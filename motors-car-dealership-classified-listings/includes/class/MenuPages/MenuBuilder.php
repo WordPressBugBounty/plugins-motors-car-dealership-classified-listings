@@ -36,7 +36,7 @@ class MenuBuilder {
 		$finalArray     = array();
 
 		foreach ( $for_sort as $item ) {
-			if ( array_key_exists( $item[2], $sort_by_position ) ) {
+			if ( array_key_exists( $item[2], $sort_by_position ) && ! empty( $sortedMatchedItems[ $sortedIterator ] ) ) {
 				$finalArray[] = $sortedMatchedItems[ $sortedIterator ];
 				$sortedIterator ++;
 			} else {

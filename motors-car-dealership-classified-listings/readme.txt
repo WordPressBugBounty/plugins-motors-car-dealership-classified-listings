@@ -2,10 +2,10 @@
 
 Contributors: Stylemix
 Donate link: https://www.paypal.me/stylemix
-Tags: car sales, car dealer, automotive, auto dealer, auto listing
+Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
 Tested up to: 6.6
-Stable tag: 1.4.23
+Stable tag: 1.4.24
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,7 +15,8 @@ Manage classified listings with WordPress, and allow users to post classified li
 
 The Motors plugin makes it easy for vehicle dealers to create and manage listings on their WordPress sites. It's perfect for anyone **selling cars**, **motorcycles**, **boats**, and more. With this plugin, you can **create and organize your listings**, attract more customers, and boost your sales.
 
-⭐ [Motors Plugin Website](https://stylemixthemes.com/wordpress-motors-plugin/)
+⭐ [Motors  Pro Plugin](https://stylemixthemes.com/wordpress-motors-plugin/?utm_source=wporg&utm_medium=description)
+⭐ [Motors  Live Demo](https://motors-plugin.stylemixthemes.com/?utm_source=wporg&utm_medium=description)
 ⭐ [Documentation](https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing)
 ⭐ [Join Facebook Community](https://www.facebook.com/groups/motorstheme)
 
@@ -118,18 +119,20 @@ After that, go to Tools -> Import, and via Wordpress Importer tool install dummy
 
 == Screenshots ==
 
-1. wordpress car dealer plugin
-2. wordpress autotrader plugin
-3. wordpress auto sales plugin
-4. wordpress automotive plugin
-5. car dealer plugin
-6. auto listing wordpress
-7. automotive listings plugin wordpress
-8. pro car dealership wordpress plugin
-9. wordpress car listing plugin
-10. wordpress dealership plugin
+1. Unlimited fields and advanced filters
+2. Listing details page
+3. Profile page
+4. Starter theme included
+5. Side-by-side vehicle comparison
+6. Email templates manager
+7. Flexible monetization options
+8. Additional features
 
 == Changelog ==
+
+= 1.4.24 =
+- **Fix:** Error occurs when activating Motors Plugin and Cost Calculator plugin on the same site.
+- **Fix:** Minor bug fixes.
 
 = 1.4.23 =
 * Minor bug fixes

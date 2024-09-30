@@ -355,7 +355,7 @@ if ( $is_promotion ) {
 						</span>
 						<span class="stm_last_changelog_info__value">
 							<?php echo esc_html( $freemius_info['latest']['version'] ); ?>
-							<a href="https://docs.stylemixthemes.com/masterstudy-lms/changelog/" target="_blank">
+							<a href="https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/changelog/release-notes" target="_blank">
 								<?php esc_html_e( 'View Changelog', 'stm_vehicles_listing' ); ?>
 							</a>
 						</span>

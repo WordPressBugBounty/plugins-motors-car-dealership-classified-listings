@@ -395,7 +395,7 @@ if ( ! function_exists( 'stm_is_motors_theme' ) ) {
 			return true;
 		}
 
-		return wp_get_theme()->get( 'Name' ) === 'Motors' || wp_get_theme()->get( 'Name' ) === 'Motors Child';
+		return wp_get_theme()->get( 'Name' ) === 'Motors' || wp_get_theme()->get( 'Name' ) === 'Motors Child' || wp_get_theme()->get( 'Name' ) === 'Motors - Child Theme';
 	}
 
 	add_filter( 'stm_is_motors_theme', 'stm_is_motors_theme', 1000, 1 );
