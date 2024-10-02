@@ -1,6 +1,6 @@
 <?php // phpcs:ignore WordPress.Files.FileName.InvalidClassFileName.
 define( 'STM_FREEMIUS_CHECKOUT_LINK', 'https://checkout.freemius.com/mode/dialog/plugin/' );
-define( 'STM_FREEMIUS_CHECKOUT_UTM_SOURCE', 'utm_source=wpadmin&utm_medium=buynow&utm_campaign=masterstudy-plugin' );
+define( 'STM_FREEMIUS_CHECKOUT_UTM_SOURCE', 'utm_source=wpadmin&utm_medium=buynow&utm_campaign=motors-plugin' );
 define( 'STM_FREEMIUS_PLUGIN_INFO_URL', 'https://stylemixthemes.com/api/freemius/motors-car-dealership-classified-listings-pro.json' );
 
 /**
@@ -315,7 +315,7 @@ if ( $is_promotion ) {
 									<?php
 								endif;
 								if ( 'mvl-go-pro' === $_GET['page'] ) {
-									$base_url     = 'https://stylemixthemes.com/wordpress-lms-plugin/pricing/?utm_source=mswpadmin&utm_campaign=masterstudy-plugin&licenses=' . esc_attr( $plan->licenses );
+									$base_url     = 'https://stylemixthemes.com/wordpress-motors-plugin/pricing/?utm_source=motorswpadmin&utm_campaign=motors-plugin&licenses=' . esc_attr( $plan->licenses );
 									$utm_medium   = isset( $_GET['source'] ) ? esc_attr( htmlspecialchars( $_GET['source'] ) ) : 'unlock-pro-button';
 									$annual_url   = $base_url . '&utm_medium=' . $utm_medium . '&billing_cycle=annual';
 									$lifetime_url = $base_url . '&utm_medium=' . $utm_medium . '&billing_cycle=lifetime';

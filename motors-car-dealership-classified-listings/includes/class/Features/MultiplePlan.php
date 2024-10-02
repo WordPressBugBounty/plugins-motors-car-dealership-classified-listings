@@ -162,7 +162,7 @@ class MultiplePlan {
 		$result     = self::$wpdbObj->get_results( $query );
 
 		$can_update = true;
-		$plan_id    = intval( $result[0]->plan_id ) ?? null;
+		$plan_id    = ( ! empty( $result ) && count( $result ) > 0 ) ? intval( $result[0]->plan_id ) : null;
 
 		if ( is_null( $plan_id ) ) {
 			return true;
@@ -213,18 +213,22 @@ class MultiplePlan {
 	}
 
 	public static function getListingIdsByPlanId( $plan_id, $user_id ) {
+		global $wpdb;
+
 		if ( 'free' === $plan_id ) {
 			$plan_id = 0;
 		}
 
 		$user_id = ( empty( $user_id ) ) ? intval( self::$currentUser ) : $user_id;
-		$result  = self::$wpdbObj->get_results( self::$wpdbObj->prepare( 'SELECT listing_id FROM ' . self::$wpdbObj->prefix . "multiple_plans_meta WHERE `plan_id` = %d AND `user_id` = %d AND `listing_status` != 'trash' ", array( $plan_id, $user_id ) ) );
+		$result  = $wpdb->get_results( $wpdb->prepare( 'SELECT listing_id FROM ' . $wpdb->prefix . "multiple_plans_meta WHERE `plan_id` = %d AND `user_id` = %d AND `listing_status` != 'trash' ", array( $plan_id, $user_id ) ) );
 
 		return $result;
 	}
 
 	public static function getCurrentPlan( $listing_id ) {
-		$result = self::$wpdbObj->get_var( self::$wpdbObj->prepare( 'SELECT plan_id FROM ' . self::$wpdbObj->prefix . 'multiple_plans_meta WHERE `user_id` = %d AND `listing_id` = %d', array( self::$currentUser, $listing_id ) ) );
+		global $wpdb;
+
+		$result = $wpdb->get_var( $wpdb->prepare( 'SELECT plan_id FROM ' . $wpdb->prefix . 'multiple_plans_meta WHERE `user_id` = %d AND `listing_id` = %d', array( self::$currentUser, $listing_id ) ) );
 
 		if ( ! empty( $result ) ) {
 			return $result;
@@ -234,14 +238,18 @@ class MultiplePlan {
 	}
 
 	public static function deletePlanMeta( $ids ) {
-		$table_name = self::$wpdbObj->prefix . 'multiple_plans_meta';
+		global $wpdb;
+
+		$table_name = $wpdb->prefix . 'multiple_plans_meta';
 		foreach ( explode( ',', $ids ) as $item ) {
-			self::$wpdbObj->delete( $table_name, array( 'id' => $item ) );
+			$wpdb->delete( $table_name, array( 'id' => $item ) );
 		}
 	}
 
 	public static function checkPlanMeta( $userId, $listing_id ) {
-		$result = self::$wpdbObj->get_var( self::$wpdbObj->prepare( 'SELECT id FROM ' . self::$wpdbObj->prefix . 'multiple_plans_meta WHERE `user_id` = %d AND `listing_id` = %d', array( $userId, $listing_id ) ) );
+		global $wpdb;
+
+		$result = $wpdb->get_var( $wpdb->prepare( 'SELECT id FROM ' . $wpdb->prefix . 'multiple_plans_meta WHERE `user_id` = %d AND `listing_id` = %d', array( $userId, $listing_id ) ) );
 
 		if ( ! empty( $result ) ) {
 			return $result;
@@ -251,9 +259,11 @@ class MultiplePlan {
 	}
 
 	public static function addPlanMeta( $plan_id, $listing_id, $listingStatus ) {
-		$table_name = self::$wpdbObj->prefix . 'multiple_plans_meta';
+		global $wpdb;
 
-		self::$wpdbObj->insert(
+		$table_name = $wpdb->prefix . 'multiple_plans_meta';
+
+		$wpdb->insert(
 			$table_name,
 			array(
 				'starttime'      => strtotime( gmdate( 'Y-m-d H:i:s' ) ),
@@ -268,10 +278,11 @@ class MultiplePlan {
 	}
 
 	public static function updatePlanMeta( $plan_id, $listing_id, $listingStatus ) {
-		$table_name = self::$wpdbObj->prefix . 'multiple_plans_meta';
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'multiple_plans_meta';
 
 		if ( self::checkPlanMeta( self::$currentUser, $listing_id ) ) {
-			self::$wpdbObj->update(
+			$wpdb->update(
 				$table_name,
 				array(
 					'plan_id'        => $plan_id,
@@ -290,11 +301,13 @@ class MultiplePlan {
 	}
 
 	public static function updateListingStatus( $listing_id, $listingStatus ) {
-		$table_name = self::$wpdbObj->prefix . 'multiple_plans_meta';
+		global $wpdb;
+
+		$table_name = $wpdb->prefix . 'multiple_plans_meta';
 
 		if ( self::checkPlanMeta( self::$currentUser, $listing_id ) ) {
 
-			self::$wpdbObj->update(
+			$wpdb->update(
 				$table_name,
 				array(
 					'listing_status' => $listingStatus,
@@ -320,7 +333,9 @@ class MultiplePlan {
 	}
 
 	public static function getUsedQuota( $plan_id ) {
-		$result = self::$wpdbObj->get_results( self::$wpdbObj->prepare( 'SELECT count(id) as usedQuota FROM ' . self::$wpdbObj->prefix . "multiple_plans_meta WHERE `plan_id` = %d AND `listing_status` = 'active' ", array( $plan_id ) ) );
+		global $wpdb;
+
+		$result = $wpdb->get_results( $wpdb->prepare( 'SELECT count(id) as usedQuota FROM ' . $wpdb->prefix . "multiple_plans_meta WHERE `plan_id` = %d AND `listing_status` = 'active' ", array( $plan_id ) ) );
 
 		return $result[0]->usedQuota;
 	}

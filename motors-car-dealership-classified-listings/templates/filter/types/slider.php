@@ -63,6 +63,7 @@ if ( apply_filters( 'stm_is_listing_price_field', false, $slug ) ) {
 }
 
 $vars['label'] = stripslashes( $label_affix );
+$hide_input = $vars['show_inputs'] ? 'numeric' : 'hidden';
 
 ?>
 <div class="col-md-12 col-sm-12">
@@ -74,12 +75,11 @@ $vars['label'] = stripslashes( $label_affix );
 			<div class="stm-price-range-unit">
 			<div class="stm-<?php echo esc_attr( $vars['slug'] ); ?>-range stm-filter-type-slider"></div>
 		</div>
-		
-		<?php if ( $vars['show_inputs'] ) : ?>
+
 		<div class="row">
 			<div class="col-md-6 col-sm-6 col-md-wider-right">
 				<input
-						type="number"
+						type="<?php echo esc_attr( $hide_input ); ?>"
 						inputmode="numeric"
 						name="min_<?php echo esc_attr( $vars['slug'] ); ?>"
 						id="stm_filter_min_<?php echo esc_attr( $vars['slug'] ); ?>"
@@ -89,7 +89,7 @@ $vars['label'] = stripslashes( $label_affix );
 			</div>
 			<div class="col-md-6 col-sm-6 col-md-wider-left">
 				<input
-						type="number"
+						type="<?php echo esc_attr( $hide_input ); ?>"
 						inputmode="numeric"
 						name="max_<?php echo esc_attr( $vars['slug'] ); ?>"
 						id="stm_filter_max_<?php echo esc_attr( $vars['slug'] ); ?>"
@@ -97,7 +97,6 @@ $vars['label'] = stripslashes( $label_affix );
 					/>
 			</div>
 		</div>
-		<?php endif; ?>
 	</div>
 
 	<!--Init slider-->

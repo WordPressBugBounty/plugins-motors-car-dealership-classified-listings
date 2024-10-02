@@ -8,7 +8,7 @@
  * License: GNU General Public License v2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: stm_vehicles_listing
- * Version: 1.4.24
+ * Version: 1.4.25
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -44,7 +44,7 @@ if ( ! defined( 'STM_LISTINGS_PATH' ) ) {
 	define( 'STM_LISTINGS_PATH', dirname( STM_LISTINGS_FILE ) );
 	define( 'STM_LISTINGS_URL', plugins_url( '', STM_LISTINGS_FILE ) );
 	define( 'STM_LISTINGS', 'stm_vehicles_listing' );
-	define( 'STM_LISTINGS_V', '1.4.24' );
+	define( 'STM_LISTINGS_V', '1.4.25' );
 	define( 'STM_LISTINGS_IMAGES', STM_LISTINGS_URL . '/includes/admin/butterbean/images/' );
 }
 
@@ -179,7 +179,7 @@ if ( is_admin() ) {
 	}
 }
 
-if ( apply_filters( 'is_mvl_pro', false ) ) {
+if ( apply_filters( 'is_mvl_pro', false ) || apply_filters( 'stm_is_motors_theme', false ) ) {
 	require_once STM_LISTINGS_PATH . '/includes/class/Features/email_template_manager/email_template_manager.php';
 } else {
 	require_once STM_LISTINGS_PATH . '/includes/email_templates/email_templates.php';

@@ -100,8 +100,8 @@ class MotorsNuxyHelpers {
 			<div class="field_overlay"></div>
 			<!--We have no pro plugin active-->
 			<span class="pro-notice">
-				<?php esc_html_e( 'Available in ', 'masterstudy-lms-learning-management-system' ); ?>
-				<a href="<?php echo esc_url( $pro_url ); ?>" target="_blank"><?php esc_html_e( 'Pro Version', 'masterstudy-lms-learning-management-system' ); ?></a>
+				<?php esc_html_e( 'Available in ', 'motors-car-dealership-classified-listings-pro' ); ?>
+				<a href="<?php echo esc_url( $pro_url ); ?>" target="_blank"><?php esc_html_e( 'Pro Version', 'motors-car-dealership-classified-listings-pro' ); ?></a>
 			</span>
 			<?php
 		}
@@ -113,7 +113,7 @@ class MotorsNuxyHelpers {
 			<span class="pro-notice">
 				<a href="#" @click.prevent="enableAddon($event, '<?php echo esc_attr( $addon_state ); ?>')">
 					<i class="fa fa-power-off"></i>
-				<?php esc_html_e( 'Enable addon', 'masterstudy-lms-learning-management-system' ); ?>
+				<?php esc_html_e( 'Enable addon', 'motors-car-dealership-classified-listings-pro' ); ?>
 				</a>
 			</span>
 			<?php

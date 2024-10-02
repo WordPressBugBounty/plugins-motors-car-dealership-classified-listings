@@ -22,6 +22,24 @@ function single_listing_layout( $conf ) {
 					'pro_url'     => \MotorsVehiclesListing\Plugin\Settings::$pro_plans_url,
 					'submenu'     => esc_html__( 'Page layout', 'stm_vehicles_listing' ),
 				),
+			'stm_whatsapp_massage'     =>
+				array(
+					'label'        => esc_html__( 'WhatsApp Message', 'stm_vehicles_listing' ),
+					'type'         => 'hint_textarea',
+					'dependencies' => '&&',
+					'hints'        => array(
+						'listing_url'   => esc_html__( 'Listing URL', 'stm_vehicles_listing' ),
+						'listing_title' => esc_html__( 'Listing Title', 'stm_vehicles_listing' ),
+					),
+					'value'        => 'Hi. I have visited your site. And I would like to rent {{listing_url}}. Is it available for rent?',
+					'dependency'   => array(
+						array(
+							'key'   => 'stm_show_seller_whatsapp',
+							'value' => 'not_empty',
+						),
+					),
+					'submenu'      => esc_html__( 'Page layout', 'stm_vehicles_listing' ),
+				),
 		)
 	);
 

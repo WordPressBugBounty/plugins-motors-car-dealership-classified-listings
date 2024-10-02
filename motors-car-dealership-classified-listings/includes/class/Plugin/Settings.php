@@ -268,10 +268,35 @@ class Settings {
 		update_option( 'motors_vehicles_listing_plugin_settings_updated', true );
 		update_option( 'motors_vehicles_listing_section_settings_updated', true );
 		update_option( \MotorsVehiclesListing\Plugin\MVL_Const::MVL_PLUGIN_OPT_NAME, $theme_settings );
-		update_option( \MotorsVehiclesListing\Plugin\MVL_Const::ADD_CAR_FORM_OPT_NAME, $theme_settings );
-		update_option( \MotorsVehiclesListing\Plugin\MVL_Const::FILTER_OPT_NAME, $theme_settings );
-		update_option( \MotorsVehiclesListing\Plugin\MVL_Const::LISTING_DETAILS_OPT_NAME, $theme_settings );
-		update_option( \MotorsVehiclesListing\Plugin\MVL_Const::SEARCH_RESULTS_OPT_NAME, $theme_settings );
-		update_option( \MotorsVehiclesListing\Plugin\MVL_Const::LISTING_TEMPLATE_OPT_NAME, $theme_settings );
+
+		if ( ! empty( $theme_settings ) ) {
+			$add_car_form_settings_map     = wpcfto_get_settings_map( 'settings', \MotorsVehiclesListing\Plugin\MVL_Const::ADD_CAR_FORM_OPT_NAME );
+			$filter_settings_map           = wpcfto_get_settings_map( 'settings', \MotorsVehiclesListing\Plugin\MVL_Const::FILTER_OPT_NAME );
+			$listing_details_settings_map  = wpcfto_get_settings_map( 'settings', \MotorsVehiclesListing\Plugin\MVL_Const::LISTING_DETAILS_OPT_NAME );
+			$search_result_settings_map    = wpcfto_get_settings_map( 'settings', \MotorsVehiclesListing\Plugin\MVL_Const::SEARCH_RESULTS_OPT_NAME );
+			$listing_template_settings_map = wpcfto_get_settings_map( 'settings', \MotorsVehiclesListing\Plugin\MVL_Const::LISTING_TEMPLATE_OPT_NAME );
+
+			if ( ! empty( $add_car_form_settings_map ) ) {
+				update_option( \MotorsVehiclesListing\Plugin\MVL_Const::ADD_CAR_FORM_OPT_NAME, array_intersect_key( $theme_settings, $add_car_form_settings_map['add_listing']['fields'] ) );
+			}
+
+			if ( ! empty( $filter_settings_map ) ) {
+				update_option( \MotorsVehiclesListing\Plugin\MVL_Const::FILTER_OPT_NAME, array_intersect_key( $theme_settings, $filter_settings_map['search_settings']['fields'] ) );
+			}
+
+			if ( ! empty( $listing_details_settings_map ) ) {
+				update_option( \MotorsVehiclesListing\Plugin\MVL_Const::LISTING_DETAILS_OPT_NAME, array_intersect_key( $theme_settings, $listing_details_settings_map['single_listing']['fields'] ) );
+			}
+
+			if ( ! empty( $search_result_settings_map ) ) {
+				update_option( \MotorsVehiclesListing\Plugin\MVL_Const::SEARCH_RESULTS_OPT_NAME, array_intersect_key( $theme_settings, $search_result_settings_map['listing_settings']['fields'] ) );
+			}
+
+			if ( ! empty( $listing_template_settings_map ) ) {
+				update_option( \MotorsVehiclesListing\Plugin\MVL_Const::LISTING_TEMPLATE_OPT_NAME, array_intersect_key( $theme_settings, $listing_template_settings_map['single_listing_template']['fields'] ) );
+			}
+
+			update_option( 'motors_vehicles_listing_section_settings_updated', true );
+		}
 	}
 }
