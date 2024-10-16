@@ -5,7 +5,7 @@ Donate link: https://www.paypal.me/stylemix
 Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
 Tested up to: 6.6
-Stable tag: 1.4.25
+Stable tag: 1.4.26
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -129,6 +129,10 @@ After that, go to Tools -> Import, and via Wordpress Importer tool install dummy
 8. Additional features
 
 == Changelog ==
+
+= 1.4.26 =
+- **Fix:** Swiper carousel widgets are not working in Elementor PRO.
+- **Fix:** Fixed setting to optimize image cropping on listing pages.
 
 = 1.4.25 =
 - **Fix:** Price slider on Inventory page does not filter search results.

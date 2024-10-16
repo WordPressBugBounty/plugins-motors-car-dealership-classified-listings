@@ -2096,6 +2096,7 @@ input:-webkit-autofill {
     padding: 57px 40px 48px;
     background-color: #ffffff;
     border-top: 4px solid #232628;
+    margin: 0;
     z-index: 9999;
 }
 

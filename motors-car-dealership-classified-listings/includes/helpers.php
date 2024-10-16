@@ -641,6 +641,41 @@ if ( ! function_exists( 'stm_data_binding' ) ) {
 	add_filter( 'stm_data_binding_func', 'stm_data_binding', 10, 3 );
 }
 
+if ( ! function_exists( 'stm_get_all_listing_attributes' ) ) {
+	function stm_get_all_listing_attributes( $default, $filter = 'all' ) {
+		$multilisting_attrs = array();
+		$attributes         = array();
+
+		// default attributes
+		$default_attrs = get_option( 'stm_vehicle_listing_options', array() );
+
+		// get multilisting attributes, if MLT is active
+		if ( stm_is_multilisting() && ( 'all' === $filter || 'multilisting' === $filter ) ) {
+			$slugs = STMMultiListing::stm_get_listing_type_slugs();
+			if ( ! empty( $slugs ) ) {
+				foreach ( $slugs as $slug ) {
+					$type_options = get_option( "stm_{$slug}_options", array() );
+					if ( ! empty( $type_options ) ) {
+						$multilisting_attrs = array_merge( $multilisting_attrs, $type_options );
+					}
+				}
+			}
+		}
+
+		if ( 'all' === $filter ) {
+			$attributes = array_merge( $default_attrs, $multilisting_attrs );
+		} elseif ( 'multilisting' === $filter ) {
+			$attributes = $multilisting_attrs;
+		} else {
+			$attributes = $default_attrs;
+		}
+
+		return $attributes;
+	}
+
+	add_filter( 'stm_get_all_listing_attributes', 'stm_get_all_listing_attributes' );
+}
+
 if ( ! function_exists( 'stm_upload_user_file' ) ) {
 	function stm_upload_user_file( $default, $file = array() ) {
 		require_once ABSPATH . 'wp-admin/includes/admin.php';

@@ -147,7 +147,7 @@ class RegisterActions {
 				wp_remote_get( $icon_url ),
 				apply_filters( 'stm_ew_kses_svg', array() )
 			);
-		} elseif ( isset( $icon_data['value'] ) ) {
+		} elseif ( isset( $icon_data['value'] ) && ! empty( $icon_data['value'] ) ) {
 			return '<i class="' . esc_attr( $icon_data['value'] ) . '"></i>';
 		}
 

@@ -1759,6 +1759,7 @@ select {
 
 .stm-isearch-results-carousel-wrap .stm-isearch-results-carousel {
     padding: 0 0 15px 0;
+    overflow: visible !important;
 }
 
 .stm-isearch-results-carousel-wrap .owl-nav, .stm-isearch-results-carousel-wrap .owl-dots {

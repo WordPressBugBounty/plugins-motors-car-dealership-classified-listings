@@ -8,10 +8,10 @@
  * License: GNU General Public License v2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: stm_vehicles_listing
- * Version: 1.4.25
+ * Version: 1.4.26
  */
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit;
 }
 
 if ( in_array( 'stm_vehicles_listing/stm_vehicles_listing.php', (array) get_option( 'active_plugins', array() ), true ) ) {
@@ -44,7 +44,7 @@ if ( ! defined( 'STM_LISTINGS_PATH' ) ) {
 	define( 'STM_LISTINGS_PATH', dirname( STM_LISTINGS_FILE ) );
 	define( 'STM_LISTINGS_URL', plugins_url( '', STM_LISTINGS_FILE ) );
 	define( 'STM_LISTINGS', 'stm_vehicles_listing' );
-	define( 'STM_LISTINGS_V', '1.4.25' );
+	define( 'STM_LISTINGS_V', '1.4.26' );
 	define( 'STM_LISTINGS_IMAGES', STM_LISTINGS_URL . '/includes/admin/butterbean/images/' );
 }
 
@@ -101,15 +101,14 @@ if ( apply_filters( 'stm_is_motors_theme', false ) || apply_filters( 'is_mvl_pro
 
 				require_once STM_LISTINGS_PATH . '/includes/class/Features/STMListingDataStoreCPT.php';
 			}
+			if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'enable_plans' ) ) {
+				if ( in_array( 'woocommerce/woocommerce.php', $active_plugins, true ) && in_array( 'subscriptio/subscriptio.php', $active_plugins, true ) ) {
+					new MultiplePlan();
+				}
+			}
 		},
 		0
 	);
-
-	if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'enable_plans' ) ) {
-		if ( in_array( 'woocommerce/woocommerce.php', $active_plugins, true ) && in_array( 'subscriptio/subscriptio.php', $active_plugins, true ) ) {
-			new MultiplePlan();
-		}
-	}
 
 	if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'friendly_url' ) ) {
 		FriendlyUrl::init();

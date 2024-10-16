@@ -2,8 +2,8 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-
-$listing_id = get_the_ID();
+global $listing_id;
+$listing_id = ( is_null( $listing_id ) ) ? get_the_ID() : $listing_id;
 
 $price      = get_post_meta( $listing_id, 'price', true );
 $sale_price = get_post_meta( $listing_id, 'sale_price', true );

@@ -32,7 +32,8 @@ $restrictions = apply_filters(
 		'images'        => 0,
 		'role'          => 'user',
 	),
-	$user_id
+	$user_id,
+	'publish'
 );
 
 if ( $restrictions['posts'] < 1 ) {

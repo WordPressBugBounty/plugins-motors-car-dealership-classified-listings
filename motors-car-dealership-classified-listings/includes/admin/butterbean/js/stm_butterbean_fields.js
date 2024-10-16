@@ -132,7 +132,7 @@
             var select = jQuery(this.el).find('select');
             var parent = select.attr('data-parent');
             var parentVal = '';
-            if ( parent.length > 0 ) {
+            if ( typeof parent !== 'undefined' && parent !== null && parent.length > 0 ) {
                 parentVal = jQuery('#butterbean-control-' + parent ).find('select').val();
             }
 

@@ -122,6 +122,7 @@ class FriendlyUrl {
 
 			foreach ( $custom_post_types as $cpt ) {
 				$current_page = ( get_the_ID() === (int) $cpt['inventory_page'] ) ? get_permalink( $cpt['inventory_page'] ) : '';
+				return ( ! empty( $current_page ) ) ? $current_page : $url;
 			}
 		}
 

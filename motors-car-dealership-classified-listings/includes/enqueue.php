@@ -65,9 +65,9 @@ function stm_listings_add_car_script() {
 		),
 		get_current_user_id()
 	);
-	$crop          = apply_filters( 'stm_me_get_nuxy_mod', false, 'user_image_crop_checkbox' );
-	$width         = apply_filters( 'stm_me_get_nuxy_mod', 800, 'gallery_image_width' );
-	$height        = apply_filters( 'stm_me_get_nuxy_mod', 600, 'gallery_image_height' );
+	$crop          = apply_filters( 'motors_vl_get_nuxy_mod', false, 'user_image_crop_checkbox' );
+	$width         = apply_filters( 'motors_vl_get_nuxy_mod', 800, 'user_image_crop_width' );
+	$height        = apply_filters( 'motors_vl_get_nuxy_mod', 600, 'user_image_crop_height' );
 
 	$_image_upload_script = "
         var stm_image_upload_settings = {

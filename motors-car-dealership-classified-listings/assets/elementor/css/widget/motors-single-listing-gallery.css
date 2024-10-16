@@ -5,6 +5,10 @@
     margin-bottom: 45px;
 }
 
+.motors-elementor-single-listing-gallery .swiper-container:not(.swiper-container-initialized) > .swiper-wrapper {
+    overflow: visible;
+}
+
 .motors-elementor-single-listing-gallery:hover .motors-elementor-thumbs-gallery .stm-swiper-controls .stm-swiper-prev {
     left: 0;
 }
