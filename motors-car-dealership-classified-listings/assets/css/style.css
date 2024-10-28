@@ -1749,6 +1749,10 @@ table.wp-list-table .column-stm_image .attachment {
     margin-right: 25px;
 }
 
+body.stm-vl-plugin-pure.elementor-page .is-layout-constrained > div.elementor {
+    max-width: 100%;
+}
+
 /*Default*/
 .stm-orange {
     color: #ffb129;

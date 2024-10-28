@@ -8,10 +8,10 @@
  * License: GNU General Public License v2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: stm_vehicles_listing
- * Version: 1.4.27
+ * Version: 1.4.28
  */
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+	exit; // Exit if accessed directly
 }
 
 if ( in_array( 'stm_vehicles_listing/stm_vehicles_listing.php', (array) get_option( 'active_plugins', array() ), true ) ) {
@@ -49,7 +49,7 @@ if ( ! defined( 'STM_LISTINGS_PATH' ) ) {
 	define( 'STM_LISTINGS_URL', plugins_url( '', STM_LISTINGS_FILE ) );
 	define( 'STM_LISTINGS', 'stm_vehicles_listing' );
 	define( 'STM_THEME_V_NEED', '5.6.33' );
-	define( 'STM_LISTINGS_V', '1.4.27' );
+	define( 'STM_LISTINGS_V', '1.4.28' );
 	define( 'STM_LISTINGS_IMAGES', STM_LISTINGS_URL . '/includes/admin/butterbean/images/' );
 }
 
@@ -152,6 +152,11 @@ if ( file_exists( STM_LISTINGS_PATH . '/includes/stm_single_dealer.php' ) ) {
 }
 
 if ( is_admin() ) {
+
+	if ( file_exists( STM_LISTINGS_PATH . '/includes/starter-theme/classes/class-loader.php' ) ) {
+		require_once STM_LISTINGS_PATH . '/includes/starter-theme/classes/class-loader.php';
+	}
+
 	require_once STM_LISTINGS_PATH . '/includes/admin/categories.php';
 	require_once STM_LISTINGS_PATH . '/includes/admin/enqueue.php';
 	require_once STM_LISTINGS_PATH . '/includes/admin/butterbean_hooks.php';
@@ -173,6 +178,8 @@ if ( is_admin() ) {
 	if ( class_exists( '\MotorsNuxy\MotorsNuxyHelpers' ) ) {
 		new MotorsNuxyHelpers();
 	}
+
+	require_once STM_LISTINGS_PATH . '/includes/admin/setup-wizard/main.php';
 
 	new Settings();
 

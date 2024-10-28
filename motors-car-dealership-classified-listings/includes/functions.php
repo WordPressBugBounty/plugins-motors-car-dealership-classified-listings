@@ -1342,7 +1342,7 @@ if ( ! function_exists( 'stm_ajax_add_review' ) ) {
 add_action( 'wp_ajax_stm_ajax_add_review', 'stm_ajax_add_review' );
 add_action( 'wp_ajax_nopriv_stm_ajax_add_review', 'stm_ajax_add_review' );
 
-function sample_admin_notice__error() {
+function review_admin_notice() {
 	$status = get_option( 'add_review_status', '' );
 
 	if ( empty( $status ) ) {
@@ -1360,7 +1360,7 @@ function sample_admin_notice__error() {
 	}
 }
 
-add_action( 'admin_notices', 'sample_admin_notice__error' );
+add_action( 'admin_notices', 'review_admin_notice' );
 
 function mvl_admin_bar_item( $admin_bar ) {
 	if ( ! current_user_can( 'manage_options' ) ) {

@@ -5,7 +5,7 @@ Donate link: https://www.paypal.me/stylemix
 Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
 Tested up to: 6.6
-Stable tag: 1.4.27
+Stable tag: 1.4.28
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -86,18 +86,18 @@ You also get an **Email Template Manager (Pro)** that lets you fully customize t
 
 - Shortcodes
 - Test Drive Form
-- Share Listings on Social Networks 
+- Share Listings on Social Networks
 
 #### Pro Features
 - Pre-built page templates for listings
 - Ability to create custom listing templates with extra premium elements
-- Search listings by location 
+- Search listings by location
 - Google Maps integration
-- Sorting listings by custom fields 
+- Sorting listings by custom fields
 - Dealer/dealership registration
-- Mark listings as sold 
+- Mark listings as sold
 - SEO-friendly URLs customizable with custom field names
-- Image sliding gallery on listing cards 
+- Image sliding gallery on listing cards
 - Loan Calculator on listing pages
 - Email template manager
 
@@ -129,6 +129,12 @@ After that, go to Tools -> Import, and via Wordpress Importer tool install dummy
 8. Additional features
 
 == Changelog ==
+
+= 1.4.28 =
+- **Enhancement:** Added a notice to guide users on installing the Motors Starter Theme.
+- **Enhancement:** Added Setup Wizard.
+- **Enhancement:** Moved the Starter Theme settings to the Motors Plugin Settings for easier access.
+- **Fix:** Made some improvements to Setup Wizard process.
 
 = 1.4.27 =
 - **Enhancement:** Added new settings for Search Filter Elementor widget.

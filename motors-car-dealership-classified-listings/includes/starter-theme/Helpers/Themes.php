@@ -53,7 +53,8 @@ class Themes {
 		self::load_wp();
 
 		$src       = self::get_source( $slug );
-		$upgrader  = new \Theme_Upgrader();
+		$skin      = new \Automatic_Upgrader_Skin();
+		$upgrader  = new \Theme_Upgrader( $skin );
 		$installed = $upgrader->install( $src );
 
 		$result = array( 'success' => false );

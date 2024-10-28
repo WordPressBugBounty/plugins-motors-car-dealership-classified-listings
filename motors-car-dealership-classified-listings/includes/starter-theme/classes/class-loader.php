@@ -4,13 +4,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use MotorsVehiclesListing\StarterTheme\Helpers\Themes;
-
 /**
  * Class Loader
  * base plugin functions here
  */
-
 class Loader {
 
 	public $plugin_slug              = 'motors-car-dealership-classified-listings';
@@ -42,27 +39,28 @@ class Loader {
 		if ( false === $this->check_is_free_active() ) {
 			return;
 		}
+
 		if ( in_array( $this->get_current_theme_text_domain(), $this->motors_themes, true ) ) {
 			return;
 		}
 
 		/** add body class */
 		add_filter( 'admin_body_class', array( $this, 'add_body_class' ) );
-		add_filter( 'admin_menu', array( $this, 'add_starter_install__admin_menu' ) );
+		add_filter( 'wpcfto_screen_motors_vehicles_listing_plugin_settings_added', array( $this, 'motors_add_starter_install__admin_menu' ) );
 		add_action( 'wp_ajax_stm_install_starter_theme', array( $this, 'stm_install_starter_theme' ) );
 	}
 	/** show template */
 
 	public function theme_starter() {
 		/** load setup template **/
-		require_once STM_LISTINGS_PATH . '/includes/starter-theme/templates/setup-start.php';
+		include STM_LISTINGS_PATH . '/includes/starter-theme/templates/setup-start.php';
 	}
 
-	public function add_starter_install__admin_menu() {
+	public function motors_add_starter_install__admin_menu() {
 		$page_title = esc_html__( 'Motors Starter Theme', 'motors-car-dealership-classified-listings' );
 
 		add_submenu_page(
-			'themes.php',
+			'mvl_plugin_settings',
 			$page_title,
 			$page_title,
 			'manage_options',
@@ -159,4 +157,6 @@ class Loader {
 		return $user->data->ID;
 	}
 }
+
 new Loader();
+
