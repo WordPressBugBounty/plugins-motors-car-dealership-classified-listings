@@ -14,8 +14,8 @@ if ( ! empty( $show_car_title ) && $show_car_title ) :
 	} ?>
 	<div class="stm-car-listing-data-single stm-border-top-unit ">
 		<div class="stm_add_car_title_form">
-			<div class="title heading-font"><?php esc_html_e( 'Listing Title', 'motors-car-dealership-classified-listings-pro' ); ?></div>
-			<input type="text" name="stm_car_main_title" value="<?php echo esc_attr( $value ); ?>" placeholder="<?php esc_attr_e( 'Title', 'motors-car-dealership-classified-listings-pro' ); ?>">
+			<div class="title heading-font"><?php esc_html_e( 'Listing Title', 'stm_vehicles_listing' ); ?></div>
+			<input type="text" name="stm_car_main_title" value="<?php echo esc_attr( $value ); ?>" placeholder="<?php esc_attr_e( 'Title', 'stm_vehicles_listing' ); ?>">
 		</div>
 	</div>
 <?php endif; ?>

@@ -176,8 +176,8 @@ $uniqid = uniqid();
 				" id="car-listing-category-<?php echo esc_attr( $filter_cat[0] ); ?>-<?php echo esc_attr( $uniqid ); ?>">
 					<div class="found-cars-clone">
 						<div class="found-cars heading-font"><i
-									class="motors-icons-car"></i><?php esc_html_e( 'available', 'motors-car-dealership-classified-listings-pro' ); ?> <span
-									class="blue-lt"><?php echo esc_attr( $listing_cars->found_posts ); ?><?php esc_html_e( ' cars', 'motors-car-dealership-classified-listings-pro' ); ?></span>
+									class="motors-icons-car"></i><?php esc_html_e( 'available', 'stm_vehicles_listing' ); ?> <span
+									class="blue-lt"><?php echo esc_attr( $listing_cars->found_posts ); ?><?php esc_html_e( ' cars', 'stm_vehicles_listing' ); ?></span>
 						</div>
 					</div>
 					<?php if ( $listing_cars->have_posts() ) : ?>

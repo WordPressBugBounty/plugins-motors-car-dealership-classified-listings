@@ -24,7 +24,7 @@ class ProfileButton extends WidgetBase {
 	}
 
 	public function get_title() {
-		return esc_html__( 'Profile Button', 'motors-car-dealership-classified-listings-pro' );
+		return esc_html__( 'Profile Button', 'stm_vehicles_listing' );
 	}
 
 	public function get_icon() {
@@ -33,21 +33,21 @@ class ProfileButton extends WidgetBase {
 
 	protected function register_controls() {
 
-		$this->stm_start_content_controls_section( 'mvl_profile_btn_content', __( 'General', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_content_controls_section( 'mvl_profile_btn_content', __( 'General', 'stm_vehicles_listing' ) );
 
 		$this->add_control(
 			'mvl_profile_btn_text',
 			array(
-				'label'   => __( 'Button Text', 'motors-car-dealership-classified-listings-pro' ),
+				'label'   => __( 'Button Text', 'stm_vehicles_listing' ),
 				'type'    => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Profile', 'motors-car-dealership-classified-listings-pro' ),
+				'default' => __( 'Profile', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'mvl_profile_btn_icon',
 			array(
-				'label'       => __( 'Icon', 'motors-car-dealership-classified-listings-pro' ),
+				'label'       => __( 'Icon', 'stm_vehicles_listing' ),
 				'type'        => \Elementor\Controls_Manager::ICONS,
 				'default'     => array(
 					'value' => 'fa-solid fa-circle-user',
@@ -59,21 +59,21 @@ class ProfileButton extends WidgetBase {
 
 		$this->stm_end_control_section();
 
-		$this->stm_start_style_controls_section( 'mvl_profile_btn_style', __( 'Style', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_style_controls_section( 'mvl_profile_btn_style', __( 'Style', 'stm_vehicles_listing' ) );
 
 		$this->start_controls_tabs( 'tabs_mvl_profile_btn_style' );
 
 		$this->start_controls_tab(
 			'tab_mvl_profile_btn_normal',
 			array(
-				'label' => __( 'Normal', 'motors-car-dealership-classified-listings-pro' ),
+				'label' => __( 'Normal', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'mvl_profile_btn_background_color',
 			array(
-				'label'     => __( 'Background Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Background Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .motors-profile-button' => 'background-color: {{VALUE}};',
@@ -84,7 +84,7 @@ class ProfileButton extends WidgetBase {
 		$this->add_control(
 			'mvl_profile_btn_text_color',
 			array(
-				'label'     => __( 'Text Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Text Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .motors-profile-button' => 'color: {{VALUE}};',
@@ -99,14 +99,14 @@ class ProfileButton extends WidgetBase {
 		$this->start_controls_tab(
 			'tab_mvl_profile_btn_hover',
 			array(
-				'label' => __( 'Hover', 'motors-car-dealership-classified-listings-pro' ),
+				'label' => __( 'Hover', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'mvl_profile_btn_background_hover_color',
 			array(
-				'label'     => __( 'Background Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Background Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .motors-profile-button:hover' => 'background-color: {{VALUE}};',
@@ -117,7 +117,7 @@ class ProfileButton extends WidgetBase {
 		$this->add_control(
 			'mvl_profile_btn_text_hover_color',
 			array(
-				'label'     => __( 'Text Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Text Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .motors-profile-button' => 'color: {{VALUE}};',
@@ -143,7 +143,7 @@ class ProfileButton extends WidgetBase {
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'mvl_profile_btn_typography',
-				'label'    => __( 'Typography', 'motors-car-dealership-classified-listings-pro' ),
+				'label'    => __( 'Typography', 'stm_vehicles_listing' ),
 				'selector' => '{{WRAPPER}} .motors-profile-button',
 			)
 		);
@@ -152,7 +152,7 @@ class ProfileButton extends WidgetBase {
 			\Elementor\Group_Control_Border::get_type(),
 			array(
 				'name'     => 'mvl_profile_btn_border',
-				'label'    => __( 'Border', 'motors-car-dealership-classified-listings-pro' ),
+				'label'    => __( 'Border', 'stm_vehicles_listing' ),
 				'selector' => '{{WRAPPER}} .motors-profile-button',
 			)
 		);
@@ -160,7 +160,7 @@ class ProfileButton extends WidgetBase {
 		$this->add_control(
 			'mvl_profile_btn_border_radius',
 			array(
-				'label'      => __( 'Border Radius', 'motors-car-dealership-classified-listings-pro' ),
+				'label'      => __( 'Border Radius', 'stm_vehicles_listing' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -172,7 +172,7 @@ class ProfileButton extends WidgetBase {
 		$this->add_responsive_control(
 			'mvl_profile_btn_padding',
 			array(
-				'label'      => __( 'Padding', 'motors-car-dealership-classified-listings-pro' ),
+				'label'      => __( 'Padding', 'stm_vehicles_listing' ),
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%', 'em' ),
 				'selectors'  => array(
@@ -184,7 +184,7 @@ class ProfileButton extends WidgetBase {
 		$this->add_responsive_control(
 			'mvl_profile_btn_icon_margin',
 			array(
-				'label'      => __( 'Icon Margin', 'motors-car-dealership-classified-listings-pro' ),
+				'label'      => __( 'Icon Margin', 'stm_vehicles_listing' ),
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%', 'em' ),
 				'selectors'  => array(
@@ -197,7 +197,7 @@ class ProfileButton extends WidgetBase {
 		$this->add_control(
 			'mvl_profile_btn_icon_size',
 			array(
-				'label'      => __( 'Icon Size', 'motors-car-dealership-classified-listings-pro' ),
+				'label'      => __( 'Icon Size', 'stm_vehicles_listing' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => array( 'px', 'em', 'rem' ),
 				'range'      => array(
@@ -229,7 +229,7 @@ class ProfileButton extends WidgetBase {
 			\Elementor\Group_Control_Box_Shadow::get_type(),
 			array(
 				'name'     => 'mvl_profile_btn_box_shadow',
-				'label'    => __( 'Box Shadow', 'motors-car-dealership-classified-listings-pro' ),
+				'label'    => __( 'Box Shadow', 'stm_vehicles_listing' ),
 				'selector' => '{{WRAPPER}} .motors-profile-button',
 			)
 		);

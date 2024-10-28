@@ -295,7 +295,7 @@ if (typeof (STMListings) == 'undefined') {
             selectElement.select2({
                 width: '100%',
                 dropdownParent: $('body'),
-                minimumResultsForSearch: Infinity,
+                minimumResultsForSearch: 0,
                 containerCssClass: 'filter-select',
                 closeOnSelect: closeOnSelect,
                 dropdownCssClass: selectClass,

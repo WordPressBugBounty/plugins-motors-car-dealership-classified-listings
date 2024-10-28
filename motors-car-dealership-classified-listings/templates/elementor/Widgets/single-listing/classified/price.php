@@ -46,6 +46,6 @@ $as_sold = get_post_meta( $listing_id, 'car_mark_as_sold', true );
 			<?php endif; ?>
 		<?php endif; ?>
 	<?php else : ?>
-		<div class="price"><?php echo esc_html__( 'Sold', 'motors-car-dealership-classified-listings-pro' ); ?></div>
+		<div class="price"><?php echo esc_html__( 'Sold', 'stm_vehicles_listing' ); ?></div>
 	<?php endif; ?>
 </div>

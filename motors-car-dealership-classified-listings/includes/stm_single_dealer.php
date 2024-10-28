@@ -5,9 +5,9 @@
 		}
 
 		$dealer_cars_count = count( $dealer_info->listings );
-		$cars_count_text   = esc_html__( 'Cars in stock', 'motors' );
+		$cars_count_text   = esc_html__( 'Cars in stock', 'stm_vehicles_listing' );
 		if ( 1 === $dealer_cars_count ) {
-			$cars_count_text = esc_html__( 'Car in stock', 'motors' );
+			$cars_count_text = esc_html__( 'Car in stock', 'stm_vehicles_listing' );
 		}
 
 		if ( ! empty( $taxonomy ) ) {
@@ -65,7 +65,7 @@
 									<?php endif; ?>
 								</div>
 							</div>
-							<div class="stm-rate-sum">(<?php esc_html_e( 'Reviews', 'motors' ); ?> <?php echo esc_attr( $ratings['count'] ); ?>)</div>
+							<div class="stm-rate-sum">(<?php esc_html_e( 'Reviews', 'stm_vehicles_listing' ); ?> <?php echo esc_attr( $ratings['count'] ); ?>)</div>
 						</div>
 					</div>
 				</td>
@@ -99,7 +99,7 @@
 								<div class="phone heading-font">
 									<?php echo substr_replace( $dealer_info->stm_phone, '*******', 3, strlen( $dealer_info->stm_phone ) );//phpcs:ignore ?>
 								</div>
-								<span class="stm-show-number" data-id="<?php echo esc_attr( $dealer_info->ID ); ?>"><?php echo esc_html__( 'Show number', 'motors' ); ?></span>
+								<span class="stm-show-number" data-id="<?php echo esc_attr( $dealer_info->ID ); ?>"><?php echo esc_html__( 'Show number', 'stm_vehicles_listing' ); ?></span>
 							<?php endif; ?>
 						<?php endif; ?>
 					</div>
@@ -115,7 +115,7 @@
 								class="map_link"
 							>
 								<i class="fas fa-external-link-alt"></i>
-								<?php esc_html_e( 'See map', 'motors' ); ?>
+								<?php esc_html_e( 'See map', 'stm_vehicles_listing' ); ?>
 							</a>
 						<?php endif; ?>
 						<div class="dealer-location-label">
@@ -127,7 +127,7 @@
 										<div class="stm-label">
 										<?php
 										// translators: %s is user location
-										echo sprintf( esc_html__( 'From %s', 'motors' ), $dealer_info->user_location );//phpcs:ignore
+										echo sprintf( esc_html__( 'From %s', 'stm_vehicles_listing' ), $dealer_info->user_location );//phpcs:ignore
 										?>
 										</div>
 									<?php endif; ?>
@@ -138,7 +138,7 @@
 									<span class="heading-font"><?php echo esc_attr( $dealer_info->stm_dealer_location ); ?></span>
 								</div>
 							<?php else : ?>
-								<?php esc_html_e( 'N/A', 'motors' ); ?>
+								<?php esc_html_e( 'N/A', 'stm_vehicles_listing' ); ?>
 							<?php endif; ?>
 						</div>
 					</div>

@@ -12,6 +12,12 @@ if ( empty( $affix ) ) {
 	$affix = '';
 }
 
+$elementor_editor = 'false';
+
+if ( class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
+	$elementor_editor = 'true';
+}
+
 if ( empty( $start_value ) ) {
 	$start_value = 0;
 }
@@ -28,6 +34,7 @@ if ( empty( $end_value ) ) {
             if (typeof stm_range_slug === "undefined") {
                 var stm_range_slug = [];
             }
+			var elementor_editor = <?php echo esc_js( $elementor_editor ); ?>;
 
             stm_range_slug.push("<?php echo esc_js( $js_slug ); ?>");
             window.stm_options_<?php echo esc_js( $js_slug ); ?>;
@@ -95,11 +102,12 @@ if ( empty( $end_value ) ) {
                     'slidestop',
                     range,
                     function () {
-                        if (typeof STMListings !== "undefined" && typeof STMListings.stm_disable_rest_filters !== "undefined") {
+                        if (typeof STMListings !== "undefined" && typeof STMListings.stm_disable_rest_filters !== "undefined" && !elementor_editor) {
                             STMListings.stm_disable_rest_filters($(this), 'listings-binding');
                         }
-
-                        $(this).closest('form').trigger('submit');
+						if ( !elementor_editor && !elementor_editor ) {
+                        	$(this).closest('form').trigger('submit');
+						}
                     }
                 );
 
@@ -121,7 +129,7 @@ if ( empty( $end_value ) ) {
 						$( range ).slider( 'values', 0, value );
 					}
 	
-					if ( old_min_value !== value ) {
+					if ( old_min_value !== value && ! elementor_editor ) {
 						$this.closest( 'form' ).trigger( 'submit' );
 					}
 	
@@ -136,7 +144,7 @@ if ( empty( $end_value ) ) {
 					if ( $this.is(':focus') && ( e.key === "Enter" || keyCode === 13 ) ) {
 						$( range ).slider( 'values', 0, value );
 	
-						if ( old_min_value !== value ) {
+						if ( old_min_value !== value && ! elementor_editor) {
 							$this.closest( 'form' ).trigger( 'submit' );
 						}
 	
@@ -152,7 +160,7 @@ if ( empty( $end_value ) ) {
 					if ( $this.is(':focus') && ( e.key === "Enter" || keyCode === 13 ) ) {
 						$( range ).slider( 'values', 1, value );
 
-						if ( old_max_value !== value ) {
+						if ( old_max_value !== value && ! elementor_editor) {
 							$this.closest( 'form' ).trigger( 'submit' );
 						}
 
@@ -175,7 +183,7 @@ if ( empty( $end_value ) ) {
 						$( range ).slider( 'values', 1, value );
 					}
 	
-					if ( old_max_value !== value ) {
+					if ( old_max_value !== value && ! elementor_editor ) {
 						$this.closest( 'form' ).trigger( 'submit' );
 					}
 	

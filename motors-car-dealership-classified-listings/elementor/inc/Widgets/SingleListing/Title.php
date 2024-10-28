@@ -24,7 +24,7 @@ class Title extends WidgetBase {
 	}
 
 	public function get_title() {
-		return esc_html__( 'Title', 'motors-car-dealership-classified-listings-pro' );
+		return esc_html__( 'Title', 'stm_vehicles_listing' );
 	}
 
 	public function get_icon() {
@@ -32,12 +32,12 @@ class Title extends WidgetBase {
 	}
 
 	protected function register_controls() {
-		$this->stm_start_content_controls_section( 'title_content', __( 'General', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_content_controls_section( 'title_content', __( 'General', 'stm_vehicles_listing' ) );
 
 		$this->add_control(
 			'title_tag',
 			array(
-				'label'   => __( 'Heading Tag', 'motors-car-dealership-classified-listings-pro' ),
+				'label'   => __( 'Heading Tag', 'stm_vehicles_listing' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'default' => 'h1',
 				'options' => array(
@@ -55,7 +55,7 @@ class Title extends WidgetBase {
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
 				'name'           => 'title_typography',
-				'label'          => __( 'Typography', 'motors-car-dealership-classified-listings-pro' ),
+				'label'          => __( 'Typography', 'stm_vehicles_listing' ),
 				'exclude'        => array(
 					'font_family',
 					'font_style',
@@ -89,7 +89,7 @@ class Title extends WidgetBase {
 			'title_color',
 			array(
 				'type'      => \Elementor\Controls_Manager::COLOR,
-				'label'     => __( 'Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Color', 'stm_vehicles_listing' ),
 				'default'   => '#232628',
 				'selectors' => array(
 					'{{WRAPPER}} .stm_listing_title' => 'color: {{VALUE}}',

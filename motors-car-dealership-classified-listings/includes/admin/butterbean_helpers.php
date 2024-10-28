@@ -149,7 +149,6 @@ function stm_listings_add_category_in() {
 	}
 
 	if ( ! empty( $term ) and ! empty( $category ) ) {
-
 		$term_slug = sanitize_title( $term );
 		$term_id   = term_exists( $term_slug, $category );
 		if ( $term_id === 0 or $term_id === null ) {

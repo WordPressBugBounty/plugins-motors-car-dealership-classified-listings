@@ -17,7 +17,7 @@ $listing_title = apply_filters( 'stm_generate_title_from_slugs', get_the_title( 
 				<?php echo wp_kses( apply_filters( 'stm_dynamic_icon_output', $date_added_icon ), apply_filters( 'stm_ew_kses_svg', array() ) ); ?>
 				<?php
 					// translators: %s: Added date.
-					printf( esc_html__( 'ADDED: %s', 'motors-car-dealership-classified-listings-pro' ), wp_kses_post( get_the_date( 'F d, Y' ) ) );
+					printf( esc_html__( 'ADDED: %s', 'stm_vehicles_listing' ), wp_kses_post( get_the_date( 'F d, Y' ) ) );
 				?>
 			</span>
 		<?php endif; ?>

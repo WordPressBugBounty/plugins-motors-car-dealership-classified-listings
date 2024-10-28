@@ -120,7 +120,7 @@ $compare_empty_placeholder = 'compare-empty.jpg';
 											</span>
 											<img class="stm-compare-empty"
 													src="<?php echo esc_url( STM_LISTINGS_URL . '/assets/elementor/img/' . $compare_empty_placeholder ); ?>"
-													alt="<?php esc_attr_e( 'Empty', 'motors-car-dealership-classified-listings-pro' ); ?>"/>
+													alt="<?php esc_attr_e( 'Empty', 'stm_vehicles_listing' ); ?>"/>
 										<?php }; ?>
 									</div>
 								</div>
@@ -132,7 +132,7 @@ $compare_empty_placeholder = 'compare-empty.jpg';
 								data-id="<?php echo esc_attr( get_the_ID() ); ?>"
 								data-post-type="<?php echo esc_attr( get_post_type( get_the_ID() ) ); ?>">
 								<i class="motors-icons-remove"></i>
-								<span><?php esc_html_e( 'Remove from list', 'motors-car-dealership-classified-listings-pro' ); ?></span>
+								<span><?php esc_html_e( 'Remove from list', 'stm_vehicles_listing' ); ?></span>
 							</span>
 							</div>
 							<a href="<?php the_permalink(); ?>" class="rmv_txt_drctn">
@@ -168,7 +168,7 @@ $compare_empty_placeholder = 'compare-empty.jpg';
 
 							<span class="btn btn-default add-to-compare hidden" data-action="remove"
 									data-id="<?php echo esc_js( get_the_ID() ); ?>">
-							<?php esc_html_e( 'Remove from compare', 'motors-car-dealership-classified-listings-pro' ); ?>
+							<?php esc_html_e( 'Remove from compare', 'stm_vehicles_listing' ); ?>
 						</span>
 						</div> <!--md-3-->
 					<?php endwhile; ?>
@@ -181,7 +181,7 @@ $compare_empty_placeholder = 'compare-empty.jpg';
 									</span>
 									<img class="stm-compare-empty"
 											src="<?php echo esc_url( STM_LISTINGS_URL . '/assets/elementor/img/' . $compare_empty_placeholder ); ?>"
-											alt="<?php esc_attr_e( 'Empty', 'motors-car-dealership-classified-listings-pro' ); ?>"/>
+											alt="<?php esc_attr_e( 'Empty', 'stm_vehicles_listing' ); ?>"/>
 								</div>
 								<div class="h5"><?php echo esc_html( $add_to_text ); ?></div>
 							</a>
@@ -229,7 +229,7 @@ $compare_empty_placeholder = 'compare-empty.jpg';
 											data-id="<?php echo esc_attr( get_the_ID() ); ?>"
 											data-post-type="<?php echo esc_attr( get_post_type( get_the_ID() ) ); ?>">
 										<i class="motors-icons-remove"></i>
-										<span><?php esc_html_e( 'Remove from list', 'motors-car-dealership-classified-listings-pro' ); ?></span>
+										<span><?php esc_html_e( 'Remove from list', 'stm_vehicles_listing' ); ?></span>
 									</span>
 									</div>
 									<h4 class="text-transform compare-car-visible"><?php the_title(); ?></h4>
@@ -237,7 +237,7 @@ $compare_empty_placeholder = 'compare-empty.jpg';
 										<?php if ( wp_is_mobile() ) : ?>
 											<tr>
 												<td class="compare-value-hover">
-													<div class="h5" data-option="<?php esc_html_e( 'Price', 'motors-car-dealership-classified-listings-pro' ); ?>">&nbsp;
+													<div class="h5" data-option="<?php esc_html_e( 'Price', 'stm_vehicles_listing' ); ?>">&nbsp;
 														<?php $price = get_post_meta( get_the_ID(), 'price', true ); ?>
 														<?php $sale_price = get_post_meta( get_the_ID(), 'sale_price', true ); ?>
 														<?php $car_price_form_label = get_post_meta( get_the_ID(), 'car_price_form_label', true ); ?>
@@ -284,11 +284,11 @@ $compare_empty_placeholder = 'compare-empty.jpg';
 																		echo esc_html( implode( ', ', $datas ) );
 
 																	} else {
-																		esc_html_e( 'None', 'motors-car-dealership-classified-listings-pro' );
+																		esc_html_e( 'None', 'stm_vehicles_listing' );
 																	}
 																}
 															} else {
-																esc_html_e( 'None', 'motors-car-dealership-classified-listings-pro' );
+																esc_html_e( 'None', 'stm_vehicles_listing' );
 															}
 															?>
 														</div>
@@ -328,7 +328,7 @@ $compare_empty_placeholder = 'compare-empty.jpg';
 								<?php echo wp_kses( apply_filters( 'stm_dynamic_icon_output', $add_icon ), apply_filters( 'stm_ew_kses_svg', array() ) ); ?>
 								<img
 										src="<?php echo esc_url( STM_LISTINGS_URL . '/assets/elementor/img/' . $compare_empty_placeholder ); ?>"
-										alt="<?php esc_attr_e( 'Empty', 'motors-car-dealership-classified-listings-pro' ); ?>"/>
+										alt="<?php esc_attr_e( 'Empty', 'stm_vehicles_listing' ); ?>"/>
 							</div>
 							<div class="add-compare-mobile-label"><?php echo esc_html( $add_to_text ); ?></div>
 						</a>
@@ -364,7 +364,7 @@ $compare_empty_placeholder = 'compare-empty.jpg';
 								</span>
 								<img class="stm-compare-empty"
 										src="<?php echo esc_url( STM_LISTINGS_URL . '/assets/elementor/img/' . $compare_empty_placeholder ); ?>"
-										alt="<?php esc_attr_e( 'Empty', 'motors-car-dealership-classified-listings-pro' ); ?>"/>
+										alt="<?php esc_attr_e( 'Empty', 'stm_vehicles_listing' ); ?>"/>
 							</div>
 							<div class="h5"><?php echo esc_html( $add_to_text ); ?></div>
 						</a>
@@ -416,7 +416,7 @@ $compare_empty_placeholder = 'compare-empty.jpg';
 			<?php if ( $compares->have_posts() ) : ?>
 				<div class="row row-4 row-compare-features hidden-xs">
 					<div class="col-md-3 col-sm-3">
-						<h4 class="stm-compare-features"><?php esc_html_e( 'Additional features', 'motors-car-dealership-classified-listings-pro' ); ?></h4>
+						<h4 class="stm-compare-features"><?php esc_html_e( 'Additional features', 'stm_vehicles_listing' ); ?></h4>
 					</div>
 					<?php
 					while ( $compares->have_posts() ) :
@@ -451,7 +451,7 @@ $compare_empty_placeholder = 'compare-empty.jpg';
 					</span>
 					<img class="stm-compare-empty"
 							src="<?php echo esc_url( STM_LISTINGS_URL . '/assets/elementor/img/' . $compare_empty_placeholder ); ?>"
-							alt="<?php esc_attr_e( 'Empty', 'motors-car-dealership-classified-listings-pro' ); ?>"/>
+							alt="<?php esc_attr_e( 'Empty', 'stm_vehicles_listing' ); ?>"/>
 				</div>
 				<div class="h5"><?php echo esc_html( $add_to_text ); ?></div>
 			</a>

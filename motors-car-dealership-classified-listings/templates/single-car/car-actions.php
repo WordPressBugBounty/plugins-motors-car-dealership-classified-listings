@@ -44,7 +44,7 @@ $show_share            = apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_s
 						<?php esc_html_e( 'stock', 'stm_vehicles_listing' ); ?>
 						#
 					</span>
-					<?php echo esc_attr( $stock_number ); ?>
+					<span class="stock-num-value"><?php echo esc_attr( $stock_number ); ?></span>
 				</div>
 			</li>
 		<?php endif; ?>

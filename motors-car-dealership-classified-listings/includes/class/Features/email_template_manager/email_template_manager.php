@@ -6,12 +6,12 @@ if ( ! function_exists( 'add_email_template_view' ) ) {
 
 	function add_email_template_view() {
 		$title = esc_html__( 'Email Template Manager', 'stm_vehicles_listing' );
-		add_submenu_page( 'mvl_plugin_settings', $title, $title, 'administrator', 'email-templaet-manager', 'email_template_view' );
+		add_submenu_page( 'mvl_plugin_settings', $title, $title, 'manage_options', 'email-template-manager', 'email_template_view' );
 
 		add_filter(
 			'mvl_submenu_positions',
 			function ( $positions ) {
-				$positions['email-templaet-manager'] = 16;
+				$positions['email-template-manager'] = 16;
 
 				return $positions;
 			}

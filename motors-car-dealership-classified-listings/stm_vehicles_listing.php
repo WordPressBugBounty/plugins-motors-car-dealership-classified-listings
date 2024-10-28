@@ -8,7 +8,7 @@
  * License: GNU General Public License v2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: stm_vehicles_listing
- * Version: 1.4.26
+ * Version: 1.4.27
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -17,6 +17,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( in_array( 'stm_vehicles_listing/stm_vehicles_listing.php', (array) get_option( 'active_plugins', array() ), true ) ) {
 
 	if ( get_template_directory() === get_stylesheet_directory() ) {
+		if ( ! function_exists( 'deactivate_plugins' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+
 		deactivate_plugins( 'stm_vehicles_listing/stm_vehicles_listing.php', true );
 	} else {
 		if ( is_admin() ) {
@@ -44,7 +48,8 @@ if ( ! defined( 'STM_LISTINGS_PATH' ) ) {
 	define( 'STM_LISTINGS_PATH', dirname( STM_LISTINGS_FILE ) );
 	define( 'STM_LISTINGS_URL', plugins_url( '', STM_LISTINGS_FILE ) );
 	define( 'STM_LISTINGS', 'stm_vehicles_listing' );
-	define( 'STM_LISTINGS_V', '1.4.26' );
+	define( 'STM_THEME_V_NEED', '5.6.33' );
+	define( 'STM_LISTINGS_V', '1.4.27' );
 	define( 'STM_LISTINGS_IMAGES', STM_LISTINGS_URL . '/includes/admin/butterbean/images/' );
 }
 
@@ -83,13 +88,20 @@ if ( ! in_array( 'stm-motors-extends/stm-motors-extends.php', (array) get_option
 require_once dirname( __FILE__ ) . '/nuxy/NUXY.php';
 require_once STM_LISTINGS_PATH . '/includes/functions.php';
 require_once STM_LISTINGS_PATH . '/includes/helpers.php';
-require_once STM_LISTINGS_PATH . '/includes/starter-theme/classes/class-loader.php';
+
+if ( file_exists( STM_LISTINGS_PATH . '/includes/starter-theme/classes/class-loader.php' ) ) {
+	require_once STM_LISTINGS_PATH . '/includes/starter-theme/classes/class-loader.php';
+}
+
 require_once STM_LISTINGS_PATH . '/includes/user-extra.php';
 
 /* Features */
 
 if ( apply_filters( 'stm_is_motors_theme', false ) || apply_filters( 'is_mvl_pro', false ) ) {
-	require_once STM_LISTINGS_PATH . '/includes/class/Plugin/hooks.php';
+	if ( file_exists( STM_LISTINGS_PATH . '/includes/class/Plugin/hooks.php' ) ) {
+		require_once STM_LISTINGS_PATH . '/includes/class/Plugin/hooks.php';
+	}
+
 	$active_plugins = (array) get_option( 'active_plugins', array() );
 
 	add_action(
@@ -117,7 +129,7 @@ if ( apply_filters( 'stm_is_motors_theme', false ) || apply_filters( 'is_mvl_pro
 
 /* Features */
 
-if ( class_exists( 'Elementor\Plugin' ) ) {
+if ( class_exists( 'Elementor\Plugin' ) && class_exists( '\MotorsVehiclesListing\Features\Elementor\Nuxy\TemplateManager' ) ) {
 	new TemplateManager();
 }
 
@@ -134,7 +146,10 @@ require_once STM_LISTINGS_PATH . '/includes/options.php';
 require_once STM_LISTINGS_PATH . '/includes/actions.php';
 require_once STM_LISTINGS_PATH . '/includes/fix-image-orientation.php';
 require_once STM_LISTINGS_PATH . '/includes/shortcodes.php';
-require_once STM_LISTINGS_PATH . '/includes/stm_single_dealer.php';
+
+if ( file_exists( STM_LISTINGS_PATH . '/includes/stm_single_dealer.php' ) ) {
+	require_once STM_LISTINGS_PATH . '/includes/stm_single_dealer.php';
+}
 
 if ( is_admin() ) {
 	require_once STM_LISTINGS_PATH . '/includes/admin/categories.php';
@@ -161,31 +176,50 @@ if ( is_admin() ) {
 
 	new Settings();
 
-	if ( class_exists( 'Elementor\Plugin' ) ) {
+	if ( class_exists( 'Elementor\Plugin' ) && class_exists( '\MotorsVehiclesListing\MenuPages\SingleListingTemplateSettings' ) ) {
 		new SingleListingTemplateSettings();
 	}
 
-	if ( ! defined( 'WPB_VC_VERSION' ) && 'classified' === get_option( 'motors_layout_type', 'classified' ) ) {
+	if ( apply_filters( 'mvl_add_listing_form_enable', true ) && class_exists( '\MotorsVehiclesListing\MenuPages\AddCarFormSettings' ) ) {
 		new AddCarFormSettings();
 	}
 
-	new SearchResultsSettings();
-	new FilterSettings();
-	new ListingDetailsSettings();
+	if ( class_exists( '\MotorsVehiclesListing\MenuPages\SearchResultsSettings' ) ) {
+		new SearchResultsSettings();
+	}
 
-	if ( ! is_network_admin() ) {
+	if ( class_exists( '\MotorsVehiclesListing\MenuPages\FilterSettings' ) ) {
+		new FilterSettings();
+	}
+
+	if ( class_exists( '\MotorsVehiclesListing\MenuPages\ListingDetailsSettings' ) ) {
+		new ListingDetailsSettings();
+	}
+
+	if ( class_exists( '\MotorsVehiclesListing\MenuPages\MenuBuilder' ) && ! is_network_admin() ) {
 		new MenuBuilder();
 	}
 }
 
-if ( apply_filters( 'is_mvl_pro', false ) || apply_filters( 'stm_is_motors_theme', false ) ) {
-	require_once STM_LISTINGS_PATH . '/includes/class/Features/email_template_manager/email_template_manager.php';
-} else {
-	require_once STM_LISTINGS_PATH . '/includes/email_templates/email_templates.php';
+if ( file_exists( STM_LISTINGS_PATH . '/elementor/MotorsElementorWidgetsFree.php' ) ) {
+	require_once STM_LISTINGS_PATH . '/elementor/MotorsElementorWidgetsFree.php';
 }
-
-require_once STM_LISTINGS_PATH . '/elementor/MotorsElementorWidgetsFree.php';
 
 if ( ! in_array( 'motors-elementor-widgets/motors-elementor-widgets.php', (array) get_option( 'active_plugins', array() ), true ) && class_exists( 'Elementor\Plugin' ) ) {
 	new MotorsElementorWidgetsFree();
 }
+
+if ( file_exists( STM_LISTINGS_PATH . '/includes/notices.php' ) ) {
+	require_once STM_LISTINGS_PATH . '/includes/notices.php';
+}
+
+add_action(
+	'plugins_loaded',
+	function () {
+		if ( apply_filters( 'is_mvl_pro', false ) && file_exists( STM_LISTINGS_PATH . '/includes/class/Features/email_template_manager/email_template_manager.php' ) ) {
+			require_once STM_LISTINGS_PATH . '/includes/class/Features/email_template_manager/email_template_manager.php';
+		} else {
+			require_once STM_LISTINGS_PATH . '/includes/email_templates/email_templates.php';
+		}
+	}
+);

@@ -85,11 +85,13 @@ if ( ! empty( $checkboxes ) ) {
 											<?php
 										endif;
 										?>
-										<input type="checkbox" name="<?php echo esc_attr( $checkbox['slug'] ); ?>[]"
+										<div class="stm-checkbox-wrapper">
+											<input type="checkbox" name="<?php echo esc_attr( $checkbox['slug'] ); ?>[]"
 											value="<?php echo esc_attr( $img_term->slug ); ?>"
 											<?php echo ( in_array( $img_term->slug, $selected_options, true ) ) ? 'checked' : ''; ?>
 										/>
 										<span><?php echo esc_attr( $img_term->name ); ?></span>
+										</div>
 									<?php endif; ?>
 									</label>
 									<?php
@@ -100,11 +102,13 @@ if ( ! empty( $checkboxes ) ) {
 									if ( empty( $image ) ) :
 										?>
 										<label class="stm-option-label">
-										<input type="checkbox" name="<?php echo esc_attr( $checkbox['slug'] ); ?>[]"
-											value="<?php echo esc_attr( $rest_term->slug ); ?>"
-											<?php echo ( in_array( $rest_term->slug, $selected_options, true ) ) ? 'checked' : ''; ?>
-										/>
-										<span><?php echo esc_attr( $rest_term->name ); ?></span>
+											<div class="stm-checkbox-wrapper">
+												<input type="checkbox" name="<?php echo esc_attr( $checkbox['slug'] ); ?>[]"
+													value="<?php echo esc_attr( $rest_term->slug ); ?>"
+													<?php echo ( in_array( $rest_term->slug, $selected_options, true ) ) ? 'checked' : ''; ?>
+												/>
+												<span><?php echo esc_attr( $rest_term->name ); ?></span>
+											</div>
 									<?php endif; ?>
 									</label>
 									<?php

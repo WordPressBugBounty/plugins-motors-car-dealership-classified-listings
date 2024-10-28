@@ -15,7 +15,6 @@
 use Elementor\Plugin;
 
 global $listing_id;
-
 $listing_id = ( is_null( $listing_id ) ) ? get_the_ID() : $listing_id;
 
 // Getting gallery list.
@@ -38,7 +37,7 @@ if ( ! empty( $video_preview ) ) {
 $placeholder_path = 'plchldr350.png';
 
 if ( empty( $badge_text ) ) {
-	$badge_text = esc_html__( 'Special', 'motors-car-dealership-classified-listings-pro' );
+	$badge_text = esc_html__( 'Special', 'stm_vehicles_listing' );
 }
 
 $badge_style = '';
@@ -57,7 +56,7 @@ $actions_visibility = ( $show_actions_onhover ) ? ' actions-onhover' : '';
 	<div class="stm-gallery-actions">
 		<?php if ( 'yes' === $show_pdf && ! empty( $car_brochure ) ) : ?>
 			<div class="stm-gallery-action-unit">
-				<a href="<?php echo esc_url( wp_get_attachment_url( $car_brochure ) ); ?>" class="stm-brochure" title="<?php esc_html_e( 'Download brochure', 'motors-car-dealership-classified-listings-pro' ); ?>" download>
+				<a href="<?php echo esc_url( wp_get_attachment_url( $car_brochure ) ); ?>" class="stm-brochure" title="<?php esc_html_e( 'Download brochure', 'stm_vehicles_listing' ); ?>" download>
 					<i class="motors-icons-brochure"></i>
 				</a>
 			</div>
@@ -70,12 +69,12 @@ $actions_visibility = ( $show_actions_onhover ) ? ' actions-onhover' : '';
 			</div>
 		<?php endif; ?>
 		<?php if ( apply_filters( 'is_listing', array() ) && ! empty( $show_featured ) && 'yes' === $show_featured ) : ?>
-			<div class="stm-gallery-action-unit stm-listing-favorite-action" data-id="<?php echo esc_attr( $listing_id ); ?>" data-toggle="tooltip" data-placement="bottom" title="<?php esc_attr_e( 'Add to favorites', 'motors-car-dealership-classified-listings-pro' ); ?>">
+			<div class="stm-gallery-action-unit stm-listing-favorite-action" data-id="<?php echo esc_attr( $listing_id ); ?>" data-toggle="tooltip" data-placement="bottom" title="<?php esc_attr_e( 'Add to favorites', 'stm_vehicles_listing' ); ?>">
 				<i class="motors-icons-staricon"></i>
 			</div>
 		<?php endif; ?>
 		<?php if ( 'yes' === $show_compare ) : ?>
-			<div class="stm-gallery-action-unit compare" data-toggle="tooltip" data-placement="bottom" data-id="<?php echo esc_attr( $listing_id ); ?>" data-title="<?php echo wp_kses_post( apply_filters( 'stm_generate_title_from_slugs', get_the_title( $listing_id ), $listing_id ) ); ?>" data-post-type="<?php echo esc_attr( get_post_type( $listing_id ) ); ?>" title="<?php esc_attr_e( 'Add to compare', 'motors-car-dealership-classified-listings-pro' ); ?>">
+			<div class="stm-gallery-action-unit compare" data-toggle="tooltip" data-placement="bottom" data-id="<?php echo esc_attr( $listing_id ); ?>" data-title="<?php echo wp_kses_post( apply_filters( 'stm_generate_title_from_slugs', get_the_title( $listing_id ), $listing_id ) ); ?>" data-post-type="<?php echo esc_attr( get_post_type( $listing_id ) ); ?>" title="<?php esc_attr_e( 'Add to compare', 'stm_vehicles_listing' ); ?>">
 				<i class="motors-icons-compare-new"></i>
 			</div>
 		<?php endif; ?>
@@ -102,13 +101,14 @@ $actions_visibility = ( $show_actions_onhover ) ? ' actions-onhover' : '';
 		<div class="stm-car-medias">
 			<div class="stm-listing-videos-unit stm-car-videos-<?php echo esc_attr( $listing_id ); ?>">
 				<i class="fas fa-film"></i>
-				<span><?php echo esc_html( $car_media['car_videos_count'] ); ?><?php esc_html_e( 'Video', 'motors-car-dealership-classified-listings-pro' ); ?></span>
+				<span><?php echo esc_html( $car_media['car_videos_count'] ); ?><?php esc_html_e( 'Video', 'stm_vehicles_listing' ); ?></span>
 			</div>
 		</div>
 	<?php // @codingStandardsIgnoreStart ?>
 		<script>
             jQuery(document).ready(function () {
-                jQuery(".stm-car-videos-<?php echo esc_attr( $listing_id ); ?>").on('click', function () {
+                jQuery(".fancy-iframe").on('click', function () {
+					
                     jQuery(this).lightGallery({
                         dynamic: true,
                         dynamicEl: [
@@ -131,13 +131,23 @@ $actions_visibility = ( $show_actions_onhover ) ? ' actions-onhover' : '';
 	<?php if ( ! empty( $gallery ) ) : ?>
 		<script>
             jQuery(document).ready(function () {
-                jQuery('.motors-elementor-big-gallery').lightGallery({
-                    selector: '.stm_fancybox',
-                    mode: 'lg-fade',
-                    download: false,
-                    thumbnail: true,
-                });
-            });
+				jQuery('.stm_fancybox').on('click', function(e) {
+            	e.preventDefault();
+					jQuery('.motors-elementor-big-gallery').lightGallery({
+						selector: '.stm_fancybox',
+						mode: 'lg-fade',
+						download: false,
+						thumbnail: true,
+						dynamic: true,
+						dynamicEl: jQuery('.stm_fancybox').map(function() {
+							return {
+								src: jQuery(this).data('src-img'),
+								thumb: jQuery(this).data('src-img'),
+							};
+						}).get()
+					});
+            	});
+			});
 		</script>
 	<?php endif; ?>
 	<?php // @codingStandardsIgnoreEnd ?>
@@ -150,7 +160,7 @@ $actions_visibility = ( $show_actions_onhover ) ? ' actions-onhover' : '';
 				// Post thumbnail first.
 				?>
 				<div class="stm-single-image swiper-slide" data-id="big-image-<?php echo esc_attr( get_post_thumbnail_id( $listing_id ) ); ?>">
-					<a href="<?php echo esc_url( $full_src[0] ); ?>" class="stm_fancybox" rel="stm-car-gallery">
+					<a href="#" class="stm_fancybox" rel="stm-car-gallery" data-src-img="<?php echo esc_url( $full_src[0] ); ?>">
 						<?php echo get_the_post_thumbnail( $listing_id, 'stm-img-796-466', array( 'class' => 'img-responsive' ) ); ?>
 						<?php if ( $show_overlay ) : ?>
 							<span class="image-overlay"></span>
@@ -169,8 +179,8 @@ $actions_visibility = ( $show_actions_onhover ) ? ' actions-onhover' : '';
 				<?php $src = wp_get_attachment_image_src( $video_preview, 'stm-img-796-466' ); ?>
 				<?php if ( ! empty( $src[0] ) ) : ?>
 					<div class="stm-single-image swiper-slide video-preview" data-id="big-image-<?php echo esc_attr( $video_preview ); ?>">
-						<a class="fancy-iframe" data-iframe="true" data-src="<?php echo esc_url( $gallery_video ); ?>">
-							<img src="<?php echo esc_url( $src[0] ); ?>" class="img-responsive" alt="<?php esc_attr_e( 'Video preview', 'motors-car-dealership-classified-listings-pro' ); ?>"/>
+						<a class="fancy-iframe" data-iframe="true" data-src-img="<?php echo esc_url( $gallery_video ); ?>">
+							<img src="<?php echo esc_url( $src[0] ); ?>" class="img-responsive" alt="<?php esc_attr_e( 'Video preview', 'stm_vehicles_listing' ); ?>"/>
 						</a>
 					</div>
 				<?php endif; ?>
@@ -182,12 +192,12 @@ $actions_visibility = ( $show_actions_onhover ) ? ' actions-onhover' : '';
 					<?php $full_src = wp_get_attachment_image_src( $gallery_image, 'full' ); ?>
 					<?php if ( ! empty( $src[0] ) && get_post_thumbnail_id( $listing_id ) !== $gallery_image ) : ?>
 						<div class="stm-single-image swiper-slide" data-id="big-image-<?php echo esc_attr( $gallery_image ); ?>">
-							<a href="<?php echo esc_url( $full_src[0] ); ?>" class="stm_fancybox" rel="stm-car-gallery">
+							<a href="#" class="stm_fancybox" rel="stm-car-gallery" data-src-img="<?php echo esc_url( $full_src[0] ); ?>">
 								<img src="<?php echo esc_url( $src[0] ); ?>" alt="
 								<?php
 								printf(
 								/* translators: post title */
-									esc_attr__( '%s full', 'motors-car-dealership-classified-listings-pro' ),
+									esc_attr__( '%s full', 'stm_vehicles_listing' ),
 									esc_html( get_the_title( $listing_id ) )
 								);
 								?>
@@ -213,7 +223,7 @@ $actions_visibility = ( $show_actions_onhover ) ? ' actions-onhover' : '';
 						<img
 							src="<?php echo esc_url( STM_LISTINGS_URL . '/assets/elementor/img/' . $placeholder_path ); ?>"
 							class="img-responsive"
-							alt="<?php esc_attr_e( 'Placeholder', 'motors-car-dealership-classified-listings-pro' ); ?>"
+							alt="<?php esc_attr_e( 'Placeholder', 'stm_vehicles_listing' ); ?>"
 						/>
 					</div>
 				<?php endif; ?>
@@ -230,7 +240,7 @@ $actions_visibility = ( $show_actions_onhover ) ? ' actions-onhover' : '';
 								<?php
 									printf(
 										/* translators: %s post title */
-										esc_attr__( '%s full', 'motors-car-dealership-classified-listings-pro' ),
+										esc_attr__( '%s full', 'stm_vehicles_listing' ),
 										esc_html( get_the_title( $listing_id ) )
 									);
 								?>
@@ -249,8 +259,8 @@ $actions_visibility = ( $show_actions_onhover ) ? ' actions-onhover' : '';
 					if ( ! empty( $src[0] ) ) :
 						?>
 						<div class="stm-single-image swiper-slide video-preview" data-id="big-image-<?php echo esc_attr( $val ); ?>">
-							<a class="fancy-iframe" data-iframe="true" data-src="<?php echo esc_url( $video_source ); ?>">ф
-								<img src="<?php echo esc_url( $src[0] ); ?>" class="img-responsive" alt="<?php esc_attr_e( 'Video preview', 'motors-car-dealership-classified-listings-pro' ); ?>"/>
+							<a class="fancy-iframe stm_fancybox" data-iframe="true" data-src="<?php echo esc_url( $video_source ); ?>">ф
+								<img src="<?php echo esc_url( $src[0] ); ?>" class="img-responsive" alt="<?php esc_attr_e( 'Video preview', 'stm_vehicles_listing' ); ?>"/>
 							</a>
 						</div>
 						<?php
@@ -266,15 +276,14 @@ $actions_visibility = ( $show_actions_onhover ) ? ' actions-onhover' : '';
 		<?php elseif ( true === apply_filters( 'stm_sold_status_enabled', false ) && ! empty( $sold ) ) : ?>
 			<?php $badge_style = 'style=background-color:' . $sold_badge_color . ';'; ?>
 			<div class="special-label h5" <?php echo esc_attr( $badge_style ); ?>>
-				<?php esc_html_e( 'Sold', 'motors-car-dealership-classified-listings-pro' ); ?>
+				<?php esc_html_e( 'Sold', 'stm_vehicles_listing' ); ?>
 			</div>
 		<?php endif; ?>
 	</div>
 
 	<?php if ( $use_slider ) : ?>
-
+		<?php if ( ! empty( $gallery ) || has_post_thumbnail() || ( ! empty( $video_preview ) && ! empty( $gallery_video ) ) ) : ?>
 		<div class="swiper-container motors-elementor-thumbs-gallery" id="<?php echo esc_attr( $gallery_thumbs_id ); ?>">
-			<?php if ( has_post_thumbnail() || ( ! empty( $video_preview ) && ! empty( $gallery_video ) ) ) : ?>
 				<div class="swiper-wrapper">
 
 					<?php
@@ -291,7 +300,7 @@ $actions_visibility = ( $show_actions_onhover ) ? ' actions-onhover' : '';
 						<?php if ( ! empty( $src[0] ) ) : ?>
 							<div class="stm-single-image swiper-slide video-preview" data-id="big-image-<?php echo esc_attr( $video_preview ); ?>">
 								<a class="fancy-iframe" data-iframe="true" data-src="<?php echo esc_url( $gallery_video ); ?>">
-									<img src="<?php echo esc_url( $src[0] ); ?>" alt="<?php esc_attr_e( 'Video preview', 'motors-car-dealership-classified-listings-pro' ); ?>"/>
+									<img src="<?php echo esc_url( $src[0] ); ?>" alt="<?php esc_attr_e( 'Video preview', 'stm_vehicles_listing' ); ?>"/>
 								</a>
 							</div>
 						<?php endif; ?>
@@ -306,7 +315,7 @@ $actions_visibility = ( $show_actions_onhover ) ? ' actions-onhover' : '';
 										<?php
 										printf(
 										/* translators: post title */
-											esc_attr__( '%s full', 'motors-car-dealership-classified-listings-pro' ),
+											esc_attr__( '%s full', 'stm_vehicles_listing' ),
 											esc_html( get_the_title( $listing_id ) )
 										);
 										?>
@@ -325,8 +334,8 @@ $actions_visibility = ( $show_actions_onhover ) ? ' actions-onhover' : '';
 							if ( ! empty( $src[0] ) ) :
 								?>
 								<div class="stm-single-image swiper-slide video-preview" data-id="big-image-<?php echo esc_attr( $video_preview ); ?>">
-									<a class="fancy-iframe" data-iframe="true" data-src="<?php echo esc_url( $video_source ); ?>">
-										<img src="<?php echo esc_url( $src[0] ); ?>" alt="<?php esc_attr_e( 'Video preview', 'motors-car-dealership-classified-listings-pro' ); ?>"/>
+									<a class="fancy-iframe stm_fancybox" data-iframe="true" data-src="<?php echo esc_url( $video_source ); ?>">
+										<img src="<?php echo esc_url( $src[0] ); ?>" alt="<?php esc_attr_e( 'Video preview', 'stm_vehicles_listing' ); ?>"/>
 									</a>
 								</div>
 							<?php endif; ?>
@@ -338,8 +347,8 @@ $actions_visibility = ( $show_actions_onhover ) ? ' actions-onhover' : '';
 					<div class="stm-swiper-prev"></div>
 					<div class="stm-swiper-next"></div>
 				</div>
-			<?php endif; ?>
 		</div>
+		<?php endif; ?>
 
 	<?php endif; ?>
 
@@ -359,6 +368,9 @@ $actions_visibility = ( $show_actions_onhover ) ? ' actions-onhover' : '';
 				<?php
 				endif;
 				?>
+				var tabletPerView = <?php echo esc_js( $slg_tablet_slides_per_view ); ?>;
+				var mobilePerView = <?php echo esc_js( $slg_mobile_slides_per_view ); ?>;
+				var infinityLoop = <?php echo esc_js( empty( $slg_infinite_loop ) ? 'false' : 'true' ); ?>;
 				var galleryThumbs = new Swiper("#<?php echo esc_attr( $gallery_thumbs_id ); ?>", {
 					spaceBetween: 23,
 					slidesPerView: 4,
@@ -370,19 +382,26 @@ $actions_visibility = ( $show_actions_onhover ) ? ' actions-onhover' : '';
 					slideToClickedSlide: true,
 					breakpoints: {
 						320: {
-							slidesPerView: 2,
+							slidesPerView: mobilePerView,
 							spaceBetween: 15
 						},
 						767: {
-							slidesPerView: 'auto',
+							slidesPerView: tabletPerView,
 							spaceBetween: 23
 						}
 					}
 				});
+				
 				var galleryTop = new Swiper("#<?php echo esc_attr( $big_gallery_id ); ?>", {
 					spaceBetween: 23,
-					loop: false,
+					loop: infinityLoop,
 					loopedSlides: 5,
+					<?php if ( $slg_autoplay ) : ?>
+					autoplay: {
+						delay: <?php echo esc_js( intval( $slg_autoplay_speed ) ); ?>,
+					},
+					speed: <?php echo esc_js( intval( $slg_speed ) ); ?>,
+					<?php endif; ?>
 					navigation: {
 					nextEl: ".stm-swiper-next",
 					prevEl: ".stm-swiper-prev",

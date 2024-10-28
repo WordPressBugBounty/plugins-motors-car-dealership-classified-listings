@@ -127,7 +127,7 @@ if ( 'custom_link' !== $pricing_plan && is_numeric( $pricing_plan ) ) {
 							</span>
 						<?php endif; ?>
 						<span class="stm-pricing-plan__items__item__text">
-							<?php echo $item['item_title'] ? esc_html( $item['item_title'] ) : esc_html__( '10 active listing quotas', 'motors-car-dealership-classified-listings-pro' ); ?>
+							<?php echo $item['item_title'] ? esc_html( $item['item_title'] ) : esc_html__( '10 active listing quotas', 'stm_vehicles_listing' ); ?>
 						</span>
 					</p>
 				<?php endforeach; ?>

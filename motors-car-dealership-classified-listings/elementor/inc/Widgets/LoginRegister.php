@@ -23,7 +23,7 @@ class LoginRegister extends WidgetBase {
 	}
 
 	public function get_title(): string {
-		return esc_html__( 'Login Register', 'motors-car-dealership-classified-listings-pro' );
+		return esc_html__( 'Login Register', 'stm_vehicles_listing' );
 	}
 
 	public function get_icon(): string {
@@ -43,23 +43,23 @@ class LoginRegister extends WidgetBase {
 	}
 
 	protected function register_controls() {
-		$this->stm_start_content_controls_section( 'section_content', esc_html__( 'General', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_content_controls_section( 'section_content', esc_html__( 'General', 'stm_vehicles_listing' ) );
 
 		$this->add_control(
 			'terms_label',
 			array(
-				'label'   => esc_html__( 'Label', 'motors-car-dealership-classified-listings-pro' ),
+				'label'   => esc_html__( 'Label', 'stm_vehicles_listing' ),
 				'type'    => \Elementor\Controls_Manager::TEXT,
-				'default' => esc_html__( 'I accept the terms of the', 'motors-car-dealership-classified-listings-pro' ),
+				'default' => esc_html__( 'I accept the terms of the', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'link_text',
 			array(
-				'label'   => esc_html__( 'Link Name', 'motors-car-dealership-classified-listings-pro' ),
+				'label'   => esc_html__( 'Link Name', 'stm_vehicles_listing' ),
 				'type'    => \Elementor\Controls_Manager::TEXT,
-				'default' => esc_html__( 'service', 'motors-car-dealership-classified-listings-pro' ),
+				'default' => esc_html__( 'service', 'stm_vehicles_listing' ),
 			)
 		);
 
@@ -68,7 +68,7 @@ class LoginRegister extends WidgetBase {
 		$this->add_control(
 			'terms_page',
 			array(
-				'label'     => esc_html__( 'Terms Page', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Terms Page', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::SELECT,
 				'options'   => $stm_me_wpcfto_pages_list,
 				'condition' => array(
@@ -80,7 +80,7 @@ class LoginRegister extends WidgetBase {
 		$this->add_control(
 			'external_link',
 			array(
-				'label' => esc_html__( 'External Link', 'motors-car-dealership-classified-listings-pro' ),
+				'label' => esc_html__( 'External Link', 'stm_vehicles_listing' ),
 				'type'  => \Elementor\Controls_Manager::SWITCHER,
 			)
 		);
@@ -88,7 +88,7 @@ class LoginRegister extends WidgetBase {
 		$this->add_control(
 			'link_of_terms',
 			array(
-				'label'     => esc_html__( 'Link', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Link', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::URL,
 				'default'   => array(
 					'url'         => 'example.com',
@@ -103,21 +103,21 @@ class LoginRegister extends WidgetBase {
 
 		$this->stm_end_control_section();
 
-		$this->stm_start_style_controls_section( 'section_style_general', esc_html__( 'General', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_style_controls_section( 'section_style_general', esc_html__( 'General', 'stm_vehicles_listing' ) );
 
 		$this->stm_start_ctrl_tabs( 'btn_style' );
 
 		$this->stm_start_ctrl_tab(
 			'btn_normal',
 			array(
-				'label' => __( 'Normal', 'motors-car-dealership-classified-listings-pro' ),
+				'label' => __( 'Normal', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'button_background_color',
 			array(
-				'label'     => esc_html__( 'Button Background Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Button Background Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} form input[type=submit]:not([disabled])' => 'background: {{VALUE}};box-shadow: 0 2px 0 {{VALUE}};',
@@ -128,7 +128,7 @@ class LoginRegister extends WidgetBase {
 		$this->add_control(
 			'button_text_color',
 			array(
-				'label'     => esc_html__( 'Button Text Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Button Text Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} form input[type=submit]:not([disabled])' => 'color: {{VALUE}};',
@@ -141,14 +141,14 @@ class LoginRegister extends WidgetBase {
 		$this->stm_start_ctrl_tab(
 			'btn_hover',
 			array(
-				'label' => __( 'Hover', 'motors-car-dealership-classified-listings-pro' ),
+				'label' => __( 'Hover', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'background_color_hover',
 			array(
-				'label'     => esc_html__( 'Button Background Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Button Background Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} form input[type=submit]:hover:not([disabled])' => 'background: {{VALUE}};box-shadow: 0 2px 0 {{VALUE}};',
@@ -159,7 +159,7 @@ class LoginRegister extends WidgetBase {
 		$this->add_control(
 			'button_text_color_hover',
 			array(
-				'label'     => esc_html__( 'Button Text Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Button Text Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} form input[type=submit]:hover:not([disabled])' => 'color: {{VALUE}};',
@@ -174,7 +174,7 @@ class LoginRegister extends WidgetBase {
 		$this->add_control(
 			'sign_in_text_color',
 			array(
-				'label'     => esc_html__( 'Sign In Text Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Sign In Text Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'default'   => '#fff',
 				'selectors' => array(
@@ -187,7 +187,7 @@ class LoginRegister extends WidgetBase {
 		$this->add_control(
 			'sign_in_background_color',
 			array(
-				'label'     => esc_html__( 'Sign In Background Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Sign In Background Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .stm-login-form form' => 'background-color: {{VALUE}};',
@@ -198,7 +198,7 @@ class LoginRegister extends WidgetBase {
 		$this->add_control(
 			'sign_up_text_color',
 			array(
-				'label'     => esc_html__( 'Sign Up Text Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Sign Up Text Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'default'   => '#232628',
 				'selectors' => array(
@@ -211,7 +211,7 @@ class LoginRegister extends WidgetBase {
 		$this->add_control(
 			'sign_up_background_color',
 			array(
-				'label'     => esc_html__( 'Sign Up Background Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Sign Up Background Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .stm-register-form form' => 'background-color: {{VALUE}};',
@@ -224,7 +224,7 @@ class LoginRegister extends WidgetBase {
 			$this->add_control(
 				'wsl_background_color',
 				array(
-					'label'     => esc_html__( 'Social Login Background Color', 'motors-car-dealership-classified-listings-pro' ),
+					'label'     => esc_html__( 'Social Login Background Color', 'stm_vehicles_listing' ),
 					'type'      => \Elementor\Controls_Manager::COLOR,
 					'selectors' => array(
 						'{{WRAPPER}} .stm-social-login-wrap' => 'background-color: {{VALUE}};',
@@ -236,7 +236,7 @@ class LoginRegister extends WidgetBase {
 			$this->add_control(
 				'wsl_text_color',
 				array(
-					'label'     => esc_html__( 'Social Text Color', 'motors-car-dealership-classified-listings-pro' ),
+					'label'     => esc_html__( 'Social Text Color', 'stm_vehicles_listing' ),
 					'type'      => \Elementor\Controls_Manager::COLOR,
 					'default'   => '#232628',
 					'selectors' => array(
@@ -250,7 +250,7 @@ class LoginRegister extends WidgetBase {
 		$this->add_control(
 			'labels_color',
 			array(
-				'label'     => esc_html__( 'Labels Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Labels Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .stm-login-register-form h3' => 'color: {{VALUE}};',
@@ -262,7 +262,7 @@ class LoginRegister extends WidgetBase {
 		$this->add_control(
 			'borders_color',
 			array(
-				'label'     => esc_html__( 'Borders Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Borders Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .stm-register-form form' => 'border-color: {{VALUE}};',

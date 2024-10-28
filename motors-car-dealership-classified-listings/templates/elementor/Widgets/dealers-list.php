@@ -22,11 +22,11 @@ if ( ! empty( $_GET['_wpnonce'] ) && wp_verify_nonce( sanitize_text_field( wp_un
 }
 
 $filters = array(
-	'alphabet' => esc_html__( 'Alphabet', 'motors-car-dealership-classified-listings-pro' ),
-	'reviews'  => esc_html__( 'Reviews', 'motors-car-dealership-classified-listings-pro' ),
-	'date'     => esc_html__( 'Date', 'motors-car-dealership-classified-listings-pro' ),
-	'cars'     => esc_html__( 'Cars number', 'motors-car-dealership-classified-listings-pro' ),
-	'watches'  => esc_html__( 'Popularity', 'motors-car-dealership-classified-listings-pro' ),
+	'alphabet' => esc_html__( 'Alphabet', 'stm_vehicles_listing' ),
+	'reviews'  => esc_html__( 'Reviews', 'stm_vehicles_listing' ),
+	'date'     => esc_html__( 'Date', 'stm_vehicles_listing' ),
+	'cars'     => esc_html__( 'Cars number', 'stm_vehicles_listing' ),
+	'watches'  => esc_html__( 'Popularity', 'stm_vehicles_listing' ),
 );
 
 $data_binding = apply_filters( 'stm_data_binding_func', array(), true );
@@ -56,7 +56,7 @@ $data_binding = apply_filters( 'stm_data_binding_func', array(), true );
 											<select name="<?php echo esc_attr( $stm_filter_dealers ); ?>" data-class="stm_select_overflowed stm_select_dealer">
 												<option value="">
 													<?php
-													esc_html_e( 'Choose', 'motors-car-dealership-classified-listings-pro' );
+													esc_html_e( 'Choose', 'stm_vehicles_listing' );
 													echo esc_html( ' ' . stm_get_name_by_slug( $stm_filter_dealers ) );
 													?>
 												</option>
@@ -91,7 +91,7 @@ $data_binding = apply_filters( 'stm_data_binding_func', array(), true );
 											id="stm-car-location-stm_all_listing_tab"
 											name="ca_location"
 											value="<?php echo ! empty( $_GET['ca_location'] ) ? esc_attr( sanitize_text_field( wp_unslash( $_GET['ca_location'] ) ) ) : ''; ?>"
-											placeholder="<?php esc_attr_e( 'Enter a location', 'motors-car-dealership-classified-listings-pro' ); ?>"
+											placeholder="<?php esc_attr_e( 'Enter a location', 'stm_vehicles_listing' ); ?>"
 											autocomplete="off">
 									<input type="hidden" name="stm_lat" value="<?php echo ! empty( $_GET['stm_lat'] ) ? floatval( $_GET['stm_lat'] ) : ''; ?>">
 									<input type="hidden" name="stm_lng" value="<?php echo ! empty( $_GET['stm_lng'] ) ? floatval( $_GET['stm_lng'] ) : ''; ?>">
@@ -112,7 +112,7 @@ $data_binding = apply_filters( 'stm_data_binding_func', array(), true );
 											class="stm_listing_filter_text stm_listing_search_location"
 											name="dealer_keyword"
 											value="<?php echo esc_attr( $dealer_keyword ); ?>"
-											placeholder="<?php esc_attr_e( 'Keyword', 'motors-car-dealership-classified-listings-pro' ); ?>">
+											placeholder="<?php esc_attr_e( 'Keyword', 'stm_vehicles_listing' ); ?>">
 								</div>
 							</div>
 						<?php endif; ?>
@@ -134,7 +134,7 @@ $data_binding = apply_filters( 'stm_data_binding_func', array(), true );
 			<div class="stm-directory-listing-top__right">
 				<div class="clearfix">
 					<div class="stm-sort-by-options clearfix">
-						<span><?php esc_html_e( 'Sort by:', 'motors-car-dealership-classified-listings-pro' ); ?></span>
+						<span><?php esc_html_e( 'Sort by:', 'stm_vehicles_listing' ); ?></span>
 						<div class="stm-select-sorting">
 							<select>
 								<?php foreach ( $filters as $filter_name => $filter ) : ?>
@@ -168,12 +168,12 @@ $data_binding = apply_filters( 'stm_data_binding_func', array(), true );
 			<?php if ( ! empty( $data['button'] ) && 'show' === $data['button'] ) : ?>
 				<a class="stm-load-more-dealers button" href="#" data-offset="12">
 					<span>
-						<?php esc_html_e( 'Show more', 'motors-car-dealership-classified-listings-pro' ); ?>
+						<?php esc_html_e( 'Show more', 'stm_vehicles_listing' ); ?>
 					</span>
 				</a>
 			<?php endif; ?>
 		<?php } else { ?>
-			<h4><?php esc_html_e( 'No dealers on your search parameters', 'motors-car-dealership-classified-listings-pro' ); ?></h4>
+			<h4><?php esc_html_e( 'No dealers on your search parameters', 'stm_vehicles_listing' ); ?></h4>
 			<?php
 		}
 		?>

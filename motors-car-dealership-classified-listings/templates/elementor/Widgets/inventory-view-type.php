@@ -12,13 +12,20 @@ if ( 'list' === $view_type ) {
 	$view_grid = 'active';
 	$view_list = '';
 }
-
 ?>
 <div class="stm-view-by">
 	<a href="#" class="view-grid view-type <?php echo esc_attr( $view_grid ); ?>" data-view="grid">
-		<i class="motors-icons-grid"></i>
+		<?php if ( ! empty( $inventory_view_type_grid_icon['value'] ) ) : ?>
+			<?php echo wp_kses( apply_filters( 'stm_dynamic_icon_output', $inventory_view_type_grid_icon ), apply_filters( 'stm_ew_kses_svg', array() ) ); ?>
+		<?php else : ?>
+			<i class="motors-icons-grid"></i>
+		<?php endif; ?>
 	</a>
 	<a href="#" class="view-list view-type <?php echo esc_attr( $view_list ); ?>" data-view="list">
-		<i class="motors-icons-list"></i>
+		<?php if ( ! empty( $inventory_view_type_list_icon['value'] ) ) : ?>
+			<?php echo wp_kses( apply_filters( 'stm_dynamic_icon_output', $inventory_view_type_list_icon ), apply_filters( 'stm_ew_kses_svg', array() ) ); ?>
+		<?php else : ?>
+			<i class="motors-icons-list"></i>
+		<?php endif; ?>
 	</a>
 </div>

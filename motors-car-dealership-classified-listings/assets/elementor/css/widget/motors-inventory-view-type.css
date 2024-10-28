@@ -15,7 +15,9 @@
 }
 
 .stm-view-by .view-type {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     float: left;
     color: #8f8f8f;
     margin-left: 10px;

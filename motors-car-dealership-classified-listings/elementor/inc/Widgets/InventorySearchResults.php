@@ -41,7 +41,7 @@ class InventorySearchResults extends WidgetBase {
 	}
 
 	public function get_title() {
-		return esc_html__( 'Search Result', 'motors-car-dealership-classified-listings-pro' );
+		return esc_html__( 'Search Result', 'stm_vehicles_listing' );
 	}
 
 	public function get_icon() {
@@ -49,14 +49,14 @@ class InventorySearchResults extends WidgetBase {
 	}
 
 	protected function register_controls() {
-		$this->stm_start_content_controls_section( 'isr_content', __( 'General', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_content_controls_section( 'isr_content', __( 'List View', 'stm_vehicles_listing' ) );
 
 		if ( stm_is_multilisting() ) {
 
 			$this->add_control(
 				'post_type',
 				array(
-					'label'   => __( 'Listing Type', 'motors-car-dealership-classified-listings-pro' ),
+					'label'   => __( 'Listing Type', 'stm_vehicles_listing' ),
 					'type'    => \Elementor\Controls_Manager::SELECT,
 					'options' => Helper::stm_ew_multi_listing_types(),
 					'default' => 'listings',
@@ -68,16 +68,29 @@ class InventorySearchResults extends WidgetBase {
 		$this->add_control(
 			'ppp_on_list',
 			array(
-				'label'   => __( 'Posts Per Page on List View', 'motors-car-dealership-classified-listings-pro' ),
+				'label'   => __( 'Listings per Page', 'stm_vehicles_listing' ),
 				'type'    => \Elementor\Controls_Manager::NUMBER,
 				'default' => '10',
 			)
 		);
 
 		$this->add_control(
+			'list_thumb_img_size',
+			array(
+				'label'   => __( 'Image Size', 'stm_vehicles_listing' ),
+				'type'    => \Elementor\Controls_Manager::SELECT,
+				'options' => Helper::stm_ew_get_image_sizes( true, true, true ),
+			),
+		);
+
+		$this->stm_end_control_section();
+
+		$this->stm_start_content_controls_section( 'isr_content_grid', __( 'Grid View', 'stm_vehicles_listing' ) );
+
+		$this->add_control(
 			'ppp_on_grid',
 			array(
-				'label'   => __( 'Posts Per Page on Grid View', 'motors-car-dealership-classified-listings-pro' ),
+				'label'   => __( 'Listings per Page', 'stm_vehicles_listing' ),
 				'type'    => \Elementor\Controls_Manager::NUMBER,
 				'default' => '9',
 			)
@@ -86,8 +99,8 @@ class InventorySearchResults extends WidgetBase {
 		$this->add_control(
 			'quant_grid_items',
 			array(
-				'label'       => __( 'Quantity of Listing Per Row on Grid View', 'motors-car-dealership-classified-listings-pro' ),
-				'description' => __( 'Reload the page to apply the settings.', 'motors-car-dealership-classified-listings-pro' ),
+				'label'       => __( 'Number of Listings per Row', 'stm_vehicles_listing' ),
+				'description' => __( 'Reload the page to apply the settings.', 'stm_vehicles_listing' ),
 				'type'        => \Elementor\Controls_Manager::SELECT,
 				'options'     => array(
 					'2' => '2',
@@ -100,16 +113,7 @@ class InventorySearchResults extends WidgetBase {
 		$this->add_control(
 			'grid_thumb_img_size',
 			array(
-				'label'   => __( 'Image size on Grid View', 'motors-car-dealership-classified-listings-pro' ),
-				'type'    => \Elementor\Controls_Manager::SELECT,
-				'options' => Helper::stm_ew_get_image_sizes( true, true, true ),
-			),
-		);
-
-		$this->add_control(
-			'list_thumb_img_size',
-			array(
-				'label'   => __( 'Image size on List View', 'motors-car-dealership-classified-listings-pro' ),
+				'label'   => __( 'Image Size', 'stm_vehicles_listing' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'options' => Helper::stm_ew_get_image_sizes( true, true, true ),
 			),
@@ -117,41 +121,106 @@ class InventorySearchResults extends WidgetBase {
 
 		$this->stm_end_control_section();
 
-		$this->stm_start_style_controls_section( 'isr_styles', __( 'Styles', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_style_controls_section( 'isr_featured_styles', __( 'Featured Listings Block', 'stm_vehicles_listing' ) );
 
 		$this->add_control(
-			'grid_thumb_height',
+			'isr_grid_card_settings_heading',
 			array(
-				'label'      => __( 'Image Height', 'motors-car-dealership-classified-listings-pro' ),
-				'type'       => \Elementor\Controls_Manager::SLIDER,
-				'size_units' => array(
-					'px',
-				),
-				'range'      => array(
-					'px' => array(
-						'min'  => 100,
-						'max'  => 300,
-						'step' => 1,
-					),
-				),
-				'selectors'  => array(
-					'{{WRAPPER}} .stm-isotope-sorting-grid .image img, {{WRAPPER}} .car-listing-modern-grid .image img'                                 => 'height: {{SIZE}}{{UNIT}}',
-					'{{WRAPPER}} .stm-isotope-sorting-grid .interactive-hoverable, {{WRAPPER}} .car-listing-modern-grid .interactive-hoverable'         => 'min-height: {{SIZE}}{{UNIT}}',
-					'{{WRAPPER}} .stm-isotope-sorting-grid .interactive-hoverable img, {{WRAPPER}} .car-listing-modern-grid .interactive-hoverable img' => 'height: 100%',
-					'{{WRAPPER}} .stm-isotope-sorting .listing-list-loop.stm-listing-directory-list-loop .image'                                        => 'min-height: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .stm-isotope-sorting .listing-list-loop.stm-listing-directory-list-loop .image img'                                    => 'height: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .stm-isotope-sorting .listing-list-loop.stm-listing-directory-list-loop .interactive-hoverable'                        => 'height:{{SIZE}}{{UNIT}};min-height: {{SIZE}}{{UNIT}} !important;',
-					'{{WRAPPER}} .stm-isotope-sorting .listing-list-loop.stm-listing-directory-list-loop .interactive-hoverable img'                    => 'height: 100%; width: 100%; object-fit: cover;',
+				'label' => __( 'Featured', 'stm_vehicle_listings' ),
+				'type'  => \Elementor\Controls_Manager::HEADING,
+			)
+		);
+
+		$this->add_control(
+			'isr_grid_card_settings_divider',
+			array(
+				'type' => \Elementor\Controls_Manager::DIVIDER,
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'isr_grid_card_settings_featured_title_typography',
+				'label'    => __( 'Text Style', 'stm_vehicle_listings' ),
+				'selector' => '{{WRAPPER}} .motors-elementor-inventory-search-results#listings-result .stm-featured-top-cars-title .heading-font',
+				'exclude'  => array( 'font_size' ),
+			)
+		);
+
+		$this->add_control(
+			'isr_grid_card_settings_featured_title_color',
+			array(
+				'label'     => __( 'Text Color', 'stm_vehicle_listings' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .motors-elementor-inventory-search-results#listings-result .stm-featured-top-cars-title .heading-font' => 'color: {{VALUE}}',
 				),
 			)
 		);
 
 		$this->add_control(
-			'isr_pagination_styles',
+			'isr_grid_card_settings_featured_bg_color',
 			array(
-				'label'     => __( 'Pagination', 'motors-car-dealership-classified-listings-pro' ),
-				'type'      => \Elementor\Controls_Manager::HEADING,
-				'separator' => 'before',
+				'label'     => __( 'Background Color', 'stm_vehicle_listings' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .motors-elementor-inventory-search-results#listings-result .stm-featured-top-cars-title' => 'border-bottom-color: {{VALUE}}',
+					'{{WRAPPER}} .motors-elementor-inventory-search-results#listings-result .stm-featured-top-cars-title .heading-font' => 'background-color: {{VALUE}}',
+					'{{WRAPPER}} .motors-elementor-inventory-search-results#listings-result .stm-featured-top-cars-title .heading-font:after' => 'background-color: {{VALUE}}',
+				),
+			)
+		);
+
+		$this->add_control(
+			'isr_grid_card_settings_featured_link_divider',
+			array(
+				'type'      => \Elementor\Controls_Manager::DIVIDER,
+			)
+		);
+
+		$this->add_control(
+			'isr_grid_card_settings_featured_link_heading',
+			array(
+				'label' => __( 'Show All Link', 'stm_vehicle_listings' ),
+				'type'  => \Elementor\Controls_Manager::HEADING,
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'isr_grid_card_settings_featured_link_typography',
+				'label'    => __( 'Text Style', 'stm_vehicle_listings' ),
+				'selector' => '{{WRAPPER}} .motors-elementor-inventory-search-results#listings-result .stm-featured-top-cars-title a',
+			)
+		);
+
+		$this->add_control(
+			'isr_grid_card_settings_featured_link_color',
+			array(
+				'label'     => __( 'Text Color', 'stm_vehicle_listings' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .motors-elementor-inventory-search-results#listings-result .stm-featured-top-cars-title a' => 'color: {{VALUE}}',
+				),
+			)
+		);
+
+		$this->stm_end_control_section();
+
+		apply_filters( 'grid_listing_card_controls', $this, self::get_name() );
+
+		apply_filters( 'list_listing_card_controls', $this, self::get_name() );
+
+		$this->stm_start_style_controls_section( 'isr_content_pagination', __( 'Pagination', 'stm_vehicles_listing' ) );
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'isr_pagination_item_typography',
+				'label'    => __( 'Text Style', 'stm_vehicles_listing' ),
+				'selector' => '{{WRAPPER}} .motors-elementor-inventory-search-results#listings-result ul.page-numbers li > a, {{WRAPPER}} .motors-elementor-inventory-search-results#listings-result ul.page-numbers li > span',
 			)
 		);
 
@@ -160,18 +229,70 @@ class InventorySearchResults extends WidgetBase {
 		$this->stm_start_ctrl_tab(
 			'pagination_normal',
 			array(
-				'label' => __( 'Normal', 'motors-car-dealership-classified-listings-pro' ),
+				'label' => __( 'Normal', 'stm_vehicles_listing' ),
+			)
+		);
+
+		$this->add_control(
+			'isr_pagination_item_color',
+			array(
+				'label'     => __( 'Text Color', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .motors-elementor-inventory-search-results#listings-result ul.page-numbers li > a' => 'color: {{VALUE}};',
+				),
 			)
 		);
 
 		$this->add_control(
 			'isr_pagination_item_bg',
 			array(
-				'label'     => __( 'Background', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Background', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .motors-elementor-inventory-search-results#listings-result ul.page-numbers li > a' => 'background-color: {{VALUE}};',
 				),
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			array(
+				'name'     => 'isr_pagination_item_border',
+				'label'    => __( 'Border', 'stm_vehicles_listing' ),
+				'selector' => '{{WRAPPER}} .motors-elementor-inventory-search-results#listings-result ul.page-numbers li > a',
+				'exclude'  => array( 'color' ),
+			)
+		);
+
+		$this->add_control(
+			'isr_pagination_item_border_color',
+			array(
+				'label'     => __( 'Border Color', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .motors-elementor-inventory-search-results#listings-result ul.page-numbers li > a' => 'border-color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'isr_pagination_item_border_radius',
+			array(
+				'label'     => __( 'Border Radius', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors' => array(
+					'{{WRAPPER}} .motors-elementor-inventory-search-results#listings-result ul.page-numbers li > a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Box_Shadow::get_type(),
+			array(
+				'name'     => 'isr_pagination_item_box_shadow',
+				'label'    => __( 'Box Shadow', 'stm_vehicles_listing' ),
+				'selector' => '{{WRAPPER}} .motors-elementor-inventory-search-results#listings-result ul.page-numbers li > a',
 			)
 		);
 
@@ -180,14 +301,25 @@ class InventorySearchResults extends WidgetBase {
 		$this->stm_start_ctrl_tab(
 			'pagination_active',
 			array(
-				'label' => __( 'Active', 'motors-car-dealership-classified-listings-pro' ),
+				'label' => __( 'Active', 'stm_vehicles_listing' ),
+			)
+		);
+
+		$this->add_control(
+			'isr_pagination_active_item_color_active',
+			array(
+				'label'     => __( 'Text Color', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .motors-elementor-inventory-search-results#listings-result ul.page-numbers li .current' => 'color: {{VALUE}};',
+				),
 			)
 		);
 
 		$this->add_control(
 			'isr_pagination_active_item_bg',
 			array(
-				'label'     => __( 'Background', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Background', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .motors-elementor-inventory-search-results#listings-result ul.page-numbers li .current' => 'background-color: {{VALUE}};',
@@ -195,9 +327,53 @@ class InventorySearchResults extends WidgetBase {
 			)
 		);
 
+		$this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			array(
+				'name'     => 'isr_pagination_item_border_active',
+				'label'    => __( 'Border', 'stm_vehicles_listing' ),
+				'selector' => '{{WRAPPER}} .motors-elementor-inventory-search-results#listings-result ul.page-numbers li .current',
+				'exclude'  => array( 'color' ),
+			)
+		);
+
+		$this->add_control(
+			'isr_pagination_item_border_color_active',
+			array(
+				'label'     => __( 'Border Color', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .motors-elementor-inventory-search-results#listings-result ul.page-numbers li .current' => 'border-color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'isr_pagination_item_border_radius_active',
+			array(
+				'label'     => __( 'Border Radius', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors' => array(
+					'{{WRAPPER}} .motors-elementor-inventory-search-results#listings-result ul.page-numbers li .current' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Box_Shadow::get_type(),
+			array(
+				'name'     => 'isr_pagination_item_box_shadow_active',
+				'label'    => __( 'Box Shadow', 'stm_vehicles_listing' ),
+				'selector' => '{{WRAPPER}} .motors-elementor-inventory-search-results#listings-result ul.page-numbers li .current',
+			)
+		);
+
 		$this->stm_end_ctrl_tab();
 
+		$this->stm_end_ctrl_tabs();
+
 		$this->stm_end_control_section();
+
 	}
 
 	protected function render() {

@@ -10,7 +10,7 @@ if ( $custom_listing_type && $listing_types_options && isset( $listing_types_opt
 ?>
 <div class="stm-form-2-features clearfix">
 	<div class="stm-car-listing-data-single stm-border-top-unit ">
-		<div class="title heading-font"><?php esc_html_e( 'Select Your Listing Features', 'motors-car-dealership-classified-listings-pro' ); ?></div>
+		<div class="title heading-font"><?php esc_html_e( 'Select Your Listing Features', 'stm_vehicles_listing' ); ?></div>
 	</div>
 	<?php
 	if ( is_array( $user_features ) ) {

@@ -24,7 +24,7 @@ class Features extends WidgetBase {
 	}
 
 	public function get_title() {
-		return esc_html__( 'Features', 'motors-car-dealership-classified-listings-pro' );
+		return esc_html__( 'Features', 'stm_vehicles_listing' );
 	}
 
 	public function get_icon() {
@@ -33,20 +33,20 @@ class Features extends WidgetBase {
 
 	protected function register_controls() {
 
-		$this->stm_start_content_controls_section( 'title_content', __( 'General', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_content_controls_section( 'title_content', __( 'General', 'stm_vehicles_listing' ) );
 
 		$this->add_control(
 			'features_type',
 			array(
-				'label'   => __( 'View Type', 'motors-car-dealership-classified-listings-pro' ),
+				'label'   => __( 'View Type', 'stm_vehicles_listing' ),
 				'type'    => \Elementor\Controls_Manager::CHOOSE,
 				'options' => array(
 					'vertical'   => array(
-						'title' => __( 'Vertical', 'motors-car-dealership-classified-listings-pro' ),
+						'title' => __( 'Vertical', 'stm_vehicles_listing' ),
 						'icon'  => 'eicon-ellipsis-v',
 					),
 					'horizontal' => array(
-						'title' => __( 'Horizontal', 'motors-car-dealership-classified-listings-pro' ),
+						'title' => __( 'Horizontal', 'stm_vehicles_listing' ),
 						'icon'  => 'eicon-ellipsis-h',
 					),
 				),
@@ -57,7 +57,7 @@ class Features extends WidgetBase {
 		$this->add_control(
 			'features_rows',
 			array(
-				'label'     => __( 'Rows', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Rows', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::CHOOSE,
 				'options'   => array(
 					'2' => array(
@@ -81,7 +81,7 @@ class Features extends WidgetBase {
 		$this->add_control(
 			'features_icon',
 			array(
-				'label'            => __( 'Icon', 'motors-car-dealership-classified-listings-pro' ),
+				'label'            => __( 'Icon', 'stm_vehicles_listing' ),
 				'type'             => \Elementor\Controls_Manager::ICONS,
 				'skin'             => 'inline',
 				'label_block'      => false,
@@ -93,18 +93,18 @@ class Features extends WidgetBase {
 			'features_notice',
 			array(
 				'type' => \Elementor\Controls_Manager::RAW_HTML,
-				'raw'  => '<div class="custom-widget-notice" style="display:flex;"> <p style="font-size: 11px; color:#9da5ae; line-height:1.4; font-style:italic;">' . __( 'The features shown are only for customization purposes. Actual listing features can be added when creating a listing.', 'motors-car-dealership-classified-listings-pro' ) . '</p></div>',
+				'raw'  => '<div class="custom-widget-notice" style="display:flex;"> <p style="font-size: 11px; color:#9da5ae; line-height:1.4; font-style:italic;">' . __( 'The features shown are only for customization purposes. Actual listing features can be added when creating a listing.', 'stm_vehicles_listing' ) . '</p></div>',
 			)
 		);
 
 		$this->stm_end_control_section();
 
-		$this->stm_start_style_controls_section( 'features_style', __( 'General', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_style_controls_section( 'features_style', __( 'General', 'stm_vehicles_listing' ) );
 
 		$this->add_control(
 			'icon_typography',
 			array(
-				'label'      => __( 'Icon Size', 'motors-car-dealership-classified-listings-pro' ),
+				'label'      => __( 'Icon Size', 'stm_vehicles_listing' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => array(
 					'px',
@@ -130,7 +130,7 @@ class Features extends WidgetBase {
 		$this->add_control(
 			'features_icon_color',
 			array(
-				'label'     => __( 'Icon Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Icon Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .stm-single-listing-car-features ul li i'   => 'color: {{VALUE}};',
@@ -143,7 +143,7 @@ class Features extends WidgetBase {
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
 				'name'           => 'title_typography',
-				'label'          => __( 'Text Typography', 'motors-car-dealership-classified-listings-pro' ),
+				'label'          => __( 'Text Typography', 'stm_vehicles_listing' ),
 				'exclude'        => array(
 					'font_family',
 					'font_style',
@@ -176,7 +176,7 @@ class Features extends WidgetBase {
 		$this->add_control(
 			'feature_color',
 			array(
-				'label'     => __( 'Text Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Text Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'default'   => '#232628',
 				'selectors' => array(

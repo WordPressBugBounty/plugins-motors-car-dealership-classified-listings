@@ -186,7 +186,7 @@
     color: #fff;
     border-radius: 3px;
     background-color: #6c98e1;
-    text-decoration: none !important;
+    text-decoration: none;
     outline: none !important;
     visibility: visible;
     border: none;
@@ -237,7 +237,7 @@
 }
 
 .stm-vl-plugin-pure a:hover, .stm-vl-plugin-pure a:focus {
-    text-decoration: none !important;
+    text-decoration: none;
 }
 
 .stm-vl-plugin-pure .select2 {

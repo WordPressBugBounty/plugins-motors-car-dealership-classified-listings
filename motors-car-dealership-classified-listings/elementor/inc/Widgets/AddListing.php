@@ -61,7 +61,7 @@ class AddListing extends WidgetBase {
 	}
 
 	public function get_title() {
-		return esc_html__( 'Add Listing', 'motors-car-dealership-classified-listings-pro' );
+		return esc_html__( 'Add Listing', 'stm_vehicles_listing' );
 	}
 
 	public function get_icon() {
@@ -69,14 +69,14 @@ class AddListing extends WidgetBase {
 	}
 
 	public function register_controls() {
-		$this->stm_start_content_controls_section( 'general', __( 'General', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_content_controls_section( 'general', __( 'General', 'stm_vehicles_listing' ) );
 
 		if ( function_exists( 'stm_is_multilisting' ) && stm_is_multilisting() ) {
 
 			$this->add_control(
 				'post_type',
 				array(
-					'label'   => __( 'Listing Type', 'motors-car-dealership-classified-listings-pro' ),
+					'label'   => __( 'Listing Type', 'stm_vehicles_listing' ),
 					'type'    => 'select',
 					'options' => Helper::stm_ew_multi_listing_types(),
 					'default' => 'listings',

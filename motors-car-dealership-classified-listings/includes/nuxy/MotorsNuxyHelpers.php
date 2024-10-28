@@ -100,8 +100,8 @@ class MotorsNuxyHelpers {
 			<div class="field_overlay"></div>
 			<!--We have no pro plugin active-->
 			<span class="pro-notice">
-				<?php esc_html_e( 'Available in ', 'motors-car-dealership-classified-listings-pro' ); ?>
-				<a href="<?php echo esc_url( $pro_url ); ?>" target="_blank"><?php esc_html_e( 'Pro Version', 'motors-car-dealership-classified-listings-pro' ); ?></a>
+				<?php esc_html_e( 'Available in ', 'stm_vehicles_listing' ); ?>
+				<a href="<?php echo esc_url( $pro_url ); ?>" target="_blank"><?php esc_html_e( 'Pro Version', 'stm_vehicles_listing' ); ?></a>
 			</span>
 			<?php
 		}
@@ -113,7 +113,7 @@ class MotorsNuxyHelpers {
 			<span class="pro-notice">
 				<a href="#" @click.prevent="enableAddon($event, '<?php echo esc_attr( $addon_state ); ?>')">
 					<i class="fa fa-power-off"></i>
-				<?php esc_html_e( 'Enable addon', 'motors-car-dealership-classified-listings-pro' ); ?>
+				<?php esc_html_e( 'Enable addon', 'stm_vehicles_listing' ); ?>
 				</a>
 			</span>
 			<?php

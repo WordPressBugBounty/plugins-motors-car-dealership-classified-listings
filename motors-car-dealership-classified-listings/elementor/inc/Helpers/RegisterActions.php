@@ -143,10 +143,15 @@ class RegisterActions {
 	public static function stm_dynamic_icon_output( $icon_data ) {
 		if ( isset( $icon_data['value']['url'] ) ) {
 			$icon_url = $icon_data['value']['url'];
-			return wp_kses(
-				wp_remote_get( $icon_url ),
-				apply_filters( 'stm_ew_kses_svg', array() )
-			);
+			$response = wp_remote_get( $icon_url );
+
+			if ( is_array( $response ) && ! is_wp_error( $response ) ) {
+				$icon_body = wp_remote_retrieve_body( $response );
+				return wp_kses(
+					$icon_body,
+					apply_filters( 'stm_ew_kses_svg', array() )
+				);
+			}
 		} elseif ( isset( $icon_data['value'] ) && ! empty( $icon_data['value'] ) ) {
 			return '<i class="' . esc_attr( $icon_data['value'] ) . '"></i>';
 		}
@@ -394,7 +399,7 @@ class RegisterActions {
 										<span></span>
 									</div>
 									<a class="load-more-btn" href="" onclick="stm_loadMoreCars(jQuery(this),'<?php echo esc_js( $terms ); ?>','<?php echo esc_js( $taxonomy ); ?>',<?php echo esc_js( $per_page ); ?>,<?php echo esc_js( $per_page ); ?>,'<?php echo esc_js( $random_int ); ?>');return false;">
-										<?php esc_html_e( 'Load more', 'motors-car-dealership-classified-listings-pro' ); ?>
+										<?php esc_html_e( 'Load more', 'stm_vehicles_listing' ); ?>
 									</a>
 								</div>
 							</div>
@@ -405,7 +410,7 @@ class RegisterActions {
 						<div class="col-xs-12 text-center">
 							<div class="dp-in">
 								<a class="load-more-btn" href="<?php echo esc_url( $url ); ?>">
-									<?php esc_html_e( 'Show all', 'motors-car-dealership-classified-listings-pro' ); ?>
+									<?php esc_html_e( 'Show all', 'stm_vehicles_listing' ); ?>
 								</a>
 							</div>
 						</div>

@@ -24,10 +24,10 @@ if ( $show_registered ) {
 			echo ' stm_has_value';
 		}
 		?>
-		" placeholder="<?php esc_attr_e( 'Enter date', 'motors-car-dealership-classified-listings-pro' ); ?>" value="<?php echo esc_attr( $data_value ); ?>"/>
+		" placeholder="<?php esc_attr_e( 'Enter date', 'stm_vehicles_listing' ); ?>" value="<?php echo esc_attr( $data_value ); ?>"/>
 		<div class="stm-label">
 			<i class="motors-icons-key"></i>
-			<?php esc_html_e( 'Registered', 'motors-car-dealership-classified-listings-pro' ); ?>
+			<?php esc_html_e( 'Registered', 'stm_vehicles_listing' ); ?>
 		</div>
 	</div>
 	<?php
@@ -41,10 +41,10 @@ if ( $show_vin ) {
 			<?php
 			if ( ! empty( $data_value ) ) {
 				?>
-				class="stm_has_value" <?php } ?> value="<?php echo esc_attr( $data_value ); ?>" placeholder="<?php esc_attr_e( 'Enter VIN', 'motors-car-dealership-classified-listings-pro' ); ?>"/>
+				class="stm_has_value" <?php } ?> value="<?php echo esc_attr( $data_value ); ?>" placeholder="<?php esc_attr_e( 'Enter VIN', 'stm_vehicles_listing' ); ?>"/>
 		<div class="stm-label">
 			<i class="motors-icons-vin_check"></i>
-			<?php esc_html_e( 'VIN', 'motors-car-dealership-classified-listings-pro' ); ?>
+			<?php esc_html_e( 'VIN', 'stm_vehicles_listing' ); ?>
 		</div>
 	</div>
 	<?php
@@ -55,16 +55,16 @@ if ( $show_history ) {
 	$data_value_link = get_post_meta( $post_id, 'history_link', true );
 	?>
 	<div class="stm-form-1-quarter stm_history">
-		<input type="text" name="stm_history_label" class="<?php echo ( ! empty( $data_value ) ) ? 'stm_has_value' : ''; ?>" value="<?php echo esc_attr( $data_value ); ?>" placeholder="<?php esc_attr_e( 'Vehicle History Report', 'motors-car-dealership-classified-listings-pro' ); ?>"/>
+		<input type="text" name="stm_history_label" class="<?php echo ( ! empty( $data_value ) ) ? 'stm_has_value' : ''; ?>" value="<?php echo esc_attr( $data_value ); ?>" placeholder="<?php esc_attr_e( 'Vehicle History Report', 'stm_vehicles_listing' ); ?>"/>
 		<div class="stm-label">
 			<i class="motors-icons-time"></i>
-			<?php esc_html_e( 'History', 'motors-car-dealership-classified-listings-pro' ); ?>
+			<?php esc_html_e( 'History', 'stm_vehicles_listing' ); ?>
 		</div>
 
 		<div class="stm-history-popup stm-invisible">
 			<div class="inner">
 				<i class="fas fa-times fa-remove"></i>
-				<h5><?php esc_html_e( 'Vehicle history', 'motors-car-dealership-classified-listings-pro' ); ?></h5>
+				<h5><?php esc_html_e( 'Vehicle history', 'stm_vehicles_listing' ); ?></h5>
 				<?php
 				if ( ! empty( $histories ) ) :
 					$histories = explode( ',', $histories );
@@ -80,8 +80,8 @@ if ( $show_history ) {
 					echo '</div>';
 				endif;
 				?>
-				<input type="text" name="stm_history_link" placeholder="<?php esc_attr_e( 'Insert link', 'motors-car-dealership-classified-listings-pro' ); ?>" value="<?php echo esc_attr( $data_value_link ); ?>"/>
-				<a href="#" class="button"><?php esc_html_e( 'Apply', 'motors-car-dealership-classified-listings-pro' ); ?></a>
+				<input type="text" name="stm_history_link" placeholder="<?php esc_attr_e( 'Insert link', 'stm_vehicles_listing' ); ?>" value="<?php echo esc_attr( $data_value_link ); ?>"/>
+				<a href="#" class="button"><?php esc_html_e( 'Apply', 'stm_vehicles_listing' ); ?></a>
 			</div>
 		</div>
 	</div>

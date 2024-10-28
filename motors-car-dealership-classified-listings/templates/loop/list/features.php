@@ -65,7 +65,8 @@ if ( ! empty( $sale_price ) ) {
 		<?php if ( ! empty( $stock_number ) && ! empty( $show_stock ) && $show_stock ) : ?>
 			<li>
 				<div class="stock-num heading-font">
-					<span><?php esc_html_e( 'stock', 'stm_vehicles_listing' ); ?># </span><?php echo esc_attr( $stock_number ); ?>
+					<span><?php esc_html_e( 'stock', 'stm_vehicles_listing' ); ?># </span>
+					<span class="stock-num-value"><?php echo esc_attr( $stock_number ); ?></span>
 				</div>
 			</li>
 		<?php endif; ?>
@@ -75,7 +76,7 @@ if ( ! empty( $sale_price ) ) {
 			<li>
 				<a href="#" class="car-action-unit stm-schedule" data-toggle="modal" data-target="#test-drive" onclick="stm_test_drive_car_title(<?php echo esc_js( $listing_id ); ?>, '<?php echo esc_js( get_the_title( $listing_id ) ); ?>')">
 					<i class="motors-icons-steering_wheel"></i>
-					<?php esc_html_e( 'Schedule Test Drive', 'stm_vehicles_listing' ); ?>
+					<span class="stm-item-title"><?php esc_html_e( 'Schedule Test Drive', 'stm_vehicles_listing' ); ?></span>
 				</a>
 			</li>
 		<?php endif; ?>
@@ -95,7 +96,7 @@ if ( ! empty( $sale_price ) ) {
 				<?php else : ?>
 				<a href="#" class="car-action-unit add-to-compare" data-title="<?php echo esc_attr( get_the_title( $listing_id ) ); ?>" data-id="<?php echo esc_attr( $listing_id ); ?>" data-action="add" data-post-type="<?php echo esc_attr( get_post_type( $listing_id ) ); ?>">
 					<i class="motors-icons-add"></i>
-					<span><?php esc_html_e( 'Add to compare', 'stm_vehicles_listing' ); ?></span>
+					<span class="stm-item-title"><?php esc_html_e( 'Add to compare', 'stm_vehicles_listing' ); ?></span>
 				</a>
 				<?php endif; ?>
 			</li>
@@ -111,7 +112,7 @@ if ( ! empty( $sale_price ) ) {
 							title="<?php esc_attr_e( 'Download brochure', 'stm_vehicles_listing' ); ?>"
 							download>
 						<i class="motors-icons-brochure"></i>
-						<?php esc_html_e( 'Car brochure', 'stm_vehicles_listing' ); ?>
+						<span class="stm-item-title"><?php esc_html_e( 'Car brochure', 'stm_vehicles_listing' ); ?></span>
 					</a>
 				</li>
 			<?php endif; ?>
@@ -122,7 +123,7 @@ if ( ! empty( $sale_price ) ) {
 			<li>
 				<a href="" class="car-action-unit set-vehicle-info" data-toggle="modal" data-target="#get-car-price" data-id="<?php echo esc_attr( $listing_id ); ?>" data-title="<?php echo esc_attr( apply_filters( 'stm_generate_title_from_slugs', get_the_title( $listing_id ), $listing_id, false ) ); ?>" data-price="<?php echo esc_attr( $price ); ?>">
 					<i class="motors-icons-phone-chat"></i>
-					<?php esc_html_e( 'Quote by Phone', 'stm_vehicles_listing' ); ?>
+					<span class="stm-item-title"><?php esc_html_e( 'Quote by Phone', 'stm_vehicles_listing' ); ?></span>
 				</a>
 			</li>
 		<?php endif; ?>
@@ -132,7 +133,7 @@ if ( ! empty( $sale_price ) ) {
 			<li>
 				<a href="#trade-offer" class="car-action-unit set-vehicle-info" data-toggle="modal" data-target="#trade-offer" data-id="<?php echo esc_attr( $listing_id ); ?>" data-title="<?php echo esc_attr( apply_filters( 'stm_generate_title_from_slugs', get_the_title( $listing_id ), $listing_id, false ) ); ?>">
 					<i class="motors-icons-trade"></i>
-					<?php esc_html_e( 'Trade-In', 'stm_vehicles_listing' ); ?>
+					<span class="stm-item-title"><?php esc_html_e( 'Trade-In', 'stm_vehicles_listing' ); ?></span>
 				</a>
 			</li>
 		<?php endif; ?>
@@ -145,7 +146,7 @@ if ( ! empty( $sale_price ) ) {
 			<li>
 				<a href="<?php esc_url( $history_link ); ?>" class="car-action-unit" target="_blank">
 					<i class="motors-icons-report"></i>
-					<?php esc_html_e( 'History report', 'stm_vehicles_listing' ); ?>
+					<span class="stm-item-title"><?php esc_html_e( 'History report', 'stm_vehicles_listing' ); ?></span>
 				</a>
 			</li>
 		<?php endif; ?>
@@ -159,7 +160,7 @@ if ( ! empty( $sale_price ) ) {
 						data-url="<?php echo esc_url( get_the_permalink( $listing_id ) ); ?>"
 						title="<?php esc_attr_e( 'Share this', 'stm_vehicles_listing' ); ?>">
 					<i class="motors-icons-share"></i>
-					<?php esc_html_e( 'Share this', 'stm_vehicles_listing' ); ?>
+					<span class="stm-item-title"><?php esc_html_e( 'Share this', 'stm_vehicles_listing' ); ?></span>
 				</a>
 				<?php if ( function_exists( 'ADDTOANY_SHARE_SAVE_KIT' ) && ! get_post_meta( $listing_id, 'sharing_disabled', true ) ) : ?>
 					<div class="stm-a2a-popup">

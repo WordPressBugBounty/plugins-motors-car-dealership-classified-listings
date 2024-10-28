@@ -6,9 +6,9 @@ $_link          = apply_filters( 'motors_vl_get_nuxy_mod', '', 'addl_reg_log_lin
 ?>
 <div class="stm-user-registration-unit">
 	<div class="clearfix stm_register_title">
-		<h3><?php esc_html_e( 'Sign Up', 'motors-car-dealership-classified-listings-pro' ); ?></h3>
-		<div class="stm_login_me"><?php esc_html_e( 'Already Registered? Members', 'motors-car-dealership-classified-listings-pro' ); ?>
-			<a href="#"><?php esc_html_e( 'Login Here', 'motors-car-dealership-classified-listings-pro' ); ?></a>
+		<h3><?php esc_html_e( 'Sign Up', 'stm_vehicles_listing' ); ?></h3>
+		<div class="stm_login_me"><?php esc_html_e( 'Already Registered? Members', 'stm_vehicles_listing' ); ?>
+			<a href="#"><?php esc_html_e( 'Login Here', 'stm_vehicles_listing' ); ?></a>
 		</div>
 	</div>
 	<div class="row">
@@ -30,41 +30,41 @@ $_link          = apply_filters( 'motors_vl_get_nuxy_mod', '', 'addl_reg_log_lin
 
 						<div class="row form-group">
 							<div class="col-md-6">
-								<h4><?php esc_html_e( 'First Name', 'motors-car-dealership-classified-listings-pro' ); ?></h4>
-								<input class="user_validated_field" type="text" name="stm_user_first_name" placeholder="<?php esc_attr_e( 'Enter First name', 'motors-car-dealership-classified-listings-pro' ); ?>"/>
+								<h4><?php esc_html_e( 'First Name', 'stm_vehicles_listing' ); ?></h4>
+								<input class="user_validated_field" type="text" name="stm_user_first_name" placeholder="<?php esc_attr_e( 'Enter First name', 'stm_vehicles_listing' ); ?>"/>
 							</div>
 							<div class="col-md-6">
-								<h4><?php esc_html_e( 'Last Name', 'motors-car-dealership-classified-listings-pro' ); ?></h4>
-								<input class="user_validated_field" type="text" name="stm_user_last_name" placeholder="<?php esc_attr_e( 'Enter Last name', 'motors-car-dealership-classified-listings-pro' ); ?>"/>
+								<h4><?php esc_html_e( 'Last Name', 'stm_vehicles_listing' ); ?></h4>
+								<input class="user_validated_field" type="text" name="stm_user_last_name" placeholder="<?php esc_attr_e( 'Enter Last name', 'stm_vehicles_listing' ); ?>"/>
 							</div>
 						</div>
 
 						<div class="row form-group">
 							<div class="col-md-6">
-								<h4><?php esc_html_e( 'Phone number', 'motors-car-dealership-classified-listings-pro' ); ?></h4>
-								<input class="user_validated_field" type="tel" name="stm_user_phone" placeholder="<?php esc_attr_e( 'Enter Phone', 'motors-car-dealership-classified-listings-pro' ); ?>"/>
+								<h4><?php esc_html_e( 'Phone number', 'stm_vehicles_listing' ); ?></h4>
+								<input class="user_validated_field" type="tel" name="stm_user_phone" placeholder="<?php esc_attr_e( 'Enter Phone', 'stm_vehicles_listing' ); ?>"/>
 								<label for="whatsapp-checker">
 									<input type="checkbox" name="stm_whatsapp_number" id="whatsapp-checker"/>
 									<span><small
-												class="text-muted"><?php esc_html_e( 'I have a WhatsApp account with this number', 'motors-car-dealership-classified-listings-pro' ); ?></small></span>
+												class="text-muted"><?php esc_html_e( 'I have a WhatsApp account with this number', 'stm_vehicles_listing' ); ?></small></span>
 								</label>
 							</div>
 							<div class="col-md-6">
-								<h4><?php esc_html_e( 'Email *', 'motors-car-dealership-classified-listings-pro' ); ?></h4>
-								<input class="user_validated_field" type="email" name="stm_user_mail" placeholder="<?php esc_attr_e( 'Enter E-mail', 'motors-car-dealership-classified-listings-pro' ); ?>"/>
+								<h4><?php esc_html_e( 'Email *', 'stm_vehicles_listing' ); ?></h4>
+								<input class="user_validated_field" type="email" name="stm_user_mail" placeholder="<?php esc_attr_e( 'Enter E-mail', 'stm_vehicles_listing' ); ?>"/>
 							</div>
 						</div>
 
 						<div class="row form-group">
 							<div class="col-md-6">
-								<h4><?php esc_html_e( 'Login *', 'motors-car-dealership-classified-listings-pro' ); ?></h4>
-								<input class="user_validated_field" type="text" name="stm_nickname" placeholder="<?php esc_attr_e( 'Enter Login', 'motors-car-dealership-classified-listings-pro' ); ?>"/>
+								<h4><?php esc_html_e( 'Login *', 'stm_vehicles_listing' ); ?></h4>
+								<input class="user_validated_field" type="text" name="stm_nickname" placeholder="<?php esc_attr_e( 'Enter Login', 'stm_vehicles_listing' ); ?>"/>
 							</div>
 							<div class="col-md-6">
-								<h4><?php esc_html_e( 'Password *', 'motors-car-dealership-classified-listings-pro' ); ?></h4>
+								<h4><?php esc_html_e( 'Password *', 'stm_vehicles_listing' ); ?></h4>
 								<div class="stm-show-password">
 									<i class="fas fa-eye-slash"></i>
-									<input class="user_validated_field" type="password" name="stm_user_password" placeholder="<?php esc_attr_e( 'Enter Password', 'motors-car-dealership-classified-listings-pro' ); ?>"/>
+									<input class="user_validated_field" type="password" name="stm_user_password" placeholder="<?php esc_attr_e( 'Enter Password', 'stm_vehicles_listing' ); ?>"/>
 								</div>
 							</div>
 						</div>
@@ -73,7 +73,7 @@ $_link          = apply_filters( 'motors_vl_get_nuxy_mod', '', 'addl_reg_log_lin
 							<label>
 								<input type="checkbox" name="stm_accept_terms"/>
 								<span>
-								<?php esc_html_e( 'I accept the terms of the', 'motors-car-dealership-classified-listings-pro' ); ?>
+								<?php esc_html_e( 'I accept the terms of the', 'stm_vehicles_listing' ); ?>
 									<?php
 									if ( ! empty( $_link ) ) :
 										?>
@@ -149,9 +149,9 @@ $_link          = apply_filters( 'motors_vl_get_nuxy_mod', '', 'addl_reg_log_lin
                                     }
 								</script>
 								<?php // phpcs:enable?>
-							<input class="g-recaptcha heading-font" data-sitekey="<?php echo esc_attr( $recaptcha_public_key ); ?>" data-callback='onSubmitACRegister' type="submit" value="<?php esc_html_e( 'Sign up now!', 'motors-car-dealership-classified-listings-pro' ); ?>" disabled/>
+							<input class="g-recaptcha heading-font" data-sitekey="<?php echo esc_attr( $recaptcha_public_key ); ?>" data-callback='onSubmitACRegister' type="submit" value="<?php esc_html_e( 'Sign up now!', 'stm_vehicles_listing' ); ?>" disabled/>
 							<?php else : ?>
-							<input class="heading-font" type="submit" value="<?php esc_html_e( 'Sign up now!', 'motors-car-dealership-classified-listings-pro' ); ?>" disabled/>
+							<input class="heading-font" type="submit" value="<?php esc_html_e( 'Sign up now!', 'stm_vehicles_listing' ); ?>" disabled/>
 							<?php endif; ?>
 							<span class="stm-listing-loader"><i class="motors-icons-load1"></i></span>
 						</div>

@@ -9,6 +9,7 @@
 	 * @var $show_sold
 	 * @var $isf_icon_position
 	 * @var $reset_btn_label
+	 * @var $isf_pal_icon
 	 * */
 ?>
 
@@ -27,6 +28,9 @@
 
 if ( empty( $action ) ) {
 	$action = 'listings-result'; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+}
+if ( isset( $isf_pal_icon ) && ! empty( $isf_pal_icon ) ) {
+	$filter['links_icon'] = $isf_pal_icon;
 }
 ?>
 <div class="sticky-mobile-filter">
@@ -75,7 +79,7 @@ if ( empty( $action ) ) {
 			<div class="row row-pad-top-24">
 				<?php
 				if ( empty( $filter['filters'] ) ) :
-					$post_type_name = __( 'Listings', 'motors-car-dealership-classified-listings-pro' );
+					$post_type_name = __( 'Listings', 'stm_vehicles_listing' );
 					if ( stm_is_multilisting() ) {
 						$ml = new STMMultiListing();
 						if ( ! empty( $ml->stm_get_current_listing() ) ) {
@@ -89,7 +93,7 @@ if ( empty( $action ) ) {
 							<?php
 							printf(
 								/* translators: %s post type name */
-								esc_html__( 'No categories created for %s', 'motors-car-dealership-classified-listings-pro' ),
+								esc_html__( 'No categories created for %s', 'stm_vehicles_listing' ),
 								esc_html( $post_type_name )
 							);
 							?>
@@ -140,6 +144,7 @@ if ( empty( $action ) ) {
 												'name'     => $attribute,
 												'is_parent' => in_array( $attribute, $parent_list, true ),
 												'multiple' => array_key_exists( 'is_multiple_select', $config ) ? $config['is_multiple_select'] : false,
+												'elementor_widget_class' => 'inventory-search-filter',
 											)
 										);
 										?>
@@ -155,15 +160,15 @@ if ( empty( $action ) ) {
 						?>
 						<div class="col-md-12 col-sm-12 stm-filter_listing_status">
 							<div class="form-group">
-								<select name="listing_status" aria-label="<?php esc_attr_e( 'Select listing status', 'motors-car-dealership-classified-listings-pro' ); ?>" class="form-control">
+								<select name="listing_status" aria-label="<?php esc_attr_e( 'Select listing status', 'stm_vehicles_listing' ); ?>" class="form-control">
 									<option value="">
-										<?php esc_html_e( 'Listing status', 'motors-car-dealership-classified-listings-pro' ); ?>
+										<?php esc_html_e( 'Listing status', 'stm_vehicles_listing' ); ?>
 									</option>
 									<option value="active" <?php selected( $listing_status, 'active' ); ?>>
-										<?php esc_html_e( 'Active', 'motors-car-dealership-classified-listings-pro' ); ?>
+										<?php esc_html_e( 'Active', 'stm_vehicles_listing' ); ?>
 									</option>
 									<option value="sold" <?php selected( $listing_status, 'sold' ); ?>>
-										<?php esc_html_e( 'Sold', 'motors-car-dealership-classified-listings-pro' ); ?>
+										<?php esc_html_e( 'Sold', 'stm_vehicles_listing' ); ?>
 									</option>
 								</select>
 							</div>

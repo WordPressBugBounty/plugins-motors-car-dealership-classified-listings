@@ -24,7 +24,7 @@ class ListingDescription extends WidgetBase {
 	}
 
 	public function get_title() {
-		return esc_html__( 'Description', 'motors-car-dealership-classified-listings-pro' );
+		return esc_html__( 'Description', 'stm_vehicles_listing' );
 	}
 
 	public function get_icon() {
@@ -35,7 +35,7 @@ class ListingDescription extends WidgetBase {
 		$this->start_controls_section(
 			'section_description',
 			array(
-				'label' => esc_html__( 'Description', 'motors-car-dealership-classified-listings-pro' ),
+				'label' => esc_html__( 'Description', 'stm_vehicles_listing' ),
 			)
 		);
 
@@ -43,7 +43,7 @@ class ListingDescription extends WidgetBase {
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'description_typo',
-				'label'    => esc_html__( 'Typography', 'motors-car-dealership-classified-listings-pro' ),
+				'label'    => esc_html__( 'Typography', 'stm_vehicles_listing' ),
 				'default'  => '',
 				'selector' => '{{WRAPPER}} .mvl-listing-description p',
 			)

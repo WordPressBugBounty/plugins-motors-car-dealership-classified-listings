@@ -34,7 +34,7 @@ class DealerEmail extends WidgetBase {
 	}
 
 	public function get_title() {
-		return esc_html__( 'Author Email', 'motors-car-dealership-classified-listings-pro' );
+		return esc_html__( 'Author Email', 'stm_vehicles_listing' );
 	}
 
 	public function get_icon() {
@@ -42,21 +42,21 @@ class DealerEmail extends WidgetBase {
 	}
 
 	protected function register_controls() {
-		$this->stm_start_content_controls_section( 'de_content', __( 'General', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_content_controls_section( 'de_content', __( 'General', 'stm_vehicles_listing' ) );
 
 		$this->add_control(
 			'de_label',
 			array(
-				'label'   => __( 'Label', 'motors-car-dealership-classified-listings-pro' ),
+				'label'   => __( 'Label', 'stm_vehicles_listing' ),
 				'type'    => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Message Us', 'motors-car-dealership-classified-listings-pro' ),
+				'default' => __( 'Message Us', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'de_icon',
 			array(
-				'label'            => __( 'Icon', 'motors-car-dealership-classified-listings-pro' ),
+				'label'            => __( 'Icon', 'stm_vehicles_listing' ),
 				'type'             => \Elementor\Controls_Manager::ICONS,
 				'skin'             => 'inline',
 				'label_block'      => false,
@@ -69,21 +69,21 @@ class DealerEmail extends WidgetBase {
 
 		$this->stm_end_control_section();
 
-		$this->stm_start_style_controls_section( 'de_styles', __( 'Style', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_style_controls_section( 'de_styles', __( 'Style', 'stm_vehicles_listing' ) );
 
 		$this->stm_start_ctrl_tabs( 'de_btn_bg_style' );
 
 		$this->stm_start_ctrl_tab(
 			'de_bg_normal',
 			array(
-				'label' => __( 'Normal', 'motors-car-dealership-classified-listings-pro' ),
+				'label' => __( 'Normal', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'de_btn_bg',
 			array(
-				'label'     => __( 'Background', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Background', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'default'   => '#ffffff',
 				'selectors' => array(
@@ -95,7 +95,7 @@ class DealerEmail extends WidgetBase {
 		$this->add_control(
 			'de_icon_color',
 			array(
-				'label'     => __( 'Icon Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Icon Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'default'   => '#232628',
 				'selectors' => array(
@@ -108,7 +108,7 @@ class DealerEmail extends WidgetBase {
 		$this->add_control(
 			'de_text_color',
 			array(
-				'label'     => __( 'Text Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Text Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'default'   => '#121e24',
 				'selectors' => array(
@@ -120,7 +120,7 @@ class DealerEmail extends WidgetBase {
 		$this->add_control(
 			'de_border_color',
 			array(
-				'label'     => __( 'Border Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Border Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'default'   => '#e0e3e7',
 				'selectors' => array(
@@ -133,7 +133,7 @@ class DealerEmail extends WidgetBase {
 			\Elementor\Group_Control_Box_Shadow::get_type(),
 			array(
 				'name'           => 'box_shadow',
-				'label'          => __( 'Box Shadow', 'motors-car-dealership-classified-listings-pro' ),
+				'label'          => __( 'Box Shadow', 'stm_vehicles_listing' ),
 				'fields_options' => array(
 					'box_shadow_type' => array(
 						'default' => 'yes',
@@ -157,14 +157,14 @@ class DealerEmail extends WidgetBase {
 		$this->stm_start_ctrl_tab(
 			'de_bg_hover',
 			array(
-				'label' => __( 'Hover', 'motors-car-dealership-classified-listings-pro' ),
+				'label' => __( 'Hover', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'de_btn_bg_hover',
 			array(
-				'label'     => __( 'Background', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Background', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'default'   => '#f8f8f8',
 				'selectors' => array(
@@ -176,7 +176,7 @@ class DealerEmail extends WidgetBase {
 		$this->add_control(
 			'de_icon_color_hover',
 			array(
-				'label'     => __( 'Icon Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Icon Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'default'   => '#232628',
 				'selectors' => array(
@@ -189,7 +189,7 @@ class DealerEmail extends WidgetBase {
 		$this->add_control(
 			'de_text_color_hover',
 			array(
-				'label'     => __( 'Text Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Text Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'default'   => '#121e24',
 				'selectors' => array(
@@ -201,7 +201,7 @@ class DealerEmail extends WidgetBase {
 		$this->add_control(
 			'de_border_color_hover',
 			array(
-				'label'     => __( 'Border Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Border Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'default'   => '#e0e3e7',
 				'selectors' => array(
@@ -214,7 +214,7 @@ class DealerEmail extends WidgetBase {
 			\Elementor\Group_Control_Box_Shadow::get_type(),
 			array(
 				'name'           => 'de_box_shadow_hover',
-				'label'          => __( 'Box Shadow', 'motors-car-dealership-classified-listings-pro' ),
+				'label'          => __( 'Box Shadow', 'stm_vehicles_listing' ),
 				'fields_options' => array(
 					'box_shadow_type' => array(
 						'default' => 'yes',
@@ -249,7 +249,7 @@ class DealerEmail extends WidgetBase {
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
 				'name'           => 'de_typography',
-				'label'          => __( 'Typography', 'motors-car-dealership-classified-listings-pro' ),
+				'label'          => __( 'Typography', 'stm_vehicles_listing' ),
 				'separator'      => 'before',
 				'exclude'        => array(
 					'font_family',
@@ -294,7 +294,7 @@ class DealerEmail extends WidgetBase {
 			\Elementor\Group_Control_Border::get_type(),
 			array(
 				'name'           => 'de_border',
-				'label'          => __( 'Border', 'motors-car-dealership-classified-listings-pro' ),
+				'label'          => __( 'Border', 'stm_vehicles_listing' ),
 				'fields_options' => array(
 					'border' => array(
 						'default' => 'solid',
@@ -317,7 +317,7 @@ class DealerEmail extends WidgetBase {
 		$this->add_control(
 			'de_btn_border_radius',
 			array(
-				'label'     => __( 'Border Radius', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Border Radius', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::DIMENSIONS,
 				'default'   => array(
 					'top'      => '5',
@@ -343,7 +343,7 @@ class DealerEmail extends WidgetBase {
 		$this->add_control(
 			'de_btn_padding',
 			array(
-				'label'     => __( 'Padding', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Padding', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::DIMENSIONS,
 				'default'   => array(
 					'top'      => '13',
@@ -361,7 +361,7 @@ class DealerEmail extends WidgetBase {
 		$this->add_control(
 			'icon_styles',
 			array(
-				'label'     => __( 'Icon', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Icon', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::HEADING,
 				'separator' => 'before',
 			)
@@ -370,7 +370,7 @@ class DealerEmail extends WidgetBase {
 		$this->add_control(
 			'de_icon_size',
 			array(
-				'label'      => __( 'Icon Size', 'motors-car-dealership-classified-listings-pro' ),
+				'label'      => __( 'Icon Size', 'stm_vehicles_listing' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => array(
 					'px',
@@ -396,7 +396,7 @@ class DealerEmail extends WidgetBase {
 		$this->add_control(
 			'de_icon_margin',
 			array(
-				'label'     => __( 'Icon Margin', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Icon Margin', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::DIMENSIONS,
 				'default'   => array(
 					'top'      => '',

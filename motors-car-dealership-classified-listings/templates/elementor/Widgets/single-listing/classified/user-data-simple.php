@@ -46,7 +46,7 @@ $listing_id = ( is_null( $listing_id ) ) ? get_the_ID() : $listing_id;
 									</div>
 								</div>
 								<div class="stm-rate-sum">
-									(<?php esc_html_e( 'Reviews', 'motors-car-dealership-classified-listings-pro' ); ?> <?php echo esc_attr( $ratings['count'] ); ?>
+									(<?php esc_html_e( 'Reviews', 'stm_vehicles_listing' ); ?> <?php echo esc_attr( $ratings['count'] ); ?>
 									)
 								</div>
 							</div>
@@ -69,7 +69,7 @@ $listing_id = ( is_null( $listing_id ) ) ? get_the_ID() : $listing_id;
 						</div>
 						<a class="stm-no-text-decoration" href="<?php echo ( boolval( apply_filters( 'is_listing', array() ) ) || apply_filters( 'stm_is_aircrafts', false ) ) ? esc_url( apply_filters( 'stm_get_author_link', $user_added_by ) ) : '#!'; ?>">
 							<h3 class="title"><?php echo wp_kses_post( apply_filters( 'stm_display_user_name', $user_added_by, '', '', '' ) ); ?></h3>
-							<div class="stm-label"><?php esc_html_e( 'Private Seller', 'motors-car-dealership-classified-listings-pro' ); ?></div>
+							<div class="stm-label"><?php esc_html_e( 'Private Seller', 'stm_vehicles_listing' ); ?></div>
 						</a>
 					</div>
 				</div>

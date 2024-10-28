@@ -27,16 +27,16 @@ class Price extends WidgetBase {
 	}
 
 	public function get_title() {
-		return esc_html__( 'Price Classified', 'motors-car-dealership-classified-listings-pro' );
+		return esc_html__( 'Price Classified', 'stm_vehicles_listing' );
 	}
 
 	protected function register_controls() {
-		$this->stm_start_content_controls_section( 'price_section', __( 'General', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_content_controls_section( 'price_section', __( 'General', 'stm_vehicles_listing' ) );
 
 		$this->add_control(
 			'price_heading',
 			array(
-				'label' => __( 'The listing price value can be edited in<br />the Listing Manager > Prices section<br />individually for each single listing.', 'motors-car-dealership-classified-listings-pro' ),
+				'label' => __( 'The listing price value can be edited in<br />the Listing Manager > Prices section<br />individually for each single listing.', 'stm_vehicles_listing' ),
 				'type'  => \Elementor\Controls_Manager::HEADING,
 			)
 		);
@@ -44,16 +44,16 @@ class Price extends WidgetBase {
 		$this->add_control(
 			'detailed_view',
 			array(
-				'label'       => __( 'Show Regural price', 'motors-car-dealership-classified-listings-pro' ),
+				'label'       => __( 'Show Regural price', 'stm_vehicles_listing' ),
 				'type'        => \Elementor\Controls_Manager::SWITCHER,
-				'description' => __( 'This setting works when the listing includes a discounted price. It will be shown with a strikethrough.', 'motors-car-dealership-classified-listings-pro' ),
+				'description' => __( 'This setting works when the listing includes a discounted price. It will be shown with a strikethrough.', 'stm_vehicles_listing' ),
 			),
 		);
 
 		$this->add_control(
 			'show_custom_label',
 			array(
-				'label'     => __( 'Show price labels', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Show price labels', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::SWITCHER,
 				'default'   => 'yes',
 				'condition' => array(

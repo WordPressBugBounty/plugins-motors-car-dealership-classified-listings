@@ -45,6 +45,8 @@ class MotorsElementorWidgetsFree {
 		}
 
 		add_filter( 'elementor/document/urls/edit', array( $this, 'listing_template_edit_url' ) );
+
+		require_once STM_LISTINGS_PATH . '/elementor/inc/Helpers/ListingsCardControls.php';
 	}
 
 	public function listing_template_edit_url( $url ) {

@@ -24,7 +24,7 @@ class AddCarButton extends WidgetBase {
 	}
 
 	public function get_title() {
-		return esc_html__( 'Add Car Button', 'motors-car-dealership-classified-listings-pro' );
+		return esc_html__( 'Add Car Button', 'stm_vehicles_listing' );
 	}
 
 	public function get_icon() {
@@ -33,21 +33,21 @@ class AddCarButton extends WidgetBase {
 
 	protected function register_controls() {
 
-		$this->stm_start_content_controls_section( 'add_car_btn_content', __( 'General', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_content_controls_section( 'add_car_btn_content', __( 'General', 'stm_vehicles_listing' ) );
 
 		$this->add_control(
 			'add_car_btn_text',
 			array(
-				'label'   => __( 'Button Text', 'motors-car-dealership-classified-listings-pro' ),
+				'label'   => __( 'Button Text', 'stm_vehicles_listing' ),
 				'type'    => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Add A Car', 'motors-car-dealership-classified-listings-pro' ),
+				'default' => __( 'Add A Car', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'add_car_btn_icon',
 			array(
-				'label'       => __( 'Icon', 'motors-car-dealership-classified-listings-pro' ),
+				'label'       => __( 'Icon', 'stm_vehicles_listing' ),
 				'type'        => \Elementor\Controls_Manager::ICONS,
 				'default'     => array(
 					'value'   => 'fas fa-plus',
@@ -60,21 +60,21 @@ class AddCarButton extends WidgetBase {
 
 		$this->stm_end_control_section();
 
-		$this->stm_start_style_controls_section( 'add_car_btn_style', __( 'Style', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_style_controls_section( 'add_car_btn_style', __( 'Style', 'stm_vehicles_listing' ) );
 
 		$this->start_controls_tabs( 'tabs_add_car_btn_style' );
 
 		$this->start_controls_tab(
 			'tab_add_car_btn_normal',
 			array(
-				'label' => __( 'Normal', 'motors-car-dealership-classified-listings-pro' ),
+				'label' => __( 'Normal', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'add_car_btn_background_color',
 			array(
-				'label'     => __( 'Background Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Background Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .listing_add_cart' => 'background-color: {{VALUE}};',
@@ -85,7 +85,7 @@ class AddCarButton extends WidgetBase {
 		$this->add_control(
 			'add_car_btn_text_color',
 			array(
-				'label'     => __( 'Text Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Text Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .listing_add_cart'      => 'color: {{VALUE}};',
@@ -100,14 +100,14 @@ class AddCarButton extends WidgetBase {
 		$this->start_controls_tab(
 			'tab_add_car_btn_hover',
 			array(
-				'label' => __( 'Hover', 'motors-car-dealership-classified-listings-pro' ),
+				'label' => __( 'Hover', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'add_car_btn_background_hover_color',
 			array(
-				'label'     => __( 'Background Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Background Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .listing_add_cart:hover' => 'background-color: {{VALUE}};',
@@ -118,7 +118,7 @@ class AddCarButton extends WidgetBase {
 		$this->add_control(
 			'add_car_btn_text_hover_color',
 			array(
-				'label'     => __( 'Text Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Text Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .listing_add_cart'      => 'color: {{VALUE}};',
@@ -144,7 +144,7 @@ class AddCarButton extends WidgetBase {
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'add_car_btn_typography',
-				'label'    => __( 'Typography', 'motors-car-dealership-classified-listings-pro' ),
+				'label'    => __( 'Typography', 'stm_vehicles_listing' ),
 				'selector' => '{{WRAPPER}} .listing_add_cart',
 			)
 		);
@@ -153,7 +153,7 @@ class AddCarButton extends WidgetBase {
 			\Elementor\Group_Control_Border::get_type(),
 			array(
 				'name'     => 'add_car_btn_border',
-				'label'    => __( 'Border', 'motors-car-dealership-classified-listings-pro' ),
+				'label'    => __( 'Border', 'stm_vehicles_listing' ),
 				'selector' => '{{WRAPPER}} .listing_add_cart',
 			)
 		);
@@ -161,7 +161,7 @@ class AddCarButton extends WidgetBase {
 		$this->add_control(
 			'add_car_btn_border_radius',
 			array(
-				'label'      => __( 'Border Radius', 'motors-car-dealership-classified-listings-pro' ),
+				'label'      => __( 'Border Radius', 'stm_vehicles_listing' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -173,7 +173,7 @@ class AddCarButton extends WidgetBase {
 		$this->add_responsive_control(
 			'add_car_btn_padding',
 			array(
-				'label'      => __( 'Padding', 'motors-car-dealership-classified-listings-pro' ),
+				'label'      => __( 'Padding', 'stm_vehicles_listing' ),
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%', 'em' ),
 				'selectors'  => array(
@@ -185,7 +185,7 @@ class AddCarButton extends WidgetBase {
 		$this->add_responsive_control(
 			'add_car_btn_icon_margin',
 			array(
-				'label'      => __( 'Icon Margin', 'motors-car-dealership-classified-listings-pro' ),
+				'label'      => __( 'Icon Margin', 'stm_vehicles_listing' ),
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%', 'em' ),
 				'selectors'  => array(
@@ -198,7 +198,7 @@ class AddCarButton extends WidgetBase {
 		$this->add_control(
 			'add_car_btn_icon_size',
 			array(
-				'label'      => __( 'Icon Size', 'motors-car-dealership-classified-listings-pro' ),
+				'label'      => __( 'Icon Size', 'stm_vehicles_listing' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => array( 'px', 'em', 'rem' ),
 				'range'      => array(
@@ -230,7 +230,7 @@ class AddCarButton extends WidgetBase {
 			\Elementor\Group_Control_Box_Shadow::get_type(),
 			array(
 				'name'     => 'add_car_btn_box_shadow',
-				'label'    => __( 'Box Shadow', 'motors-car-dealership-classified-listings-pro' ),
+				'label'    => __( 'Box Shadow', 'stm_vehicles_listing' ),
 				'selector' => '{{WRAPPER}} .listing_add_cart',
 			)
 		);

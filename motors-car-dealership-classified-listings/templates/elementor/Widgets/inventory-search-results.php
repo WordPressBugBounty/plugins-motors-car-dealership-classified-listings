@@ -12,7 +12,7 @@ if ( ! isset( $post_type ) || empty( $post_type ) ) {
 	$post_type = 'listings';
 }
 ?>
-<div class="motors-elementor-inventory-search-results" id="listings-result">
+<div class="motors-elementor-inventory-search-results" id="listings-result" data-custom-img-size="<?php echo ! empty( $custom_img_size ) ? esc_attr( $custom_img_size ) : ''; ?>">
 	<?php
 	do_action(
 		'stm_listings_load_results',

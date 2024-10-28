@@ -29,7 +29,7 @@ $_taxonomy = ( ! $_taxonomy ) ? array() : $_taxonomy;
 ?>
 <div class="stm_add_car_form_1">
 	<div class="stm-car-listing-data-single stm-border-top-unit ">
-		<div class="title heading-font"><?php esc_html_e( 'Listing Item Details', 'motors-car-dealership-classified-listings-pro' ); ?></div>
+		<div class="title heading-font"><?php esc_html_e( 'Listing Item Details', 'stm_vehicles_listing' ); ?></div>
 	</div>
 
 	<?php if ( ! empty( $_taxonomy ) ) : ?>
@@ -83,7 +83,7 @@ $_taxonomy = ( ! $_taxonomy ) ? array() : $_taxonomy;
 									required="required"
 							>
 								<option value=""
-										selected="selected"><?php esc_html_e( 'Select', 'motors-car-dealership-classified-listings-pro' ); ?> <?php echo esc_html( $tax_name ); ?></option>
+										selected="selected"><?php esc_html_e( 'Select', 'stm_vehicles_listing' ); ?> <?php echo esc_html( $tax_name ); ?></option>
 								<?php
 								if ( ! empty( $terms ) ) :
 									foreach ( $terms as $_term ) :
@@ -118,13 +118,13 @@ $_taxonomy = ( ! $_taxonomy ) ? array() : $_taxonomy;
 				}
 				?>
 
-			.stm-form1-intro-unit .select2-selection__rendered[title="<?php esc_html_e('Select', 'motors-car-dealership-classified-listings-pro'); ?> <?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $tax_name, 'Add A Car Step 1 Slug Name' ) ); ?>"] {
+			.stm-form1-intro-unit .select2-selection__rendered[title="<?php esc_html_e('Select', 'stm_vehicles_listing'); ?> <?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $tax_name, 'Add A Car Step 1 Slug Name' ) ); ?>"] {
 				background-color: transparent !important;
 				border: 1px solid rgba(255, 255, 255, 0.5);
 				color: #fff !important;
 			}
 
-			.stm-form1-intro-unit .select2-selection__rendered[title="<?php esc_html_e('Select', 'motors-car-dealership-classified-listings-pro'); ?> <?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $tax_name, 'Add A Car Step 1 Slug Name' ) ); ?>"] + .select2-selection__arrow b {
+			.stm-form1-intro-unit .select2-selection__rendered[title="<?php esc_html_e('Select', 'stm_vehicles_listing'); ?> <?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $tax_name, 'Add A Car Step 1 Slug Name' ) ); ?>"] + .select2-selection__arrow b {
 				color: rgba(255, 255, 255, 0.5);
 			}
 
@@ -161,7 +161,7 @@ $_taxonomy = ( ! $_taxonomy ) ? array() : $_taxonomy;
 									class="form-control <?php echo ( ! empty( $value ) ) ? 'stm_has_value' : ''; ?>"
 									name="stm_s_s_<?php echo esc_attr( $data_unit['slug'] ); ?>"
 									value="<?php echo esc_attr( $value ); ?>"
-									placeholder="<?php printf( esc_attr__( 'Enter %1$s %2$s', 'motors-car-dealership-classified-listings-pro' ), esc_attr__( $data_unit['single_name'], 'motors-car-dealership-classified-listings-pro' ), ( ! empty( $data_unit['number_field_affix'] ) ) ? '(' . esc_attr__( $data_unit['number_field_affix'], 'motors-car-dealership-classified-listings-pro' ) . ')' : '' ); ?>"<?php //phpcs:ignore?>
+									placeholder="<?php printf( esc_attr__( 'Enter %1$s %2$s', 'stm_vehicles_listing' ), esc_attr__( $data_unit['single_name'], 'stm_vehicles_listing' ), ( ! empty( $data_unit['number_field_affix'] ) ) ? '(' . esc_attr__( $data_unit['number_field_affix'], 'stm_vehicles_listing' ) . ')' : '' ); ?>"<?php //phpcs:ignore?>
 									<?php echo esc_attr( $is_required ); ?>
 							/>
 						<?php else : ?>
@@ -173,7 +173,7 @@ $_taxonomy = ( ! $_taxonomy ) ? array() : $_taxonomy;
 									$selected = get_post_meta( $_id, $data_unit['slug'], true );
 								}
 								?>
-								<option value=""><?php printf( esc_html__( 'Select %s', 'motors-car-dealership-classified-listings-pro' ), esc_html__( $data_unit['single_name'], 'motors-car-dealership-classified-listings-pro' ) ) ?></option><?php //phpcs:ignore?>
+								<option value=""><?php printf( esc_html__( 'Select %s', 'stm_vehicles_listing' ), esc_html__( $data_unit['single_name'], 'stm_vehicles_listing' ) ) ?></option><?php //phpcs:ignore?>
 								<?php
 								if ( ! empty( $terms ) ) :
 									foreach ( $terms as $_term ) :
@@ -209,7 +209,7 @@ $_taxonomy = ( ! $_taxonomy ) ? array() : $_taxonomy;
 				foreach ( $data as $data_unit ) :
 					?>
 
-				.stm-form-1-end-unit .select2-selection__rendered[title="<?php echo esc_attr__( 'Select', 'motors-car-dealership-classified-listings-pro' ); ?> <?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $data_unit['single_name'], 'Add A Car Step 1 Taxonomy Label' ) ); ?>"] {
+				.stm-form-1-end-unit .select2-selection__rendered[title="<?php echo esc_attr__( 'Select', 'stm_vehicles_listing' ); ?> <?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $data_unit['single_name'], 'Add A Car Step 1 Taxonomy Label' ) ); ?>"] {
 					background-color: transparent !important;
 					border: 1px solid rgba(255, 255, 255, 0.5);
 					color: #888 !important;
@@ -241,37 +241,37 @@ $_taxonomy = ( ! $_taxonomy ) ? array() : $_taxonomy;
 
 				<div class="stn-add-car-location-wrap">
 					<div class="stm-car-listing-data-single">
-						<div class="title heading-font"><?php esc_html_e( 'Listing item Location', 'motors-car-dealership-classified-listings-pro' ); ?></div>
+						<div class="title heading-font"><?php esc_html_e( 'Listing item Location', 'stm_vehicles_listing' ); ?></div>
 					</div>
 					<div class="stm-form-1-quarter stm_location stm-location-search-unit">
 						<div class="stm-location-input-wrap stm-location">
 							<div class="stm-label">
 								<i class="motors-icons-pin_2"></i>
-								<?php esc_html_e( 'Location', 'motors-car-dealership-classified-listings-pro' ); ?>
+								<?php esc_html_e( 'Location', 'stm_vehicles_listing' ); ?>
 							</div>
 							<input type="text" name="stm_location_text"
 								<?php
 								if ( ! empty( $data_value ) ) {
 									?>
 									class="stm_has_value"
-								<?php } ?> id="stm-add-car-location" value="<?php echo esc_attr( $data_value ); ?>" placeholder="<?php esc_attr_e( 'Enter ZIP or Address', 'motors-car-dealership-classified-listings-pro' ); ?>"/>
+								<?php } ?> id="stm-add-car-location" value="<?php echo esc_attr( $data_value ); ?>" placeholder="<?php esc_attr_e( 'Enter ZIP or Address', 'stm_vehicles_listing' ); ?>"/>
 						</div>
 						<div class="stm-location-input-wrap stm-lng">
 							<div class="stm-label">
 								<i class="motors-icons-pin_2"></i>
-								<?php esc_html_e( 'Latitude', 'motors-car-dealership-classified-listings-pro' ); ?>
+								<?php esc_html_e( 'Latitude', 'stm_vehicles_listing' ); ?>
 							</div>
-							<input type="text" class="text_stm_lat" name="stm_lat" value="<?php echo esc_attr( $data_value_lat ); ?>" placeholder="<?php esc_attr_e( 'Enter Latitude', 'motors-car-dealership-classified-listings-pro' ); ?>"/>
+							<input type="text" class="text_stm_lat" name="stm_lat" value="<?php echo esc_attr( $data_value_lat ); ?>" placeholder="<?php esc_attr_e( 'Enter Latitude', 'stm_vehicles_listing' ); ?>"/>
 						</div>
 						<div class="stm-location-input-wrap stm-lng">
 							<div class="stm-label">
 								<i class="motors-icons-pin_2"></i>
-								<?php esc_html_e( 'Longitude', 'motors-car-dealership-classified-listings-pro' ); ?>
+								<?php esc_html_e( 'Longitude', 'stm_vehicles_listing' ); ?>
 							</div>
-							<input type="text" class="text_stm_lng" name="stm_lng" value="<?php echo esc_attr( $data_value_lng ); ?>" placeholder="<?php esc_attr_e( 'Enter Longitude', 'motors-car-dealership-classified-listings-pro' ); ?>"/>
+							<input type="text" class="text_stm_lng" name="stm_lng" value="<?php echo esc_attr( $data_value_lng ); ?>" placeholder="<?php esc_attr_e( 'Enter Longitude', 'stm_vehicles_listing' ); ?>"/>
 						</div>
 						<div class="stm-link-lat-lng-wrap">
-							<a href="https://www.latlong.net/" target="_blank"><?php echo esc_html__( 'Lat and Long Finder', 'motors-car-dealership-classified-listings-pro' ); ?></a>
+							<a href="https://www.latlong.net/" target="_blank"><?php echo esc_html__( 'Lat and Long Finder', 'stm_vehicles_listing' ); ?></a>
 						</div>
 						<input type="hidden" name="stm_location_address" id="stm_location_address" value="<?php echo esc_attr( $data_location_address ); ?>">
 					</div>

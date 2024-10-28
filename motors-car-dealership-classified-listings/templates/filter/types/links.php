@@ -1,5 +1,6 @@
 <?php
 $filter_links = stm_get_car_filter_links();
+$links_icons  = $filter['links_icon'] ?? '';
 
 if ( ! empty( $filter_links ) && ! empty( $filter['options'] ) ) : ?>
 	<div class="stm-filter-links">
@@ -52,10 +53,15 @@ if ( ! empty( $filter_links ) && ! empty( $filter['options'] ) ) : ?>
 										}
 										?>
 										<li
-											class="stm-single-filter-link"
+											class="stm-single-filter-link <?php echo esc_attr( isset( $links_icons ) && ! empty( $links_icons ) ? 'elementor-icons' : '' ); ?>"
 											data-slug="<?php echo esc_attr( $filter_link['slug'] ); ?>"
 											data-value="<?php echo esc_attr( $key ); ?>"
 										>
+											<?php
+											if ( isset( $links_icons ) && ! empty( $links_icons ) ) {
+												echo wp_kses( apply_filters( 'stm_dynamic_icon_output', $links_icons ), apply_filters( 'stm_ew_kses_svg', array() ) );
+											}
+											?>
 											<a href="<?php echo esc_attr( apply_filters( 'stm_listings_current_url', '' ) . '?' . $filter_link['slug'] . '=' . $key ); ?>">
 												<?php echo esc_html( $filter_links_cat['label'] ) . ' <span>(' . esc_html( $count ) . ')</span>'; ?>
 											</a>

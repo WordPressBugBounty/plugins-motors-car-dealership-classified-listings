@@ -16,7 +16,7 @@ $history_link      = get_post_meta( $listing_id, 'history_link', true );
 //Registration
 if ( ! empty( $registration_date ) && $show_registered ) {
 	$data[] = array(
-		'single_name' => esc_html__( 'Registered', 'motors-car-dealership-classified-listings-pro' ),
+		'single_name' => esc_html__( 'Registered', 'stm_vehicles_listing' ),
 		'value'       => $registration_date,
 		'font'        => 'motors-icons-key',
 		'standart'    => false,
@@ -25,8 +25,8 @@ if ( ! empty( $registration_date ) && $show_registered ) {
 
 if ( empty( $registration_date ) && $show_registered ) {
 	$data[] = array(
-		'single_name' => esc_html__( 'Registered', 'motors-car-dealership-classified-listings-pro' ),
-		'value'       => esc_html__( 'N/A', 'motors-car-dealership-classified-listings-pro' ),
+		'single_name' => esc_html__( 'Registered', 'stm_vehicles_listing' ),
+		'value'       => esc_html__( 'N/A', 'stm_vehicles_listing' ),
 		'font'        => 'motors-icons-key',
 		'standart'    => false,
 	);
@@ -35,7 +35,7 @@ if ( empty( $registration_date ) && $show_registered ) {
 //History
 if ( ! empty( $history ) && $show_history ) {
 	$data[] = array(
-		'single_name' => esc_html__( 'History', 'motors-car-dealership-classified-listings-pro' ),
+		'single_name' => esc_html__( 'History', 'stm_vehicles_listing' ),
 		'value'       => $history,
 		'link'        => $history_link,
 		'font'        => 'motors-icons-time',
@@ -45,8 +45,8 @@ if ( ! empty( $history ) && $show_history ) {
 
 if ( empty( $history ) && $show_history ) {
 	$data[] = array(
-		'single_name' => esc_html__( 'History', 'motors-car-dealership-classified-listings-pro' ),
-		'value'       => esc_html__( 'N/A', 'motors-car-dealership-classified-listings-pro' ),
+		'single_name' => esc_html__( 'History', 'stm_vehicles_listing' ),
+		'value'       => esc_html__( 'N/A', 'stm_vehicles_listing' ),
 		'font'        => 'motors-icons-time',
 		'standart'    => false,
 	);
@@ -55,7 +55,7 @@ if ( empty( $history ) && $show_history ) {
 //Stock
 if ( ! empty( $stock_number ) && $show_stock ) {
 	$data[] = array(
-		'single_name' => esc_html__( 'Stock id', 'motors-car-dealership-classified-listings-pro' ),
+		'single_name' => esc_html__( 'Stock id', 'stm_vehicles_listing' ),
 		'value'       => $stock_number,
 		'font'        => 'motors-icons-hashtag',
 		'standart'    => false,
@@ -64,8 +64,8 @@ if ( ! empty( $stock_number ) && $show_stock ) {
 
 if ( empty( $stock_number ) && $show_stock ) {
 	$data[] = array(
-		'single_name' => esc_html__( 'Stock id', 'motors-car-dealership-classified-listings-pro' ),
-		'value'       => esc_html__( 'N/A', 'motors-car-dealership-classified-listings-pro' ),
+		'single_name' => esc_html__( 'Stock id', 'stm_vehicles_listing' ),
+		'value'       => esc_html__( 'N/A', 'stm_vehicles_listing' ),
 		'font'        => 'motors-icons-hashtag',
 		'standart'    => false,
 	);
@@ -75,7 +75,7 @@ if ( empty( $stock_number ) && $show_stock ) {
 //VIN
 if ( ! empty( $vin_num ) && $show_vin ) {
 	$data[] = array(
-		'single_name' => esc_html__( 'VIN:', 'motors-car-dealership-classified-listings-pro' ),
+		'single_name' => esc_html__( 'VIN:', 'stm_vehicles_listing' ),
 		'value'       => $vin_num,
 		'font'        => 'motors-icons-vin_check',
 		'standart'    => false,
@@ -85,7 +85,7 @@ if ( ! empty( $vin_num ) && $show_vin ) {
 
 if ( empty( $vin_num ) && $show_vin ) {
 	$data[] = array(
-		'single_name' => esc_html__( 'VIN:', 'motors-car-dealership-classified-listings-pro' ),
+		'single_name' => esc_html__( 'VIN:', 'stm_vehicles_listing' ),
 		'value'       => $vin_num,
 		'font'        => 'motors-icons-vin_check',
 		'standart'    => false,
@@ -128,7 +128,7 @@ $cols_class .= ( isset( $data_columns_mobile ) && $data_columns_mobile ) ? ' mob
 							$value = implode( ', ', $values );
 						}
 					} else {
-						$value = esc_html__( 'N/A', 'motors-car-dealership-classified-listings-pro' );
+						$value = esc_html__( 'N/A', 'stm_vehicles_listing' );
 					}
 				} else {
 					$value = $data_single['value'];

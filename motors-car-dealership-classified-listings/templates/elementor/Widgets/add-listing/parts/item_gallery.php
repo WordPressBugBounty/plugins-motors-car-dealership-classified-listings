@@ -48,7 +48,7 @@ if ( ! empty( $limits['multi_plans_images_limit'] ) ) {
 			'limit' => $limit['limit'],
 			'text'  => sprintf(
 			/* translators: %d: images limit */
-				esc_html__( 'Sorry, you can upload only %d images per add', 'motors-car-dealership-classified-listings-pro' ),
+				esc_html__( 'Sorry, you can upload only %d images per add', 'stm_vehicles_listing' ),
 				$limit['limit']
 			),
 		);
@@ -62,7 +62,7 @@ if ( ! empty( $jsonMultiPlanImgLimit ) ) {
 
 <div class="stm-form-3-photos clearfix">
 	<div class="stm-car-listing-data-single stm-border-top-unit">
-		<div class="title heading-font"><?php esc_html_e( 'Upload photo', 'motors-car-dealership-classified-listings-pro' ); ?></div>
+		<div class="title heading-font"><?php esc_html_e( 'Upload photo', 'stm_vehicles_listing' ); ?></div>
 	</div>
 	<div class="stm-media-car-add-nitofication">
 		<?php

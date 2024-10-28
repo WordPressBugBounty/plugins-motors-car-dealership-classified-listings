@@ -17,7 +17,7 @@ if ( $custom_listing_type && $listing_types_options && isset( $listing_types_opt
 
 <div class="stm-form-5-notes clearfix">
 	<div class="stm-car-listing-data-single stm-border-top-unit ">
-		<div class="title heading-font"><?php esc_html_e( 'Enter Seller\'s notes', 'motors-car-dealership-classified-listings-pro' ); ?></div>
+		<div class="title heading-font"><?php esc_html_e( 'Enter Seller\'s notes', 'stm_vehicles_listing' ); ?></div>
 	</div>
 	<div class="row stm-relative">
 		<div class="col-md-9 col-sm-9 stm-non-relative">
@@ -29,7 +29,7 @@ if ( $custom_listing_type && $listing_types_options && isset( $listing_types_opt
 					<div class="stm_phrases">
 						<div class="inner">
 							<i class="fas fa-times"></i>
-							<h5><?php esc_html_e( 'Select all the phrases that apply to your vehicle.', 'motors-car-dealership-classified-listings-pro' ); ?></h5>
+							<h5><?php esc_html_e( 'Select all the phrases that apply to your vehicle.', 'stm_vehicles_listing' ); ?></h5>
 							<?php if ( ! empty( $stm_phrases ) ) : ?>
 								<div class="clearfix">
 									<?php foreach ( $stm_phrases as $phrase ) : ?>
@@ -39,7 +39,7 @@ if ( $custom_listing_type && $listing_types_options && isset( $listing_types_opt
 										</label>
 									<?php endforeach; ?>
 								</div>
-								<a href="#" class="button"><?php esc_html_e( 'Apply', 'motors-car-dealership-classified-listings-pro' ); ?></a>
+								<a href="#" class="button"><?php esc_html_e( 'Apply', 'stm_vehicles_listing' ); ?></a>
 							<?php endif; ?>
 						</div>
 					</div>
@@ -71,7 +71,7 @@ if ( $custom_listing_type && $listing_types_options && isset( $listing_types_opt
 		<?php if ( ! empty( $stm_phrases ) ) : ?>
 			<div class="col-md-3 col-sm-3 hidden-xs">
 				<div class="stm-seller-notes-phrases heading-font">
-					<span><?php esc_html_e( 'Add the Template Phrases', 'motors-car-dealership-classified-listings-pro' ); ?></span>
+					<span><?php esc_html_e( 'Add the Template Phrases', 'stm_vehicles_listing' ); ?></span>
 				</div>
 			</div>
 		<?php endif; ?>

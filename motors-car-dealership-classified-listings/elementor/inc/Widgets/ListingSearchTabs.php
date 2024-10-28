@@ -56,7 +56,7 @@ class ListingSearchTabs extends WidgetBase {
 	}
 
 	public function get_title(): string {
-		return esc_html__( 'Listings Search Tabs', 'motors-car-dealership-classified-listings-pro' );
+		return esc_html__( 'Listings Search Tabs', 'stm_vehicles_listing' );
 	}
 
 	public function get_icon(): string {
@@ -64,12 +64,12 @@ class ListingSearchTabs extends WidgetBase {
 	}
 
 	protected function register_controls() {
-		$this->stm_start_content_controls_section( 'lst_fields_content', __( 'Form Fields', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_content_controls_section( 'lst_fields_content', __( 'Form Fields', 'stm_vehicles_listing' ) );
 
 		$this->add_control(
 			'lst_amount',
 			array(
-				'label' => esc_html__( 'Listings Amount of Category', 'motors-car-dealership-classified-listings-pro' ),
+				'label' => esc_html__( 'Listings Amount of Category', 'stm_vehicles_listing' ),
 				'type'  => \Elementor\Controls_Manager::SWITCHER,
 			)
 		);
@@ -79,7 +79,7 @@ class ListingSearchTabs extends WidgetBase {
 		$repeater->add_control(
 			'lst_taxonomy',
 			array(
-				'label'   => esc_html__( 'Category', 'motors-car-dealership-classified-listings-pro' ),
+				'label'   => esc_html__( 'Category', 'stm_vehicles_listing' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'options' => Helper::stm_ew_get_car_filter_fields(),
 			)
@@ -88,7 +88,7 @@ class ListingSearchTabs extends WidgetBase {
 		$repeater->add_control(
 			'lst_label',
 			array(
-				'label' => esc_html__( 'Label', 'motors-car-dealership-classified-listings-pro' ),
+				'label' => esc_html__( 'Label', 'stm_vehicles_listing' ),
 				'type'  => \Elementor\Controls_Manager::TEXT,
 			)
 		);
@@ -96,7 +96,7 @@ class ListingSearchTabs extends WidgetBase {
 		$repeater->add_control(
 			'lst_placeholder',
 			array(
-				'label' => esc_html__( 'Placeholder', 'motors-car-dealership-classified-listings-pro' ),
+				'label' => esc_html__( 'Placeholder', 'stm_vehicles_listing' ),
 				'type'  => \Elementor\Controls_Manager::TEXT,
 			)
 		);
@@ -104,7 +104,7 @@ class ListingSearchTabs extends WidgetBase {
 		$repeater->add_responsive_control(
 			'lst_field_width',
 			array(
-				'label'           => esc_html__( 'Field width', 'motors-car-dealership-classified-listings-pro' ),
+				'label'           => esc_html__( 'Field width', 'stm_vehicles_listing' ),
 				'type'            => \Elementor\Controls_Manager::SELECT,
 				'options'         => array(
 					'10'  => '10%',
@@ -139,7 +139,7 @@ class ListingSearchTabs extends WidgetBase {
 		$this->add_control(
 			'lst_taxonomies',
 			array(
-				'label'       => esc_html__( 'Fields', 'motors-car-dealership-classified-listings-pro' ),
+				'label'       => esc_html__( 'Fields', 'stm_vehicles_listing' ),
 				'fields'      => $repeater->get_controls(),
 				'type'        => \Elementor\Controls_Manager::REPEATER,
 				'title_field' => '{{{ lst_label }}}',
@@ -149,18 +149,18 @@ class ListingSearchTabs extends WidgetBase {
 		$this->add_control(
 			'lst_advanced_search',
 			array(
-				'label'       => esc_html__( 'Use Advanced Search Mode', 'motors-car-dealership-classified-listings-pro' ),
+				'label'       => esc_html__( 'Use Advanced Search Mode', 'stm_vehicles_listing' ),
 				'type'        => \Elementor\Controls_Manager::SWITCHER,
 				'default'     => 'no',
-				'description' => __( 'Hide optional fields and show it by clicking on special link', 'motors-car-dealership-classified-listings-pro' ),
+				'description' => __( 'Hide optional fields and show it by clicking on special link', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'lst_advanced_search_label',
 			array(
-				'label'     => esc_html__( 'Advanced Search toggle label', 'motors-car-dealership-classified-listings-pro' ),
-				'default'   => esc_html__( 'Advanced Search', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Advanced Search toggle label', 'stm_vehicles_listing' ),
+				'default'   => esc_html__( 'Advanced Search', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::TEXT,
 				'condition' => array(
 					'lst_advanced_search' => 'yes',
@@ -170,12 +170,12 @@ class ListingSearchTabs extends WidgetBase {
 
 		$this->stm_end_control_section();
 
-		$this->stm_start_content_controls_section( 'lst_tabs_content', __( 'Search Tabs', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_content_controls_section( 'lst_tabs_content', __( 'Search Tabs', 'stm_vehicles_listing' ) );
 
 		$this->add_control(
 			'lst_show_tabs',
 			array(
-				'label'   => esc_html__( 'Category Tabs', 'motors-car-dealership-classified-listings-pro' ),
+				'label'   => esc_html__( 'Category Tabs', 'stm_vehicles_listing' ),
 				'default' => 'yes',
 				'type'    => \Elementor\Controls_Manager::SWITCHER,
 			)
@@ -184,7 +184,7 @@ class ListingSearchTabs extends WidgetBase {
 		$this->add_control(
 			'lst_show_all_tab',
 			array(
-				'label'   => esc_html__( 'All Categories Tab', 'motors-car-dealership-classified-listings-pro' ),
+				'label'   => esc_html__( 'All Categories Tab', 'stm_vehicles_listing' ),
 				'type'    => \Elementor\Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			)
@@ -193,8 +193,8 @@ class ListingSearchTabs extends WidgetBase {
 		$this->add_control(
 			'lst_show_all_text',
 			array(
-				'label'   => esc_html__( 'All Categories Tab Title', 'motors-car-dealership-classified-listings-pro' ),
-				'default' => esc_html__( 'All', 'motors-car-dealership-classified-listings-pro' ),
+				'label'   => esc_html__( 'All Categories Tab Title', 'stm_vehicles_listing' ),
+				'default' => esc_html__( 'All', 'stm_vehicles_listing' ),
 				'type'    => \Elementor\Controls_Manager::TEXT,
 			)
 		);
@@ -202,7 +202,7 @@ class ListingSearchTabs extends WidgetBase {
 		$this->add_control(
 			'lst_condition_tabs',
 			array(
-				'label'    => esc_html__( 'Categories', 'motors-car-dealership-classified-listings-pro' ),
+				'label'    => esc_html__( 'Categories', 'stm_vehicles_listing' ),
 				'type'     => \Elementor\Controls_Manager::SELECT2,
 				'options'  => Helper::stm_ew_get_listing_taxonomies( true ),
 				'multiple' => true,
@@ -212,18 +212,18 @@ class ListingSearchTabs extends WidgetBase {
 		$this->add_control(
 			'tab_prefix',
 			array(
-				'label'       => __( 'Tab Prefix', 'motors-car-dealership-classified-listings-pro' ),
+				'label'       => __( 'Tab Prefix', 'stm_vehicles_listing' ),
 				'type'        => \Elementor\Controls_Manager::TEXT,
-				'description' => __( 'This will appear before category name', 'motors-car-dealership-classified-listings-pro' ),
+				'description' => __( 'This will appear before category name', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'tab_suffix',
 			array(
-				'label'       => __( 'Tab Suffix', 'motors-car-dealership-classified-listings-pro' ),
+				'label'       => __( 'Tab Suffix', 'stm_vehicles_listing' ),
 				'type'        => \Elementor\Controls_Manager::TEXT,
-				'description' => __( 'This will appear after category name', 'motors-car-dealership-classified-listings-pro' ),
+				'description' => __( 'This will appear after category name', 'stm_vehicles_listing' ),
 			)
 		);
 
@@ -231,12 +231,12 @@ class ListingSearchTabs extends WidgetBase {
 
 		if ( defined( 'STM_REVIEW' ) ) {
 
-			$this->stm_start_content_controls_section( 'lst_section_reviews', esc_html__( 'Car Reviews Tab', 'motors-car-dealership-classified-listings-pro' ) );
+			$this->stm_start_content_controls_section( 'lst_section_reviews', esc_html__( 'Car Reviews Tab', 'stm_vehicles_listing' ) );
 
 			$this->add_control(
 				'lst_enable_reviews',
 				array(
-					'label'   => esc_html__( 'Show Car Reviews Tab', 'motors-car-dealership-classified-listings-pro' ),
+					'label'   => esc_html__( 'Show Car Reviews Tab', 'stm_vehicles_listing' ),
 					'type'    => \Elementor\Controls_Manager::SWITCHER,
 					'default' => 'yes',
 				)
@@ -247,7 +247,7 @@ class ListingSearchTabs extends WidgetBase {
 			$reviews_repeater->add_control(
 				'lst_reviews_taxonomy',
 				array(
-					'label'   => esc_html__( 'Category', 'motors-car-dealership-classified-listings-pro' ),
+					'label'   => esc_html__( 'Category', 'stm_vehicles_listing' ),
 					'type'    => \Elementor\Controls_Manager::SELECT,
 					'options' => Helper::stm_ew_get_car_filter_fields(),
 				)
@@ -256,7 +256,7 @@ class ListingSearchTabs extends WidgetBase {
 			$reviews_repeater->add_control(
 				'lst_reviews_label',
 				array(
-					'label' => esc_html__( 'Label', 'motors-car-dealership-classified-listings-pro' ),
+					'label' => esc_html__( 'Label', 'stm_vehicles_listing' ),
 					'type'  => \Elementor\Controls_Manager::TEXT,
 				)
 			);
@@ -264,7 +264,7 @@ class ListingSearchTabs extends WidgetBase {
 			$reviews_repeater->add_control(
 				'lst_reviews_placeholder',
 				array(
-					'label' => esc_html__( 'Placeholder', 'motors-car-dealership-classified-listings-pro' ),
+					'label' => esc_html__( 'Placeholder', 'stm_vehicles_listing' ),
 					'type'  => \Elementor\Controls_Manager::TEXT,
 				)
 			);
@@ -272,7 +272,7 @@ class ListingSearchTabs extends WidgetBase {
 			$reviews_repeater->add_responsive_control(
 				'lst_field_width',
 				array(
-					'label'           => esc_html__( 'Field width', 'motors-car-dealership-classified-listings-pro' ),
+					'label'           => esc_html__( 'Field width', 'stm_vehicles_listing' ),
 					'type'            => \Elementor\Controls_Manager::SELECT,
 					'options'         => array(
 						'10'  => '10%',
@@ -307,7 +307,7 @@ class ListingSearchTabs extends WidgetBase {
 			$this->add_control(
 				'lst_reviews_taxonomies',
 				array(
-					'label'       => esc_html__( 'Fields', 'motors-car-dealership-classified-listings-pro' ),
+					'label'       => esc_html__( 'Fields', 'stm_vehicles_listing' ),
 					'fields'      => $reviews_repeater->get_controls(),
 					'type'        => \Elementor\Controls_Manager::REPEATER,
 					'title_field' => '{{{ lst_reviews_label }}}',
@@ -320,12 +320,12 @@ class ListingSearchTabs extends WidgetBase {
 
 		if ( defined( 'STM_VALUE_MY_CAR' ) ) {
 
-			$this->stm_start_content_controls_section( 'lst_section_value_my_car', esc_html__( 'Value My Car Tab', 'motors-car-dealership-classified-listings-pro' ) );
+			$this->stm_start_content_controls_section( 'lst_section_value_my_car', esc_html__( 'Value My Car Tab', 'stm_vehicles_listing' ) );
 
 			$this->add_control(
 				'lst_enable_value_my_car',
 				array(
-					'label'   => esc_html__( 'Show Value My Car Tab', 'motors-car-dealership-classified-listings-pro' ),
+					'label'   => esc_html__( 'Show Value My Car Tab', 'stm_vehicles_listing' ),
 					'type'    => \Elementor\Controls_Manager::SWITCHER,
 					'default' => 'yes',
 				)
@@ -334,32 +334,32 @@ class ListingSearchTabs extends WidgetBase {
 			$this->add_control(
 				'lst_value_my_car_fields',
 				array(
-					'label'       => esc_html__( 'Fields', 'motors-car-dealership-classified-listings-pro' ),
+					'label'       => esc_html__( 'Fields', 'stm_vehicles_listing' ),
 					'type'        => \Elementor\Controls_Manager::SELECT2,
 					'options'     => Helper::stm_ew_get_value_my_car_options(),
 					'multiple'    => true,
 					'default'     => array( 'email', 'phone', 'make', 'model' ),
-					'description' => esc_html__( 'Required fields: Email, Phone, Make and Model', 'motors-car-dealership-classified-listings-pro' ),
+					'description' => esc_html__( 'Required fields: Email, Phone, Make and Model', 'stm_vehicles_listing' ),
 				)
 			);
 
 			$this->stm_end_control_section();
 		}
 
-		$this->stm_start_content_controls_section( 'lst_btn_settings', esc_html__( 'Button', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_content_controls_section( 'lst_btn_settings', esc_html__( 'Button', 'stm_vehicles_listing' ) );
 
 		$this->add_control(
 			'lst_btn_postfix',
 			array(
-				'label'   => esc_html__( 'Search button postfix', 'motors-car-dealership-classified-listings-pro' ),
-				'default' => esc_html__( 'Cars', 'motors-car-dealership-classified-listings-pro' ),
+				'label'   => esc_html__( 'Search button postfix', 'stm_vehicles_listing' ),
+				'default' => esc_html__( 'Cars', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'lst_btn_icon',
 			array(
-				'label'            => esc_html__( 'Icon', 'motors-car-dealership-classified-listings-pro' ),
+				'label'            => esc_html__( 'Icon', 'stm_vehicles_listing' ),
 				'type'             => \Elementor\Controls_Manager::ICONS,
 				'skin'             => 'inline',
 				'fa4compatibility' => 'icon',
@@ -373,7 +373,7 @@ class ListingSearchTabs extends WidgetBase {
 		$this->add_control(
 			'lst_btn_icon_size',
 			array(
-				'label'      => esc_html__( 'Icon Size', 'motors-car-dealership-classified-listings-pro' ),
+				'label'      => esc_html__( 'Icon Size', 'stm_vehicles_listing' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => array(
 					'px',
@@ -401,12 +401,12 @@ class ListingSearchTabs extends WidgetBase {
 
 		$this->stm_end_control_section();
 
-		$this->stm_start_style_controls_section( 'section_style_general', esc_html__( 'General', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_style_controls_section( 'section_style_general', esc_html__( 'General', 'stm_vehicles_listing' ) );
 
 		$this->add_control(
 			'background_color',
 			array(
-				'label'     => esc_html__( 'Background Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Background Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .filter-listing .tab-content' => 'background: {{VALUE}};',
@@ -444,7 +444,7 @@ class ListingSearchTabs extends WidgetBase {
 		$this->add_control(
 			'fields_style_heading',
 			array(
-				'label' => esc_html__( 'Fields Style', 'motors-car-dealership-classified-listings-pro' ),
+				'label' => esc_html__( 'Fields Style', 'stm_vehicles_listing' ),
 				'type'  => \Elementor\Controls_Manager::HEADING,
 			)
 		);
@@ -453,7 +453,7 @@ class ListingSearchTabs extends WidgetBase {
 			\Elementor\Group_Control_Border::get_type(),
 			array(
 				'name'     => 'lst_fields_border',
-				'label'    => esc_html__( 'Fields Border', 'motors-car-dealership-classified-listings-pro' ),
+				'label'    => esc_html__( 'Fields Border', 'stm_vehicles_listing' ),
 				'selector' => '{{WRAPPER}} .filter-listing .tab-content .stm-filter-tab-selects .stm-select-col input, {{WRAPPER}} .filter-listing .tab-content .stm-filter-tab-selects .stm-select-col select',
 			)
 		);
@@ -461,7 +461,7 @@ class ListingSearchTabs extends WidgetBase {
 		$this->add_responsive_control(
 			'lst_fields_border_radius',
 			array(
-				'label'      => esc_html__( 'Fields Border Radius', 'motors-car-dealership-classified-listings-pro' ),
+				'label'      => esc_html__( 'Fields Border Radius', 'stm_vehicles_listing' ),
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -483,7 +483,7 @@ class ListingSearchTabs extends WidgetBase {
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
 				'name'           => 'tab_typography',
-				'label'          => esc_html__( 'Tab Typography', 'motors-car-dealership-classified-listings-pro' ),
+				'label'          => esc_html__( 'Tab Typography', 'stm_vehicles_listing' ),
 				'exclude'        => array(
 					'font_style',
 					'text_decoration',
@@ -499,14 +499,14 @@ class ListingSearchTabs extends WidgetBase {
 		$this->stm_start_ctrl_tab(
 			'tab_normal',
 			array(
-				'label' => __( 'Normal', 'motors-car-dealership-classified-listings-pro' ),
+				'label' => __( 'Normal', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'tab_background_color',
 			array(
-				'label'     => esc_html__( 'Tab Background Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Tab Background Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .stm_dynamic_listing_filter_nav li:not(.active)' => 'background-color: {{VALUE}};',
@@ -517,7 +517,7 @@ class ListingSearchTabs extends WidgetBase {
 		$this->add_control(
 			'tab_text_color',
 			array(
-				'label'     => esc_html__( 'Tab Text Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Tab Text Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .stm_dynamic_listing_filter_nav li a' => 'color: {{VALUE}};',
@@ -530,14 +530,14 @@ class ListingSearchTabs extends WidgetBase {
 		$this->stm_start_ctrl_tab(
 			'tab_active',
 			array(
-				'label' => __( 'Active', 'motors-car-dealership-classified-listings-pro' ),
+				'label' => __( 'Active', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'tab_background_color_active',
 			array(
-				'label'     => esc_html__( 'Tab Background Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Tab Background Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .stm_dynamic_listing_filter_nav li.active' => 'background: {{VALUE}};',
@@ -548,7 +548,7 @@ class ListingSearchTabs extends WidgetBase {
 		$this->add_control(
 			'tab_text_color_active',
 			array(
-				'label'     => esc_html__( 'Tab Text Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Tab Text Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .stm_dynamic_listing_filter_nav li.active a' => 'color: {{VALUE}};',
@@ -563,7 +563,7 @@ class ListingSearchTabs extends WidgetBase {
 		$this->add_control(
 			'lst_advanced_search_label_font_size',
 			array(
-				'label'      => esc_html__( 'Advanced Search Toggle Font Size', 'motors-car-dealership-classified-listings-pro' ),
+				'label'      => esc_html__( 'Advanced Search Toggle Font Size', 'stm_vehicles_listing' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => array(
 					'px',
@@ -593,14 +593,14 @@ class ListingSearchTabs extends WidgetBase {
 		$this->stm_start_ctrl_tab(
 			'lst_advanced_search_label_normal',
 			array(
-				'label' => __( 'Normal', 'motors-car-dealership-classified-listings-pro' ),
+				'label' => __( 'Normal', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'lst_advanced_search_label_color',
 			array(
-				'label'     => esc_html__( 'Advanced Search toggle label color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Advanced Search toggle label color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'default'   => '#888888',
 				'selectors' => array(
@@ -614,14 +614,14 @@ class ListingSearchTabs extends WidgetBase {
 		$this->stm_start_ctrl_tab(
 			'lst_advanced_search_label_hover',
 			array(
-				'label' => __( 'Hover', 'motors-car-dealership-classified-listings-pro' ),
+				'label' => __( 'Hover', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'lst_advanced_search_label_color_hover',
 			array(
-				'label'     => esc_html__( 'Advanced Search toggle label color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Advanced Search toggle label color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'default'   => '#ffffff',
 				'selectors' => array(
@@ -639,14 +639,14 @@ class ListingSearchTabs extends WidgetBase {
 		$this->stm_start_ctrl_tab(
 			'btn_normal',
 			array(
-				'label' => __( 'Normal', 'motors-car-dealership-classified-listings-pro' ),
+				'label' => __( 'Normal', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'button_background_color',
 			array(
-				'label'     => esc_html__( 'Button Background Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Button Background Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .filter-listing .tab-content button[type=submit]' => 'background: {{VALUE}};box-shadow: 0 2px 0 {{VALUE}};',
@@ -657,7 +657,7 @@ class ListingSearchTabs extends WidgetBase {
 		$this->add_control(
 			'button_text_color',
 			array(
-				'label'     => esc_html__( 'Button Text Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Button Text Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .filter-listing .tab-content button[type=submit]' => 'color: {{VALUE}};',
@@ -670,14 +670,14 @@ class ListingSearchTabs extends WidgetBase {
 		$this->stm_start_ctrl_tab(
 			'btn_hover',
 			array(
-				'label' => __( 'Hover', 'motors-car-dealership-classified-listings-pro' ),
+				'label' => __( 'Hover', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'button_background_color_hover',
 			array(
-				'label'     => esc_html__( 'Button Background Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Button Background Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .filter-listing .tab-content form button[type=submit]:hover' => 'background: {{VALUE}};box-shadow: 0 2px 0 {{VALUE}};',
@@ -688,7 +688,7 @@ class ListingSearchTabs extends WidgetBase {
 		$this->add_control(
 			'button_text_color_hover',
 			array(
-				'label'     => esc_html__( 'Button Text Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Button Text Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .filter-listing .tab-content form button[type=submit]:hover' => 'color: {{VALUE}};',
@@ -711,7 +711,7 @@ class ListingSearchTabs extends WidgetBase {
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
 				'name'           => 'button_typography',
-				'label'          => esc_html__( 'Button Typography', 'motors-car-dealership-classified-listings-pro' ),
+				'label'          => esc_html__( 'Button Typography', 'stm_vehicles_listing' ),
 				'exclude'        => array(
 					'font_style',
 					'text_decoration',
@@ -725,7 +725,7 @@ class ListingSearchTabs extends WidgetBase {
 		$this->add_control(
 			'button_icon_margin',
 			array(
-				'label'     => __( 'Button Icon Margin', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Button Icon Margin', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::DIMENSIONS,
 				'default'   => array(
 					'top'      => '0',
@@ -744,7 +744,7 @@ class ListingSearchTabs extends WidgetBase {
 		$this->add_control(
 			'validation_issues_color',
 			array(
-				'label'     => esc_html__( 'Validation Issues Text Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Validation Issues Text Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .filter-listing.stm_dynamic_listing_filter .tab-content .stm-filter-tab-selects .vmc-file-wrap .file-wrap .error' => 'color: {{VALUE}};',

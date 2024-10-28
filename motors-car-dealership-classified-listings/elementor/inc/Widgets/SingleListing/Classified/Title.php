@@ -23,7 +23,7 @@ class Title extends WidgetBase {
 	}
 
 	public function get_title() {
-		return esc_html__( 'Title Classified', 'motors-car-dealership-classified-listings-pro' );
+		return esc_html__( 'Title Classified', 'stm_vehicles_listing' );
 	}
 
 	public function get_icon() {
@@ -31,12 +31,12 @@ class Title extends WidgetBase {
 	}
 
 	protected function register_controls() {
-		$this->stm_start_content_controls_section( 'title_content', __( 'General', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_content_controls_section( 'title_content', __( 'General', 'stm_vehicles_listing' ) );
 
 		$this->add_control(
 			'title_tag',
 			array(
-				'label'   => __( 'Heading Tag', 'motors-car-dealership-classified-listings-pro' ),
+				'label'   => __( 'Heading Tag', 'stm_vehicles_listing' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'default' => 'h1',
 				'options' => array(
@@ -53,7 +53,7 @@ class Title extends WidgetBase {
 		$this->add_control(
 			'added_date',
 			array(
-				'label'   => __( 'Added Date', 'motors-car-dealership-classified-listings-pro' ),
+				'label'   => __( 'Added Date', 'stm_vehicles_listing' ),
 				'type'    => \Elementor\Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			)
@@ -62,7 +62,7 @@ class Title extends WidgetBase {
 		$this->add_control(
 			'date_added_icon',
 			array(
-				'label'            => __( 'Icon', 'motors-car-dealership-classified-listings-pro' ),
+				'label'            => __( 'Icon', 'stm_vehicles_listing' ),
 				'type'             => \Elementor\Controls_Manager::ICONS,
 				'skin'             => 'inline',
 				'fa4compatibility' => 'icon',
@@ -75,13 +75,13 @@ class Title extends WidgetBase {
 
 		$this->stm_end_control_section();
 
-		$this->stm_start_style_controls_section( 'title_style', __( 'Style', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_style_controls_section( 'title_style', __( 'Style', 'stm_vehicles_listing' ) );
 
 		$this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
 				'name'           => 'title_typography',
-				'label'          => __( 'Title Typography', 'motors-car-dealership-classified-listings-pro' ),
+				'label'          => __( 'Title Typography', 'stm_vehicles_listing' ),
 				'exclude'        => array(
 					'font_family',
 					'font_style',
@@ -114,7 +114,7 @@ class Title extends WidgetBase {
 		$this->add_control(
 			'title_color',
 			array(
-				'label'     => __( 'Title Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Title Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'default'   => '#232628',
 				'selectors' => array(
@@ -127,7 +127,7 @@ class Title extends WidgetBase {
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
 				'name'           => 'label_typography',
-				'label'          => __( 'Label Typography', 'motors-car-dealership-classified-listings-pro' ),
+				'label'          => __( 'Label Typography', 'stm_vehicles_listing' ),
 				'exclude'        => array(
 					'font_family',
 					'font_style',
@@ -159,7 +159,7 @@ class Title extends WidgetBase {
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
 				'name'           => 'date_added_typography',
-				'label'          => __( 'Added Date Typography', 'motors-car-dealership-classified-listings-pro' ),
+				'label'          => __( 'Added Date Typography', 'stm_vehicles_listing' ),
 				'exclude'        => array(
 					'font_family',
 					'font_style',
@@ -192,7 +192,7 @@ class Title extends WidgetBase {
 			'added_date_icon_size',
 			array(
 				'type'       => \Elementor\Controls_Manager::SLIDER,
-				'label'      => __( 'Added Date Icon Size', 'motors-car-dealership-classified-listings-pro' ),
+				'label'      => __( 'Added Date Icon Size', 'stm_vehicles_listing' ),
 				'size_units' => array(
 					'px',
 				),

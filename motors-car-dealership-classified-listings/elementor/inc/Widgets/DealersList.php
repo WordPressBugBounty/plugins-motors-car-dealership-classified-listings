@@ -63,7 +63,7 @@ class DealersList extends WidgetBase {
 	}
 
 	public function get_title(): string {
-		return esc_html__( 'Dealers List', 'motors-car-dealership-classified-listings-pro' );
+		return esc_html__( 'Dealers List', 'stm_vehicles_listing' );
 	}
 
 	public function get_icon(): string {
@@ -71,7 +71,7 @@ class DealersList extends WidgetBase {
 	}
 
 	protected function register_controls() {
-		$this->stm_start_content_controls_section( 'section_content', __( 'Content', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_content_controls_section( 'section_content', __( 'Content', 'stm_vehicles_listing' ) );
 
 		$listing_categories = stm_listings_attributes();
 
@@ -80,15 +80,15 @@ class DealersList extends WidgetBase {
 		}
 
 		if ( ! in_array( 'location', $listing_categories, true ) ) {
-			$listing_categories['location'] = esc_html__( 'Location', 'motors-car-dealership-classified-listings-pro' );
+			$listing_categories['location'] = esc_html__( 'Location', 'stm_vehicles_listing' );
 		}
 
-		$listing_categories['keyword'] = esc_html__( 'Keyword', 'motors-car-dealership-classified-listings-pro' );
+		$listing_categories['keyword'] = esc_html__( 'Keyword', 'stm_vehicles_listing' );
 
 		$this->add_control(
 			'filter_categories',
 			array(
-				'label'    => esc_html__( 'Select Categories', 'motors-car-dealership-classified-listings-pro' ),
+				'label'    => esc_html__( 'Select Categories', 'stm_vehicles_listing' ),
 				'type'     => \Elementor\Controls_Manager::SELECT2,
 				'options'  => $listing_categories,
 				'multiple' => true,
@@ -98,7 +98,7 @@ class DealersList extends WidgetBase {
 		$this->add_control(
 			'dealer_category_fields',
 			array(
-				'label'    => esc_html__( 'Dealer Fields', 'motors-car-dealership-classified-listings-pro' ),
+				'label'    => esc_html__( 'Dealer Fields', 'stm_vehicles_listing' ),
 				'type'     => \Elementor\Controls_Manager::SELECT2,
 				'options'  => Helper::get_listing_options(),
 				'multiple' => true,
@@ -108,17 +108,17 @@ class DealersList extends WidgetBase {
 		$this->add_control(
 			'button_text',
 			array(
-				'label'       => __( 'Button Text', 'motors-car-dealership-classified-listings-pro' ),
+				'label'       => __( 'Button Text', 'stm_vehicles_listing' ),
 				'type'        => \Elementor\Controls_Manager::TEXT,
-				'placeholder' => __( 'Enter Button Text', 'motors-car-dealership-classified-listings-pro' ),
-				'default'     => __( 'Find Dealer ', 'motors-car-dealership-classified-listings-pro' ),
+				'placeholder' => __( 'Enter Button Text', 'stm_vehicles_listing' ),
+				'default'     => __( 'Find Dealer ', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'button_icon',
 			array(
-				'label'       => esc_html__( 'Button Icon', 'motors-car-dealership-classified-listings-pro' ),
+				'label'       => esc_html__( 'Button Icon', 'stm_vehicles_listing' ),
 				'type'        => \Elementor\Controls_Manager::ICONS,
 				'skin'        => 'inline',
 				'label_block' => false,
@@ -132,7 +132,7 @@ class DealersList extends WidgetBase {
 		$this->add_control(
 			'button_icon_size',
 			array(
-				'label'      => esc_html__( 'Icon Size', 'motors-car-dealership-classified-listings-pro' ),
+				'label'      => esc_html__( 'Icon Size', 'stm_vehicles_listing' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => array(
 					'px',
@@ -160,12 +160,12 @@ class DealersList extends WidgetBase {
 
 		$this->end_controls_section();
 
-		$this->stm_start_style_controls_section( 'section_style_general', esc_html__( 'General', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_style_controls_section( 'section_style_general', esc_html__( 'General', 'stm_vehicles_listing' ) );
 
 		$this->add_control(
 			'background_color',
 			array(
-				'label'     => esc_html__( 'Background Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Background Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .stm_dynamic_listing_dealer_filter .tab-content' => 'background: {{VALUE}};',
@@ -178,14 +178,14 @@ class DealersList extends WidgetBase {
 		$this->stm_start_ctrl_tab(
 			'btn_normal',
 			array(
-				'label' => __( 'Normal', 'motors-car-dealership-classified-listings-pro' ),
+				'label' => __( 'Normal', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'button_background_color',
 			array(
-				'label'     => esc_html__( 'Button Background Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Button Background Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .stm_dynamic_listing_dealer_filter .tab-content button[type=submit]' => 'background: {{VALUE}};box-shadow: 0 2px 0 {{VALUE}};',
@@ -196,7 +196,7 @@ class DealersList extends WidgetBase {
 		$this->add_control(
 			'button_text_color',
 			array(
-				'label'     => esc_html__( 'Button Text Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Button Text Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .stm_dynamic_listing_dealer_filter .tab-content button[type=submit]' => 'color: {{VALUE}};',
@@ -209,14 +209,14 @@ class DealersList extends WidgetBase {
 		$this->stm_start_ctrl_tab(
 			'btn_hover',
 			array(
-				'label' => __( 'Hover', 'motors-car-dealership-classified-listings-pro' ),
+				'label' => __( 'Hover', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'button_background_color_hover',
 			array(
-				'label'     => esc_html__( 'Button Background Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Button Background Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .stm_dynamic_listing_dealer_filter .tab-content form button[type=submit]:hover' => 'background: {{VALUE}};box-shadow: 0 2px 0 {{VALUE}};',
@@ -227,7 +227,7 @@ class DealersList extends WidgetBase {
 		$this->add_control(
 			'button_text_color_hover',
 			array(
-				'label'     => esc_html__( 'Button Text Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Button Text Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .stm_dynamic_listing_dealer_filter .tab-content form button[type=submit]:hover' => 'color: {{VALUE}};',
@@ -251,7 +251,7 @@ class DealersList extends WidgetBase {
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
 				'name'           => 'button_typography',
-				'label'          => esc_html__( 'Button Typography', 'motors-car-dealership-classified-listings-pro' ),
+				'label'          => esc_html__( 'Button Typography', 'stm_vehicles_listing' ),
 				'exclude'        => array(
 					'font_style',
 					'text_decoration',
@@ -265,7 +265,7 @@ class DealersList extends WidgetBase {
 		$this->add_control(
 			'button_icon_margin',
 			array(
-				'label'     => __( 'Button Icon Margin', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Button Icon Margin', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::DIMENSIONS,
 				'default'   => array(
 					'top'      => '0',

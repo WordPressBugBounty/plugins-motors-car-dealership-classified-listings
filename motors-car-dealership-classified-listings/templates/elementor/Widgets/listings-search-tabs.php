@@ -99,7 +99,7 @@ $nonce_field = apply_filters( 'stm_listings_filter_nonce', false );
 		<?php if ( defined( 'STM_REVIEW' ) && 'yes' === $lst_enable_reviews ) : ?>
 			<li class="<?php echo esc_attr( $tab_activity_class ); ?>">
 				<a href="<?php echo esc_attr( sprintf( '#car-reviews-tab-%s', $uniq_id ) ); ?>" role="tab" data-toggle="tab" aria-expanded="false">
-					<?php esc_html_e( 'Car reviews', 'motors-car-dealership-classified-listings-pro' ); ?>
+					<?php esc_html_e( 'Car reviews', 'stm_vehicles_listing' ); ?>
 				</a>
 			</li>
 			<?php $tab_activity_class = ''; ?>
@@ -108,7 +108,7 @@ $nonce_field = apply_filters( 'stm_listings_filter_nonce', false );
 		<?php if ( defined( 'STM_VALUE_MY_CAR' ) && 'yes' === $lst_enable_value_my_car ) : ?>
 			<li class="<?php echo esc_attr( $tab_activity_class ); ?>">
 				<a href="<?php echo esc_attr( sprintf( '#value-my-car-%s', $uniq_id ) ); ?>" role="tab" data-toggle="tab" aria-expanded="false">
-					<?php esc_html_e( 'Value my car', 'motors-car-dealership-classified-listings-pro' ); ?>
+					<?php esc_html_e( 'Value my car', 'stm_vehicles_listing' ); ?>
 				</a>
 			</li>
 			<?php $tab_activity_class = ''; ?>
@@ -280,7 +280,7 @@ $nonce_field = apply_filters( 'stm_listings_filter_nonce', false );
 						?>
 
 						<button type="submit" class="vmc-btn-submit heading-font" data-widget-id="value-my-car-<?php echo esc_attr( $uniq_id ); ?>">
-							<?php esc_html_e( 'Value my Car', 'motors-car-dealership-classified-listings-pro' ); ?>
+							<?php esc_html_e( 'Value my Car', 'stm_vehicles_listing' ); ?>
 							<i class="fas fa-spinner"></i>
 						</button>
 					</div>

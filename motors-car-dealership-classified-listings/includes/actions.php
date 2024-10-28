@@ -13,15 +13,17 @@ function stm_listings_template_actions() {
 		define( 'DOING_AJAX', true );
 		switch ( $action ) {
 			case 'listings-result':
-				$nav_type = ( ! empty( $_GET['navigation_type'] ) ) ? $_GET['navigation_type'] : null;
-				$source   = ( ! empty( $_GET['posts_per_page'] ) ) ? array( 'posts_per_page' => $_GET['posts_per_page'] ) : null;
+				$nav_type = ( ! empty( $_POST['navigation_type'] ) ) ? sanitize_text_field( $_POST['navigation_type'] ) : null;
+				$source   = ( ! empty( $_POST['posts_per_page'] ) ) ? array( 'posts_per_page' => sanitize_text_field( $_POST['posts_per_page'] ) ) : null;
 
+				if ( ! empty( $_POST['custom_img_size'] ) ) {
+					$source['custom_img_size'] = sanitize_text_field( $_POST['custom_img_size'] );
+				}
 				// if request is for multilisting post types
 				if ( stm_is_multilisting() && ! empty( $_GET['posttype'] ) && ! in_array( $_GET['posttype'], array( 'undefined', apply_filters( 'stm_listings_post_type', 'listings' ) ), true ) ) {
 					set_query_var( 'listings_type', $_GET['posttype'] );
 					HooksMultiListing::stm_listings_attributes_filter( array( 'slug' => $_GET['posttype'] ) );
 				}
-
 				stm_listings_ajax_results( $source, null, $nav_type );
 				break;
 			case 'listings-result-load':
@@ -51,8 +53,7 @@ function stm_listings_template_actions() {
  * Ajax filter cars
  */
 function stm_listings_ajax_results( $source = null, $type = null, $navigation_type = null ) {
-	$r = apply_filters( 'stm_listings_filter_func', $source );
-
+	$r         = apply_filters( 'stm_listings_filter_func', $source );
 	$fragments = false;
 	if ( ! empty( $_GET['fragments'] ) ) {
 		$fragments = explode( ',', $_GET['fragments'] );

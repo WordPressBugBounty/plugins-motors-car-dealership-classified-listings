@@ -13,13 +13,13 @@ $is_editing    = ( ! empty( $_GET['edit_car'] ) && ! empty( $_GET['item_id'] ) )
 ?>
 <div class="stm-form-plans">
 	<div class="stm-car-listing-data-single stm-border-top-unit ">
-		<div class="title heading-font"><?php esc_html_e( 'Choose plan', 'motors-car-dealership-classified-listings-pro' ); ?></div>
+		<div class="title heading-font"><?php esc_html_e( 'Choose plan', 'stm_vehicles_listing' ); ?></div>
 	</div>
 	<div id="user_plans_select_wrap">
 		<?php if ( is_user_logged_in() ) { ?>
 			<div class="user-plans-list" >
 				<select name="selectedPlan">
-					<option value=""><?php echo esc_html__( 'Select Plan', 'motors-car-dealership-classified-listings-pro' ); ?></option>
+					<option value=""><?php echo esc_html__( 'Select Plan', 'stm_vehicles_listing' ); ?></option>
 					<?php
 					$count = 0;
 					foreach ( $plans['plans'] as $plan ) :
@@ -46,7 +46,7 @@ $is_editing    = ( ! empty( $_GET['edit_car'] ) && ! empty( $_GET['item_id'] ) )
 				</select>
 			</div>
 		<?php } else { ?>
-			<p style="color: #888888; font-size: 13px;"><?php echo esc_html__( 'Please, log in to view your available plans', 'motors-car-dealership-classified-listings-pro' ); ?></p>
+			<p style="color: #888888; font-size: 13px;"><?php echo esc_html__( 'Please, log in to view your available plans', 'stm_vehicles_listing' ); ?></p>
 		<?php } ?>
 	</div>
 </div>

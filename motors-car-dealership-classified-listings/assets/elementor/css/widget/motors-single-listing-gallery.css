@@ -84,7 +84,6 @@
     text-align: center;
     font-size: 14px;
     font-weight: 700;
-    background-color: var(--mvl-secondary-color);
     transform: rotate(-45deg) translateZ(0);
     transform-origin: 50% 50%;
     -webkit-transform-origin: 50% 50%;
@@ -112,6 +111,11 @@
     bottom: 20px;
     left: -76px;
     transform: rotate(45deg) translateZ(0);
+}
+
+.motors-elementor-single-listing-gallery .special-label,
+.motors-elementor-single-listing-gallery .special-label.h5 {
+    background-color: var(--mvl-secondary-color);
 }
 
 .motors-elementor-single-listing-gallery.video-left .stm-car-medias {
@@ -168,6 +172,9 @@
 }
 
 .motors-elementor-single-listing-gallery .stm-gallery-actions .stm-gallery-action-unit a.stm-brochure {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     line-height: 30px;
 }
 
@@ -289,6 +296,10 @@
 
 .motors-elementor-single-listing-gallery .motors-elementor-big-gallery .stm-single-image img {
     width: 100%;
+}
+
+.motors-elementor-single-listing-gallery .motors-elementor-big-gallery .stm-single-image a {
+    color: unset;
 }
 
 .motors-elementor-single-listing-gallery .motors-elementor-big-gallery .stm-single-image a img {
@@ -476,16 +487,20 @@
 .motors-elementor-single-listing-gallery .motors-elementor-thumbs-gallery .stm-swiper-controls .stm-swiper-prev,
 .motors-elementor-single-listing-gallery .motors-elementor-thumbs-gallery .stm-swiper-controls .stm-swiper-next {
     position: absolute;
+    display: flex;
     top: 0;
     width: 30px;
     height: 100%;
     background: rgba(0, 0, 0, 0.7);
     z-index: 2;
     cursor: pointer;
+    justify-content: center;
+    align-items: center;
 }
 
 .motors-elementor-single-listing-gallery .motors-elementor-thumbs-gallery .stm-swiper-controls .stm-swiper-prev:after,
 .motors-elementor-single-listing-gallery .motors-elementor-thumbs-gallery .stm-swiper-controls .stm-swiper-next:after {
+    align-self: center;
     display: inline-block;
     font-family: "Font Awesome 6 Free";
     font-weight: 600;
@@ -496,7 +511,6 @@
     transform: translate(0, 0);
     color: #fff;
     line-height: 82px;
-    margin-left: 11px;
 }
 
 .motors-elementor-single-listing-gallery .motors-elementor-thumbs-gallery .stm-swiper-controls .stm-swiper-prev {

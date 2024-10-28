@@ -25,6 +25,7 @@
     position: relative;
     min-height: 40px;
     margin: 0 -22px;
+    margin-bottom: 35px;
 }
 
 .classic-filter-row.motors-elementor-widget .filter-sidebar .sidebar-entry-header.icon-right {
@@ -58,7 +59,7 @@
 
 .classic-filter-row.motors-elementor-widget .filter-sidebar .sidebar-action-units {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     width: 100%;
 }
 
@@ -71,6 +72,22 @@
     flex-direction: row;
     align-items: center;
     box-shadow: none;
+    background-color: unset;
+    color: var(--mvl-secondary-color);
+    text-decoration: none;
+    padding: unset;
+    width: unset;
+    text-transform: capitalize;
+}
+
+.classic-filter-row.motors-elementor-widget .filter-sidebar .sidebar-action-units a.button i {
+    font-size: 12px;
+}
+
+.classic-filter-row.motors-elementor-widget .filter-sidebar .sidebar-action-units a.button:hover {
+    color: var(--mvl-secondary-color);
+    background-color: unset;
+    text-decoration: none;
 }
 
 .classic-filter-row.motors-elementor-widget .filter-sidebar .sidebar-action-units a.button img,
@@ -78,9 +95,102 @@
     margin-right: 5px;
 }
 
+.classic-filter-row.motors-elementor-widget .stm-listing-directory-checkboxes .stm-accordion-content-wrapper .stm-checkbox-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.classic-filter-row.motors-elementor-widget .stm-listing-directory-checkboxes .stm-accordion-content-wrapper .stm-checkbox-wrapper input[type=checkbox] {
+    margin-right: 5px;
+    width: 16px;
+    min-width: 16px;
+    height: 16px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+}
+
+.classic-filter-row.motors-elementor-widget .stm-listing-directory-checkboxes .stm-accordion-content-wrapper .stm-checkbox-wrapper input[type=checkbox]:checked {
+    background-color: var(--mvl-primary-color) !important;
+    border-color: var(--mvl-primary-color) !important;
+}
+
+.classic-filter-row.motors-elementor-widget .stm-listing-directory-checkboxes .stm-accordion-content-wrapper .stm-checkbox-wrapper input[type=checkbox]:checked::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 5px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.classic-filter-row.motors-elementor-widget .stm-listing-directory-checkboxes .stm-accordion-content-wrapper .stm-checkbox-wrapper input[type=checkbox]:hover {
+    border-color: var(--mvl-primary-color);
+}
+
+.classic-filter-row.motors-elementor-widget .stm-listing-directory-checkboxes .stm-accordion-content-wrapper .stm-checkbox-submit {
+    width: 100%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.classic-filter-row.motors-elementor-widget .stm-listing-directory-checkboxes .stm-accordion-content-wrapper .stm-checkbox-submit a {
+    max-width: unset;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    background-color: var(--mvl-primary-color);
+    color: #fff;
+    transition: all 0.2s ease-in-out;
+}
+
+.classic-filter-row.motors-elementor-widget .stm-accordion-content .content {
+    padding: 15px 15px 25px;
+}
+
+.classic-filter-row.motors-elementor-widget .ui-slider-horizontal {
+    height: 4px;
+}
+
+.classic-filter-row.motors-elementor-widget .ui-widget-header {
+    background: var(--mvl-secondary-color);
+}
+
+.classic-filter-row.motors-elementor-widget .ui-slider .ui-slider-handle {
+    top: -9px;
+    border: 1px solid #c5c5c5;
+    background: #f6f6f6;
+    font-weight: normal;
+    color: #454545;
+}
+
+.classic-filter-row.motors-elementor-widget .ui-slider .ui-slider-handle::after {
+    position: absolute;
+    content: "";
+    display: block;
+    top: 50%;
+    left: 50%;
+    margin: -5px 0 0 -5px;
+    width: 10px;
+    height: 10px;
+    background-color: var(--mvl-secondary-color);
+    border-radius: 50%;
+}
+
 .classic-filter-row.motors-elementor-widget input[type=text] {
     height: 40px;
     line-height: 40px;
+    border-radius: 0;
+    border: none;
+    background-color: #eceff3;
 }
 
 .classic-filter-row.motors-elementor-widget .form-group {
@@ -93,6 +203,11 @@
 
 .classic-filter-row.motors-elementor-widget .type-text input[type=search]:invalid {
     border-color: #ff2325;
+}
+
+.classic-filter-row.motors-elementor-widget .stm-slider-filter-type-unit .row input {
+    border: none;
+    border-radius: 0;
 }
 
 .classic-filter-row.motors-elementor-widget .filter-price {
@@ -129,7 +244,12 @@
 .classic-filter-row.motors-elementor-widget .select2-selection--multiple.filter-select {
     min-height: 40px;
     display: flex;
-    border-color: transparent;
+    border: none;
+}
+
+.classic-filter-row.motors-elementor-widget .select2-selection--multiple.filter-select .select2-search__field {
+    background: none;
+    border: none !important;
 }
 
 .classic-filter-row.motors-elementor-widget .select2-selection--multiple.filter-select .select2-selection__rendered {
@@ -164,10 +284,11 @@
 }
 
 .classic-filter-row.motors-elementor-widget .select2-selection--multiple.filter-select .select2-selection__rendered li.select2-selection__choice {
-    margin-top: 5px;
+    margin-top: 8px;
     margin-bottom: 0;
     font-size: 92%;
     background-color: #fff;
+    color: #888;
 }
 
 .classic-filter-row.motors-elementor-widget .select2-selection--multiple.filter-select .select2-selection__rendered li.select2-search--inline {
@@ -209,6 +330,7 @@
 
 .classic-filter-row.motors-elementor-widget .stm-accordion-single-unit > a.title {
     padding: 15px 20px 15px 25px;
+    margin-top: 0;
 }
 
 .classic-filter-row.motors-elementor-widget .stm-accordion-single-unit > a.title .minus {
@@ -225,7 +347,17 @@
 }
 
 .classic-filter-row.motors-elementor-widget .stm-accordion-single-unit .stm-accordion-content .stm-accordion-content-wrapper {
-    padding: 5px 10px 20px;
+    padding: 5px 25px 20px;
+}
+
+.classic-filter-row.motors-elementor-widget .stm-accordion-single-unit .stm-accordion-content .stm-accordion-content-wrapper .stm-accordion-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.classic-filter-row.motors-elementor-widget .stm-accordion-single-unit .stm-accordion-content .stm-accordion-content-wrapper .stm-accordion-inner .stm-option-label {
+    width: 45%;
 }
 
 .sticky-mobile-filter {
@@ -310,6 +442,10 @@ html.mobile-overflow-hidden {
 
     .mobile-filter-overlay.active {
         display: block;
+    }
+
+    .select2-container {
+        z-index: 100000;
     }
 
     .mobile-filter .mobile-search-btn {
@@ -402,18 +538,30 @@ html.mobile-overflow-hidden {
     }
 
     .classic-filter-row.motors-elementor-widget .search-filter-form .stm-listing-directory-checkboxes.stm-two_cols .stm-accordion-content-wrapper .stm-option-label {
-        width: 50%;
+        width: 45%;
     }
 
     .classic-filter-row.motors-elementor-widget .search-filter-form .stm-accordion-single-unit.stm-listing-directory-checkboxes .stm-accordion-content .stm-accordion-content-wrapper .stm-accordion-inner .stm-checkbox-submit {
-        width: 95px;
+        width: 100%;
+        padding: 0;
     }
 
     .classic-filter-row.motors-elementor-widget .search-filter-form .stm-accordion-single-unit.stm-listing-directory-checkboxes .stm-accordion-content .stm-accordion-content-wrapper .stm-accordion-inner .stm-checkbox-submit a {
-        padding: 11px 0 10px 0;
-        border-radius: 0;
+        padding: 17px 25px 14px 25px;
+        border-radius: 3px;
+        display: flex;
+        justify-content: center;
+        line-height: 14px;
     }
+}
 
+@media (max-width: 1024px) and (max-width: 1024px) {
+    .classic-filter-row.motors-elementor-widget .search-filter-form .stm-accordion-single-unit.stm-listing-directory-checkboxes .stm-accordion-content .stm-accordion-content-wrapper .stm-accordion-inner .stm-checkbox-submit {
+        margin: 0;
+    }
+}
+
+@media (max-width: 1024px) {
     .classic-filter-row.motors-elementor-widget .search-filter-form .sticky-filter-actions {
         position: sticky;
         bottom: 0;
@@ -503,6 +651,10 @@ html.mobile-overflow-hidden {
     }
 }
 
+.select2.select2-container.select2-container--default {
+    width: 100% !important;
+}
+
 @media (max-width: 1025px) {
     body #wrapper #main .search-filter-form .filter-sidebar {
         padding: 0 22px 30px 45px;
@@ -520,11 +672,41 @@ html.mobile-overflow-hidden {
 }
 
 .stm-filter-links .stm-accordion-single-unit .stm-accordion-content > .content > ul {
-    padding: 30px 25px;
+    padding: 0 25px;
+}
+
+.stm-filter-links .stm-accordion-single-unit .stm-accordion-content > .content > ul.list-style-3 {
+    list-style: none;
+}
+
+@media (max-width: 1024px) {
+    .stm-filter-links .stm-accordion-single-unit .stm-accordion-content > .content > ul.list-style-3 {
+        margin: 0;
+    }
+}
+
+.stm-filter-links .stm-accordion-single-unit .stm-accordion-content > .content > ul li.elementor-icons {
+    padding: 0;
+}
+
+.stm-filter-links .stm-accordion-single-unit .stm-accordion-content > .content > ul li.elementor-icons::before {
+    display: none;
+}
+
+.stm-filter-links .stm-accordion-single-unit .stm-accordion-content > .content > ul li {
+    position: relative;
+    padding-left: 30px;
+    transition: 0.2s all ease-in-out;
 }
 
 .stm-filter-links .stm-accordion-single-unit .stm-accordion-content > .content > ul li a {
     transition: all 0.2s ease-in-out;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.stm-filter-links .stm-accordion-single-unit .stm-accordion-content > .content > ul li a span {
+    transition: 0.2s all ease-in-out;
 }
 
 .stm-filter-links .stm-accordion-single-unit .stm-accordion-content > .content > ul li:before {

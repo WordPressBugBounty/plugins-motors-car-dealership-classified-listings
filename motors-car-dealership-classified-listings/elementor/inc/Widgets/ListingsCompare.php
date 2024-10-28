@@ -30,7 +30,7 @@ class ListingsCompare extends WidgetBase {
 	}
 
 	public function get_title() {
-		return esc_html__( 'Listings Compare', 'motors-car-dealership-classified-listings-pro' );
+		return esc_html__( 'Listings Compare', 'stm_vehicles_listing' );
 	}
 
 	public function get_icon() {
@@ -51,14 +51,14 @@ class ListingsCompare extends WidgetBase {
 	}
 
 	protected function register_controls() {
-		$this->stm_start_content_controls_section( 'compare_content', __( 'General', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_content_controls_section( 'compare_content', __( 'General', 'stm_vehicles_listing' ) );
 
 		if ( stm_is_multilisting() ) {
 
 			$this->add_control(
 				'listing_type_heading',
 				array(
-					'label'     => esc_html__( 'Default Listing type', 'motors-car-dealership-classified-listings-pro' ),
+					'label'     => esc_html__( 'Default Listing type', 'stm_vehicles_listing' ),
 					'type'      => \Elementor\Controls_Manager::HEADING,
 					'separator' => 'before',
 				)
@@ -69,25 +69,25 @@ class ListingsCompare extends WidgetBase {
 		$this->add_control(
 			'compare_title',
 			array(
-				'label'   => __( 'Title', 'motors-car-dealership-classified-listings-pro' ),
+				'label'   => __( 'Title', 'stm_vehicles_listing' ),
 				'type'    => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Compare vehicles', 'motors-car-dealership-classified-listings-pro' ),
+				'default' => __( 'Compare vehicles', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'add_item_label',
 			array(
-				'label'   => __( 'Add Item Label', 'motors-car-dealership-classified-listings-pro' ),
+				'label'   => __( 'Add Item Label', 'stm_vehicles_listing' ),
 				'type'    => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Add Car To Compare', 'motors-car-dealership-classified-listings-pro' ),
+				'default' => __( 'Add Car To Compare', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'add_item_icon',
 			array(
-				'label'            => __( 'Add Item Icon', 'motors-car-dealership-classified-listings-pro' ),
+				'label'            => __( 'Add Item Icon', 'stm_vehicles_listing' ),
 				'type'             => \Elementor\Controls_Manager::ICONS,
 				'skin'             => 'inline',
 				'fa4compatibility' => 'icon',
@@ -117,25 +117,25 @@ class ListingsCompare extends WidgetBase {
 						$this->add_control(
 							'compare_title_' . $slug,
 							array(
-								'label'   => __( 'Title', 'motors-car-dealership-classified-listings-pro' ),
+								'label'   => __( 'Title', 'stm_vehicles_listing' ),
 								'type'    => \Elementor\Controls_Manager::TEXT,
-								'default' => __( 'Compare vehicles', 'motors-car-dealership-classified-listings-pro' ),
+								'default' => __( 'Compare vehicles', 'stm_vehicles_listing' ),
 							)
 						);
 
 						$this->add_control(
 							'add_item_label_' . $slug,
 							array(
-								'label'   => __( 'Add Item Label', 'motors-car-dealership-classified-listings-pro' ),
+								'label'   => __( 'Add Item Label', 'stm_vehicles_listing' ),
 								'type'    => \Elementor\Controls_Manager::TEXT,
-								'default' => __( 'Add Item To Compare', 'motors-car-dealership-classified-listings-pro' ),
+								'default' => __( 'Add Item To Compare', 'stm_vehicles_listing' ),
 							)
 						);
 
 						$this->add_control(
 							'add_item_icon_' . $slug,
 							array(
-								'label'            => __( 'Add Item Icon', 'motors-car-dealership-classified-listings-pro' ),
+								'label'            => __( 'Add Item Icon', 'stm_vehicles_listing' ),
 								'type'             => \Elementor\Controls_Manager::ICONS,
 								'skin'             => 'inline',
 								'fa4compatibility' => 'icon',
@@ -153,13 +153,13 @@ class ListingsCompare extends WidgetBase {
 
 		$this->stm_end_control_section();
 
-		$this->stm_start_style_controls_section( 'compare_style', __( 'Style', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_style_controls_section( 'compare_style', __( 'Style', 'stm_vehicles_listing' ) );
 
 		$this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
 				'name'           => 'title_typography',
-				'label'          => __( 'Title Typography', 'motors-car-dealership-classified-listings-pro' ),
+				'label'          => __( 'Title Typography', 'stm_vehicles_listing' ),
 				'exclude'        => array(
 					'font_family',
 					'font_style',
@@ -194,7 +194,7 @@ class ListingsCompare extends WidgetBase {
 		$this->add_control(
 			'title_line_color',
 			array(
-				'label'     => __( 'Title Line Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Title Line Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .colored-separator div' => 'background-color: {{VALUE}}',
@@ -206,7 +206,7 @@ class ListingsCompare extends WidgetBase {
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
 				'name'           => 'add_item_typography',
-				'label'          => __( 'Add Item Label Typography', 'motors-car-dealership-classified-listings-pro' ),
+				'label'          => __( 'Add Item Label Typography', 'stm_vehicles_listing' ),
 				'exclude'        => array(
 					'font_family',
 					'font_style',
@@ -241,7 +241,7 @@ class ListingsCompare extends WidgetBase {
 		$this->add_control(
 			'add_item_icon_color',
 			array(
-				'label'     => __( 'Add Item Icon Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Add Item Icon Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'default'   => '#d1d7dc',
 				'selectors' => array(
@@ -254,7 +254,7 @@ class ListingsCompare extends WidgetBase {
 		$this->add_control(
 			'add_item_icon_size',
 			array(
-				'label'      => __( 'Add Item Icon Size', 'motors-car-dealership-classified-listings-pro' ),
+				'label'      => __( 'Add Item Icon Size', 'stm_vehicles_listing' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => array(
 					'px',

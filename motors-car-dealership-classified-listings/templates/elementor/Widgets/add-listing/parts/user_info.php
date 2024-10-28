@@ -42,14 +42,14 @@ if ( $dealer ) :
 						<button type="submit" class="heading-font enabled" data-load="<?php echo esc_attr( $btnType ); ?>"
 							<?php
 							if ( empty( $_id ) ) {
-								echo 'data-toggle="tooltip" data-placement="top" title="' . esc_html__( 'Add a Listing using Free or Paid Plan limits', 'motors-car-dealership-classified-listings-pro' ) . '"';
+								echo 'data-toggle="tooltip" data-placement="top" title="' . esc_html__( 'Add a Listing using Free or Paid Plan limits', 'stm_vehicles_listing' ) . '"';
 							}
 							?>
 						>
 							<?php if ( ! empty( $_id ) ) : ?>
-								<i class="motors-icons-add_check"></i><?php esc_html_e( 'Edit Listing', 'motors-car-dealership-classified-listings-pro' ); ?>
+								<i class="motors-icons-add_check"></i><?php esc_html_e( 'Edit Listing', 'stm_vehicles_listing' ); ?>
 							<?php else : ?>
-								<i class="motors-icons-add_check"></i><?php esc_html_e( 'Submit listing', 'motors-car-dealership-classified-listings-pro' ); ?>
+								<i class="motors-icons-add_check"></i><?php esc_html_e( 'Submit listing', 'stm_vehicles_listing' ); ?>
 							<?php endif; ?>
 						</button>
 						<span class="stm-add-a-car-loader add"><i class="motors-icons-load1"></i></span>
@@ -60,11 +60,11 @@ if ( $dealer ) :
 						<button type="submit" class="heading-font enabled" data-load="pay"
 							<?php
 							if ( empty( $_id ) ) {
-								echo 'data-toggle="tooltip" data-placement="top" title="' . esc_html__( 'Pay for this Listing', 'motors-car-dealership-classified-listings-pro' ) . '"';
+								echo 'data-toggle="tooltip" data-placement="top" title="' . esc_html__( 'Pay for this Listing', 'stm_vehicles_listing' ) . '"';
 							}
 							?>
 						>
-							<i class="motors-icons-payment_listing"></i><?php esc_html_e( 'Pay for Listing', 'motors-car-dealership-classified-listings-pro' ); ?>
+							<i class="motors-icons-payment_listing"></i><?php esc_html_e( 'Pay for Listing', 'stm_vehicles_listing' ); ?>
 						</button>
 						<span class="stm-add-a-car-loader pay"><i class="motors-icons-load1"></i></span>
 					</li>
@@ -74,12 +74,12 @@ if ( $dealer ) :
 			<div class="right-info">
 
 				<a target="_blank" href="<?php echo esc_url( add_query_arg( array( 'view-myself' => 1 ), get_author_posts_url( $user_id ) ) ); ?>">
-					<i class="fas fa-external-link-alt"></i><?php esc_html_e( 'Show my Public Profile', 'motors-car-dealership-classified-listings-pro' ); ?>
+					<i class="fas fa-external-link-alt"></i><?php esc_html_e( 'Show my Public Profile', 'stm_vehicles_listing' ); ?>
 				</a>
 
 				<div class="stm_logout">
-					<a href="#"><?php esc_html_e( 'Log out', 'motors-car-dealership-classified-listings-pro' ); ?></a>
-					<?php esc_html_e( 'to choose a different account', 'motors-car-dealership-classified-listings-pro' ); ?>
+					<a href="#"><?php esc_html_e( 'Log out', 'stm_vehicles_listing' ); ?></a>
+					<?php esc_html_e( 'to choose a different account', 'stm_vehicles_listing' ); ?>
 				</div>
 
 			</div>
@@ -101,7 +101,7 @@ if ( $dealer ) :
 				</div>
 				<div class="user-info">
 					<h4><?php echo wp_kses_post( apply_filters( 'stm_display_user_name', $user['user_id'], $user_login, $f_name, $l_name ) ); ?></h4>
-					<div class="stm-label"><?php esc_html_e( 'Private Seller', 'motors-car-dealership-classified-listings-pro' ); ?></div>
+					<div class="stm-label"><?php esc_html_e( 'Private Seller', 'stm_vehicles_listing' ); ?></div>
 				</div>
 			</div>
 
@@ -115,14 +115,14 @@ if ( $dealer ) :
 						<button type="submit" class="heading-font enabled" data-load="<?php echo esc_attr( $btn_type ); ?>"
 							<?php
 							if ( empty( $_id ) ) {
-								echo 'data-toggle="tooltip" data-placement="top" title="' . esc_html__( 'Add a Listing using Free or Paid Plan limits', 'motors-car-dealership-classified-listings-pro' ) . '"';
+								echo 'data-toggle="tooltip" data-placement="top" title="' . esc_html__( 'Add a Listing using Free or Paid Plan limits', 'stm_vehicles_listing' ) . '"';
 							}
 							?>
 						>
 							<?php if ( ! empty( $_id ) ) : ?>
-								<i class="motors-icons-add_check"></i><?php esc_html_e( 'Edit Listing', 'motors-car-dealership-classified-listings-pro' ); ?>
+								<i class="motors-icons-add_check"></i><?php esc_html_e( 'Edit Listing', 'stm_vehicles_listing' ); ?>
 							<?php else : ?>
-								<i class="motors-icons-add_check"></i><?php esc_html_e( 'Submit listing', 'motors-car-dealership-classified-listings-pro' ); ?>
+								<i class="motors-icons-add_check"></i><?php esc_html_e( 'Submit listing', 'stm_vehicles_listing' ); ?>
 							<?php endif; ?>
 						</button>
 						<span class="stm-add-a-car-loader add"><i class="motors-icons-load1"></i></span>
@@ -134,11 +134,11 @@ if ( $dealer ) :
 								data-load="pay"
 							<?php
 							if ( empty( $_id ) ) {
-								echo 'data-toggle="tooltip" data-placement="top" title="' . esc_html__( 'Pay for this Listing', 'motors-car-dealership-classified-listings-pro' ) . '"';
+								echo 'data-toggle="tooltip" data-placement="top" title="' . esc_html__( 'Pay for this Listing', 'stm_vehicles_listing' ) . '"';
 							}
 							?>
 						>
-							<i class="motors-icons-payment_listing"></i><?php esc_html_e( 'Pay for Listing', 'motors-car-dealership-classified-listings-pro' ); ?>
+							<i class="motors-icons-payment_listing"></i><?php esc_html_e( 'Pay for Listing', 'stm_vehicles_listing' ); ?>
 						</button>
 						<span class="stm-add-a-car-loader pay"><i class="motors-icons-load1"></i></span>
 					</li>
@@ -147,11 +147,11 @@ if ( $dealer ) :
 
 			<div class="right-info">
 				<a target="_blank" href="<?php echo esc_url( add_query_arg( array( 'view-myself' => 1 ), get_author_posts_url( $user_id ) ) ); ?>">
-					<i class="fas fa-external-link-alt"></i><?php esc_html_e( 'Show my Public Profile', 'motors-car-dealership-classified-listings-pro' ); ?>
+					<i class="fas fa-external-link-alt"></i><?php esc_html_e( 'Show my Public Profile', 'stm_vehicles_listing' ); ?>
 				</a>
 				<div class="stm_logout">
-					<a href="#"><?php esc_html_e( 'Log out', 'motors-car-dealership-classified-listings-pro' ); ?></a>
-					<?php esc_html_e( 'to choose a different account', 'motors-car-dealership-classified-listings-pro' ); ?>
+					<a href="#"><?php esc_html_e( 'Log out', 'stm_vehicles_listing' ); ?></a>
+					<?php esc_html_e( 'to choose a different account', 'stm_vehicles_listing' ); ?>
 				</div>
 			</div>
 		</div>

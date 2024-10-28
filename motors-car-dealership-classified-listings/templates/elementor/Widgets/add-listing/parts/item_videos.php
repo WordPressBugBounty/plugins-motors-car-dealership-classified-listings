@@ -11,7 +11,7 @@ if ( empty( $_id ) ) :
 	?>
 	<div class="stm-form-4-videos clearfix">
 		<div class="stm-car-listing-data-single stm-border-top-unit ">
-			<div class="title heading-font"><?php esc_html_e( 'Add Videos', 'motors-car-dealership-classified-listings-pro' ); ?></div>
+			<div class="title heading-font"><?php esc_html_e( 'Add Videos', 'stm_vehicles_listing' ); ?></div>
 		</div>
 		<div class="stm-add-videos-unit">
 			<div class="row">
@@ -19,7 +19,7 @@ if ( empty( $_id ) ) :
 					<div class="stm-video-units">
 						<div class="stm-video-link-unit-wrap">
 							<div class="heading-font">
-								<span class="video-label"><?php esc_html_e( 'Video link', 'motors-car-dealership-classified-listings-pro' ); ?></span> <span
+								<span class="video-label"><?php esc_html_e( 'Video link', 'stm_vehicles_listing' ); ?></span> <span
 										class="count">1</span></div>
 							<div class="stm-video-link-unit">
 								<input type="text" name="stm_video[]"/>
@@ -43,8 +43,8 @@ if ( empty( $_id ) ) :
 
 	<div class="stm-form-4-videos clearfix">
 		<div class="stm-car-listing-data-single stm-border-top-unit ">
-			<div class="title heading-font"><?php esc_html_e( 'Add Videos', 'motors-car-dealership-classified-listings-pro' ); ?></div>
-			<span class="step_number step_number_4 heading-font"><?php esc_html_e( 'step', 'motors-car-dealership-classified-listings-pro' ); ?> 4</span>
+			<div class="title heading-font"><?php esc_html_e( 'Add Videos', 'stm_vehicles_listing' ); ?></div>
+			<span class="step_number step_number_4 heading-font"><?php esc_html_e( 'step', 'stm_vehicles_listing' ); ?> 4</span>
 		</div>
 		<?php $has_videos = false; ?>
 		<div class="stm-add-videos-unit">
@@ -53,7 +53,7 @@ if ( empty( $_id ) ) :
 					<div class="stm-video-units">
 						<div class="stm-video-link-unit-wrap">
 							<div class="heading-font">
-								<span class="video-label"><?php esc_html_e( 'Video link', 'motors-car-dealership-classified-listings-pro' ); ?></span> <span
+								<span class="video-label"><?php esc_html_e( 'Video link', 'stm_vehicles_listing' ); ?></span> <span
 										class="count">1</span>
 							</div>
 							<?php

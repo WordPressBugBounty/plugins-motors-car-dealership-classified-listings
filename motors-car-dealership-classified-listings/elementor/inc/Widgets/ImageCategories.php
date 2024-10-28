@@ -74,7 +74,7 @@ class ImageCategories extends WidgetBase {
 	}
 
 	public function get_title(): string {
-		return esc_html__( 'Image Categories', 'motors-car-dealership-classified-listings-pro' );
+		return esc_html__( 'Image Categories', 'stm_vehicles_listing' );
 	}
 
 	public function get_icon(): string {
@@ -83,7 +83,7 @@ class ImageCategories extends WidgetBase {
 
 	protected function register_controls() {
 
-		$this->stm_start_content_controls_section( 'section_content', esc_html__( 'General', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_content_controls_section( 'section_content', esc_html__( 'General', 'stm_vehicles_listing' ) );
 
 		$listing_categories = stm_listings_attributes();
 
@@ -94,7 +94,7 @@ class ImageCategories extends WidgetBase {
 		$this->add_control(
 			'taxonomy',
 			array(
-				'label'   => esc_html__( 'Select Category', 'motors-car-dealership-classified-listings-pro' ),
+				'label'   => esc_html__( 'Select Category', 'stm_vehicles_listing' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'options' => $listing_categories,
 			)
@@ -103,7 +103,7 @@ class ImageCategories extends WidgetBase {
 		$this->add_control(
 			'items_count',
 			array(
-				'label'   => esc_html__( 'Items Count', 'motors-car-dealership-classified-listings-pro' ),
+				'label'   => esc_html__( 'Items Count', 'stm_vehicles_listing' ),
 				'type'    => \Elementor\Controls_Manager::SWITCHER,
 				'default' => '',
 			)
@@ -112,7 +112,7 @@ class ImageCategories extends WidgetBase {
 		$this->add_control(
 			'show_as_carousel',
 			array(
-				'label'   => esc_html__( 'Carousel', 'motors-car-dealership-classified-listings-pro' ),
+				'label'   => esc_html__( 'Carousel', 'stm_vehicles_listing' ),
 				'type'    => \Elementor\Controls_Manager::SWITCHER,
 				'default' => '',
 			)
@@ -121,7 +121,7 @@ class ImageCategories extends WidgetBase {
 		$this->add_control(
 			'limit',
 			array(
-				'label'     => esc_html__( 'Visible Items', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Visible Items', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::NUMBER,
 				'condition' => array(
 					'show_as_carousel' => '',
@@ -132,19 +132,19 @@ class ImageCategories extends WidgetBase {
 		$this->add_control(
 			'items_align',
 			array(
-				'label'     => esc_html__( 'Items Align', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Items Align', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::CHOOSE,
 				'options'   => array(
 					'left'   => array(
-						'title' => esc_html__( 'Left', 'motors-car-dealership-classified-listings-pro' ),
+						'title' => esc_html__( 'Left', 'stm_vehicles_listing' ),
 						'icon'  => 'eicon-text-align-left',
 					),
 					'center' => array(
-						'title' => esc_html__( 'Center', 'motors-car-dealership-classified-listings-pro' ),
+						'title' => esc_html__( 'Center', 'stm_vehicles_listing' ),
 						'icon'  => 'eicon-text-align-center',
 					),
 					'right'  => array(
-						'title' => esc_html__( 'Right', 'motors-car-dealership-classified-listings-pro' ),
+						'title' => esc_html__( 'Right', 'stm_vehicles_listing' ),
 						'icon'  => 'eicon-text-align-right',
 					),
 				),
@@ -163,7 +163,7 @@ class ImageCategories extends WidgetBase {
 		$this->add_control(
 			'items_margin_bottom',
 			array(
-				'label'          => esc_html__( 'Items Margin Bottom', 'motors-car-dealership-classified-listings-pro' ),
+				'label'          => esc_html__( 'Items Margin Bottom', 'stm_vehicles_listing' ),
 				'type'           => \Elementor\Controls_Manager::SLIDER,
 				'size_units'     => array( 'px' ),
 				'range'          => array(
@@ -198,7 +198,7 @@ class ImageCategories extends WidgetBase {
 		$this->add_responsive_control(
 			'per_row',
 			array(
-				'label'          => esc_html__( 'Columns', 'motors-car-dealership-classified-listings-pro' ),
+				'label'          => esc_html__( 'Columns', 'stm_vehicles_listing' ),
 				'type'           => \Elementor\Controls_Manager::SLIDER,
 				'size_units'     => array( 'px' ),
 				'range'          => array(
@@ -232,7 +232,7 @@ class ImageCategories extends WidgetBase {
 		$this->add_control(
 			'title',
 			array(
-				'label'       => esc_html__( 'Title', 'motors-car-dealership-classified-listings-pro' ),
+				'label'       => esc_html__( 'Title', 'stm_vehicles_listing' ),
 				'type'        => \Elementor\Controls_Manager::TEXT,
 				'placeholder' => esc_html__( 'Browse by' ) . ' {{category}}',
 				'default'     => __( 'Browse by' ) . ' {{category}}',
@@ -243,7 +243,7 @@ class ImageCategories extends WidgetBase {
 		$this->add_control(
 			'show_all_text',
 			array(
-				'label'       => esc_html__( '"Show all" label', 'motors-car-dealership-classified-listings-pro' ),
+				'label'       => esc_html__( '"Show all" label', 'stm_vehicles_listing' ),
 				'type'        => \Elementor\Controls_Manager::TEXT,
 				'placeholder' => esc_html__( 'Show all' ) . ' {{category}}',
 				'default'     => __( 'Show all' ) . ' {{category}}',
@@ -258,7 +258,7 @@ class ImageCategories extends WidgetBase {
 		$this->add_responsive_control(
 			'slides_per_view',
 			array(
-				'label'      => esc_html__( 'Columns', 'motors-car-dealership-classified-listings-pro' ),
+				'label'      => esc_html__( 'Columns', 'stm_vehicles_listing' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => array( 'px' ),
 				'range'      => array(
@@ -282,7 +282,7 @@ class ImageCategories extends WidgetBase {
 		$this->add_responsive_control(
 			'slides_per_transition',
 			array(
-				'label'      => esc_html__( 'Slides Per Transition', 'motors-car-dealership-classified-listings-pro' ),
+				'label'      => esc_html__( 'Slides Per Transition', 'stm_vehicles_listing' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => array( 'px' ),
 				'range'      => array(
@@ -315,7 +315,7 @@ class ImageCategories extends WidgetBase {
 		$this->add_control(
 			'loop',
 			array(
-				'label'     => __( 'Infinite Loop', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Infinite Loop', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::SWITCHER,
 				'condition' => array(
 					'show_as_carousel' => 'yes',
@@ -326,9 +326,9 @@ class ImageCategories extends WidgetBase {
 		$this->add_control(
 			'click_drag',
 			array(
-				'label'       => __( 'Click & Drag', 'motors-car-dealership-classified-listings-pro' ),
+				'label'       => __( 'Click & Drag', 'stm_vehicles_listing' ),
 				'type'        => \Elementor\Controls_Manager::SWITCHER,
-				'description' => __( 'Accept mouse events like touch events (click and drag to change slides)', 'motors-car-dealership-classified-listings-pro' ),
+				'description' => __( 'Accept mouse events like touch events (click and drag to change slides)', 'stm_vehicles_listing' ),
 				'condition'   => array(
 					'show_as_carousel' => 'yes',
 				),
@@ -338,7 +338,7 @@ class ImageCategories extends WidgetBase {
 		$this->add_control(
 			'autoplay',
 			array(
-				'label'     => __( 'Autoplay', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Autoplay', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::SWITCHER,
 				'condition' => array(
 					'show_as_carousel' => 'yes',
@@ -349,12 +349,12 @@ class ImageCategories extends WidgetBase {
 		$this->add_control(
 			'transition_speed',
 			array(
-				'label'       => __( 'Animation Speed', 'motors-car-dealership-classified-listings-pro' ),
+				'label'       => __( 'Animation Speed', 'stm_vehicles_listing' ),
 				'type'        => \Elementor\Controls_Manager::NUMBER,
 				'min'         => 100,
 				'step'        => 100,
 				'default'     => 300,
-				'description' => __( 'Speed of slide animation in milliseconds', 'motors-car-dealership-classified-listings-pro' ),
+				'description' => __( 'Speed of slide animation in milliseconds', 'stm_vehicles_listing' ),
 				'condition'   => array(
 					'show_as_carousel' => 'yes',
 					'autoplay'         => 'yes',
@@ -365,7 +365,7 @@ class ImageCategories extends WidgetBase {
 		$this->add_control(
 			'delay',
 			array(
-				'label'       => __( 'Slide Duration', 'motors-car-dealership-classified-listings-pro' ),
+				'label'       => __( 'Slide Duration', 'stm_vehicles_listing' ),
 				'type'        => \Elementor\Controls_Manager::NUMBER,
 				'min'         => 100,
 				'step'        => 100,
@@ -374,40 +374,40 @@ class ImageCategories extends WidgetBase {
 					'autoplay'         => 'yes',
 					'show_as_carousel' => 'yes',
 				),
-				'description' => __( 'Delay between transitions in milliseconds', 'motors-car-dealership-classified-listings-pro' ),
+				'description' => __( 'Delay between transitions in milliseconds', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'pause_on_mouseover',
 			array(
-				'label'       => __( 'Pause on Mouseover', 'motors-car-dealership-classified-listings-pro' ),
+				'label'       => __( 'Pause on Mouseover', 'stm_vehicles_listing' ),
 				'type'        => \Elementor\Controls_Manager::SWITCHER,
 				'condition'   => array(
 					'autoplay'         => 'yes',
 					'show_as_carousel' => 'yes',
 				),
-				'description' => __( 'When enabled autoplay will be paused on mouse enter over carousel container', 'motors-car-dealership-classified-listings-pro' ),
+				'description' => __( 'When enabled autoplay will be paused on mouse enter over carousel container', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'reverse',
 			array(
-				'label'       => __( 'Reverse Direction', 'motors-car-dealership-classified-listings-pro' ),
+				'label'       => __( 'Reverse Direction', 'stm_vehicles_listing' ),
 				'type'        => \Elementor\Controls_Manager::SWITCHER,
 				'condition'   => array(
 					'autoplay'         => 'yes',
 					'show_as_carousel' => 'yes',
 				),
-				'description' => __( 'Enables autoplay in reverse direction', 'motors-car-dealership-classified-listings-pro' ),
+				'description' => __( 'Enables autoplay in reverse direction', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'navigation',
 			array(
-				'label'     => __( 'Navigation', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Navigation', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::SWITCHER,
 				'condition' => array(
 					'show_as_carousel' => 'yes',
@@ -418,12 +418,12 @@ class ImageCategories extends WidgetBase {
 		$this->add_control(
 			'navigation_style',
 			array(
-				'label'     => __( 'Navigation Style', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Navigation Style', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::SELECT,
 				'options'   => array(
-					'default'     => __( 'Default (On both sides)', 'motors-car-dealership-classified-listings-pro' ),
-					'outstanding' => __( 'Outstanding', 'motors-car-dealership-classified-listings-pro' ),
-					'in_heading'  => __( 'In Heading', 'motors-car-dealership-classified-listings-pro' ),
+					'default'     => __( 'Default (On both sides)', 'stm_vehicles_listing' ),
+					'outstanding' => __( 'Outstanding', 'stm_vehicles_listing' ),
+					'in_heading'  => __( 'In Heading', 'stm_vehicles_listing' ),
 				),
 				'default'   => 'default',
 				'condition' => array(
@@ -435,13 +435,13 @@ class ImageCategories extends WidgetBase {
 		$this->stm_end_control_section();
 
 		/*Start style section*/
-		$this->stm_start_style_controls_section( 'section_color', esc_html__( 'General', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_style_controls_section( 'section_color', esc_html__( 'General', 'stm_vehicles_listing' ) );
 
 		$this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
 				'name'           => 'title_typography',
-				'label'          => esc_html__( 'Title Typography', 'motors-car-dealership-classified-listings-pro' ),
+				'label'          => esc_html__( 'Title Typography', 'stm_vehicles_listing' ),
 				'selector'       => '{{WRAPPER}} .stm_icon_filter_title > h3',
 				'fields_options' => array(
 					'font_size'      => array(
@@ -496,7 +496,7 @@ class ImageCategories extends WidgetBase {
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
 				'name'           => 'show_all_typography',
-				'label'          => esc_html__( '"Show all" Label Typography', 'motors-car-dealership-classified-listings-pro' ),
+				'label'          => esc_html__( '"Show all" Label Typography', 'stm_vehicles_listing' ),
 				'selector'       => '{{WRAPPER}} .stm_icon_filter_label',
 				'fields_options' => array(
 					'font_size'      => array(
@@ -551,7 +551,7 @@ class ImageCategories extends WidgetBase {
 		$this->add_control(
 			'show_all_color',
 			array(
-				'label'     => esc_html__( '"Show all" Label Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( '"Show all" Label Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'default'   => '#777777',
 				'selectors' => array(
@@ -566,7 +566,7 @@ class ImageCategories extends WidgetBase {
 		$this->add_control(
 			'show_all_color_hover',
 			array(
-				'label'     => esc_html__( '"Show all" Label Color On Hover', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( '"Show all" Label Color On Hover', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'default'   => '#4e90cc',
 				'selectors' => array(
@@ -583,7 +583,7 @@ class ImageCategories extends WidgetBase {
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'item_typography',
-				'label'    => esc_html__( 'Item Typography', 'motors-car-dealership-classified-listings-pro' ),
+				'label'    => esc_html__( 'Item Typography', 'stm_vehicles_listing' ),
 				'selector' => '{{WRAPPER}} .stm_listing_icon_filter_single .name',
 				'exclude'  => array(
 					'font_family',
@@ -596,7 +596,7 @@ class ImageCategories extends WidgetBase {
 		$this->add_control(
 			'item_color',
 			array(
-				'label'     => esc_html__( 'Item Font Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Item Font Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'default'   => '#777777',
 				'selectors' => array(
@@ -608,7 +608,7 @@ class ImageCategories extends WidgetBase {
 		$this->add_control(
 			'item_color_hover',
 			array(
-				'label'     => esc_html__( 'Item Font Color on Hover', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Item Font Color on Hover', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'default'   => '#4e90cc',
 				'selectors' => array(
@@ -620,7 +620,7 @@ class ImageCategories extends WidgetBase {
 		$this->add_control(
 			'navigation_background_color',
 			array(
-				'label'     => esc_html__( 'Navigation Background Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Navigation Background Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'default'   => '#dddddd',
 				'selectors' => array(
@@ -636,7 +636,7 @@ class ImageCategories extends WidgetBase {
 		$this->add_control(
 			'navigation_background_color_hover',
 			array(
-				'label'     => esc_html__( 'Navigation Background Color On Hover', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Navigation Background Color On Hover', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'default'   => '#dddddd',
 				'selectors' => array(
@@ -652,7 +652,7 @@ class ImageCategories extends WidgetBase {
 		$this->add_control(
 			'navigation_icon_color',
 			array(
-				'label'     => esc_html__( 'Navigation Icon Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Navigation Icon Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'default'   => '#ffffff',
 				'selectors' => array(
@@ -668,7 +668,7 @@ class ImageCategories extends WidgetBase {
 		$this->add_control(
 			'navigation_icon_color_hover',
 			array(
-				'label'     => esc_html__( 'Navigation Icon Color On Hover', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => esc_html__( 'Navigation Icon Color On Hover', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'default'   => '#ffffff',
 				'selectors' => array(

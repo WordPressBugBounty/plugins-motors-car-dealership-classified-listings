@@ -24,14 +24,14 @@
 			<a href="<?php echo esc_url( apply_filters( 'stm_get_author_link', '' ) ); ?>"><?php echo wp_kses_post( apply_filters( 'stm_display_user_name', $user->ID, '', '', '' ) ); ?></a>
 		</div>
 		<ul class="account-list">
-			<li><a href="<?php echo esc_url( apply_filters( 'stm_get_author_link', '' ) ); ?>"><?php esc_html_e( 'My items', 'motors' ); ?> (<span><?php echo esc_html( $cars_total ); ?></span>)</a></li>
+			<li><a href="<?php echo esc_url( apply_filters( 'stm_get_author_link', '' ) ); ?>"><?php esc_html_e( 'My items', 'stm_vehicles_listing' ); ?> (<span><?php echo esc_html( $cars_total ); ?></span>)</a></li>
 			<?php if ( function_exists( 'stm_show_my_plans' ) && stm_show_my_plans() ) : ?>
-			<li><a href="<?php echo esc_url( add_query_arg( array( 'page' => 'my-plans' ), apply_filters( 'stm_get_author_link', '' ) ) ); ?>"><?php esc_html_e( 'My plans', 'motors' ); ?></a></li>
+			<li><a href="<?php echo esc_url( add_query_arg( array( 'page' => 'my-plans' ), apply_filters( 'stm_get_author_link', '' ) ) ); ?>"><?php esc_html_e( 'My plans', 'stm_vehicles_listing' ); ?></a></li>
 			<?php endif; ?>
-			<li class="stm-my-favourites"><a href="<?php echo esc_url( add_query_arg( array( 'page' => 'favourite' ), apply_filters( 'stm_get_author_link', '' ) ) ); ?>"><?php esc_html_e( 'Favorites', 'motors' ); ?> (<span><?php echo esc_attr( $my_fav ); ?></span>)</a></li>
+			<li class="stm-my-favourites"><a href="<?php echo esc_url( add_query_arg( array( 'page' => 'favourite' ), apply_filters( 'stm_get_author_link', '' ) ) ); ?>"><?php esc_html_e( 'Favorites', 'stm_vehicles_listing' ); ?> (<span><?php echo esc_attr( $my_fav ); ?></span>)</a></li>
 		</ul>
 		<a href="<?php echo esc_url( wp_logout_url( home_url() ) ); ?>" class="logout">
-			<i class="fas fa-power-off"></i><?php esc_html_e( 'Logout', 'motors' ); ?>
+			<i class="fas fa-power-off"></i><?php esc_html_e( 'Logout', 'stm_vehicles_listing' ); ?>
 		</a>
 	</div>
 
@@ -42,32 +42,32 @@
 		<form method="post">
 			<?php do_action( 'stm_before_signin_form' ); ?>
 			<div class="form-group">
-				<h4><?php esc_html_e( 'Login or E-mail', 'motors' ); ?></h4>
-				<input type="text" name="stm_user_login" autocomplete="off" placeholder="<?php esc_attr_e( 'Enter login or E-mail', 'motors' ); ?>"/>
+				<h4><?php esc_html_e( 'Login or E-mail', 'stm_vehicles_listing' ); ?></h4>
+				<input type="text" name="stm_user_login" autocomplete="off" placeholder="<?php esc_attr_e( 'Enter login or E-mail', 'stm_vehicles_listing' ); ?>"/>
 			</div>
 
 			<div class="form-group">
-				<h4><?php esc_html_e( 'Password', 'motors' ); ?></h4>
-				<input type="password" name="stm_user_password" autocomplete="off" placeholder="<?php esc_attr_e( 'Enter password', 'motors' ); ?>"/>
+				<h4><?php esc_html_e( 'Password', 'stm_vehicles_listing' ); ?></h4>
+				<input type="password" name="stm_user_password" autocomplete="off" placeholder="<?php esc_attr_e( 'Enter password', 'stm_vehicles_listing' ); ?>"/>
 			</div>
 
 			<div class="form-group form-checker">
 				<label>
 					<input type="checkbox" name="stm_remember_me" />
-					<span><?php esc_html_e( 'Remember me', 'motors' ); ?></span>
+					<span><?php esc_html_e( 'Remember me', 'stm_vehicles_listing' ); ?></span>
 				</label>
 				<div class="stm-forgot-password">
 					<a href="#">
-						<?php esc_html_e( 'Forgot Password', 'motors' ); ?>
+						<?php esc_html_e( 'Forgot Password', 'stm_vehicles_listing' ); ?>
 					</a>
 				</div>
 			</div>
 			<?php if ( class_exists( 'SitePress' ) ) : ?>
 				<input type="hidden" name="current_lang" value="<?php echo esc_attr( ICL_LANGUAGE_CODE ); ?>"/>
 			<?php endif; ?>
-			<input class="heading-font" type="submit" value="<?php esc_attr_e( 'Login', 'motors' ); ?>"/>
+			<input class="heading-font" type="submit" value="<?php esc_attr_e( 'Login', 'stm_vehicles_listing' ); ?>"/>
 			<span class="stm-listing-loader"><i class="stm-icon-load1"></i></span>
-			<a href="<?php echo esc_url( apply_filters( 'stm_get_author_link', 'register' ) ); ?>" class="stm_label"><?php esc_html_e( 'Sign Up', 'motors' ); ?></a>
+			<a href="<?php echo esc_url( apply_filters( 'stm_get_author_link', 'register' ) ); ?>" class="stm_label"><?php esc_html_e( 'Sign Up', 'stm_vehicles_listing' ); ?></a>
 			<div class="stm-validation-message"></div>
 			<?php do_action( 'stm_after_signin_form' ); ?>
 		</form>
@@ -76,10 +76,10 @@
 				<a href="#" class="stm-forgot-password-back">
 					<i class="fa-solid fa-angle-left"></i>
 				</a>
-				<h4><?php esc_html_e( 'Login or E-mail', 'motors' ); ?></h4>
+				<h4><?php esc_html_e( 'Login or E-mail', 'stm_vehicles_listing' ); ?></h4>
 				<input type="hidden" name="stm_link_send_to" value="<?php echo esc_attr( get_permalink() ); ?>" readonly/>
-				<input type="text" name="stm_user_login" placeholder="<?php esc_attr_e( 'Enter login or E-mail', 'motors' ); ?>"/>
-				<input type="submit" value="<?php esc_attr_e( 'Send password', 'motors' ); ?>"/>
+				<input type="text" name="stm_user_login" placeholder="<?php esc_attr_e( 'Enter login or E-mail', 'stm_vehicles_listing' ); ?>"/>
+				<input type="submit" value="<?php esc_attr_e( 'Send password', 'stm_vehicles_listing' ); ?>"/>
 				<span class="stm-listing-loader"><i class="stm-icon-load1"></i></span>
 				<div class="stm-validation-message"></div>
 			</div>

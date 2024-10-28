@@ -23,7 +23,7 @@ class Similar extends WidgetBase {
 	}
 
 	public function get_title() {
-		return esc_html__( 'Similar Listings', 'motors-car-dealership-classified-listings-pro' );
+		return esc_html__( 'Similar Listings', 'stm_vehicles_listing' );
 	}
 
 	public function get_icon() {
@@ -31,14 +31,14 @@ class Similar extends WidgetBase {
 	}
 
 	protected function register_controls() {
-		$this->stm_start_content_controls_section( 'similar_content', __( 'General', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_content_controls_section( 'similar_content', __( 'General', 'stm_vehicles_listing' ) );
 
 		$this->add_control(
 			'similar_title',
 			array(
-				'label'   => __( 'Title', 'motors-car-dealership-classified-listings-pro' ),
+				'label'   => __( 'Title', 'stm_vehicles_listing' ),
 				'type'    => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Similar listing', 'motors-car-dealership-classified-listings-pro' ),
+				'default' => __( 'Similar listing', 'stm_vehicles_listing' ),
 			)
 		);
 
@@ -47,7 +47,7 @@ class Similar extends WidgetBase {
 			$this->add_control(
 				'listing_type_heading',
 				array(
-					'label'     => esc_html__( 'Default Listing type', 'motors-car-dealership-classified-listings-pro' ),
+					'label'     => esc_html__( 'Default Listing type', 'stm_vehicles_listing' ),
 					'type'      => \Elementor\Controls_Manager::HEADING,
 					'separator' => 'before',
 				)
@@ -58,9 +58,9 @@ class Similar extends WidgetBase {
 		$this->add_control(
 			'similar_taxonomies',
 			array(
-				'label'       => __( 'Show Similar By', 'motors-car-dealership-classified-listings-pro' ),
+				'label'       => __( 'Show Similar By', 'stm_vehicles_listing' ),
 				'type'        => \Elementor\Controls_Manager::SELECT2,
-				'description' => __( 'Enter slug of listing category', 'motors-car-dealership-classified-listings-pro' ),
+				'description' => __( 'Enter slug of listing category', 'stm_vehicles_listing' ),
 				'options'     => $this->motors_get_listing_taxonomies(),
 				'multiple'    => true,
 			)
@@ -86,9 +86,9 @@ class Similar extends WidgetBase {
 						$this->add_control(
 							'similar_taxonomies_' . $slug,
 							array(
-								'label'       => __( 'Show Similar By', 'motors-car-dealership-classified-listings-pro' ),
+								'label'       => __( 'Show Similar By', 'stm_vehicles_listing' ),
 								'type'        => \Elementor\Controls_Manager::SELECT2,
-								'description' => __( 'Enter slug of listing category', 'motors-car-dealership-classified-listings-pro' ),
+								'description' => __( 'Enter slug of listing category', 'stm_vehicles_listing' ),
 								'options'     => Helper::stm_ew_multi_listing_search_filter_fields( $slug ),
 								'multiple'    => true,
 							)
@@ -101,13 +101,13 @@ class Similar extends WidgetBase {
 
 		$this->stm_end_control_section();
 
-		$this->stm_start_style_controls_section( 'similar_start', __( 'Style', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_style_controls_section( 'similar_start', __( 'Style', 'stm_vehicles_listing' ) );
 
 		$this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
 				'name'           => 'similar_typography_title',
-				'label'          => __( 'Label Typography', 'motors-car-dealership-classified-listings-pro' ),
+				'label'          => __( 'Label Typography', 'stm_vehicles_listing' ),
 				'separator'      => 'before',
 				'exclude'        => array(
 					'font_family',
@@ -143,7 +143,7 @@ class Similar extends WidgetBase {
 		$this->add_control(
 			'features_icon_color',
 			array(
-				'label'     => __( 'Label Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Label Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'default'   => '#232628',
 				'selectors' => array(
@@ -156,7 +156,7 @@ class Similar extends WidgetBase {
 			\Elementor\Group_Control_Border::get_type(),
 			array(
 				'name'           => 'label_border',
-				'label'          => __( 'Label Border', 'motors-car-dealership-classified-listings-pro' ),
+				'label'          => __( 'Label Border', 'stm_vehicles_listing' ),
 				'fields_options' => array(
 					'border' => array(
 						'default' => 'solid',
@@ -179,7 +179,7 @@ class Similar extends WidgetBase {
 		$this->add_control(
 			'label_padding',
 			array(
-				'label'     => __( 'Label Padding', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Label Padding', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::DIMENSIONS,
 				'default'   => array(
 					'top'      => '30',
@@ -197,7 +197,7 @@ class Similar extends WidgetBase {
 		$this->add_control(
 			'label_margin',
 			array(
-				'label'     => __( 'Label Margin', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Label Margin', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::DIMENSIONS,
 				'default'   => array(
 					'top'      => '0',

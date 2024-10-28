@@ -58,16 +58,21 @@ if (typeof (STMListings) == 'undefined') {
     };
 
     Filter.prototype.performAjax = function (url) {
-        $.ajax({
-            url: url,
-            dataType: 'json',
-            context: this,
-            data: 'ajax_action=' + this.ajax_action,
-            beforeSend: this.ajaxBefore,
-            success: this.ajaxSuccess,
-            complete: this.ajaxComplete,
-        });
-    };
+			var custom_img_size = $('#listings-result').data('custom-img-size')
+			$.ajax({
+				url: url,
+				dataType: 'json',
+				context: this,
+				type: 'POST',
+				data: {
+					ajax_action: this.ajax_action,
+					custom_img_size: custom_img_size,
+				},
+				beforeSend: this.ajaxBefore,
+				success: this.ajaxSuccess,
+				complete: this.ajaxComplete,
+			})
+		}
 
     Filter.prototype.ajaxBefore = function () {
         this.getTarget().addClass('stm-loading');

@@ -44,7 +44,7 @@ Motors_Elementor_Widgets_Free\Helpers\Helper::stm_ew_load_template( 'elementor/W
 	<?php
 	if ( $car_edit ) {
 		if ( ! is_user_logged_in() ) {
-			echo '<h4>' . esc_html__( 'Please login.', 'motors-car-dealership-classified-listings-pro' ) . '</h4></div>';
+			echo '<h4>' . esc_html__( 'Please login.', 'stm_vehicles_listing' ) . '</h4></div>';
 
 			return false;
 		}
@@ -55,12 +55,12 @@ Motors_Elementor_Widgets_Free\Helpers\Helper::stm_ew_load_template( 'elementor/W
 			$car_user = get_post_meta( $item_id, 'stm_car_user', true );
 
 			if ( intval( $user_id ) !== intval( $car_user ) ) {
-				echo '<h4>' . esc_html__( 'You are not the owner of this car.', 'motors-car-dealership-classified-listings-pro' ) . '</h4></div>';
+				echo '<h4>' . esc_html__( 'You are not the owner of this car.', 'stm_vehicles_listing' ) . '</h4></div>';
 
 				return false;
 			}
 		} else {
-			echo '<h4>' . esc_html__( 'No car to edit.', 'motors-car-dealership-classified-listings-pro' ) . '</h4></div>';
+			echo '<h4>' . esc_html__( 'No car to edit.', 'stm_vehicles_listing' ) . '</h4></div>';
 
 			return false;
 		}

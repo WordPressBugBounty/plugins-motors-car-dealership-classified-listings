@@ -24,7 +24,7 @@ class UserDataSimple extends WidgetBase {
 	}
 
 	public function get_title() {
-		return esc_html__( 'User Data Simple', 'motors-car-dealership-classified-listings-pro' );
+		return esc_html__( 'User Data Simple', 'stm_vehicles_listing' );
 	}
 
 	public function get_icon() {
@@ -36,12 +36,12 @@ class UserDataSimple extends WidgetBase {
 	}
 
 	private function get_general_settings() {
-		$this->stm_start_style_controls_section( 'uds_general_styles', __( 'General', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_style_controls_section( 'uds_general_styles', __( 'General', 'stm_vehicles_listing' ) );
 
 		$this->add_control(
 			'uds_general_user_name_color',
 			array(
-				'label'     => __( 'User Name Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'User Name Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'default'   => '#232628',
 				'selectors' => array(
@@ -54,7 +54,7 @@ class UserDataSimple extends WidgetBase {
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
 				'name'           => 'uds_general_user_name_typography',
-				'label'          => __( 'User Name Typography', 'motors-car-dealership-classified-listings-pro' ),
+				'label'          => __( 'User Name Typography', 'stm_vehicles_listing' ),
 				'separator'      => 'before',
 				'exclude'        => array(
 					'font_family',
@@ -90,9 +90,9 @@ class UserDataSimple extends WidgetBase {
 		$this->add_control(
 			'uds_general_user_role_color',
 			array(
-				'label'       => __( 'User Role Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'       => __( 'User Role Color', 'stm_vehicles_listing' ),
 				'type'        => \Elementor\Controls_Manager::COLOR,
-				'description' => esc_html__( 'Only for User Role Subscriber', 'motors-car-dealership-classified-listings-pro' ),
+				'description' => esc_html__( 'Only for User Role Subscriber', 'stm_vehicles_listing' ),
 				'default'     => '#888888',
 				'selectors'   => array(
 					'{{WRAPPER}} .stm-listing-car-dealer-info-simple .stm-user-main-info-c .stm-label' => 'color: {{VALUE}};',
@@ -104,8 +104,8 @@ class UserDataSimple extends WidgetBase {
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
 				'name'           => 'uds_general_user_role_typography',
-				'label'          => __( 'User Role Typography', 'motors-car-dealership-classified-listings-pro' ),
-				'description'    => esc_html__( 'Only for User Role Subscriber', 'motors-car-dealership-classified-listings-pro' ),
+				'label'          => __( 'User Role Typography', 'stm_vehicles_listing' ),
+				'description'    => esc_html__( 'Only for User Role Subscriber', 'stm_vehicles_listing' ),
 				'separator'      => 'before',
 				'exclude'        => array(
 					'font_family',
@@ -141,9 +141,9 @@ class UserDataSimple extends WidgetBase {
 		$this->add_control(
 			'uds_review_amount_color',
 			array(
-				'label'       => __( 'Review Amount Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'       => __( 'Review Amount Color', 'stm_vehicles_listing' ),
 				'type'        => \Elementor\Controls_Manager::COLOR,
-				'description' => esc_html__( 'Only for User Role Dealer', 'motors-car-dealership-classified-listings-pro' ),
+				'description' => esc_html__( 'Only for User Role Dealer', 'stm_vehicles_listing' ),
 				'default'     => '#888888',
 				'selectors'   => array(
 					'{{WRAPPER}} .stm-listing-car-dealer-info-simple .dealer-rating .stm-rate-sum' => 'color: {{VALUE}};',

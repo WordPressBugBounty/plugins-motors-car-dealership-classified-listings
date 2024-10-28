@@ -32,14 +32,18 @@ $aria_label = sprintf(
 <select aria-label="<?php echo esc_attr( $aria_label ); ?>" <?php echo $multiple ? 'multiple="multiple"' : ''; ?>
 	<?php echo $multiple ? 'data-placeholder="' . esc_attr( $placeholder['label'] ) . '"' : ''; ?>
 		name="<?php echo esc_attr( $sel_name ); ?>"
-		class="<?php echo esc_attr( $class ); ?>" >
+		class="<?php echo esc_attr( $class ); ?>"
+		<?php if ( isset( $elementor_widget_class ) && ! empty( $elementor_widget_class ) ) : ?>
+			data-elementor-widget-class="<?php echo esc_attr( $elementor_widget_class ); ?>"
+		<?php endif; ?>
+		>
 	<?php
 	if ( ! empty( $options ) ) :
 		foreach ( $options as $value => $option ) :
 			$parent_attr = ( ! empty( $option['parent'] ) ) ? $option['parent'] : '';
 			$value_attr  = ( ! empty( $option['option'] ) ) ? $option['option'] : '';
 			?>
-			<option data-parent="<?php echo esc_attr( $parent_attr ); ?>" value="<?php echo esc_attr( $value_attr ); ?>" <?php selected( $option['selected'] ); ?> <?php disabled( $option['disabled'] ); ?>>
+			<option class="mvl-inventory-select" data-parent="<?php echo esc_attr( $parent_attr ); ?>" value="<?php echo esc_attr( $value_attr ); ?>" <?php selected( $option['selected'] ); ?> <?php disabled( $option['disabled'] ); ?>>
 				<?php
 				$label = $option['label'] ?? '';
 

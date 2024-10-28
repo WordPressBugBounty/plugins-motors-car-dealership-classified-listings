@@ -82,7 +82,7 @@ $can_register = apply_filters( 'motors_vl_get_nuxy_mod', false, 'new_user_regist
 				?>
 				<div class="stm-add-a-car-login-overlay"></div>
 			<?php else : ?>
-				<h3 class="sign-in-only"><?php esc_html_e( 'Sign In', 'motors-car-dealership-classified-listings-pro' ); ?></h3>
+				<h3 class="sign-in-only"><?php esc_html_e( 'Sign In', 'stm_vehicles_listing' ); ?></h3>
 			<?php endif; ?>
 			<div class="stm-add-a-car-login <?php echo ( ! $can_register ) ? esc_attr( ' without-register-form' ) : ''; ?>">
 				<div class="stm-login-form">
@@ -90,21 +90,21 @@ $can_register = apply_filters( 'motors_vl_get_nuxy_mod', false, 'new_user_regist
 						<input type="hidden" name="redirect" value="disable">
 						<input type="hidden" name="fetch_plans" value="true">
 						<div class="form-group">
-							<h4><?php esc_html_e( 'Login or E-mail', 'motors-car-dealership-classified-listings-pro' ); ?></h4>
+							<h4><?php esc_html_e( 'Login or E-mail', 'stm_vehicles_listing' ); ?></h4>
 							<input type="text" name="stm_user_login"
-								placeholder="<?php esc_attr_e( 'Enter login or E-mail', 'motors-car-dealership-classified-listings-pro' ); ?>">
+								placeholder="<?php esc_attr_e( 'Enter login or E-mail', 'stm_vehicles_listing' ); ?>">
 						</div>
 
 						<div class="form-group">
-							<h4><?php esc_html_e( 'Password', 'motors-car-dealership-classified-listings-pro' ); ?></h4>
+							<h4><?php esc_html_e( 'Password', 'stm_vehicles_listing' ); ?></h4>
 							<input type="password" name="stm_user_password"
-								placeholder="<?php esc_attr_e( 'Enter password', 'motors-car-dealership-classified-listings-pro' ); ?>">
+								placeholder="<?php esc_attr_e( 'Enter password', 'stm_vehicles_listing' ); ?>">
 						</div>
 
 						<div class="form-group form-checker">
 							<label>
 								<input type="checkbox" name="stm_remember_me">
-								<span><?php esc_attr_e( 'Remember me', 'motors-car-dealership-classified-listings-pro' ); ?></span>
+								<span><?php esc_attr_e( 'Remember me', 'stm_vehicles_listing' ); ?></span>
 							</label>
 						</div>
 						<input type="submit" value="Login">

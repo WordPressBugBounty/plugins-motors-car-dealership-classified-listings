@@ -31,7 +31,7 @@ class OfferPriceButton extends WidgetBase {
 	}
 
 	public function get_title() {
-		return esc_html__( 'Offer Price Button', 'motors-car-dealership-classified-listings-pro' );
+		return esc_html__( 'Offer Price Button', 'stm_vehicles_listing' );
 	}
 
 	public function get_icon() {
@@ -39,34 +39,34 @@ class OfferPriceButton extends WidgetBase {
 	}
 
 	protected function register_controls() {
-		$this->stm_start_content_controls_section( 'opb_content', __( 'General', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_content_controls_section( 'opb_content', __( 'General', 'stm_vehicles_listing' ) );
 
 		$this->add_control(
 			'opb_btn_label',
 			array(
-				'label'   => __( 'Label', 'motors-car-dealership-classified-listings-pro' ),
+				'label'   => __( 'Label', 'stm_vehicles_listing' ),
 				'type'    => \Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Make an Offer Price', 'motors-car-dealership-classified-listings-pro' ),
+				'default' => __( 'Make an Offer Price', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->stm_end_control_section();
 
-		$this->stm_start_style_controls_section( 'opb_styles', __( 'Style', 'motors-car-dealership-classified-listings-pro' ) );
+		$this->stm_start_style_controls_section( 'opb_styles', __( 'Style', 'stm_vehicles_listing' ) );
 
 		$this->stm_start_ctrl_tabs( 'opb_btn_bg_style' );
 
 		$this->stm_start_ctrl_tab(
 			'opb_bg_normal',
 			array(
-				'label' => __( 'Normal', 'motors-car-dealership-classified-listings-pro' ),
+				'label' => __( 'Normal', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'opb_btn_bg',
 			array(
-				'label'     => __( 'Background', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Background', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .stm-car_dealer-buttons a' => 'background-color: {{VALUE}};',
@@ -77,7 +77,7 @@ class OfferPriceButton extends WidgetBase {
 		$this->add_control(
 			'opb_icon_color',
 			array(
-				'label'     => __( 'Icon Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Icon Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .stm-car_dealer-buttons a i'   => 'color: {{VALUE}};',
@@ -89,7 +89,7 @@ class OfferPriceButton extends WidgetBase {
 		$this->add_control(
 			'opb_text_color',
 			array(
-				'label'     => __( 'Text Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Text Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .stm-car_dealer-buttons a' => 'color: {{VALUE}};',
@@ -100,7 +100,7 @@ class OfferPriceButton extends WidgetBase {
 		$this->add_control(
 			'opb_border_color',
 			array(
-				'label'     => __( 'Border Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Border Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .stm-car_dealer-buttons a' => 'border-color: {{VALUE}};',
@@ -112,7 +112,7 @@ class OfferPriceButton extends WidgetBase {
 			\Elementor\Group_Control_Box_Shadow::get_type(),
 			array(
 				'name'     => 'opb_box_shadow',
-				'label'    => __( 'Box Shadow', 'motors-car-dealership-classified-listings-pro' ),
+				'label'    => __( 'Box Shadow', 'stm_vehicles_listing' ),
 				'selector' => '{{WRAPPER}} .stm-car_dealer-buttons a',
 			)
 		);
@@ -122,14 +122,14 @@ class OfferPriceButton extends WidgetBase {
 		$this->stm_start_ctrl_tab(
 			'opb_bg_hover',
 			array(
-				'label' => __( 'Hover', 'motors-car-dealership-classified-listings-pro' ),
+				'label' => __( 'Hover', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_control(
 			'opb_btn_bg_hover',
 			array(
-				'label'     => __( 'Background', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Background', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .stm-car_dealer-buttons a:hover' => 'background-color: {{VALUE}};',
@@ -140,7 +140,7 @@ class OfferPriceButton extends WidgetBase {
 		$this->add_control(
 			'opb_icon_color_hover',
 			array(
-				'label'     => __( 'Icon Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Icon Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .stm-car_dealer-buttons a:hover i'   => 'color: {{VALUE}};',
@@ -152,7 +152,7 @@ class OfferPriceButton extends WidgetBase {
 		$this->add_control(
 			'opb_text_color_hover',
 			array(
-				'label'     => __( 'Text Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Text Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .stm-car_dealer-buttons a:hover' => 'color: {{VALUE}};',
@@ -163,7 +163,7 @@ class OfferPriceButton extends WidgetBase {
 		$this->add_control(
 			'opb_border_color_hover',
 			array(
-				'label'     => __( 'Border Color', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Border Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .stm-car_dealer-buttons a:hover' => 'border-color: {{VALUE}};',
@@ -175,7 +175,7 @@ class OfferPriceButton extends WidgetBase {
 			\Elementor\Group_Control_Box_Shadow::get_type(),
 			array(
 				'name'     => 'opb_box_shadow_hover',
-				'label'    => __( 'Box Shadow', 'motors-car-dealership-classified-listings-pro' ),
+				'label'    => __( 'Box Shadow', 'stm_vehicles_listing' ),
 				'selector' => '{{WRAPPER}} .stm-car_dealer-buttons a:hover',
 			)
 		);
@@ -196,7 +196,7 @@ class OfferPriceButton extends WidgetBase {
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'opb_typography',
-				'label'     => __( 'Typography', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Typography', 'stm_vehicles_listing' ),
 				'separator' => 'before',
 				'exclude'   => array(
 					'font_family',
@@ -221,7 +221,7 @@ class OfferPriceButton extends WidgetBase {
 			\Elementor\Group_Control_Border::get_type(),
 			array(
 				'name'     => 'opb_border',
-				'label'    => __( 'Border', 'motors-car-dealership-classified-listings-pro' ),
+				'label'    => __( 'Border', 'stm_vehicles_listing' ),
 				'exclude'  => array( 'color' ),
 				'selector' => '{{WRAPPER}} .stm-car_dealer-buttons a',
 			)
@@ -230,7 +230,7 @@ class OfferPriceButton extends WidgetBase {
 		$this->add_control(
 			'opb_btn_border_radius',
 			array(
-				'label'     => __( 'Border Radius', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Border Radius', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::DIMENSIONS,
 				'default'   => array(
 					'top'      => '',
@@ -256,7 +256,7 @@ class OfferPriceButton extends WidgetBase {
 		$this->add_control(
 			'opb_btn_padding',
 			array(
-				'label'     => __( 'Padding', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Padding', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::DIMENSIONS,
 				'default'   => array(
 					'top'      => '17',
@@ -274,7 +274,7 @@ class OfferPriceButton extends WidgetBase {
 		$this->add_control(
 			'icon_styles',
 			array(
-				'label'     => __( 'Icon', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Icon', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::HEADING,
 				'separator' => 'before',
 			)
@@ -283,7 +283,7 @@ class OfferPriceButton extends WidgetBase {
 		$this->add_control(
 			'opb_icon_size',
 			array(
-				'label'      => __( 'Icon Size', 'motors-car-dealership-classified-listings-pro' ),
+				'label'      => __( 'Icon Size', 'stm_vehicles_listing' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => array(
 					'px',
@@ -309,11 +309,11 @@ class OfferPriceButton extends WidgetBase {
 		$this->add_control(
 			'opb_icon_position',
 			array(
-				'label'     => __( 'Icon Position', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Icon Position', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::SELECT,
 				'options'   => array(
-					'row-reverse' => __( 'Left', 'motors-car-dealership-classified-listings-pro' ),
-					'row'         => __( 'Right', 'motors-car-dealership-classified-listings-pro' ),
+					'row-reverse' => __( 'Left', 'stm_vehicles_listing' ),
+					'row'         => __( 'Right', 'stm_vehicles_listing' ),
 				),
 				'default'   => 'row',
 				'selectors' => array(
@@ -325,7 +325,7 @@ class OfferPriceButton extends WidgetBase {
 		$this->add_control(
 			'opb_icon_margin',
 			array(
-				'label'     => __( 'Icon Margin', 'motors-car-dealership-classified-listings-pro' ),
+				'label'     => __( 'Icon Margin', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::DIMENSIONS,
 				'default'   => array(
 					'top'      => '',

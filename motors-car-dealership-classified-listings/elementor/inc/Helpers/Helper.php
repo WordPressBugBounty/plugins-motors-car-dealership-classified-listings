@@ -33,7 +33,7 @@ class Helper {
 
 		if ( $include_default_blank ) {
 			$sizes = array(
-				'' => __( 'Theme Default', 'motors-car-dealership-classified-listings-pro' ),
+				'' => __( 'Theme Default', 'stm_vehicles_listing' ),
 			);
 		}
 
@@ -55,9 +55,9 @@ class Helper {
 			$sizes = array_merge(
 				$sizes,
 				array(
-					'medium' => __( 'Medium', 'motors-car-dealership-classified-listings-pro' ),
-					'large'  => __( 'Large', 'motors-car-dealership-classified-listings-pro' ),
-					'full'   => __( 'Full', 'motors-car-dealership-classified-listings-pro' ),
+					'medium' => __( 'Medium', 'stm_vehicles_listing' ),
+					'large'  => __( 'Large', 'stm_vehicles_listing' ),
+					'full'   => __( 'Full', 'stm_vehicles_listing' ),
 				)
 			);
 		}
@@ -93,14 +93,14 @@ class Helper {
 
 	public static function stm_ew_get_value_my_car_options() {
 		$stm_value_my_car_options = array(
-			'email'   => esc_html__( 'Email', 'motors-car-dealership-classified-listings-pro' ),
-			'phone'   => esc_html__( 'Phone', 'motors-car-dealership-classified-listings-pro' ),
-			'make'    => esc_html__( 'Make', 'motors-car-dealership-classified-listings-pro' ),
-			'model'   => esc_html__( 'Model', 'motors-car-dealership-classified-listings-pro' ),
-			'year'    => esc_html__( 'Year', 'motors-car-dealership-classified-listings-pro' ),
-			'mileage' => esc_html__( 'Mileage', 'motors-car-dealership-classified-listings-pro' ),
-			'vin'     => esc_html__( 'VIN', 'motors-car-dealership-classified-listings-pro' ),
-			'photo'   => esc_html__( 'Photo', 'motors-car-dealership-classified-listings-pro' ),
+			'email'   => esc_html__( 'Email', 'stm_vehicles_listing' ),
+			'phone'   => esc_html__( 'Phone', 'stm_vehicles_listing' ),
+			'make'    => esc_html__( 'Make', 'stm_vehicles_listing' ),
+			'model'   => esc_html__( 'Model', 'stm_vehicles_listing' ),
+			'year'    => esc_html__( 'Year', 'stm_vehicles_listing' ),
+			'mileage' => esc_html__( 'Mileage', 'stm_vehicles_listing' ),
+			'vin'     => esc_html__( 'VIN', 'stm_vehicles_listing' ),
+			'photo'   => esc_html__( 'Photo', 'stm_vehicles_listing' ),
 		);
 
 		return $stm_value_my_car_options;
@@ -119,7 +119,7 @@ class Helper {
 			}
 
 			if ( ! in_array( 'location', $only_use_on_car_filter_options, true ) ) {
-				$only_use_on_car_filter_options['location'] = esc_html__( 'Location', 'motors-car-dealership-classified-listings-pro' );
+				$only_use_on_car_filter_options['location'] = esc_html__( 'Location', 'stm_vehicles_listing' );
 			}
 
 			return $only_use_on_car_filter_options;
@@ -133,7 +133,7 @@ class Helper {
 
 		if ( $include_default ) {
 			$listing_types = array(
-				'listings' => __( 'Listings (default)', 'motors-car-dealership-classified-listings-pro' ),
+				'listings' => __( 'Listings (default)', 'stm_vehicles_listing' ),
 			);
 		}
 
@@ -340,7 +340,7 @@ class Helper {
 					} elseif ( ! empty( $field['lst_reviews_placeholder'] ) ) {
 						$number_string = $field['lst_reviews_placeholder'];
 					} else {
-						$number_string = esc_html__( 'Max', 'motors-car-dealership-classified-listings-pro' ) . ' ' . $sel_tax_name;
+						$number_string = esc_html__( 'Max', 'stm_vehicles_listing' ) . ' ' . $sel_tax_name;
 					}
 				}
 
@@ -448,7 +448,7 @@ class Helper {
 							} elseif ( ! empty( $field['lst_reviews_placeholder'] ) ) {
 								$select_main = $field['lst_reviews_placeholder'];
 							} else {
-								$select_main = esc_html__( 'Choose', 'motors-car-dealership-classified-listings-pro' ) . ' ' . $sel_tax_name;
+								$select_main = esc_html__( 'Choose', 'stm_vehicles_listing' ) . ' ' . $sel_tax_name;
 							}
 
 							$select_main = apply_filters( 'stm_dynamic_string_translation', $select_main, 'Select Text' );
@@ -535,7 +535,7 @@ class Helper {
 			}
 		}
 
-		$plans['custom_link'] = esc_html__( 'Use Custom Link', 'motors-car-dealership-classified-listings-pro' );
+		$plans['custom_link'] = esc_html__( 'Use Custom Link', 'stm_vehicles_listing' );
 
 		return $plans;
 	}

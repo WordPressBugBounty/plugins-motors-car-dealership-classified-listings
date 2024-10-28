@@ -42,7 +42,7 @@ if ( ! $empty_image ) :
 			<label for="stm_car_gallery_add" class="inner">
 				<i class="motors-icons-photos"></i>
 				<span class="stm-placeholder__text">
-				<?php esc_html_e( 'Add image', 'motors-car-dealership-classified-listings-pro' ); ?>
+				<?php esc_html_e( 'Add image', 'stm_vehicles_listing' ); ?>
 			</span>
 			</label>
 		<?php endif; ?>

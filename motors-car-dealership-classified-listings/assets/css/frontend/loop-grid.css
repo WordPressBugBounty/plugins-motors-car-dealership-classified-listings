@@ -11,13 +11,22 @@
 @media (max-width: 820px) {
     .archive-listing-page .stm-isotope-listing-item.col-md-4,
   .car-listing-modern-grid .stm-isotope-listing-item.col-md-4 {
-        flex: 0 0 50%;
-        max-width: 50%;
+        flex: 0 0 33.33%;
+        max-width: 33.33%;
+    }
+}
+
+@media (max-width: 767px) {
+    .archive-listing-page .stm-isotope-listing-item.col-md-4,
+  .car-listing-modern-grid .stm-isotope-listing-item.col-md-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
     }
 }
 
 .archive-listing-page .stm-isotope-listing-item a,
 .car-listing-modern-grid .stm-isotope-listing-item a {
+    display: block;
     text-decoration: none;
 }
 
@@ -38,6 +47,8 @@
     max-width: 100%;
     width: 100%;
     height: auto;
+    -o-object-fit: cover;
+    object-fit: cover;
 }
 
 .archive-listing-page .stm-isotope-listing-item .listing-car-item-meta,

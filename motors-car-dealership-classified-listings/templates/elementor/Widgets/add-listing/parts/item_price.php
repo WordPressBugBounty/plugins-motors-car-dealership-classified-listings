@@ -37,7 +37,7 @@ $vars = array(
 
 <div class="stm-form-price-edit">
 	<div class="stm-car-listing-data-single stm-border-top-unit ">
-		<div class="title heading-font"><?php esc_html_e( 'Set Your Asking Price', 'motors-car-dealership-classified-listings-pro' ); ?></div>
+		<div class="title heading-font"><?php esc_html_e( 'Set Your Asking Price', 'stm_vehicles_listing' ); ?></div>
 	</div>
 	<div class="row stm-relative">
 		<?php
