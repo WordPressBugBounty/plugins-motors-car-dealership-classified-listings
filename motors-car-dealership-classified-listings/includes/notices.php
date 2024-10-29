@@ -42,6 +42,8 @@ if ( ! in_array( $active_theme, $theme_exists, true ) && empty( $start_theme_not
 	);
 }
 
-foreach ( $init_data as $item ) {
-	stm_admin_notices_init( $item );
+if ( function_exists( 'stm_admin_notices_init' ) ) {
+	foreach ( $init_data as $item ) {
+		stm_admin_notices_init( $item );
+	}
 }

@@ -5,7 +5,7 @@ Donate link: https://www.paypal.me/stylemix
 Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
 Tested up to: 6.6
-Stable tag: 1.4.28
+Stable tag: 1.4.29
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -129,6 +129,9 @@ After that, go to Tools -> Import, and via Wordpress Importer tool install dummy
 8. Additional features
 
 == Changelog ==
+
+= 1.4.29 =
+- **Fix:** Minor bug fixes.
 
 = 1.4.28 =
 - **Enhancement:** Added a notice to guide users on installing the Motors Starter Theme.
