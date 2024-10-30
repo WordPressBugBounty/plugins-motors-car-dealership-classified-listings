@@ -30,8 +30,8 @@ $as_label = apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_generated_titl
 				</div>
 			<?php endif; ?>
 		<?php else : ?>
-			<div class="price">
-				<div class="normal-price"><?php echo esc_attr( $car_price_form_label ); ?></div>
+			<div class="price archive_request_price" data-toggle="modal" data-target="#get-car-price" data-title="<?php echo esc_attr( get_the_title( get_the_ID() ) ); ?>" data-id="<?php echo esc_attr( get_the_ID() ); ?>">
+				<div class="normal-price" ><?php echo esc_html( $car_price_form_label ); ?></div>
 			</div>
 		<?php endif; ?>
 	<?php endif; ?>

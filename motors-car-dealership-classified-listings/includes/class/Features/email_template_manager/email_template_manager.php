@@ -721,9 +721,12 @@ if ( ! function_exists( 'stm_generate_template_view' ) ) {
 
 		if ( ! empty( $template ) ) {
 			foreach ( $args as $k => $val ) {
-				$template = str_replace( "[{$k}]", $val, $template );
+				if ( ! empty( $val ) ) {
+					$template = str_replace( "[{$k}]", $val, $template );
+				} else {
+					$template = str_replace( "[{$k}]", 'N/A', $template );
+				}
 			}
-
 			return $template;
 		}
 

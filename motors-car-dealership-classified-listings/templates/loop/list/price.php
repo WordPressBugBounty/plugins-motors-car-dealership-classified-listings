@@ -16,7 +16,7 @@ if ( empty( $price ) && ! empty( $sale_price ) ) {
 $car_price_form_label = get_post_meta( get_the_ID(), 'car_price_form_label', true );
 
 if ( ! empty( $car_price_form_label ) ) : ?>
-<div class="price">
+<div class="price archive_request_price" data-toggle="modal" data-target="#get-car-price" data-title="<?php echo esc_attr( get_the_title( get_the_ID() ) ); ?>" data-id="<?php echo esc_attr( get_the_ID() ); ?>">
 	<div class="normal-price">
 		<span class="heading-font"><?php echo esc_attr( $car_price_form_label ); ?></span>
 	</div>

@@ -7,6 +7,10 @@
 }
 
 /*admin style for logo motors*/
+.hidden {
+    display: none;
+}
+
 body .motors-alignwide,
 body .container {
     max-width: 1140px;

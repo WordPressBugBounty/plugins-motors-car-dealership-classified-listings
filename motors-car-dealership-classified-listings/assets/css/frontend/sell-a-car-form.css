@@ -112,7 +112,7 @@
     }
 }
 
-.stm-sell-a-car-form .form-content input[type=text], .stm-sell-a-car-form .form-content input[type=tel], .stm-sell-a-car-form .form-content input[type=email], .stm-sell-a-car-form .form-content input[type=search], .stm-sell-a-car-form .form-content input[type=password] {
+.stm-sell-a-car-form .form-content input[type=text], .stm-sell-a-car-form .form-content input[type=tel], .stm-sell-a-car-form .form-content input[type=email], .stm-sell-a-car-form .form-content input[type=search], .stm-sell-a-car-form .form-content input[type=password], .stm-sell-a-car-form .form-content input[type=tel] {
     height: 43px;
     line-height: 43px;
 }

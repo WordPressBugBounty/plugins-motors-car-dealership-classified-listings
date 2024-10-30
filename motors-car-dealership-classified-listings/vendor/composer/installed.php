@@ -3,7 +3,7 @@
         'name' => 'motors_vehicles_listing/plugin',
         'pretty_version' => 'dev-release',
         'version' => 'dev-release',
-        'reference' => 'b1dd74383c1313d1fc9a801ededa2acde3509809',
+        'reference' => '4037eebc8417be15c01738b5c287ef756ecc52a8',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'motors_vehicles_listing/plugin' => array(
             'pretty_version' => 'dev-release',
             'version' => 'dev-release',
-            'reference' => 'b1dd74383c1313d1fc9a801ededa2acde3509809',
+            'reference' => '4037eebc8417be15c01738b5c287ef756ecc52a8',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

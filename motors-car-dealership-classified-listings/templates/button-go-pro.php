@@ -315,7 +315,7 @@ if ( $is_promotion ) {
 									<?php
 								endif;
 								if ( 'mvl-go-pro' === $_GET['page'] ) {
-									$base_url     = 'https://stylemixthemes.com/wordpress-motors-plugin/pricing/?utm_source=motorswpadmin&utm_campaign=motors-plugin&licenses=' . esc_attr( $plan->licenses );
+									$base_url     = 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=motorswpadmin&utm_campaign=motors-plugin&licenses=' . esc_attr( $plan->licenses );
 									$utm_medium   = isset( $_GET['source'] ) ? esc_attr( htmlspecialchars( $_GET['source'] ) ) : 'unlock-pro-button';
 									$annual_url   = $base_url . '&utm_medium=' . $utm_medium . '&billing_cycle=annual';
 									$lifetime_url = $base_url . '&utm_medium=' . $utm_medium . '&billing_cycle=lifetime';

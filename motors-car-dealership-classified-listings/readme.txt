@@ -5,7 +5,7 @@ Donate link: https://www.paypal.me/stylemix
 Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
 Tested up to: 6.6
-Stable tag: 1.4.29
+Stable tag: 1.4.30
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -129,6 +129,12 @@ After that, go to Tools -> Import, and via Wordpress Importer tool install dummy
 8. Additional features
 
 == Changelog ==
+
+= 1.4.30 =
+- **Enhancement:** Changed the order of settings in the Listing Manager menu for better usability.
+- **Fix:** Listing Price Form Custom Label is not appearing on the Inventory Page in Grid View.
+- **Fix:** Page reloads when Trade In form is submitted with incomplete information.
+- **Fix:** Resolved an issue where Starter Theme update was not appearing for users.
 
 = 1.4.29 =
 - **Fix:** Minor bug fixes.

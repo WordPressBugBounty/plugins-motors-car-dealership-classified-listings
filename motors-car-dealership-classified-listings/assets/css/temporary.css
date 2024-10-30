@@ -1,0 +1,45 @@
+.stm-loader-warning {
+    position: relative;
+    margin: 0 15px 15px 0;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
+    border-radius: 4px;
+    border: #227afb;
+    .notice-wrapper {
+        display: flex;
+        justify-content: space-between;
+        .inner-wrapper {
+            display: flex;
+            align-items: center;
+            img {
+                height: 40px;
+                -o-object-fit: cover;
+                object-fit: cover;
+                margin-right: 20px;
+            }
+            p {
+                color: #1D2327;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 15px;
+                line-height: 20px;
+            }
+        }
+        .stm_mvl_install_button {
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            color: #fff !important;
+            transition: .3s ease;
+            border-color: #227afb;
+            margin: 4px 0 0 auto;
+            padding: 9px 18px;
+            background: #4478FF;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 17px;
+        }
+    }
+}

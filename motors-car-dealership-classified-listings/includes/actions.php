@@ -851,6 +851,205 @@ if ( ! function_exists( 'stm_ajax_buy_car_online' ) ) {
 	}
 }
 
+//Trade in form ajax
+if ( ! function_exists( 'handle_stm_trade_in_form' ) ) {
+	function handle_stm_trade_in_form() {
+		check_ajax_referer( 'stm_trade_in_nonce', 'trade_in_wpnonce' );
+
+		$recaptcha_enabled    = apply_filters( 'motors_vl_get_nuxy_mod', 0, 'enable_recaptcha' );
+		$recaptcha_secret_key = apply_filters( 'motors_vl_get_nuxy_mod', '', 'recaptcha_secret_key' );
+		$stm_errors           = array();
+
+		if ( $recaptcha_enabled && isset( $_POST['g-recaptcha-response'] ) ) {
+			if ( ! stm_motors_check_recaptcha( $recaptcha_secret_key, sanitize_text_field( $_POST['g-recaptcha-response'] ) ) ) {
+				$stm_errors['recaptcha_error'] = esc_html__( 'Please prove you\'re not a robot', 'stm_vehicles_listing' );
+			}
+		}
+
+		if ( ! empty( $stm_errors ) ) {
+			wp_send_json(
+				array(
+					'success' => false,
+					'message' => implode( '', $stm_errors ),
+				)
+			);
+		}
+
+		$files           = array();
+		$stm_urls        = '';
+		$files_to_delete = array();
+		$images_name     = array();
+
+		if ( ! empty( $_FILES ) ) {
+			foreach ( $_FILES as $file ) {
+				if ( is_array( $file ) && isset( $file['tmp_name'] ) && ! empty( $file['tmp_name'] ) ) {
+					$attachment_id     = apply_filters( 'stm_upload_user_file', false, $file );
+					$files_to_delete[] = $attachment_id;
+					if ( $attachment_id ) {
+						$file_path = get_attached_file( $attachment_id );
+						if ( file_exists( $file_path ) ) {
+							$files[]       = $file_path;
+							$url           = wp_get_attachment_url( $attachment_id );
+							$stm_urls     .= esc_url( $url ) . '<br/>';
+							$images_name[] = basename( $file['name'] );
+						}
+					}
+				}
+			}
+		}
+
+		$fields = array(
+			'first_name',
+			'last_name',
+			'email',
+			'phone',
+			'car',
+			'make',
+			'model',
+			'stm_year',
+			'transmission',
+			'mileage',
+			'vin',
+			'exterior_color',
+			'interior_color',
+			'exterior_condition',
+			'interior_condition',
+			'owner',
+			'accident',
+			'comments',
+			'video_url',
+			'image_urls' => implode( ', ', $images_name ),
+		);
+
+		$args = array();
+		foreach ( $fields as $field => $value ) {
+			if ( 'image_urls' === $field ) {
+				$args[ $field ] = $value;
+			} else {
+				$args[ $value ] = isset( $_POST[ $value ] ) ? sanitize_text_field( $_POST[ $value ] ) : '';
+			}
+		}
+
+		$body = apply_filters( 'get_generate_template_view', '', 'trade_in', $args );
+
+		if ( ! empty( $body ) ) {
+			$to = get_bloginfo( 'admin_email' );
+
+			$subject_type = is_singular( apply_filters( 'stm_listings_post_type', 'listings' ) ) ? 'trade_in' : 'sell_a_car';
+			$subject      = apply_filters( 'get_generate_subject_view', '', $subject_type, $args );
+
+			$stm_blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
+			$wp_email     = 'wordpress@' . preg_replace( '#^www\.#', '', strtolower( $_SERVER['SERVER_NAME'] ) );
+
+			$headers = array(
+				'From: ' . $stm_blogname . ' <' . $wp_email . '>',
+				'Content-Type: text/html; charset=UTF-8',
+			);
+
+			$mail_sent = wp_mail( $to, $subject, $body, $headers, $files );
+
+			if ( $mail_sent ) {
+				$response = array(
+					'success' => true,
+					'message' => __( 'Form submitted successfully!', 'stm_vehicles_listing' ),
+					'data'    => $_POST,
+				);
+				foreach ( $files_to_delete as $file ) {
+					wp_delete_attachment( $file, true );
+				}
+			} else {
+				$response = array(
+					'success' => false,
+					'message' => __( 'Failed to send email', 'stm_vehicles_listing' ),
+				);
+			}
+		} else {
+			$response = array(
+				'success' => false,
+				'message' => __( 'No content to send', 'stm_vehicles_listing' ),
+			);
+		}
+
+		wp_send_json( $response );
+	}
+}
+
+add_action( 'wp_ajax_stm_trade_in_form', 'handle_stm_trade_in_form' );
+add_action( 'wp_ajax_nopriv_stm_trade_in_form', 'handle_stm_trade_in_form' );
+
+if ( ! function_exists( 'stm_ajax_add_test_drive' ) ) {
+	//Ajax request test drive
+	function stm_ajax_add_test_drive() {
+		check_ajax_referer( 'stm_add_test_drive_nonce', 'security', false );
+		$response['errors'] = array();
+
+		if ( ! filter_var( $_POST['name'], FILTER_SANITIZE_STRING ) ) {
+			$response['response']       = esc_html__( 'Please fill all fields', 'stm_vehicles_listing' );
+			$response['errors']['name'] = true;
+		}
+		if ( ! is_email( $_POST['email'] ) ) {
+			$response['response']        = esc_html__( 'Please enter correct email', 'stm_vehicles_listing' );
+			$response['errors']['email'] = true;
+		}
+		if ( ! is_numeric( $_POST['phone'] ) ) {
+			$response['response']        = esc_html__( 'Please enter correct phone number', 'stm_vehicles_listing' );
+			$response['errors']['phone'] = true;
+		}
+		if ( empty( $_POST['date'] ) ) {
+			$response['response']       = esc_html__( 'Please fill all fields', 'stm_vehicles_listing' );
+			$response['errors']['date'] = true;
+		}
+
+		if ( ! filter_var( $_POST['name'], FILTER_SANITIZE_STRING ) && ! is_email( $_POST['email'] ) && ! is_numeric( $_POST['phone'] ) && empty( $_POST['date'] ) ) {
+			$response['response'] = esc_html__( 'Please fill all fields', 'stm_vehicles_listing' );
+		}
+
+		if ( empty( $response['errors'] ) && ! empty( $_POST['vehicle_id'] ) ) {
+			$vehicle_id                = intval( $_POST['vehicle_id'] );
+			$test_drive['post_title']  = esc_html__( 'New request for test drive', 'stm_vehicles_listing' ) . ' ' . get_the_title( $vehicle_id );
+			$test_drive['post_type']   = 'test_drive_request';
+			$test_drive['post_status'] = 'draft';
+			$test_drive_id             = wp_insert_post( $test_drive );
+			update_post_meta( $test_drive_id, 'name', sanitize_text_field( $_POST['name'] ) );
+			update_post_meta( $test_drive_id, 'email', sanitize_email( $_POST['email'] ) );
+			update_post_meta( $test_drive_id, 'phone', sanitize_text_field( $_POST['phone'] ) );
+			update_post_meta( $test_drive_id, 'date', sanitize_text_field( $_POST['date'] ) );
+			$response['response'] = esc_html__( 'Your request was sent', 'stm_vehicles_listing' );
+			$response['status']   = 'success';
+
+			//Sending Mail to admin
+			add_filter( 'wp_mail_content_type', 'stm_set_html_content_type_mail' );
+
+			$to      = get_bloginfo( 'admin_email' );
+			$subject = esc_html__( 'Request for a test drive', 'stm_vehicles_listing' ) . ' ' . get_the_title( $vehicle_id );
+			$body    = esc_html__( 'Name - ', 'stm_vehicles_listing' ) . esc_html( $_POST['name'] ) . '<br/>';
+			$body   .= esc_html__( 'Email - ', 'stm_vehicles_listing' ) . esc_html( $_POST['email'] ) . '<br/>';
+			$body   .= esc_html__( 'Phone - ', 'stm_vehicles_listing' ) . esc_html( $_POST['phone'] ) . '<br/>';
+			$body   .= esc_html__( 'Date - ', 'stm_vehicles_listing' ) . esc_html( $_POST['date'] ) . '<br/>';
+
+			wp_mail( $to, $subject, $body );
+
+			$car_owner = get_post_meta( $vehicle_id, 'stm_car_user', true );
+			if ( ! empty( $car_owner ) ) {
+				$user_fields = stm_get_user_custom_fields( $car_owner );
+				if ( ! empty( $user_fields ) && ! empty( $user_fields['email'] ) ) {
+					wp_mail( $user_fields['email'], $subject, $body );
+				}
+			}
+
+			remove_filter( 'wp_mail_content_type', 'stm_set_html_content_type_mail' );
+
+		} else {
+			$response['status'] = 'danger';
+		}
+
+		wp_send_json( $response );
+	}
+
+	add_action( 'wp_ajax_stm_ajax_add_test_drive', 'stm_ajax_add_test_drive' );
+	add_action( 'wp_ajax_nopriv_stm_ajax_add_test_drive', 'stm_ajax_add_test_drive' );
+}
+
 // Media upload limit.
 if ( ! function_exists( 'stm_filter_media_upload_size' ) ) {
 	function stm_filter_media_upload_size( $size ) {

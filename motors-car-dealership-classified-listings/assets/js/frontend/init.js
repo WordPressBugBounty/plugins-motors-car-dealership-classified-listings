@@ -571,5 +571,15 @@ if (typeof (STMListings) == 'undefined') {
 
     });
 
+    $('body').on(
+        'click',
+        '.listing-car-item-meta .price[data-target="#get-car-price"], .stm_moto_hover_unit .price [data-target="#get-car-price"], #listings-result .image .price [data-target="#get-car-price"]',
+        function (e) {
+            if ($(e.target).closest('a').length) {
+                e.preventDefault()
+            }
+        }
+    )
+
 })(jQuery);
 

@@ -29,26 +29,10 @@ function stm_listings_register_manager( $butterbean, $post_type ) {
 
 	/*Register sections*/
 	$manager->register_section(
-		'stm_options',
-		array(
-			'label' => esc_html__( 'Details', 'stm_vehicles_listing' ),
-			'icon'  => 'fas fa-list-ul',
-		)
-	);
-
-	$manager->register_section(
 		'stm_features',
 		array(
 			'label' => esc_html__( 'Options', 'stm_vehicles_listing' ),
-			'icon'  => 'fa fa-dashboard',
-		)
-	);
-
-	$manager->register_section(
-		'stm_additional_features',
-		array(
-			'label' => esc_html__( 'Features', 'stm_vehicles_listing' ),
-			'icon'  => 'fa-regular fa-square-check',
+			'icon'  => 'motors-icons-car',
 		)
 	);
 
@@ -61,10 +45,10 @@ function stm_listings_register_manager( $butterbean, $post_type ) {
 	);
 
 	$manager->register_section(
-		'special_offers',
+		'stm_additional_features',
 		array(
-			'label' => esc_html__( 'Specials', 'stm_vehicles_listing' ),
-			'icon'  => 'fa fa-bookmark',
+			'label' => esc_html__( 'Additional features', 'stm_vehicles_listing' ),
+			'icon'  => 'fa-solid fa-square-check',
 		)
 	);
 
@@ -85,10 +69,26 @@ function stm_listings_register_manager( $butterbean, $post_type ) {
 	);
 
 	$manager->register_section(
+		'special_offers',
+		array(
+			'label' => esc_html__( 'Mark as Featured', 'stm_vehicles_listing' ),
+			'icon'  => 'fa fa-bookmark',
+		)
+	);
+
+	$manager->register_section(
 		'motors_listing_info',
 		array(
 			'label' => esc_html__( 'Specifications', 'stm_vehicles_listing' ),
 			'icon'  => 'fa fa-th-list',
+		)
+	);
+
+	$manager->register_section(
+		'stm_options',
+		array(
+			'label' => esc_html__( 'Other Details', 'stm_vehicles_listing' ),
+			'icon'  => 'fa-solid fa-list',
 		)
 	);
 

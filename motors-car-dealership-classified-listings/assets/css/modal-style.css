@@ -16,6 +16,12 @@
     transform: translateY(-50%);
 }
 
+#get-car-price-form .form-error,
+#request-trade-offer-form .form-error,
+#request-test-drive-form .form-error {
+    border: 1px solid #ff2325 !important;
+}
+
 #get-car-price-form .modal-dialog,
 #request-trade-offer-form .modal-dialog,
 #request-test-drive-form .modal-dialog {
@@ -65,6 +71,50 @@
     font-size: 14px;
     outline: none !important;
     background-color: #eceff3;
+}
+
+#get-car-price-form .stm-loader.circle,
+#request-trade-offer-form .stm-loader.circle,
+#request-test-drive-form .stm-loader.circle {
+    position: relative;
+    width: 50px;
+    height: 50px;
+}
+
+#get-car-price-form .stm-loader.circle div,
+#request-trade-offer-form .stm-loader.circle div,
+#request-test-drive-form .stm-loader.circle div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 5px solid #eceff3;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+}
+
+#get-car-price-form .stm-loader-inner,
+#request-trade-offer-form .stm-loader-inner,
+#request-test-drive-form .stm-loader-inner {
+    display: none;
+}
+
+#get-car-price-form .stm-sell-a-car-loader.active .stm-loader-inner,
+#request-trade-offer-form .stm-sell-a-car-loader.active .stm-loader-inner,
+#request-test-drive-form .stm-sell-a-car-loader.active .stm-loader-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .modal-backdrop.fade {
@@ -234,6 +284,10 @@
     float: right;
 }
 
+#request-trade-in-offer .form-error {
+    border: 1px solid #ff2325 !important;
+}
+
 #request-trade-in-offer .stm-label-type-2 {
     margin-bottom: 5px;
     font-weight: 400;
@@ -265,6 +319,42 @@
 #request-trade-in-offer .wpcf7-response-output.wpcf7-mail-sent-ok {
     border-color: #32cd32 !important;
     color: #32cd32 !important;
+}
+
+#request-trade-in-offer .stm-loader.circle {
+    position: relative;
+    width: 50px;
+    height: 50px;
+}
+
+#request-trade-in-offer .stm-loader.circle div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 5px solid #eceff3;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+}
+
+#request-trade-in-offer .stm-loader-inner {
+    display: none;
+}
+
+#request-trade-in-offer .stm-sell-a-car-loader.active .stm-loader-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 #trade-in .modal-dialog {
