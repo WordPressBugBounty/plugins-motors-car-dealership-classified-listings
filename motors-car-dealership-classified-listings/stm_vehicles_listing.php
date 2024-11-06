@@ -8,7 +8,7 @@
  * License: GNU General Public License v2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: stm_vehicles_listing
- * Version: 1.4.30
+ * Version: 1.4.31
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -49,7 +49,7 @@ if ( ! defined( 'STM_LISTINGS_PATH' ) ) {
 	define( 'STM_LISTINGS_URL', plugins_url( '', STM_LISTINGS_FILE ) );
 	define( 'STM_LISTINGS', 'stm_vehicles_listing' );
 	define( 'STM_THEME_V_NEED', '5.6.33' );
-	define( 'STM_LISTINGS_V', '1.4.30' );
+	define( 'STM_LISTINGS_V', '1.4.31' );
 	define( 'STM_LISTINGS_IMAGES', STM_LISTINGS_URL . '/includes/admin/butterbean/images/' );
 }
 
@@ -187,7 +187,7 @@ if ( is_admin() ) {
 		new SingleListingTemplateSettings();
 	}
 
-	if ( apply_filters( 'mvl_add_listing_form_enable', true ) && class_exists( '\MotorsVehiclesListing\MenuPages\AddCarFormSettings' ) ) {
+	if ( apply_filters( 'mvl_add_listing_form_enable', true ) && class_exists( '\MotorsVehiclesListing\MenuPages\AddCarFormSettings' ) && ! defined( 'WPB_VC_VERSION' ) && 'classified' === get_option( 'motors_layout_type', 'classified' ) ) {
 		new AddCarFormSettings();
 	}
 

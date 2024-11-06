@@ -5,7 +5,7 @@ Donate link: https://www.paypal.me/stylemix
 Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
 Tested up to: 6.6
-Stable tag: 1.4.30
+Stable tag: 1.4.31
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,8 +15,8 @@ Manage classified listings with WordPress, and allow users to post classified li
 
 The Motors plugin makes it easy for vehicle dealers to create and manage listings on their WordPress sites. It's perfect for anyone **selling cars**, **motorcycles**, **boats**, and more. With this plugin, you can **create and organize your listings**, attract more customers, and boost your sales.
 
-⭐ [Motors  Pro Plugin](https://stylemixthemes.com/wordpress-motors-plugin/?utm_source=wporg&utm_medium=description)
-⭐ [Motors  Live Demo](https://motors-plugin.stylemixthemes.com/?utm_source=wporg&utm_medium=description)
+⭐ [Motors  Pro Plugin](https://stylemixthemes.com/car-dealer-plugin/?utm_source=wporg-motors&utm_medium=description)
+⭐ [Motors  Live Demo](https://motors-plugin.stylemixthemes.com/?utm_source=wporg-motors&utm_medium=description)
 ⭐ [Documentation](https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing)
 ⭐ [Join Facebook Community](https://www.facebook.com/groups/motorstheme)
 
@@ -24,25 +24,25 @@ The Motors plugin makes it easy for vehicle dealers to create and manage listing
 
 #### Car Dealers
 
-Car dealers can use the Motors plugin to showcase their inventory online. By creating detailed listings with photos, videos, and descriptions, dealers can attract more buyers. For example, a car dealer can use the plugin to allow customers to request test drives directly from the listing page and many more.
+Car dealers can use the Motors plugin to showcase their inventory online. By creating detailed listings with photos, videos, and descriptions, dealers can attract more buyers. For example, a car dealer can use the plugin to allow customers to request test drives directly from the listing page and many more. The plugin has features to post an unlimited number of car listings.
 
 #### Dealerships
 
-Dealerships can benefit from the Motors plugin by managing multiple types of vehicles in one place. Whether they sell cars, motorcycles, boats, or trucks, they can keep their listings effectively. A dealership can set up categories for different vehicle types to help customers find what they're looking for.
+Dealerships can benefit from the Motors by managing multiple types of vehicles in one place. It makes selling items for vehicle dealers simple and fast. Whether they sell cars, motorcycles, boats, or trucks, Motors gives an opportunity to dealers to keep their listings effectively on WordPress sites. A dealership can set up categories for different vehicle types to help customers find what they’re looking for.
 
 ### Create a Listing with Ease
 
-You can add all the important details about the vehicle, like its make, model, year, and mileage. Plus, you can upload photos and videos to give buyers a good look at the vehicle from every angle.
+With the plugin, car dealers can add all the important details about the vehicle, like its make, model, year, and mileage. Plus, you can upload photos and videos to give buyers a good look at the vehicle from every angle.
 
-You have the option to let the plugin come up with a title for you based on the vehicle's details, or you can create your own to highlight its best features. Don't forget to fill in important info like the Vehicle Identification Number (VIN), production date, and any history or maintenance records.
+You have the option to let the plugin come up with a title for you based on the vehicle’s details, or you can create your own to highlight its best features. The Motors plugin helps you fill in important info to your car listings on the WordPress site like the Vehicle Identification Number (VIN), production date, and any history or maintenance records.
 
 You can take it further by using premium pre-built page templates for each listing or creating your own custom layout using premium elements.
 
 ### Customize Listing Pages
 
-You can choose how you want your listings to appear, whether it's in a grid or list format, to make it easier for buyers to browse through. You can also add buttons for test drives, loan calculators, and certification logos to help buyers make decisions faster.
+The plugin allows you to choose how you want your car listings to appear, whether it’s in a grid or list format, to make it easier for buyers to browse through your WordPress site. You can also add buttons for test drives, loan calculators, and certification logos to help buyers make decisions faster.
 
-You can customize your site with advanced features:
+The plugin lets you set options like registering users as vehicle dealers on your WordPress site. You can customize your site with the advanced features listed below:
 - Search listings by location using Google Maps integration.
 - Sort listings by custom fields—perfect for businesses that want to offer custom sorting options.
 - Register users as Dealers or Dealerships, allowing multiple sellers to manage their own listings.
@@ -53,15 +53,15 @@ You can customize your site with advanced features:
 
 ### Listing Management
 The Motors plugin offers a wide range of management features:
-- **User Management** – From user registration to profile management, both buyers and dealers have access to an intuitive system.
-- **Listings Management** – Add, edit, and delete listings easily via the frontend submission form.
+- **User Management** – From user registration to profile management, the plugin gives access to both buyers and car dealers to an intuitive system of your WordPress site.
+- **Listings Management** – Plugin lets you add, edit, and delete listings posted by vehicle dealers easily via the frontend submission form.
 - **Comparing Listings** – Users can compare multiple vehicles side-by-side to help make informed decisions.
 - **Category Management** – Create unlimited custom categories with parent-child dependencies, icons, and filters to ensure easy browsing.
 - **Shortcodes** – Use shortcodes to integrate listing features into any page.
 
-You also get an **Email Template Manager (Pro)** that lets you fully customize the emails sent out to maintain consistent messaging.
+The Motors plugin also has an **Email Template Manager (Pro)** that lets you fully customize the emails sent out to maintain consistent messaging for customers and dealers on your WordPress site. 
 
-#### Plugin Features
+#### The Car Dealer WordPress Plugin Features
 
 **User Management**
 
@@ -129,6 +129,9 @@ After that, go to Tools -> Import, and via Wordpress Importer tool install dummy
 8. Additional features
 
 == Changelog ==
+
+= 1.4.31 =
+- **Fix:** Small bug fixes.
 
 = 1.4.30 =
 - **Enhancement:** Changed the order of settings in the Listing Manager menu for better usability.

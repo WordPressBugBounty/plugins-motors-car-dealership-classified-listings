@@ -37,7 +37,8 @@ function stm_listings_template_actions() {
 				stm_listings_ajax_results( array( 'sold_car' => 'on' ), 'sold_car', null );
 				break;
 			case 'listings-binding':
-				stm_listings_binding_results();
+				$hide_empty = ( ! empty( $_GET['hide_empty'] ) ) ? sanitize_text_field( $_GET['hide_empty'] ) : false;
+				stm_listings_binding_results( $hide_empty );
 				break;
 			case 'listings-items':
 				stm_listings_items();
@@ -230,8 +231,8 @@ function stm_listings_items_ajax_results( $source = null, $type = null, $navigat
 /**
  * Ajax filter binding
  */
-function stm_listings_binding_results() {
-	$r = apply_filters( 'stm_listings_filter_func', null );
+function stm_listings_binding_results( $hide_empty ) {
+	$r = apply_filters( 'stm_listings_filter_func', null, $hide_empty );
 
 	$fragments = apply_filters( 'stm_listings_input', null, 'fragments' );
 	if ( ! empty( $fragments ) ) {
