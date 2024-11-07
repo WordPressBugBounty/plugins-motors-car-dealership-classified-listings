@@ -259,7 +259,7 @@ $actions_visibility = ( $show_actions_onhover ) ? ' actions-onhover' : '';
 					if ( ! empty( $src[0] ) ) :
 						?>
 						<div class="stm-single-image swiper-slide video-preview" data-id="big-image-<?php echo esc_attr( $val ); ?>">
-							<a class="fancy-iframe stm_fancybox" data-iframe="true" data-src="<?php echo esc_url( $video_source ); ?>">ф
+							<a class="fancy-iframe stm_fancybox" data-iframe="true" data-src="<?php echo esc_url( $video_source ); ?>">
 								<img src="<?php echo esc_url( $src[0] ); ?>" class="img-responsive" alt="<?php esc_attr_e( 'Video preview', 'stm_vehicles_listing' ); ?>"/>
 							</a>
 						</div>

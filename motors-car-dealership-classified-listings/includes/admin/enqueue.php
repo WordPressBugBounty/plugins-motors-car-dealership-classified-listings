@@ -91,7 +91,7 @@ function stm_listings_admin_enqueue( $hook ) {
 
 	wp_enqueue_media();
 
-	if ( 'product' === get_post_type() || in_array( get_post_type(), apply_filters( 'stm_listings_multi_type', array( 'listings' ) ), true ) || 'page' === get_post_type() || 'listings_page_listing_categories' === $hook || 'motors-plugin_page_listing_categories' === $hook ) {
+	if ( 'product' === get_post_type() || in_array( get_post_type(), apply_filters( 'stm_listings_multi_type', array( 'listings' ) ), true ) || 'page' === get_post_type() || 'listings_page_listing_categories' === $hook || 'motors-plugin_page_listing_categories' === $hook || 'toplevel_page_listing_categories' === $hook ) {
 		wp_register_script( 'stm-theme-quicksearch', STM_LISTINGS_URL . '/assets/js/jquery.quicksearch.js', array( 'jquery' ), STM_LISTINGS_V, true );
 		wp_register_script( 'stm-theme-multiselect', STM_LISTINGS_URL . '/assets/js/jquery.multi-select.js', array( 'jquery' ), STM_LISTINGS_V, true );
 		wp_add_inline_script( 'stm-theme-multiselect', 'var myText = "' . esc_js( __( 'Search...', 'stm_vehicles_listing' ) ) . '";' );

@@ -78,6 +78,7 @@ class ComposerStaticInit5db859e1dab632b715b93d33219eb1cf
         'MotorsVehiclesListing\\User\\UserListingsController' => __DIR__ . '/../..' . '/includes/class/User/UserListingsController.php',
         'MotorsVehiclesListing\\User\\UserMetaController' => __DIR__ . '/../..' . '/includes/class/User/UserMetaController.php',
         'MotorsVehiclesListing\\User\\UserReviewsController' => __DIR__ . '/../..' . '/includes/class/User/UserReviewsController.php',
+        'MotorsVehiclesListing\\User\\UserRoles' => __DIR__ . '/../..' . '/includes/class/User/UserRoles.php',
         'Motors_Elementor_Widgets_Free\\Helpers\\Helper' => __DIR__ . '/../..' . '/elementor/inc/Helpers/Helper.php',
         'Motors_Elementor_Widgets_Free\\Helpers\\RegisterActions' => __DIR__ . '/../..' . '/elementor/inc/Helpers/RegisterActions.php',
         'Motors_Elementor_Widgets_Free\\Widgets\\AddListing' => __DIR__ . '/../..' . '/elementor/inc/Widgets/AddListing.php',

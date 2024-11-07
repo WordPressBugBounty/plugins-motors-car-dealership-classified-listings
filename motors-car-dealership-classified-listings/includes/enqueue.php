@@ -151,6 +151,7 @@ function stm_listings_enqueue_scripts_styles() {
 	wp_register_style( 'sell-a-car-form', STM_LISTINGS_URL . '/assets/css/frontend/sell-a-car-form.css', null, STM_LISTINGS_V );
 	wp_register_style( 'listing-icon-filter', STM_LISTINGS_URL . '/assets/css/frontend/listing_icon_filter.css', null, STM_LISTINGS_V );
 	wp_register_style( 'listings-tabs', STM_LISTINGS_URL . '/assets/css/frontend/listings-tabs.css', null, STM_LISTINGS_V );
+	wp_register_style( 'listing-search-empty-results', STM_LISTINGS_URL . '/assets/css/frontend/components/inventory/results-empty.css', null, STM_LISTINGS_V );
 	wp_register_style( 'listing-search', STM_LISTINGS_URL . '/assets/css/frontend/listing-search.css', null, STM_LISTINGS_V );
 	wp_register_style( 'motors-single-listing', STM_LISTINGS_URL . '/assets/css/frontend/single-listing.css', null, STM_LISTINGS_V );
 	wp_register_style( 'inventory', STM_LISTINGS_URL . '/assets/css/frontend/inventory.css', null, STM_LISTINGS_V );

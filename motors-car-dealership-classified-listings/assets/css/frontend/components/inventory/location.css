@@ -81,22 +81,22 @@
 
 .filter-sidebar .stm-location-search-unit:before {
     content: "\e956";
+    position: absolute;
+    top: 10px;
+    left: 10px;
     color: #898989;
   /* use !important to prevent issues with browser extensions that change fonts */
-    font-family: "stm-icon";
-    speak: never;
+    font-family: "motors-icons";
+    speak: none;
+    font-size: 19px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: normal;
     font-variant: normal;
     text-transform: none;
     line-height: 1;
   /* Better Font Rendering =========== */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-size: 19px;
-    position: absolute;
-    top: 10px;
-    left: 10px;
 }
 
 .stm-location-search-unit #ca_location_listing_filter {

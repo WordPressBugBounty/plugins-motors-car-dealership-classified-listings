@@ -27,6 +27,7 @@ class InventorySearchResults extends WidgetBase {
 
 	public function get_style_depends(): array {
 		$widget_styles   = parent::get_style_depends();
+		$widget_styles[] = 'listing-search-empty-results';
 		$widget_styles[] = self::get_name() . '-rtl';
 
 		return $widget_styles;

@@ -724,7 +724,7 @@ function stm_vehicle_listings_save_options( $options ) {
 		}
 	}
 
-	if ( current_user_can( 'administrator' ) || current_user_can( 'editor' ) ) {
+	if ( current_user_can( 'administrator' ) || current_user_can( 'editor' ) || current_user_can( 'listing_manager' ) ) {
 		return update_option( 'stm_vehicle_listing_options', $options );
 	}
 

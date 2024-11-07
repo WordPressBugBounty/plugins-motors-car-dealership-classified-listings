@@ -737,6 +737,19 @@ function stm_listings_init() {
 			'show_in_menu'       => 'admin.php?page=mvl_plugin_settings',
 			'query_var'          => true,
 			'hierarchical'       => false,
+			'capability_type'    => 'listings_post',
+			'capabilities'       => array(
+				'publish_post'           => 'publish_listings_post',
+				'edit_post'           => 'edit_listings_post',
+				'read_post'           => 'read_listings_post',
+				'delete_post'         => 'delete_listings_post',
+				'publish_posts'       => 'publish_listings_posts',
+				'edit_posts'          => 'edit_listings_posts',
+				'delete_posts'        => 'delete_listings_posts',
+				'edit_others_posts'   => 'edit_others_listings_posts',
+				'delete_others_posts' => 'delete_others_listings_posts',
+				'read_private_posts'  => 'read_private_listings_posts',
+			),
 		)
 	);
 
@@ -761,8 +774,9 @@ function stm_listings_init() {
 			'public'               => true,
 			'publicly_queryable'   => false,
 			'show_ui'              => true,
-			'show_in_menu'         => 'edit.php?post_type=listings',
+			'show_in_menu'         => 'admin.php?page=mvl_plugin_settings',
 			'show_in_nav_menus'    => false,
+			'capability_type'      => 'listing_manager',
 			'query_var'            => true,
 			'has_archive'          => true,
 			'hierarchical'         => false,

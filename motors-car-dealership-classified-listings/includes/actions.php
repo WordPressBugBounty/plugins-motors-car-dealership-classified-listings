@@ -519,8 +519,12 @@ function delete_images_from_trashed_listing( $listing_id ) {
 }
 
 if ( ! function_exists( 'mvl_get_user_role' ) ) {
-	function mvl_get_user_role( $default, $user_id = null ) {
+	function mvl_get_user_role( $default, $user_id = null, $return_role = false ) {
 		$user_data = get_userdata( $user_id ? $user_id : get_current_user_id() );
+
+		if ( $return_role && ! empty( $user_data->roles ) ) {
+			return $user_data->roles[0];
+		}
 
 		return ! empty( $user_data ) && in_array( 'stm_dealer', $user_data->roles, true );
 	}

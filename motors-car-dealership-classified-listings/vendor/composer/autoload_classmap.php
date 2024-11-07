@@ -48,6 +48,7 @@ return array(
     'MotorsVehiclesListing\\User\\UserListingsController' => $baseDir . '/includes/class/User/UserListingsController.php',
     'MotorsVehiclesListing\\User\\UserMetaController' => $baseDir . '/includes/class/User/UserMetaController.php',
     'MotorsVehiclesListing\\User\\UserReviewsController' => $baseDir . '/includes/class/User/UserReviewsController.php',
+    'MotorsVehiclesListing\\User\\UserRoles' => $baseDir . '/includes/class/User/UserRoles.php',
     'Motors_Elementor_Widgets_Free\\Helpers\\Helper' => $baseDir . '/elementor/inc/Helpers/Helper.php',
     'Motors_Elementor_Widgets_Free\\Helpers\\RegisterActions' => $baseDir . '/elementor/inc/Helpers/RegisterActions.php',
     'Motors_Elementor_Widgets_Free\\Widgets\\AddListing' => $baseDir . '/elementor/inc/Widgets/AddListing.php',

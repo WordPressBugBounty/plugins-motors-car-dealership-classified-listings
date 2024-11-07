@@ -174,7 +174,6 @@ class Settings {
 		}
 
 		//Add submenu for test_drive_request
-
 		$test_drive_data = get_post_type_object( 'test_drive_request' );
 		if ( ! empty( $test_drive_data ) ) {
 			add_submenu_page(
