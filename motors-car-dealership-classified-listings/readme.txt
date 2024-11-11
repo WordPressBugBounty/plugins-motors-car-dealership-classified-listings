@@ -5,7 +5,7 @@ Donate link: https://www.paypal.me/stylemix
 Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
 Tested up to: 6.6
-Stable tag: 1.4.32
+Stable tag: 1.4.33
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,7 +59,7 @@ The Motors plugin offers a wide range of management features:
 - **Category Management** – Create unlimited custom categories with parent-child dependencies, icons, and filters to ensure easy browsing.
 - **Shortcodes** – Use shortcodes to integrate listing features into any page.
 
-The Motors plugin also has an **Email Template Manager (Pro)** that lets you fully customize the emails sent out to maintain consistent messaging for customers and dealers on your WordPress site. 
+The Motors plugin also has an **Email Template Manager (Pro)** that lets you fully customize the emails sent out to maintain consistent messaging for customers and dealers on your WordPress site.
 
 #### The Car Dealer WordPress Plugin Features
 
@@ -129,6 +129,9 @@ After that, go to Tools -> Import, and via Wordpress Importer tool install dummy
 8. Additional features
 
 == Changelog ==
+
+= 1.4.33 =
+- **Fix:** Minor bug fixes.
 
 = 1.4.32 =
 - **New feature:** Added a new user role, 'Listing Manager' to create and manage listings directly from the admin site.

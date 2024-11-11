@@ -353,18 +353,8 @@ function _stm_listings_build_query_args( $args = null, $source = null ) {
 		$custom_suffix     = 'low';
 	}
 
-	if ( stm_is_multilisting() && ! empty( $custom_meta_key ) ) {
-		$current_slug = STMMultiListing::stm_get_current_listing_slug();
-		if ( ! empty( $current_slug ) ) {
-			$data = (array) get_option( "stm_{$current_slug}_options", array() );
-			if ( ! empty( $data ) ) {
-				foreach ( $data as $key => $arr ) {
-					if ( $custom_meta_key === $arr['slug'] && true === $arr['listing_price_field'] ) {
-						$sort_by = 'price_' . $custom_suffix;
-					}
-				}
-			}
-		}
+	if ( apply_filters( 'stm_is_listing_price_field', false, $custom_meta_key ) ) {
+		$sort_by = 'price_' . $custom_suffix;
 	}
 
 	if ( ! empty( $sort_by ) ) {

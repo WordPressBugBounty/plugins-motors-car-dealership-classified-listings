@@ -56,6 +56,7 @@ class STMListingDataStoreCPT extends WC_Product_Data_Store_CPT implements WC_Obj
 			)
 		);
 
+		$product->set_virtual( true );
 		$this->read_attributes( $product );
 		$this->read_downloads( $product );
 		$this->read_visibility( $product );
