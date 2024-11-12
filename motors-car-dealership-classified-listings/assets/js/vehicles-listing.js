@@ -136,7 +136,7 @@
 			}
 
 			$('.stm_edit_item_wrap').slideDown();
-			
+
 			$('.stm-new-filter-category').slideUp();
 		});
 
@@ -184,22 +184,22 @@
 			$('.stm_edit_item_wrap #stm-edit-picked-font-icon').val(font);
 			$('.stm_edit_item_wrap .stm_theme_cat_chosen_icon_edit_preview').html('<i class="' + font + '"></i>')
 		});
-		
-		
-		$(".source .item").draggable({ 
+
+
+		$(".source .item").draggable({
 			revert: "invalid", appendTo: 'body', helper: 'clone',
-        	start: function(ev, ui){ 
-	        	ui.helper.width($(this).width()); 
+        	start: function(ev, ui){
+	        	ui.helper.width($(this).width());
 	        }
     	});
 
-	    $(".target .empty").droppable({ 
-		    tolerance: 'pointer', 
-		    hoverClass: 'highlight', 
+	    $(".target .empty").droppable({
+		    tolerance: 'pointer',
+		    hoverClass: 'highlight',
 		    drop: function(ev, ui){
 	            var item = ui.draggable;
 	            if (!ui.draggable.closest('.empty').length) item = item.clone().draggable();
-	            this.innerHTML = '';                               
+	            this.innerHTML = '';
 	            item.css({ top: 0, left: 0 }).appendTo(this);
 				$(item).closest('.target-unit').find('input').val(ui.draggable[0].dataset.key);
 	        },
@@ -323,6 +323,7 @@
 				if(depValue) {
 					stm_this.show();
 				} else {
+					$(stm_this).find('input').prop('checked', false);
 					stm_this.hide();
 				}
 			}
@@ -590,5 +591,5 @@
 		});
 
 	});
-	
+
 }(jQuery));

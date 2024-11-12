@@ -25,10 +25,10 @@ if (typeof (STMListings) == 'undefined') {
 				if ( field.value !== '' ) {
 					if ( ['stm_lat', 'stm_lng'].includes( field.name ) ) {
 						if ( field.value !== 0 ) {
-							url.searchParams.set( field.name, field.value );
+							url.searchParams.append( field.name, field.value );
 						}
 					} else {
-						url.searchParams.set( field.name, field.value );
+						url.searchParams.append( field.name, field.value );
 					}
 				}
 			}
