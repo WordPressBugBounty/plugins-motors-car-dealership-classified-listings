@@ -2,6 +2,7 @@ a.motors-profile-button {
     display: flex;
     align-items: center;
     color: #35475A;
+    justify-content: center;
 }
 
 a.motors-profile-button:hover {

@@ -176,7 +176,7 @@ class InventorySearchResults extends WidgetBase {
 		$this->add_control(
 			'isr_grid_card_settings_featured_link_divider',
 			array(
-				'type'      => \Elementor\Controls_Manager::DIVIDER,
+				'type' => \Elementor\Controls_Manager::DIVIDER,
 			)
 		);
 

@@ -4,29 +4,29 @@
  * @var $field_name
  * @var $section_name
  */
+$is_enable = $field_data['is_enable'] ?? false;
+$is_pro    = apply_filters( 'is_mvl_pro', false );
 
-$is_enable   = $field_data['is_enable'] ?? false;
-$is_pro_plus = $field_data['is_pro_plus'] ?? false;
-$is_pro      = apply_filters( 'is_mvl_pro', false );
-
-if ( $is_pro && ! $is_enable && ! $is_pro_plus ) {
+if ( $is_pro && ! $is_enable ) {
 	return;
 }
 
 $version = ( WP_DEBUG ) ? time() : STM_LISTINGS_V;
 wp_enqueue_style( 'stm_lms_unlock_addons', STM_LISTINGS_URL . '/assets/css/nuxy/nuxy_unlock_addons.css', null, $version );
 
-$label         = $field_data['label'] ?? '';
-$img           = $field_data['img'] ?? '';
-$description   = $field_data['desc'] ?? '';
-$search_addon  = $field_data['search'] ?? '';
-$utm_url       = $field_data['utm_url'] ?? '';
-$slug          = str_replace( ' ', '-', mb_strtolower( $label ) );
-$redirect_link = admin_url( 'admin.php?page=' . ( $is_enable ? "stm-addons&search={$search_addon}" : "motors-vl-go-pro&source=button-{$slug}-settings" ) );
-$redirect_link = ! $is_enable && $is_pro_plus && $utm_url && $is_pro ? $utm_url : $redirect_link;
-$link_text     = $is_enable ? esc_html__( 'Enable addon', 'stm_vehicles_listing' ) : esc_html__( 'Upgrade to PRO', 'stm_vehicles_listing' );
+$label           = $field_data['label'] ?? '';
+$img             = $field_data['img'] ?? '';
+$description     = $field_data['desc'] ?? '';
+$search_addon    = $field_data['search'] ?? '';
+$utm_url         = $field_data['utm_url'] ?? '';
+$slug            = str_replace( ' ', '-', mb_strtolower( $label ) );
+$redirect_link   = admin_url( 'admin.php?page=' . ( $is_pro && $is_enable ? "mvl-addons&search={$search_addon}" : "mvl-go-pro&source=button-{$slug}-settings" ) );
+$redirect_link   = ! $is_enable && $utm_url && $is_pro ? $utm_url : $redirect_link;
+$link_text       = $is_pro && $is_enable ? esc_html__( 'Enable addon', 'stm_vehicles_listing' ) : esc_html__( 'Upgrade to PRO', 'stm_vehicles_listing' );
+$second_btn_text = $field_data['second_btn_text'] ?? '';
+$second_btn_link = $field_data['second_btn_link'] ?? '';
 ?>
-<div class="motors-vl-unlock-pro-banner<?php echo esc_attr( $is_enable || ! $is_enable && $is_pro_plus ? ' addon_disabled' : '' ); ?>">
+<div class="motors-vl-unlock-pro-banner<?php echo esc_attr( $is_enable || ! $is_enable ? ' addon_disabled' : '' ); ?>">
 	<div class="motors-vl-unlock-banner-wrapper">
 		<?php if ( ! empty( $img ) ) : ?>
 			<div class="unlock-banner-image">
@@ -57,6 +57,11 @@ $link_text     = $is_enable ? esc_html__( 'Enable addon', 'stm_vehicles_listing'
 					<a href="<?php echo esc_url( $redirect_link ); ?>" target="_blank" class="primary button btn">
 						<?php echo esc_html( $link_text ); ?>
 					</a>
+					<?php if ( ! empty( $second_btn_text ) ) : ?>
+						<a href="<?php echo esc_url( $second_btn_link ); ?>" target="_blank" class="secondary button btn">
+							<?php echo esc_html( $second_btn_text ); ?>
+						</a>
+					<?php endif; ?>
 				</div>
 			</div>
 		</div>

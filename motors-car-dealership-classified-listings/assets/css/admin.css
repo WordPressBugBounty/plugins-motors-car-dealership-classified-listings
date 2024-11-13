@@ -52,9 +52,9 @@ li#toplevel_page_mvl_plugin_settings .wp-submenu li.mvl-pro-addons-menu.upgrade 
     padding: 20px 0 15px
 }
 
-li#toplevel_page_mvl_plugin_settings .wp-submenu li.mvl-addons-page-menu {
-    padding-top: 15px;
-    padding-bottom: 10px;
+li#toplevel_page_mvl_plugin_settings .wp-submenu li.mvl-addons-page-menu-lock {
+    #padding-top: 15px;
+    #padding-bottom: 10px;
     background-image: url(../images/lock.svg);
     background-position-y: 43%;
     background-position-x: 91%;

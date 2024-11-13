@@ -29,6 +29,7 @@
 			<li><a href="<?php echo esc_url( add_query_arg( array( 'page' => 'my-plans' ), apply_filters( 'stm_get_author_link', '' ) ) ); ?>"><?php esc_html_e( 'My plans', 'stm_vehicles_listing' ); ?></a></li>
 			<?php endif; ?>
 			<li class="stm-my-favourites"><a href="<?php echo esc_url( add_query_arg( array( 'page' => 'favourite' ), apply_filters( 'stm_get_author_link', '' ) ) ); ?>"><?php esc_html_e( 'Favorites', 'stm_vehicles_listing' ); ?> (<span><?php echo esc_attr( $my_fav ); ?></span>)</a></li>
+			<?php apply_filters( 'load_saved_searches_popup_link', '' ); ?>
 		</ul>
 		<a href="<?php echo esc_url( wp_logout_url( home_url() ) ); ?>" class="logout">
 			<i class="fas fa-power-off"></i><?php esc_html_e( 'Logout', 'stm_vehicles_listing' ); ?>
@@ -53,21 +54,31 @@
 
 			<div class="form-group form-checker">
 				<label>
-					<input type="checkbox" name="stm_remember_me" />
-					<span><?php esc_html_e( 'Remember me', 'stm_vehicles_listing' ); ?></span>
+					<span>
+						<input type="checkbox" name="stm_remember_me" />
+						<span><?php esc_html_e( 'Remember me', 'stm_vehicles_listing' ); ?></span>
+					</span>
+					<span class="stm-forgot-password">
+						<a href="#">
+							<?php esc_html_e( 'Forgot Password', 'stm_vehicles_listing' ); ?>
+						</a>
+					</span>
 				</label>
-				<div class="stm-forgot-password">
-					<a href="#">
-						<?php esc_html_e( 'Forgot Password', 'stm_vehicles_listing' ); ?>
-					</a>
-				</div>
 			</div>
 			<?php if ( class_exists( 'SitePress' ) ) : ?>
 				<input type="hidden" name="current_lang" value="<?php echo esc_attr( ICL_LANGUAGE_CODE ); ?>"/>
 			<?php endif; ?>
 			<input class="heading-font" type="submit" value="<?php esc_attr_e( 'Login', 'stm_vehicles_listing' ); ?>"/>
 			<span class="stm-listing-loader"><i class="stm-icon-load1"></i></span>
-			<a href="<?php echo esc_url( apply_filters( 'stm_get_author_link', 'register' ) ); ?>" class="stm_label"><?php esc_html_e( 'Sign Up', 'stm_vehicles_listing' ); ?></a>
+			<?php
+			if ( apply_filters( 'mvl_is_addon_enabled', 'social_login' ) ) {
+				echo do_shortcode( '[motors_social_login action="sign-in"]' );
+			}
+			?>
+			<div class="mvl-sign-in-forgot-pass">
+				<?php esc_html_e( 'Don’t have an account?', 'stm_vehicles_listing' ); ?>
+				<a href="<?php echo esc_url( apply_filters( 'stm_get_author_link', 'register' ) ); ?>" class="stm_label"><?php esc_html_e( 'Sign Up', 'stm_vehicles_listing' ); ?></a>
+			</div>
 			<div class="stm-validation-message"></div>
 			<?php do_action( 'stm_after_signin_form' ); ?>
 		</form>

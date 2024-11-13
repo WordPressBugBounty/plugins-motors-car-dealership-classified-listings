@@ -13,6 +13,7 @@ class AddListing extends WidgetBase {
 
 		$this->stm_ew_admin_register_ss( $this->get_admin_name(), self::get_name(), STM_LISTINGS_PATH, STM_LISTINGS_URL, STM_LISTINGS_V );
 		$this->stm_ew_enqueue( self::get_name() );
+
 	}
 
 	public function get_script_depends() {

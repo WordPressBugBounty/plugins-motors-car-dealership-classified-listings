@@ -28,6 +28,8 @@ add_filter(
 
 		$conf = apply_filters( 'mvl_user_dealer_options', $user_settings );
 
+		$conf = apply_filters( 'mvl_profile_options', $conf );
+
 		$conf = array(
 			'name'   => esc_html__( 'Profile', 'stm_vehicles_listing' ),
 			'fields' => $conf,

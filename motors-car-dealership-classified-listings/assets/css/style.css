@@ -161,7 +161,7 @@ body .container {
 
 .btn,
 .btn-large {
-    color: #fff !important;
+    color: #fff;
 }
 
 .mg-bt-20 {
@@ -1735,7 +1735,7 @@ table.wp-list-table .column-stm_image .attachment {
 }
 
 .lOffer-account-dropdown.stm-login-form-unregistered {
-    width: 235px;
+    width: 320px;
     padding: 25px 20px 25px 20px;
 }
 
@@ -1743,14 +1743,153 @@ table.wp-list-table .column-stm_image .attachment {
     margin-bottom: 14px;
 }
 
-.lOffer-account-dropdown.stm-login-form-unregistered .stm-forgot-password {
-    display: none;
+.lOffer-account-dropdown.stm-login-form-unregistered form input[type=submit] {
+    display: block;
+    width: 100%;
+    max-width: unset;
+    background-color: #1280DF;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    text-transform: none;
 }
 
-.lOffer-account-dropdown.stm-login-form-unregistered form input[type=submit] {
-    display: inline;
-    width: 50%;
-    margin-right: 25px;
+.lOffer-account-dropdown.stm-login-form-unregistered form .form-checker label {
+    display: flex;
+    justify-content: space-between;
+}
+
+.lOffer-account-dropdown.stm-login-form-unregistered form .form-checker label span {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.lOffer-account-dropdown.stm-login-form-unregistered form .form-checker label span a {
+    color: #1280DF;
+}
+
+.lOffer-account-dropdown.stm-login-form-unregistered form h4 {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.lOffer-account-dropdown.stm-login-form-unregistered form input {
+    background-color: #ECEFF3;
+    border: 2px solid #ECEFF3;
+    outline: none;
+}
+
+.lOffer-account-dropdown.stm-login-form-unregistered form input:active, .lOffer-account-dropdown.stm-login-form-unregistered form input:focus {
+    border: 2px solid #1280DF;
+}
+
+.lOffer-account-dropdown.stm-login-form-unregistered form input::-webkit-input-placeholder {
+    font-size: 14px;
+}
+
+.lOffer-account-dropdown.stm-login-form-unregistered form input[type=checkbox] {
+    opacity: 1;
+    -moz-appearance: auto;
+    appearance: auto;
+    -webkit-appearance: auto;
+    margin-right: 5px;
+}
+
+.lOffer-account-dropdown.stm-login-form-unregistered form input[type=checkbox] {
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-appearance: none;
+    width: 17px;
+    height: 17px;
+    border: 1px solid rgb(236, 239, 243);
+    border-radius: 3px;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+}
+
+.lOffer-account-dropdown.stm-login-form-unregistered form input[type=checkbox]:checked {
+    background-color: #1280DF;
+    border-color: #1280DF;
+}
+
+.lOffer-account-dropdown.stm-login-form-unregistered form input[type=checkbox]:checked::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 3px;
+    width: 5px;
+    height: 7px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.lOffer-account-dropdown.stm-login-form-unregistered form input::-moz-placeholder {
+    color: #888;
+    opacity: 1;
+    font-size: 14px;
+}
+
+.lOffer-account-dropdown.stm-login-form-unregistered form input::placeholder {
+    color: #888;
+    opacity: 1;
+    font-size: 14px;
+}
+
+.lOffer-account-dropdown.stm-login-form-unregistered form input:-ms-input-placeholder {
+    color: #888;
+    font-size: 14px;
+}
+
+.lOffer-account-dropdown.stm-login-form-unregistered form input::-ms-input-placeholder {
+    color: #888;
+    font-size: 14px;
+}
+
+.lOffer-account-dropdown.stm-login-form-unregistered form .mvl-sign-in-forgot-pass {
+    font-size: 13px;
+    color: #8e8e8e;
+    margin-top: 15px;
+}
+
+.lOffer-account-dropdown.stm-login-form-unregistered form .mvl-sign-in-forgot-pass a {
+    color: #1280DF;
+}
+
+.lOffer-account-dropdown.stm-login-form-unregistered form .stm-message-ajax-validation {
+    padding: 10px 15px;
+    background-color: #35475A;
+    border-radius: 4px;
+    margin-top: 10px;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+}
+
+.lOffer-account-dropdown.stm-login-form-unregistered .stm_forgot_password_send input[type=text] {
+    margin-bottom: 25px;
+}
+
+.lOffer-account-dropdown.stm-login-form-unregistered .stm_forgot_password_send .form-group {
+    position: relative;
+}
+
+.lOffer-account-dropdown.stm-login-form-unregistered .stm_forgot_password_send .form-group .stm-forgot-password-back {
+    position: absolute;
+    right: 5px;
+    top: 1px;
+    color: #1280DF;
+}
+
+.lOffer-account-dropdown.stm-login-form-unregistered .stm_forgot_password_send .form-group .stm-forgot-password-back i {
+    transform: rotate(-90deg);
+}
+
+.lOffer-account-dropdown.stm-login-form-unregistered .motors-socials-head .motors-socials-head-text {
+    margin-top: 20px;
+    margin-bottom: 15px;
 }
 
 body.stm-vl-plugin-pure.elementor-page .is-layout-constrained > div.elementor {

@@ -83,6 +83,11 @@ jQuery(document).ready(function ($) {
 		}
 	)
 
+	$('.stm-forgot-password-back').on('click', function (e) {
+		e.preventDefault()
+		$('.stm_forgot_password_send').slideUp('slow')
+	})
+
 	$('input[name="stm_accept_terms"]').on('click', function () {
 		if ($(this).is(':checked')) {
 			$(

@@ -739,7 +739,7 @@ function stm_listings_init() {
 			'hierarchical'       => false,
 			'capability_type'    => 'listings_post',
 			'capabilities'       => array(
-				'publish_post'           => 'publish_listings_post',
+				'publish_post'        => 'publish_listings_post',
 				'edit_post'           => 'edit_listings_post',
 				'read_post'           => 'read_listings_post',
 				'delete_post'         => 'delete_listings_post',

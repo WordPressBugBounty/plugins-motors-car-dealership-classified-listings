@@ -95,9 +95,12 @@
 								<i class="fas fa-spinner"></i>
 							</span>
 						</div>
-
+						<?php
+						if ( apply_filters( 'mvl_is_addon_enabled', 'social_login' ) ) {
+							echo do_shortcode( '[motors_social_login action="sign-up"]' );
+						}
+						?>
 						<div class="stm-validation-message"></div>
-
 					</form>
 				</div>
 			</div>

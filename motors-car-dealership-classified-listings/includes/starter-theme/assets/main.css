@@ -1,12 +1,4 @@
-/*
-  TODO when will be available option for giving empty field from Nuxy these css styles should be removed
-*/
-.stm_metaboxes_grid__inner .container-constructed .row .wpcfto-box.column-1.wpcfto-box-pro_banner {
-    display: none;
-}
-.stm_metaboxes_grid__inner .container-constructed .row .wpcfto-box.column-1.not_pro.wpcfto-box-pro_banner {
-    display: flex;
-}
+
 /* ended css styles for Nuxy Empty Field*/
 
 .buttonload i {

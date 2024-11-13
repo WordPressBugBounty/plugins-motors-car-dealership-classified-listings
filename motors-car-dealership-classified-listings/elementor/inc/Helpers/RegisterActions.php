@@ -23,7 +23,9 @@ class RegisterActions {
 		add_filter( 'stm_ew_modify_post_type_objects', array( self::class, 'motors_modify_post_type_objects' ) );
 
 		add_filter( 'stm_ew_kses_svg', array( self::class, 'stm_ew_kses_svg' ) );
-		add_filter( 'stm_dynamic_icon_output', array( self::class, 'stm_dynamic_icon_output' ) );
+		if ( ! has_filter( 'stm_dynamic_icon_output', array( self::class, 'stm_dynamic_icon_output' ) ) && ! apply_filters( 'is_mvl_pro', false ) ) {
+			add_filter( 'stm_dynamic_icon_output', array( self::class, 'stm_dynamic_icon_output' ) );
+		}
 
 		add_action( 'wp_ajax_close_after_click', array( self::class, 'close_after_click' ) );
 

@@ -19,7 +19,7 @@ if (typeof (STMListings) == 'undefined') {
     };
 
     STMListings.stm_ajax_login = function () {
-        $(".stm-login-form form").on('submit', function (e) {
+        $(".stm-login-form form, .stm-login-form-unregistered form").on('submit', function (e) {
             e.preventDefault();
 
             $.ajax({

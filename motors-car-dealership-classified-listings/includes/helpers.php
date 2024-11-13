@@ -164,6 +164,11 @@ function mvl_modify_key( $key ) {
 	return strtolower( str_replace( array( ' ', '/' ), '_', $key ) );
 }
 
+function is_mvl_addon_enabled( $addon ) {
+	$enabled_addons = get_option( 'motors_vl_addons' );
+	return defined( 'STM_LISTINGS_PRO_PATH' ) && isset( $enabled_addons[ $addon ] ) && 'on' === $enabled_addons[ $addon ];
+}
+
 add_filter( 'wp_kses_allowed_html', 'mvl_wp_kses_allowed_html' );
 function mvl_wp_kses_allowed_html( $allowed_html ) {
 	$allowed_atts = array(

@@ -8,7 +8,7 @@
  * License: GNU General Public License v2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: stm_vehicles_listing
- * Version: 1.4.34
+ * Version: 1.4.35
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -49,12 +49,14 @@ if ( ! defined( 'STM_LISTINGS_PATH' ) ) {
 	define( 'STM_LISTINGS_URL', plugins_url( '', STM_LISTINGS_FILE ) );
 	define( 'STM_LISTINGS', 'stm_vehicles_listing' );
 	define( 'STM_THEME_V_NEED', '5.6.33' );
-	define( 'STM_LISTINGS_V', '1.4.34' );
+	define( 'STM_LISTINGS_V', '1.4.35' );
 	define( 'STM_LISTINGS_IMAGES', STM_LISTINGS_URL . '/includes/admin/butterbean/images/' );
 }
 
 require_once STM_LISTINGS_PATH . '/vendor/autoload.php';
 
+use MotorsVehiclesListing\Plugin;
+use MotorsVehiclesListing\Addons\AddonsPage;
 use MotorsNuxy\MotorsNuxyHelpers;
 use MotorsVehiclesListing\User;
 use MotorsVehiclesListing\Features\Elementor\Nuxy\TemplateManager;
@@ -154,8 +156,8 @@ if ( file_exists( STM_LISTINGS_PATH . '/includes/stm_single_dealer.php' ) ) {
 
 if ( is_admin() ) {
 
-	if ( file_exists( STM_LISTINGS_PATH . '/includes/starter-theme/classes/class-loader.php' ) ) {
-		require_once STM_LISTINGS_PATH . '/includes/starter-theme/classes/class-loader.php';
+	if ( defined( 'STM_LISTINGS_PRO_PATH' ) || ! stm_is_motors_theme() ) {
+		new AddonsPage();
 	}
 
 	require_once STM_LISTINGS_PATH . '/includes/admin/categories.php';
@@ -212,6 +214,8 @@ if ( is_admin() ) {
 			}
 		}
 	);
+
+	require_once STM_LISTINGS_PATH . '/includes/class/Addons/settings.php';
 }
 
 if ( file_exists( STM_LISTINGS_PATH . '/elementor/MotorsElementorWidgetsFree.php' ) ) {

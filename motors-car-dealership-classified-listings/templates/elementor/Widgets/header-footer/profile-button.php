@@ -1,5 +1,8 @@
 <?php
 $profile_page_link = get_permalink( apply_filters( 'motors_vl_get_nuxy_mod', '', 'login_page' ) );
+if ( is_user_logged_in() ) {
+	$profile_page_link = apply_filters( 'stm_get_author_link', '' );
+}
 ?>
 <a href="<?php echo esc_url( $profile_page_link ); ?>" class="motors-profile-button">
 	<span class="profile-icon-wrapper">

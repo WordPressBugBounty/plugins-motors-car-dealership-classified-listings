@@ -22,7 +22,7 @@ class Settings {
 			add_filter( 'wpcfto_options_page_setup', array( $this, 'mvl_settings' ) );
 			add_action( 'stm_importer_done', array( $this, 'mlv_save_settings' ), 20, 1 );
 			add_filter( 'wpcfto_icons_set', array( $this, 'icons_set_icon_picker' ) );
-			add_action( 'wpcfto_screen_motors_vehicles_listing_plugin_settings_added', array( $this, 'mvl_add_submenus' ) );
+			add_action( 'wpcfto_screen_motors_vehicles_listing_plugin_settings_added', array( $this, 'mvl_add_submenus' ), 10, 1 );
 			add_action( 'wpcfto_screen_motors_vehicles_listing_plugin_settings_added', array( $this, 'mvl_add_submenu_settings' ), 1000, 1 );
 			add_action( 'wpcfto_screen_motors_vehicles_listing_plugin_settings_added', array( $this, 'mvl_add_submenu_upgrade' ), 1001, 1 );
 		}
@@ -100,6 +100,16 @@ class Settings {
 			);
 		}
 
+		if ( defined( 'STM_LISTINGS_PRO_PATH' ) || ! stm_is_motors_theme() ) {
+			$config_map = array_merge(
+				$config_map,
+				array(
+					'pro/addons/social-login',
+					'pro/addons/saved-search',
+				)
+			);
+		}
+
 		foreach ( $config_map as $file_name ) {
 			require_once STM_LISTINGS_PATH . '/includes/class/Plugin/config/' . $file_name . '.php';
 		}
@@ -160,7 +170,7 @@ class Settings {
 				'manage_options',
 				'/edit.php?post_type=' . $post_type,
 				'',
-				3
+				2
 			);
 
 			add_filter(

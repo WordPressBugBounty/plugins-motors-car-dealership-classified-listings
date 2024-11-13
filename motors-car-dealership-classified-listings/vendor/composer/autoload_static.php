@@ -38,6 +38,9 @@ class ComposerStaticInit5db859e1dab632b715b93d33219eb1cf
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'MotorsNuxy\\MotorsNuxyHelpers' => __DIR__ . '/../..' . '/includes/nuxy/MotorsNuxyHelpers.php',
+        'MotorsVehiclesListing\\Addons\\Addon' => __DIR__ . '/../..' . '/includes/class/Addons/Addon.php',
+        'MotorsVehiclesListing\\Addons\\Addons' => __DIR__ . '/../..' . '/includes/class/Addons/Addons.php',
+        'MotorsVehiclesListing\\Addons\\AddonsPage' => __DIR__ . '/../..' . '/includes/class/Addons/AddonsPage.php',
         'MotorsVehiclesListing\\Api\\ApiPosts' => __DIR__ . '/../..' . '/includes/class/Api/ApiPosts.php',
         'MotorsVehiclesListing\\Core\\CoreApi' => __DIR__ . '/../..' . '/includes/class/Core/CoreApi.php',
         'MotorsVehiclesListing\\Core\\CoreController' => __DIR__ . '/../..' . '/includes/class/Core/CoreController.php',
@@ -60,6 +63,7 @@ class ComposerStaticInit5db859e1dab632b715b93d33219eb1cf
         'MotorsVehiclesListing\\MenuPages\\MenuBuilder' => __DIR__ . '/../..' . '/includes/class/MenuPages/MenuBuilder.php',
         'MotorsVehiclesListing\\MenuPages\\SearchResultsSettings' => __DIR__ . '/../..' . '/includes/class/MenuPages/SearchResultsSettings.php',
         'MotorsVehiclesListing\\MenuPages\\SingleListingTemplateSettings' => __DIR__ . '/../..' . '/includes/class/MenuPages/SingleListingTemplateSettings.php',
+        'MotorsVehiclesListing\\Plugin' => __DIR__ . '/../..' . '/includes/class/Plugin.php',
         'MotorsVehiclesListing\\Plugin\\MVL_Const' => __DIR__ . '/../..' . '/includes/class/Plugin/MVL_Const.php',
         'MotorsVehiclesListing\\Plugin\\PluginOptions' => __DIR__ . '/../..' . '/includes/class/Plugin/PluginOptions.php',
         'MotorsVehiclesListing\\Plugin\\Settings' => __DIR__ . '/../..' . '/includes/class/Plugin/Settings.php',

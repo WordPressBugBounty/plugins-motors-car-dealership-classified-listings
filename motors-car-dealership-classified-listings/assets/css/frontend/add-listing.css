@@ -656,12 +656,13 @@ input:-webkit-autofill {
 
 .stm-login-register-form .stm-login-form form .stm-listing-loader {
     position: relative;
-    top: 1px;
+    top: 10px;
     color: #ffffff;
     font-size: 15px;
     line-height: 15px;
     visibility: hidden;
     opacity: 0;
+    left: 50%;
 }
 
 .stm-login-register-form .stm-login-form form .stm-listing-loader i {
@@ -688,7 +689,7 @@ input:-webkit-autofill {
 }
 
 .stm-login-register-form .stm-register-form form {
-    padding: 37px 30px 4px;
+    padding: 37px 30px 30px;
     background-color: #ffffff;
     border-top: 4px solid #153e4d;
     -o-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
@@ -700,7 +701,7 @@ input:-webkit-autofill {
 }
 
 .stm-login-register-form .stm-register-form form .form-group {
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .stm-login-register-form .stm-register-form form .form-group h4 {
@@ -724,10 +725,12 @@ input:-webkit-autofill {
     margin-top: 10px;
 }
 
+.stm-login-register-form .stm-register-form form .form-group.form-group-submit {
+    margin-bottom: 0;
+}
+
 .stm-login-register-form .stm-register-form form input[type=submit][disabled] {
     background-color: #c9cccf !important;
-    -o-box-shadow: 0 2px 0 rgba(201, 204, 207, 0.5);
-    box-shadow: 0 2px 0 rgba(201, 204, 207, 0.5);
 }
 
 .stm-login-register-form .stm-register-form form input[type=submit][disabled]:hover {
@@ -749,12 +752,13 @@ input:-webkit-autofill {
 
 .stm-login-register-form .stm-register-form form .stm-listing-loader {
     position: relative;
-    top: 1px;
+    top: 10px;
     color: #6c98e1;
     font-size: 15px;
     line-height: 15px;
     visibility: hidden;
     opacity: 0;
+    left: 50%;
 }
 
 .stm-login-register-form .stm-register-form form .stm-listing-loader i {
@@ -769,7 +773,7 @@ input:-webkit-autofill {
 
 .stm-login-register-form .stm-register-form form .stm-message-ajax-validation {
     margin-bottom: 20px;
-    background-color: #153e4d;
+    background-color: #35475A;
     color: #ffffff;
     padding: 10px 20px;
     text-align: center;
@@ -1619,6 +1623,11 @@ input:-webkit-autofill {
     font-size: 18px;
 }
 
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm-form-inner .motors-icons-load1 {
+    opacity: 0;
+    visibility: hidden;
+}
+
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm-form-inner.activated > .motors-icons-load1, .stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm-form-inner.activated:before {
     opacity: 1;
     visibility: visible;
@@ -1635,11 +1644,6 @@ input:-webkit-autofill {
     font-size: 13px;
     line-height: 24px;
     color: #888888;
-}
-
-.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm_register_title {
-    padding-top: 35px;
-    margin-bottom: 20px;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm_register_title h3 {
@@ -1924,10 +1928,6 @@ input:-webkit-autofill {
     visibility: visible;
 }
 
-.stm-add-a-car-login .stm-listing-loader .motors-icons-load1 {
-    margin-left: 10px !important;
-}
-
 .stm-add-a-car-login .stm-listing-loader.visible .motors-icons-load1 {
     font-size: 18px;
     visibility: visible;
@@ -1938,9 +1938,27 @@ input:-webkit-autofill {
     margin-bottom: 30px;
 }
 
+.stm-add-a-car-login .stm-login-form .motors-socials-head-text {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.stm-add-a-car-login .stm-login-form .motors-socials-head-text::before, .stm-add-a-car-login .stm-login-form .motors-socials-head-text::after {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
 .stm-add-a-car-login .stm-login-form form {
     padding: 41px 30px 36px;
-    background-color: #232628;
+    background-color: rgb(53, 71, 90);
+}
+
+.stm-add-a-car-login .stm-login-form form input[type=text], .stm-add-a-car-login .stm-login-form form input[type=number], .stm-add-a-car-login .stm-login-form form input[type=tel], .stm-add-a-car-login .stm-login-form form input[type=email], .stm-add-a-car-login .stm-login-form form input[type=search], .stm-add-a-car-login .stm-login-form form input[type=password] {
+    background-color: rgb(243, 247, 252);
+    border-color: rgb(243, 247, 252);
+    border-radius: 4px;
+}
+
+.stm-add-a-car-login .stm-login-form form input[type=text]:focus, .stm-add-a-car-login .stm-login-form form input[type=number]:focus, .stm-add-a-car-login .stm-login-form form input[type=tel]:focus, .stm-add-a-car-login .stm-login-form form input[type=email]:focus, .stm-add-a-car-login .stm-login-form form input[type=search]:focus, .stm-add-a-car-login .stm-login-form form input[type=password]:focus {
+    border-color: #1280DF;
 }
 
 .stm-add-a-car-login .stm-login-form form h4 {
@@ -1952,7 +1970,7 @@ input:-webkit-autofill {
 
 .stm-add-a-car-login .stm-login-form form .form-checker {
     margin-bottom: 26px !important;
-    color: rgba(255, 255, 255, 0.5);
+    color: #fff;
     font-size: 13px;
 }
 
@@ -2000,16 +2018,71 @@ input:-webkit-autofill {
     padding: 16px 46px 12px;
     visibility: inherit;
     font-weight: 700;
+    max-width: unset;
+    background-color: #1280DF;
+    box-shadow: none;
+    text-transform: unset;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.stm-add-a-car-login .stm-login-form form div.checker span {
+    background-image: none;
+}
+
+.stm-add-a-car-login .stm-login-form form div.checker {
+    margin-right: 5px;
+    width: unset;
+    height: unset;
+}
+
+.stm-add-a-car-login .stm-login-form form div.checker input[type=checkbox] {
+    opacity: 1;
+    -moz-appearance: auto;
+    appearance: auto;
+    -webkit-appearance: auto;
+}
+
+.stm-add-a-car-login .stm-login-form form div.checker input[type=checkbox] {
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-appearance: none;
+    width: 17px;
+    height: 17px;
+    border: 1px solid rgb(236, 239, 243);
+    border-radius: 3px;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+}
+
+.stm-add-a-car-login .stm-login-form form input[type=checkbox]:checked {
+    background-color: #1280DF !important;
+    border-color: #1280DF !important;
+}
+
+.stm-add-a-car-login .stm-login-form form input[type=checkbox]:checked::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 3px;
+    width: 5px;
+    height: 7px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
 }
 
 .stm-add-a-car-login .stm-login-form form .stm-listing-loader {
     position: relative;
-    top: 1px;
+    top: 10px;
     color: #ffffff;
     font-size: 15px;
     line-height: 15px;
     visibility: hidden;
     opacity: 0;
+    left: 50%;
 }
 
 .stm-add-a-car-login .stm-login-form form .stm-listing-loader i {

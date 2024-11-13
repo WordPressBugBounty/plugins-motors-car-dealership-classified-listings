@@ -1477,17 +1477,17 @@ class InventorySearchFilter extends WidgetBase {
 		$this->stm_start_ctrl_tab(
 			'isf_price_normal',
 			array(
-				'label'     => __( 'Normal', 'stm_vehicles_listing' ),
+				'label' => __( 'Normal', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_group_control(
 			\Elementor\Group_Control_Border::get_type(),
 			array(
-				'name'      => 'isf_price_border',
-				'label'     => esc_html__( 'Border', 'stm_vehicles_listing' ),
-				'selector'  => '{{WRAPPER}} .classic-filter-row.motors-elementor-widget .stm-accordion-single-unit.price .stm-accordion-content .stm-accordion-content-wrapper input',
-				'exclude'   => array(
+				'name'     => 'isf_price_border',
+				'label'    => esc_html__( 'Border', 'stm_vehicles_listing' ),
+				'selector' => '{{WRAPPER}} .classic-filter-row.motors-elementor-widget .stm-accordion-single-unit.price .stm-accordion-content .stm-accordion-content-wrapper input',
+				'exclude'  => array(
 					'color',
 				),
 			)
@@ -1547,17 +1547,17 @@ class InventorySearchFilter extends WidgetBase {
 		$this->stm_start_ctrl_tab(
 			'isf_price_hover',
 			array(
-				'label'     => __( 'Active', 'stm_vehicles_listing' ),
+				'label' => __( 'Active', 'stm_vehicles_listing' ),
 			)
 		);
 
 		$this->add_group_control(
 			\Elementor\Group_Control_Border::get_type(),
 			array(
-				'name'      => 'isf_price_border_active',
-				'label'     => esc_html__( 'Border', 'stm_vehicles_listing' ),
-				'selector'  => '{{WRAPPER}} .classic-filter-row.motors-elementor-widget .stm-accordion-single-unit.price .stm-accordion-content .stm-accordion-content-wrapper input:focus',
-				'exclude'   => array(
+				'name'     => 'isf_price_border_active',
+				'label'    => esc_html__( 'Border', 'stm_vehicles_listing' ),
+				'selector' => '{{WRAPPER}} .classic-filter-row.motors-elementor-widget .stm-accordion-single-unit.price .stm-accordion-content .stm-accordion-content-wrapper input:focus',
+				'exclude'  => array(
 					'color',
 				),
 			)

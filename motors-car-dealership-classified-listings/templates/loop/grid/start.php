@@ -23,12 +23,18 @@ $col = ( ! empty( get_post_meta( apply_filters( 'stm_listings_user_defined_filte
 if ( ! empty( $columns ) ) {
 	$col = $columns;
 }
+
+$listing_id = get_the_ID();
+$post_type  = get_post_type();
+
 ?>
 
 <div
 	class="col-md-<?php echo esc_attr( $col ); ?> col-sm-6 col-xs-12 col-xxs-12 stm-directory-grid-loop stm-isotope-listing-item all <?php echo esc_attr( implode( ' ', $classes ) ); ?>"
 	data-price="<?php echo esc_attr( $data_price ); ?>"
 	data-date="<?php echo get_the_date( 'Ymdhi' ); ?>"
+	data-listing-id="<?php echo esc_attr( $listing_id ); ?>"
+	data-post-type="<?php echo esc_attr( $post_type ); ?>"
 	<?php
 	if ( ! empty( $atts ) ) {
 		foreach ( $atts as $val ) {

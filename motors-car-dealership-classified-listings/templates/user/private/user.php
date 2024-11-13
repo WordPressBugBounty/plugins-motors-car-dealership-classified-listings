@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $user        = wp_get_current_user();
 $user_id     = $user->ID;
 $user_fields = apply_filters( 'stm_get_user_custom_fields', $user_id );
+$path        = 'user/private/';
 
 $tpl = 'inventory';
 if ( ! empty( $_GET['page'] ) ) {
@@ -33,7 +34,13 @@ if ( ! empty( $_GET['page'] ) ) {
 
 			<div class="col-md-9 col-sm-12">
 				<div class="stm-user-private-main">
-					<?php do_action( 'stm_listings_load_template', 'user/private/' . $tpl, array( 'user_id' => $user_id ) ); ?>
+					<?php
+					if ( isset( $_GET['page'] ) && apply_filters( 'get_saved_searches_page', sanitize_text_field( $_GET['page'] ) ) === 'saved-searches' ) {
+						do_action( 'load_saved_searches_page' );
+					} else {
+						do_action( 'stm_listings_load_template', $path . $tpl, array( 'user_id' => $user_id ) );
+					}
+					?>
 				</div>
 			</div>
 

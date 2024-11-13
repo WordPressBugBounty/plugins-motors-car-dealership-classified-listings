@@ -107,8 +107,9 @@ body.toplevel_page_mvl_plugin_settings .go-to-pro-notice {
     color: #227AFF;
     font-size: .75rem;
     font-weight: 700;
-    line-height: normal;
-    background: 0 0
+    line-height: 1.6;
+    background: 0 0;
+    text-transform: initial;
 }
 
 .unlock-wrapper-content .unlock-addons-buttons .secondary:hover {
@@ -189,8 +190,8 @@ body.toplevel_page_mvl_plugin_settings .go-to-pro-notice {
 .motors-vl-unlock-pro-banner .motors-vl-unlock-banner-wrapper {
     display: flex;
     width: 898px;
-    height: 300px;
-    padding: 0 80px;
+    min-height: 300px;
+    padding: 50px 80px;
     flex-shrink: 0;
     align-items: center
 }

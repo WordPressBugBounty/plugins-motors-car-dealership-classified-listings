@@ -32,7 +32,7 @@ class MotorsNuxyHelpers {
 	public function wpcfto_field_addon_state( $classes, $field_name, $field ) {
 		$is_addon = ( ! empty( $field['pro'] ) && empty( $is_pro ) );
 
-		if ( 'addons' === $field['type'] ) {
+		if ( ! empty( $field['type'] ) && 'addons' === $field['type'] ) {
 			$is_addon = false;
 		}
 

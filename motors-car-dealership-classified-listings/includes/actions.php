@@ -2,6 +2,17 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+use \MotorsVehiclesListing\Plugin;
+/** @var \MotorsVehiclesListing\Plugin $plugin */
+
+$plugin = new Plugin();
+
+add_action(
+	'plugins_loaded',
+	function () use ( $plugin ) {
+		$plugin->register_addons( apply_filters( 'motors_vl_plugin_addons', array() ) );
+	}
+);
 
 add_action( 'wp', 'stm_listings_template_actions' );
 
@@ -56,6 +67,7 @@ function stm_listings_template_actions() {
 function stm_listings_ajax_results( $source = null, $type = null, $navigation_type = null ) {
 	$r         = apply_filters( 'stm_listings_filter_func', $source );
 	$fragments = false;
+
 	if ( ! empty( $_GET['fragments'] ) ) {
 		$fragments = explode( ',', $_GET['fragments'] );
 	}

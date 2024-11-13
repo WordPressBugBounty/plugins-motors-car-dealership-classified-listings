@@ -59,8 +59,10 @@ $current_page = apply_filters( 'stm_account_current_page', '' );
 			<?php esc_html_e( 'Profile Settings', 'stm_vehicles_listing' ); ?>
 		</a>
 
+		<?php do_action( 'saved_search_navigation', $current_page ); ?>
+
 	</div>
-	
+
 	<?php if ( ! empty( $user_fields['phone'] ) ) : ?>
 		<div class="stm-dealer-phone">
 			<i class="fas fa-phone"></i>

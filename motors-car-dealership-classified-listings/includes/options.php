@@ -389,7 +389,7 @@ function stm_get_categories( $include_label = false ) {
 function stm_get_name_by_slug( $slug = '', $listing_type = '' ) {
 	//Get all filter options from STM listing plugin - Listing - listing categories
 	$filter_options = get_option( 'stm_vehicle_listing_options' );
-	if ( class_exists( 'STMMultiListing' ) && $listing_type && ! in_array( $listing_type, array( 'listings', 'cars' ) ) ) {
+	if ( class_exists( 'STMMultiListing' ) && $listing_type && ! in_array( $listing_type, array( 'listings', 'cars' ), true ) ) {
 		$filter_options = get_option( 'stm_' . $listing_type . '_options' );
 	}
 

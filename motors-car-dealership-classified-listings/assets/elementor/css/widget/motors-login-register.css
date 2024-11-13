@@ -6,8 +6,14 @@
     color: inherit;
 }
 
+.stm-login-register-form .stm-register-form form .form-group.form-checker span a, .stm-login-register-form .stm-login-form form .form-group.form-checker span a {
+    color: #1280DF;
+    text-decoration: none;
+}
+
 .stm-login-register-form .stm-register-form form label[for=whatsapp-checker], .stm-login-register-form .stm-login-form form label[for=whatsapp-checker] {
     margin-top: 10px;
+    display: flex;
 }
 
 .stm-login-register-form .stm-login-form .form-checker {
@@ -23,6 +29,11 @@
 
 .stm-login-register-form .stm-login-form .form-checker .stm-forgot-password {
     line-height: 1;
+}
+
+.stm-login-register-form .stm-login-form .form-checker .stm-forgot-password a {
+    text-decoration: none;
+    font-size: 13px;
 }
 
 .stm-login-register-form .stm-login-form form.stm_forgot_password_send {

@@ -8,6 +8,9 @@ $baseDir = dirname($vendorDir);
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'MotorsNuxy\\MotorsNuxyHelpers' => $baseDir . '/includes/nuxy/MotorsNuxyHelpers.php',
+    'MotorsVehiclesListing\\Addons\\Addon' => $baseDir . '/includes/class/Addons/Addon.php',
+    'MotorsVehiclesListing\\Addons\\Addons' => $baseDir . '/includes/class/Addons/Addons.php',
+    'MotorsVehiclesListing\\Addons\\AddonsPage' => $baseDir . '/includes/class/Addons/AddonsPage.php',
     'MotorsVehiclesListing\\Api\\ApiPosts' => $baseDir . '/includes/class/Api/ApiPosts.php',
     'MotorsVehiclesListing\\Core\\CoreApi' => $baseDir . '/includes/class/Core/CoreApi.php',
     'MotorsVehiclesListing\\Core\\CoreController' => $baseDir . '/includes/class/Core/CoreController.php',
@@ -30,6 +33,7 @@ return array(
     'MotorsVehiclesListing\\MenuPages\\MenuBuilder' => $baseDir . '/includes/class/MenuPages/MenuBuilder.php',
     'MotorsVehiclesListing\\MenuPages\\SearchResultsSettings' => $baseDir . '/includes/class/MenuPages/SearchResultsSettings.php',
     'MotorsVehiclesListing\\MenuPages\\SingleListingTemplateSettings' => $baseDir . '/includes/class/MenuPages/SingleListingTemplateSettings.php',
+    'MotorsVehiclesListing\\Plugin' => $baseDir . '/includes/class/Plugin.php',
     'MotorsVehiclesListing\\Plugin\\MVL_Const' => $baseDir . '/includes/class/Plugin/MVL_Const.php',
     'MotorsVehiclesListing\\Plugin\\PluginOptions' => $baseDir . '/includes/class/Plugin/PluginOptions.php',
     'MotorsVehiclesListing\\Plugin\\Settings' => $baseDir . '/includes/class/Plugin/Settings.php',
