@@ -34,7 +34,7 @@ $can_register = apply_filters( 'motors_vl_get_nuxy_mod', false, 'new_user_regist
 						<input type="submit" class="button" value="<?php esc_html_e( 'Login', 'stm_vehicles_listing' ); ?>"/>
 						<span class="stm-listing-loader"><i class="fas fa-spinner"></i></span>
 						<?php
-						if ( apply_filters( 'mvl_is_addon_enabled', 'social_login' ) ) {
+						if ( apply_filters( 'mvl_is_addon_enabled', false, 'social_login' ) ) {
 							echo do_shortcode( '[motors_social_login action="sign-in"]' );
 						}
 						?>
@@ -117,7 +117,7 @@ $can_register = apply_filters( 'motors_vl_get_nuxy_mod', false, 'new_user_regist
 								<span class="stm-listing-loader"><i class="fas fa-spinner"></i></span>
 							</div>
 							<?php
-							if ( apply_filters( 'mvl_is_addon_enabled', 'social_login' ) ) {
+							if ( apply_filters( 'mvl_is_addon_enabled', false, 'social_login' ) ) {
 								echo do_shortcode( '[motors_social_login action="sign-up"]' );
 							}
 							?>

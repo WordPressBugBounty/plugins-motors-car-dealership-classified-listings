@@ -96,7 +96,7 @@
 							</span>
 						</div>
 						<?php
-						if ( apply_filters( 'mvl_is_addon_enabled', 'social_login' ) ) {
+						if ( apply_filters( 'mvl_is_addon_enabled', false, 'social_login' ) ) {
 							echo do_shortcode( '[motors_social_login action="sign-up"]' );
 						}
 						?>

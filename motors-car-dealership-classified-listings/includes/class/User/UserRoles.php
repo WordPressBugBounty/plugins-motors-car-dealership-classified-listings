@@ -94,6 +94,7 @@ class UserRoles {
 
 				$user->add_cap( 'edit_listings_post' );
 				$user->add_cap( 'read_listings_post' );
+				$user->add_cap( 'delete_listings_post' );
 
 				$caps = array(
 					'publish',

@@ -71,7 +71,7 @@
 			<input class="heading-font" type="submit" value="<?php esc_attr_e( 'Login', 'stm_vehicles_listing' ); ?>"/>
 			<span class="stm-listing-loader"><i class="stm-icon-load1"></i></span>
 			<?php
-			if ( apply_filters( 'mvl_is_addon_enabled', 'social_login' ) ) {
+			if ( apply_filters( 'mvl_is_addon_enabled', false, 'social_login' ) ) {
 				echo do_shortcode( '[motors_social_login action="sign-in"]' );
 			}
 			?>

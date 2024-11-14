@@ -80,7 +80,7 @@ $can_register = apply_filters( 'motors_vl_get_nuxy_mod', false, 'new_user_regist
 						<input type="submit" value="Login">
 						<span class="stm-listing-loader"><i class="motors-icons-load1"></i></span>
 						<?php
-						if ( apply_filters( 'mvl_is_addon_enabled', 'social_login' ) ) {
+						if ( apply_filters( 'mvl_is_addon_enabled', false, 'social_login' ) ) {
 							echo do_shortcode( '[motors_social_login action="sign-in"]' );
 						}
 						?>
