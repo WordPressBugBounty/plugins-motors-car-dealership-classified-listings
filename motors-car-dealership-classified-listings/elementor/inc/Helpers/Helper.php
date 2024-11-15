@@ -440,7 +440,7 @@ class Helper {
 							if ( ! empty( $taxonomy_info['listing_taxonomy_parent'] ) ) {
 								$terms = array();
 							} else {
-								$terms = apply_filters( 'stm_get_category_by_slug_all', array(), $selected_taxonomy, false, ( 'yes' === $show_amount ) );
+								$terms = apply_filters( 'stm_get_category_by_slug_all', array(), $selected_taxonomy, false, ( 'yes' === $show_amount ), $taxonomy_info );
 							}
 
 							if ( ! empty( $field['lst_placeholder'] ) ) {

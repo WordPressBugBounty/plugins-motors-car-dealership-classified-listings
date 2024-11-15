@@ -96,6 +96,12 @@ add_filter(
 					'type'        => 'checkbox',
 					'submenu'     => esc_html__( 'Page layout', 'stm_vehicles_listing' ),
 				),
+			'show_print_btn'       =>
+				array(
+					'label'       => esc_html__( 'Show Print Button', 'stm_vehicles_listing' ),
+					'type'        => 'checkbox',
+					'submenu'     => esc_html__( 'Page layout', 'stm_vehicles_listing' ),
+				),
 			'show_vin'              =>
 				array(
 					'label'       => esc_html__( 'VIN Number', 'stm_vehicles_listing' ),

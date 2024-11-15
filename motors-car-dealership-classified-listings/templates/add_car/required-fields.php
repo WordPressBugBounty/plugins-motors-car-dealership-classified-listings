@@ -25,21 +25,7 @@ if ( ! empty( $taxonomies ) ) :
 				$terms = array();
 
 				if ( empty( $tax_info['listing_taxonomy_parent'] ) ) {
-					$terms = apply_filters( 'stm_get_category_by_slug_all', array(), $_taxonomy, true );
-
-					$field = 'name';
-					$order = 'ASC';
-
-					if ( ! empty( $tax_info['terms_filters_sort_by'] ) ) {
-						if ( str_contains( $tax_info['terms_filters_sort_by'], 'count' ) ) {
-							$field = 'count';
-						}
-						if ( str_contains( $tax_info['terms_filters_sort_by'], 'desc' ) ) {
-							$order = 'DESC';
-						}
-					}
-
-					$terms = wp_list_sort( $terms, $field, $order );
+					$terms = apply_filters( 'stm_get_category_by_slug_all', array(), $_taxonomy, true, false, $tax_info );
 				}
 
 				$has_selected = '';

@@ -586,23 +586,7 @@ if ( ! function_exists( 'stm_data_binding' ) ) {
 
 			/** @var WP_Term $term */
 
-			$terms = apply_filters( 'stm_get_category_by_slug_all', array(), $slug, $is_add_car, true );
-
-			if ( ! empty( $attr['listing_taxonomy_parent'] ) ) {
-				$field = 'name';
-				$order = 'ASC';
-
-				if ( ! empty( $attr['terms_filters_sort_by'] ) ) {
-					if ( str_contains( $attr['terms_filters_sort_by'], 'count' ) ) {
-						$field = 'count';
-					}
-					if ( str_contains( $attr['terms_filters_sort_by'], 'desc' ) ) {
-						$order = 'DESC';
-					}
-				}
-
-				$terms = wp_list_sort( $terms, $field, $order );
-			}
+			$terms = apply_filters( 'stm_get_category_by_slug_all', array(), $slug, $is_add_car, true, $attr );
 
 			foreach ( $terms as $term ) {
 				$deps = array_values( array_filter( (array) get_term_meta( $term->term_id, 'stm_parent' ) ) );
@@ -945,7 +929,7 @@ if ( ! function_exists( 'motors_listing_filter_get_selects' ) && defined( 'STM_L
 							if ( ! empty( $taxonomy_info['listing_taxonomy_parent'] ) ) {
 								$terms = array();
 							} else {
-								$terms = apply_filters( 'stm_get_category_by_slug_all', array(), $select_string, false );
+								$terms = apply_filters( 'stm_get_category_by_slug_all', array(), $select_string, false, $taxonomy_info );
 							}
 
 							$select_main = '';

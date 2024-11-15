@@ -11,6 +11,13 @@
 	 * @var $reset_btn_label
 	 * @var $isf_pal_icon
 	 * */
+
+$price_slug = 'price';
+foreach ( $filter['options'] as $key => $value ) {
+	if ( apply_filters( 'stm_is_listing_price_field', false, $key ) ) {
+		$price_slug = $key;
+	}
+}
 ?>
 
 <script type="text/javascript">
@@ -117,7 +124,7 @@ if ( isset( $isf_pal_icon ) && ! empty( $isf_pal_icon ) ) {
 							$config['is_multiple_select'] = false;
 						}
 
-						if ( ! empty( $isf_price_single ) && 'price' === $attribute && ! empty( $config['slider'] ) && ! empty( $config['numeric'] ) ) {
+						if ( ! empty( $isf_price_single ) && $price_slug === $attribute && ! empty( $config['slider'] ) && ! empty( $config['numeric'] ) ) {
 							continue;
 						}
 
@@ -229,13 +236,13 @@ if ( isset( $isf_pal_icon ) && ! empty( $isf_pal_icon ) ) {
 
 		<!--Classified price-->
 		<?php
-		if ( ! empty( $isf_price_single ) && ! empty( $filter['options']['price'] ) && ! empty( $filter['filters']['price']['slider'] ) && ! empty( $filter['filters']['price']['numeric'] ) ) {
+		if ( ! empty( $isf_price_single ) && ! empty( $filter['options'][ $price_slug ] ) && ! empty( $filter['filters'][ $price_slug ]['slider'] ) && ! empty( $filter['filters'][ $price_slug ]['numeric'] ) ) {
 			do_action(
 				'stm_listings_load_template',
 				'filter/types/price',
 				array(
-					'taxonomy' => 'price',
-					'options'  => $filter['options']['price'],
+					'taxonomy' => $price_slug,
+					'options'  => $filter['options'][ $price_slug ],
 				)
 			);
 		}

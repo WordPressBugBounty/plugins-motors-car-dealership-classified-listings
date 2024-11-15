@@ -470,13 +470,25 @@ function stm_get_custom_taxonomy_count( $total, $slug, $taxonomy = '' ) {
 }
 add_filter( 'stm_get_custom_taxonomy_count', 'stm_get_custom_taxonomy_count', 10, 3 );
 
-function stm_get_category_by_slug( $slug ) {
+function stm_get_category_by_slug( $slug, $attr_data = array() ) {
 	$result = null;
 
 	if ( ! empty( $slug ) ) {
+		$field = 'name';
+		$order = 'ASC';
+
+		if ( ! empty( $attr_data['terms_filters_sort_by'] ) ) {
+			if ( str_contains( $attr_data['terms_filters_sort_by'], 'count' ) ) {
+				$field = 'count';
+			}
+			if ( str_contains( $attr_data['terms_filters_sort_by'], 'desc' ) ) {
+				$order = 'DESC';
+			}
+		}
+
 		$terms_args = array(
-			'orderby'    => 'name',
-			'order'      => 'ASC',
+			'orderby'    => $field,
+			'order'      => $order,
 			'hide_empty' => true,
 			'fields'     => 'all',
 			'pad_counts' => true,
@@ -492,13 +504,25 @@ function stm_get_category_by_slug( $slug ) {
 	return apply_filters( 'stm_get_category_by_slug', $result, $slug );
 }
 
-function stm_get_category_by_slug_all( $result, $slug = false, $is_add_car = false, $show_count = false ) {
+function stm_get_category_by_slug_all( $result, $slug = false, $is_add_car = false, $show_count = false, $attr_data = array() ) {
 	$result = null;
 
 	if ( ! empty( $slug ) ) {
+		$field = 'name';
+		$order = 'ASC';
+
+		if ( ! empty( $attr_data['terms_filters_sort_by'] ) ) {
+			if ( str_contains( $attr_data['terms_filters_sort_by'], 'count' ) ) {
+				$field = 'count';
+			}
+			if ( str_contains( $attr_data['terms_filters_sort_by'], 'desc' ) ) {
+				$order = 'DESC';
+			}
+		}
+
 		$terms_args = array(
-			'orderby'    => 'name',
-			'order'      => 'ASC',
+			'orderby'    => $field,
+			'order'      => $order,
 			'hide_empty' => ( ! $is_add_car ) ? true : false,
 			'fields'     => 'all',
 			'pad_counts' => apply_filters( 'stm_get_term_pad_counts', true ),
@@ -514,7 +538,7 @@ function stm_get_category_by_slug_all( $result, $slug = false, $is_add_car = fal
 	return $result;
 }
 
-add_filter( 'stm_get_category_by_slug_all', 'stm_get_category_by_slug_all', 10, 4 );
+add_filter( 'stm_get_category_by_slug_all', 'stm_get_category_by_slug_all', 10, 5 );
 
 function stm_remove_meta_boxes() {
 	$taxonomies_style = stm_get_taxonomies_as_div();

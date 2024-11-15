@@ -15,13 +15,49 @@ if ( isset( $multiple ) && true === boolval( $multiple ) ) {
 	$class            = $class . ' stm-multiple-select';
 }
 
-$aria_label = '';
+$aria_label   = '';
+$first_option = reset( $options );
+unset( $options[''] );
+
 if ( $multiple ) {
 	$aria_label = $placeholder['label'];
 } elseif ( ! empty( $options ) ) {
-	$option     = reset( $options );
-	$aria_label = $option['label'];
+	$aria_label = $first_option['label'];
 }
+
+$attr_data = stm_get_taxonomies_with_type( $name );
+
+if ( ! $attr_data['numeric'] ) {
+
+	$sort = $attr_data['terms_filters_sort_by'] ?? 'name_asc';
+
+	switch ( $sort ) {
+		case 'name_desc':
+			krsort( $options );
+			break;
+		case 'count_asc':
+			uasort(
+				$options,
+				function ( $a, $b ) {
+					return abs( $a['count'] ) <=> abs( $b['count'] );
+				}
+			);
+			break;
+		case 'count_desc':
+			uasort(
+				$options,
+				function ( $a, $b ) {
+					return abs( $b['count'] ) <=> abs( $a['count'] );
+				}
+			);
+			break;
+		default:
+			ksort( $options );
+			break;
+	}
+}
+
+$options = array_merge( array( '' => $first_option ), $options );
 
 $aria_label = sprintf(
 	/* translators: %s label */

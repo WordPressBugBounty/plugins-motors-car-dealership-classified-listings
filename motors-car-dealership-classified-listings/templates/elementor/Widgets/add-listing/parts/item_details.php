@@ -3,14 +3,6 @@ $_id = apply_filters( 'stm_listings_input', null, 'item_id' );
 
 $data = apply_filters( 'stm_get_single_car_listings', array() );
 
-$terms_args = array(
-	'orderby'    => 'name',
-	'order'      => 'ASC',
-	'hide_empty' => false,
-	'fields'     => 'all',
-	'pad_counts' => true,
-);
-
 if ( $custom_listing_type && $listing_types_options ) {
 	$_taxonomy        = ( $listing_types_options[ $custom_listing_type . '_addl_required_fields' ] ) ? $listing_types_options[ $custom_listing_type . '_addl_required_fields' ] : array();
 	$number_as_input  = ( $listing_types_options[ $custom_listing_type . '_addl_number_as_input' ] ) ? $listing_types_options[ $custom_listing_type . '_addl_number_as_input' ] : '';
@@ -42,7 +34,7 @@ $_taxonomy = ( ! $_taxonomy ) ? array() : $_taxonomy;
 					$terms = array();
 
 					if ( empty( $tax_info['listing_taxonomy_parent'] ) ) {
-						$terms = apply_filters( 'stm_get_category_by_slug_all', array(), $_tax, true );
+						$terms = apply_filters( 'stm_get_category_by_slug_all', array(), $_tax, true, false, $tax_info );
 					}
 
 					$has_selected = '';
@@ -142,6 +134,26 @@ $_taxonomy = ( ! $_taxonomy ) ? array() : $_taxonomy;
 
 					$terms = array();
 					if ( empty( $tax_info['listing_taxonomy_parent'] ) ) {
+						$field = 'name';
+						$order = 'ASC';
+
+						if ( ! empty( $tax_info['terms_filters_sort_by'] ) ) {
+							if ( str_contains( $tax_info['terms_filters_sort_by'], 'count' ) ) {
+								$field = 'count';
+							}
+							if ( str_contains( $tax_info['terms_filters_sort_by'], 'desc' ) ) {
+								$order = 'DESC';
+							}
+						}
+
+						$terms_args = array(
+							'orderby'    => $field,
+							'order'      => $order,
+							'hide_empty' => false,
+							'fields'     => 'all',
+							'pad_counts' => true,
+						);
+
 						$terms = get_terms( $data_unit['slug'], $terms_args );
 					}
 
