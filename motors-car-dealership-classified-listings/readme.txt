@@ -5,7 +5,7 @@ Donate link: https://www.paypal.me/stylemix
 Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
 Tested up to: 6.7
-Stable tag: 1.4.37
+Stable tag: 1.4.38
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -129,6 +129,9 @@ After that, go to Tools -> Import, and via Wordpress Importer tool install dummy
 8. Additional features
 
 == Changelog ==
+
+= 1.4.38 =
+- **Fix:** Minor bug fixes.
 
 = 1.4.37 =
 - **Fix:** Corrected 'Sort by filters' not functioning for widgets on Inventory and home pages.

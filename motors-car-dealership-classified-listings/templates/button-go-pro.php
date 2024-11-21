@@ -194,11 +194,11 @@ $is_promotion = $current_time >= $start_date->format('U') && $current_time < $de
 if ( $is_promotion ) {
 	$freemius_info['plan']['licenses_5000']->annual_price = 199;
 	$freemius_info['plan']['licenses_5']->annual_price    = 79;
-	$freemius_info['plan']['licenses_1']->annual_price    = 29;
+	$freemius_info['plan']['licenses_1']->annual_price    = 49;
 
 	$freemius_info['plan']['licenses_5000']->lifetime_price = 599;
 	$freemius_info['plan']['licenses_5']->lifetime_price    = 219;
-	$freemius_info['plan']['licenses_1']->lifetime_price    = 69;
+	$freemius_info['plan']['licenses_1']->lifetime_price    = 89;
 }
 ?>
 <div class="mvl-go_pro">
