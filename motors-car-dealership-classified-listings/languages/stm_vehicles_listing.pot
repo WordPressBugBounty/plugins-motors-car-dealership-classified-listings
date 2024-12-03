@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Motors – Car Dealer, Classifieds & Listing\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-06 06:59+0000\n"
+"POT-Creation-Date: 2024-11-20 06:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.6.11; wp-6.6.2\n"
+"X-Loco-Version: 2.6.14; wp-6.7\n"
 "X-Domain: stm_vehicles_listing"
 
 #: includes/class/Features/Elementor/Nuxy/TemplateManager.php:68
@@ -30,6 +30,10 @@ msgstr ""
 
 #: includes/class/Features/Elementor/Nuxy/TemplateManager.php:67
 msgid " found"
+msgstr ""
+
+#: templates/journey/free-journey-addons-sidebars.php:19
+msgid " Motors"
 msgstr ""
 
 #: templates/button-go-pro.php:144
@@ -125,11 +129,11 @@ msgstr ""
 msgid "1 Site License"
 msgstr ""
 
-#: templates/button-go-pro.php:345
+#: templates/button-go-pro.php:350
 msgid "1 year"
 msgstr ""
 
-#: templates/button-go-pro.php:267 templates/button-go-pro.php:279
+#: templates/button-go-pro.php:272 templates/button-go-pro.php:284
 msgid "1-time"
 msgstr ""
 
@@ -184,10 +188,10 @@ msgid ""
 msgstr ""
 
 #: templates/filter/sidebar.php:111
-#: elementor/inc/Widgets/InventorySearchResults.php:304
+#: elementor/inc/Widgets/InventorySearchResults.php:305
 #: elementor/inc/Widgets/ListingSearchTabs.php:533
 #: elementor/inc/Widgets/ListingsGridTabs.php:370
-#: templates/elementor/Widgets/inventory-search-filter.php:168
+#: templates/elementor/Widgets/inventory-search-filter.php:175
 #: templates/filter/horizontal-filter/horizontal-filter.php:100
 #: elementor/inc/Widgets/SingleListing/Gallery.php:515
 #: elementor/inc/Widgets/SingleListing/Gallery.php:912
@@ -210,7 +214,7 @@ msgstr ""
 msgid "Add a button for users to contact sellers via WhatsApp"
 msgstr ""
 
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:130
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:136
 msgid "Add a button for users to directly contact sellers"
 msgstr ""
 
@@ -326,7 +330,7 @@ msgstr ""
 msgid "Add Item To Compare"
 msgstr ""
 
-#: elementor/inc/Widgets/AddListing.php:64
+#: elementor/inc/Widgets/AddListing.php:65
 msgid "Add Listing"
 msgstr ""
 
@@ -340,7 +344,7 @@ msgstr ""
 msgid "Add listing form"
 msgstr ""
 
-#: includes/functions.php:709 includes/functions.php:749
+#: includes/functions.php:709 includes/functions.php:762
 #: includes/class/Features/Elementor/Nuxy/TemplateManager.php:60
 msgid "Add New"
 msgstr ""
@@ -367,7 +371,7 @@ msgstr ""
 msgid "Add New Item"
 msgstr ""
 
-#: includes/functions.php:750
+#: includes/functions.php:763
 msgid "Add New Test Drives"
 msgstr ""
 
@@ -393,14 +397,14 @@ msgstr ""
 msgid "Add the Template Phrases"
 msgstr ""
 
-#: includes/functions.php:417 includes/enqueue.php:215
+#: includes/functions.php:417 includes/enqueue.php:216
 #: templates/single-car/car-actions.php:57 templates/compare/compare.php:7
 #: templates/loop/list/features.php:99 templates/loop/grid/compare.php:30
 #: templates/elementor/Widgets/single-listing/gallery.php:77
 msgid "Add to compare"
 msgstr ""
 
-#: includes/enqueue.php:222 templates/loop/favorite.php:9
+#: includes/enqueue.php:223 templates/loop/favorite.php:9
 #: templates/elementor/Widgets/single-listing/gallery.php:72
 msgid "Add to favorites"
 msgstr ""
@@ -461,6 +465,14 @@ msgstr ""
 
 #: includes/admin/metaboxes.php:174
 msgid "Additional videos <br/> (URL Embed video)"
+msgstr ""
+
+#: templates/journey/free-journey-addons-sidebars.php:15
+msgid "addon"
+msgstr ""
+
+#: includes/class/Addons/AddonsPage.php:20
+msgid "Addons"
 msgstr ""
 
 #: includes/admin/butterbean_metaboxes.php:431
@@ -528,12 +540,28 @@ msgstr ""
 msgid "All new registered users will get an e-mail for account verification"
 msgstr ""
 
-#: includes/functions.php:753
+#: includes/functions.php:766
 msgid "All Test Drives"
 msgstr ""
 
 #: includes/class/Plugin/config/single-listing/general.php:30
 msgid "Allow dealers and users to create new listing categories"
+msgstr ""
+
+#: includes/class/Plugin/config/pro/addons/social-login.php:73
+msgid "Allow users to sign in using their Facebook accounts"
+msgstr ""
+
+#: includes/class/Plugin/config/pro/addons/social-login.php:20
+msgid "Allow users to sign in using their Google accounts"
+msgstr ""
+
+#: includes/class/Addons/Addons.php:45
+#: includes/class/Plugin/config/pro/addons/saved-search.php:35
+msgid ""
+"Allow your visitors to create saved searches and get email notifications for "
+"new items that match their criteria. So they will stay updated with the "
+"latest posts in real-time."
 msgstr ""
 
 #: templates/elementor/Widgets/dealers-list.php:25
@@ -557,12 +585,20 @@ msgstr ""
 msgid "Animation Speed"
 msgstr ""
 
-#: templates/button-go-pro.php:230
+#: templates/button-go-pro.php:235
 msgid "Annual"
 msgstr ""
 
 #: templates/filter/types/location.php:44
 msgid "Any location"
+msgstr ""
+
+#: includes/class/Plugin/config/pro/addons/social-login.php:78
+msgid "App ID"
+msgstr ""
+
+#: includes/class/Plugin/config/pro/addons/social-login.php:94
+msgid "App Secret"
 msgstr ""
 
 #: templates/add_car/step_1_additional_fields.php:121
@@ -577,7 +613,7 @@ msgstr ""
 msgid "Arrange field order"
 msgstr ""
 
-#: templates/login.php:106 templates/elementor/Widgets/login_register.php:165
+#: templates/login.php:111 templates/elementor/Widgets/login_register.php:170
 msgid "As Dealer"
 msgstr ""
 
@@ -627,8 +663,8 @@ msgstr ""
 msgid "Back to Dashboard"
 msgstr ""
 
-#: elementor/inc/Widgets/InventorySearchResults.php:250
-#: elementor/inc/Widgets/InventorySearchResults.php:322
+#: elementor/inc/Widgets/InventorySearchResults.php:251
+#: elementor/inc/Widgets/InventorySearchResults.php:323
 #: elementor/inc/Widgets/SingleListing/OfferPriceButton.php:69
 #: elementor/inc/Widgets/SingleListing/OfferPriceButton.php:132
 #: elementor/inc/Widgets/SingleListing/DealerEmail.php:86
@@ -718,8 +754,8 @@ msgstr ""
 msgid "Biographical Info"
 msgstr ""
 
-#: elementor/inc/Widgets/InventorySearchResults.php:262
-#: elementor/inc/Widgets/InventorySearchResults.php:334
+#: elementor/inc/Widgets/InventorySearchResults.php:263
+#: elementor/inc/Widgets/InventorySearchResults.php:335
 #: elementor/inc/Widgets/SingleListing/OfferPriceButton.php:224
 #: elementor/inc/Widgets/SingleListing/DealerEmail.php:297
 #: elementor/inc/Widgets/SingleListing/Gallery.php:370
@@ -736,8 +772,8 @@ msgstr ""
 msgid "Border"
 msgstr ""
 
-#: elementor/inc/Widgets/InventorySearchResults.php:271
-#: elementor/inc/Widgets/InventorySearchResults.php:343
+#: elementor/inc/Widgets/InventorySearchResults.php:272
+#: elementor/inc/Widgets/InventorySearchResults.php:344
 #: elementor/inc/Widgets/PricingPlan.php:1010
 #: elementor/inc/Widgets/SingleListing/OfferPriceButton.php:103
 #: elementor/inc/Widgets/SingleListing/OfferPriceButton.php:166
@@ -751,8 +787,8 @@ msgstr ""
 msgid "Border Color"
 msgstr ""
 
-#: elementor/inc/Widgets/InventorySearchResults.php:282
-#: elementor/inc/Widgets/InventorySearchResults.php:354
+#: elementor/inc/Widgets/InventorySearchResults.php:283
+#: elementor/inc/Widgets/InventorySearchResults.php:355
 #: elementor/inc/Widgets/PricingPlan.php:1671
 #: elementor/inc/Widgets/PricingPlan.php:1748
 #: elementor/inc/Widgets/SingleListing/OfferPriceButton.php:233
@@ -802,8 +838,8 @@ msgstr ""
 msgid "Bottom Right"
 msgstr ""
 
-#: elementor/inc/Widgets/InventorySearchResults.php:294
-#: elementor/inc/Widgets/InventorySearchResults.php:366
+#: elementor/inc/Widgets/InventorySearchResults.php:295
+#: elementor/inc/Widgets/InventorySearchResults.php:367
 #: elementor/inc/Widgets/SingleListing/OfferPriceButton.php:115
 #: elementor/inc/Widgets/SingleListing/OfferPriceButton.php:178
 #: elementor/inc/Widgets/SingleListing/DealerEmail.php:136
@@ -939,7 +975,7 @@ msgid ""
 "By enabling this button, your site will use WordPress search for listings"
 msgstr ""
 
-#: includes/class/Plugin/Settings.php:117
+#: includes/class/Plugin/Settings.php:127
 msgid "by StylemixThemes"
 msgstr ""
 
@@ -989,15 +1025,15 @@ msgstr ""
 msgid "Car certified logos"
 msgstr ""
 
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:149
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:155
 msgid "Car Gurus"
 msgstr ""
 
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:156
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:162
 msgid "Car Gurus Style"
 msgstr ""
 
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:196
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:202
 msgid "Car Gurus widget height"
 msgstr ""
 
@@ -1186,7 +1222,7 @@ msgstr ""
 msgid "Check to make select multiple on filter page"
 msgstr ""
 
-#: includes/helpers.php:888 includes/helpers.php:950
+#: includes/helpers.php:877 includes/helpers.php:939
 #: elementor/inc/Helpers/Helper.php:451
 #: templates/elementor/Widgets/dealers-list.php:59
 msgid "Choose"
@@ -1200,7 +1236,7 @@ msgstr ""
 msgid "Choose file..."
 msgstr ""
 
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:157
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:163
 msgid ""
 "Choose from different styles for integrating Car Gurus functionality into "
 "your listings"
@@ -1262,7 +1298,7 @@ msgid ""
 "of the vehicle's price."
 msgstr ""
 
-#: templates/button-go-pro.php:228
+#: templates/button-go-pro.php:233
 msgid "Choose the package that suits your business"
 msgstr ""
 
@@ -1290,7 +1326,7 @@ msgstr ""
 msgid "Choose where you want to show the field to search by keywords"
 msgstr ""
 
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:123
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:129
 msgid "Choose whether to display the complete contact number"
 msgstr ""
 
@@ -1323,6 +1359,14 @@ msgstr ""
 msgid "Click on shortcode for copy"
 msgstr ""
 
+#: includes/class/Plugin/config/pro/addons/social-login.php:25
+msgid "Client ID"
+msgstr ""
+
+#: includes/class/Plugin/config/pro/addons/social-login.php:41
+msgid "Client secret"
+msgstr ""
+
 #: includes/admin/categories.php:191 includes/admin/categories.php:272
 msgid "Close box by default"
 msgstr ""
@@ -1349,7 +1393,7 @@ msgstr ""
 msgid "Company name"
 msgstr ""
 
-#: includes/actions.php:660 templates/compare/compare-footer-modal.php:30
+#: includes/actions.php:677 templates/compare/compare-footer-modal.php:30
 #: elementor/inc/Widgets/SingleListing/Gallery.php:95
 #: elementor/inc/Widgets/HeaderFooter/CompareButton.php:43
 #: includes/class/Plugin/config/shortcodes/shortcodes-list.php:53
@@ -1383,11 +1427,11 @@ msgstr ""
 msgid "Compare vehicles"
 msgstr ""
 
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:150
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:156
 msgid "Configure settings to add Car Gurus integration"
 msgstr ""
 
-#: includes/actions.php:318
+#: includes/actions.php:331
 msgid "Confirmation password is wrong"
 msgstr ""
 
@@ -1429,6 +1473,18 @@ msgstr ""
 msgid "Convert numeric categories to input field"
 msgstr ""
 
+#: includes/class/Plugin/config/pro/addons/social-login.php:59
+msgid ""
+"Copy and paste the redirect URL to the Authorized redirect URL in the Google "
+"API Console"
+msgstr ""
+
+#: includes/class/Plugin/config/pro/addons/social-login.php:112
+msgid ""
+"Copy and paste the redirect URL to the Site URL in the Facebook Developers "
+"Page"
+msgstr ""
+
 #: includes/admin/categories.php:225
 msgid "Count ASC"
 msgstr ""
@@ -1451,7 +1507,7 @@ msgstr ""
 msgid "Created by"
 msgstr ""
 
-#: includes/functions.php:782
+#: includes/functions.php:796
 msgid "Credentials"
 msgstr ""
 
@@ -1506,6 +1562,7 @@ msgid "Current Password"
 msgstr ""
 
 #: includes/admin/categories.php:324 includes/admin/categories.php:325
+#: includes/class/User/UserRoles.php:72 includes/class/User/UserRoles.php:73
 msgid "Custom Fields"
 msgstr ""
 
@@ -1552,7 +1609,7 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: includes/actions.php:1028
+#: includes/actions.php:1045
 msgid "Date - "
 msgstr ""
 
@@ -1564,7 +1621,7 @@ msgstr ""
 msgid "Date: oldest first"
 msgstr ""
 
-#: includes/functions.php:802 includes/functions.php:869
+#: includes/functions.php:816 includes/functions.php:883
 #: includes/admin/butterbean/inc/controls/class-control-datetime.php:112
 msgid "Day"
 msgstr ""
@@ -1798,13 +1855,17 @@ msgstr ""
 msgid "Displays in accordance with Monetization > Subscription model settings."
 msgstr ""
 
-#: includes/actions.php:79 includes/actions.php:199
-#: includes/vehicle_functions.php:2598 includes/helpers.php:260
+#: includes/actions.php:92 includes/actions.php:212
+#: includes/vehicle_functions.php:2598 includes/helpers.php:265
 msgid "Distance : nearby"
 msgstr ""
 
 #: includes/vehicle_functions.php:2440
 msgid "Do you want to delete Listing images permanently?"
+msgstr ""
+
+#: templates/account-dropdown.php:79
+msgid "Don’t have an account?"
 msgstr ""
 
 #: templates/single-car/car-calculator.php:64
@@ -1844,7 +1905,7 @@ msgstr ""
 msgid "Duration"
 msgstr ""
 
-#: includes/functions.php:794 includes/functions.php:861
+#: includes/functions.php:808 includes/functions.php:875
 msgid "E-mail"
 msgstr ""
 
@@ -1877,7 +1938,7 @@ msgstr ""
 msgid "Edit Listing"
 msgstr ""
 
-#: includes/functions.php:751
+#: includes/functions.php:764
 msgid "Edit Test Drives"
 msgstr ""
 
@@ -1886,13 +1947,13 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: templates/login.php:65 templates/add_car/registration.php:56
-#: templates/elementor/Widgets/login_register.php:127
+#: templates/login.php:70 templates/add_car/registration.php:56
+#: templates/elementor/Widgets/login_register.php:132
 #: templates/elementor/Widgets/add-listing/parts/registration.php:53
 msgid "Email *"
 msgstr ""
 
-#: includes/actions.php:1026
+#: includes/actions.php:1043
 msgid "Email - "
 msgstr ""
 
@@ -1904,7 +1965,7 @@ msgstr ""
 msgid "Email address is visible to anyone"
 msgstr ""
 
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:129
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:135
 msgid "Email button"
 msgstr ""
 
@@ -1936,7 +1997,7 @@ msgstr ""
 msgid "Empty"
 msgstr ""
 
-#: includes/nuxy/unlock-banner-component.php:39
+#: includes/nuxy/unlock-banner-component.php:39 templates/addons/main.php:85
 #: templates/listing-cars/listing-list-owner-actions.php:120
 #: includes/class/Elementor/Nuxy/AddListingManager.php:53
 msgid "Enable"
@@ -1965,7 +2026,7 @@ msgid "Enable a loan calculator and configure the settings in the next section"
 msgstr ""
 
 #: includes/nuxy/MotorsNuxyHelpers.php:116
-#: includes/nuxy/unlock-banner-component.php:27
+#: includes/nuxy/unlock-banner-component.php:25
 msgid "Enable addon"
 msgstr ""
 
@@ -2031,7 +2092,7 @@ msgstr ""
 
 #. %1$s single name, %2$s field affix
 #: templates/add_car/item_details.php:76
-#: templates/elementor/Widgets/add-listing/parts/item_details.php:164
+#: templates/elementor/Widgets/add-listing/parts/item_details.php:176
 #, php-format
 msgid "Enter %1$s %2$s"
 msgstr ""
@@ -2085,9 +2146,9 @@ msgstr ""
 msgid "Enter Discount Price"
 msgstr ""
 
-#: templates/login.php:67 templates/add_car/registration.php:57
+#: templates/login.php:72 templates/add_car/registration.php:57
 #: templates/user/private/settings.php:102
-#: templates/elementor/Widgets/login_register.php:129
+#: templates/elementor/Widgets/login_register.php:134
 #: templates/elementor/Widgets/add-listing/parts/registration.php:54
 msgid "Enter E-mail"
 msgstr ""
@@ -2096,8 +2157,8 @@ msgstr ""
 msgid "Enter First Name"
 msgstr ""
 
-#: templates/login.php:49 templates/add_car/registration.php:34
-#: templates/elementor/Widgets/login_register.php:106
+#: templates/login.php:54 templates/add_car/registration.php:34
+#: templates/elementor/Widgets/login_register.php:111
 #: templates/elementor/Widgets/add-listing/parts/registration.php:34
 msgid "Enter First name"
 msgstr ""
@@ -2106,13 +2167,13 @@ msgstr ""
 msgid "Enter Last Name"
 msgstr ""
 
-#: templates/login.php:54 templates/add_car/registration.php:38
-#: templates/elementor/Widgets/login_register.php:111
+#: templates/login.php:59 templates/add_car/registration.php:38
+#: templates/elementor/Widgets/login_register.php:116
 #: templates/elementor/Widgets/add-listing/parts/registration.php:38
 msgid "Enter Last name"
 msgstr ""
 
-#: templates/elementor/Widgets/add-listing/parts/item_details.php:264
+#: templates/elementor/Widgets/add-listing/parts/item_details.php:276
 msgid "Enter Latitude"
 msgstr ""
 
@@ -2120,33 +2181,35 @@ msgstr ""
 msgid "Enter Linkedin Public profile URL"
 msgstr ""
 
-#: templates/login.php:75 templates/add_car/registration.php:64
-#: templates/elementor/Widgets/login_register.php:137
+#: templates/login.php:80 templates/add_car/registration.php:64
+#: templates/elementor/Widgets/login_register.php:142
 #: templates/elementor/Widgets/add-listing/parts/registration.php:61
 msgid "Enter Login"
 msgstr ""
 
-#: templates/login.php:18 templates/account-dropdown.php:46
-#: templates/account-dropdown.php:81 templates/add_car/check_user.php:66
+#: templates/login.php:18 templates/account-dropdown.php:47
+#: templates/account-dropdown.php:92 templates/add_car/check_user.php:66
 #: templates/elementor/Widgets/login_register.php:44
-#: templates/elementor/Widgets/login_register.php:77
+#: templates/elementor/Widgets/login_register.php:82
+#: templates/partials/user/account-dropdown.php:13
 #: templates/elementor/Widgets/add-listing/parts/check_user.php:95
 msgid "Enter login or E-mail"
 msgstr ""
 
-#: templates/elementor/Widgets/add-listing/parts/item_details.php:271
+#: templates/elementor/Widgets/add-listing/parts/item_details.php:283
 msgid "Enter Longitude"
 msgstr ""
 
-#: templates/login.php:82 templates/add_car/registration.php:70
-#: templates/elementor/Widgets/login_register.php:144
+#: templates/login.php:87 templates/add_car/registration.php:70
+#: templates/elementor/Widgets/login_register.php:149
 #: templates/elementor/Widgets/add-listing/parts/registration.php:67
 msgid "Enter Password"
 msgstr ""
 
-#: templates/login.php:23 templates/account-dropdown.php:51
+#: templates/login.php:23 templates/account-dropdown.php:52
 #: templates/add_car/check_user.php:71
 #: templates/elementor/Widgets/login_register.php:49
+#: templates/partials/user/account-dropdown.php:18
 #: templates/elementor/Widgets/add-listing/parts/check_user.php:101
 msgid "Enter password"
 msgstr ""
@@ -2155,9 +2218,9 @@ msgstr ""
 msgid "Enter Period Text"
 msgstr ""
 
-#: templates/login.php:62 templates/add_car/registration.php:45
+#: templates/login.php:67 templates/add_car/registration.php:45
 #: templates/user/private/settings.php:95
-#: templates/elementor/Widgets/login_register.php:119
+#: templates/elementor/Widgets/login_register.php:124
 #: templates/elementor/Widgets/add-listing/parts/registration.php:45
 msgid "Enter Phone"
 msgstr ""
@@ -2219,8 +2282,24 @@ msgstr ""
 msgid "Enter your Current Password to confirm changes"
 msgstr ""
 
+#: includes/class/Plugin/config/pro/addons/social-login.php:101
+msgid "Enter your Facebook Access Token here"
+msgstr ""
+
+#: includes/class/Plugin/config/pro/addons/social-login.php:85
+msgid "Enter your Facebook Client Token here"
+msgstr ""
+
 #: templates/user/private/settings.php:173
 msgid "Enter your Facebook profile URL"
+msgstr ""
+
+#: includes/class/Plugin/config/pro/addons/social-login.php:32
+msgid "Enter your Google Client ID here"
+msgstr ""
+
+#: includes/class/Plugin/config/pro/addons/social-login.php:48
+msgid "Enter your Google Client Secret key here"
 msgstr ""
 
 #: templates/user/private/settings.php:183
@@ -2231,11 +2310,11 @@ msgstr ""
 msgid "Enter Youtube channel URL"
 msgstr ""
 
-#: templates/elementor/Widgets/add-listing/parts/item_details.php:257
+#: templates/elementor/Widgets/add-listing/parts/item_details.php:269
 msgid "Enter ZIP or Address"
 msgstr ""
 
-#: includes/actions.php:359
+#: includes/actions.php:372
 msgid "Error, please try again"
 msgstr ""
 
@@ -2257,10 +2336,11 @@ msgid "Extra clean"
 msgstr ""
 
 #: includes/user-extra.php:66 templates/user/private/settings.php:170
+#: includes/class/Plugin/config/pro/addons/social-login.php:70
 msgid "Facebook"
 msgstr ""
 
-#: includes/actions.php:963
+#: includes/actions.php:980
 msgid "Failed to send email"
 msgstr ""
 
@@ -2298,7 +2378,7 @@ msgstr ""
 msgid "Featured Listings"
 msgstr ""
 
-#: elementor/inc/Widgets/InventorySearchResults.php:124
+#: elementor/inc/Widgets/InventorySearchResults.php:125
 msgid "Featured Listings Block"
 msgstr ""
 
@@ -2381,8 +2461,8 @@ msgstr ""
 msgid "First Color"
 msgstr ""
 
-#: templates/login.php:47 templates/add_car/registration.php:33
-#: templates/elementor/Widgets/login_register.php:104
+#: templates/login.php:52 templates/add_car/registration.php:33
+#: templates/elementor/Widgets/login_register.php:109
 #: templates/elementor/Widgets/add-listing/parts/registration.php:33
 msgid "First Name"
 msgstr ""
@@ -2391,7 +2471,7 @@ msgstr ""
 msgid "First name"
 msgstr ""
 
-#: includes/options.php:651
+#: includes/options.php:675
 msgid "Font Awesome"
 msgstr ""
 
@@ -2403,7 +2483,7 @@ msgstr ""
 msgid "For the best experience with the Motors plugin, install the "
 msgstr ""
 
-#: templates/account-dropdown.php:61
+#: templates/account-dropdown.php:63
 #: templates/elementor/Widgets/login_register.php:58
 msgid "Forgot Password"
 msgstr ""
@@ -2412,7 +2492,7 @@ msgstr ""
 msgid "Form Fields"
 msgstr ""
 
-#: includes/actions.php:954
+#: includes/actions.php:971
 msgid "Form submitted successfully!"
 msgstr ""
 
@@ -2423,6 +2503,10 @@ msgstr ""
 #: includes/class/Plugin/config/user-settings/user-settings.php:7
 #: includes/class/Plugin/config/pro/user-settings/dealer-settings.php:19
 msgid "Free listing submission"
+msgstr ""
+
+#: templates/addons/main.php:35
+msgid "Frequent updates"
 msgstr ""
 
 #. %s is user location
@@ -2467,7 +2551,7 @@ msgstr ""
 #: elementor/inc/Widgets/ImageCategories.php:86
 #: elementor/inc/Widgets/ImageCategories.php:438
 #: elementor/inc/Widgets/ListingsGridTabs.php:206
-#: elementor/inc/Widgets/AddListing.php:72
+#: elementor/inc/Widgets/AddListing.php:73
 #: elementor/inc/Widgets/PricingPlan.php:48
 #: includes/class/Plugin/config/user-main.php:16
 #: includes/class/Plugin/config/user-main.php:26
@@ -2527,7 +2611,18 @@ msgstr ""
 msgid "Genuine Price"
 msgstr ""
 
-#: templates/button-go-pro.php:324
+#: includes/class/Addons/Addons.php:35
+msgid ""
+"Get a comprehensive overview of a vehicle’s history with important details "
+"like make and mileage by VIN number. Connect up to 5 VIN services for "
+"comprehensive insights."
+msgstr ""
+
+#: templates/addons/main.php:49
+msgid "Get Now"
+msgstr ""
+
+#: templates/button-go-pro.php:329
 msgid "Get now"
 msgstr ""
 
@@ -2543,6 +2638,10 @@ msgstr ""
 #: includes/class/Plugin/config/pro/google-services/google-maps.php:20
 #, php-format
 msgid "Get the necessary API key from this %s to integrate with Google Map"
+msgstr ""
+
+#: includes/class/Plugin/config/pro/addons/social-login.php:17
+msgid "Google"
 msgstr ""
 
 #: includes/class/Plugin/config/pro/google-services/google-maps.php:12
@@ -2563,7 +2662,7 @@ msgstr ""
 msgid "Grid Title"
 msgstr ""
 
-#: elementor/inc/Widgets/InventorySearchResults.php:88
+#: elementor/inc/Widgets/InventorySearchResults.php:89
 msgid "Grid View"
 msgstr ""
 
@@ -2655,7 +2754,11 @@ msgstr ""
 msgid "Hover"
 msgstr ""
 
-#: includes/options.php:706
+#: templates/addons/main.php:101
+msgid "How it works"
+msgstr ""
+
+#: includes/options.php:730
 msgid "How to add new icon pack"
 msgstr ""
 
@@ -2676,7 +2779,7 @@ msgstr ""
 msgid "hwy mpg"
 msgstr ""
 
-#: templates/login.php:94 templates/add_car/registration.php:80
+#: templates/login.php:99 templates/add_car/registration.php:80
 #: elementor/inc/Widgets/LoginRegister.php:53
 #: templates/elementor/Widgets/add-listing/parts/registration.php:76
 msgid "I accept the terms of the"
@@ -2689,7 +2792,7 @@ msgid "I don't know"
 msgstr ""
 
 #: templates/add_car/registration.php:50
-#: templates/elementor/Widgets/login_register.php:123
+#: templates/elementor/Widgets/login_register.php:128
 #: templates/elementor/Widgets/add-listing/parts/registration.php:49
 msgid "I have a WhatsApp account with this number"
 msgstr ""
@@ -2863,8 +2966,8 @@ msgstr ""
 msgid "Image limit per listing:"
 msgstr ""
 
-#: elementor/inc/Widgets/InventorySearchResults.php:80
-#: elementor/inc/Widgets/InventorySearchResults.php:116
+#: elementor/inc/Widgets/InventorySearchResults.php:81
+#: elementor/inc/Widgets/InventorySearchResults.php:117
 msgid "Image Size"
 msgstr ""
 
@@ -2899,7 +3002,7 @@ msgid ""
 "reject the request and add a notice."
 msgstr ""
 
-#: includes/enqueue.php:218
+#: includes/enqueue.php:219
 msgid "In compare list"
 msgstr ""
 
@@ -3093,7 +3196,7 @@ msgstr ""
 msgid "Kilometers"
 msgstr ""
 
-#: includes/functions.php:1079
+#: includes/functions.php:1093
 msgid "km"
 msgstr ""
 
@@ -3143,8 +3246,8 @@ msgstr ""
 msgid "Last 30 days"
 msgstr ""
 
-#: templates/login.php:52 templates/add_car/registration.php:37
-#: templates/elementor/Widgets/login_register.php:109
+#: templates/login.php:57 templates/add_car/registration.php:37
+#: templates/elementor/Widgets/login_register.php:114
 #: templates/elementor/Widgets/add-listing/parts/registration.php:37
 msgid "Last Name"
 msgstr ""
@@ -3153,7 +3256,7 @@ msgstr ""
 msgid "Last name"
 msgstr ""
 
-#: templates/button-go-pro.php:365
+#: templates/button-go-pro.php:370
 msgid "Last Update:"
 msgstr ""
 
@@ -3161,16 +3264,29 @@ msgstr ""
 msgid "Last week"
 msgstr ""
 
-#: templates/elementor/Widgets/add-listing/parts/item_details.php:274
+#: templates/elementor/Widgets/add-listing/parts/item_details.php:286
 msgid "Lat and Long Finder"
 msgstr ""
 
 #: includes/admin/butterbean_metaboxes.php:405 includes/admin/metaboxes.php:93
-#: templates/elementor/Widgets/add-listing/parts/item_details.php:262
+#: templates/elementor/Widgets/add-listing/parts/item_details.php:274
 msgid "Latitude"
 msgstr ""
 
-#: templates/button-go-pro.php:221
+#: includes/class/Plugin/config/pro/addons/social-login.php:132
+#: includes/class/Plugin/config/pro/addons/saved-search.php:38
+msgid "Learn More"
+msgstr ""
+
+#: templates/journey/free-journey-addons-sidebars.php:30
+#: includes/class/Plugin/config/pro/addons/social-login.php:30
+#: includes/class/Plugin/config/pro/addons/social-login.php:46
+#: includes/class/Plugin/config/pro/addons/social-login.php:83
+#: includes/class/Plugin/config/pro/addons/social-login.php:99
+msgid "Learn more"
+msgstr ""
+
+#: templates/button-go-pro.php:223
 msgid "Learn more."
 msgstr ""
 
@@ -3209,6 +3325,14 @@ msgstr ""
 msgid "Let users download vehicle brochures in PDF format for offline viewing"
 msgstr ""
 
+#: includes/class/Addons/Addons.php:55
+#: includes/class/Plugin/config/pro/addons/social-login.php:129
+msgid ""
+"Let users log in to your site quickly using their existing Google or "
+"Facebook accounts. Forget about remembering passwords – it’s just one click "
+"to get started!"
+msgstr ""
+
 #: includes/class/Elementor/Nuxy/AddListingManager.php:246
 msgid "Let users upload images for vehicle listings"
 msgstr ""
@@ -3221,7 +3345,7 @@ msgstr ""
 msgid "License"
 msgstr ""
 
-#: templates/button-go-pro.php:235 templates/button-go-pro.php:344
+#: templates/button-go-pro.php:240 templates/button-go-pro.php:349
 msgid "Lifetime"
 msgstr ""
 
@@ -3246,7 +3370,7 @@ msgstr ""
 msgid "List"
 msgstr ""
 
-#: elementor/inc/Widgets/InventorySearchResults.php:52
+#: elementor/inc/Widgets/InventorySearchResults.php:53
 msgid "List View"
 msgstr ""
 
@@ -3344,11 +3468,11 @@ msgid "Listing info card"
 msgstr ""
 
 #: templates/add_car/item_details.php:32
-#: templates/elementor/Widgets/add-listing/parts/item_details.php:32
+#: templates/elementor/Widgets/add-listing/parts/item_details.php:24
 msgid "Listing Item Details"
 msgstr ""
 
-#: templates/elementor/Widgets/add-listing/parts/item_details.php:244
+#: templates/elementor/Widgets/add-listing/parts/item_details.php:256
 msgid "Listing item Location"
 msgstr ""
 
@@ -3401,7 +3525,7 @@ msgid "Listing statistics for:"
 msgstr ""
 
 #: templates/filter/sidebar.php:108
-#: templates/elementor/Widgets/inventory-search-filter.php:165
+#: templates/elementor/Widgets/inventory-search-filter.php:172
 #: templates/filter/horizontal-filter/horizontal-filter.php:97
 msgid "Listing status"
 msgstr ""
@@ -3430,8 +3554,8 @@ msgstr ""
 msgid "Listing title max length"
 msgstr ""
 
-#: elementor/inc/Widgets/InventorySearchResults.php:59
-#: elementor/inc/Widgets/AddListing.php:79
+#: elementor/inc/Widgets/InventorySearchResults.php:60
+#: elementor/inc/Widgets/AddListing.php:80
 msgid "Listing Type"
 msgstr ""
 
@@ -3459,7 +3583,7 @@ msgstr ""
 #: includes/functions.php:696 includes/functions.php:697
 #: includes/vehicle_functions.php:79 includes/vehicle_functions.php:80
 #: templates/filter/sidebar.php:35
-#: templates/elementor/Widgets/inventory-search-filter.php:82
+#: templates/elementor/Widgets/inventory-search-filter.php:89
 #: templates/filter/horizontal-filter/horizontal-filter.php:20
 msgid "Listings"
 msgstr ""
@@ -3493,8 +3617,8 @@ msgstr ""
 msgid "Listings Page and Listing Detail Page"
 msgstr ""
 
-#: elementor/inc/Widgets/InventorySearchResults.php:71
-#: elementor/inc/Widgets/InventorySearchResults.php:93
+#: elementor/inc/Widgets/InventorySearchResults.php:72
+#: elementor/inc/Widgets/InventorySearchResults.php:94
 msgid "Listings per Page"
 msgstr ""
 
@@ -3506,7 +3630,7 @@ msgstr ""
 msgid "Live Demo"
 msgstr ""
 
-#: elementor/inc/Helpers/RegisterActions.php:402
+#: elementor/inc/Helpers/RegisterActions.php:404
 msgid "Load more"
 msgstr ""
 
@@ -3532,7 +3656,7 @@ msgstr ""
 #: elementor/inc/Widgets/DealersList.php:83
 #: templates/filter/horizontal-filter/horizontal-filter-sort-list.php:22
 #: includes/class/Elementor/Nuxy/AddListingManager.php:219
-#: templates/elementor/Widgets/add-listing/parts/item_details.php:250
+#: templates/elementor/Widgets/add-listing/parts/item_details.php:262
 msgid "Location"
 msgstr ""
 
@@ -3544,13 +3668,14 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
-#: templates/login.php:34 templates/account-dropdown.php:68
+#: templates/login.php:34 templates/account-dropdown.php:71
 #: templates/elementor/Widgets/login_register.php:65
+#: templates/partials/user/account-dropdown.php:30
 msgid "Login"
 msgstr ""
 
-#: templates/login.php:73 templates/add_car/registration.php:63
-#: templates/elementor/Widgets/login_register.php:135
+#: templates/login.php:78 templates/add_car/registration.php:63
+#: templates/elementor/Widgets/login_register.php:140
 #: templates/elementor/Widgets/add-listing/parts/registration.php:60
 msgid "Login *"
 msgstr ""
@@ -3560,16 +3685,25 @@ msgstr ""
 msgid "Login Here"
 msgstr ""
 
-#: templates/login.php:16 templates/account-dropdown.php:45
-#: templates/account-dropdown.php:79 templates/add_car/check_user.php:65
+#: templates/login.php:16 templates/account-dropdown.php:46
+#: templates/account-dropdown.php:90 templates/add_car/check_user.php:65
 #: templates/elementor/Widgets/login_register.php:42
-#: templates/elementor/Widgets/login_register.php:72
+#: templates/elementor/Widgets/login_register.php:77
+#: templates/partials/user/account-dropdown.php:11
 #: templates/elementor/Widgets/add-listing/parts/check_user.php:93
 msgid "Login or E-mail"
 msgstr ""
 
 #: elementor/inc/Widgets/LoginRegister.php:26
 msgid "Login Register"
+msgstr ""
+
+#: includes/class/Plugin/config/pro/addons/social-login.php:72
+msgid "Login via Facebook"
+msgstr ""
+
+#: includes/class/Plugin/config/pro/addons/social-login.php:19
+msgid "Login via Google"
 msgstr ""
 
 #: templates/single-car/car-actions.php:160
@@ -3582,12 +3716,12 @@ msgstr ""
 msgid "Logo 2"
 msgstr ""
 
-#: templates/account-dropdown.php:34
+#: templates/account-dropdown.php:35
 msgid "Logout"
 msgstr ""
 
 #: includes/admin/butterbean_metaboxes.php:418 includes/admin/metaboxes.php:97
-#: templates/elementor/Widgets/add-listing/parts/item_details.php:269
+#: templates/elementor/Widgets/add-listing/parts/item_details.php:281
 msgid "Longitude"
 msgstr ""
 
@@ -3660,7 +3794,7 @@ msgstr ""
 msgid "Marked Featured"
 msgstr ""
 
-#: includes/helpers.php:849 elementor/inc/Helpers/Helper.php:343
+#: includes/helpers.php:838 elementor/inc/Helpers/Helper.php:343
 msgid "Max"
 msgstr ""
 
@@ -3697,7 +3831,7 @@ msgstr ""
 msgid "Message Us"
 msgstr ""
 
-#: includes/functions.php:1076
+#: includes/functions.php:1090
 msgid "mi"
 msgstr ""
 
@@ -3714,7 +3848,7 @@ msgstr ""
 msgid "Miles"
 msgstr ""
 
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:178
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:184
 msgid "Minimum rating label"
 msgstr ""
 
@@ -3795,19 +3929,19 @@ msgstr ""
 msgid "Motors"
 msgstr ""
 
-#: includes/options.php:654
+#: includes/options.php:678
 msgid "Motors Pack"
 msgstr ""
 
-#: includes/class/Plugin/Settings.php:116
+#: includes/class/Plugin/Settings.php:126
 msgid "Motors Plugin"
 msgstr ""
 
-#: includes/functions.php:1305 includes/functions.php:1309
+#: includes/functions.php:1319 includes/functions.php:1323
 msgid "Motors Plugin Settings"
 msgstr ""
 
-#: templates/button-go-pro.php:210
+#: templates/button-go-pro.php:212
 msgid "Motors Pro"
 msgstr ""
 
@@ -3878,13 +4012,13 @@ msgstr ""
 msgid "N/A"
 msgstr ""
 
-#: includes/functions.php:790 includes/functions.php:857
+#: includes/functions.php:804 includes/functions.php:871
 #: templates/modals/test-drive.php:15 templates/modals/get-car-price.php:16
 #: templates/modals/trade-offer.php:21
 msgid "Name"
 msgstr ""
 
-#: includes/actions.php:1025
+#: includes/actions.php:1042
 msgid "Name - "
 msgstr ""
 
@@ -3938,7 +4072,7 @@ msgstr ""
 msgid "New Password"
 msgstr ""
 
-#: includes/actions.php:451
+#: includes/actions.php:464
 msgid "New password not saved, because of wrong confirmation."
 msgstr ""
 
@@ -3947,11 +4081,11 @@ msgstr ""
 msgid "New Pay Per Listing"
 msgstr ""
 
-#: includes/actions.php:1009
+#: includes/actions.php:1026
 msgid "New request for test drive"
 msgstr ""
 
-#: includes/functions.php:752
+#: includes/functions.php:765
 msgid "New Test Drives"
 msgstr ""
 
@@ -3968,7 +4102,7 @@ msgstr ""
 msgid "New/Used Cars"
 msgstr ""
 
-#: includes/options.php:917 templates/trade-in.php:248
+#: includes/options.php:941 templates/trade-in.php:248
 #: templates/trade-in.php:249 includes/admin/categories.php:380
 #: elementor/inc/Widgets/ListingsGridTabs.php:97
 #: elementor/inc/Widgets/ListingsGridTabs.php:117
@@ -3995,13 +4129,13 @@ msgstr ""
 #. %s post type name
 #. post type name
 #: templates/filter/sidebar.php:46
-#: templates/elementor/Widgets/inventory-search-filter.php:96
+#: templates/elementor/Widgets/inventory-search-filter.php:103
 #: templates/filter/horizontal-filter/horizontal-filter.php:33
 #, php-format
 msgid "No categories created for %s"
 msgstr ""
 
-#: includes/actions.php:969
+#: includes/actions.php:986
 msgid "No content to send"
 msgstr ""
 
@@ -4038,7 +4172,7 @@ msgstr ""
 msgid "No items found in Trash"
 msgstr ""
 
-#: includes/options.php:538
+#: includes/options.php:562
 msgid "No parent"
 msgstr ""
 
@@ -4054,11 +4188,11 @@ msgstr ""
 msgid "No reviews for this Vehicle"
 msgstr ""
 
-#: includes/functions.php:756
+#: includes/functions.php:769
 msgid "No Test Drives found"
 msgstr ""
 
-#: includes/functions.php:757
+#: includes/functions.php:770
 msgid "No Test Drives found in Trash"
 msgstr ""
 
@@ -4076,7 +4210,7 @@ msgstr ""
 
 #: elementor/inc/Widgets/LoginRegister.php:113
 #: elementor/inc/Widgets/DealersList.php:181
-#: elementor/inc/Widgets/InventorySearchResults.php:232
+#: elementor/inc/Widgets/InventorySearchResults.php:233
 #: elementor/inc/Widgets/ListingSearchTabs.php:502
 #: elementor/inc/Widgets/ListingSearchTabs.php:596
 #: elementor/inc/Widgets/ListingSearchTabs.php:642
@@ -4098,6 +4232,10 @@ msgstr ""
 
 #: includes/admin/butterbean_helpers.php:127 includes/admin/metaboxes.php:21
 msgid "Not assigned"
+msgstr ""
+
+#: templates/filter/results.php:41
+msgid "Not found any vehicle based on your filter"
 msgstr ""
 
 #: elementor/inc/Widgets/SingleListing/DealerPhoneNumber.php:74
@@ -4128,7 +4266,7 @@ msgstr ""
 msgid "Number Of Listings Per Row"
 msgstr ""
 
-#: elementor/inc/Widgets/InventorySearchResults.php:102
+#: elementor/inc/Widgets/InventorySearchResults.php:103
 msgid "Number of Listings per Row"
 msgstr ""
 
@@ -4270,16 +4408,17 @@ msgstr ""
 #: includes/class/Plugin/config/single-listing/single-listing-layout.php:83
 #: includes/class/Plugin/config/single-listing/single-listing-layout.php:90
 #: includes/class/Plugin/config/single-listing/single-listing-layout.php:97
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:104
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:111
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:118
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:125
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:132
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:139
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:152
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:174
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:192
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:204
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:103
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:110
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:117
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:124
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:131
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:138
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:145
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:158
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:180
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:198
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:210
 #: includes/class/Plugin/config/pro/single-listing/single-listing-layout.php:14
 #: includes/class/Plugin/config/pro/single-listing/single-listing-layout.php:23
 #: includes/class/Plugin/config/pro/single-listing/single-listing-layout.php:41
@@ -4290,19 +4429,20 @@ msgstr ""
 msgid "Pages"
 msgstr ""
 
-#: elementor/inc/Widgets/InventorySearchResults.php:216
+#: elementor/inc/Widgets/InventorySearchResults.php:217
 msgid "Pagination"
 msgstr ""
 
-#: templates/login.php:21 templates/account-dropdown.php:50
+#: templates/login.php:21 templates/account-dropdown.php:51
 #: templates/add_car/check_user.php:70
 #: templates/elementor/Widgets/login_register.php:47
+#: templates/partials/user/account-dropdown.php:16
 #: templates/elementor/Widgets/add-listing/parts/check_user.php:99
 msgid "Password"
 msgstr ""
 
-#: templates/login.php:78 templates/add_car/registration.php:67
-#: templates/elementor/Widgets/login_register.php:140
+#: templates/login.php:83 templates/add_car/registration.php:67
+#: templates/elementor/Widgets/login_register.php:145
 #: templates/elementor/Widgets/add-listing/parts/registration.php:64
 msgid "Password *"
 msgstr ""
@@ -4360,8 +4500,8 @@ msgstr ""
 msgid "Pending..."
 msgstr ""
 
-#: templates/button-go-pro.php:266 templates/button-go-pro.php:267
-#: templates/button-go-pro.php:278 templates/button-go-pro.php:279
+#: templates/button-go-pro.php:271 templates/button-go-pro.php:272
+#: templates/button-go-pro.php:283 templates/button-go-pro.php:284
 msgid "per year"
 msgstr ""
 
@@ -4390,20 +4530,20 @@ msgstr ""
 msgid "Personal Seller"
 msgstr ""
 
-#: includes/functions.php:798 includes/functions.php:865
+#: includes/functions.php:812 includes/functions.php:879
 #: includes/user-extra.php:25 templates/modals/test-drive.php:29
 #: templates/modals/get-car-price.php:30 templates/modals/trade-offer.php:35
 #: elementor/inc/Helpers/Helper.php:97 templates/user/private/settings.php:93
 msgid "Phone"
 msgstr ""
 
-#: includes/actions.php:1027
+#: includes/actions.php:1044
 msgid "Phone - "
 msgstr ""
 
-#: templates/login.php:60 templates/trade-in.php:318
+#: templates/login.php:65 templates/trade-in.php:318
 #: templates/add_car/registration.php:44
-#: templates/elementor/Widgets/login_register.php:117
+#: templates/elementor/Widgets/login_register.php:122
 #: templates/elementor/Widgets/add-listing/parts/registration.php:44
 msgid "Phone number"
 msgstr ""
@@ -4452,16 +4592,16 @@ msgstr ""
 msgid "Please enable Motors Pro Plugin"
 msgstr ""
 
-#: includes/actions.php:991
+#: includes/actions.php:1008
 msgid "Please enter correct email"
 msgstr ""
 
-#: includes/actions.php:995
+#: includes/actions.php:1012
 msgid "Please enter correct phone number"
 msgstr ""
 
-#: includes/actions.php:611 includes/actions.php:987 includes/actions.php:999
-#: includes/actions.php:1004 includes/vehicle_functions.php:2731
+#: includes/actions.php:628 includes/actions.php:1004 includes/actions.php:1016
+#: includes/actions.php:1021 includes/vehicle_functions.php:2731
 msgid "Please fill all fields"
 msgstr ""
 
@@ -4489,7 +4629,7 @@ msgstr ""
 msgid "Please fill Vehicle Price field"
 msgstr ""
 
-#: includes/actions.php:399
+#: includes/actions.php:412
 msgid "Please load image with right extension (jpg, jpeg, png and gif)"
 msgstr ""
 
@@ -4498,7 +4638,7 @@ msgstr ""
 msgid "Please login."
 msgstr ""
 
-#: includes/actions.php:865 includes/vehicle_functions.php:2739
+#: includes/actions.php:882 includes/vehicle_functions.php:2739
 msgid "Please prove you're not a robot"
 msgstr ""
 
@@ -4575,6 +4715,10 @@ msgstr ""
 
 #: templates/button-go-pro.php:38
 msgid "Premium Addons"
+msgstr ""
+
+#: templates/addons/main.php:19
+msgid "Premium addons"
 msgstr ""
 
 #: elementor/inc/Widgets/PricingPlan.php:451
@@ -4661,6 +4805,10 @@ msgstr ""
 msgid "Priority Ticket Support"
 msgstr ""
 
+#: templates/addons/main.php:27
+msgid "Priority ticket support"
+msgstr ""
+
 #: templates/single-car/car-user.php:137 templates/add_car/registered.php:29
 #: templates/add_car/user_info.php:149 templates/user/public/user.php:41
 #: templates/user/private/sidebar.php:32
@@ -4670,11 +4818,15 @@ msgstr ""
 msgid "Private Seller"
 msgstr ""
 
+#: includes/class/Addons/AddonsPage.php:19
+msgid "Pro Addons"
+msgstr ""
+
 #: includes/nuxy/MotorsNuxyHelpers.php:104
 msgid "Pro Version"
 msgstr ""
 
-#: includes/class/Plugin/config/user-main.php:32
+#: includes/class/Plugin/config/user-main.php:34
 #: elementor/inc/Widgets/HeaderFooter/ProfileButton.php:43
 #: includes/class/Plugin/config/shortcodes/shortcodes-list.php:25
 #: includes/class/Plugin/config/shortcodes/shortcodes-list.php:41
@@ -4754,6 +4906,11 @@ msgstr ""
 msgid "Recommend vehicles in other locations in case of empty result"
 msgstr ""
 
+#: includes/class/Plugin/config/pro/addons/social-login.php:58
+#: includes/class/Plugin/config/pro/addons/social-login.php:111
+msgid "Redirect URL"
+msgstr ""
+
 #: templates/single-car/car-data.php:82
 #: templates/add_car/step_1_additional_fields.php:40
 #: templates/elementor/Widgets/single-listing/classified/listing-data.php:19
@@ -4794,13 +4951,14 @@ msgstr ""
 msgid "Regular price label (default - Buy For)"
 msgstr ""
 
-#: elementor/inc/Widgets/InventorySearchResults.php:103
+#: elementor/inc/Widgets/InventorySearchResults.php:104
 msgid "Reload the page to apply the settings."
 msgstr ""
 
-#: templates/login.php:28 templates/account-dropdown.php:57
+#: templates/login.php:28 templates/account-dropdown.php:59
 #: templates/add_car/check_user.php:77
 #: templates/elementor/Widgets/login_register.php:54
+#: templates/partials/user/account-dropdown.php:23
 #: templates/elementor/Widgets/add-listing/parts/check_user.php:107
 msgid "Remember me"
 msgstr ""
@@ -4813,18 +4971,18 @@ msgstr ""
 msgid "Remove all"
 msgstr ""
 
-#: includes/functions.php:421 includes/enqueue.php:216 includes/enqueue.php:219
+#: includes/functions.php:421 includes/enqueue.php:217 includes/enqueue.php:220
 #: templates/single-car/car-actions.php:58 templates/compare/compare.php:104
 #: templates/elementor/Widgets/listings-compare.php:171
 #: templates/loop/grid/compare.php:18
 msgid "Remove from compare"
 msgstr ""
 
-#: includes/enqueue.php:221
+#: includes/enqueue.php:222
 msgid "Remove from favorites"
 msgstr ""
 
-#: includes/enqueue.php:217 templates/compare/compare.php:67
+#: includes/enqueue.php:218 templates/compare/compare.php:67
 #: templates/compare/compare.php:162
 #: templates/elementor/Widgets/listings-compare.php:135
 #: templates/elementor/Widgets/listings-compare.php:232
@@ -4870,7 +5028,7 @@ msgstr ""
 msgid "Request car price [car]"
 msgstr ""
 
-#: includes/actions.php:1024
+#: includes/actions.php:1041
 msgid "Request for a test drive"
 msgstr ""
 
@@ -5146,6 +5304,10 @@ msgstr ""
 msgid "Reset all"
 msgstr ""
 
+#: templates/filter/results.php:47
+msgid "Reset filters"
+msgstr ""
+
 #: elementor/inc/Widgets/ImageCategories.php:397
 msgid "Reverse Direction"
 msgstr ""
@@ -5229,6 +5391,17 @@ msgstr ""
 msgid "Save Changes"
 msgstr ""
 
+#: includes/class/Addons/Addons.php:42
+#: includes/class/Plugin/config/pro/addons/saved-search.php:33
+#: includes/class/Plugin/config/pro/addons/saved-search.php:37
+#: includes/class/Plugin/config/pro/addons/saved-search.php:45
+msgid "Saved Searches"
+msgstr ""
+
+#: includes/class/Plugin/config/pro/addons/saved-search.php:18
+msgid "Saved Searches Amount"
+msgstr ""
+
 #: templates/modals/test-drive.php:8
 msgid "Schedule a Test Drive"
 msgstr ""
@@ -5286,7 +5459,7 @@ msgstr ""
 msgid "Search radius"
 msgstr ""
 
-#: elementor/inc/Widgets/InventorySearchResults.php:44
+#: elementor/inc/Widgets/InventorySearchResults.php:45
 msgid "Search Result"
 msgstr ""
 
@@ -5295,7 +5468,7 @@ msgid "Search result heading"
 msgstr ""
 
 #: templates/single-car/search-results/search-results-carousel.php:37
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:108
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:114
 msgid "Search results"
 msgstr ""
 
@@ -5313,7 +5486,7 @@ msgstr ""
 msgid "Search Tabs"
 msgstr ""
 
-#: includes/functions.php:755
+#: includes/functions.php:768
 msgid "Search Test Drives"
 msgstr ""
 
@@ -5337,10 +5510,10 @@ msgstr ""
 msgid "See map"
 msgstr ""
 
-#: templates/elementor/Widgets/add-listing/parts/item_details.php:86
-#: templates/elementor/Widgets/add-listing/parts/item_details.php:121
-#: templates/elementor/Widgets/add-listing/parts/item_details.php:127
-#: templates/elementor/Widgets/add-listing/parts/item_details.php:212
+#: templates/elementor/Widgets/add-listing/parts/item_details.php:78
+#: templates/elementor/Widgets/add-listing/parts/item_details.php:113
+#: templates/elementor/Widgets/add-listing/parts/item_details.php:119
+#: templates/elementor/Widgets/add-listing/parts/item_details.php:224
 msgid "Select"
 msgstr ""
 
@@ -5353,8 +5526,8 @@ msgstr ""
 #. %s name option
 #. %s label
 #: templates/add_car/required-fields.php:21
-#: templates/filter/types/select.php:28
-#: templates/elementor/Widgets/add-listing/parts/item_details.php:176
+#: templates/filter/types/select.php:64
+#: templates/elementor/Widgets/add-listing/parts/item_details.php:188
 #, php-format
 msgid "Select %s"
 msgstr ""
@@ -5381,7 +5554,7 @@ msgid "Select how you want the listings to be sorted"
 msgstr ""
 
 #: templates/filter/sidebar.php:106
-#: templates/elementor/Widgets/inventory-search-filter.php:163
+#: templates/elementor/Widgets/inventory-search-filter.php:170
 msgid "Select listing status"
 msgstr ""
 
@@ -5439,11 +5612,11 @@ msgstr ""
 msgid "Sell a car Online"
 msgstr ""
 
-#: templates/user/private/sidebar.php:67
+#: templates/user/private/sidebar.php:69
 msgid "Seller Contact Phone"
 msgstr ""
 
-#: templates/single-car/car-user.php:170 templates/user/private/sidebar.php:74
+#: templates/single-car/car-user.php:170 templates/user/private/sidebar.php:76
 msgid "Seller Email"
 msgstr ""
 
@@ -5490,9 +5663,20 @@ msgstr ""
 msgid "Send confirmation email"
 msgstr ""
 
-#: templates/account-dropdown.php:82
-#: templates/elementor/Widgets/login_register.php:79
+#: includes/class/Plugin/config/pro/addons/saved-search.php:12
+msgid "Send Email"
+msgstr ""
+
+#: templates/account-dropdown.php:93
+#: templates/elementor/Widgets/login_register.php:84
 msgid "Send password"
+msgstr ""
+
+#: includes/class/Plugin/config/pro/addons/saved-search.php:13
+msgid ""
+"Send periodic email alerts to customers with saved searches about new "
+"matching items. Set the alert frequency in days. <br /> Leave empty if you "
+"don’t want send email alerts."
 msgstr ""
 
 #: includes/class/Plugin/config/pro/listing-settings/general.php:7
@@ -5566,12 +5750,16 @@ msgid ""
 "Set the duration for which each paid submission will remain active in days."
 msgstr ""
 
+#: includes/class/Plugin/config/pro/addons/saved-search.php:19
+msgid "Set the maximum number of active saved searches per user."
+msgstr ""
+
 #: includes/class/Plugin/config/user-settings/user-settings.php:16
 #: includes/class/Plugin/config/pro/user-settings/dealer-settings.php:27
 msgid "Set the maximum number of listings that can be published for free"
 msgstr ""
 
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:179
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:185
 msgid ""
 "Set the minimum rating threshold for vehicles to be labeled according to Car "
 "Gurus standards"
@@ -5590,16 +5778,16 @@ msgstr ""
 msgid "Set Your Asking Price"
 msgstr ""
 
-#: includes/class/Plugin/Settings.php:204
-#: includes/class/Plugin/Settings.php:205
+#: includes/class/Plugin/Settings.php:213
+#: includes/class/Plugin/Settings.php:214
 msgid "Settings"
 msgstr ""
 
-#: includes/options.php:793
+#: includes/options.php:817
 msgid "Settings saved"
 msgstr ""
 
-#: includes/actions.php:288
+#: includes/actions.php:301
 msgid "Settings Saved."
 msgstr ""
 
@@ -5635,7 +5823,7 @@ msgid "Show All"
 msgstr ""
 
 #: templates/filter/featured.php:51
-#: elementor/inc/Helpers/RegisterActions.php:413
+#: elementor/inc/Helpers/RegisterActions.php:415
 msgid "Show all"
 msgstr ""
 
@@ -5644,7 +5832,7 @@ msgid "Show Car Reviews Tab"
 msgstr ""
 
 #: templates/filter/sidebar.php:155
-#: templates/elementor/Widgets/inventory-search-filter.php:214
+#: templates/elementor/Widgets/inventory-search-filter.php:221
 msgid "Show cars"
 msgstr ""
 
@@ -5671,7 +5859,7 @@ msgstr ""
 msgid "Show Email Address on my Profile"
 msgstr ""
 
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:122
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:128
 msgid "Show full phone number"
 msgstr ""
 
@@ -5688,7 +5876,7 @@ msgid "Show more"
 msgstr ""
 
 #: templates/add_car/registered.php:36 templates/add_car/user_info.php:122
-#: templates/add_car/user_info.php:193 templates/user/private/sidebar.php:83
+#: templates/add_car/user_info.php:193 templates/user/private/sidebar.php:85
 #: templates/elementor/Widgets/add-listing/parts/registered.php:33
 #: templates/elementor/Widgets/add-listing/parts/user_info.php:77
 #: templates/elementor/Widgets/add-listing/parts/user_info.php:150
@@ -5713,6 +5901,10 @@ msgstr ""
 msgid "Show price labels"
 msgstr ""
 
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:101
+msgid "Show Print Button"
+msgstr ""
+
 #: elementor/inc/Widgets/SingleListing/Classified/Price.php:47
 msgid "Show Regural price"
 msgstr ""
@@ -5730,11 +5922,11 @@ msgstr ""
 msgid "Show the Google Maps on your website"
 msgstr ""
 
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:109
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:115
 msgid "Show the search results on the page"
 msgstr ""
 
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:102
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:108
 msgid "Show the unique VIN for each vehicle"
 msgstr ""
 
@@ -5750,7 +5942,7 @@ msgstr ""
 msgid "Show when listings were published"
 msgstr ""
 
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:116
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:122
 msgid "Show when vehicles were manufactured"
 msgstr ""
 
@@ -5772,9 +5964,10 @@ msgstr ""
 msgid "Sign In Text Color"
 msgstr ""
 
-#: templates/login.php:42 templates/account-dropdown.php:70
+#: templates/login.php:47 templates/account-dropdown.php:80
 #: templates/add_car/registration.php:11
-#: templates/elementor/Widgets/login_register.php:98
+#: templates/elementor/Widgets/login_register.php:103
+#: templates/partials/user/account-dropdown.php:33
 #: templates/elementor/Widgets/add-listing/parts/registration.php:9
 msgid "Sign Up"
 msgstr ""
@@ -5783,9 +5976,9 @@ msgstr ""
 msgid "Sign Up Background Color"
 msgstr ""
 
-#: templates/login.php:111 templates/add_car/registration.php:93
-#: templates/elementor/Widgets/login_register.php:237
-#: templates/elementor/Widgets/login_register.php:241
+#: templates/login.php:116 templates/add_car/registration.php:93
+#: templates/elementor/Widgets/login_register.php:242
+#: templates/elementor/Widgets/login_register.php:246
 #: templates/elementor/Widgets/add-listing/parts/registration.php:152
 #: templates/elementor/Widgets/add-listing/parts/registration.php:154
 msgid "Sign up now!"
@@ -5803,7 +5996,7 @@ msgstr ""
 msgid "Similar Listings"
 msgstr ""
 
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:136
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:142
 msgid "Similar listings configuration"
 msgstr ""
 
@@ -5823,11 +6016,11 @@ msgstr ""
 msgid "Singular name"
 msgstr ""
 
-#: includes/options.php:887
+#: includes/options.php:911
 msgid "Singular, Plural names and Slug are required"
 msgstr ""
 
-#: includes/actions.php:485 includes/vehicle_functions.php:893
+#: includes/actions.php:498 includes/vehicle_functions.php:893
 #: includes/vehicle_functions.php:1068 includes/vehicle_functions.php:1545
 #: includes/vehicle_functions.php:1744
 msgid "Site is on demo mode"
@@ -5861,8 +6054,15 @@ msgstr ""
 msgid "Slug"
 msgstr ""
 
-#: includes/options.php:893
+#: includes/options.php:917
 msgid "Slug name is already in use. Please choose another slug name."
+msgstr ""
+
+#: includes/class/Addons/Addons.php:52
+#: includes/class/Plugin/config/pro/addons/social-login.php:127
+#: includes/class/Plugin/config/pro/addons/social-login.php:131
+#: includes/class/Plugin/config/pro/addons/social-login.php:139
+msgid "Social Login"
 msgstr ""
 
 #: elementor/inc/Widgets/LoginRegister.php:227
@@ -5875,7 +6075,7 @@ msgstr ""
 
 #: templates/single-car/car-gallery.php:47 templates/filter/sidebar.php:114
 #: templates/loop/badge.php:32
-#: templates/elementor/Widgets/inventory-search-filter.php:171
+#: templates/elementor/Widgets/inventory-search-filter.php:178
 #: templates/filter/horizontal-filter/horizontal-filter.php:103
 #: templates/elementor/Widgets/single-listing/gallery.php:279
 #: templates/elementor/Widgets/single-listing/classified/price.php:49
@@ -5895,7 +6095,7 @@ msgstr ""
 msgid "Sold vehicles will have a Sold badge"
 msgstr ""
 
-#: includes/options.php:748 includes/options.php:756 includes/options.php:764
+#: includes/options.php:772 includes/options.php:780 includes/options.php:788
 msgid "Some error occurred"
 msgstr ""
 
@@ -5916,12 +6116,8 @@ msgstr ""
 msgid "Sorry, image is too large:"
 msgstr ""
 
-#: includes/class/Features/STMListingDataStoreCPT.php:300
+#: includes/class/Features/STMListingDataStoreCPT.php:301
 msgid "Sorry, item is out of stock and cannot be added to cart"
-msgstr ""
-
-#: templates/filter/results.php:39
-msgid "Sorry, No results"
 msgstr ""
 
 #: templates/filter/result_with_rating.php:94
@@ -5999,7 +6195,7 @@ msgid ""
 "when creating a listing. Add new %s"
 msgstr ""
 
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:138
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:144
 msgid ""
 "Specify the criteria for displaying similar listings based on listing "
 "categories. Add several criteria by commas, for example: make,condition"
@@ -6013,7 +6209,7 @@ msgstr ""
 msgid "Specify the duration for which a listing will be featured in days."
 msgstr ""
 
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:197
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:203
 msgid "Specify the height of the Car Gurus widget in pixels"
 msgstr ""
 
@@ -6038,6 +6234,10 @@ msgstr ""
 
 #: templates/button-go-pro.php:52
 msgid "Starter Theme"
+msgstr ""
+
+#: templates/addons/main.php:43
+msgid "Starter themes"
 msgstr ""
 
 #: templates/loop/list/price_rating.php:32
@@ -6193,12 +6393,12 @@ msgstr ""
 msgid "Test drive button"
 msgstr ""
 
-#: includes/functions.php:747 includes/functions.php:748
-#: includes/functions.php:759
+#: includes/functions.php:760 includes/functions.php:761
+#: includes/functions.php:772
 msgid "Test Drives"
 msgstr ""
 
-#: templates/button-go-pro.php:381
+#: templates/button-go-pro.php:386
 msgid "Tested up to:"
 msgstr ""
 
@@ -6206,8 +6406,8 @@ msgstr ""
 msgid "Text Alignment"
 msgstr ""
 
-#: elementor/inc/Widgets/InventorySearchResults.php:239
-#: elementor/inc/Widgets/InventorySearchResults.php:311
+#: elementor/inc/Widgets/InventorySearchResults.php:240
+#: elementor/inc/Widgets/InventorySearchResults.php:312
 #: elementor/inc/Widgets/InventorySortBy.php:162
 #: elementor/inc/Widgets/InventorySortBy.php:257
 #: elementor/inc/Widgets/InventorySortBy.php:286
@@ -6228,7 +6428,7 @@ msgstr ""
 msgid "Text Color"
 msgstr ""
 
-#: elementor/inc/Widgets/InventorySearchResults.php:222
+#: elementor/inc/Widgets/InventorySearchResults.php:223
 #: elementor/inc/Widgets/SingleListing/Gallery.php:580
 msgid "Text Style"
 msgstr ""
@@ -6298,6 +6498,10 @@ msgstr ""
 
 #: includes/class/Plugin/config/user-main.php:13
 msgid "There will be a form to sign up for new users"
+msgstr ""
+
+#: templates/addons/main.php:92
+msgid "This addon available in Pro version"
 msgstr ""
 
 #: includes/admin/categories.php:49
@@ -6397,6 +6601,15 @@ msgstr ""
 msgid "Title Typography"
 msgstr ""
 
+#: includes/class/Plugin/config/pro/addons/saved-search.php:26
+msgid ""
+"To allow users to save searches and receive email alerts for new matching "
+"listings, add the Save Search widget<br />on the Search Results page. <a "
+"href=\"https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-"
+"listing/motors-pro-addons/saved-searches#adding-save-search-widget-to-the-"
+"page\" target=\"_blank\">Learn more</a>"
+msgstr ""
+
 #: templates/add_car/registered.php:41 templates/add_car/user_info.php:127
 #: templates/add_car/user_info.php:197
 #: templates/elementor/Widgets/add-listing/parts/registered.php:38
@@ -6461,6 +6674,10 @@ msgstr ""
 msgid "Transmission"
 msgstr ""
 
+#: templates/filter/results.php:42
+msgid "Try another filter, location or keywords"
+msgstr ""
+
 #: includes/user-extra.php:76 templates/user/private/settings.php:180
 msgid "Twitter"
 msgstr ""
@@ -6497,10 +6714,15 @@ msgid "Unlimited License"
 msgstr ""
 
 #: includes/nuxy/unlock-banner-component.php:39
+#: templates/journey/free-journey-addons-sidebars.php:11
 msgid "Unlock"
 msgstr ""
 
-#: includes/class/Plugin/Settings.php:230
+#: templates/addons/main.php:11
+msgid "Unlock all addons WITH MOTORS PRO!"
+msgstr ""
+
+#: includes/class/Plugin/Settings.php:239
 msgid "Unlock PRO"
 msgstr ""
 
@@ -6533,7 +6755,7 @@ msgstr ""
 msgid "Updates for 1 year"
 msgstr ""
 
-#: includes/class/Plugin/Settings.php:229
+#: includes/class/Plugin/Settings.php:238
 msgid "Upgrade"
 msgstr ""
 
@@ -6541,7 +6763,8 @@ msgstr ""
 msgid "Upgrade Plan"
 msgstr ""
 
-#: includes/nuxy/unlock-banner-component.php:27
+#: includes/nuxy/unlock-banner-component.php:25
+#: templates/journey/free-journey-addons-sidebars.php:27
 msgid "Upgrade to PRO"
 msgstr ""
 
@@ -6747,7 +6970,7 @@ msgid "Vehicle Production Date"
 msgstr ""
 
 #: includes/class/Elementor/Nuxy/AddListingManager.php:187
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:115
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:121
 msgid "Vehicle production date"
 msgstr ""
 
@@ -6755,7 +6978,7 @@ msgstr ""
 msgid "Vehicles per page:"
 msgstr ""
 
-#: templates/button-go-pro.php:354
+#: templates/button-go-pro.php:359
 msgid "Version:"
 msgstr ""
 
@@ -6806,7 +7029,7 @@ msgstr ""
 msgid "Videos"
 msgstr ""
 
-#: templates/button-go-pro.php:359
+#: templates/button-go-pro.php:364
 msgid "View Changelog"
 msgstr ""
 
@@ -6819,7 +7042,7 @@ msgstr ""
 msgid "View more"
 msgstr ""
 
-#: includes/functions.php:754
+#: includes/functions.php:767
 msgid "View Test Drives"
 msgstr ""
 
@@ -6839,7 +7062,11 @@ msgstr ""
 msgid "Vin"
 msgstr ""
 
-#: includes/class/Plugin/config/single-listing/single-listing-layout.php:101
+#: includes/class/Addons/Addons.php:32
+msgid "VIN Decoder"
+msgstr ""
+
+#: includes/class/Plugin/config/single-listing/single-listing-layout.php:107
 #: elementor/inc/Widgets/SingleListing/Classified/ListingData.php:40
 msgid "VIN Number"
 msgstr ""
@@ -6934,6 +7161,7 @@ msgid "Width for cropped images"
 msgstr ""
 
 #: includes/nuxy/unlock-banner-component.php:47
+#: templates/journey/free-journey-addons-sidebars.php:17
 msgid "with"
 msgstr ""
 
@@ -6941,7 +7169,7 @@ msgstr ""
 msgid "Without sidebar"
 msgstr ""
 
-#: templates/button-go-pro.php:373
+#: templates/button-go-pro.php:378
 msgid "WordPress Version:"
 msgstr ""
 
@@ -6954,7 +7182,7 @@ msgstr ""
 msgid "Year"
 msgstr ""
 
-#: includes/options.php:917 templates/trade-in.php:244
+#: includes/options.php:941 templates/trade-in.php:244
 #: templates/trade-in.php:245 includes/admin/categories.php:380
 #: elementor/inc/Widgets/ListingsGridTabs.php:96
 #: elementor/inc/Widgets/ListingsGridTabs.php:116
@@ -6975,6 +7203,22 @@ msgid ""
 "please sign in first"
 msgstr ""
 
+#: includes/class/Plugin/config/pro/addons/social-login.php:81
+msgid "You can get App ID from Facebook Developers Page."
+msgstr ""
+
+#: includes/class/Plugin/config/pro/addons/social-login.php:97
+msgid "You can get App Secret from Facebook Developers Page."
+msgstr ""
+
+#: includes/class/Plugin/config/pro/addons/social-login.php:28
+msgid "You can get Client ID from Google APIs console."
+msgstr ""
+
+#: includes/class/Plugin/config/pro/addons/social-login.php:44
+msgid "You can get Secret Key from Google APIs console."
+msgstr ""
+
 #: includes/vehicle_functions.php:1157
 msgid "You do not have available posts"
 msgstr ""
@@ -6990,7 +7234,7 @@ msgid ""
 msgstr ""
 
 #. %s: string
-#: templates/button-go-pro.php:341
+#: templates/button-go-pro.php:346
 #, php-format
 msgid ""
 "You get <a href=\"%1$s\"><span class=\"stm_terms_content_support\" data-"
@@ -6999,7 +7243,7 @@ msgid ""
 "Guarantee based on <a href=\"%1$s\">Refund Policy</a>."
 msgstr ""
 
-#: includes/enqueue.php:220 includes/vehicle_functions.php:23
+#: includes/enqueue.php:221 includes/vehicle_functions.php:23
 msgid "You have already added 3 cars"
 msgstr ""
 
@@ -7012,7 +7256,7 @@ msgstr ""
 msgid "Your contact details"
 msgstr ""
 
-#: includes/actions.php:578 includes/actions.php:1017
+#: includes/actions.php:595 includes/actions.php:1034
 #: includes/vehicle_functions.php:2712
 msgid "Your request was sent"
 msgstr ""

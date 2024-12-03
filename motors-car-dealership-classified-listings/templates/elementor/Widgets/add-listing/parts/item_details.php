@@ -158,6 +158,16 @@ $_taxonomy = ( ! $_taxonomy ) ? array() : $_taxonomy;
 					}
 
 					$is_required = ( isset( $data_unit['required_filed'] ) && $data_unit['required_filed'] ) ? 'required' : '';
+
+					$has_selected = '';
+					if ( ! empty( $_id ) ) {
+						$post_terms = wp_get_post_terms( $_id, $tax_info['slug'] );
+						if ( ! empty( $post_terms[0] ) ) {
+							$has_selected = $post_terms[0]->slug;
+						} elseif ( ! empty( $tax_info['slug'] ) ) {
+							$has_selected = get_post_meta( $_id, $tax_info['slug'], true );
+						}
+					}
 					?>
 					<div class="stm-form-1-quarter">
 						<?php
@@ -178,6 +188,7 @@ $_taxonomy = ( ! $_taxonomy ) ? array() : $_taxonomy;
 							/>
 						<?php else : ?>
 							<select name="stm_s_s_<?php echo esc_attr( $data_unit['slug'] ); ?>"
+									data-selected="<?php echo esc_attr( $has_selected ); ?>"
 									class="add_a_car-select add_a_car-select-<?php echo esc_attr( $data_unit['slug'] ); ?>" <?php echo esc_attr( $is_required ); ?>>
 								<?php
 								$selected = '';

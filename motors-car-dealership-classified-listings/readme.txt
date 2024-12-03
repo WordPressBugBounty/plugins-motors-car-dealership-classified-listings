@@ -5,7 +5,7 @@ Donate link: https://www.paypal.me/stylemix
 Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
 Tested up to: 6.7
-Stable tag: 1.4.38
+Stable tag: 1.4.39
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,18 +88,21 @@ The Motors plugin also has an **Email Template Manager (Pro)** that lets you ful
 - Test Drive Form
 - Share Listings on Social Networks
 
-#### Pro Features
-- Pre-built page templates for listings
-- Ability to create custom listing templates with extra premium elements
-- Search listings by location
-- Google Maps integration
-- Sorting listings by custom fields
-- Dealer/dealership registration
-- Mark listings as sold
-- SEO-friendly URLs customizable with custom field names
-- Image sliding gallery on listing cards
-- Loan Calculator on listing pages
-- Email template manager
+#### Motors Premium Features
+1. **Social login** – Users can log in to your site using their Google or Facebook accounts. This allows for quick access without the need to remember a password.
+2. **Saved Searches** – Allow visitors to save their searches and receive email alerts when new listings match their criteria. You can choose how often these alerts are sent and ensure they never miss relevant listings.
+3. **VIN Decoder** – Get essential vehicle information by entering the VIN (Vehicle Identification Number). You can connect up to five VIN services to gather accurate details like make, model, and more, so users quickly understand key aspects of a vehicle they’re interested in.
+4. **Pre-built page templates for listings** – Choose from a selection of ready-made templates to display your vehicle listings. Save time by using these pre-designed layouts instead of building one from scratch.
+5. **Ability to create custom listing templates with premium elements** – Create custom vehicle listing templates freely in Elementor. Use extra premium elements to tailor them to your needs.
+6. **Search listings by location** – Allow your users to quickly find listings based on location, making it simple to discover relevant vehicles nearby or in a specific area.
+7. **Google Maps integration** – The plugin seamlessly integrates with Google Maps to let your visitors view locations and listings on an interactive map for better search and navigation.
+8. **Sorting listings by custom fields** – This feature helps users filter listings based on custom fields so it’s easier for them to find exactly what they're looking for. Enable filters for different attributes to narrow down their search results.
+9. **Dealer/dealership registration** – Allow dealers and dealerships to register on your site for a fee. After registration, they can post their cars and listings for sale.
+10. **Mark listings as sold** – Mark your items as sold to keep your inventory up-to-date and show visitors which items are still available.
+11. **SEO-friendly URLs customizable with custom field names** – Create clean, SEO-optimized URLs by customizing them with your own field names to improve search engine visibility.
+12. **Image sliding gallery on listing cards** – Add an image gallery with sliding functionality to your listing cards, allowing users to easily view multiple images of the item.
+13. **Loan Calculator on listing pages** – Enable a loan calculator on listing pages to help users estimate monthly payments based on the vehicle price, interest rate, loan term, and down payment. Easily customize the default settings.
+14. **Email template manager** – Customize and control the automated emails sent to users and admins. Tailor the templates to reflect your tone and ensure they align with your automotive site's specific needs.
 
 == Installation ==
 
@@ -129,6 +132,11 @@ After that, go to Tools -> Import, and via Wordpress Importer tool install dummy
 8. Additional features
 
 == Changelog ==
+
+= 1.4.39 =
+- **Update:**  Updated .pot files in Motors plugin.
+- **Fix:**  Values resetting in fields with Parent-Child dependencies during listing creation.
+- **Fix:**  Seller's note not saving correctly in listings.
 
 = 1.4.38 =
 - **Fix:** Minor bug fixes.

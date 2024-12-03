@@ -100,6 +100,7 @@ $vars = array(
 							}
 							?>
 						<select name="stm_s_s_<?php echo esc_attr( $data_unit['slug'] ); ?>"
+								data-selected="<?php echo esc_attr( $selected ); ?>"
 								aria-label="<?php echo esc_attr( $single_name ); ?>">
 							<option value="" <?php selected( $selected, '' ); ?>>
 								<?php echo esc_html( $single_name ); ?>
