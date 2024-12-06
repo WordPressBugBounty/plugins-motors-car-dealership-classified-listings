@@ -12,12 +12,28 @@ function set_classified_fields( $manager ) {
 		)
 	);
 
+	/**
+	* Register stock/serial number controls from selected demo
+	*/
+	do_action( 'listing_stock_number_register_control', $manager );
+
+	$manager->register_control(
+		'registration_date',
+		array(
+			'type'    => 'datepicker',
+			'section' => 'stm_options',
+			'label'   => esc_html__( 'Manufacture Date', 'stm_vehicles_listing' ),
+			'preview' => 'regist',
+			'attr'    => array( 'class' => 'widefat' ),
+		)
+	);
+
 	$manager->register_control(
 		'city_mpg',
 		array(
 			'type'    => 'text',
 			'section' => 'stm_options',
-			'label'   => esc_html__( 'City MPG', 'stm_vehicles_listing' ),
+			'label'   => esc_html__( 'City Fuel Efficiency', 'stm_vehicles_listing' ),
 			'attr'    => array( 'class' => 'widefat' ),
 			'preview' => 'mpg',
 		)
@@ -28,9 +44,9 @@ function set_classified_fields( $manager ) {
 		array(
 			'type'    => 'text',
 			'section' => 'stm_options',
-			'label'   => esc_html__( 'Highway MPG', 'stm_vehicles_listing' ),
+			'label'   => esc_html__( 'Highway Fuel Efficiency', 'stm_vehicles_listing' ),
 			'attr'    => array( 'class' => 'widefat' ),
-			'preview' => 'mpg',
+			'preview' => 'hgw',
 		)
 	);
 }

@@ -194,6 +194,9 @@ if ( ! class_exists( 'ButterBean' ) ) {
 			require_once( $this->dir_path . 'inc/controls/class-control-radio-image.php' );
 			require_once( $this->dir_path . 'inc/controls/class-control-select-group.php' );
 			require_once( $this->dir_path . 'inc/controls/class-control-textarea.php' );
+			require_once( $this->dir_path . 'inc/controls/class-control-section-title.php' );
+			require_once( $this->dir_path . 'inc/controls/class-control-video-repeater.php' );
+			require_once( $this->dir_path . 'inc/controls/class-control-media-repeater.php' );
 
 			require_once( $this->dir_path . 'inc/controls/class-control-excerpt.php' );
 			require_once( $this->dir_path . 'inc/controls/class-control-multi-avatars.php' );
@@ -668,6 +671,9 @@ if ( ! class_exists( 'ButterBean' ) ) {
 			$this->register_control_type( 'checkbox_repeater', 'ButterBean_Control_Checkbox_Repeater' );
 			$this->register_control_type( 'multiselect', 'ButterBean_Control_Multiselect' );
 			$this->register_control_type( 'grouped_checkboxes', 'ButterBean_Control_Grouped_Checkboxes' );
+			$this->register_control_type( 'section_title', 'ButterBean_Control_Section_Title' );
+			$this->register_control_type( 'video_repeater', 'ButterBean_Control_Video_Repeater' );
+			$this->register_control_type( 'media_repeater', 'ButterBean_Control_Media_Repeater' );
 		}
 
 		/**
@@ -717,6 +723,8 @@ if ( ! class_exists( 'ButterBean' ) ) {
 			), '', true );
 
 			wp_enqueue_script( 'stm-butterbean', $this->dir_uri . "js/stm_butterbean_fields.js", array( 'butterbean' ), '', true );
+			wp_enqueue_style( 'stmselect2', STM_LISTINGS_URL . '/assets/css/frontend/select2.min.css', array( 'butterbean', 'stm-butterbean' ), STM_LISTINGS_V );
+			wp_enqueue_script( 'stmselect2', STM_LISTINGS_URL . '/assets/js/frontend/select2.full.min.js', array( 'jquery', 'butterbean', 'stm-butterbean' ), STM_LISTINGS_V, true );
 
 			// Enqueue the main plugin style.
 			wp_enqueue_style( 'butterbean', $this->dir_uri . "css/butterbean{$min}.css" );

@@ -1,6 +1,10 @@
 /*Butterbean fields*/
 ( function($) {
 
+   $(document).ready(function() {
+    var hiddenInput = $('.butterbean-content input[type="hidden"][data-section-id]');
+    });
+
     $('body').on('click','.stm_vehicles_listing_icons .inner .stm_font_nav a',function(e){
         e.preventDefault();
         $('.stm_vehicles_listing_icons .inner .stm_font_nav a').removeClass('active');
@@ -86,36 +90,76 @@
     }
 
     /*Multiselect*/
-    butterbean.views.register_control( 'multiselect', {
-
-        // Adds custom events.
-        events : {
-            'keydown .stm-multiselect-wrapper .stm_add_new_optionale input'    : 'preventsubmit',
-            'click .stm-multiselect-wrapper .fa-plus'    : 'addfield',
-            'change'    : 'beforeChange',
+    butterbean.views.register_control('multiselect', {
+        events: {
+            'keydown .stm-multiselect-wrapper .stm_add_new_optionale input': 'preventsubmit',
+            'click .stm-multiselect-wrapper .fa-plus': 'addfield',
+            'click .stm-multiselect-wrapper .stm_add_new_optionale .stm_add_new_btn': 'addfield',
+            'change': 'beforeChange',
         },
 
         ready: function() {
-            jQuery("#butterbean-control-stm_rental_office").find('.stm_add_new_optionale').hide();
+            var $select = jQuery(this.el).find('select');
+            $select.select2({
+                width: '100%',
+                dropdownParent: jQuery('#wpfooter'),
+                tags: true,
+                placeholder: this.model.get('l10n').field_placeholder,
+                dropdownPosition: 'below',
+            })
+
+            $select.on('select2:open', () => {
+                let $dropdown = jQuery('.select2-dropdown');
+
+                if (!$dropdown.find('.stm-add-new-wrapper').length) {
+                    $dropdown.append(`
+                        <div class="stm-add-new-wrapper">
+                            <input type="text" class="stm-add-new-input" placeholder="${this.model.get('l10n').add_new}" />
+                            <span class="icon-plus stm-add-new-btn">+</span>
+                        </div>
+                    `)
+
+                    jQuery('.stm-add-new-btn').on('click', (e) => {
+                        e.preventDefault();
+                        let inputVal = jQuery('.stm-add-new-input').val().trim();
+
+                        if (inputVal !== '') {
+                            this.addfield(e, inputVal);
+                        }
+                    });
+                    jQuery('.stm-add-new-input').on('keypress', (e) => {
+                        if (e.which === 13) {
+                            e.preventDefault();
+                            let inputVal = jQuery('.stm-add-new-input').val().trim();
+
+                            if (inputVal !== '') {
+                                this.addfield(e, inputVal);
+                            }
+                        }
+                    });
+                }
+            });
         },
-        beforeChange: function( event ){
+
+        beforeChange: function(event) {
             var select = jQuery(this.el).find('select');
             var parent = select.attr('data-parent');
-            if ( parent.length <= 0 ) {
+            if (!parent || parent.length <= 0) {
                 return false;
             }
-            var parentVal = jQuery('#butterbean-control-' + parent ).find('select').val();
-            var name      = select.attr('name').replace(/[\])}[{(]/g, '');
-            const el = document.createElement("input");
-            el.type  = "hidden";
-            el.name  = name + '_stm_have_parent';
+            var parentVal = jQuery('#butterbean-control-' + parent).find('select').val();
+            var name = select.attr('name').replace(/[\])}[{(]/g, '');
+            const el = document.createElement('input');
+            el.type = 'hidden';
+            el.name = name + '_stm_have_parent';
             el.value = parentVal;
             event.currentTarget.appendChild(el);
         },
-        preventsubmit: function(e) {
-            if( (event.keyCode == 13) ) {
+
+        preventsubmit: function(event) {
+            if (event.keyCode === 13) {
                 event.preventDefault();
-                this.addfield(e);
+                this.addfield(event);
 
                 jQuery('.stm_checkbox_adder').focus();
 
@@ -123,42 +167,53 @@
             }
         },
 
-        addfield: function(m) {
+        addfield: function(event, customValue = null) {
             var $ = jQuery;
-            var $input = $(m.currentTarget).closest('.stm_add_new_inner').find('input');
+            var $input = customValue
+                ? jQuery('<input>').val(customValue)
+                : $(event.currentTarget).closest('.stm_add_new_inner').find('input');
             var inputVal = $input.val();
             var $preloader = $input.closest('.stm_add_new_inner').find('i');
 
             var select = jQuery(this.el).find('select');
             var parent = select.attr('data-parent');
             var parentVal = '';
-            if ( typeof parent !== 'undefined' && parent !== null && parent.length > 0 ) {
-                parentVal = jQuery('#butterbean-control-' + parent ).find('select').val();
+            if (typeof parent !== 'undefined' && parent !== null && parent.length > 0) {
+                parentVal = jQuery('#butterbean-control-' + parent).find('select').val();
             }
 
-		    if(inputVal !== '') {
+            if (inputVal !== '') {
                 $.ajax({
                     url: ajaxurl,
                     dataType: 'json',
                     context: this,
                     data: 'term=' + inputVal + '&category=' + this.model.attributes.name + '&action=stm_listings_add_category_in&stm_parent=' + parentVal + '&security=' + listings_add_category_in,
-                    beforeSend: function () {
+                    beforeSend: function() {
                         $input.closest('.stm-multiselect-wrapper').addClass('stm_loading');
-                        $preloader.addClass('fa-pulse fa-spinner');
+                        if ($preloader.length) $preloader.addClass('fa-pulse fa-spinner');
                     },
                     complete: $.proxy(function(data) {
                         data = data.responseJSON;
                         $input.closest('.stm-multiselect-wrapper').removeClass('stm_loading');
-                        $input.val('');
-                        $preloader.removeClass('fa-pulse fa-spinner');
-                        select.multiSelect('addOption', { value: data.slug, text: data.name});
-                        select.multiSelect('select', [data.slug]);
-                    })
-                })
+                        if ($preloader.length) $preloader.removeClass('fa-pulse fa-spinner');
+
+                        var newOption = new Option(data.name, data.slug, true, true);
+                        select.append(newOption).trigger('change');
+
+                        if (!customValue) $input.val('');
+                        $input.focus();
+                        let inputVal = jQuery('.stm-add-new-input').val().trim();
+
+                        if (inputVal !== '') {
+                            jQuery('.stm-add-new-input').val('');
+                        }
+
+                        select.select2('close');
+                    }),
+                });
             }
         }
-
-    } );
+    });
 
     /*Repeater checks*/
     butterbean.views.register_control( 'checkbox_repeater', {
@@ -375,6 +430,269 @@
         }
 
     } );
+
+    /* Video repeater */
+    butterbean.views.register_control('video_repeater', {
+			events: {
+				'click .butterbean-add-field': 'addfield',
+				'click .butterbean-delete-field': 'deletefield',
+				'change .video-repeater input[name="video_links[]"]': 'valueadded',
+				'click .select-image-button': 'selectImage',
+				'click .video-repeater .butterbean-remove-media': 'removeImage',
+				'click .video-repeater .butterbean-change-media': 'changeImage',
+			},
+
+			valueadded: function (m) {
+				var $ = jQuery
+				var key = m.currentTarget.dataset.key
+				var value = $(m.currentTarget).val()
+				var currentValues = this.model.attributes.values
+				currentValues[key]['link'] = value
+				this.model
+					.set({
+						values: currentValues,
+					})
+					.trigger('change', this.model)
+			},
+
+			addfield: function () {
+				var currentValues = this.model.attributes.values
+				currentValues.push({ link: '', img: '' })
+				this.model
+					.set({
+						values: currentValues,
+					})
+					.trigger('change', this.model)
+			},
+
+			deletefield: function (m) {
+				var index = m.currentTarget.dataset.delete
+				var currentValues = this.model.attributes.values
+
+				currentValues.splice(index, 1)
+
+				this.model
+					.set({
+						values: currentValues,
+					})
+					.trigger('change', this.model)
+			},
+
+			selectImage: function (m) {
+				var self = this
+				var hiddenInput = jQuery(this.el).find('input[name="video_image[]"]')
+
+				var frame = wp.media({
+					title: 'Choose image',
+					button: { text: 'Choose image' },
+					multiple: false,
+				})
+
+				var $ = jQuery
+				var key = m.currentTarget.dataset.key
+				var value_img = $(m.currentTarget).val()
+
+				frame.on('select', function (m) {
+					var attachment = frame.state().get('selection').first().toJSON()
+					hiddenInput.val(attachment.id)
+
+					var currentValues = self.model.attributes.values
+					currentValues[key]['img'] = attachment.id
+					currentValues[key]['img_url'] = attachment.url
+					self.model
+						.set({
+							values: currentValues,
+						})
+						.trigger('change', self.model)
+				})
+
+				frame.open()
+			},
+
+			removeImage: function (m) {
+				var self = this
+				var key = m.currentTarget.dataset.key
+				var currentValues = self.model.attributes.values
+
+				currentValues[key]['img'] = ''
+				currentValues[key]['img_url'] = ''
+				this.model
+					.set({
+						values: currentValues,
+					})
+					.trigger('change', this.model)
+			},
+
+			changeImage: function (m) {
+				var self = this
+				var hiddenInput = jQuery(this.el).find('input[name="video_image[]"]')
+
+				var frame = wp.media({
+					title: 'Choose image',
+					button: { text: 'Choose image' },
+					multiple: false,
+				})
+
+				var $ = jQuery
+				var key = m.currentTarget.dataset.key
+				var value_img = $(m.currentTarget).val()
+
+				frame.on('select', function (m) {
+					var attachment = frame.state().get('selection').first().toJSON()
+					hiddenInput.val(attachment.id)
+
+					var currentValues = self.model.attributes.values
+					currentValues[key]['img'] = attachment.id
+					currentValues[key]['img_url'] = attachment.url
+					self.model
+						.set({
+							values: currentValues,
+						})
+						.trigger('change', self.model)
+				})
+
+				frame.open()
+			},
+		})
+
+    /*Media repeater*/
+    butterbean.views.register_control('media_repeater', {
+			events: {
+				'click .butterbean-add-field': 'addfield',
+				'click .butterbean-delete-field': 'deletefield',
+				'change .media-repeater input[name="certificate_media_links[]"]': 'valueadded',
+				'click .select-image-button': 'selectImage',
+				'click .media-repeater .butterbean-remove-media': 'removeImage',
+				'click .media-repeater .butterbean-change-media': 'changeImage',
+				'change .media-repeater input[name="certificate_media_file_name[]"]': 'fileNameAdded',
+			},
+
+			valueadded: function (m) {
+				var $ = jQuery
+				var key = m.currentTarget.dataset.key
+				var value = $(m.currentTarget).val()
+				var currentValues = this.model.attributes.values
+				currentValues[key]['media_link'] = value
+				this.model
+					.set({
+						values: currentValues,
+					})
+					.trigger('change', this.model)
+			},
+
+			fileNameAdded: function (m) {
+				var $ = jQuery
+				var key = m.currentTarget.dataset.key
+				var value = $(m.currentTarget).val()
+				var currentValues = this.model.attributes.values
+				currentValues[key]['media_file_name'] = value
+				this.model.set({ values: currentValues }).trigger('change', this.model)
+			},
+
+			addfield: function () {
+				var currentValues = this.model.attributes.values
+				if (currentValues.length < 2) {
+					currentValues.push({ media_link: '', media_img: '', media_file_name: '' })
+					this.model
+						.set({
+							values: currentValues,
+						})
+						.trigger('change', this.model)
+				}
+                if (currentValues.length >= 2) {
+					jQuery('.butterbean-add-field.add-media-repeater').hide()
+				}
+			},
+
+			deletefield: function (m) {
+				var index = m.currentTarget.dataset.delete
+				var currentValues = this.model.attributes.values
+
+				currentValues.splice(index, 1)
+
+				this.model
+					.set({
+						values: currentValues,
+					})
+					.trigger('change', this.model)
+			},
+
+			selectImage: function (m) {
+				var self = this
+				var hiddenInput = jQuery(this.el).find('input[name="certificate_media_image[]"]')
+
+				var frame = wp.media({
+					title: 'Choose image',
+					button: { text: 'Choose image' },
+					multiple: false,
+				})
+
+				var $ = jQuery
+				var key = m.currentTarget.dataset.key
+				var value_img = $(m.currentTarget).val()
+
+				frame.on('select', function (m) {
+					var attachment = frame.state().get('selection').first().toJSON()
+					hiddenInput.val(attachment.id)
+
+					var currentValues = self.model.attributes.values
+					currentValues[key]['media_img'] = attachment.id
+					currentValues[key]['media_img_url'] = attachment.url
+					self.model
+						.set({
+							values: currentValues,
+						})
+						.trigger('change', self.model)
+				})
+
+				frame.open()
+			},
+
+			removeImage: function (m) {
+				var self = this
+				var key = m.currentTarget.dataset.key
+				var currentValues = self.model.attributes.values
+
+				currentValues[key]['media_img'] = ''
+				currentValues[key]['media_img_url'] = ''
+				this.model
+					.set({
+						values: currentValues,
+					})
+					.trigger('change', self.model)
+			},
+
+			changeImage: function (m) {
+				var self = this
+				var hiddenInput = jQuery(this.el).find('input[name="certificate_media_image[]"]')
+
+				var frame = wp.media({
+					title: 'Choose image',
+					button: { text: 'Choose image' },
+					multiple: false,
+				})
+
+				var $ = jQuery
+				var key = m.currentTarget.dataset.key
+				var value_img = $(m.currentTarget).val()
+
+				frame.on('select', function (m) {
+					var attachment = frame.state().get('selection').first().toJSON()
+					hiddenInput.val(attachment.id)
+
+					var currentValues = self.model.attributes.values
+					currentValues[key]['media_img'] = attachment.id
+					currentValues[key]['media_img_url'] = attachment.url
+					self.model
+						.set({
+							values: currentValues,
+						})
+						.trigger('change', self.model)
+				})
+
+				frame.open()
+			},
+		})
 
     /*Repeater Info*/
     butterbean.views.register_control( 'repeater-info', {
@@ -681,15 +999,18 @@
 
             var medias = this.model.attributes.values;
 
-            if(typeof(medias[0]) !== 'undefined' && this.model.attributes.name == 'gallery') {
-                $('#_thumbnail_id').val(medias[0].id);
-            } else if(typeof(medias[0]) === 'undefined' && this.model.attributes.name == 'gallery') {
-                $('#remove-post-thumbnail').click();
-            }
-
             var moduleId = '#butterbean-control-' + this.model.attributes.name + ' ';
 
-            $(document).on("mouseenter", moduleId + '.stm_mini_thumbs .thumbs .inner', function(e){
+            $(moduleId + '.stm_mini_thumbs .thumbs .featured-item').remove();
+
+            if (medias.length > 0) {
+                var firstThumb = $(moduleId + '.stm_mini_thumbs .thumbs .inner').first();
+                if (!firstThumb.find('.featured-item').length) {
+                    firstThumb.append(`<span class="featured-item">${this.model.get('l10n').featured}</span>`);
+                }
+            }
+
+            $(document).on("mouseenter", moduleId + '.stm_mini_thumbs .thumbs .inner', function(e) {
                 var item = $(this);
                 item.draggable({
                     revert: 'invalid',
@@ -702,9 +1023,8 @@
                         item.closest('.thumbs').addClass('main-target');
                         $(moduleId + '.main_image .main_image_droppable').removeClass('drop-here');
                     }
-                })
+                });
             });
-
 
             $(moduleId + '.stm_mini_thumbs .thumbs').droppable({
                 drop: $.proxy(stmDroppableEvent, this),
@@ -714,13 +1034,13 @@
                 drop: $.proxy(stmDropFeatured, this),
             });
 
-            $( moduleId + ".stm_mini_thumbs .thumbs" ).on( "dropover", function( event, ui ) {
+            $(moduleId + ".stm_mini_thumbs .thumbs").on("dropover", function(event, ui) {
                 $(event.target).addClass('targets-here');
-            } );
+            });
 
-            $( moduleId + ".stm_mini_thumbs .thumbs" ).on( "dropout", function( event, ui ) {
+            $(moduleId + ".stm_mini_thumbs .thumbs").on("dropout", function(event, ui) {
                 $(event.target).removeClass('targets-here');
-            } );
+            });
 
             function stmDropFeatured(event, ui) {
                 var ids = [];
@@ -734,7 +1054,7 @@
                 medias[dragToIndex] = swapFrom;
                 medias[dragFromIndex] = swapTo;
 
-                _.each(medias, function(img){
+                _.each(medias, function(img) {
                     ids.push(img.id);
                 });
 
@@ -760,14 +1080,14 @@
                 medias[dragToIndex] = swapFrom;
                 medias[dragFromIndex] = swapTo;
 
-                _.each(medias, function(img){
+                _.each(medias, function(img) {
                     ids.push(img.id);
                 });
 
                 this.model.set({
                     values: medias,
                     value: ids.join()
-                })
+                });
             }
         },
 
@@ -808,12 +1128,12 @@
         /*PREVIEW*/
         $(document).on('click', '.image_preview', function(){
             var stmImage = $(this).find('span').data('preview');
-
-            $('.image-preview').addClass('visible').append('<img src="' + stmImage + '" />');
+            $('#wpfooter').append('<div class="image-preview visible"><div class="overlay"></div><img src="' + stmImage + '" /></div>');
+            $('#ui-datepicker-div').css('display', 'none');
         });
 
         $(document).on('click', '.image-preview .overlay', function(){
-            $('.image-preview').removeClass('visible').find('img').remove();
+            $('.image-preview').removeClass('visible').remove();
         });
 
         /*Reset amount*/
@@ -926,3 +1246,29 @@
 
     });
 })(jQuery);
+
+jQuery(document).ready(function($) {
+	if ($('.media-repeater-item').length === 0) {
+		$('.butterbean-add-field.add-media-repeater').click()
+	}
+	if ($('.media-repeater-item').length === 2) {
+		$('.butterbean-add-field.add-media-repeater').hide()
+	}
+	if ($('.video-repeater-item').length === 0) {
+		$('.butterbean-add-field.video-repeater').click()
+	}
+
+    let previousValue = $('input[name="butterbean_stm_car_manager_setting_car_price_form_label"]').val();
+
+    $('input[name="butterbean_stm_car_manager_setting_car_price_form"]').on('change', function () {
+        const labelInput = $('input[name="butterbean_stm_car_manager_setting_car_price_form_label"]');
+        if ($(this).is(':checked')) {
+            if (previousValue !== '') {
+                labelInput.val(previousValue);
+            }
+        } else {
+            previousValue = labelInput.val();
+            labelInput.val('');
+        }
+    });
+});

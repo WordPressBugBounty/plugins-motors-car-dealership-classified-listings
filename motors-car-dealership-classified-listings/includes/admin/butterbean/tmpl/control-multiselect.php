@@ -1,3 +1,6 @@
+<?php
+// Output JavaScript template.
+?>
 <div class="stm-multiselect-wrapper">
 
 	<div class="labels">
@@ -5,12 +8,6 @@
 			<# if ( data.label ) { #>
 				<span class="butterbean-label">{{ data.label }}</span>
 			<# } #>
-		</div>
-
-		<div class="select-to-label">
-
-			<span class="butterbean-label">{{ data.l10n.selected }} {{data.label}}</span>
-
 		</div>
 
 	</div>
@@ -24,12 +21,5 @@
 		<# } ) #>
 
 	</select>
-
-	<div class="stm_add_new_optionale">
-		<div class="stm_add_new_inner">
-			<input placeholder="{{data.l10n.add_new}}" value="" />
-			<i class="fas fa-plus"></i>
-		</div>
-	</div>
 
 </div>

@@ -2745,3 +2745,104 @@ if ( ! function_exists( 'stm_ajax_add_trade_offer' ) ) {
 	add_action( 'wp_ajax_stm_ajax_add_trade_offer', 'stm_ajax_add_trade_offer' );
 	add_action( 'wp_ajax_nopriv_stm_ajax_add_trade_offer', 'stm_ajax_add_trade_offer' );
 }
+
+function remove_post_author_metabox() {
+	$custom_post_types = ( class_exists( 'STMMultiListing' ) ) ? STMMultiListing::stm_get_listing_type_slugs() : array();
+	$post_types        = array_merge( array( 'listings' ), $custom_post_types );
+
+	foreach ( $post_types as $post_type ) {
+		remove_meta_box( 'authordiv', $post_type, 'normal' );
+	}
+}
+
+add_action( 'admin_menu', 'remove_post_author_metabox' );
+
+// Patch gallery videos for post type "listings"
+function patch_gallery_videos_on_view( $post_id ) {
+	if ( get_post_meta( $post_id, '_patched_gallery_videos', true ) ) {
+		return;
+	}
+
+	$post_type = get_post_type( $post_id );
+	if ( 'listings' !== $post_type ) {
+		return;
+	}
+
+	$video_preview          = get_post_meta( $post_id, 'video_preview', true );
+	$gallery_videos_posters = get_post_meta( $post_id, 'gallery_videos_posters', true );
+	$gallery_video          = get_post_meta( $post_id, 'gallery_video', true );
+	$gallery_videos         = get_post_meta( $post_id, 'gallery_videos', true );
+
+	$gallery_videos_posters = is_array( $gallery_videos_posters ) ? $gallery_videos_posters : array();
+	$gallery_videos         = is_array( $gallery_videos ) ? $gallery_videos : array();
+
+	if ( ! empty( $video_preview ) && ! in_array( $video_preview, $gallery_videos_posters, true ) ) {
+		array_unshift( $gallery_videos_posters, $video_preview );
+	}
+
+	if ( ! empty( $gallery_video ) && ! in_array( $gallery_video, $gallery_videos, true ) ) {
+		array_unshift( $gallery_videos, $gallery_video );
+	}
+
+	update_post_meta( $post_id, 'gallery_videos_posters', $gallery_videos_posters );
+	update_post_meta( $post_id, 'gallery_videos', $gallery_videos );
+	update_post_meta( $post_id, '_patched_gallery_videos', 1 );
+}
+
+add_action(
+	'the_post',
+	function ( $post ) {
+		if ( ! is_admin() && 'listings' === $post->post_type ) {
+			patch_gallery_videos_on_view( $post->ID );
+		}
+	}
+);
+
+add_action(
+	'add_meta_boxes',
+	function () {
+		global $post;
+		if ( isset( $post ) && 'listings' === $post->post_type ) {
+			patch_gallery_videos_on_view( $post->ID );
+		}
+	}
+);
+
+//Patch for car price form
+function patch_car_price_form( $post_id ) {
+	if ( get_post_meta( $post_id, '_patched_car_price_form', true ) ) {
+		return;
+	}
+
+	$post_type = get_post_type( $post_id );
+	if ( 'listings' !== $post_type ) {
+		return;
+	}
+
+	$car_price_form_label = get_post_meta( $post_id, 'car_price_form_label', true );
+	if ( ! empty( $car_price_form_label ) ) {
+		update_post_meta( $post_id, 'car_price_form', 'on' );
+	}
+
+	update_post_meta( $post_id, '_patched_car_price_form', 1 );
+}
+
+add_action(
+	'the_post',
+	function ( $post ) {
+		if ( ! is_admin() && 'listings' === $post->post_type ) {
+			patch_car_price_form( $post->ID );
+		}
+	}
+);
+
+add_action(
+	'add_meta_boxes',
+	function () {
+		global $post;
+		if ( isset( $post ) && 'listings' === $post->post_type ) {
+			patch_car_price_form( $post->ID );
+		}
+	}
+);
+

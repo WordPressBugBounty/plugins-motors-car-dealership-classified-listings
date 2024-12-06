@@ -7,6 +7,10 @@
 }
 
 /*admin style for logo motors*/
+#tagsdiv-stm_additional_features {
+    display: none;
+}
+
 .hidden {
     display: none;
 }
@@ -1997,6 +2001,154 @@ table > tbody > tr td {
 
 .swiper-container {
     overflow: hidden;
+}
+
+.stm-views-metabox {
+    margin-top: 20px;
+}
+
+.stm-views-metabox__item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.stm-views-metabox__item .reset-counter {
+    text-decoration: underline;
+    margin-left: 5px;
+}
+
+.stm-views-metabox__item span {
+    font-weight: 700;
+    margin-left: 5px;
+}
+
+.mvl-checkbox-metabox {
+    margin: 10px 0;
+}
+
+.mvl-checkbox-metabox input[type=text] {
+    border: 1px solid #CED4DA;
+    width: 100%;
+}
+
+.mvl-checkbox-metabox h4 {
+    margin: 10px 0 5px 0;
+}
+
+.metabox-description p {
+    font-size: 12px;
+    color: #CED4DA;
+    display: flex;
+}
+
+.metabox-description p span {
+    margin-top: 3px;
+    font-size: 10px;
+    padding: 0 6px;
+    border: 1px solid #CED4DA;
+    border-radius: 50%;
+    margin-right: 5px;
+    width: 16px;
+    line-height: 0;
+    height: 16px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.meta-box-checkbox-label {
+    font-weight: 700;
+}
+
+.listing-author-metabox {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.listing-author-metabox #listing_author_select {
+    width: 100%;
+    border: 1px solid #CED4DA;
+}
+
+#listing_badges .inside {
+    margin-top: 5px;
+}
+
+#listing_badges .mvl-checkbox-metabox {
+    margin: 10px 0;
+}
+
+#listing_badges .mvl-checkbox-metabox h4 {
+    margin: 10px 0 5px 0;
+}
+
+#listing_badges .mvl-checkbox-metabox .special-image-wrapper img {
+    width: 241px;
+    height: auto;
+    -o-object-fit: cover;
+    object-fit: cover;
+    border: 1px solid #CED4DA;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.mvl-checkbox-metabox label {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.mvl-checkbox-metabox input[type=checkbox] {
+    display: none;
+}
+
+.mvl-checkbox-metabox label {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    padding-left: 30px;
+    line-height: 20px;
+}
+
+.mvl-checkbox-metabox input[type=checkbox] {
+    display: none;
+}
+
+.checkbox-custom {
+    width: 15px;
+    height: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    display: inline-block;
+    position: absolute;
+    top: 2px;
+    left: 0;
+    transition: all 0.3s ease;
+    background-color: #fff;
+}
+
+.mvl-checkbox-metabox input[type=checkbox]:checked + .checkbox-custom {
+    background-color: #0073AA;
+    border-color: #0073AA;
+}
+
+.mvl-checkbox-metabox input[type=checkbox]:checked + .checkbox-custom::after {
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: 4px;
+    width: 5px;
+    height: 9px;
+    border: solid 2px #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.mvl-checkbox-metabox input[type=checkbox]:focus + .checkbox-custom {
+    outline: none;
+    box-shadow: 0 0 3px #0073AA;
 }
 
 .stm-accordion-single-unit {

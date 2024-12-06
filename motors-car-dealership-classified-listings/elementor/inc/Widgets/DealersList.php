@@ -34,6 +34,7 @@ class DealersList extends WidgetBase {
 				'stmselect2',
 				'app-select2',
 				'stm-cascadingdropdown',
+				'listing-search',
 			)
 		);
 	}

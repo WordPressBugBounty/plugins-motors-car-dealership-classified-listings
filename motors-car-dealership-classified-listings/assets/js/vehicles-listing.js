@@ -223,10 +223,6 @@
 			$(this).closest('.target-unit').find('input').val('');
 	    });
 
-		jQuery('.stm-multiselect').multiSelect({
-			'keepOrder' : true
-		});
-
 		$('.stm_vehicles_listing_icons .inner .stm_font_nav a').on('click',function(e){
 			e.preventDefault();
 			$('.stm_vehicles_listing_icons .inner .stm_font_nav a').removeClass('active');

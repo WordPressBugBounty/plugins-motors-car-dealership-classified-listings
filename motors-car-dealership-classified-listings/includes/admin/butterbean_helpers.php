@@ -59,6 +59,42 @@ function stm_listings_validate_repeater_videos( $value, $butterbean ) {
 	return $value;
 }
 
+/* Save Video Repeater */
+function video_repeater( $value, $butterbean ) {
+	$links        = isset( $_POST['video_links'] ) ? array_map( 'sanitize_text_field', $_POST['video_links'] ) : [];
+	$video_images = isset( $_POST['video_image'] ) ? array_map( 'sanitize_text_field', $_POST['video_image'] ) : [];
+
+	$post_id = $butterbean->manager->post_id;
+
+	if ( isset( $links ) ) {
+		update_post_meta( $post_id, 'gallery_videos', $links );
+	}
+
+	if ( isset( $video_images ) ) {
+		update_post_meta( $post_id, 'gallery_videos_posters', $video_images );
+	}
+
+	return $value;
+}
+
+/* Save Media Repeater */
+function media_repeater( $value, $butterbean ) {
+	$post_id = $butterbean->manager->post_id;
+
+	$history = isset( $_POST['certificate_media_file_name'] ) ? array_map( 'sanitize_text_field', $_POST['certificate_media_file_name'] ): [];
+	$history_link = isset( $_POST['certificate_media_links'] ) ? array_map( 'sanitize_text_field', $_POST['certificate_media_links'] ): [];
+	$certified_logo_1 = isset( $_POST['certificate_media_image'] ) ? array_map( 'sanitize_text_field', $_POST['certificate_media_image'] ): [];
+
+	update_post_meta( $post_id, 'history', isset( $history[0] ) ? $history[0] : '' );
+	update_post_meta( $post_id, 'history_link', isset( $history_link[0] ) ? $history_link[0] : '' );
+	update_post_meta( $post_id, 'certified_logo_1', isset( $certified_logo_1[0] ) ? $certified_logo_1[0] : '' );
+	update_post_meta( $post_id, 'history_2', isset( $history[1] ) ? $history[1] : '' );
+	update_post_meta( $post_id, 'certified_logo_2_link', isset( $history_link[1] ) ? $history_link[1] : '' );
+	update_post_meta( $post_id, 'certified_logo_2', isset( $certified_logo_1[1] ) ? $certified_logo_1[1] : '' );
+
+	return $value;
+}
+
 function stm_listings_multiselect( $value, $butterbean ) {
 	wp_set_object_terms( $butterbean->manager->post_id, $value, $butterbean->name );
 
@@ -70,6 +106,10 @@ function stm_listings_validate_gallery( $value ) {
 	$values = array();
 
 	$featured_image = '';
+
+	if ( empty( $value[0] ) ) {
+		array_shift( $value );
+	}
 
 	if ( ! empty( $value ) ) {
 		$i = 0;
@@ -86,7 +126,6 @@ function stm_listings_validate_gallery( $value ) {
 		}
 	}
 
-	//setting up thumbnail image
 	if ( ! empty( $featured_image ) ) {
 		set_post_thumbnail( get_the_ID(), $featured_image );
 	}
@@ -227,14 +266,6 @@ function stm_butterbean_save_post( $post_id ) {
 		$reqeust_rent_sale_price = $_POST[ 'butterbean_' . $manager_slug . '_manager_setting_sale_rent_price' ];
 	}
 
-	if ( isset( $_POST[ 'butterbean_' . $manager_slug . '_manager_setting_stm_car_views' ] ) ) {
-		$request_car_views = $_POST[ 'butterbean_' . $manager_slug . '_manager_setting_stm_car_views' ];
-	}
-
-	if ( isset( $_POST[ 'butterbean_' . $manager_slug . '_manager_setting_stm_phone_reveals' ] ) ) {
-		$request_phone_reveals = $_POST[ 'butterbean_' . $manager_slug . '_manager_setting_stm_phone_reveals' ];
-	}
-
 	if ( isset( $_POST[ 'butterbean_' . $manager_slug . '_manager_setting_stm_car_user' ] ) ) {
 		$request_car_manager = $_POST[ 'butterbean_' . $manager_slug . '_manager_setting_stm_car_user' ];
 	}
@@ -268,16 +299,6 @@ function stm_butterbean_save_post( $post_id ) {
 		update_post_meta( $post_id, 'sale_rent_price', $rent_sale_price );
 	}
 
-	// manage resetting car views
-	if ( empty( $request_car_views ) ) {
-		stm_delete_statistics_data( $post_id, 'car' );
-	}
-
-	// manage resetting phone views
-	if ( empty( $request_phone_reveals ) ) {
-		stm_delete_statistics_data( $post_id, 'phone' );
-	}
-
 	// change author when owner changed
 	if ( ! empty( $request_car_manager ) ) {
 		$author_id = get_post_field( 'post_author', $post_id );
@@ -286,30 +307,6 @@ function stm_butterbean_save_post( $post_id ) {
 		}
 	}
 
-}
-
-
-function stm_delete_statistics_data( $post_id, $type ) {
-	$meta_key      = ( $type == 'car' ) ? 'stm_car_views' : 'stm_phone_reveals';
-	$stat_meta_key = ( $type == 'car' ) ? 'car_views_stat_' : 'phone_reveals_stat_';
-
-	// empty total counter
-	delete_post_meta( $post_id, $meta_key );
-
-	// empty statistics counters for the last 32 days
-	$past  = strtotime( date( 'Y-m-d', strtotime( '-32 days', time() ) ) );
-	$today = strtotime( date( 'Y-m-d' ) );
-
-	$dates_arr = [];
-
-	for ( $i = $past; $i <= $today; $i = $i + 86400 ) {
-		$date_str = date( 'Y-m-d', $i );
-		array_push( $dates_arr, $date_str );
-	}
-
-	foreach ( $dates_arr as $date_str ) {
-		delete_post_meta( $post_id, $stat_meta_key . $date_str );
-	}
 }
 
 function stm_save_genuine_price( $post_id ) {

@@ -53,8 +53,7 @@ class ButterBean_Control_Grouped_Checkboxes extends ButterBean_Control {
 		$this->l10n = wp_parse_args(
 			$this->l10n,
 			array(
-				'add_feature' => esc_html__( 'Add new feature', 'stm_vehicles_listing' ),
-				'add'         => esc_html__( 'Add', 'stm_vehicles_listing' ),
+				'add' => esc_html__( 'Add', 'stm_vehicles_listing' ),
 			)
 		);
 	}

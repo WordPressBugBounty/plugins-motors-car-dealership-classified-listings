@@ -61,23 +61,6 @@ if ( ! function_exists( 'mvl_is_multiple_plans' ) ) {
 	add_filter( 'stm_is_multiple_plans', 'mvl_is_multiple_plans' );
 }
 
-if ( ! function_exists( 'set_pro_butterbean_fields' ) ) {
-	add_action( 'add_pro_butterbean_fields', 'set_pro_butterbean_fields' );
-	function set_pro_butterbean_fields( $manager ) {
-		$manager->register_control(
-			'car_mark_as_sold',
-			array(
-				'type'        => 'checkbox',
-				'section'     => 'stm_price',
-				'value'       => 'on',
-				'label'       => esc_html__( 'Mark as sold', 'stm_vehicles_listing' ),
-				'description' => esc_html__( 'Enable/Disable \'Car sold\'', 'stm_vehicles_listing' ),
-				'attr'        => array( 'class' => 'widefat' ),
-			)
-		);
-	}
-}
-
 if ( ! function_exists( 'mvl_nuxy_sortby_pro' ) ) {
 	function mvl_nuxy_sortby_pro( $sorts ) {
 		$options = mvl_nuxy_sort_options();

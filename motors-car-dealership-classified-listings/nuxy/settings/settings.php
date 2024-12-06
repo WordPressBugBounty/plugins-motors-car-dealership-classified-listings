@@ -18,7 +18,6 @@ class WPCFTO_Settings {
 		add_action( 'wp_ajax_wpcfto_save_settings', array( $this, 'stm_save_settings' ) );
 		add_action( 'wp_ajax_wpcfto_regenerate_fonts', array( $this, 'stm_regenerate_fonts' ) );
 		add_filter( 'wpcfto_enable_regenerate_fonts', array( $this, 'stm_enable_regenerate_fonts' ) );
-		add_filter( 'wpcfto_field_fonts_download_settings', array( $this, 'fonts_download_settings_template' ) );
 
 		if ( ! empty( $this->setup['admin_bar_title'] ) ) {
 			add_action( 'admin_bar_menu', array( $this, 'admin_bar_button' ), 40 );
@@ -33,12 +32,12 @@ class WPCFTO_Settings {
 		?>
 		<style>
 			<?php echo esc_attr( $selector ); ?>
-            img {
-                max-width: 25px;
-                vertical-align: top;
-                position: relative;
-                top: 3px;
-            }
+			img {
+				max-width: 25px;
+				vertical-align: top;
+				position: relative;
+				top: 3px;
+			}
 		</style>
 		<?php
 	}
@@ -179,10 +178,9 @@ class WPCFTO_Settings {
 		$request_body = file_get_contents( 'php://input' );
 		if (!empty($request_body)) {
 			$request_body = json_decode($request_body, true);
-			$enable_download_font = $this->find_value_by_type($request_body, 'fonts_download_settings');
 			foreach ($request_body as $section_name => $section) {
 				foreach ( $section['fields'] as $field_name => $field ) {
-					if ( $enable_download_font && class_exists( 'WPCFTO_WebFont_Loader' ) ) {
+					if ( class_exists( 'WPCFTO_WebFont_Loader' ) ) {
 						if ( ! empty( $field['value']['font-data']['family'] ) ) {
 							$exclude_font_family = ! empty( $field['excluded'] ) && in_array( 'font-family', $field['excluded'], true );
 							if ( ! $exclude_font_family ) {
@@ -221,8 +219,7 @@ class WPCFTO_Settings {
 			die;
 		}
 
-		$id       = sanitize_text_field( $_GET['name'] );
-		$settings = get_option( $id, array() );
+		$settings = $this->wpcfto_get_settings();
 
 		$response = array(
 			'reload'    => true,
@@ -232,7 +229,7 @@ class WPCFTO_Settings {
 		$wpcfto_webfont = new WPCFTO_WebFont_Loader();
 
 		foreach ( $settings as $field_name => $field ) {
-			if ( ! empty( $field['font-data']['family'] ) && ! empty( $field['font-family'] ) ) {
+			if ( ! empty( $field['font-data']['family'] ) ) {
 				$folder_name = $wpcfto_webfont->get_fonts_folder() . '/' . $field_name;
 				$wpcfto_webfont->deleteDirFiles( $folder_name );
 				$font                                              = new WPCFTO_WebFont_Loader( $field, $field_name );
@@ -254,24 +251,6 @@ class WPCFTO_Settings {
 			foreach ( $settings as $field_name => $field ) {
 				if ( ! empty( $field['font-data']['family'] ) ) {
 					return true;
-				}
-			}
-		}
-
-		return false;
-	}
-
-	public function fonts_download_settings_template() {
-		return STM_WPCFTO_PATH . '/metaboxes/fields/fonts_download_settings.php';
-	}
-
-	public function find_value_by_type( $array, $type ) {
-		foreach ( $array as $tab ) {
-			if ( isset( $tab['fields'] ) ) {
-				foreach ( $tab['fields'] as $field ) {
-					if ( isset( $field['type'] ) && $field['type'] === $type ) {
-						return $field['value'];
-					}
 				}
 			}
 		}

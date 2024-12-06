@@ -9,18 +9,9 @@
 		<# if ( data.preview ) { #>
 			<div class="image_preview">
 
-				<i class="fas fa-eye"></i>
+				<i class="motors-icons-ico_mag_eye"></i>
 				<span data-preview="{{data.preview_url}}{{ data.preview }}.jpg">Preview</span>
 
-			</div>
-		<# } #>
-	</span>
-<# } else { #>
-	<span class="butterbean-description butterbean-no-info">
-		<# if ( data.preview ) { #>
-			<div class="image_preview dede">
-				<i class="fas fa-eye"></i>
-				<span data-preview="{{data.preview_url}}{{ data.preview }}.jpg">Preview</span>
 			</div>
 		<# } #>
 	</span>
@@ -45,6 +36,9 @@
 					<div class="stm_repeater_checkbox">
 						<label>
 							<input type="checkbox" data-key="{{key}}-{{k}}" <# if(feature.checked) { #> checked="checked" <# } #> />
+							<span class="mvl-checkbox"></span>
+						</label>
+						<label>
 							<span>{{feature.val}}</span>
 						</label>
 						<i class="fas fa-times" data-key="{{key}}-{{k}}"></i>

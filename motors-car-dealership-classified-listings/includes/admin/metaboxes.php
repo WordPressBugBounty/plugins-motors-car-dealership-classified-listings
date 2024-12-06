@@ -70,7 +70,7 @@ function stm_listings_metaboxes() {
 					'type'  => 'text',
 				),
 				'registration_date'         => array(
-					'label' => __( 'Vehicle Production Date', 'stm_vehicles_listing' ),
+					'label' => __( 'Manufacture Date', 'stm_vehicles_listing' ),
 					'type'  => 'datepicker',
 				),
 				'history'                   => array(
@@ -102,11 +102,11 @@ function stm_listings_metaboxes() {
 					'type'  => 'separator',
 				),
 				'city_mpg'                  => array(
-					'label' => __( 'City MPG', 'stm_vehicles_listing' ),
+					'label' => __( 'City Fuel Efficiency', 'stm_vehicles_listing' ),
 					'type'  => 'text',
 				),
 				'highway_mpg'               => array(
-					'label' => __( 'Highway MPG', 'stm_vehicles_listing' ),
+					'label' => __( 'Highway Fuel Efficiency', 'stm_vehicles_listing' ),
 					'type'  => 'text',
 				),
 				'divider_0'                 => array(

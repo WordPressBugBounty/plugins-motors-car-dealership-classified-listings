@@ -1,20 +1,34 @@
+@charset "UTF-8";
 /*Since we using gallery with embedded featured image, we can hide default WP featured image*/
 .post-type-listings #postimagediv {
     display: none;
 }
 
+body .butterbean-ui {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+body .butterbean-manager-default {
+    background: #2C3E50;
+}
+
+body .butterbean-manager-default .butterbean-nav {
+    background: #2C3E50;
+}
+
 body .butterbean-manager-default .butterbean-nav li a {
-    padding: 9px 10px 11px 18px !important;
-    background-color: #f2f2f2 !important;
-    border-color: #e5e5e5;
-    color: #23282d;
+    padding: 12px 10px 12px 18px !important;
+    background-color: transparent;
+    color: #BEC5CB;
+    border: none;
+    display: flex;
+    align-items: center;
     font-weight: 700 !important;
-    transition: all 0.2s ease;
 }
 
 body .butterbean-manager-default .butterbean-nav li a:hover {
-    background-color: #fff !important;
-    color: #0073aa !important;
+    color: #fff !important;
 }
 
 body .butterbean-manager-default .butterbean-nav li a span {
@@ -22,67 +36,56 @@ body .butterbean-manager-default .butterbean-nav li a span {
     top: 1px;
     letter-spacing: -0.7px;
     font-size: 14px;
+    font-weight: 500;
+    margin-left: 10px;
 }
 
 body .butterbean-manager-default .butterbean-nav li a i {
     position: relative;
-    min-width: 25px !important;
     font-size: 16px !important;
-}
-
-body .butterbean-manager-default .butterbean-nav li a i.fa-list-ul {
-    font-size: 15px;
-}
-
-body .butterbean-manager-default .butterbean-nav li a i.fa-dashboard {
-    top: 1px;
-}
-
-body .butterbean-manager-default .butterbean-nav li a i.fa-square-check {
-    top: 1px !important;
-}
-
-body .butterbean-manager-default .butterbean-nav li a i.fa-dollar {
-    top: 1px;
-    left: 2px;
-}
-
-body .butterbean-manager-default .butterbean-nav li a i.fa-bookmark {
-    top: 2px;
-    left: 1px;
-    font-size: 15px !important;
-}
-
-body .butterbean-manager-default .butterbean-nav li a i.fa-image {
-    top: 1px;
-    font-size: 13px !important;
-}
-
-body .butterbean-manager-default .butterbean-nav li a i.fa-video-camera {
-    top: 1px;
-    font-size: 14px !important;
-}
-
-body .butterbean-manager-default .butterbean-nav li a i.motors-icons-car {
-    font-size: 12px !important;
-    min-width: 25px !important;
-    display: inline-block;
+    width: 20px;
+    display: flex;
+    justify-content: center;
 }
 
 body .butterbean-manager-default .butterbean-nav li[aria-selected=true] a {
-    background-color: #0073aa !important;
+    background-color: #2985F7 !important;
     color: #fff !important;
+    border: none;
 }
 
 /*Visualisation*/
 .butterbean-manager-default .butterbean-label {
     margin-bottom: 12px;
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 700;
+    text-transform: capitalize;
+}
+
+#butterbean-control-car_brochure .butterbean-label {
+    text-transform: none;
+}
+
+.butterbean-control-checkbox {
+    display: flex;
+}
+
+.butterbean-control-checkbox .toggle-checkbox span.butterbean-description {
+    margin-top: 5px !important;
+}
+
+.butturbean-checkbox-info #butterbean-checkbox-description {
+    margin-top: 5px !important;
+    white-space: nowrap;
+}
+
+.butterbean-manager-default .butterbean-label.butterbean-label-inline {
+    display: inline-block !important;
+    margin-bottom: 0;
 }
 
 .butterbean-manager-default .butterbean-control {
-    margin-bottom: 41px !important;
+    margin-bottom: 30px !important;
 }
 
 .butterbean-control-hidden {
@@ -94,10 +97,11 @@ input.butterbean-datepicker {
 }
 
 .butterbean-manager-default .butterbean-label + .butterbean-description {
-    margin-top: 1px !important;
+    margin-top: 0 !important;
 }
 
 .butterbean-manager-default .butterbean-description {
+    display: flex;
     margin-bottom: 10px !important;
 }
 
@@ -111,10 +115,6 @@ input.butterbean-datepicker {
     min-width: 25px;
     position: relative;
     top: 2px;
-}
-
-.butterbean-control-gallery {
-    max-width: 798px;
 }
 
 .butterbean-control-gallery .main_image {
@@ -180,34 +180,36 @@ input.butterbean-datepicker {
     display: block;
 }
 
-.butterbean-control-gallery .stm_mini_thumbs {
-    margin: 0 -7.5px;
-}
-
 .butterbean-control-gallery .stm_mini_thumbs .thumbs {
-    position: relative;
     float: left;
     width: 25%;
+    max-width: 160px;
+    margin-right: 25px;
 }
 
-.butterbean-control-gallery .stm_mini_thumbs .thumbs:before {
-    content: "";
-    display: block;
-    top: 0;
-    left: 7.5px;
-    right: 7.5px;
-    bottom: 19px;
+.butterbean-control-gallery .stm_mini_thumbs .thumbs:last-child {
+    margin-right: 0;
+}
+
+.butterbean-control-gallery .stm_mini_thumbs .thumbs:first-child .inner .featured-item {
     position: absolute;
-    transition: all 0.2s ease;
-    visibility: hidden;
-    opacity: 0;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 99999;
+    background-color: #2271B1;
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    bottom: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.butterbean-control-gallery .stm_mini_thumbs .thumbs:first-child .inner img {
+    border: 2px solid #2271B1;
+    position: relative;
 }
 
 .butterbean-control-gallery .stm_mini_thumbs .thumbs .inner {
     position: relative;
-    padding: 0 7.5px 15px;
     cursor: move;
 }
 
@@ -218,8 +220,13 @@ input.butterbean-datepicker {
 }
 
 .butterbean-control-gallery .stm_mini_thumbs .thumbs .inner.ui-draggable-dragging img {
+    position: relative;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.25);
-    outline: 3px solid #0073aa;
+}
+
+.butterbean-control-gallery .stm_mini_thumbs .thumbs .inner.ui-draggable-dragging .featured-item {
+    bottom: -6px;
+    left: 0;
 }
 
 .butterbean-control-gallery .stm_mini_thumbs .thumbs .inner .inner-hover {
@@ -233,13 +240,22 @@ input.butterbean-datepicker {
     transition: all 0.2s ease;
 }
 
-.butterbean-control-gallery .stm_mini_thumbs .thumbs .inner:hover .inner-hover {
+.butterbean-control-gallery .stm_mini_thumbs {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.butterbean-control-gallery .stm_mini_thumbs .thumbs .inner .inner-hover {
     opacity: 1;
     visibility: visible;
 }
 
-.butterbean-control-gallery .stm_mini_thumbs .thumbs .inner:hover img {
-    outline: 3px solid #0073aa;
+.butterbean-control-gallery .stm_mini_thumbs .thumbs .inner img {
+    border: 1px solid #C3C4C7;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #fff;
 }
 
 .butterbean-control-gallery .stm_mini_thumbs .thumbs .fa-times {
@@ -247,19 +263,15 @@ input.butterbean-datepicker {
     width: 24px;
     height: 24px;
     position: absolute;
-    right: -19px;
-    top: -11px;
+    right: -35px;
+    top: -8px;
     border-radius: 50%;
     cursor: pointer;
-    background-color: #0073aa;
-    color: #fff;
+    background-color: #fff;
+    color: #49525c;
     text-align: center;
     line-height: 24px;
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
-}
-
-.butterbean-control-gallery .stm_mini_thumbs .thumbs .fa-times:hover {
-    background-color: red;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
 .butterbean-control-gallery .stm_mini_thumbs .thumbs .fa-arrows-alt {
@@ -277,8 +289,11 @@ input.butterbean-datepicker {
 }
 
 .butterbean-control-gallery .stm_mini_thumbs .thumbs img {
-    max-width: 100%;
-    height: auto;
+    max-width: 160px;
+    height: 104px;
+    width: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
 }
 
 /*Small hack im not proud of*/
@@ -316,7 +331,6 @@ input.butterbean-datepicker {
     top: 0;
     left: 0;
     width: 40px;
-    height: 100%;
     background-color: red;
     color: #fff;
     line-height: 40px;
@@ -329,23 +343,103 @@ input.butterbean-datepicker {
     padding-left: 50px !important;
 }
 
+.car-manager-small-thumb-image .thumb-image-inner img {
+    border: 1px solid #C3C4C7;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #fff;
+    max-width: 160px;
+}
+
+.mvl-repeater-item {
+    padding: 25px;
+    border-radius: 4px;
+    background-color: #F2F2F2;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.mvl-repeater-item .video-repeater-link-input {
+    width: 100%;
+    box-shadow: none !important;
+    background-color: #fff !important;
+    border: 1px solid #CED4DA !important;
+    font-style: normal;
+    height: 40px;
+    line-height: 40px;
+    padding: 5px 20px;
+    border-radius: 4px !important;
+    font-size: 14px;
+    outline: none !important;
+    transition: all 0.2s ease;
+    margin-bottom: 20px;
+}
+
+.mvl-repeater-item .mvl-repeater-item-delete {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+}
+
+.mvl-repeater-item .mvl-repeater-item-delete i {
+    font-size: 20px;
+    font-weight: 600;
+    color: #787C82;
+}
+
+.mvl-repeater-item .mvl-repeater-item-heading {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    margin-top: 0;
+    text-transform: capitalize;
+}
+
+.mvl-repeater-item .car-manager-small-thumb-image {
+    margin-bottom: 5px;
+}
+
+.mvl-repeater-item .mvl-repeater-item-heading-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.stm-info-icon {
+    font-size: 10px;
+    padding: 0px 6px;
+    border: 1px solid;
+    border-radius: 50%;
+    margin-right: 5px;
+    width: 16px;
+    height: 16px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 16px;
+    max-height: 16px;
+}
+
 .grouped_checkboxes_wrap {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin: 30px -15px 0;
+    margin: 0px -15px 0;
 }
 
 .grouped_checkboxes_wrap .grouped_checkboxes {
     display: block;
     padding: 0 15px;
     margin-bottom: 30px;
+    width: 30%;
 }
 
 .grouped_checkboxes_wrap .grouped_checkboxes h5 {
     max-width: 200px;
     font-size: 16px;
-    margin: 0 0 10px;
+    margin: 0 0 15px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -358,12 +452,11 @@ input.butterbean-datepicker {
 }
 
 .grouped_checkboxes_wrap .stm_repeater_checkbox {
-    display: block;
+    display: flex;
 }
 
 .grouped_checkboxes_wrap .stm_repeater_checkbox label {
-    display: inline-block;
-    margin: 0 15px 15px 0;
+    margin: 0 0 15px 0;
     font-size: 16px;
 }
 
@@ -435,7 +528,6 @@ input.butterbean-datepicker {
 
 .stm-multiselect-wrapper .labels {
     width: 480px;
-    margin-bottom: 5px;
 }
 
 .stm-multiselect-wrapper .labels:after {
@@ -514,29 +606,16 @@ input.butterbean-datepicker {
 }
 
 .butterbean-label {
-    max-width: 45%;
+    max-width: 100%;
 }
 
 .butterbean-description {
-    position: absolute;
-    right: 0;
-    top: 0;
-    max-width: 45%;
-}
-
-.butterbean-description:not(.butterbean-no-info):before {
-    position: absolute;
-    left: -22px;
-    top: 1px;
-    display: inline-block;
-    color: #0073aa;
-    font-family: "Font Awesome 6 Free";
-    font-weight: 600;
-    font-size: 16px;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    content: "\f05a";
+    max-width: 100%;
+    font-size: 13px;
+    font-weight: 400;
+    color: #3C434A;
+    font-style: normal !important;
+    margin-top: 10px !important;
 }
 
 #butterbean-control-special_image .butterbean-description,
@@ -551,8 +630,15 @@ input.butterbean-datepicker {
     max-width: 35%;
 }
 
+#butterbean-control-car_price_form_label .butterbean-label,
+#butterbean-control-car_price_form .butterbean-label {
+    text-transform: none;
+}
+
 .butterbean-content {
     min-height: 511px !important;
+    background-color: #fff;
+    border-left: none;
 }
 
 .butterbean-content .stm_checkbox_adder,
@@ -560,15 +646,31 @@ input.butterbean-datepicker {
 .butterbean-content select,
 .butterbean-content input[type=text].widefat, .butterbean-content input[type=number] {
     box-shadow: none !important;
-    background-color: #f1f1f1 !important;
-    border: 1px solid #aaaaaa !important;
+    background-color: #fff !important;
+    border: 1px solid #CED4DA !important;
+    font-style: normal;
     height: 40px;
     line-height: 40px;
     padding: 5px 20px;
     border-radius: 4px !important;
-    font-style: italic;
     font-size: 14px;
+    outline: none !important;
     transition: all 0.2s ease;
+}
+
+.butterbean-content .stm_checkbox_adder::-moz-placeholder, .butterbean-content .butterbean-datepicker::-moz-placeholder, .butterbean-content select::-moz-placeholder, .butterbean-content input[type=text].widefat::-moz-placeholder, .butterbean-content input[type=number]::-moz-placeholder {
+    text-transform: none;
+    color: #CED4DA;
+    font-style: normal;
+}
+
+.butterbean-content .stm_checkbox_adder::placeholder,
+.butterbean-content .butterbean-datepicker::placeholder,
+.butterbean-content select::placeholder,
+.butterbean-content input[type=text].widefat::placeholder, .butterbean-content input[type=number]::placeholder {
+    text-transform: none;
+    color: #CED4DA;
+    font-style: normal;
 }
 
 .butterbean-content .stm_checkbox_adder[readonly=readonly], .butterbean-content .stm_checkbox_adder.has-value[readonly=readonly],
@@ -578,8 +680,8 @@ input.butterbean-datepicker {
 .butterbean-content select.has-value[readonly=readonly],
 .butterbean-content input[type=text].widefat[readonly=readonly],
 .butterbean-content input[type=text].widefat.has-value[readonly=readonly], .butterbean-content input[type=number][readonly=readonly], .butterbean-content input[type=number].has-value[readonly=readonly] {
-    background-color: #f1f1f1 !important;
-    border: 1px solid #aaaaaa !important;
+    background-color: #fff !important;
+    border: 1px solid #CED4DA !important;
 }
 
 .butterbean-content .stm_checkbox_adder[readonly=readonly]:focus, .butterbean-content .stm_checkbox_adder.has-value[readonly=readonly]:focus,
@@ -589,18 +691,15 @@ input.butterbean-datepicker {
 .butterbean-content select.has-value[readonly=readonly]:focus,
 .butterbean-content input[type=text].widefat[readonly=readonly]:focus,
 .butterbean-content input[type=text].widefat.has-value[readonly=readonly]:focus, .butterbean-content input[type=number][readonly=readonly]:focus, .butterbean-content input[type=number].has-value[readonly=readonly]:focus {
-    background-color: #f1f1f1 !important;
-    border: 1px solid #aaaaaa !important;
+    background-color: #fff !important;
+    border: 1px solid #CED4DA !important;
 }
 
-.butterbean-content .stm_checkbox_adder.has-value, .butterbean-content .stm_checkbox_adder:focus,
-.butterbean-content .butterbean-datepicker.has-value,
+.butterbean-content .stm_checkbox_adder:focus,
 .butterbean-content .butterbean-datepicker:focus,
-.butterbean-content select.has-value,
 .butterbean-content select:focus,
-.butterbean-content input[type=text].widefat.has-value,
-.butterbean-content input[type=text].widefat:focus, .butterbean-content input[type=number].has-value, .butterbean-content input[type=number]:focus {
-    border-color: #0073aa !important;
+.butterbean-content input[type=text].widefat:focus, .butterbean-content input[type=number]:focus {
+    border-color: #0073AA !important;
     background-color: #fff !important;
 }
 
@@ -613,11 +712,97 @@ input.butterbean-datepicker {
     margin: 0;
 }
 
+input::-moz-placeholder {
+    color: #CED4DA;
+}
+
+input::placeholder {
+    color: #CED4DA;
+}
+
+.butterbean-label-wrapp {
+    display: flex;
+    justify-content: space-between;
+}
+
+.toggle-checkbox {
+  /* Rounded sliders */
+}
+
+.toggle-checkbox .switch {
+    position: relative;
+    display: inline-block;
+    width: 42px;
+    height: 26px;
+    margin-right: 15px;
+}
+
+.toggle-checkbox .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-checkbox .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    transition: 0.4s;
+    border: 1px solid #ccc;
+}
+
+.toggle-checkbox .slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 3px;
+    background-color: #ccc;
+    transition: 0.4s;
+}
+
+.toggle-checkbox input:checked + .slider {
+    background-color: #0073AA;
+    border-color: #0073AA;
+}
+
+.toggle-checkbox input:checked + .slider:before {
+    transform: translateX(15px);
+    background-color: #fff;
+}
+
+.toggle-checkbox .slider.round {
+    border-radius: 34px;
+}
+
+.toggle-checkbox .slider.round:before {
+    border-radius: 50%;
+}
+
 .image_preview {
     display: inline-block;
-    margin-left: 15px;
+    margin-left: 10px;
     position: relative;
     cursor: pointer;
+}
+
+.image_preview span {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-style: normal;
+    color: #8E8E8E;
+}
+
+.image_preview i {
+    color: #8E8E8E;
+    font-size: 10px;
 }
 
 .image_preview .fas {
@@ -643,8 +828,18 @@ input.butterbean-datepicker {
     padding: 30px 30px 0 !important;
 }
 
-.butterbean-control-gallery .butterbean-description {
+.butterbean-description {
     max-width: 65%;
+    color: rgba(60, 67, 74, 0.6980392157);
+    font-size: 12px;
+}
+
+.butterbean-description .descr-link {
+    margin-left: 5px;
+}
+
+.butterbean-description i {
+    margin-right: 5px;
 }
 
 #butterbean-control-special_car .butterbean-description {
@@ -661,6 +856,10 @@ input.butterbean-datepicker {
 
 .butterbean-control-image .butterbean-img {
     max-height: 466px !important;
+}
+
+.butterbean-pdf-file {
+    margin-top: 10px;
 }
 
 .image-holder-butterbean_stm_car_manager_setting_video_preview {
@@ -720,7 +919,7 @@ input.butterbean-datepicker {
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 999999;
+    z-index: 9999999999;
     visibility: hidden;
     opacity: 0;
     transition: all 0.2s ease;
@@ -732,6 +931,7 @@ input.butterbean-datepicker {
     left: 50%;
     margin: -237.5px 0 0 -350px;
     z-index: 25;
+    border-radius: 10px;
 }
 
 .image-preview.visible {
@@ -786,7 +986,10 @@ input.butterbean-datepicker {
     }
 }
 
-#butterbean-control-sale_price {
+#butterbean-control-regular_price_label,
+#butterbean-control-special_price_label,
+#butterbean-control-registration_date,
+#butterbean-control-highway_mpg {
     float: right;
     width: 48%;
 }
@@ -795,7 +998,11 @@ input.butterbean-datepicker {
 #butterbean-control-stm_lat_car_admin,
 #butterbean-control-stm_lng_car_admin,
 #butterbean-control-rent_price,
-#butterbean-control-sale_rent_price {
+#butterbean-control-sale_rent_price,
+#butterbean-control-sale_price,
+#butterbean-control-stock_number,
+#butterbean-control-city_mpg,
+#butterbean-control-registration_number {
     float: left;
     width: 48%;
 }
@@ -1017,4 +1224,281 @@ input.butterbean-datepicker {
 .stm_repeater_info_inputs .info_inputs_wrapper > div h5 {
     margin-top: 15px;
     margin-bottom: 5px;
+}
+
+#butterbean-control-stm_features_title {
+    width: 100% !important;
+}
+
+.stm_features.butterbean-section.butterbean-section-default[aria-hidden=true],
+.features.butterbean-section.butterbean-section-default[aria-hidden=true] {
+    display: none;
+}
+
+.stm_features.butterbean-section.butterbean-section-default .butterbean-control:nth-child(even) {
+    box-sizing: border-box;
+    padding-right: 20px;
+}
+
+.features.butterbean-section.butterbean-section-default .butterbean-control:nth-child(odd) {
+    box-sizing: border-box;
+    padding-right: 20px;
+}
+
+.stm_features.butterbean-section.butterbean-section-default,
+.features.butterbean-section.butterbean-section-default {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.stm_features.butterbean-section.butterbean-section-default .butterbean-control,
+.features.butterbean-section.butterbean-section-default .butterbean-control {
+    width: 50%;
+    float: unset;
+}
+
+.stm_features.butterbean-section.butterbean-section-default .butterbean-control-multiselect .select2-container--focus .select2-selection.select2-selection--multiple,
+.features.butterbean-section.butterbean-section-default .butterbean-control-multiselect .select2-container--focus .select2-selection.select2-selection--multiple {
+    border: 1px solid #0073AA !important;
+}
+
+.stm_features.butterbean-section.butterbean-section-default .butterbean-control-multiselect .select2-selection.select2-selection--multiple,
+.features.butterbean-section.butterbean-section-default .butterbean-control-multiselect .select2-selection.select2-selection--multiple {
+    position: relative;
+    display: flex;
+    align-items: center;
+    box-shadow: none !important;
+    background-color: #fff !important;
+    border: 1px solid #CED4DA !important;
+    font-style: normal;
+    height: 40px;
+    padding: 1px 5px;
+    border-radius: 4px !important;
+    font-size: 14px;
+    outline: none !important;
+    transition: all 0.2s ease;
+}
+
+.stm_features.butterbean-section.butterbean-section-default .butterbean-control-multiselect .select2-selection.select2-selection--multiple .select2-selection__choice,
+.features.butterbean-section.butterbean-section-default .butterbean-control-multiselect .select2-selection.select2-selection--multiple .select2-selection__choice {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    max-height: 24px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 3px 1px;
+    border: none;
+    padding: 0px 5px 0px 10px;
+}
+
+.stm_features.butterbean-section.butterbean-section-default .butterbean-control-multiselect .select2-selection.select2-selection--multiple .select2-selection__choice .select2-selection__choice__remove,
+.features.butterbean-section.butterbean-section-default .butterbean-control-multiselect .select2-selection.select2-selection--multiple .select2-selection__choice .select2-selection__choice__remove {
+    font-size: 17px;
+    font-weight: 300;
+    margin-left: 5px;
+}
+
+.stm_features.butterbean-section.butterbean-section-default .butterbean-control-multiselect .select2-selection.select2-selection--multiple .select2-selection__rendered,
+.features.butterbean-section.butterbean-section-default .butterbean-control-multiselect .select2-selection.select2-selection--multiple .select2-selection__rendered {
+    display: flex;
+    align-items: center;
+}
+
+.stm_features.butterbean-section.butterbean-section-default .butterbean-control-multiselect .select2-selection.select2-selection--multiple::after,
+.features.butterbean-section.butterbean-section-default .butterbean-control-multiselect .select2-selection.select2-selection--multiple::after {
+    content: "\f078";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 11px;
+    color: #666;
+    position: absolute;
+    right: 10px;
+}
+
+.select2-dropdown {
+    border: 1px solid #CED4DA !important;
+    border-radius: 4px !important;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+.select2-dropdown .select2-results__option {
+    padding: 10px;
+    color: #3C434A;
+    font-size: 13px;
+    margin: 0;
+}
+
+.select2-dropdown .select2-results__option--highlighted {
+    background-color: #EDEFF3;
+}
+
+.select2-dropdown .select2-results__option[aria-selected=true] {
+    background-color: #e5f1f6;
+    position: relative;
+}
+
+.select2-dropdown .select2-results__option[aria-selected=true]:before {
+    content: "\f00c";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 15px;
+    color: #0073AA;
+    position: absolute;
+    right: 10px;
+}
+
+.stm-add-new-wrapper {
+    padding: 6px 10px;
+    background-color: #F2F2F2;
+    position: relative;
+}
+
+input.stm-add-new-input {
+    width: 100%;
+    padding-right: 25px;
+    padding-left: 10px;
+    font-size: 13px;
+    outline: none;
+    border: 1px solid #CED4DA;
+    border-radius: 4px;
+}
+
+input.stm-add-new-input::-moz-placeholder {
+    color: #BEC5CB;
+}
+
+input.stm-add-new-input::placeholder {
+    color: #BEC5CB;
+}
+
+input.stm-add-new-input:focus {
+    border-color: #BEC5CB;
+    outline: none;
+    box-shadow: none;
+}
+
+.icon-plus {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    font-weight: 200;
+    transform: translateY(-50%);
+    font-family: math;
+    font-size: 18px;
+    line-height: 0;
+    color: #0073AA;
+}
+
+.icon-plus:hover {
+    cursor: pointer;
+}
+
+#butterbean-manager-stm_car_manager .butterbean-control.butterbean-control-section_title {
+    margin-bottom: 20px !important;
+}
+
+#butterbean-manager-stm_car_manager .butterbean-control.butterbean-control-section_title#butterbean-control-gallery_title {
+    margin-bottom: 0 !important;
+}
+
+#butterbean-manager-stm_car_manager .butterbean-control.butterbean-control-section_title .butterbean-section-heading {
+    padding: 0;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+}
+
+.butterbean-section-heading-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.butterbean-section-heading-wrapper .butterbean-section-heading-wrapper-inner-one {
+    display: flex;
+    align-items: center;
+}
+
+.stm_repeater_checkbox {
+  /* Стиль для активного состояния чекбокса с галочкой */
+}
+
+.stm_repeater_checkbox input[type=checkbox] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.stm_repeater_checkbox label input[type=checkbox] + span {
+    position: relative;
+    padding-left: 30px;
+}
+
+.stm_repeater_checkbox label input[type=checkbox] + span::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    border: 2px solid #BEC5CB;
+    border-radius: 4px;
+    background-color: #fff;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.stm_repeater_checkbox label input[type=checkbox]:checked + span::before {
+    background-color: #0073AA;
+    border-color: #0073AA;
+}
+
+.stm_repeater_checkbox label input[type=checkbox]:checked + span::after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 45%;
+    transform: translateY(-50%) rotate(45deg);
+    width: 6px;
+    height: 9px;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+}
+
+/* MLT Fields Styles */
+.stm-listing-type #butterbean-control-stock_number,
+.stm-listing-type #butterbean-control-regular_price_label,
+.stm-listing-type #butterbean-control-registration_date,
+.stm-listing-type #butterbean-control-special_price_label {
+    width: 100%;
+}
+
+.stm-listing-type #butterbean-control-sale_price {
+    float: right;
+}
+
+.stm-listing-type .butterbean-control.butterbean-control-section_title {
+    margin-bottom: 20px !important;
+}
+
+.stm-listing-type .butterbean-control.butterbean-control-section_title#butterbean-control-gallery_title {
+    margin-bottom: 0 !important;
+}
+
+.stm-listing-type .butterbean-control.butterbean-control-section_title .butterbean-section-heading {
+    padding: 0 !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    line-height: 24px !important;
+}
+
+.stm-listing-type .butterbean-heading-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.stm-template-boats #butterbean-control-stock_number {
+    width: 100%;
 }

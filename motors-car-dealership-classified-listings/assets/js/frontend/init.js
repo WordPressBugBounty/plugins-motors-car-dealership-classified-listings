@@ -582,4 +582,3 @@ if (typeof (STMListings) == 'undefined') {
     )
 
 })(jQuery);
-

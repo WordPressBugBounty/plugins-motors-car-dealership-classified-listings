@@ -46,9 +46,10 @@ class ButterBean_Control_Multiselect extends ButterBean_Control {
 		$this->l10n = wp_parse_args(
 			$this->l10n,
 			array(
-				'all'      => esc_html__( 'All', 'stm_vehicles_listing' ),
-				'selected' => esc_html__( 'Selected', 'stm_vehicles_listing' ),
-				'add_new'  => esc_html__( 'Add new', 'stm_vehicles_listing' ),
+				'all'               => esc_html__( 'All', 'stm_vehicles_listing' ),
+				'selected'          => esc_html__( 'Selected', 'stm_vehicles_listing' ),
+				'add_new'           => esc_html__( 'Add new', 'stm_vehicles_listing' ),
+				'field_placeholder' => esc_html__( 'Select', 'stm_vehicles_listing' ) . ' ' . $this->label,
 			)
 		);
 	}

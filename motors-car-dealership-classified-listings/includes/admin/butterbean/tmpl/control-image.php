@@ -1,4 +1,8 @@
-<# if ( data.label ) { #>
+<?php
+// Output JavaScript template.
+?>
+<div class="butterbean-heading-wrapper">
+	<# if ( data.label ) { #>
 	<span class="butterbean-label">{{ data.label }}</span>
 <# } #>
 
@@ -8,7 +12,7 @@
 		<# if ( data.preview ) { #>
 			<div class="image_preview">
 
-				<i class="fas fa-eye"></i>
+				<i class="motors-icons-ico_mag_eye"></i>
 				<span data-preview="{{data.preview_url}}{{ data.preview }}.jpg">Preview</span>
 
 			</div>
@@ -18,12 +22,13 @@
 	<span class="butterbean-description butterbean-no-info">
 		<# if ( data.preview ) { #>
 			<div class="image_preview dede">
-				<i class="fas fa-eye"></i>
+				<i class="motors-icons-ico_mag_eye"></i>
 				<span data-preview="{{data.preview_url}}{{ data.preview }}.jpg">Preview</span>
 			</div>
 		<# } #>
 	</span>
 <# } #>
+</div>
 
 <input type="hidden" class="butterbean-attachment-id" name="{{ data.field_name }}" value="{{ data.value }}" {{{ data.attr }}} />
 

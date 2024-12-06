@@ -5,7 +5,7 @@ Donate link: https://www.paypal.me/stylemix
 Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
 Tested up to: 6.7
-Stable tag: 1.4.39
+Stable tag: 1.4.40
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -132,6 +132,11 @@ After that, go to Tools -> Import, and via Wordpress Importer tool install dummy
 8. Additional features
 
 == Changelog ==
+
+= 1.4.40 =
+- **Enhancement:** Redesigned Listing Manager and made settings more intuitive.
+- **Fix:**  Resolved an issue where the dependency between fields was not working on the Listing Creation Page.
+- **Fix:**  Styles for Listings Grid Tabs widget in mobile view
 
 = 1.4.39 =
 - **Update:**  Updated .pot files in Motors plugin.

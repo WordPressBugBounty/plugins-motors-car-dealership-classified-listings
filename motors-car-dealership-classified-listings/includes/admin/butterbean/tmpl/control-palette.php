@@ -1,9 +1,12 @@
+<?php
+// Output JavaScript template.
+?>
 <# if ( data.label ) { #>
 	<span class="butterbean-label">{{ data.label }}</span>
 <# } #>
 
 <# if ( data.description ) { #>
-	<span class="butterbean-description">{{{ data.description }}}</span>
+	<span class="butterbean-description"><span class="stm-info-icon">i</span>{{{ data.description }}}</span>
 <# } #>
 
 <# _.each( data.choices, function( palette, choice ) { #>

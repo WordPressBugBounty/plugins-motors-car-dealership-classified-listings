@@ -55,6 +55,7 @@ class ComposerStaticInit5db859e1dab632b715b93d33219eb1cf
         'MotorsVehiclesListing\\Helper\\FilterHelper' => __DIR__ . '/../..' . '/includes/class/Helper/FilterHelper.php',
         'MotorsVehiclesListing\\Helper\\ListingStats' => __DIR__ . '/../..' . '/includes/class/Helper/ListingStats.php',
         'MotorsVehiclesListing\\Helper\\OptionsHelper' => __DIR__ . '/../..' . '/includes/class/Helper/OptionsHelper.php',
+        'MotorsVehiclesListing\\ListingMetaboxes' => __DIR__ . '/../..' . '/includes/class/ListingMetaboxes.php',
         'MotorsVehiclesListing\\Loader' => __DIR__ . '/../..' . '/includes/class/Loader.php',
         'MotorsVehiclesListing\\MenuPages\\AddCarFormSettings' => __DIR__ . '/../..' . '/includes/class/MenuPages/AddCarFormSettings.php',
         'MotorsVehiclesListing\\MenuPages\\FilterSettings' => __DIR__ . '/../..' . '/includes/class/MenuPages/FilterSettings.php',

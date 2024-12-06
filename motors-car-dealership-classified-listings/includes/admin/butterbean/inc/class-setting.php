@@ -166,7 +166,6 @@ class ButterBean_Setting {
 	 * @return string
 	 */
 	public function get_field_name() {
-
 		return "butterbean_{$this->manager->name}_setting_{$this->name}";
 	}
 

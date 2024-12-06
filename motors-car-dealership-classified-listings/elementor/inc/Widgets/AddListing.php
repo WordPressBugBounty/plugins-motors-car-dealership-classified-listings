@@ -27,6 +27,7 @@ class AddListing extends WidgetBase {
 			'app-select2',
 			'progressbar-layui',
 			'progressbar',
+			'listing-search',
 			$this->get_admin_name(),
 		);
 

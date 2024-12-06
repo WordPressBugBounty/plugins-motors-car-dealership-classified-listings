@@ -25,6 +25,7 @@ return array(
     'MotorsVehiclesListing\\Helper\\FilterHelper' => $baseDir . '/includes/class/Helper/FilterHelper.php',
     'MotorsVehiclesListing\\Helper\\ListingStats' => $baseDir . '/includes/class/Helper/ListingStats.php',
     'MotorsVehiclesListing\\Helper\\OptionsHelper' => $baseDir . '/includes/class/Helper/OptionsHelper.php',
+    'MotorsVehiclesListing\\ListingMetaboxes' => $baseDir . '/includes/class/ListingMetaboxes.php',
     'MotorsVehiclesListing\\Loader' => $baseDir . '/includes/class/Loader.php',
     'MotorsVehiclesListing\\MenuPages\\AddCarFormSettings' => $baseDir . '/includes/class/MenuPages/AddCarFormSettings.php',
     'MotorsVehiclesListing\\MenuPages\\FilterSettings' => $baseDir . '/includes/class/MenuPages/FilterSettings.php',

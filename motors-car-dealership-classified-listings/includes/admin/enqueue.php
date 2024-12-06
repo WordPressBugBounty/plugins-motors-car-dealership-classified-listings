@@ -80,6 +80,16 @@ function stm_listings_admin_enqueue( $hook ) {
 	wp_enqueue_style( 'mvl-admin-sub-menu', STM_LISTINGS_URL . '/assets/css/admin.css', '', STM_LISTINGS_V );
 	wp_enqueue_style( 'mvl-pricing-plans', STM_LISTINGS_URL . '/assets/css/admin-pricing-plans.css', '', STM_LISTINGS_V );
 	wp_enqueue_script( 'mvl-admin-sub-menu', STM_LISTINGS_URL . '/assets/js/admin/sub_menu.js', array( 'jquery' ), STM_LISTINGS_V, true );
+	wp_enqueue_script( 'listing-metaboxes', STM_LISTINGS_URL . '/assets/js/listing-metaboxes.js', array( 'jquery' ), STM_LISTINGS_V, true );
+
+	wp_localize_script(
+		'listing-metaboxes',
+		'listing_metaboxes',
+		array(
+			'choose_image' => esc_html__( 'Choose Image', 'stm_vehicles_listing' ),
+			'add_image'    => esc_html__( 'Add Image', 'stm_vehicles_listing' ),
+		)
+	);
 
 	wp_enqueue_style( 'stm-listings-datetimepicker', STM_LISTINGS_URL . '/assets/css/jquery.stmdatetimepicker.css', array(), STM_LISTINGS_V );
 	wp_enqueue_script( 'stm-listings-datetimepicker', STM_LISTINGS_URL . '/assets/js/jquery.stmdatetimepicker.js', array( 'jquery' ), STM_LISTINGS_V, true );

@@ -1,3 +1,6 @@
+<?php
+// Output JavaScript template.
+?>
 <label>
 
 	<# if ( data.label ) { #>
@@ -5,7 +8,7 @@
 	<# } #>
 
 	<# if ( data.description ) { #>
-		<span class="butterbean-description">{{{ data.description }}}</span>
+		<span class="butterbean-description"><span class="stm-info-icon">i</span>{{{ data.description }}}</span>
 	<# } #>
 
 	<select {{{ data.attr }}}>

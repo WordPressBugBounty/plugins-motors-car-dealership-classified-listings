@@ -404,7 +404,19 @@ function _stm_listings_build_query_args( $args = null, $source = null ) {
 
 	$args['sold_car'] = 'off';
 
-	if ( apply_filters( 'stm_sold_status_enabled', false ) ) {
+	$review_query = false;
+
+	if ( ! empty( $source['listing_type'] ) && 'with_review' === $source['listing_type'] ) {
+		$review_query         = true;
+		$args['meta_query'][] = array(
+			array(
+				'key'     => 'has_review_car',
+				'compare' => 'EXISTS',
+			),
+		);
+	}
+
+	if ( apply_filters( 'stm_sold_status_enabled', false ) && ! $review_query ) {
 		$_sold_meta_key   = 'car_mark_as_sold';
 		$_sold_meta_query = array(
 			array(
@@ -443,15 +455,6 @@ function _stm_listings_build_query_args( $args = null, $source = null ) {
 	}
 
 	$args['meta_query_count'][] = ( isset( $args['meta_query'] ) ) ? $args['meta_query'] : array();
-
-	if ( ! empty( $source['listing_type'] ) && 'with_review' === $source['listing_type'] ) {
-		$args['meta_query'][] = array(
-			array(
-				'key'     => 'has_review_car',
-				'compare' => 'EXISTS',
-			),
-		);
-	}
 
 	if ( ! empty( $source['posts_per_page'] ) ) {
 		$args['posts_per_page'] = $source['posts_per_page'];
