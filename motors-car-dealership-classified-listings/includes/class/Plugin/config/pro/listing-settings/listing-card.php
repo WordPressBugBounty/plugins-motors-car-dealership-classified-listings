@@ -3,7 +3,7 @@ add_filter(
 	'listing_settings_conf',
 	function ( $conf_for_merge ) {
 
-		if ( ! stm_is_motors_theme() && ! apply_filters( 'enable_loan_calculator', false ) ) {
+		if ( ! stm_is_motors_theme() || ( stm_is_motors_theme() && ! apply_filters( 'enable_loan_calculator', false ) ) ) {
 			return $conf_for_merge;
 		}
 

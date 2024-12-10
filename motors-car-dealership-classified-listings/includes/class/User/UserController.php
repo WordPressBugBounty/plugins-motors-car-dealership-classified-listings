@@ -58,7 +58,7 @@ class UserController extends CoreController {
 			foreach ( $_GET as $tax => $term ) {// phpcs:ignore WordPress.Security.NonceVerification.Missing
 				if ( term_exists( sanitize_title( $term ), sanitize_title( $tax ) ) ) {
 					$term_data  = get_term_by( 'slug', sanitize_title( $term ), sanitize_title( $tax ) );
-					$tr         = $tax . '_tr';
+					$tr         = str_replace( '-', '_', $tax ) . '_tr';
 					$left_join .= $model->left_join( $tr );
 					$where     .= $model->where( $tr, $term_data->term_id );
 				}
