@@ -1246,7 +1246,7 @@ if ( ! function_exists( 'stm_ajax_add_a_car' ) ) {
 		}
 
 		if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'enable_plans' ) && apply_filters( 'stm_is_multiple_plans', false ) && 'pay' !== $_POST['btn-type'] ) {
-			if ( empty( $_POST['selectedPlan'] ) ) {
+			if ( empty( $_POST['selectedPlan'] ) && ! current_user_can( 'manage_options' ) ) {
 				$error               = true;
 				$response['message'] = esc_html__( 'Please select plan', 'stm_vehicles_listing' );
 			}

@@ -3,12 +3,8 @@ defined( 'ABSPATH' ) || exit;
 
 $get_params = false;
 
-if ( ! defined( 'WPB_VC_VERSION' ) ) {
-	$histories    = apply_filters( 'motors_vl_get_nuxy_mod', false, 'addl_history_report' );
-	$show_history = apply_filters( 'motors_vl_get_nuxy_mod', false, 'addl_show_history' );
-} elseif ( ! empty( $histories ) ) {
-	$show_history = true;
-}
+$histories       = apply_filters( 'motors_vl_get_nuxy_mod', false, 'addl_history_report' );
+$show_history    = apply_filters( 'motors_vl_get_nuxy_mod', false, 'addl_show_history' );
 $show_registered = apply_filters( 'motors_vl_get_nuxy_mod', false, 'addl_show_registered' );
 $show_vin        = apply_filters( 'motors_vl_get_nuxy_mod', false, 'addl_show_vin' );
 
