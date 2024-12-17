@@ -185,11 +185,11 @@ function get_freemius_info() {
 }
 
 $freemius_info = get_freemius_info();
-
-$start_date   = new DateTime( '14th November 2024' );
-$deadline     = new DateTime( '7th December 2024' );
-$current_time = time();
-$is_promotion = $current_time >= $start_date->format('U') && $current_time < $deadline->format('U'); //phpcs:ignore
+$start_date    = new DateTime( '19th December 2024' );
+$deadline      = new DateTime( '11th January 2025' );
+$current_time  = time();
+$is_promotion  = $current_time >= $start_date->format('U') && $current_time < $deadline->format('U'); //phpcs:ignore
+$only_annual   = true;
 
 if ( $is_promotion ) {
 	$freemius_info['plan']['licenses_5000']->annual_price = 199;
@@ -226,12 +226,12 @@ if ( $is_promotion ) {
 					<?php endif; ?>
 				</p>
 				<?php if ( $is_promotion ) : ?>
-					<div class="stm-discount"><a href="https://stylemixthemes.com/deal/?utm_source=wpadmin&utm_medium=gopro&utm_campaign=bfcampaign24" target="_blank"></a></div>
+					<div class="stm-discount"><a href="<?php echo esc_url( 'https://stylemixthemes.com/deal/?utm_source=motors-go-pro&utm_medium=wpadmin&utm_campaign=WRAPUP24' ); ?>" target="_blank"></a></div>
 				<?php endif; ?>
 			</div>
 			<?php if ( isset( $freemius_info['plan'] ) ) : ?>
 				<h2><?php esc_html_e( 'Choose the package that suits your business', 'stm_vehicles_listing' ); ?></h2>
-				<div class="stm-type-pricing">
+				<div class="stm-type-pricing" data-pricing="<?php echo esc_attr( $only_annual ? 'annual' : 'lifetime' ); ?>" data-promotion="<?php echo esc_attr( $is_promotion ? 'true' : 'false' ); ?>">
 					<div class="left active"><?php esc_html_e( 'Annual', 'stm_vehicles_listing' ); ?></div>
 					<div class="stm-type-pricing__switch">
 						<input type="checkbox" id="GoProStmTypePricing">
@@ -254,10 +254,10 @@ if ( $is_promotion ) {
 										?>
 										<sup>$</sup>
 										<span class="stm_price__value"
-											data-price-annual="<?php echo esc_attr( number_format( $plan->annual_price * 0.50, 0, '.', '' ) ); ?>"
-											data-price-lifetime="<?php echo esc_attr( number_format( $plan->lifetime_price * 0.50, 0, '.', '' ) ); ?>"
+											data-price-annual="<?php echo esc_attr( number_format( $plan->annual_price * 0.75, 0, '.', '' ) ); ?>"
+											data-price-lifetime="<?php echo esc_attr( number_format( $plan->lifetime_price, 0, '.', '' ) ); ?>"
 											data-price-old-annual="<?php echo esc_attr( number_format( $plan->annual_price, 2, '.', '' ) ); ?>">
-											<?php echo esc_html( number_format( $plan->annual_price * 0.50, 0, '.', '' ) ); ?>
+											<?php echo esc_html( number_format( $plan->annual_price * 0.75, 0, '.', '' ) ); ?>
 										</span>
 										<div class="discount">
 											<sup>$</sup>
@@ -324,6 +324,8 @@ if ( $is_promotion ) {
 									$utm_medium   = isset( $_GET['source'] ) ? esc_attr( htmlspecialchars( $_GET['source'] ) ) : 'unlock-pro-button';
 									$annual_url   = $base_url . '&utm_medium=' . $utm_medium . '&billing_cycle=annual';
 									$lifetime_url = $base_url . '&utm_medium=' . $utm_medium . '&billing_cycle=lifetime';
+									$coupon       = $is_promotion ? '&plugin_coupon=RECAP24' : '';
+									$annual_url  .= $coupon;
 									?>
 									<a href="<?php echo esc_url( $annual_url ); ?>" class="stm_plan__btn stm_plan__btn--buy" data-checkout-url-annual="<?php echo esc_url( $annual_url ); ?>" data-checkout-url-lifetime="<?php echo esc_url( $lifetime_url ); ?>" target="_blank">
 										<?php esc_html_e( 'Get now', 'stm_vehicles_listing' ); ?>
@@ -397,16 +399,30 @@ if ( $is_promotion ) {
 
 <script>
 	jQuery(document).ready(function ($) {
+		let promotion = $('.stm-type-pricing').attr('data-promotion');
+		if ( promotion === 'false' ) {
+			$('.stm_price small').css('float', '');
+		}
 		$('#GoProStmTypePricing').on('change', function () {
 
 			let parent = $(this).closest('.stm-type-pricing');
-
+			let pricing_for = parent.attr('data-pricing');
 			let left = parent.find('.left'); //Annual
 			let right = parent.find('.right'); //Lifetime
 			let stm_price = $('.stm_price small');
 
 			left.toggleClass('active', !this.checked);
 			right.toggleClass('active', this.checked);
+
+			if (pricing_for === 'annual' && promotion === 'true') {
+				if (this.checked) {
+					$('.discount').hide();
+					$('.stm_price small').css('float', '');
+				} else {
+					$('.discount').show();
+					$('.stm_price small').css('float', 'left');
+				}
+			}
 
 			let typePrice = 'annual';
 

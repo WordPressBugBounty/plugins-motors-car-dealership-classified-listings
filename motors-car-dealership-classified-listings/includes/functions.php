@@ -944,13 +944,13 @@ if ( ! function_exists( 'stm_generate_title_from_slugs' ) ) {
 		}
 
 		if ( empty( $title_from ) ) {
-			return $title;
+			return strip_shortcodes( $title );
 		}
 
 		$title_return = apply_filters( 'generate_title_from_slugs', '', $post_id, $show_labels );
 
 		if ( ! empty( $title_return ) ) {
-			return $title_return;
+			return strip_shortcodes( $title_return );
 		}
 
 		$taxonomies  = apply_filters( 'stm_replace_curly_brackets', $title_from );
@@ -983,7 +983,7 @@ if ( ! function_exists( 'stm_generate_title_from_slugs' ) ) {
 			$title_return = get_the_title( $post_id );
 		}
 
-		return $title_return;
+		return strip_shortcodes( $title_return );
 	}
 
 	add_filter( 'stm_generate_title_from_slugs', 'stm_generate_title_from_slugs', 10, 3 );
