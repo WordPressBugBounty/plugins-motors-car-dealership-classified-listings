@@ -226,7 +226,7 @@ if ( $is_promotion ) {
 					<?php endif; ?>
 				</p>
 				<?php if ( $is_promotion ) : ?>
-					<div class="stm-discount"><a href="<?php echo esc_url( 'https://stylemixthemes.com/deal/?utm_source=motors-go-pro&utm_medium=wpadmin&utm_campaign=WRAPUP24' ); ?>" target="_blank"></a></div>
+					<div class="stm-discount"><a href="<?php echo esc_url( 'https://stylemixthemes.com/2024-year-in-review/?utm_source=motors-go-pro&utm_medium=wpadmin&utm_campaign=WRAPUP24' ); ?>" target="_blank"></a></div>
 				<?php endif; ?>
 			</div>
 			<?php if ( isset( $freemius_info['plan'] ) ) : ?>
