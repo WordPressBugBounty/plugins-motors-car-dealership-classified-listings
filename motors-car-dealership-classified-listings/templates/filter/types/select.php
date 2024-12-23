@@ -20,7 +20,8 @@ $first_option = reset( $options );
 unset( $options[''] );
 
 if ( $multiple ) {
-	$aria_label = $placeholder['label'];
+	$plshldr    = apply_filters( 'mvl_get_dynamic_string_translation', $placeholder['label'], 'Listing Category ' . $placeholder['label'] );
+	$aria_label = $plshldr;
 } elseif ( ! empty( $options ) ) {
 	$aria_label = $first_option['label'];
 }
@@ -66,7 +67,7 @@ $aria_label = sprintf(
 );
 ?>
 <select aria-label="<?php echo esc_attr( $aria_label ); ?>" <?php echo $multiple ? 'multiple="multiple"' : ''; ?>
-	<?php echo $multiple ? 'data-placeholder="' . esc_attr( $placeholder['label'] ) . '"' : ''; ?>
+	<?php echo $multiple ? 'data-placeholder="' . esc_attr( $plshldr ) . '"' : ''; ?>
 		name="<?php echo esc_attr( $sel_name ); ?>"
 		class="<?php echo esc_attr( $class ); ?>"
 		<?php if ( isset( $elementor_widget_class ) && ! empty( $elementor_widget_class ) ) : ?>
@@ -81,16 +82,14 @@ $aria_label = sprintf(
 			?>
 			<option class="mvl-inventory-select" data-parent="<?php echo esc_attr( $parent_attr ); ?>" value="<?php echo esc_attr( $value_attr ); ?>" <?php selected( $option['selected'] ); ?> <?php disabled( $option['disabled'] ); ?>>
 				<?php
-				$label = $option['label'] ?? '';
-
 				if ( apply_filters( 'stm_is_listing_price_field', false, $name ) ) {
 					if ( ! empty( $option['option'] ) ) {
 						echo esc_html( apply_filters( 'stm_filter_price_view', '', $option['option'] ) );
 					} else {
-						echo esc_html( apply_filters( 'stm_dynamic_string_translation', $label, 'Filter Option Label for ' . $label ) );
+						echo esc_html( apply_filters( 'mvl_get_dynamic_string_translation', $option['label'], 'Listing Category ' . $option['label'] ) );
 					}
 				} else {
-					echo esc_html( apply_filters( 'stm_dynamic_string_translation', $label, 'Filter Option Label for ' . $label ) );
+					echo esc_html( apply_filters( 'mvl_get_dynamic_string_translation', $option['label'], 'Listing Category ' . $option['label'] ) );
 				}
 				?>
 			</option>

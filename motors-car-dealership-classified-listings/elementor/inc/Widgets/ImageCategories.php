@@ -53,7 +53,10 @@ class ImageCategories extends WidgetBase {
 
 
 	public function get_style_depends(): array {
-		return array( $this->get_name() );
+		return array(
+			$this->get_name(),
+			'swiper',
+		);
 	}
 
 	public function get_script_depends() {

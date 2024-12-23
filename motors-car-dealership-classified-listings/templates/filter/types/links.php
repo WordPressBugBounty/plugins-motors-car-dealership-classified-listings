@@ -29,7 +29,7 @@ if ( ! empty( $filter_links ) && ! empty( $filter['options'] ) ) : ?>
 						<?php
 						echo ( wp_is_mobile() || 'false' === esc_attr( $filter_links_default_expanded ) ) ? 'collapsed' : ''; //phpcs:ignore
 						?> " data-toggle="collapse" href="#<?php echo esc_attr( $filter_link['slug'] ); ?>" aria-expanded="<?php echo 'false'; //phpcs:ignore?>">
-							<h5><?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $filter_link['single_name'], 'Filter Name ' . $filter_link['single_name'] ) ); ?></h5>
+							<h5><?php echo esc_html( apply_filters( 'stm_listings_dynamic_string_translation', $filter_link['single_name'], 'Filter Name ' . $filter_link['single_name'] ) ); ?></h5>
 							<span class="minus"></span>
 						</a>
 

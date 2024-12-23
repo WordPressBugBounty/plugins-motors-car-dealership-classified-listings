@@ -19,7 +19,7 @@ if ( ! empty( $taxonomies ) ) :
 				$_option_default = sprintf(
 					/* translators: %s name option */
 					esc_html__( 'Select %s', 'stm_vehicles_listing' ),
-					esc_html( apply_filters( 'stm_dynamic_string_translation', stm_get_name_by_slug( $_taxonomy ), 'Add A Car Step 1 Slug Name' ) )
+					esc_html( apply_filters( 'stm_listings_dynamic_string_translation', stm_get_name_by_slug( $_taxonomy ), 'Add A Car Step 1 Slug Name' ) )
 				);
 
 				$terms = array();
@@ -59,7 +59,7 @@ if ( ! empty( $taxonomies ) ) :
 									min="0"
 									type="number"
 									name="stm_f_s[<?php echo esc_attr( $_taxonomy ); ?>]"
-									aria-label="<?php echo esc_attr( apply_filters( 'stm_dynamic_string_translation', stm_get_name_by_slug( $_taxonomy ), 'Add A Car Step 1 Slug Name' ) ); ?>"
+									aria-label="<?php echo esc_attr( apply_filters( 'stm_listings_dynamic_string_translation', stm_get_name_by_slug( $_taxonomy ), 'Add A Car Step 1 Slug Name' ) ); ?>"
 									aria-labelledby="<?php printf( 'listing-%s', esc_html( $tax_info['slug'] ) ); ?>"
 									required />
 						<?php else : ?>
@@ -68,7 +68,7 @@ if ( ! empty( $taxonomies ) ) :
 									data-class="stm_select_overflowed"
 									data-selected="<?php echo esc_attr( $has_selected ); ?>"
 									name="stm_f_s[<?php echo esc_attr( str_replace( '-', '_pre_', $_taxonomy ) ); ?>]"
-									aria-label="<?php echo esc_attr( apply_filters( 'stm_dynamic_string_translation', stm_get_name_by_slug( $_taxonomy ), 'Add A Car Step 1 Slug Name' ) ); ?>"
+									aria-label="<?php echo esc_attr( apply_filters( 'stm_listings_dynamic_string_translation', stm_get_name_by_slug( $_taxonomy ), 'Add A Car Step 1 Slug Name' ) ); ?>"
 									aria-labelledby="<?php printf( 'listing-%s', esc_html( $tax_info['slug'] ) ); ?>"
 									required
 							>

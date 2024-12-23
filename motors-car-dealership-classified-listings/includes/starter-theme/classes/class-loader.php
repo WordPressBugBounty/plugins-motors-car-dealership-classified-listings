@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class Loader
  * base plugin functions here
  */
-class Loader {
+class MVL_Loader {
 
 	public $plugin_slug              = 'motors-car-dealership-classified-listings';
 	public $starter_theme_version    = '1.0.0';
@@ -158,5 +158,5 @@ class Loader {
 	}
 }
 
-new Loader();
+new MVL_Loader();
 

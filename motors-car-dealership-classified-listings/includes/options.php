@@ -397,7 +397,7 @@ function stm_get_name_by_slug( $slug = '', $listing_type = '' ) {
 	if ( ! empty( $filter_options ) && ! empty( $slug ) ) {
 		foreach ( $filter_options as $filter_option ) {
 			if ( $filter_option['slug'] === $slug && ! empty( $filter_option['single_name'] ) ) {
-				$name = stm_listings_dynamic_string_translation( 'Option - ' . $filter_option['single_name'], $filter_option['single_name'] );
+				$name = stm_listings_dynamic_string_translation( $filter_option['single_name'], 'Listing Category ' . $filter_option['single_name'] );
 			}
 		}
 	}
@@ -942,6 +942,9 @@ function stm_listings_add_new_option() {
 		$link    = get_site_url() . '/wp-admin/edit-tags.php?taxonomy=' . esc_attr( $new_option['slug'] ) . '&post_type=listings';
 
 		$options[] = $current_option;
+
+		do_action( 'wpml_register_single_string', 'stm_vehicles_listing', 'Listing Category ' . $new_option['single_name'], $new_option['single_name'] );
+		do_action( 'wpml_register_single_string', 'stm_vehicles_listing', 'Listing Category ' . $new_option['plural_name'], $new_option['plural_name'] );
 
 		$data['option'] = array(
 			'key'     => max( array_keys( $options ) ),

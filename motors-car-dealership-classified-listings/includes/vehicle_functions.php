@@ -2726,7 +2726,11 @@ if ( ! function_exists( 'stm_ajax_add_trade_offer' ) ) {
 				$subject = apply_filters( 'get_generate_subject_view', '', 'trade_offer', $args );
 				$body    = apply_filters( 'get_generate_template_view', '', 'trade_offer', $args );
 
-				do_action( 'stm_wp_mail', $to, $subject, $body, '' );
+				add_filter( 'wp_mail_content_type', 'stm_set_html_content_type_mail' );
+
+				wp_mail( $to, $subject, $body );
+
+				remove_filter( 'wp_mail_content_type', 'stm_set_html_content_type_mail' );
 			} else {
 				$response['response'] = esc_html__( 'Please fill all fields', 'stm_vehicles_listing' );
 				$response['status']   = 'danger';

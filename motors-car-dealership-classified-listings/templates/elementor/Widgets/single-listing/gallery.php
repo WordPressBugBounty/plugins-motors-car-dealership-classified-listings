@@ -271,7 +271,7 @@ $actions_visibility = ( $show_actions_onhover ) ? ' actions-onhover' : '';
 		</div>
 		<?php if ( empty( $sold ) && ! empty( $special_car ) && 'on' === $special_car ) : ?>
 			<div class="special-label h5" <?php echo esc_attr( $badge_style ); ?>>
-				<?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $badge_text, 'Special Badge Text' ) ); ?>
+				<?php echo esc_html( apply_filters( 'stm_listings_dynamic_string_translation', $badge_text, 'Special Badge Text' ) ); ?>
 			</div>
 		<?php elseif ( true === apply_filters( 'stm_sold_status_enabled', false ) && ! empty( $sold ) ) : ?>
 			<?php $badge_style = 'style=background-color:' . $sold_badge_color . ';'; ?>

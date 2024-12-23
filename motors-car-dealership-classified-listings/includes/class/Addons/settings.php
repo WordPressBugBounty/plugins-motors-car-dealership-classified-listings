@@ -3,9 +3,9 @@
 use MotorsVehiclesListing\Addons\Addons;
 
 if ( ! defined( 'STM_LISTINGS_PRO_PATH' ) && ! stm_is_motors_theme() ) {
-	add_action( 'wpcfto_screen_motors_vehicles_listing_plugin_settings_added', 'addons_add_submenu_pages', 100 );
+	add_action( 'wpcfto_screen_motors_vehicles_listing_plugin_settings_added', 'mvl_addons_add_submenu_pages', 100 );
 
-	function addons_add_submenu_pages() {
+	function mvl_addons_add_submenu_pages() {
 		if ( ! defined( 'STM_LMS_PRO_PATH' ) ) {
 			$addons   = Addons::list();
 			$position = 110;
@@ -18,7 +18,7 @@ if ( ! defined( 'STM_LISTINGS_PRO_PATH' ) && ! stm_is_motors_theme() ) {
 					'manage_options',
 					$key,
 					function () use ( $key ) {
-						unlock_addons_callback( $key );
+						mvl_unlock_addons_callback( $key );
 					}
 				);
 
@@ -33,7 +33,7 @@ if ( ! defined( 'STM_LISTINGS_PRO_PATH' ) && ! stm_is_motors_theme() ) {
 		}
 	}
 
-	function unlock_addons_callback( $addon ) {
+	function mvl_unlock_addons_callback( $addon ) {
 		$version = ( WP_DEBUG ) ? time() : STM_LISTINGS_V;
 
 		wp_enqueue_style( 'mvl_unlock_addons', STM_LISTINGS_URL . '/assets/css/unlock_addons.css', null, $version );

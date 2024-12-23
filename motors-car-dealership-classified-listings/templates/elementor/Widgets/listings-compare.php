@@ -201,7 +201,7 @@ $compare_empty_placeholder = 'compare-empty.jpg';
 												<?php $compare_option = get_post_meta( get_the_ID(), $filter_option['slug'], true ); ?>
 												<td class="compare-value-hover <?php echo esc_attr( 'compare-value-' . $filter_option['slug'] ); ?>"
 													data-value="<?php echo esc_attr( 'compare-value-' . $filter_option['slug'] ); ?>">
-													<?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $filter_option['single_name'], 'Compare page ' . $filter_option['single_name'] ) ); ?>
+													<?php echo esc_html( apply_filters( 'stm_listings_dynamic_string_translation', $filter_option['single_name'], 'Compare page ' . $filter_option['single_name'] ) ); ?>
 												</td>
 											</tr>
 										<?php }; ?>
@@ -382,7 +382,7 @@ $compare_empty_placeholder = 'compare-empty.jpg';
 											<?php $compare_option = get_post_meta( get_the_ID(), $filter_option['slug'], true ); ?>
 											<td class="compare-value-hover <?php echo esc_attr( 'compare-value-' . $filter_option['slug'] ); ?>"
 												data-value="<?php echo esc_attr( 'compare-value-' . $filter_option['slug'] ); ?>">
-												<?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $filter_option['single_name'], 'Compare page ' . $filter_option['single_name'] ) ); ?>
+												<?php echo esc_html( apply_filters( 'stm_listings_dynamic_string_translation', $filter_option['single_name'], 'Compare page ' . $filter_option['single_name'] ) ); ?>
 											</td>
 										</tr>
 									<?php }; ?>

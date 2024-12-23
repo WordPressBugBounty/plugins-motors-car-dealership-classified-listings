@@ -41,6 +41,22 @@
     padding: 5px 10px;
 }
 
+#get-car-price-form .modal-body .button-row .col-md-4,
+#request-trade-offer-form .modal-body .button-row .col-md-4,
+#request-test-drive-form .modal-body .button-row .col-md-4 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#get-car-price-form .modal-body .button-row .col-md-4 .stm-ajax-loader,
+#request-trade-offer-form .modal-body .button-row .col-md-4 .stm-ajax-loader,
+#request-test-drive-form .modal-body .button-row .col-md-4 .stm-ajax-loader {
+    margin-left: 10px;
+}
+
 #get-car-price-form .modal-body .form-group,
 #request-trade-offer-form .modal-body .form-group,
 #request-test-drive-form .modal-body .form-group {

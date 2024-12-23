@@ -147,13 +147,13 @@ $cols_class .= ( isset( $data_columns_mobile ) && $data_columns_mobile ) ? ' mob
 							<?php if ( ! empty( $data_single['font'] ) ) : ?>
 								<i class="<?php echo esc_attr( $data_single['font'] ); ?>"></i>
 							<?php endif; ?>
-							<?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $data_single['single_name'], 'Listing Category ' . $data_single['single_name'] ) ); ?>
+							<?php echo esc_html( apply_filters( 'mvl_get_dynamic_string_translation', $data_single['single_name'], 'Listing Category ' . $data_single['single_name'] ) ); ?>
 						</span>
-						<span class="heading-font" title="<?php echo esc_attr( apply_filters( 'stm_dynamic_string_translation', $value, 'Listing Term ' . $value ) ); ?>">
+						<span class="heading-font" title="<?php echo esc_attr( apply_filters( 'mvl_get_dynamic_string_translation', $value, 'Listing Term ' . $value ) ); ?>">
 							<?php if ( ! empty( $data_single['link'] ) ) : ?>
 								<a href="<?php echo esc_url( $data_single['link'] ); ?>" target="_blank">
 							<?php endif; ?>
-							<?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $value, 'Listing Term ' . $value ) ); ?>
+							<?php echo esc_html( apply_filters( 'mvl_get_dynamic_string_translation', $value, 'Listing Term ' . $value ) ); ?>
 							<?php if ( ! empty( $data_single['link'] ) ) : ?>
 								</a>
 							<?php endif; ?>

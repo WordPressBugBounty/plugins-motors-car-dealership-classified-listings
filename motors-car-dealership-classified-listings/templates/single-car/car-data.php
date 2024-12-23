@@ -45,7 +45,7 @@ $show_history      = apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_histo
 					if ( ! empty( $data_meta ) && ! apply_filters( 'is_empty_value', $data_meta ) ) :
 						?>
 						<tr>
-							<td class="t-label"><?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $data_value['single_name'], 'Category name' ) ); ?></td>
+							<td class="t-label"><?php echo esc_html( apply_filters( 'stm_listings_dynamic_string_translation', $data_value['single_name'], 'Category name' ) ); ?></td>
 							<?php if ( ! empty( $data_value['numeric'] ) ) : ?>
 								<td class="t-value h6"><?php echo wp_kses_post( ucfirst( $data_meta . $affix ) ); ?></td>
 							<?php else : ?>

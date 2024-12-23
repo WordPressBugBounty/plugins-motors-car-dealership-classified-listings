@@ -68,7 +68,7 @@ $isSellOnline = ( $sellOnline ) ? (boolean) ! empty( get_post_meta( $listing_id,
 					<span class="labeled"><?php esc_html_e( 'BUY CAR ONLINE:', 'stm_vehicles_listing' ); ?></span>
 				<?php else : ?>
 					<?php if ( ! empty( $regular_price_label ) ) : ?>
-						<span class="labeled"><?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $regular_price_label, 'Regular Price Label' ) ); ?></span>
+						<span class="labeled"><?php echo esc_html( apply_filters( 'stm_listings_dynamic_string_translation', $regular_price_label, 'Regular Price Label' ) ); ?></span>
 					<?php endif; ?>
 				<?php endif; ?>
 				<span class="h3">
@@ -174,6 +174,6 @@ $isSellOnline = ( $sellOnline ) ? (boolean) ! empty( get_post_meta( $listing_id,
 	<?php endif; ?>
 
 	<?php if ( ! empty( $regular_price_description ) ) : ?>
-		<div class="price-description-single"><?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $regular_price_description, 'Regular Price Description' ) ); ?></div>
+		<div class="price-description-single"><?php echo esc_html( apply_filters( 'stm_listings_dynamic_string_translation', $regular_price_description, 'Regular Price Description' ) ); ?></div>
 	<?php endif; ?>
 <?php } ?>

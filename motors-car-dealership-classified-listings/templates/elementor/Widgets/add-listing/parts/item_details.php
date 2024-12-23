@@ -63,7 +63,7 @@ $_taxonomy = ( ! $_taxonomy ) ? array() : $_taxonomy;
 					?>
 					<?php if ( ! empty( $tax_info ) ) : ?>
 					<div class="col-md-3 col-sm-3 stm-form-1-selects">
-						<div class="stm-label heading-font"><?php echo esc_html( $tax_name ); ?>*
+						<div class="stm-label heading-font"><?php echo esc_html( apply_filters( 'mvl_get_dynamic_string_translation', $tax_name, 'Listing Category ' . $tax_name ) ); ?>*
 						</div>
 						<?php if ( $number_field ) : ?>
 							<?php $value = get_post_meta( $_id, $tax_info['slug'], true ); ?>
@@ -110,13 +110,13 @@ $_taxonomy = ( ! $_taxonomy ) ? array() : $_taxonomy;
 				}
 				?>
 
-			.stm-form1-intro-unit .select2-selection__rendered[title="<?php esc_html_e('Select', 'stm_vehicles_listing'); ?> <?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $tax_name, 'Add A Car Step 1 Slug Name' ) ); ?>"] {
+			.stm-form1-intro-unit .select2-selection__rendered[title="<?php esc_html_e('Select', 'stm_vehicles_listing'); ?> <?php echo esc_html( apply_filters( 'stm_listings_dynamic_string_translation', $tax_name, 'Add A Car Step 1 Slug Name' ) ); ?>"] {
 				background-color: transparent !important;
 				border: 1px solid rgba(255, 255, 255, 0.5);
 				color: #fff !important;
 			}
 
-			.stm-form1-intro-unit .select2-selection__rendered[title="<?php esc_html_e('Select', 'stm_vehicles_listing'); ?> <?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $tax_name, 'Add A Car Step 1 Slug Name' ) ); ?>"] + .select2-selection__arrow b {
+			.stm-form1-intro-unit .select2-selection__rendered[title="<?php esc_html_e('Select', 'stm_vehicles_listing'); ?> <?php echo esc_html( apply_filters( 'stm_listings_dynamic_string_translation', $tax_name, 'Add A Car Step 1 Slug Name' ) ); ?>"] + .select2-selection__arrow b {
 				color: rgba(255, 255, 255, 0.5);
 			}
 
@@ -216,7 +216,7 @@ $_taxonomy = ( ! $_taxonomy ) ? array() : $_taxonomy;
 							<?php if ( ! empty( $data_unit['font'] ) ) : ?>
 								<i class="<?php echo esc_attr( $data_unit['font'] ); ?>"></i>
 							<?php endif; ?>
-							<?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $data_unit['single_name'], 'Add A Car Step 1 Taxonomy Label ' . $data_unit['single_name'] ) ); ?>
+							<?php echo esc_html( apply_filters( 'mvl_get_dynamic_string_translation', $data_unit['single_name'], 'Listing Category ' . $data_unit['single_name'] ) ); ?>
 							<?php
 							if ( isset( $data_unit['required_filed'] ) && $data_unit['required_filed'] ) {
 								echo '*';
@@ -232,7 +232,7 @@ $_taxonomy = ( ! $_taxonomy ) ? array() : $_taxonomy;
 				foreach ( $data as $data_unit ) :
 					?>
 
-				.stm-form-1-end-unit .select2-selection__rendered[title="<?php echo esc_attr__( 'Select', 'stm_vehicles_listing' ); ?> <?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $data_unit['single_name'], 'Add A Car Step 1 Taxonomy Label' ) ); ?>"] {
+				.stm-form-1-end-unit .select2-selection__rendered[title="<?php echo esc_attr__( 'Select', 'stm_vehicles_listing' ); ?> <?php echo esc_html( apply_filters( 'stm_listings_dynamic_string_translation', $data_unit['single_name'], 'Add A Car Step 1 Taxonomy Label' ) ); ?>"] {
 					background-color: transparent !important;
 					border: 1px solid rgba(255, 255, 255, 0.5);
 					color: #888 !important;

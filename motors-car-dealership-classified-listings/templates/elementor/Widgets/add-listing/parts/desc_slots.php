@@ -16,7 +16,7 @@ if ( $custom_listing_type && $listing_types_options ) {
 <div class="motors-desc-slots-wrapper">
 	<div class="mdsw-left">
 		<?php if ( ! empty( $_title ) ) : ?>
-			<h3><?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $_title, 'Add Listing title' ) ); ?></h3>
+			<h3><?php echo esc_html( apply_filters( 'stm_listings_dynamic_string_translation', $_title, 'Add Listing title' ) ); ?></h3>
 		<?php endif; ?>
 		<?php
 		if ( ! empty( $desc ) ) {
@@ -41,7 +41,7 @@ if ( $custom_listing_type && $listing_types_options ) {
 
 			?>
 			<div class="stm-posts-available-number heading-font">
-				<?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $slots_title, 'Slots Available title' ) ); ?>:
+				<?php echo esc_html( apply_filters( 'stm_listings_dynamic_string_translation', $slots_title, 'Slots Available title' ) ); ?>:
 				<span><?php echo esc_html( $limits['posts'] ); ?></span>
 			</div>
 			<?php

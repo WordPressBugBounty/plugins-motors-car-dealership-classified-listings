@@ -222,6 +222,7 @@ function stm_listings_add_category_in() {
 add_action( 'wp_ajax_stm_listings_add_category_in', 'stm_listings_add_category_in' );
 
 add_action( 'save_post', 'stm_butterbean_save_post', 100, 1 );
+
 function stm_butterbean_save_post( $post_id ) {
 
 	$post_types = [ apply_filters( 'stm_listings_post_type', 'listings' ) ];
@@ -306,6 +307,10 @@ function stm_butterbean_save_post( $post_id ) {
 			wp_update_post( [ 'ID' => $post_id, 'post_author' => $request_car_manager ] );
 		}
 	}
+
+	$mark_as_sold = isset( $_POST['car_mark_as_sold'] ) ? $_POST['car_mark_as_sold'] : '';
+
+	update_post_meta( $post_id, 'car_mark_as_sold', $mark_as_sold );
 
 }
 

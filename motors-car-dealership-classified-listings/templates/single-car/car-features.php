@@ -35,7 +35,7 @@ if ( 'listings' !== $mlt_post_type ) {
 							<?php foreach ( $values['tab_title_selected_labels'] as $key => $feature ) : ?>
 								<?php if ( in_array( $feature['label'], $features, true ) ) : ?>
 									<li>
-										<span><?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $feature['label'], 'Car feature ' . $feature['label'] ) ); ?></span>
+										<span><?php echo esc_html( apply_filters( 'stm_listings_dynamic_string_translation', $feature['label'], 'Car feature ' . $feature['label'] ) ); ?></span>
 									</li>
 								<?php endif; ?>
 							<?php endforeach; ?>
@@ -51,7 +51,7 @@ if ( 'listings' !== $mlt_post_type ) {
 						}
 						?>
 						<li class="row-4">
-							<span><?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $feature, 'Car feature ' . $feature ) ); ?></span>
+							<span><?php echo esc_html( apply_filters( 'stm_listings_dynamic_string_translation', $feature, 'Car feature ' . $feature ) ); ?></span>
 						</li>
 					<?php endforeach; ?>
 				</ul>

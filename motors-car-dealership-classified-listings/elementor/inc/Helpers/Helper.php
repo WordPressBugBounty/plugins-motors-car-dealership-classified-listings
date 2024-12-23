@@ -361,7 +361,7 @@ class Helper {
 					$output .= ob_get_clean();
 				} elseif ( $is_price_field ) {
 					// Display price field
-					$number_string = apply_filters( 'stm_dynamic_string_translation', $number_string, 'Select Text' );
+					$number_string = apply_filters( 'stm_listings_dynamic_string_translation', $number_string, 'Select Text' );
 
 					$output .= '<div class="stm-ajax-isnot-reloadable">';
 					$output .= '<select class="stm-filter-ajax-disabled-field" name="max_' . $selected_taxonomy . '" data-class="stm_select_overflowed">';
@@ -376,7 +376,7 @@ class Helper {
 				} else {
 					// If numeric.
 					if ( ! empty( $taxonomy_info['numeric'] ) ) {
-						$select_main = apply_filters( 'stm_dynamic_string_translation', $number_string, 'Option text' );
+						$select_main = apply_filters( 'stm_listings_dynamic_string_translation', $number_string, 'Option text' );
 
 						if ( ! empty( $numbers ) ) {
 							$output .= '<select name="' . $selected_taxonomy . '" data-class="stm_select_overflowed" data-sel-type="' . esc_attr( $selected_taxonomy ) . '">';
@@ -451,7 +451,7 @@ class Helper {
 								$select_main = esc_html__( 'Choose', 'stm_vehicles_listing' ) . ' ' . $sel_tax_name;
 							}
 
-							$select_main = apply_filters( 'stm_dynamic_string_translation', $select_main, 'Select Text' );
+							$select_main = apply_filters( 'stm_listings_dynamic_string_translation', $select_main, 'Select Text' );
 
 							$output .= '<div class="stm-ajax-reloadable">';
 							$output .= '<select name="' . esc_attr( $selected_taxonomy ) . '" data-class="stm_select_overflowed">';

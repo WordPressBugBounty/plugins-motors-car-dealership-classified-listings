@@ -9,13 +9,13 @@ $data = apply_filters( 'stm_get_car_archive_listings', array() );
 	<ul class="heading-font clearfix">
 		<?php if ( ! empty( $listing_list_sort_slug ) ) : ?>
 			<li class="main" data-sort="none" data-filter="<?php echo esc_attr( $listing_list_sort_slug['slug'] ); ?>">
-				<span><?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $listing_list_sort_slug['single_name'], 'Sort param ' . $listing_list_sort_slug['single_name'] ) ); ?></span>
+				<span><?php echo esc_html( apply_filters( 'stm_listings_dynamic_string_translation', $listing_list_sort_slug['single_name'], 'Sort param ' . $listing_list_sort_slug['single_name'] ) ); ?></span>
 			</li>
 		<?php endif; ?>
 		<?php if ( ! empty( $data ) ) : ?>
 			<?php foreach ( $data as $single_data ) : ?>
 				<li class="<?php echo esc_html__( $single_data['slug'], 'stm_vehicles_listing' ); ?>" data-sort="none" data-filter="<?php echo esc_html_e( $single_data['slug'], 'stm_vehicles_listing' );//phpcs:ignore ?>">
-					<span><?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $single_data['single_name'], 'Sort param ' . $single_data['single_name'] ) ); ?></span>
+					<span><?php echo esc_html( apply_filters( 'stm_listings_dynamic_string_translation', $single_data['single_name'], 'Sort param ' . $single_data['single_name'] ) ); ?></span>
 				</li>
 			<?php endforeach; ?>
 			<li class="location" data-sort="none" data-filter="stm_car_location">

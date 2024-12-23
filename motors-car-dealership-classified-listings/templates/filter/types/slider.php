@@ -63,13 +63,13 @@ if ( apply_filters( 'stm_is_listing_price_field', false, $slug ) ) {
 }
 
 $vars['label'] = stripslashes( $label_affix );
-$hide_input = $vars['show_inputs'] ? 'numeric' : 'hidden';
+$hide_input    = $vars['show_inputs'] ? 'numeric' : 'hidden';
 
 ?>
 <div class="col-md-12 col-sm-12">
 	<div class="filter-<?php echo esc_attr( $vars['slug'] ); ?> stm-slider-filter-type-unit">
 		<div class="clearfix">
-			<h5 class="pull-left"><?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $taxonomy['single_name'], 'Filter Option Label for ' . $taxonomy['single_name'] ) ); ?></h5>
+			<h5 class="pull-left"><?php echo esc_html( apply_filters( 'stm_listings_dynamic_string_translation', $taxonomy['single_name'], 'Filter Option Label for ' . $taxonomy['single_name'] ) ); ?></h5>
 			<div class="stm-current-slider-labels"><?php echo esc_html( $vars['label'] ); ?></div>
 		</div>
 			<div class="stm-price-range-unit">

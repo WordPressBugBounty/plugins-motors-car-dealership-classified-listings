@@ -32,7 +32,8 @@
 							</div>
 						</div>
 					</div>
-					<div class="row">
+					<div class="row button-row">
+						<div class="col-md-8 col-sm-8"></div>
 						<div class="col-md-4 col-sm-4">
 							<button type="submit"
 									class="stm-request-test-drive"><?php esc_html_e( 'Request', 'stm_vehicles_listing' ); ?></button>

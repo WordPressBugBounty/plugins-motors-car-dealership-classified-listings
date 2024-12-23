@@ -1006,16 +1006,21 @@ function stm_listings_search_inventory() {
 	return apply_filters( 'stm_listings_default_search_inventory', $enable_search );
 }
 
-function stm_listings_dynamic_string_translation_e( $desc, $string ) {
-	do_action( 'wpml_register_single_string', 'stm_vehicles_listing', $desc, $string );
-	echo wp_kses_post( apply_filters( 'wpml_translate_single_string', $string, 'stm_vehicles_listing', $desc ) );
-}
-
-function stm_listings_dynamic_string_translation( $desc, $string ) {
-	do_action( 'wpml_register_single_string', 'stm_vehicles_listing', $desc, $string );
-
+function mvl_get_dynamic_string_translation( $string, $desc ) {
 	return apply_filters( 'wpml_translate_single_string', $string, 'stm_vehicles_listing', $desc );
 }
+add_filter( 'mvl_get_dynamic_string_translation', 'mvl_get_dynamic_string_translation', 10, 2 );
+
+function stm_listings_dynamic_string_translation_e( $string, $desc ) {
+	do_action( 'wpml_register_single_string', 'stm_vehicles_listing', $desc, $string );
+	echo wp_kses_post( mvl_get_dynamic_string_translation( $string, $desc ) );
+}
+
+function stm_listings_dynamic_string_translation( $string, $desc ) {
+	do_action( 'wpml_register_single_string', 'stm_vehicles_listing', $desc, $string );
+	return mvl_get_dynamic_string_translation( $string, $desc );
+}
+add_filter( 'stm_listings_dynamic_string_translation', 'stm_listings_dynamic_string_translation', 10, 2 );
 
 // check for multilisting
 if ( ! function_exists( 'stm_is_multilisting' ) ) {
@@ -1239,7 +1244,7 @@ add_filter( 'get_top_vehicles_for_mm', 'get_top_vehicles_for_mm', 10, 2 );
 function add_footer_template() {
 	global $wp_query;
 
-	if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_quote' ) ) {
+	if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_quote' ) || ( is_singular( apply_filters( 'stm_listings_post_type', 'listings' ) ) && 'on' === get_post_meta( get_the_ID(), 'car_price_form', true ) ) ) {
 		stm_listings_load_template( 'modals/get-car-price' );
 	}
 
@@ -1254,7 +1259,7 @@ function add_footer_template() {
 	if (
 		apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_trade' )
 		|| apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_offer_price' )
-		|| ( class_exists( 'Elementor\Plugin' ) && $wp_query->get( 'show_trade_in' ) )
+		|| ( class_exists( 'Elementor\Plugin' ) && $wp_query->get( 'show_offer_price' ) )
 	) {
 		stm_listings_load_template( 'modals/trade-offer' );
 	}
@@ -1271,6 +1276,10 @@ function add_footer_template() {
 }
 
 add_action( 'wp_footer', 'add_footer_template' );
+
+if ( class_exists( 'Header_Footer_Elementor' ) && has_action( 'elementor/page_templates/canvas/after_content' ) ) {
+	add_action( 'elementor/page_templates/canvas/after_content', 'add_footer_template' );
+}
 
 if ( ! function_exists( 'stm_ajax_add_review' ) ) {
 	function stm_ajax_add_review() {
@@ -1353,3 +1362,44 @@ if ( ! function_exists( 'stm_force_favourites' ) ) {
 		}
 	}
 }
+
+// patch for creating car_mark_as_sold meta need to be removed after update
+if ( ! function_exists( 'stm_create_car_mark_as_sold_meta' ) ) {
+	function stm_create_car_mark_as_sold_meta() {
+		$post_types = stm_listings_multi_type( true );
+
+		$args = array(
+			'posts_per_page' => -1,
+			'post_status'    => 'publish',
+			'fields'         => 'ids',
+			'meta_query'     => array(
+				array(
+					'key'     => 'car_mark_as_sold',
+					'compare' => 'NOT EXISTS',
+				),
+			),
+		);
+
+		foreach ( $post_types as $post_type ) {
+			$args['post_type'] = $post_type;
+			$posts             = new WP_Query( $args );
+
+			if ( ! empty( $posts->posts ) ) {
+				foreach ( $posts->posts as $post_id ) {
+					add_post_meta( $post_id, 'car_mark_as_sold', '' );
+				}
+			}
+		}
+
+		update_option( 'mark_as_sold_pathed', true );
+	}
+}
+
+add_action(
+	'admin_init',
+	function() {
+		if ( ! get_option( 'mark_as_sold_pathed' ) ) {
+			stm_create_car_mark_as_sold_meta();
+		}
+	}
+);

@@ -52,11 +52,11 @@ $vars = array(
 	<div class="filter-<?php echo esc_attr( $vars['slug'] . '_' . $vars['tab_name'] ); ?> vc_taxonomy mts_semeht_taxonomy">
 		<?php if ( ! empty( $tab_name ) ) : ?>
 			<div class="clearfix">
-				<label class="pull-left"><?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $label, 'Label category ' . $label ) ); ?></label>
+				<label class="pull-left"><?php echo esc_html( apply_filters( 'stm_listings_dynamic_string_translation', $label, 'Label category ' . $label ) ); ?></label>
 				<div class="stm-current-slider-labels"><?php echo esc_html( $vars['label'] ); ?></div>
 			</div>
 		<?php else : ?>
-		<label><?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $label, 'Label category ' . $label ) ); ?></label>
+		<label><?php echo esc_html( apply_filters( 'stm_listings_dynamic_string_translation', $label, 'Label category ' . $label ) ); ?></label>
 		<?php endif ?>
 		<div class="stm-taxonomy-range-unit">
 			<div class="stm-<?php echo esc_attr( $taxonomy . '_' . $tab_name ); ?>-range ui-slider-wrap"></div>

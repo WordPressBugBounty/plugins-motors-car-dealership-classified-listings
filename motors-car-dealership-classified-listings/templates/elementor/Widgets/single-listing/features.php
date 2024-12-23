@@ -36,7 +36,7 @@ if ( 'listings' !== $mlt_post_type ) {
 								<?php if ( in_array( $feature['label'], $features, true ) ) : ?>
 									<li>
 										<?php echo wp_kses( apply_filters( 'stm_dynamic_icon_output', $features_icon ), apply_filters( 'stm_ew_kses_svg', array() ) ); ?>
-										<span><?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $feature['label'], 'Car feature ' . $feature['label'] ) ); ?></span>
+										<span><?php echo esc_html( apply_filters( 'stm_listings_dynamic_string_translation', $feature['label'], 'Car feature ' . $feature['label'] ) ); ?></span>
 									</li>
 								<?php endif; ?>
 							<?php endforeach; ?>
@@ -53,7 +53,7 @@ if ( 'listings' !== $mlt_post_type ) {
 						?>
 						<li class="row-<?php echo esc_attr( $features_rows ); ?>">
 							<?php echo wp_kses( apply_filters( 'stm_dynamic_icon_output', $features_icon ), apply_filters( 'stm_ew_kses_svg', array() ) ); ?>
-							<span><?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $feature, 'Car feature ' . $feature ) ); ?></span>
+							<span><?php echo esc_html( apply_filters( 'stm_listings_dynamic_string_translation', $feature, 'Car feature ' . $feature ) ); ?></span>
 						</li>
 					<?php endforeach; ?>
 				</ul>

@@ -6,7 +6,7 @@ if ( ! empty( $filter_badges ) ) : ?>
 			<?php foreach ( $filter_badges as $badge => $badge_info ) : ?>
 				<li>
 					<?php if ( ! empty( $badge_info['name'] ) ) : ?>
-						<span><?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $badge_info['name'], 'Filter Badge Name' ) ); ?>: </span>
+						<span><?php echo esc_html( apply_filters( 'stm_listings_dynamic_string_translation', $badge_info['name'], 'Filter Badge Name' ) ); ?>: </span>
 					<?php endif; ?>
 					<?php echo wp_kses_post( str_replace( '\\', '', $badge_info['value'] ) ); ?>
 					<i data-url="<?php echo esc_url( $badge_info['url'] ); ?>"

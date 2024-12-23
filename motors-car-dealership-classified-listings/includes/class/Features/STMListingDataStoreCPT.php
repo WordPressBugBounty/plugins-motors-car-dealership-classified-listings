@@ -209,7 +209,11 @@ function mvl_woocommerce_payment_complete( $order_id ) {
 			$subject = stm_generate_subject_view( 'pay_per_listing', $args );
 			$body    = stm_generate_template_view( 'pay_per_listing', $args );
 
-			do_action( 'stm_wp_mail', $to, $subject, $body, '' );
+			add_filter( 'wp_mail_content_type', 'stm_set_html_content_type_mail' );
+
+			wp_mail( $to, $subject, $body );
+
+			remove_filter( 'wp_mail_content_type', 'stm_set_html_content_type_mail' );
 		}
 	}
 }

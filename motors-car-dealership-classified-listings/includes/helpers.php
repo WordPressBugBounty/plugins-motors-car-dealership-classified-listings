@@ -268,7 +268,7 @@ if ( ! function_exists( 'stm_get_sort_options_html' ) ) {
 
 		foreach ( $sort_args as $slug => $label ) {
 			$selected = ( $slug === $currently_selected ) ? ' selected' : '';
-			$html    .= '<option value="' . $slug . '" ' . $selected . '>' . $label . '</option>';
+			$html    .= '<option value="' . $slug . '" ' . $selected . '>' . apply_filters( 'stm_listings_dynamic_string_translation', $label, 'Sort options - ' . $label ) . '</option>';
 
 		}
 
@@ -838,7 +838,7 @@ if ( ! function_exists( 'motors_listing_filter_get_selects' ) && defined( 'STM_L
 							$number_string = esc_html__( 'Max', 'stm_vehicles_listing' ) . ' ';
 						}
 
-						$number_string .= apply_filters( 'stm_dynamic_string_translation', stm_get_name_by_slug( $select_string ), 'Select Text' );
+						$number_string .= apply_filters( 'stm_listings_dynamic_string_translation', stm_get_name_by_slug( $select_string ), 'Select Text' );
 
 						if ( ! empty( $words['number_affix'] ) ) {
 							$number_string .= ' ' . $words['number_affix'];
@@ -877,7 +877,7 @@ if ( ! function_exists( 'motors_listing_filter_get_selects' ) && defined( 'STM_L
 								$select_main .= esc_html__( 'Choose', 'stm_vehicles_listing' ) . ' ';
 							}
 
-							$select_main .= apply_filters( 'stm_dynamic_string_translation', stm_get_name_by_slug( $select_string ), 'Option text' );
+							$select_main .= apply_filters( 'stm_listings_dynamic_string_translation', stm_get_name_by_slug( $select_string ), 'Option text' );
 
 							if ( ! empty( $words['number_affix'] ) ) {
 								$select_main .= ' ' . $words['number_affix'];
@@ -939,7 +939,7 @@ if ( ! function_exists( 'motors_listing_filter_get_selects' ) && defined( 'STM_L
 								$select_main .= esc_html__( 'Choose', 'stm_vehicles_listing' ) . ' ';
 							}
 
-							$select_main .= apply_filters( 'stm_dynamic_string_translation', stm_get_name_by_slug( $select_string ), 'Option select text' );
+							$select_main .= apply_filters( 'stm_listings_dynamic_string_translation', stm_get_name_by_slug( $select_string ), 'Option select text' );
 
 							if ( ! empty( $words['select_affix'] ) ) {
 								$select_main .= ' ' . $words['select_affix'];

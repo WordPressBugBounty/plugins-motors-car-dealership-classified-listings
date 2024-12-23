@@ -105,6 +105,12 @@ class AddListingManager {
 				'preview'          => STM_LISTINGS_URL . '/assets/images/elementor/nuxy/desc_slots.png',
 				'preview_position' => 'preview_bottom',
 				'group'            => 'started',
+				'button'           => array(
+					'text'    => esc_html__( 'Preview Page', 'stm_vehicles_listing' ),
+					'link'    => get_permalink( apply_filters( 'motors_vl_get_nuxy_mod', '', 'user_add_car_page' ) ),
+					'tooltip' => wp_kses_post( empty( apply_filters( 'motors_vl_get_nuxy_mod', '', 'user_add_car_page' ) ) ? __( 'Please select the <strong>“Add Listing”</strong> page in <strong>Settings > Pages</strong> to enable the Preview Page button.', 'stm_vehicles_listing' ) : '' ),
+					'icon'    => 'fa-solid fa-up-right-from-square',
+				),
 			),
 			'addl_title'          => array(
 				'label'   => esc_html__( 'Title', 'stm_vehicles_listing' ),
