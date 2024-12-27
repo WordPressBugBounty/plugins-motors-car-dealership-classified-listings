@@ -186,7 +186,7 @@ if (typeof (STMListings) == 'undefined') {
     STMListings.Filter = Filter;
 
     $(function () {
-			
+
         $('form[data-trigger=filter]').each(function () {
             $(this).data('Filter', new Filter(this));
         });
@@ -293,7 +293,7 @@ if (typeof (STMListings) == 'undefined') {
 		let name                 = changed_item.attr('name');
 		if ( $( changed_item ).length && name && name.length > 0 ) {
 			let name = changed_item.attr('name').replace(/[\[\]']+/g,'');
-			
+
 			if ( stm_parent_slug_list.split(',').includes( name ) ) {
 				var child_select = $('.filter-select option[data-parent="' + name + '"]').parent();
 				child_select.val('');
@@ -303,11 +303,11 @@ if (typeof (STMListings) == 'undefined') {
 
 	STMListings.stm_disable_rest_filters = function ($_this, action, tabs_filter) {
 		var $_form = $_this.closest( 'form' );
-		
+
 		var data = [],
 				url  = $_form.attr( 'action' ),
 				sign = url.indexOf( '?' ) < 0 ? '?' : '&';
-		
+
 		$.each(
 				$_form.serializeArray(),
 				function (i, field) {
@@ -316,9 +316,9 @@ if (typeof (STMListings) == 'undefined') {
 					}
 				}
 		);
-		
+
 		url = url + sign + data.join( '&' );
-		
+
 		$.ajax(
 				{
 					url: url,
@@ -375,12 +375,13 @@ if (typeof (STMListings) == 'undefined') {
 									}
 								);
 							}
-							
+
 							/*Change total*/
 							$( '.stm-horizontal-filter-sidebar #stm-classic-filter-submit span' ).text( res.total );
 							$( '.search-filter-form #show-car-btn-mobile span' ).text( res.total );
 							$( '.mobile-search-filter #show-car-btn-mobile span' ).text( res.total );
 							$( '.filter-listing.motors_dynamic_listing_filter .stm-filter-tab-selects .search-submit span' ).text( res.total );
+							$( '.filter-listing.stm_dynamic_listing_filter .stm-filter-tab-selects .search-submit span' ).text( res.total );
 
 							$( '.stm-listing-directory-total-matches' ).show();
 						}
@@ -388,7 +389,7 @@ if (typeof (STMListings) == 'undefined') {
 				}
 		);
 	};
-	
+
 	$( document ).on(
 			'change',
 			'.archive-listing-page form input, .archive-listing-page form select',
@@ -406,18 +407,18 @@ if (typeof (STMListings) == 'undefined') {
 			STMListings.stm_disable_rest_filters( $( this ), 'listings-binding', true );
 		}
 	);
-	
+
 	$( document ).on(
 			'click',
 			'.stm-ajax-checkbox-button .button, .stm-ajax-checkbox-instant .stm-option-label input',
 			function (e) {
-				
+
 				if ($( this )[0].className == 'button') {
 					e.preventDefault();
 				}
-				
+
 				$( this ).closest( 'form' ).trigger( 'submit' );
-				
+
 			}
 	);
 })(jQuery);

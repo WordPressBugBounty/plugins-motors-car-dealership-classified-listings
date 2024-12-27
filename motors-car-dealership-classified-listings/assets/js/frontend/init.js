@@ -581,4 +581,24 @@ if (typeof (STMListings) == 'undefined') {
         }
     )
 
+    $(document).ready(function () {
+			function updateCarListing() {
+				var selectedOption = $('.stm-select-sorting select').val()
+				if (selectedOption === 'popular') {
+					$('.user-listings-wrapper#popular').addClass('active')
+					$('.user-listings-wrapper#recent').removeClass('active')
+					$('.popular.user-listings-pagination').addClass('active')
+					$('.recent.user-listings-pagination').removeClass('active')
+				} else {
+					$('.user-listings-wrapper#popular').removeClass('active')
+					$('.user-listings-wrapper#recent').addClass('active')
+					$('.popular.user-listings-pagination').removeClass('active')
+					$('.recent.user-listings-pagination').addClass('active')
+				}
+			}
+			$('.stm-select-sorting select').on('change', function () {
+				updateCarListing()
+			})
+		})
+
 })(jQuery);

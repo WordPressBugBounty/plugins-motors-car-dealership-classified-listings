@@ -4875,7 +4875,7 @@ msgid ""
 "12,18,27"
 msgstr ""
 
-#: templates/loop/list/features.php:126
+#: templates/loop/list/features.php:125
 msgid "Quote by Phone"
 msgstr ""
 

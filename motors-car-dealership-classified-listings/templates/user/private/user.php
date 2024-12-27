@@ -9,9 +9,6 @@ $user_fields = apply_filters( 'stm_get_user_custom_fields', $user_id );
 $path        = 'user/private/';
 
 $tpl = 'inventory';
-if ( ! empty( $_GET['page'] ) ) {
-	$tpl = sanitize_file_name( $_GET['page'] );
-}
 
 ?>
 

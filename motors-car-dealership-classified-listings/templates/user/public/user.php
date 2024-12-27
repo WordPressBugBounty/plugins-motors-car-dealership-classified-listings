@@ -1,4 +1,6 @@
 <?php
+mvl_enqueue_header_scripts_styles( 'stmselect2' );
+mvl_enqueue_header_scripts_styles( 'app-select2' );
 $user_page      = get_queried_object();
 $user_id        = $user_page->data->ID;
 $user_image     = get_the_author_meta( 'stm_user_avatar', $user_id );
@@ -16,11 +18,27 @@ if ( ! empty( $user_image ) ) {
 	$image = $user_image;
 }
 
-$posts_per_page = get_option( 'posts_per_page' );
-$page           = ( ! empty( $_GET['page'] ) ) ? intval( $_GET['page'] ) : 1;//phpcs:ignore WordPress.Security.NonceVerification.Recommended
-$offset         = $posts_per_page * ( $page - 1 );
+$show_more_button = apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_more_button_user_profile' );
+$posts_per_page   = apply_filters( 'motors_vl_get_nuxy_mod', 6, 'post_per_page_user_inventory' );
+$page             = ( ! empty( $_GET['page'] ) ) ? intval( $_GET['page'] ) : 1; //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+$offset           = ! empty( $_GET['sort_by'] ) && 'recent' === $_GET['sort_by'] ? $posts_per_page * ( $page - 1 ) : 0;
+$offset_popular   = ! empty( $_GET['sort_by'] ) && 'popular' === $_GET['sort_by'] ? $posts_per_page * ( $page - 1 ) : 0;
 
-$query = stm_user_listings_query( $user_id, 'publish', $posts_per_page, false, $offset );
+$row    = 'row row-3';
+$active = 'grid';
+$list   = '';
+$grid   = 'active';
+if ( ! empty( $_GET['view_type'] ) && 'list' === $_GET['view_type'] ) {
+	$list   = 'active';
+	$grid   = '';
+	$active = 'list';
+	$row    = 'row-no-border-last';
+}
+
+
+$query         = stm_user_listings_query( $user_id, 'publish', $posts_per_page, false, $offset );
+$query_popular = stm_user_listings_query( $user_id, 'publish', $posts_per_page, true, $offset_popular );
+
 ?>
 
 <div class="container stm-user-public-profile">
@@ -91,28 +109,105 @@ $query = stm_user_listings_query( $user_id, 'publish', $posts_per_page, false, $
 
 			<div class="stm-user-public-listing">
 				<?php if ( $query->have_posts() ) : ?>
-					<h3 class="stm-seller-title"><?php esc_html_e( 'Sellers Inventory', 'stm_vehicles_listing' ); ?></h3>
+					<div class="stm-user-public-listing-top">
+						<div class="stm-user-public-listing-top-left">
+							<h3 class="stm-seller-title"><?php esc_html_e( 'Sellers Inventory', 'stm_vehicles_listing' ); ?></h3>
+						</div>
+						<div class="stm-user-public-listing-top-right">
+							<?php if ( stm_is_multilisting() ) : ?>
+								<div class="multilisting-select">
+									<?php
+									$listings = stm_listings_multi_type_labeled( true );
+									if ( ! empty( $listings ) ) :
+										?>
+										<div class="select-type select-listing-type" style="margin-right: 15px;">
+											<div class="stm-label-type"><?php esc_html_e( 'Listing type', 'stm_vehicles_listing' ); ?></div>
+											<select>
+												<option value="all"
+														selected><?php esc_html_e( 'All listing types', 'stm_vehicles_listing' ); ?></option>
+												<?php foreach ( $listings as $slug => $label ) : ?>
+													<option value="<?php echo esc_attr( $slug ); ?>" <?php echo ( isset( $_GET['listing_type'] ) && ! empty( $_GET['listing_type'] ) && $_GET['listing_type'] === $slug ) ? 'selected' : ''; ?>><?php echo esc_html( $label );//phpcs:ignore WordPress.Security.NonceVerification.Recommended ?></option>
+												<?php endforeach; ?>
+											</select>
+										</div>
+									<?php endif; ?>
+								</div>
+							<?php endif; ?>
+
+							<div class="stm-sort-by-options clearfix">
+								<span class="sort-by-label"><?php esc_html_e( 'Sort by', 'stm_vehicles_listing' ); ?>:</span>
+								<div class="stm-select-sorting">
+									<select id="stm-dealer-view-type">
+										<option value="popular"><?php esc_html_e( 'Popular items', 'stm_vehicles_listing' ); ?></option>
+										<option value="recent" selected=""><?php esc_html_e( 'Recent items', 'stm_vehicles_listing' ); ?></option>
+									</select>
+								</div>
+							</div>
+
+							<div class="stm-view-by">
+								<a href="?view_type=grid#stm_us_inv" class="view-grid view-type <?php echo esc_attr( $grid ); ?>" data-view="grid">
+									<i class="motors-icons-grid"></i>
+								</a>
+								<a href="?view_type=list#stm_us_inv" class="view-list view-type <?php echo esc_attr( $list ); ?>" data-view="list">
+									<i class="motors-icons-list"></i>
+								</a>
+							</div>
+							<input type="hidden" id="stm_user_dealer_view_type" value="<?php echo esc_attr( $active ); ?>" />
+						</div>
+					</div>
 					<div class="archive-listing-page row">
-						<?php
-						while ( $query->have_posts() ) :
-							$query->the_post();
-							?>
-							<?php do_action( 'stm_listings_load_template', 'listing-grid', array( 'columns' => 3 ) ); ?>
-						<?php endwhile; ?>
+						<div class="col-md-12">
+							<div class="user-listings-wrapper active" id="recent">
+								<div class="car-listing-row <?php echo esc_attr( $row ); ?>">
+									<?php
+									while ( $query->have_posts() ) :
+										$query->the_post();
+										?>
+										<?php do_action( 'stm_listings_load_template', 'listing-' . $active, array( 'columns' => 3 ) ); ?>
+									<?php endwhile; ?>
+								</div>
+								<?php if ( $query->found_posts > $posts_per_page && $show_more_button ) : ?>
+								<div class="stm-load-more-dealer-cars">
+									<a class="button" data-offset="<?php echo esc_attr( $posts_per_page ); ?>" data-user="<?php echo esc_attr( $user_id ); ?>" data-popular="no" href="#" class="heading-font">
+										<span><?php esc_html_e( 'Show more', 'stm_vehicles_listing' ); ?></span>
+									</a>
+								</div>
+								<?php endif; ?>
+							</div>
+							<div class="user-listings-wrapper" id="popular">
+								<div class="car-listing-row <?php echo esc_attr( $row ); ?>">
+									<?php
+									while ( $query_popular->have_posts() ) :
+										$query_popular->the_post();
+										?>
+										<?php do_action( 'stm_listings_load_template', 'listing-' . $active, array( 'columns' => 3 ) ); ?>
+									<?php endwhile; ?>
+								</div>
+								<?php if ( $query_popular->found_posts > $posts_per_page && $show_more_button ) : ?>
+								<div class="stm-load-more-dealer-cars">
+									<a class="button" data-offset="<?php echo esc_attr( $offset_popular ); ?>" data-user="<?php echo esc_attr( $user_id ); ?>" data-popular="yes" href="#" class="heading-font">
+										<span><?php esc_html_e( 'Show more', 'stm_vehicles_listing' ); ?></span>
+									</a>
+								</div>
+								<?php endif; ?>
+							</div>
+						</div>
 					</div>
 					<?php
-
-					echo paginate_links( //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						array(
-							'type'           => 'list',
-							'format'         => '?page=%#%',
-							'current'        => $page,
-							'total'          => $query->max_num_pages,
-							'posts_per_page' => $posts_per_page,
-							'prev_text'      => '<i class="fas fa-angle-left"></i>',
-							'next_text'      => '<i class="fas fa-angle-right"></i>',
-						)
-					);
+					if ( ! $show_more_button ) :
+						?>
+						<div class="recent user-listings-pagination active">
+							<?php
+							do_action( 'delear_public_page_pagination', $query, $page, $posts_per_page, 'recent' );
+							?>
+						</div>
+						<div class="popular user-listings-pagination">
+							<?php
+							do_action( 'delear_public_page_pagination', $query, $page, $posts_per_page, 'popular' );
+							?>
+						</div>
+						<?php
+					endif;
 					?>
 				<?php else : ?>
 					<h4 class="stm-seller-title"

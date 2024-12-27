@@ -5,7 +5,7 @@ Donate link: https://www.paypal.me/stylemix
 Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
 Tested up to: 6.7
-Stable tag: 1.4.46
+Stable tag: 1.4.47
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -132,6 +132,13 @@ After that, go to Tools -> Import, and via Wordpress Importer tool install dummy
 8. Additional features
 
 == Changelog ==
+
+= 1.4.47 =
+- **Enhancement:** Added a "Show More" button for displaying listings on the page.
+- **Enhancement:** Introduced a quick access menu in the admin bar for better management.
+- **Fix:** Fixed an issue when admin couldn't access the Test Drives.
+- **Fix:** Addressed an issue where scrolling the WordPress dashboard menu was impossible on the Listings page.
+- **Fix:** Corrected an issue in the Search Tabs widget where the number of search results was not displayed.
 
 = 1.4.46 =
 - **UPD:** Added compatibility with Elementor v3.26.0.

@@ -36,6 +36,7 @@ button[type=submit]:focus {
     text-decoration: none;
     outline: none;
     background-color: #6c90e9;
+    color: #fff;
 }
 
 table {
@@ -1063,6 +1064,9 @@ ul.list-style-2 li:before {
 
 .page-numbers li .prev,
 .page-numbers li .next {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 54px;
     height: 35px;
     font-size: 20px;
@@ -1868,6 +1872,107 @@ span.video-preview {
     position: relative;
 }
 
+.stm-user-public-listing .stm-user-public-listing-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+.stm-user-public-listing .stm-user-public-listing-top .stm-user-public-listing-top-right {
+    display: flex;
+    align-items: center;
+}
+
+.stm-user-public-listing .stm-user-public-listing-top .stm-user-public-listing-top-right .stm-sort-by-options {
+    display: flex;
+    align-items: center;
+}
+
+.stm-user-public-listing .stm-user-public-listing-top .stm-user-public-listing-top-right .stm-sort-by-options .sort-by-label {
+    font-size: 14px;
+}
+
+.stm-user-public-listing .stm-user-public-listing-top .stm-user-public-listing-top-right .stm-sort-by-options .stm-select-sorting {
+    min-width: 180px;
+    margin: 0 10px;
+}
+
+.stm-user-public-listing .stm-user-public-listing-top .stm-user-public-listing-top-right .stm-sort-by-options .stm-select-sorting .select2-selection--single {
+    height: 32px;
+}
+
+.stm-user-public-listing .stm-user-public-listing-top .stm-user-public-listing-top-right .stm-sort-by-options .stm-select-sorting .select2-selection--single .select2-selection__rendered {
+    line-height: 32px;
+}
+
+.stm-user-public-listing .stm-user-public-listing-top .stm-user-public-listing-top-right .stm-sort-by-options .stm-select-sorting .select2-selection--single .select2-selection__arrow {
+    height: 32px;
+}
+
+.stm-user-public-listing .stm-user-public-listing-top .stm-view-by {
+    display: inline-block;
+}
+
+.stm-user-public-listing .stm-user-public-listing-top .stm-view-by .view-type {
+    display: block;
+    float: left;
+    color: #8f8f8f;
+    width: 32px;
+    height: 32px;
+    line-height: 34px;
+    text-align: center;
+    text-decoration: none !important;
+    text-indent: 2px;
+    margin-left: 10px;
+}
+
+.stm-user-public-listing .stm-user-public-listing-top .stm-view-by .view-type i {
+    line-height: 34px;
+}
+
+.stm-user-public-listing .stm-user-public-listing-top .stm-view-by .view-grid {
+    font-size: 16px;
+}
+
+.stm-user-public-listing .stm-user-public-listing-top .stm-view-by .view-list {
+    font-size: 12px;
+}
+
+.stm-user-public-listing .stm-user-public-listing-top .stm-view-by .view-type.active {
+    background-color: #f0f2f5;
+    color: #8f8f8f;
+}
+
+.stm-user-public-listing .archive-listing-page .user-listings-wrapper {
+    display: none;
+}
+
+.stm-user-public-listing .archive-listing-page .user-listings-wrapper .button {
+    margin: 0 auto;
+}
+
+.stm-user-public-listing .archive-listing-page .user-listings-wrapper.active {
+    display: block;
+}
+
+.stm-user-public-listing .archive-listing-page .car-listing-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.stm-user-public-listing .user-listings-pagination {
+    display: none;
+}
+
+.stm-user-public-listing .user-listings-pagination.active {
+    display: block;
+}
+
+.row-no-border-last .listing-list-loop:last-child {
+    border-color: transparent;
+}
+
 .stm-user-private .stm-car-listing-sort-units {
     margin-bottom: 0 !important;
     padding-bottom: 35px !important;
@@ -2191,6 +2296,58 @@ span.video-preview {
     height: 100%;
     background-color: #232628;
     z-index: -1;
+}
+
+.stm-user-private .stm-user-private-main .page-numbers {
+    border-top: none;
+}
+
+.stm-user-private .stm-load-more-dealer-cars {
+    padding-top: 27px;
+    text-align: center;
+}
+
+.stm-user-private .stm-load-more-dealer-cars a {
+    position: relative;
+    display: inline-block;
+    height: 42px;
+    padding: 10px 18px;
+    background-color: #153e4d;
+    vertical-align: top;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 4px;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+}
+
+.stm-user-private .stm-load-more-dealer-cars.not-clickable a {
+    padding: 10px 0;
+    background-color: #aaa !important;
+}
+
+.stm-user-private .stm-load-more-dealer-cars.not-clickable a:before {
+    position: absolute;
+    display: block;
+    font-family: "stm-icon";
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    top: 50%;
+    left: 50%;
+    margin: -11px 0 0 -7px;
+    content: "\e924";
+    line-height: 22px;
+    animation: rotating 2s infinite linear;
+}
+
+.stm-user-private .stm-load-more-dealer-cars.not-clickable a span {
+    opacity: 0;
 }
 
 .stm-sort-private-my-cars {
@@ -3190,6 +3347,27 @@ body.stm-vl-plugin-pure.post-type-archive-listings .container {
     object-fit: cover;
 }
 
+.archive-listing-page .stm-isotope-listing-item .image .stm-car-medias,
+.car-listing-modern-grid .stm-isotope-listing-item .image .stm-car-medias {
+    position: absolute;
+    top: 6px;
+    left: 7px;
+    z-index: 20;
+}
+
+.archive-listing-page .stm-isotope-listing-item .image .stm-car-medias > div,
+.car-listing-modern-grid .stm-isotope-listing-item .image .stm-car-medias > div {
+    display: inline-block;
+    margin-right: 9px;
+    padding: 2px 5px 0 6px;
+    border-radius: 2px;
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    font-size: 11px;
+    line-height: 22px;
+    font-weight: 600;
+}
+
 .archive-listing-page .stm-isotope-listing-item .listing-car-item-meta,
 .car-listing-modern-grid .stm-isotope-listing-item .listing-car-item-meta {
     padding-top: 12px;
@@ -4066,6 +4244,10 @@ img {
 
 .stm_cargurus_wrapper img {
     max-width: 100%;
+}
+
+.stm-load-more-dealer-cars {
+    margin-bottom: 30px;
 }
 
 #trade-in.modal.in .modal-dialog {

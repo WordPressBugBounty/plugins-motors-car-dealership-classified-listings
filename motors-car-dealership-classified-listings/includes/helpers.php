@@ -1123,3 +1123,19 @@ add_filter(
 	},
 	99
 );
+
+function delear_public_page_pagination_action( $query, $page, $posts_per_page, $sort_by ) {
+	echo paginate_links( //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		array(
+			'type'           => 'list',
+			'format'         => '?page=%#%',
+			'current'        => $page,
+			'total'          => $query->max_num_pages,
+			'posts_per_page' => $posts_per_page,
+			'prev_text'      => '<i class="fas fa-angle-left"></i>',
+			'next_text'      => '<i class="fas fa-angle-right"></i>',
+			'add_args'       => array( 'sort_by' => $sort_by ),
+		)
+	);
+}
+add_action( 'delear_public_page_pagination', 'delear_public_page_pagination_action', 4, 99 );

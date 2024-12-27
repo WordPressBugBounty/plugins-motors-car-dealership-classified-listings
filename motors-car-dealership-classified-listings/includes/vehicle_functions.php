@@ -2057,8 +2057,9 @@ if ( ! function_exists( 'stm_user_listings_query' ) ) {
 		}
 
 		if ( $popular ) {
-			$args['order']   = 'ASC';
-			$args['orderby'] = 'stm_car_views';
+			$args['order']    = 'DESC';
+			$args['orderby']  = 'meta_value_num';
+			$args['meta_key'] = 'stm_car_views';
 		}
 
 		$query = new WP_Query( $args );
@@ -2849,4 +2850,51 @@ add_action(
 		}
 	}
 );
+
+if ( ! function_exists( 'stm_ajax_dealer_load_cars' ) ) {
+	function stm_ajax_dealer_load_cars() {
+		check_ajax_referer( 'stm_security_nonce', 'security' );
+		$response       = array();
+		$user_id        = intval( filter_var( $_POST['user_id'], FILTER_SANITIZE_NUMBER_INT ) );
+		$offset         = intval( filter_var( $_POST['offset'], FILTER_SANITIZE_NUMBER_INT ) );
+		$view_type      = ( ! empty( $_POST['view_type'] ) && 'list' === $_POST['view_type'] ) ? 'list' : 'grid';
+		$popular        = ( ! empty( $_POST['popular'] ) && 'yes' === $_POST['popular'] );
+		$user_private   = ( ! empty( $_POST['profile_page'] ) );
+		$posts_per_page = apply_filters( 'motors_vl_get_nuxy_mod', 6, 'post_per_page_user_inventory' );
+
+		$status             = $user_private ? 'any' : 'publish';
+		$response['offset'] = $offset;
+		$new_offset         = $posts_per_page + $offset;
+
+		$query   = function_exists( 'stm_user_listings_query' ) ? stm_user_listings_query( $user_id, $status, $posts_per_page, $popular, $offset ) : null;
+		$html    = '';
+		$columns = apply_filters( 'get_stm_column_dealer_load_cars', 3 );
+
+		if ( ! empty( $query ) && $query->have_posts() ) {
+			ob_start();
+			while ( $query->have_posts() ) {
+				$query->the_post();
+				if ( $user_private ) {
+					do_action( 'stm_listings_load_template', 'listing-cars/listing-' . $view_type . '-directory-edit-loop' );
+				} else {
+					do_action( 'stm_listings_load_template', 'listing-' . $view_type, array( 'columns' => $columns ) );
+				}
+			}
+			$html = ob_get_clean();
+		}
+		$response['html'] = $html;
+		$button           = 'show';
+		if ( $query->found_posts <= $new_offset ) {
+			$button = 'hide';
+		} else {
+			$response['new_offset'] = $new_offset;
+		}
+		$response['button'] = $button;
+		wp_send_json( $response );
+		exit;
+	}
+}
+
+add_action( 'wp_ajax_stm_ajax_dealer_load_cars', 'stm_ajax_dealer_load_cars' );
+add_action( 'wp_ajax_nopriv_stm_ajax_dealer_load_cars', 'stm_ajax_dealer_load_cars' );
 

@@ -102,7 +102,7 @@ class FilterListing extends elementorModules.frontend.handlers.Base {
 					inventoryUrl = form.action + '?' + params;
 
 				/* start if enable friendly urls */
-				if ( motors_vl_config.enable_friendly_urls.length > 0 && form.hasAttribute('data-action') ) {
+				if ( typeof motors_vl_config !== 'undefined' && motors_vl_config.enable_friendly_urls.length > 0 && form.hasAttribute('data-action') ) {
 					inventoryUrl = form.getAttribute( 'data-action' );
 				}
 				/* end if enable friendly urls */

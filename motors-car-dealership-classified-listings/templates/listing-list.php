@@ -7,7 +7,7 @@ $listing_id = get_the_ID();
 $post_type  = get_post_type();
 ?>
 
-<div class="listing-list-loop stm-isotope-listing-item" data-listing-id="<?php echo esc_attr( $listing_id ); ?>" data-post-type="<?php echo esc_attr( $post_type ); ?>">
+<div class="listing-list-loop stm-isotope-listing-item stm-listing-directory-list-loop" data-listing-id="<?php echo esc_attr( $listing_id ); ?>" data-post-type="<?php echo esc_attr( $post_type ); ?>">
 
 	<?php do_action( 'stm_listings_load_template', 'loop/list/image' ); ?>
 

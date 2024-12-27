@@ -2151,6 +2151,39 @@ table > tbody > tr td {
     box-shadow: 0 0 3px #0073AA;
 }
 
+#wp-admin-bar-mvl-plugin-unlock-pro {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#wp-admin-bar-mvl-plugin-unlock-pro a.ab-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#wp-admin-bar-mvl-plugin-unlock-pro span {
+    border-radius: 4px;
+    background: linear-gradient(180deg, #FF9C28 0%, #E76100 100%);
+    color: #fff;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    font-size: 13px;
+    font-weight: 700;
+    width: 100%;
+    text-align: center;
+    height: 35px;
+}
+
+#wp-admin-bar-mvl-plugin-unlock-pro span:hover {
+    background: linear-gradient(180deg, rgba(255, 156, 40, 0.95) 0, #E76100 100%);
+}
+
+#wp-admin-bar-mvl-plugin-settings-default li {
+    padding: 3px 10px;
+}
+
 .stm-accordion-single-unit {
     margin-top: 20px;
 }

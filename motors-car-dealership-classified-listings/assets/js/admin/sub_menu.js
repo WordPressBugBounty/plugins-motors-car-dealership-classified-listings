@@ -7,7 +7,7 @@
     $settings_parent.nextAll('li').addClass('mvl-pro-addons-menu');
     $settings_parent.addClass('mvl-settings-menu');
     var addonsMenu = $('.mvl-addons-locked').closest('li').addClass('mvl-addons-page-menu-lock');
-
+    $(window).trigger('resize')
     if ($('li.mvl-pro-addons-menu:last').find('span.mvl-unlock-pro-btn').length > 0) {
       $('li.mvl-pro-addons-menu:last').removeClass('mvl-addons-page-menu').addClass('upgrade');
     }

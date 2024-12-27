@@ -776,7 +776,6 @@ function stm_listings_init() {
 			'show_ui'              => true,
 			'show_in_menu'         => 'admin.php?page=mvl_plugin_settings',
 			'show_in_nav_menus'    => false,
-			'capability_type'      => 'listing_manager',
 			'query_var'            => true,
 			'has_archive'          => true,
 			'hierarchical'         => false,
@@ -1333,6 +1332,89 @@ function mvl_admin_bar_item( $admin_bar ) {
 				),
 			)
 		);
+
+		$submenus = array(
+			array(
+				'id'    => 'mvl-plugin-submenu-listings',
+				'title' => esc_html__( 'Listings', 'stm_vehicles_listing' ),
+				'href'  => admin_url( 'edit.php?post_type=listings' ),
+			),
+			array(
+				'id'    => 'mvl-plugin-add-new-listing',
+				'title' => esc_html__( 'Add New Listing', 'stm_vehicles_listing' ),
+				'href'  => admin_url( 'post-new.php?post_type=listings' ),
+			),
+			array(
+				'id'    => 'mvl-plugin-submenu-custom-fields',
+				'title' => esc_html__( 'Custom Fields', 'stm_vehicles_listing' ),
+				'href'  => admin_url( 'admin.php?page=listing_categories' ),
+			),
+			array(
+				'id'    => 'mvl-plugin-submenu-settings',
+				'title' => esc_html__( 'Settings', 'stm_vehicles_listing' ),
+				'href'  => admin_url( 'admin.php?page=mvl_plugin_settings' ),
+			),
+			array(
+				'id'    => 'mvl-plugin-submenu-community',
+				'title' => esc_html__( 'Community', 'stm_vehicles_listing' ),
+				'href'  => esc_url( 'https://www.facebook.com/groups/motorstheme' ),
+				'meta'  => array(
+					'target' => '_blank',
+				),
+			),
+			array(
+				'id'    => 'mvl-plugin-submenu-documentation',
+				'title' => esc_html__( 'Documentation', 'stm_vehicles_listing' ),
+				'href'  => esc_url( 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing' ),
+				'meta'  => array(
+					'target' => '_blank',
+				),
+			),
+		);
+
+		if ( defined( 'ELEMENTOR_VERSION' ) ) {
+			$listing_template_menu = array(
+				'id'    => 'mvl-plugin-listing-templates',
+				'title' => esc_html__( 'Listing Templates', 'stm_vehicles_listing' ),
+				'href'  => admin_url( 'admin.php?page=mvl_single_listing_template_settings' ),
+			);
+			array_splice( $submenus, 2, 0, array( $listing_template_menu ) );
+		}
+
+		if ( apply_filters( 'is_mvl_pro', false ) && ! apply_filters( 'stm_is_motors_theme', false ) ) {
+			$listing_template_menu = array(
+				'id'    => 'mvl-plugin-pro',
+				'title' => esc_html__( 'Addons', 'stm_vehicles_listing' ),
+				'href'  => admin_url( 'admin.php?page=mvl-addons' ),
+			);
+			array_splice( $submenus, 5, 0, array( $listing_template_menu ) );
+		}
+
+		foreach ( $submenus as $submenu ) {
+			$admin_bar->add_menu(
+				array(
+					'id'     => $submenu['id'],
+					'parent' => 'mvl-plugin-settings',
+					'title'  => $submenu['title'],
+					'href'   => $submenu['href'],
+					'meta'   => isset( $submenu['meta'] ) ? $submenu['meta'] : array(),
+				)
+			);
+		}
+
+		if ( ! apply_filters( 'stm_is_motors_theme', false ) && ! apply_filters( 'is_mvl_pro', false ) ) {
+			$admin_bar->add_menu(
+				array(
+					'id'     => 'mvl-plugin-unlock-pro',
+					'parent' => 'mvl-plugin-settings',
+					'title'  => '<span>' . esc_html__( 'Unlock PRO', 'stm_vehicles_listing' ) . '</span>',
+					'href'   => admin_url( 'admin.php?page=mvl-go-pro' ),
+					'meta'   => array(
+						'title'  => esc_html__( 'Unlock PRO', 'stm_vehicles_listing' ),
+					),
+				)
+			);
+		}
 	}
 }
 
