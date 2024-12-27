@@ -2851,8 +2851,8 @@ add_action(
 	}
 );
 
-if ( ! function_exists( 'stm_ajax_dealer_load_cars' ) ) {
-	function stm_ajax_dealer_load_cars() {
+if ( ! function_exists( 'mvl_ajax_dealer_load_cars' ) ) {
+	function mvl_ajax_dealer_load_cars() {
 		check_ajax_referer( 'stm_security_nonce', 'security' );
 		$response       = array();
 		$user_id        = intval( filter_var( $_POST['user_id'], FILTER_SANITIZE_NUMBER_INT ) );
@@ -2895,6 +2895,5 @@ if ( ! function_exists( 'stm_ajax_dealer_load_cars' ) ) {
 	}
 }
 
-add_action( 'wp_ajax_stm_ajax_dealer_load_cars', 'stm_ajax_dealer_load_cars' );
-add_action( 'wp_ajax_nopriv_stm_ajax_dealer_load_cars', 'stm_ajax_dealer_load_cars' );
-
+add_action( 'wp_ajax_mvl_ajax_dealer_load_cars', 'mvl_ajax_dealer_load_cars' );
+add_action( 'wp_ajax_nopriv_mvl_ajax_dealer_load_cars', 'mvl_ajax_dealer_load_cars' );
