@@ -63,7 +63,7 @@ class FeaturesSettings {
 				'type'             => 'group_title',
 				'label'            => esc_html__( 'Features list', 'stm_vehicles_listing' ),
 				'description'      => wp_kses_post( 'Create a list of features for your listings. <br/>You can specify a title for the feature list and choose which features to include in it. <a href="' . get_site_url() . '/wp-admin/edit-tags.php?taxonomy=stm_additional_features&post_type=listings" target="_blank">Add Feature</a>' ),
-				'preview'          => STM_LISTINGS_URL . '/assets/images/elementor/nuxy/item_features.png',
+				'preview'          => STM_LISTINGS_URL . '/assets/images/previews/features.png',
 				'preview_position' => 'preview_bottom',
 				'submenu'          => esc_html__( 'Features list', 'stm_vehicles_listing' ),
 				'group'            => 'started',

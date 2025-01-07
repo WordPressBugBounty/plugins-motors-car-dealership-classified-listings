@@ -26,9 +26,7 @@ function stm_listings_locate_template( $templates ) {
 		}
 
 		if ( ! ( $located ) ) {
-			if ( file_exists( STM_LISTINGS_PATH . '/templates/' . $template ) ) {
-				$located = STM_LISTINGS_PATH . '/templates/' . $template;
-			} else {
+			if ( file_exists( realpath( apply_filters( 'stm_listings_template_file', STM_LISTINGS_PATH, $template ) . '/templates/' . $template ) ) ) {
 				$located = realpath( apply_filters( 'stm_listings_template_file', STM_LISTINGS_PATH, $template ) . '/templates/' . $template );
 			}
 		}
@@ -172,7 +170,6 @@ function stm_listings_load_pagination( $post_per_page ) {
 add_filter( 'template_include', 'stm_author_template_loader' );
 
 function stm_author_template_loader( $template ) {
-
 	if ( is_author() ) {
 
 		$located = stm_listings_locate_template( 'author.php' );

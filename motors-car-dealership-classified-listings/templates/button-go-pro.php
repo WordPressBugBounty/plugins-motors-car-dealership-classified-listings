@@ -191,7 +191,7 @@ $current_time  = time();
 $is_promotion  = $current_time >= $start_date->format('U') && $current_time < $deadline->format('U'); //phpcs:ignore
 $only_annual   = true;
 
-if ( $is_promotion ) {
+if ( $is_promotion && ! empty( $freemius_info ) ) {
 	$freemius_info['plan']['licenses_5000']->annual_price = 199;
 	$freemius_info['plan']['licenses_5']->annual_price    = 79;
 	$freemius_info['plan']['licenses_1']->annual_price    = 49;

@@ -29,7 +29,7 @@
                         $('.starter_install_theme_btn span').html('Successfully Installed');
                         setTimeout(
                             function () {
-                                location.replace(location.origin + '/wp-admin/admin.php?page=motors_starter_demo_installer');
+                                location.replace(location.origin + '/wp-admin/admin.php?page=mst-starter-options');
                             }, 2000
                         )
                     }

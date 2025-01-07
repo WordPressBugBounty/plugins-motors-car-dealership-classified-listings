@@ -9,6 +9,7 @@ add_filter(
 					'label' => esc_html__( 'Filter by location Settings', 'stm_vehicles_listing' ),
 					//'img'   => STM_LISTINGS_URL . '/assets/images/pro/payouts.png', //phpcs:ignore
 					'desc'  => esc_html__( 'The search results can be filtered based on location', 'stm_vehicles_listing' ),
+					'preview'     => STM_LISTINGS_URL . '/assets/images/previews/filter-by-location-sf.png',
 				),
 			);
 		} else {
@@ -17,6 +18,7 @@ add_filter(
 					'label'       => esc_html__( 'Filter by location', 'stm_vehicles_listing' ),
 					'description' => esc_html__( 'The search results can be filtered based on location', 'stm_vehicles_listing' ),
 					'type'        => 'checkbox',
+					'preview'     => STM_LISTINGS_URL . '/assets/images/previews/filter-by-location-sf.png',
 				),
 				'enable_distance_search'          => array(
 					'label'       => esc_html__( 'Sort by distance', 'stm_vehicles_listing' ),

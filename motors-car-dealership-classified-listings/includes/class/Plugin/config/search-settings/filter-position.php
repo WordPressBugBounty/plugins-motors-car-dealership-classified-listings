@@ -10,6 +10,7 @@ add_filter(
 					'type'        => 'select',
 					'value'       => 'left',
 					'options'     => mvl_nuxy_positions(),
+					'preview'     => STM_LISTINGS_URL . '/assets/images/previews/bar-position-sf.png',
 				),
 		);
 

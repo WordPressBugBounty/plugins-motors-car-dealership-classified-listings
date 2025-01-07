@@ -22,7 +22,7 @@ class MenuBuilder {
 		$matchedItems = array();
 
 		foreach ( $for_sort as $k => $item ) {
-			if ( 'motors_starter_demo_installer' === $item[2] ) {
+			if ( 'motors_starter_demo_installer' === $item[2] || 'mst-starter-options' === $item[2] ) {
 				$starter = $item;
 				unset( $for_sort[ $k ] );
 				continue;

@@ -10,6 +10,7 @@ add_filter(
 					'value'       => 'date_high',
 					'options'     => apply_filters( 'mvl_nuxy_sortby', array() ),
 					'description' => esc_html__( 'Select how you want the listings to be sorted', 'stm_vehicles_listing' ),
+					'preview'     => STM_LISTINGS_URL . '/assets/images/previews/default-sorting-sf.png',
 				),
 		);
 

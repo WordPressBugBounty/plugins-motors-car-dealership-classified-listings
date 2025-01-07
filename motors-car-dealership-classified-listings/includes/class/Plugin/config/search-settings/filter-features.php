@@ -11,6 +11,7 @@ add_filter(
 						'label'       => esc_html__( 'Filter by features', 'stm_vehicles_listing' ),
 						'description' => esc_html__( 'The search results can be filtered based on features', 'stm_vehicles_listing' ),
 						'type'        => 'checkbox',
+						'preview'     => STM_LISTINGS_URL . '/assets/images/previews/filter-by-features-sf.png',
 					),
 					$dependencies
 				),

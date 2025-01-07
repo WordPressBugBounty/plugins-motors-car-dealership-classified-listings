@@ -12,6 +12,8 @@ function single_listing_layout( $conf ) {
 					'pro'         => true,
 					'pro_url'     => \MotorsVehiclesListing\Plugin\Settings::$pro_plans_url,
 					'submenu'     => esc_html__( 'Page layout', 'stm_vehicles_listing' ),
+					'preview'          => STM_LISTINGS_URL . '/assets/images/previews/loan-calc-in-sngl.png',
+					'preview_position' => 'preview_bottom',
 				),
 			'stm_show_seller_whatsapp' =>
 				array(
@@ -21,6 +23,8 @@ function single_listing_layout( $conf ) {
 					'pro'         => true,
 					'pro_url'     => \MotorsVehiclesListing\Plugin\Settings::$pro_plans_url,
 					'submenu'     => esc_html__( 'Page layout', 'stm_vehicles_listing' ),
+					'preview'          => STM_LISTINGS_URL . '/assets/images/previews/whatsapp-in-sngl.png',
+					'preview_position' => 'preview_bottom',
 				),
 			'stm_whatsapp_massage'     =>
 				array(

@@ -14,6 +14,8 @@ add_filter(
 					'description' => esc_html__( 'Enable a button to allow users to initiate trade-in inquiries for listed vehicles', 'stm_vehicles_listing' ),
 					'type'        => 'checkbox',
 					'submenu'     => esc_html__( 'Page layout', 'stm_vehicles_listing' ),
+					'preview'          => STM_LISTINGS_URL . '/assets/images/previews/trade-in-sngl.png',
+					'preview_position' => 'preview_bottom',
 				),
 			'show_compare'          =>
 				array(
@@ -21,6 +23,8 @@ add_filter(
 					'description' => esc_html__( 'Activate a button for users to add vehicles to a comparison list for side-by-side evaluation', 'stm_vehicles_listing' ),
 					'type'        => 'checkbox',
 					'submenu'     => esc_html__( 'Page layout', 'stm_vehicles_listing' ),
+					'preview'          => STM_LISTINGS_URL . '/assets/images/previews/compare-in-sngl.png',
+					'preview_position' => 'preview_bottom',
 				),
 			'show_featured_btn'     =>
 				array(
@@ -28,6 +32,8 @@ add_filter(
 					'description' => esc_html__( 'Enable a button for users to save vehicles as favorites', 'stm_vehicles_listing' ),
 					'type'        => 'checkbox',
 					'submenu'     => esc_html__( 'Page layout', 'stm_vehicles_listing' ),
+					'preview'          => STM_LISTINGS_URL . '/assets/images/previews/favorite-in-sngl.png',
+					'preview_position' => 'preview_bottom',
 				),
 			'show_offer_price'      =>
 				array(
@@ -35,6 +41,8 @@ add_filter(
 					'description' => esc_html__( 'Enable a button for users to make offers or negotiate prices', 'stm_vehicles_listing' ),
 					'type'        => 'checkbox',
 					'submenu'     => esc_html__( 'Page layout', 'stm_vehicles_listing' ),
+					'preview'          => STM_LISTINGS_URL . '/assets/images/previews/offer-price-in-sngl.png',
+					'preview_position' => 'preview_bottom',
 				),
 			'show_share'            =>
 				array(
@@ -43,6 +51,8 @@ add_filter(
 					'type'        => 'checkbox',
 					'group'       => 'started',
 					'submenu'     => esc_html__( 'Page layout', 'stm_vehicles_listing' ),
+					'preview'          => STM_LISTINGS_URL . '/assets/images/previews/share-in-sngl.png',
+					'preview_position' => 'preview_bottom',
 				),
 			'show_notice_share'     => array(
 				'type'        => 'group_title',
@@ -60,6 +70,8 @@ add_filter(
 					'description' => esc_html__( 'Let users download vehicle brochures in PDF format for offline viewing', 'stm_vehicles_listing' ),
 					'type'        => 'checkbox',
 					'submenu'     => esc_html__( 'Page layout', 'stm_vehicles_listing' ),
+					'preview'          => STM_LISTINGS_URL . '/assets/images/previews/pdf-in-sngl.png',
+					'preview_position' => 'preview_bottom',
 				),
 			'show_stock'            =>
 				array(
@@ -67,6 +79,8 @@ add_filter(
 					'description' => esc_html__( 'Each vehicle listing will have an ID', 'stm_vehicles_listing' ),
 					'type'        => 'checkbox',
 					'submenu'     => esc_html__( 'Page layout', 'stm_vehicles_listing' ),
+					'preview'          => STM_LISTINGS_URL . '/assets/images/previews/listing-id-in-sngl.png',
+					'preview_position' => 'preview_bottom',
 				),
 			'show_test_drive'       =>
 				array(
@@ -74,6 +88,8 @@ add_filter(
 					'description' => esc_html__( 'Add a button allowing users to request test drives for listed vehicles directly from the page', 'stm_vehicles_listing' ),
 					'type'        => 'checkbox',
 					'submenu'     => esc_html__( 'Page layout', 'stm_vehicles_listing' ),
+					'preview'          => STM_LISTINGS_URL . '/assets/images/previews/test-drive-in-sngl.png',
+					'preview_position' => 'preview_bottom',
 				),
 			'show_certified_logo_1' =>
 				array(
@@ -81,6 +97,8 @@ add_filter(
 					'description' => esc_html__( 'Show certification logos or badges to indicate that certain vehicles meet specific quality or inspection standards.', 'stm_vehicles_listing' ),
 					'type'        => 'checkbox',
 					'submenu'     => esc_html__( 'Page layout', 'stm_vehicles_listing' ),
+					'preview'          => STM_LISTINGS_URL . '/assets/images/previews/certificate-one-in-sngl.png',
+					'preview_position' => 'preview_bottom',
 				),
 			'show_certified_logo_2' =>
 				array(
@@ -88,6 +106,8 @@ add_filter(
 					'description' => esc_html__( 'Show certification logos or badges to indicate that certain vehicles meet specific quality or inspection standards.', 'stm_vehicles_listing' ),
 					'type'        => 'checkbox',
 					'submenu'     => esc_html__( 'Page layout', 'stm_vehicles_listing' ),
+					'preview'          => STM_LISTINGS_URL . '/assets/images/previews/certificate-two-in-sngl.png',
+					'preview_position' => 'preview_bottom',
 				),
 			'show_added_date'       =>
 				array(
@@ -95,6 +115,8 @@ add_filter(
 					'description' => esc_html__( 'Show when listings were published', 'stm_vehicles_listing' ),
 					'type'        => 'checkbox',
 					'submenu'     => esc_html__( 'Page layout', 'stm_vehicles_listing' ),
+					'preview'          => STM_LISTINGS_URL . '/assets/images/previews/publication-in-sngl.png',
+					'preview_position' => 'preview_bottom',
 				),
 			'show_print_btn'       =>
 				array(
@@ -108,6 +130,8 @@ add_filter(
 					'description' => esc_html__( 'Show the unique VIN for each vehicle', 'stm_vehicles_listing' ),
 					'type'        => 'checkbox',
 					'submenu'     => esc_html__( 'Page layout', 'stm_vehicles_listing' ),
+					'preview'          => STM_LISTINGS_URL . '/assets/images/previews/vin-in-sngl.png',
+					'preview_position' => 'preview_bottom',
 				),
 			'show_search_results'   =>
 				array(
@@ -115,6 +139,8 @@ add_filter(
 					'description' => esc_html__( 'Show the search results on the page', 'stm_vehicles_listing' ),
 					'type'        => 'checkbox',
 					'submenu'     => esc_html__( 'Page layout', 'stm_vehicles_listing' ),
+					'preview'          => STM_LISTINGS_URL . '/assets/images/previews/search-results-in-sngl.png',
+					'preview_position' => 'preview_bottom',
 				),
 			'show_registered'       =>
 				array(
@@ -122,6 +148,8 @@ add_filter(
 					'description' => esc_html__( 'Show when vehicles were manufactured', 'stm_vehicles_listing' ),
 					'type'        => 'checkbox',
 					'submenu'     => esc_html__( 'Page layout', 'stm_vehicles_listing' ),
+					'preview'          => STM_LISTINGS_URL . '/assets/images/previews/production-date-in-sngl.png',
+					'preview_position' => 'preview_bottom',
 				),
 			'stm_show_number'       =>
 				array(
@@ -129,6 +157,8 @@ add_filter(
 					'description' => esc_html__( 'Choose whether to display the complete contact number', 'stm_vehicles_listing' ),
 					'type'        => 'checkbox',
 					'submenu'     => esc_html__( 'Page layout', 'stm_vehicles_listing' ),
+					'preview'          => STM_LISTINGS_URL . '/assets/images/previews/full-number-in-sngl.png',
+					'preview_position' => 'preview_bottom',
 				),
 			'stm_show_seller_email' =>
 				array(
@@ -136,6 +166,8 @@ add_filter(
 					'description' => esc_html__( 'Add a button for users to directly contact sellers', 'stm_vehicles_listing' ),
 					'type'        => 'checkbox',
 					'submenu'     => esc_html__( 'Page layout', 'stm_vehicles_listing' ),
+					'preview'          => STM_LISTINGS_URL . '/assets/images/previews/email-in-sngl.png',
+					'preview_position' => 'preview_bottom',
 				),
 			'stm_similar_query'     =>
 				array(
@@ -143,6 +175,8 @@ add_filter(
 					'type'        => 'text',
 					'description' => esc_html__( 'Specify the criteria for displaying similar listings based on listing categories. Add several criteria by commas, for example: make,condition', 'stm_vehicles_listing' ),
 					'submenu'     => esc_html__( 'Page layout', 'stm_vehicles_listing' ),
+					'preview'          => STM_LISTINGS_URL . '/assets/images/previews/similar-in-sngl.png',
+					'preview_position' => 'preview_bottom',
 				),
 		);
 

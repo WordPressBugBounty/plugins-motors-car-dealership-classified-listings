@@ -206,7 +206,7 @@ class FilterHelper {
 		if ( ! empty( $filter_numeric_keys ) ) {
 			$this->filter_terms = array_merge(
 				$this->filter_terms,
-				TermsModel::get_stm_terms( $filter_numeric_keys, $hide_empty_terms )
+				TermsModel::get_stm_terms( $filter_numeric_keys, false )
 			);
 		}
 

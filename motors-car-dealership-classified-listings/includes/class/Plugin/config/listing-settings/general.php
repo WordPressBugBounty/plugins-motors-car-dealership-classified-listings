@@ -13,19 +13,23 @@ add_filter(
 				),
 			'featured_listings_list_amount'   =>
 				array(
-					'label'   => esc_html__( 'Number of Featured Listings List', 'stm_vehicles_listing' ),
-					'group'   => 'started',
-					'type'    => 'number',
-					'value'   => '3',
+					'label'            => esc_html__( 'Number of Featured Listings List', 'stm_vehicles_listing' ),
+					'group'            => 'started',
+					'type'             => 'number',
+					'value'            => '3',
+					'preview'          => STM_LISTINGS_URL . '/assets/images/previews/fetured-list-srp.png',
+					'preview_position' => 'preview_bottom',
 					'submenu' => esc_html__( 'General', 'stm_vehicles_listing' ),
 				),
 			'featured_listings_grid_amount'   =>
 				array(
-					'label'   => esc_html__( 'Number of Featured Listings Grid', 'stm_vehicles_listing' ),
-					'type'    => 'number',
-					'value'   => '3',
-					'submenu' => esc_html__( 'General', 'stm_vehicles_listing' ),
-					'group'   => 'ended',
+					'label'            => esc_html__( 'Number of Featured Listings Grid', 'stm_vehicles_listing' ),
+					'type'             => 'number',
+					'value'            => '3',
+					'submenu'          => esc_html__( 'General', 'stm_vehicles_listing' ),
+					'preview'          => STM_LISTINGS_URL . '/assets/images/previews/fetured-grid-srp.png',
+					'preview_position' => 'preview_bottom',
+					'group'            => 'ended',
 				),
 		);
 

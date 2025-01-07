@@ -33,6 +33,7 @@ add_filter(
 					'label' => esc_html__( 'Search by keywords', 'stm_vehicles_listing' ),
 					//'img'   => STM_LISTINGS_URL . '/assets/images/pro/payouts.png',
 					'desc'  => esc_html__( 'Users can make a search based on the keywords through all listings', 'stm_vehicles_listing' ),
+					'preview'     => STM_LISTINGS_URL . '/assets/images/previews/search-by-keywords-sf.png',
 				),
 			);
 		} else {
@@ -44,6 +45,7 @@ add_filter(
 						'type'        => 'checkbox',
 						'group'       => 'started',
 						'value'       => true,
+						'preview'     => STM_LISTINGS_URL . '/assets/images/previews/search-by-keywords-sf.png',
 					),
 				'position_keywords_search' =>
 					array_merge(

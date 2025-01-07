@@ -703,14 +703,14 @@ if ( ! function_exists( 'stm_upload_user_file' ) ) {
 }
 
 if ( ! function_exists( 'stm_similar_cars' ) ) {
-	function stm_similar_cars( $default, $similar_taxonomies = array() ) {
+	function stm_similar_cars( $default, $similar_taxonomies = array(), $postsnum = 3, $exclude = array() ) {
 		$tax_query = array();
 		$taxes     = ( count( $similar_taxonomies ) === 0 ) ? apply_filters( 'stm_me_get_nuxy_mod', '', 'stm_similar_query' ) : $similar_taxonomies;
 		$query     = array(
 			'post_type'      => apply_filters( 'stm_listings_post_type', 'listings' ),
 			'post_status'    => 'publish',
-			'posts_per_page' => '3',
-			'post__not_in'   => array( get_the_ID() ),
+			'posts_per_page' => $postsnum,
+			'post__not_in'   => array_merge( array( get_the_ID() ), $exclude ),
 		);
 
 		if ( ! empty( $taxes ) ) {
@@ -745,7 +745,7 @@ if ( ! function_exists( 'stm_similar_cars' ) ) {
 		return new WP_Query( apply_filters( 'stm_similar_cars_query', $query ) );
 	}
 
-	add_filter( 'stm_similar_cars', 'stm_similar_cars', 10, 2 );
+	add_filter( 'stm_similar_cars', 'stm_similar_cars', 10, 4 );
 }
 
 if ( ! function_exists( 'stm_set_html_content_type_mail' ) ) {

@@ -19,20 +19,23 @@ add_filter(
 					'value'       => '{make} {serie} {ca-year}',
 					'description' => esc_html__( 'The title will be generated based on the listing categories. Put the category in curly brackets, for example, {make} {serie} {ca-year}. Leave this field empty if you want a custom title to be added to each listing', 'stm_vehicles_listing' ),
 					'submenu'     => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
+					'preview'     => STM_LISTINGS_URL . '/assets/images/previews/auto-title-srp.png',
 				),
-			'listing_view_type'                    =>
-				array(
-					'label'       => esc_html__( 'Default  desktop view for the listing page', 'stm_vehicles_listing' ),
-					'description' => esc_html__( 'Choose how you want to display your listing page by default on desktop', 'stm_vehicles_listing' ),
-					'type'        => 'radio',
-					'options'     =>
-						array(
-							'grid' => 'Grid',
-							'list' => 'List',
-						),
-					'value'       => 'list',
-					'submenu'     => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
+			'listing_view_type' => array(
+				'label'       => esc_html__( 'Default desktop view for the listing page', 'stm_vehicles_listing' ),
+				'description' => esc_html__( 'Choose how you want to display your listing page by default on desktop', 'stm_vehicles_listing' ),
+				'type'        => 'radio',
+				'options'     => array(
+					'grid' => 'Grid',
+					'list' => 'List',
 				),
+				'image_top'   => array(
+					'grid' => STM_LISTINGS_URL . '/assets/images/previews/grid_view_srp.svg',
+					'list' => STM_LISTINGS_URL . '/assets/images/previews/list_view_srp.svg',
+				),
+				'value'       => 'list',
+				'submenu'     => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
+			),
 			'show_generated_title_as_label'        =>
 				array(
 					'label'       => esc_html__( 'Show the First Two Words of the Listing Title as a Badge', 'stm_vehicles_listing' ),
@@ -44,6 +47,7 @@ add_filter(
 							'value' => 'list',
 						),
 					'submenu'     => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
+					'preview'     => STM_LISTINGS_URL . '/assets/images/previews/first-two-param-srp.png',
 				),
 			'listing_view_type_mobile'             =>
 				array(
@@ -66,6 +70,7 @@ add_filter(
 						'type'        => 'text',
 						'value'       => '44',
 						'submenu'     => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
+						'preview'     => STM_LISTINGS_URL . '/assets/images/previews/title-max-srp.png',
 					),
 					$grid_title_dependency,
 				),
@@ -78,6 +83,7 @@ add_filter(
 						'value' => 'list',
 					),
 					'submenu'    => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
+					'preview'     => STM_LISTINGS_URL . '/assets/images/previews/author-details-srp.png',
 				),
 			'show_listing_stock'                   =>
 				array(
@@ -88,6 +94,7 @@ add_filter(
 						'value' => 'list',
 					),
 					'submenu'    => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
+					'preview'     => STM_LISTINGS_URL . '/assets/images/previews/listing-id-srp.png',
 				),
 			'show_listing_test_drive'              =>
 				array(
@@ -98,6 +105,7 @@ add_filter(
 						'value' => 'list',
 					),
 					'submenu'    => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
+					'preview'     => STM_LISTINGS_URL . '/assets/images/previews/test-drive-srp.png',
 				),
 			'show_listing_compare'                 =>
 				array(
@@ -105,6 +113,7 @@ add_filter(
 					'description' => esc_html__( 'The listing will have a separate button so that users can compare the separate vehicles', 'stm_vehicles_listing' ),
 					'type'        => 'checkbox',
 					'submenu'     => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
+					'preview'     => STM_LISTINGS_URL . '/assets/images/previews/compare-srp.png',
 				),
 			'enable_favorite_items'                =>
 				array(
@@ -112,6 +121,7 @@ add_filter(
 					'description' => esc_html__( 'When hovering over the listing image users will have the option to save the listing to their favorites', 'stm_vehicles_listing' ),
 					'type'        => 'checkbox',
 					'submenu'     => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
+					'preview'     => STM_LISTINGS_URL . '/assets/images/previews/favorites-srp.png',
 				),
 			'show_listing_share'                   =>
 				array(
@@ -122,6 +132,7 @@ add_filter(
 						'value' => 'list',
 					),
 					'submenu'    => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
+					'preview'     => STM_LISTINGS_URL . '/assets/images/previews/share-srp.png',
 				),
 			'show_listing_pdf'                     =>
 				array(
@@ -132,6 +143,7 @@ add_filter(
 						'value' => 'list',
 					),
 					'submenu'    => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
+					'preview'     => STM_LISTINGS_URL . '/assets/images/previews/pdf-srp.png',
 				),
 			'show_listing_quote'                   =>
 				array(
@@ -142,6 +154,7 @@ add_filter(
 						'value' => 'list',
 					),
 					'submenu'    => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
+					'preview'     => STM_LISTINGS_URL . '/assets/images/previews/request-srp.png',
 				),
 			'show_listing_trade'                   =>
 				array(
@@ -152,6 +165,7 @@ add_filter(
 						'value' => 'list',
 					),
 					'submenu'    => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
+					'preview'     => STM_LISTINGS_URL . '/assets/images/previews/trade-in-srp.png',
 				),
 		);
 
