@@ -1,5 +1,6 @@
 <?php
-$_id = apply_filters( 'stm_listings_input', null, 'item_id' );
+$_id               = apply_filters( 'stm_listings_input', null, 'item_id' );
+$is_video_required = apply_filters( 'motors_vl_get_nuxy_mod', false, 'addl_video_required' );
 
 if ( $custom_listing_type && $listing_types_options && isset( $listing_types_options[ $custom_listing_type . '_addl_video_content' ] ) ) {
 	$content = $listing_types_options[ $custom_listing_type . '_addl_video_content' ];
@@ -11,7 +12,10 @@ if ( empty( $_id ) ) :
 	?>
 	<div class="stm-form-4-videos clearfix">
 		<div class="stm-car-listing-data-single stm-border-top-unit ">
-			<div class="title heading-font"><?php esc_html_e( 'Add Videos', 'stm_vehicles_listing' ); ?></div>
+			<div class="title heading-font">
+				<?php esc_html_e( 'Add Videos', 'stm_vehicles_listing' ); ?>
+				<?php echo $is_video_required ? esc_html( '*' ) : ''; ?>
+			</div>
 		</div>
 		<div class="stm-add-videos-unit">
 			<div class="row">
@@ -36,6 +40,7 @@ if ( empty( $_id ) ) :
 				</div>
 			</div>
 		</div>
+		<input type="hidden" data-video-field="<?php echo esc_attr( $is_video_required ) ? 'true' : 'false'; ?>">
 	</div>
 
 <?php else : ?>
@@ -92,5 +97,6 @@ if ( empty( $_id ) ) :
 				</div>
 			</div>
 		</div>
+		<input type="hidden" data-video-field="<?php echo esc_attr( $is_video_required ) ? 'true' : 'false'; ?>">
 	</div>
 <?php endif; ?>

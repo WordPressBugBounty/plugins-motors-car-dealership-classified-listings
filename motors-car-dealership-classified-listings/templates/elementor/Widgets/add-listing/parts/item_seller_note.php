@@ -1,6 +1,7 @@
 <?php
 
-$_id = apply_filters( 'stm_listings_input', null, 'item_id' );
+$_id         = apply_filters( 'stm_listings_input', null, 'item_id' );
+$is_required = apply_filters( 'motors_vl_get_nuxy_mod', false, 'addl_seller_note_required' );
 
 $note = '';
 if ( ! empty( $_id ) ) {
@@ -17,7 +18,10 @@ if ( $custom_listing_type && $listing_types_options && isset( $listing_types_opt
 
 <div class="stm-form-5-notes clearfix">
 	<div class="stm-car-listing-data-single stm-border-top-unit ">
-		<div class="title heading-font"><?php esc_html_e( 'Enter Seller\'s notes', 'stm_vehicles_listing' ); ?></div>
+		<div class="title heading-font">
+			<?php esc_html_e( 'Enter Seller\'s notes', 'stm_vehicles_listing' ); ?>
+			<?php echo $is_required ? esc_html( '*' ) : ''; ?>
+		</div>
 	</div>
 	<div class="row stm-relative">
 		<div class="col-md-9 col-sm-9 stm-non-relative">
@@ -76,4 +80,5 @@ if ( $custom_listing_type && $listing_types_options && isset( $listing_types_opt
 			</div>
 		<?php endif; ?>
 	</div>
+	<input type="hidden" data-seller-note-require="<?php echo esc_attr( $is_required ) ? 'true' : 'false'; ?>">
 </div>

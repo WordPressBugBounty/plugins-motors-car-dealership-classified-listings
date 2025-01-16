@@ -40,6 +40,9 @@
 
 <?php else : ?>
 	<div class="lOffer-account-dropdown stm-login-form-unregistered">
+
+		<?php do_action( 'stm_signin_demo_login_tools' ); ?>
+
 		<form method="post">
 			<?php do_action( 'stm_before_signin_form' ); ?>
 			<div class="form-group">

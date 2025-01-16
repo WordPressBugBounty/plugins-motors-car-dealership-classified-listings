@@ -97,9 +97,19 @@ class STM_Metaboxes {
 
 						$field_modified = call_user_func( array( $this, $sanitize ), $field_modified, $field_name );
 					}
-					$field_modified_array = json_decode( wp_unslash( $field_modified ), true );
+					
+					$field_modified_array = array();
+
+					if ( is_string( $field_modified ) ) {
+						$decoded = json_decode( wp_unslash( $field_modified ), true );
+
+						if ( json_last_error() === JSON_ERROR_NONE ) {
+							$field_modified_array = $decoded;
+						}
+					}
+
 					if ( ! empty( $field_modified_array ) && ! empty( $field_modified_array['font-data']['family'] ) ) {
-						$font                                           = new WPCFTO_WebFont_Loader( $field_modified_array, $field_name . '_' . $post_id );
+						$font = new WPCFTO_WebFont_Loader( $field_modified_array, $field_name . '_' . $post_id );
 						$field_modified_array['font-data']['local_url'] = $font->get_url();
 						$field_modified                                 = json_encode( wp_slash( $field_modified_array ) );
 					}
@@ -264,10 +274,16 @@ class STM_Metaboxes {
 			'regenerate_fonts_notice'            => esc_html__( 'Sync and update your fonts if they are displayed incorrectly on your website.', 'nuxy' ),
 			'fonts_download_setting_label'       => esc_html__( 'Download Google Fonts', 'nuxy' ),
 			'fonts_download_setting_description' => esc_html__( 'Download and store Google Fonts locally. Set the fonts in the typography.', 'nuxy' ),
+			'delete'                             => esc_html__( 'Delete', 'nuxy' ),
+			'preview'                            => esc_html__( 'Preview', 'nuxy' ),
 		);
 	}
 
 	public static function wpcfto_scripts() {
+		if ( is_customize_preview() ) {
+			return;
+		}
+
 		$v      = STM_WPCFTO_VERSION;
 		$base   = STM_WPCFTO_URL . 'metaboxes/assets/';
 		$assets = STM_WPCFTO_URL . 'metaboxes/assets/';
@@ -297,10 +313,6 @@ class STM_Metaboxes {
 				'translations' => self::translations(),
 				'transform'    => WPCFTO_Gfonts::transform(),
 				'nonce'        => wp_create_nonce( 'stm_wpcfto_get_settings_nonce' ),
-				'translations' => array(
-					'delete'  => esc_html__( 'Delete', 'nuxy' ),
-					'preview' => esc_html__( 'Preview', 'nuxy' ),
-				),
 			)
 		);
 
@@ -368,6 +380,14 @@ class STM_Metaboxes {
 		wp_enqueue_script(
 			'wpcfto_fields_layout_component',
 			STM_WPCFTO_URL . '/metaboxes/general_components/js/fields_aside.js',
+			array( 'wpcfto_metaboxes.js' ),
+			$v,
+			true
+		);
+
+		wp_enqueue_script(
+			'wpcfto_multiselect_add_term_component',
+			STM_WPCFTO_URL . '/metaboxes/general_components/js/multiselect_add_term.js',
 			array( 'wpcfto_metaboxes.js' ),
 			$v,
 			true
@@ -644,7 +664,7 @@ function wpcfto_metaboxes_generate_deps( $section_name, $dep ) {
 	return $dependency;
 }
 
-function wpcfto_metaboxes_display_single_field( $section, $section_name, $field, $field_name, $metabox_id = null  ) {
+function wpcfto_metaboxes_display_single_field( $section, $section_name, $field, $field_name, $metabox_id = null ) {
 	$dependency  = wpcfto_metaboxes_deps( $field, $section_name );
 	$width       = 'column-1';
 	$is_pro      = ( ! empty( $field['pro'] ) ) ? 'is_pro' : 'not_pro';
@@ -715,7 +735,7 @@ function wpcfto_metaboxes_display_single_field( $section, $section_name, $field,
 			$field_label    = "{$field}['label']";
 			$field_id       = $section_name . '-' . $field_name;
 			$field_readonly = isset( $field_data['readonly'] ) ? 'true' : 'false';
-			$option_id     = $metabox_id;
+			$option_id      = $metabox_id;
 
 			$file = apply_filters( "wpcfto_field_{$field_type}", STM_WPCFTO_PATH . '/metaboxes/fields/' . $field_type . '.php' );
 
@@ -749,7 +769,7 @@ function wpcfto_metaboxes_display_group_field( $section, $section_name, $field, 
 		<?php if ( isset( $field['group_title'] ) && ! empty( $field['group_title'] ) ) { ?>
 		<div class="wpcfto_group_title"><?php echo esc_html( $field['group_title'] ); ?></div>
 	<?php } ?>
-	<?php
+		<?php
 	endif;
 
 	wpcfto_metaboxes_display_single_field( $section, $section_name, $field, $field_name );
@@ -757,7 +777,7 @@ function wpcfto_metaboxes_display_group_field( $section, $section_name, $field, 
 	if ( 'ended' === $field['group'] ) :
 		?>
 		</div></div></div>
-	<?php
+		<?php
 	endif;
 }
 

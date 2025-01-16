@@ -171,9 +171,14 @@ class AddListingManager {
 				'type'             => 'group_title',
 				'label'            => esc_html__( 'Details', 'stm_vehicles_listing' ),
 				'submenu'          => esc_html__( 'Listing creation form', 'stm_vehicles_listing' ),
-				'group'            => 'started',
+				'dependency' => array(
+					'key' => 'sorted_steps',
+					'value' => 'item_details',
+				),
+				'dependency_mode' => 'sorted',
 				'preview'          => STM_LISTINGS_URL . '/assets/images/previews/details-addl.png',
 				'preview_position' => 'preview_bottom',
+				'group'            => 'started',
 			),
 			'addl_required_fields'     => array(
 				'label'       => esc_html__( 'Required Categories', 'stm_vehicles_listing' ),
@@ -240,6 +245,20 @@ class AddListingManager {
 				'preview'          => STM_LISTINGS_URL . '/assets/images/previews/features-settings-addl.png',
 				'preview_position' => 'preview_bottom',
 				'submenu'          => esc_html__( 'Listing creation form', 'stm_vehicles_listing' ),
+				'group'            => 'started',
+				'dependency'       => array(
+					'key'   => 'sorted_steps',
+					'value' => 'item_features',
+				),
+				'dependency_mode'  => 'sorted',
+			),
+			'addl_required_featured'            => array(
+				'label'       => esc_html__( 'Make Required', 'stm_vehicles_listing' ),
+				'description' => esc_html__( 'Users will be required to fill this field to add a listing', 'stm_vehicles_listing' ),
+				'type'        => 'checkbox',
+				'value'       => false,
+				'submenu'     => esc_html__( 'Listing creation form', 'stm_vehicles_listing' ),
+				'group'       => 'ended',
 			),
 		);
 	}
@@ -254,12 +273,24 @@ class AddListingManager {
 				'preview_position' => 'preview_bottom',
 				'submenu'          => esc_html__( 'Listing creation form', 'stm_vehicles_listing' ),
 				'group'            => 'started',
+				'dependency'       => array(
+					'key'   => 'sorted_steps',
+					'value' => 'item_gallery',
+				),
+				'dependency_mode'  => 'sorted',
 			),
 			'addl_gallery_content'     => array(
 				'type'    => 'editor',
 				'label'   => esc_html__( 'Description', 'stm_vehicles_listing' ),
 				'submenu' => esc_html__( 'Listing creation form', 'stm_vehicles_listing' ),
-				'group'   => 'ended',
+			),
+			'addl_required_image'      => array(
+				'label'       => esc_html__( 'Make Required', 'stm_vehicles_listing' ),
+				'description' => esc_html__( 'Users will be required to fill this field to add a listing', 'stm_vehicles_listing' ),
+				'type'        => 'checkbox',
+				'value'       => false,
+				'submenu'     => esc_html__( 'Listing creation form', 'stm_vehicles_listing' ),
+				'group'       => 'ended',
 			),
 		);
 	}
@@ -274,12 +305,24 @@ class AddListingManager {
 				'preview_position' => 'preview_bottom',
 				'submenu'          => esc_html__( 'Listing creation form', 'stm_vehicles_listing' ),
 				'group'            => 'started',
+				'dependency'       => array(
+					'key'   => 'sorted_steps',
+					'value' => 'item_videos',
+				),
+				'dependency_mode'  => 'sorted',
 			),
 			'addl_video_content'     => array(
 				'type'    => 'editor',
 				'label'   => esc_html__( 'Description', 'stm_vehicles_listing' ),
 				'submenu' => esc_html__( 'Listing creation form', 'stm_vehicles_listing' ),
-				'group'   => 'ended',
+			),
+			'addl_video_required'    => array(
+				'label'       => esc_html__( 'Make Required', 'stm_vehicles_listing' ),
+				'description' => esc_html__( 'Users will be required to fill this field to add a listing', 'stm_vehicles_listing' ),
+				'type'        => 'checkbox',
+				'value'       => false,
+				'submenu'     => esc_html__( 'Listing creation form', 'stm_vehicles_listing' ),
+				'group'       => 'ended',
 			),
 		);
 	}
@@ -294,11 +337,23 @@ class AddListingManager {
 				'preview_position' => 'preview_bottom',
 				'submenu'          => esc_html__( 'Listing creation form', 'stm_vehicles_listing' ),
 				'group'            => 'started',
+				'dependency'       => array(
+					'key'   => 'sorted_steps',
+					'value' => 'item_seller_note',
+				),
+				'dependency_mode'  => 'sorted',
 			),
 			'addl_seller_note_content'     => array(
 				'type'        => 'editor',
 				'label'       => esc_html__( 'Template Phrases', 'stm_vehicles_listing' ),
 				'description' => esc_html__( 'Enter phrases, separated by a comma. Example - (Excellent condition, Always garaged, etc)', 'motors-elementor_widgets' ),
+				'submenu'     => esc_html__( 'Listing creation form', 'stm_vehicles_listing' ),
+			),
+			'addl_seller_note_required'    => array(
+				'label'       => esc_html__( 'Make Required', 'stm_vehicles_listing' ),
+				'description' => esc_html__( 'Users will be required to fill this field to add a listing', 'stm_vehicles_listing' ),
+				'type'        => 'checkbox',
+				'value'       => false,
 				'submenu'     => esc_html__( 'Listing creation form', 'stm_vehicles_listing' ),
 				'group'       => 'ended',
 			),
@@ -373,7 +428,7 @@ class AddListingManager {
 	private function listing_plans() {
 		if ( class_exists( 'Subscriptio' ) || class_exists( 'RP_SUB' ) ) {
 			return array(
-				'addl_group_plans_title' => array(
+				'addl_group_plans_title'     => array(
 					'type'             => 'group_title',
 					'label'            => esc_html__( 'Subscription Plans', 'stm_vehicles_listing' ),
 					'description'      => esc_html__( 'Displays in accordance with Monetization > Subscription model settings.', 'stm_vehicles_listing' ),
@@ -381,6 +436,18 @@ class AddListingManager {
 					'preview_position' => 'preview_bottom',
 					'icon'             => 'fa fa-clock',
 					'submenu'          => esc_html__( 'Listing creation form', 'stm_vehicles_listing' ),
+					'group'            => 'started',
+					'dependency'       => array(
+						'key'   => 'sorted_steps',
+						'value' => 'item_plans',
+					),
+					'dependency_mode'  => 'sorted',
+				),
+				'addl_group_plans_title_end' => array(
+					'label' => '',
+					'type'  => 'nuxy-hidden',
+					'value' => '',
+					'group' => 'ended',
 				),
 			);
 		}

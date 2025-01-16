@@ -5,7 +5,7 @@ Donate link: https://www.paypal.me/stylemix
 Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
 Tested up to: 6.7
-Stable tag: 1.4.49
+Stable tag: 1.4.50
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -132,6 +132,12 @@ After that, go to Tools -> Import, and via Wordpress Importer tool install dummy
 8. Additional features
 
 == Changelog ==
+
+= 1.4.50 =
+- **Enhancement:** Introduced an option to select the required steps in Add Listing.
+- **Enhancement:** Added the dependency with the Listing Creation Form settings in the Layout Builder.
+- **Fix:** Fixed an issue where changing a listing's author via the admin dashboard did not update the user's inventory.
+- **Fix:** Fixed the “Show All” button in Featured not working properly on Inventory page.
 
 = 1.4.49 =
 - **Enhancement:** Added image previews in the plugin settings for easier visualization.

@@ -99,6 +99,16 @@ Motors_Elementor_Widgets_Free\Helpers\Helper::stm_ew_load_template( 'elementor/W
 		}
 		?>
 	</form>
+	<script type="text/javascript">
+		var add_form_steps = [];
+		<?php foreach ( $steps as $step ) : ?>
+			<?php if ( isset( $step['options'] ) && 'enable_layouts' === $step['id'] ) : ?>
+				<?php foreach ( $step['options'] as $option ) : ?>
+					add_form_steps.push( <?php echo json_encode( $option['id'] ); ?> );
+				<?php endforeach; ?>
+			<?php endif; ?>
+		<?php endforeach; ?>
+	</script>
 
 	<?php do_action( 'stm_listings_load_template', 'add_car/progress-bar', array() ); ?>
 

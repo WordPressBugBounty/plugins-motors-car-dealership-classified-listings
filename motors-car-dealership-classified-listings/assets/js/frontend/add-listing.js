@@ -406,6 +406,7 @@ if (typeof (STMListings) == 'undefined') {
 						);
 
 						$( 'button[type="submit"]', _this.formUser ).removeClass().addClass( 'enabled' );
+						$('label[for="stm_car_gallery_add"]').removeClass('required_field');
 
 						_this.uploadProgress( image, false, 'remove' );
 					};
@@ -769,42 +770,213 @@ if (typeof (STMListings) == 'undefined') {
 	};
 
 	ListingForm.prototype.validateFields = function () {
-		var hasRequired = false;
+		var hasRequired = false
+		this.$message.slideUp()
+		var errors = []
 
-		this.$message.slideUp();
-
-		this.$form.find( '.stm-form-1-end-unit, .stm-form1-intro-unit' ).find( 'select' ).each(
-			function () {
-				$( this ).data( 'select2' ).$container.removeClass( 'reuqired_field' );
-				if ($( this ).attr( 'required' ) && $( this ).find( ':selected' ).val() == '') {
-					$( this ).data( 'select2' ).$container.addClass( 'reuqired_field' );
-					hasRequired = true;
-				}
-			}
-		);
-
-		this.$form.find( '.stm-form-1-end-unit' ).find( 'input' ).each(
-			function () {
-				$( this ).removeClass( 'reuqired_field' );
-				if ($( this ).attr( 'required' ) && $( this ).val() == '') {
-					$( this ).addClass( 'reuqired_field' );
-					hasRequired = true;
-				}
-			}
-		);
-
-		if (hasRequired) {
-			this.$message.html( 'Please enter required fields' ).slideDown();
+		var stepToCheckFunction = {
+			item_details: this.checkSelectFields,
+			item_gallery: this.checkImageRequired,
+			item_features: this.checkFeaturesRequired,
+			item_videos: this.checkVideoRequired,
+			item_seller_note: this.checkSellerNotesRequired,
+			item_price: this.checkPriceRequired
 		}
 
-		return hasRequired;
-	};
+		for (var i = 0; i < add_form_steps.length; i++) {
+			var step = add_form_steps[i]
+			if (stepToCheckFunction[step]) {
+				stepToCheckFunction[step].call(this, errors)
+			}
+		}
+
+		if (errors.length > 0) {
+			this.$message.html(errors.join('<br>')).slideDown()
+			return true
+		}
+
+		return false
+	}
+
+
+	ListingForm.prototype.checkSelectFields = function (errors) {
+		let hasRequired = false
+
+		this.$form
+			.find('.stm-form-1-end-unit, .stm-form1-intro-unit')
+			.find('input[required]')
+			.each(function () {
+				const value = $(this).val().trim()
+				$(this).removeClass('required_field')
+
+				if (value === '' && !hasRequired) {
+					$(this).addClass('required_field')
+					hasRequired = true
+				}
+			})
+
+		this.$form
+			.find('.stm-form-1-end-unit, .stm-form1-intro-unit')
+			.find('select')
+			.each(function () {
+				let select2Data = $(this).data('select2')
+
+				if (select2Data) {
+					select2Data.$container.removeClass('required_field')
+					if (
+						$(this).attr('required') &&
+						$(this).find(':selected').val() === ''
+					) {
+						select2Data.$container.addClass('required_field')
+						hasRequired = true
+					}
+				}
+			})
+
+		if (hasRequired && !errors.includes(stm_i18n.required_fields)) {
+			errors.push(stm_i18n.required_fields)
+			this.$message.html(stm_i18n.required_fields).slideDown()
+		}
+
+		return hasRequired
+	}
+
+	ListingForm.prototype.checkFeaturesRequired = function (errors) {
+		var is_features_required = this.$form
+			.find('.stm-form-2-features')
+			.find('input[data-features-required]')
+			.data('features-required')
+
+		if (is_features_required) {
+			var featured_checkboxes = this.$form
+				.find('.stm-form-2-features .checker input[type="checkbox"]')
+				.filter(function () {
+					return $(this).is(':visible')
+				})
+
+			var hasChecked = featured_checkboxes
+				.map(function () {
+					return $(this).prop('checked')
+				})
+				.get()
+				.includes(true)
+
+			if (!hasChecked) {
+				errors.push(stm_i18n.features_required)
+				featured_checkboxes.closest('.checker').addClass('required_field')
+			} else {
+				featured_checkboxes.closest('.checker').removeClass('required_field')
+			}
+		}
+	}
+
+	ListingForm.prototype.checkImageRequired = function (errors) {
+		var is_image_required = this.$form
+			.find('.stm-form-3-photos')
+			.find('input[data-image-field]')
+			.data('image-field')
+		if (
+			is_image_required &&
+			this.$form.find(
+				'.stm-media-car-gallery .stm-placeholder .inner .stm-image-preview'
+			).length === 0
+		) {
+			errors.push(stm_i18n.image_upload_required)
+			this.$form
+				.find('.stm-media-car-gallery .stm-placeholder .inner')
+				.addClass('required_field')
+			return true
+		}
+
+		return false
+	}
+
+	ListingForm.prototype.checkPriceRequired = function (errors) {
+		var is_price_required = this.$form
+			.find('.stm_price_input')
+			.find('input[name="stm_car_price"][required]')
+		if (is_price_required.val() === '') {
+			errors.push(stm_i18n.car_price_required)
+			is_price_required.addClass('required_field')
+		}
+
+	}
+
+	ListingForm.prototype.checkVideoRequired = function (errors) {
+		var is_video_required = this.$form
+			.find('.stm-form-4-videos')
+			.find('input[data-video-field]')
+			.data('video-field')
+		if (is_video_required) {
+			var video_links = this.$form
+				.find('.stm-video-link-unit input[type="text"]')
+				.map(function () {
+					return $(this).val()
+				})
+				.get()
+			if (
+				video_links.every(function (link) {
+					return link === ''
+				})
+			) {
+				errors.push(stm_i18n.video_required)
+				this.$form
+					.find('.stm-form-4-videos .stm-video-link-unit')
+					.addClass('required_field')
+				return true
+			}
+		}
+
+		return false
+	}
+
+	ListingForm.prototype.checkSellerNotesRequired = function (errors) {
+		var is_seller_notes_required = this.$form
+			.find('.stm-form-5-notes')
+			.find('input[data-seller-note-require]')
+			.data('seller-note-require')
+
+		var editorContent = tinymce.activeEditor.getContent()
+
+		if (is_seller_notes_required && editorContent === '') {
+			errors.push(stm_i18n.seller_notes_required)
+			this.$form.find('#wp-stm_seller_notes-wrap').addClass('required_field')
+		} else {
+			this.$form.find('#wp-stm_seller_notes-wrap').removeClass('required_field')
+		}
+	}
+
 
 	$( document ).ready(
 		function () {
-
 			var $form = $( '#stm_sell_a_car_form' ), listingForm = new ListingForm( $form );
 			var currentSelect;
+
+			listingForm.$form
+				.find('.checker span input[type="checkbox"]')
+				.on('change', function () {
+					if ($(this).is(':checked')) {
+						listingForm.$form.find('.checker').removeClass('required_field')
+					}
+				})
+
+			if (typeof tinymce !== 'undefined') {
+				tinymce.activeEditor.on('change', function () {
+					listingForm.$form
+						.find('#wp-stm_seller_notes-wrap')
+						.removeClass('required_field')
+				})
+			}
+
+			listingForm.$form
+				.find('.stm-video-link-unit input[type="text"]')
+				.on('input', function () {
+					if ($(this).val().length > 0) {
+						$(this)
+							.closest('.stm-video-link-unit')
+							.removeClass('required_field')
+					}
+				})
 
 			//window.hasOwnProperty = window.hasOwnProperty || Object.prototype.hasOwnProperty;
 

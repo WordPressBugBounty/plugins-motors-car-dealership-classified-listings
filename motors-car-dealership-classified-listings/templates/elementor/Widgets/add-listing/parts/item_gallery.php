@@ -22,7 +22,8 @@ if ( $custom_listing_type && $listing_types_options && isset( $listing_types_opt
 	$content = apply_filters( 'motors_vl_get_nuxy_mod', '', 'addl_gallery_content' );
 }
 
-$max_file_size = apply_filters( 'stm_listing_media_upload_size', 1024 * 4000 ); /*4mb is the highest media upload here*/
+$is_image_required = apply_filters( 'motors_vl_get_nuxy_mod', false, 'addl_required_image' );
+$max_file_size     = apply_filters( 'stm_listing_media_upload_size', 1024 * 4000 ); /*4mb is the highest media upload here*/
 
 $user_id = get_current_user_id();
 $limits  = apply_filters(
@@ -62,7 +63,10 @@ if ( ! empty( $jsonMultiPlanImgLimit ) ) {
 
 <div class="stm-form-3-photos clearfix">
 	<div class="stm-car-listing-data-single stm-border-top-unit">
-		<div class="title heading-font"><?php esc_html_e( 'Upload photo', 'stm_vehicles_listing' ); ?></div>
+		<div class="title heading-font">
+			<?php esc_html_e( 'Upload photo', 'stm_vehicles_listing' ); ?>
+			<?php echo $is_image_required ? esc_html( '*' ) : ''; ?>
+		</div>
 	</div>
 	<div class="stm-media-car-add-nitofication">
 		<?php
@@ -140,5 +144,6 @@ if ( ! empty( $jsonMultiPlanImgLimit ) ) {
 				<?php // phpcs:enable ?>
 			<?php endif; ?>
 		</div>
+		<input type="hidden" data-image-field="<?php echo esc_attr( $is_image_required ) ? 'true' : 'false'; ?>">
 	</div>
 </div>

@@ -145,5 +145,17 @@ class ListingMetaboxes {
 				}
 			}
 		}
+		if ( isset( $_POST['stm_car_user'] ) ) {
+			$new_author_id = sanitize_text_field( $_POST['stm_car_user'] );
+			$current_post  = get_post( $post_id );
+			if ( $current_post->post_author !== $new_author_id ) {
+				wp_update_post(
+					array(
+						'ID'          => $post_id,
+						'post_author' => $new_author_id,
+					)
+				);
+			}
+		}
 	}
 }

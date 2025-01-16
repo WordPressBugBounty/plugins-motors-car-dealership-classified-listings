@@ -16,25 +16,9 @@ $can_register = apply_filters( 'motors_vl_get_nuxy_mod', false, 'new_user_regist
 
 		<div class="col-md-4">
 			<h3><?php esc_html_e( 'Sign In', 'stm_vehicles_listing' ); ?></h3>
-			<?php if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'site_demo_mode' ) ) : ?>
-				<div style="background: #FFF; padding: 15px; margin-bottom: 15px;">
-					<span style="width: 100%;">You can use these credentials for demo testing:</span>
 
-					<div style="display: flex; flex-direction: row; margin-top: 10px;">
-					<span style="width: 40%;">
-						<b>Dealer:</b><br/>
-						dealer<br/>
-						dealer
-					</span>
+			<?php do_action( 'stm_signin_demo_login_tools' ); ?>
 
-						<span style="width: 40%;">
-						<b>User:</b><br/>
-						demo<br/>
-						demo
-					</span>
-					</div>
-				</div>
-			<?php endif; ?>
 			<div class="stm-login-form">
 				<form method="post">
 					<?php do_action( 'stm_before_signin_form' ); ?>

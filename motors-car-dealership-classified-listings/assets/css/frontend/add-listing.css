@@ -828,6 +828,14 @@ input:-webkit-autofill {
     margin-bottom: 17px;
 }
 
+.stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .select2.select2-container.required_field .selection .select2-selection--single .select2-selection__rendered, .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form1-intro-unit .select2.select2-container.required_field .selection .select2-selection--single .select2-selection__rendered {
+    border: 1px solid red;
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .row .stm-form-1-selects input.required_field, .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form1-intro-unit .row .stm-form-1-selects input.required_field {
+    border: 1px solid red;
+}
+
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form1-intro-unit {
     padding: 23px 30px 11px;
     background-color: #232628;
@@ -1089,6 +1097,11 @@ input:-webkit-autofill {
     cursor: pointer;
 }
 
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-2-features .stm-single-feature .feature-single .checker.required_field span {
+    border: 1px solid red;
+    border-radius: 3px;
+}
+
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-3-photos #stm_car_gallery_add {
     display: none;
 }
@@ -1219,6 +1232,15 @@ input:-webkit-autofill {
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-3-photos .stm-add-media-car .stm-media-car-gallery .stm-placeholder .inner.active .stm-image-preview:before, .stm-vl-plugin-pure .stm_add_car_form .stm-form-3-photos .stm-add-media-car .stm-media-car-gallery .stm-placeholder .inner.active .stm-image-preview .fas {
     opacity: 1;
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-3-photos .stm-add-media-car .stm-media-car-gallery .stm-placeholder .inner.required_field {
+    border-color: red;
+    color: red;
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-3-photos .stm-add-media-car .stm-media-car-gallery .stm-placeholder .inner.required_field span {
+    color: red;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-3-photos .stm-add-media-car .stm-media-car-gallery .stm-placeholder-native .inner {
@@ -1429,6 +1451,10 @@ input:-webkit-autofill {
     transform: rotate(-45deg);
 }
 
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-4-videos .stm-video-link-unit.required_field input {
+    border: 1px solid red;
+}
+
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-5-notes {
     margin-bottom: 53px;
 }
@@ -1488,6 +1514,10 @@ input:-webkit-autofill {
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-5-notes .stm-seller-notes-phrases span {
     border-bottom: 1px dashed #232628;
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-5-notes #wp-stm_seller_notes-wrap.required_field {
+    border: 1px solid red;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-5-notes .stm-phrases-unit .stm_phrases {
@@ -2259,6 +2289,10 @@ input:-webkit-autofill {
 .stm-vl-plugin-pure .stm-form-price-edit .stm_price_input p {
     color: #888888;
     line-height: 24px;
+}
+
+.stm-vl-plugin-pure .stm-form-price-edit .stm_price_input input.required_field {
+    border: 1px solid red;
 }
 
 .stm_edit_car_form .stm_logout {

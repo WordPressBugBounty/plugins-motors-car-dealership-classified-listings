@@ -1,7 +1,8 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-$item_id = $id ?? 0;
+$item_id           = $id ?? 0;
+$is_image_required = apply_filters( 'motors_vl_get_nuxy_mod', false, 'addl_required_image' );
 
 if ( ! empty( apply_filters( 'stm_listings_input', null, 'item_id' ) ) ) {
 	$item_id = apply_filters( 'stm_listings_input', null, 'item_id' );
@@ -12,7 +13,7 @@ $content = apply_filters( 'motors_vl_get_nuxy_mod', '', 'addl_gallery_content' )
 
 <div class="stm-form-3-photos clearfix">
 	<?php
-		$vars['step_title']  = __( 'Upload photo', 'stm_vehicles_listing' );
+		$vars['step_title']  = __( 'Upload photo', 'stm_vehicles_listing' ) . ( $is_image_required ? '*' : '' );
 		$vars['step_number'] = 3;
 		do_action( 'stm_listings_load_template', 'add_car/step-title', $vars );
 	?>
@@ -30,6 +31,7 @@ $content = apply_filters( 'motors_vl_get_nuxy_mod', '', 'addl_gallery_content' )
 			accept="image/*"
 			name="stm_car_gallery_add"
 			multiple>
+	<input type="hidden" data-image-field="<?php echo esc_attr( $is_image_required ) ? 'true' : 'false'; ?>">
 
 	<!--Check if user not editing existing images-->
 	<div class="stm-add-media-car">

@@ -4818,6 +4818,10 @@ msgstr ""
 msgid "Private Seller"
 msgstr ""
 
+#: includes/class/Plugin/config/user-main.php:26
+msgid "Profile"
+msgstr ""
+
 #: includes/class/Addons/AddonsPage.php:19
 msgid "Pro Addons"
 msgstr ""

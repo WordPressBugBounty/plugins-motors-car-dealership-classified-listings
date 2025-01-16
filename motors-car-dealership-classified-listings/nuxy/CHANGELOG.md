@@ -1,3 +1,13 @@
+## 4.4.31
+- **Fix:** Fixed minor bug.
+## 4.4.31
+- **Fix:** Fixed type string.
+## 4.4.30
+- **Enhancement:** Introduced the ability to add new features directly to the Multiselect Control.
+## 4.4.29
+- **Fix:** Added a fallback to handle missing "position" values.
+## 4.4.28
+- **Fix:** Fixed script error in WordPress Customizer.
 ## 4.4.27
 - **Fix:** Add string translate for options.
 ## 4.4.26

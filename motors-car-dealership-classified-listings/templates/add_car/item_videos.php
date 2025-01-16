@@ -6,12 +6,13 @@ $item_id = $id ?? 0;
 if ( ! empty( apply_filters( 'stm_listings_input', null, 'item_id' ) ) ) {
 	$item_id = apply_filters( 'stm_listings_input', null, 'item_id' );
 }
+$is_video_required = apply_filters( 'motors_vl_get_nuxy_mod', false, 'addl_video_required' );
 
 $content = apply_filters( 'motors_vl_get_nuxy_mod', '', 'addl_video_content' );
 ?>
 <div class="stm-form-4-videos clearfix">
 	<?php
-	$vars['step_title']  = __( 'Add Videos', 'stm_vehicles_listing' );
+	$vars['step_title']  = __( 'Add Videos', 'stm_vehicles_listing' ) . ( $is_video_required ? '*' : '' );
 	$vars['step_number'] = 4;
 	do_action( 'stm_listings_load_template', 'add_car/step-title', $vars );
 
@@ -104,4 +105,5 @@ $content = apply_filters( 'motors_vl_get_nuxy_mod', '', 'addl_video_content' );
 			</div>
 		</div>
 	<?php endif; ?>
+	<input type="hidden" data-video-field="<?php echo esc_attr( $is_video_required ) ? 'true' : 'false'; ?>">
 </div>

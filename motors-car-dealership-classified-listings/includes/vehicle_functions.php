@@ -1171,10 +1171,9 @@ if ( ! function_exists( 'stm_ajax_add_a_car' ) ) {
 		/*Getting car features*/
 		if ( ! empty( $_POST['stm_car_features_labels'] ) ) {
 			foreach ( $_POST['stm_car_features_labels'] as $car_feature ) {
-				$car_features[] = sanitize_text_field( $car_feature );
+				$car_features[] = esc_attr( $car_feature );
 			}
 		}
-
 		/*Videos*/
 		if ( ! empty( $_POST['stm_video'] ) ) {
 			foreach ( $_POST['stm_video'] as $video ) {
@@ -1225,7 +1224,6 @@ if ( ! function_exists( 'stm_ajax_add_a_car' ) ) {
 
 		if ( empty( $_POST['stm_car_price'] ) ) {
 			$error               = true;
-			$response['message'] = esc_html__( 'Please add item price', 'stm_vehicles_listing' );
 			$price               = '';
 			$normal_price        = '';
 		} else {

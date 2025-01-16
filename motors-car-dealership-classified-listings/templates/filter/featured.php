@@ -35,7 +35,7 @@ if ( isset( $url_args['featured_top'] ) && $url_args['featured_top'] ) {
 } elseif ( stm_is_multilisting() ) {
 	$inventory_link = add_query_arg( array_merge( $url_args, array( 'featured_top' => 'true' ) ), apply_filters( 'stm_inventory_page_url', '', $args['post_type'] ) );
 } else {
-	$inventory_link = add_query_arg( array_merge( $url_args, array( 'featured_top' => 'true' ) ), apply_filters( 'stm_listings_user_defined_filter_page', '' ) );
+	$inventory_link = add_query_arg( array_merge( $url_args, array( 'featured_top' => 'true' ) ), get_permalink( apply_filters( 'stm_listings_user_defined_filter_page', '' ) ) );
 }
 
 $template_args = array();

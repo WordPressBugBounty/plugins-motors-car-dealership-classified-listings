@@ -30,7 +30,7 @@ if ( ! empty( $user_features ) && is_array( $user_features ) ) :
 							<label>
 								<input
 									type="checkbox"
-									value="<?php echo esc_attr( $feature['value'] ); ?>"
+									value="<?php echo esc_attr( $feature['label'] ); ?>"
 									name="stm_car_features_labels[]"
 									<?php checked( in_array( $feature['value'], $features_car, true ) ); ?>
 								>

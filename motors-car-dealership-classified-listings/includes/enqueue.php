@@ -224,6 +224,12 @@ function stm_listings_enqueue_scripts_styles() {
 			'motors_vl_config'                  => array(
 				'enable_friendly_urls' => apply_filters( 'motors_vl_get_nuxy_mod', false, 'friendly_url' ),
 			),
+			'required_fields'       => __( 'Please enter required fields', 'stm_vehicles_listing' ),
+			'image_upload_required' => __( 'Please upload a photo to create a listing', 'stm_vehicles_listing' ),
+			'seller_notes_required' => __( 'Please leave a seller’s note to create a listing', 'stm_vehicles_listing' ),
+			'features_required'     => __( 'Please choose at least one feature to create a listing', 'stm_vehicles_listing' ),
+			'video_required'        => __( 'Please share a video URL to create a listing', 'stm_vehicles_listing' ),
+			'car_price_required'    => __( 'Please add item price', 'stm_vehicles_listing' ),
 		)
 	);
 
@@ -272,12 +278,24 @@ add_action( 'wp_enqueue_scripts', 'init_motors_root_colors' );
 
 if ( ! function_exists( 'mvl_enqueue_header_scripts_styles' ) ) {
 	function mvl_enqueue_header_scripts_styles( $file_name ) {
-		if ( ! wp_style_is( $file_name, 'enqueued' ) ) {
-			wp_enqueue_style( $file_name );
-		}
+		if ( is_array( $file_name ) ) {
+			foreach ( $file_name as $id ) {
+				if ( wp_style_is( $id, 'registered' ) && ! wp_style_is( $id, 'enqueued' ) ) {
+					wp_enqueue_style( $id );
+				}
 
-		if ( ! wp_script_is( $file_name, 'enqueued' ) ) {
-			wp_enqueue_script( $file_name );
+				if ( wp_script_is( $id, 'registered' ) && ! wp_script_is( $id, 'enqueued' ) ) {
+					wp_enqueue_script( $id );
+				}
+			}
+		} else {
+			if ( ! wp_style_is( $file_name, 'enqueued' ) ) {
+				wp_enqueue_style( $file_name );
+			}
+
+			if ( ! wp_script_is( $file_name, 'enqueued' ) ) {
+				wp_enqueue_script( $file_name );
+			}
 		}
 	}
 }

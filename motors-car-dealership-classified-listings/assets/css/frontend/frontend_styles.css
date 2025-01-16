@@ -1223,6 +1223,20 @@ span.video-preview {
     margin-bottom: 28px;
 }
 
+.stm-login-register-form .stm-demo-login-tools {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    background-color: rgb(243, 247, 252);
+    padding: 10px 30px 10px;
+    margin: 0 0 15px;
+}
+
+.stm-login-register-form .stm-demo-login-tools .sep {
+    font-weight: 500;
+    margin: 0 4px;
+}
+
 .stm-login-register-form .stm-login-form {
     margin-bottom: 30px;
 }
@@ -1636,6 +1650,20 @@ span.video-preview {
 .stm-listing-loader.visible {
     opacity: 1;
     visibility: visible;
+}
+
+.lOffer-account-dropdown .stm-demo-login-tools {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    border-bottom: 1px solid #ccc;
+    padding: 0 0 10px;
+    margin: 0 0 15px;
+}
+
+.lOffer-account-dropdown .stm-demo-login-tools .sep {
+    font-weight: 500;
+    margin: 0 4px;
 }
 
 .stm-user-public-profile {

@@ -7,11 +7,12 @@ if ( ! empty( $id ) ) {
 }
 
 $stm_phrases = apply_filters( 'motors_vl_get_nuxy_mod', false, 'addl_seller_note_content' );
+$is_required = apply_filters( 'motors_vl_get_nuxy_mod', false, 'addl_seller_note_required' );
 ?>
 
 <div class="stm-form-5-notes clearfix">
 	<?php
-		$vars['step_title']  = __( 'Enter Seller\'s notes', 'stm_vehicles_listing' );
+		$vars['step_title']  = __( 'Enter Seller\'s notes', 'stm_vehicles_listing' ) . ( $is_required ? '*' : '' );
 		$vars['step_number'] = 5;
 		do_action( 'stm_listings_load_template', 'add_car/step-title', $vars );
 	?>
@@ -72,4 +73,5 @@ $stm_phrases = apply_filters( 'motors_vl_get_nuxy_mod', false, 'addl_seller_note
 			</div>
 		<?php endif; ?>
 	</div>
+	<input type="hidden" data-seller-note-require="<?php echo esc_attr( $is_required ) ? 'true' : 'false'; ?>">
 </div>

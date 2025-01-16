@@ -16,6 +16,7 @@ class WPCFTO_Settings {
 
 		add_action( 'admin_menu', array( $this, 'settings_page' ), 1000 );
 		add_action( 'wp_ajax_wpcfto_save_settings', array( $this, 'stm_save_settings' ) );
+		add_action( 'wp_ajax_wpcfto_create_term', array( $this, 'stm_create_term' ) );
 		add_action( 'wp_ajax_wpcfto_regenerate_fonts', array( $this, 'stm_regenerate_fonts' ) );
 		add_filter( 'wpcfto_enable_regenerate_fonts', array( $this, 'stm_enable_regenerate_fonts' ) );
 		add_filter( 'wpcfto_field_fonts_download_settings', array( $this, 'fonts_download_settings_template' ) );
@@ -63,6 +64,8 @@ class WPCFTO_Settings {
 	public function settings_page() {
 		if ( current_user_can( 'manage_options' ) ) {
 
+			$position = isset( $this->page_args['position'] ) ? $this->page_args['position'] : null;
+
 			if ( ! empty( $this->page_args['parent_slug'] ) ) {
 				$r = add_submenu_page(
 					$this->page_args['parent_slug'],
@@ -71,7 +74,7 @@ class WPCFTO_Settings {
 					'manage_options',
 					$this->page_args['menu_slug'],
 					array( $this, 'settings_page_view' ),
-					$this->page_args['position']
+					$position
 				);
 			} else {
 				add_menu_page(
@@ -81,7 +84,7 @@ class WPCFTO_Settings {
 					$this->page_args['menu_slug'],
 					array( $this, 'settings_page_view' ),
 					$this->page_args['icon'],
-					$this->page_args['position']
+					$position
 				);
 			}
 
@@ -274,6 +277,33 @@ class WPCFTO_Settings {
 		}
 
 		return false;
+	}
+
+	public function stm_create_term() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return false;
+		}
+
+		check_ajax_referer( 'wpcfto_create_term', 'nonce' );
+		$request_body = json_decode( file_get_contents( 'php://input' ) );
+
+		if ( empty( $request_body ) ) {
+			wp_send_json( array( 'error' => true, 'message' => 'Tag is empty' ) );
+		}
+
+		$taxonomy = sanitize_text_field( $request_body->new_taxonomy );
+		$term     = sanitize_text_field( $request_body->new_term );
+
+		if ( ! empty( $taxonomy ) && ! empty( $term ) ) {
+			$newTermData = wp_insert_term( $term, $taxonomy );
+
+			if ( $newTermData ) {
+				$term = get_term( $newTermData['term_id'], $taxonomy );
+				wp_send_json( array( 'success' => true, 'term' => $term ) );
+			}
+		}
+
+		wp_send_json( array( 'error' => true ) );
 	}
 
 	public function fonts_download_settings_template() {
