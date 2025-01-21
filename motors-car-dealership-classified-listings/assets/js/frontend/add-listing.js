@@ -770,7 +770,9 @@ if (typeof (STMListings) == 'undefined') {
 	};
 
 	ListingForm.prototype.validateFields = function () {
-		var hasRequired = false
+		if ( typeof add_form_steps === 'undefined' ) {
+			return false;
+		}
 		this.$message.slideUp()
 		var errors = []
 
