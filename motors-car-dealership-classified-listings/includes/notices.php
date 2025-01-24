@@ -7,6 +7,7 @@ $theme_exists = array(
 	'motors-starter-theme',
 	'motors-child',
 	'motors-starter-theme-child',
+	'motors-child-theme',
 	'motors',
 );
 

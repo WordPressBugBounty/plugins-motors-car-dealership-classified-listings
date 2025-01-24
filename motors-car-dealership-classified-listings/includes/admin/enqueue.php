@@ -118,6 +118,9 @@ function stm_listings_admin_enqueue( $hook ) {
 			true
 		);
 
+		wp_register_style( 'stm_admin_listing_categories', STM_LISTINGS_URL . '/assets/css/admin/categories.css', array(), STM_LISTINGS_V );
+		wp_register_script( 'bootstrap-bundle', STM_LISTINGS_URL . '/assets/js/admin/bootstrap.bundle.min.js', array(), STM_LISTINGS_V, true );
+
 		/* Google places */
 		do_action( 'stm_admin_google_places_script' );
 	}
@@ -127,19 +130,3 @@ function stm_listings_admin_enqueue( $hook ) {
 }
 
 add_action( 'admin_enqueue_scripts', 'stm_listings_admin_enqueue' );
-
-function motors_starter_enqueue_admin_scripts_and_styles() {
-	wp_enqueue_style( 'motors-starter-admin-styles', STM_LISTINGS_URL . '/assets/css/temporary.css', array(), STM_LISTINGS_V );
-
-	wp_enqueue_script( 'motors-starter-admin-scripts', STM_LISTINGS_URL . '/assets/js/temporary.js', array( 'jquery' ), STM_LISTINGS_V, true );
-
-	wp_localize_script(
-		'motors-starter-admin-scripts',
-		'stm_lms_starter_theme_data',
-		array(
-			'stm_update_starter_theme' => wp_create_nonce( 'stm_update_starter_theme' ),
-		)
-	);
-}
-
-add_action( 'admin_enqueue_scripts', 'motors_starter_enqueue_admin_scripts_and_styles' );

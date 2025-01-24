@@ -25,6 +25,12 @@ class Settings {
 			add_action( 'wpcfto_screen_motors_vehicles_listing_plugin_settings_added', array( $this, 'mvl_add_submenus' ), 10, 1 );
 			add_action( 'wpcfto_screen_motors_vehicles_listing_plugin_settings_added', array( $this, 'mvl_add_submenu_settings' ), 1000, 1 );
 			add_action( 'wpcfto_screen_motors_vehicles_listing_plugin_settings_added', array( $this, 'mvl_add_submenu_upgrade' ), 1001, 1 );
+			add_action( 'wp_ajax_mvl_ajax_add_feedback', array( $this, 'ajax_add_feedback' ) );
+			if ( ! get_option( 'mvl_feedback_added', false ) ) {
+				add_action( 'wpcfto_after_tab_nav', array( $this, 'mvl_add_feedback_button' ) );
+				add_action( 'admin_footer', array( $this, 'render_feedback_popup' ) );
+			}
+			add_action( 'wpcfto_after_tab_nav', array( $this, 'mvl_add_version' ) );
 		}
 	}
 
@@ -122,16 +128,51 @@ class Settings {
 		$motors_logo    = $this->assets_url . 'logo.png';
 
 		$setup[] = array(
-			'option_name' => \MotorsVehiclesListing\Plugin\MVL_Const::MVL_PLUGIN_OPT_NAME,
-			'title'       => esc_html__( 'Motors Plugin', 'stm_vehicles_listing' ),
-			'sub_title'   => esc_html__( 'by StylemixThemes', 'stm_vehicles_listing' ),
-			'logo'        => $motors_logo,
+			'option_name'     => \MotorsVehiclesListing\Plugin\MVL_Const::MVL_PLUGIN_OPT_NAME,
+			'title'           => esc_html__( 'Motors Plugin', 'stm_vehicles_listing' ),
+			'sub_title'       => esc_html__( 'by StylemixThemes', 'stm_vehicles_listing' ),
+			'logo'            => $motors_logo,
+
+			'additional_link' => array(
+				'text'   => esc_html__( 'Feature Request', 'stm_vehicles_listing' ),
+				'icon'   => 'fa-regular fa-star',
+				'url'    => esc_url( 'https://stylemixthemes.cnflx.io/boards/motors-car-dealer-rental-classifieds' ),
+				'target' => true,
+			),
+
+			'header_menu'     => array(
+				'menu' => array(
+					'text'           => esc_html__( 'Help', 'stm_vehicles_listing' ),
+					'url'            => '',
+					'icon'           => 'fa-regular fa-circle-question',
+					'header_submenu' => array(
+						'documentation'      => array(
+							'text'   => esc_html__( 'Documentation', 'stm_vehicles_listing' ),
+							'url'    => esc_url( 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing' ),
+							'icon'   => 'fa-regular fa-file-lines',
+							'target' => true,
+						),
+						'support'            => array(
+							'text'   => esc_html__( 'Support', 'stm_vehicles_listing' ),
+							'url'    => apply_filters( 'is_mvl_pro', false ) ? esc_url( 'https://support.stylemixthemes.com/tickets/new/support?item_id=43' ) : esc_url( 'https://wordpress.org/support/plugin/motors-car-dealership-classified-listings/' ),
+							'icon'   => 'fa-solid fa-life-ring',
+							'target' => true,
+						),
+						'facebook_community' => array(
+							'text'   => esc_html__( 'Facebook Community', 'stm_vehicles_listing' ),
+							'url'    => esc_url( 'https://www.facebook.com/groups/motorstheme' ),
+							'icon'   => 'fa-brands fa-facebook-f',
+							'target' => true,
+						),
+					),
+				),
+			),
 
 			/*
 			* Next we add a page to display our awesome settings.
 			* All parameters are required and same as WordPress add_menu_page.
 			*/
-			'page'        => array(
+			'page'            => array(
 				'page_title' => 'Motors Plugin',
 				'menu_title' => 'Motors Plugin',
 				'menu_slug'  => 'mvl_plugin_settings',
@@ -142,7 +183,7 @@ class Settings {
 			/*
 			* And Our fields to display on a page. We use tabs to separate settings on groups.
 			*/
-			'fields'      => $opts,
+			'fields'          => $opts,
 		);
 
 		return $setup;
@@ -308,4 +349,32 @@ class Settings {
 			update_option( 'motors_vehicles_listing_section_settings_updated', true );
 		}
 	}
+
+	public function mvl_add_version() {
+		$output = '<div class="mvl-plugin-version">' . esc_html__( 'Version ', 'stm_vehicle_listings' ) . esc_html( STM_LISTINGS_V ) . '</div>';
+		echo wp_kses_post( $output );
+	}
+
+	public function mvl_add_feedback_button() {
+		wp_enqueue_style( 'mvl-feedback', STM_LISTINGS_URL . '/assets/css/feedback.css', array(), STM_LISTINGS_V );
+		wp_enqueue_script( 'mvl-feedback', STM_LISTINGS_URL . '/assets/js/admin/feedback.js', array(), STM_LISTINGS_V, true );
+		echo '<div class="mvl-feedback"><a href="#" class="mvl-feedback-button">' . esc_html__( 'Feedback', 'stm_vehicle_listings' ) . '<img src="' . esc_url( STM_LISTINGS_URL . '/includes/class/Plugin/assets/img/feedback.svg' ) . '" alt="Feedback Icon"></a></div>';
+	}
+
+	public function render_feedback_popup() {
+		$feedback_template = STM_LISTINGS_PATH . '/includes/class/Plugin/feedback.php';
+		if ( file_exists( $feedback_template ) ) {
+			require_once $feedback_template;
+		}
+	}
+
+	public static function get_ticket_url() {
+		$type = defined( 'STM_LISTINGS_PATH' ) ? 'support' : 'pre-sale';
+		return "https://support.stylemixthemes.com/tickets/new/{$type}?item_id=43";
+	}
+
+	public function ajax_add_feedback() {
+		update_option( 'mvl_feedback_added', true );
+	}
+
 }

@@ -3,17 +3,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-$image_categories = stm_get_car_modern_filter_view_images();
+$_categories = apply_filters( 'mvl_listings_attributes', array() );
 
 if ( stm_is_multilisting() && isset( $_GET['post_type'] ) && apply_filters( 'stm_listings_post_type', 'listings' ) !== $_GET['post_type'] ) { //phpcs:ignore
-	$image_categories = apply_filters( 'stm_get_listings_filter', array(), $_GET['post_type'], array( 'where' => array( 'use_on_car_modern_filter_view_images' => true ) ), false ); //phpcs:ignore
+	$_categories = apply_filters( 'stm_get_listings_filter', array(), $_GET['post_type'], array(), false ); //phpcs:ignore
 }
 
-if ( ! empty( $image_categories ) ) {
-	foreach ( $image_categories as $img_cat ) {
+if ( ! empty( $_categories ) ) {
+	foreach ( $_categories as $_category ) {
 		/** Add Custom Field To Form */
-		add_action( $img_cat['slug'] . '_add_form_fields', 'stm_taxonomy_listing_add_field', 10 );
-		add_action( $img_cat['slug'] . '_edit_form_fields', 'stm_taxonomy_listing_edit_field', 10, 2 );
+		add_action( $_category['slug'] . '_add_form_fields', 'stm_taxonomy_listing_add_field', 10 );
+		add_action( $_category['slug'] . '_edit_form_fields', 'stm_taxonomy_listing_edit_field', 10, 2 );
 		/** Save Custom Field Of Form */
 		add_action( 'wp_update_term_data', 'stm_taxonomy_listing_image_save', 10, 3 );
 		add_action( 'create_term', 'stm_taxonomy_listing_image_save', 10, 3 );
@@ -21,104 +21,153 @@ if ( ! empty( $image_categories ) ) {
 }
 
 /*Add field*/
-if (!function_exists('stm_taxonomy_listing_add_field')) {
-    function stm_taxonomy_listing_add_field($taxonomy)
-    {
-        $default_image = plugin_dir_url(__FILE__) . '../../assets/images/default_170x50.gif';
-        ?>
-        <div class="form-field">
-            <label for="stm_taxonomy_listing_image"><?php esc_html_e('Category Image'); ?></label>
-            <div class="stm-choose-listing-image">
-                <input
-                    type="hidden"
-                    name="stm_taxonomy_listing_image"
-                    id="stm_taxonomy_listing_image"
-                    value=""
-                    size="40"
-                    aria-required="true"/>
+if ( ! function_exists( 'stm_taxonomy_listing_add_field' ) ) {
+	function stm_taxonomy_listing_add_field() {
+		wp_enqueue_style( 'stm_admin_categories_option', STM_LISTINGS_URL . '/assets/css/admin/listing-categories.css', array(), STM_LISTINGS_V );
 
-                <img class="stm_taxonomy_listing_image_chosen" src="<?php echo esc_url($default_image); ?>"/>
+		$default_image = STM_LISTINGS_URL . '/assets/images/default_170x50.gif';
+		?>
+		<div class="form-field">
+			<label for="stm_taxonomy_listing_image">
+				<?php esc_html_e( 'Category Image', 'stm_vehicles_listing' ); ?>
+			</label>
+			<div class="stm-choose-listing-image">
+				<input
+					type="hidden"
+					name="stm_taxonomy_listing_image"
+					id="stm_taxonomy_listing_image"
+					value=""
+					size="40"
+					aria-required="true"/>
 
-                <input type="button" class="button-primary" value="Choose image"/>
-            </div>
-            <script type="text/javascript">
-                jQuery(function ($) {
-                    $(".stm-choose-listing-image .button-primary").click(function () {
-                        var custom_uploader = wp.media({
-                            title: "Select image",
-                            button: {
-                                text: "Attach"
-                            },
-                            multiple: false
-                        }).on("select", function () {
-                            var attachment = custom_uploader.state().get("selection").first().toJSON();
-                            $('#stm_taxonomy_listing_image').val(attachment.id);
-                            $('.stm_taxonomy_listing_image_chosen').attr('src', attachment.url);
-                        }).open();
-                    });
-                });
-            </script>
-        </div>
-    <?php }
+				<img class="stm_taxonomy_listing_image_chosen" style="display: none;" src="<?php echo esc_url( $default_image ); ?>" alt="<?php esc_attr_e( 'Category Image', 'stm_vehicles_listing' ); ?>"/>
+
+				<input type="button" class="button-secondary button-image-add" value="<?php esc_attr_e( 'Choose image', 'stm_vehicles_listing' ); ?>"/>
+				<input type="button" class="button-secondary button-image-delete" style="display: none;" value="<?php esc_attr_e( 'Remove image', 'stm_vehicles_listing' ); ?>"/>
+			</div>
+			<script type="text/javascript">
+				jQuery(function ($) {
+					let parent = '.stm-choose-listing-image';
+
+					$( '.button-image-add', parent ).click(function () {
+						let $parent = $( this ).parents( parent );
+
+						let custom_uploader = wp.media({
+							title: "Select image",
+							button: {
+								text: "Attach"
+							},
+							multiple: false
+						}).on("select", function () {
+							let attachment = custom_uploader.state().get( "selection" ).first().toJSON();
+							$( '#stm_taxonomy_listing_image', $parent ).val( attachment.id );
+							$( '.stm_taxonomy_listing_image_chosen', $parent ).attr( 'src', attachment.url ).show();
+							$( '.button-image-delete', $parent ).show();
+						}).open();
+					});
+
+					$( '.button-image-delete', parent ).click( function ( e ) {
+						e.preventDefault();
+
+						let $parent = $( this ).parents( parent );
+
+						$( '#stm_taxonomy_listing_image', $parent ).val( '' );
+						$( '.stm_taxonomy_listing_image_chosen', $parent ).attr( 'src', '' ).hide();
+						$( '.button-image-delete', $parent ).hide();
+					} );
+				});
+			</script>
+		</div>
+		<?php
+	}
 }
 
 /*Edit field*/
 if ( ! function_exists( 'stm_taxonomy_listing_edit_field' ) ) {
 	function stm_taxonomy_listing_edit_field( $tag, $taxonomy ) {
-		$current_image             = get_term_meta( $tag->term_id, 'stm_image', true );
-		$default_image_placeholder = plugin_dir_url( __FILE__ ) . '../../assets/images/default_170x50.gif';
-		$default_image             = plugin_dir_url( __FILE__ ) . '../../assets/images/default_170x50.gif';
+		wp_enqueue_style( 'stm_admin_categories_option', STM_LISTINGS_URL . '/assets/css/admin/listing-categories.css', array(), STM_LISTINGS_V );
+
+		$current_image = get_term_meta( $tag->term_id, 'stm_image', true );
+		$default_image = STM_LISTINGS_URL . '/assets/images/default_170x50.gif';
+		$_selected     = false;
+
 		if ( ! empty( $current_image ) ) {
-			$default_image = wp_get_attachment_image_src( $current_image, 'thumbnail' );
+			$default_image = wp_get_attachment_image_src( $current_image );
 			if ( ! empty( $default_image[0] ) ) {
 				$default_image = $default_image[0];
+				$_selected     = true;
 			}
 		}
 
-        ?>
-        <tr class="form-field">
-            <th scope="row" valign="top"><label
-                    for="stm_taxonomy_listing_image"><?php esc_html_e('Category Image'); ?></label></th>
-            <td>
-                <div class="stm-choose-listing-image">
-                    <input
-                        type="hidden"
-                        name="stm_taxonomy_listing_image"
-                        id="stm_taxonomy_listing_image"
-                        value="<?php echo esc_attr( $current_image ); ?>"
-                        size="40"
-                        aria-required="true"/>
+		?>
+		<tr class="form-field">
+			<th scope="row" valign="top">
+				<label for="stm_taxonomy_listing_image">
+					<?php esc_html_e( 'Category Image', 'stm_vehicles_listing' ); ?>
+				</label>
+			</th>
+			<td>
+				<div class="stm-choose-listing-image">
+					<input
+						type="hidden"
+						name="stm_taxonomy_listing_image"
+						id="stm_taxonomy_listing_image"
+						value="<?php echo esc_attr( $current_image ); ?>"
+						size="40"
+						aria-required="true"/>
 
-                    <img class="stm_taxonomy_listing_image_chosen" src="<?php echo esc_url($default_image); ?>"/>
+					<img
+						class="stm_taxonomy_listing_image_chosen"
+						src="<?php echo esc_url( $default_image ); ?>"
+						<?php echo ! $_selected ? 'style="display: none;"' : ''; ?>
+						alt="<?php esc_attr_e( 'Category Image', 'stm_vehicles_listing' ); ?>"
+					/>
 
-                    <input type="button" class="button-primary" value="Choose image"/>
-                    <input type="button" class="button-primary-delete" value="Remove image"/>
-                </div>
-            </td>
-            <script type="text/javascript">
-                jQuery(function ($) {
-                    $(".stm-choose-listing-image .button-primary").click(function () {
-                        var custom_uploader = wp.media({
-                            title: "Select image",
-                            button: {
-                                text: "Attach"
-                            },
-                            multiple: false
-                        }).on("select", function () {
-                            var attachment = custom_uploader.state().get("selection").first().toJSON();
-                            $('#stm_taxonomy_listing_image').val(attachment.id);
-                            $('.stm_taxonomy_listing_image_chosen').attr('src', attachment.url);
-                        }).open();
-                    });
+					<input type="button" class="button-secondary button-image-add" value="<?php esc_attr_e( 'Choose image', 'stm_vehicles_listing' ); ?>"/>
+					<input
+						type="button"
+						class="button-secondary button-image-delete"
+						value="<?php esc_attr_e( 'Remove image', 'stm_vehicles_listing' ); ?>"
+						<?php echo ! $_selected ? 'style="display: none;"' : ''; ?>
+					/>
+				</div>
+			</td>
+			<script type="text/javascript">
+				jQuery(function ($) {
+					let parent = '.stm-choose-listing-image';
 
-                    $(".stm-choose-listing-image .button-primary-delete").click(function () {
-                        $('#stm_taxonomy_listing_image').val('');
-                        $('.stm_taxonomy_listing_image_chosen').attr('src', '<?php echo esc_url($default_image_placeholder); ?>');
-                    })
-                });
-            </script>
-        </tr>
-    <?php }
+					$( '.button-image-add', parent ).click(function () {
+						let $parent = $( this ).parents( parent );
+
+						let custom_uploader = wp.media({
+							title: "Select image",
+							button: {
+								text: "Attach"
+							},
+							multiple: false
+						}).on("select", function () {
+							let attachment = custom_uploader.state().get("selection").first().toJSON();
+
+							$( '#stm_taxonomy_listing_image', $parent ).val( attachment.id );
+							$( '.stm_taxonomy_listing_image_chosen', $parent ).attr( 'src', attachment.url ).show();
+							$( '.button-image-delete', $parent ).show();
+						}).open();
+					});
+
+					$( '.button-image-delete', parent ).click(function ( e ) {
+						e.preventDefault();
+
+						let $parent = $( this ).parents( parent );
+
+						$( '#stm_taxonomy_listing_image', $parent ).val( '' );
+						$( '.stm_taxonomy_listing_image_chosen', $parent ).attr( 'src', '' ).hide();
+						$( '.button-image-delete', $parent ).hide();
+					})
+				});
+			</script>
+		</tr>
+		<?php
+	}
 }
 
 /*Save value*/
@@ -135,15 +184,15 @@ if ( ! function_exists( 'stm_taxonomy_listing_image_save' ) ) {
 /*Parent tax*/
 $stm_get_car_parent_exist = stm_get_car_parent_exist();
 
-if (!empty($stm_get_car_parent_exist)) {
-    foreach ($stm_get_car_parent_exist as $stm_get_car_parent_exist_single) {
-        /** Add Custom Field To Form */
-        add_action($stm_get_car_parent_exist_single['slug'] . '_add_form_fields', 'stm_taxonomy_listing_add_field_parent', 10);
-        add_action($stm_get_car_parent_exist_single['slug'] . '_edit_form_fields', 'stm_taxonomy_listing_edit_field_parent', 10, 2);
-        /** Save Custom Field Of Form */
-        add_action('created_' . $stm_get_car_parent_exist_single['slug'], 'stm_taxonomy_listing_parent_save', 10, 2);
-        add_action('edited_' . $stm_get_car_parent_exist_single['slug'], 'stm_taxonomy_listing_parent_save', 10, 2);
-    }
+if ( ! empty( $stm_get_car_parent_exist ) ) {
+	foreach ( $stm_get_car_parent_exist as $stm_get_car_parent_exist_single ) {
+		/** Add Custom Field To Form */
+		add_action( $stm_get_car_parent_exist_single['slug'] . '_add_form_fields', 'stm_taxonomy_listing_add_field_parent', 10 );
+		add_action( $stm_get_car_parent_exist_single['slug'] . '_edit_form_fields', 'stm_taxonomy_listing_edit_field_parent', 10, 2 );
+		/** Save Custom Field Of Form */
+		add_action( 'created_' . $stm_get_car_parent_exist_single['slug'], 'stm_taxonomy_listing_parent_save', 10, 2 );
+		add_action( 'edited_' . $stm_get_car_parent_exist_single['slug'], 'stm_taxonomy_listing_parent_save', 10, 2 );
+	}
 }
 
 /*Add field*/

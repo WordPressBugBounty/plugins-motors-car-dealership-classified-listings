@@ -1,0 +1,189 @@
+.mvl-feedback-modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 99999;
+    padding-top: 150px;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.mvl-feedback-modal .feedback-modal-content {
+    position: relative;
+    max-width: 500px;
+    padding: 45px;
+    margin: auto;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.16);
+    background-color: #ffffff;
+  /** Rating Stars */
+}
+
+.mvl-feedback-modal .feedback-modal-content .feedback-modal-close {
+    position: absolute;
+    top: 5px;
+    right: -33px;
+    font-size: 36px;
+    font-weight: 300;
+    line-height: 24px;
+    cursor: pointer;
+}
+
+.mvl-feedback-modal .feedback-modal-content .feedback-thank-you {
+    display: block;
+    margin-bottom: 25px;
+}
+
+.mvl-feedback-modal .feedback-modal-content h2 {
+    font-size: 32px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.mvl-feedback-modal .feedback-modal-content .feedback-rating-stars {
+    margin-top: 25px;
+}
+
+.mvl-feedback-modal .feedback-modal-content .feedback-rating-stars ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.mvl-feedback-modal .feedback-modal-content .feedback-rating-stars ul li {
+    margin: 0;
+}
+
+.mvl-feedback-modal .feedback-modal-content .feedback-rating-stars ul li.star {
+    display: inline-block;
+}
+
+.mvl-feedback-modal .feedback-modal-content .feedback-rating-stars ul li.star:not(.disabled):hover {
+    opacity: 0.7;
+}
+
+.mvl-feedback-modal .feedback-modal-content .feedback-rating-stars ul li.star i {
+    display: block;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    background-repeat: no-repeat;
+}
+
+.mvl-feedback-modal .feedback-modal-content .feedback-rating-stars ul li.star.selected i {
+    color: #d6981b;
+    background: url(../../includes/class/Plugin/assets/img/star-filled.svg) no-repeat;
+}
+
+.mvl-feedback-modal .feedback-modal-content .feedback-rating-stars .rating-text {
+    color: #2f3138;
+    font-size: 26px;
+    font-style: italic;
+    font-weight: 300;
+    margin-top: 5px;
+}
+
+.mvl-feedback-modal .feedback-modal-content .feedback-review-text {
+    color: #2f3138;
+    font-size: 15px;
+    margin-top: 20px;
+}
+
+.mvl-feedback-modal .feedback-modal-content .feedback-extra {
+    display: none;
+    text-align: left;
+}
+
+.mvl-feedback-modal .feedback-modal-content .feedback-extra textarea {
+    width: 100%;
+    resize: none;
+    margin-top: 25px;
+    padding: 14px;
+    border-radius: 5px;
+    border: 1px solid #cfcfcf;
+    background-color: #f0f8f8;
+    color: #2f3138;
+    font-size: 16px;
+}
+
+.mvl-feedback-modal .feedback-modal-content .feedback-extra textarea:focus, .mvl-feedback-modal .feedback-modal-content .feedback-extra textarea:active {
+    outline: 0;
+    box-shadow: none;
+    border: 1px solid #11c482;
+    background-color: #ffffff;
+}
+
+.mvl-feedback-modal .feedback-modal-content .feedback-extra textarea::-moz-placeholder {
+    opacity: 0.5;
+    color: #2f3138;
+    font-size: 14px;
+}
+
+.mvl-feedback-modal .feedback-modal-content .feedback-extra textarea::placeholder {
+    opacity: 0.5;
+    color: #2f3138;
+    font-size: 14px;
+}
+
+.mvl-feedback-modal .feedback-modal-content .feedback-extra small {
+    opacity: 0.8;
+}
+
+.mvl-feedback-modal .feedback-modal-content .feedback-submit {
+    width: 100%;
+    display: block;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-top: 20px;
+    padding: 17px 0;
+    border: none;
+    border-radius: 5px;
+    background-color: #00a0df;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.12);
+}
+
+.mvl-feedback-modal .feedback-modal-content .feedback-submit:focus {
+    outline: 0;
+}
+
+.mvl-feedback-modal .feedback-modal-content .feedback-submit img {
+    width: 16px;
+    margin-left: 5px;
+    vertical-align: text-top;
+}
+
+.mvl-feedback {
+    display: flex;
+    justify-content: center;
+    margin: 35px 0 15px 0;
+    padding: 0 32px;
+}
+
+.mvl-feedback .mvl-feedback-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(180deg, rgb(59, 150, 251) 0%, rgb(36, 121, 246) 100%);
+    padding: 12px 18px;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    width: 100%;
+    outline: none;
+    box-shadow: none;
+}
+
+.mvl-feedback .mvl-feedback-button img {
+    margin-left: 7px;
+}

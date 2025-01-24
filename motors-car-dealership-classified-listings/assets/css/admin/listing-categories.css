@@ -1,0 +1,19 @@
+.stm-choose-listing-image {
+    vertical-align: middle !important;
+    margin: 5px 0 20px;
+}
+
+.stm-choose-listing-image .button-primary {
+    vertical-align: middle !important;
+}
+
+.stm-choose-listing-image .button-primary-delete {
+    margin: 0 0 0 2px;
+}
+
+.stm-choose-listing-image .stm_taxonomy_listing_image_chosen {
+    vertical-align: middle !important;
+    max-height: 60px;
+    margin: 0 8px 0 0;
+    border-radius: 3px;
+}

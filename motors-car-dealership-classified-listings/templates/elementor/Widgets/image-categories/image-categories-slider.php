@@ -126,10 +126,9 @@ if ( ! empty( $taxonomy ) ) :
 											$category_image = $image[0];
 										}
 										?>
-										<?php if ( ! empty( $category_image && $taxonomy_info['use_on_car_modern_filter_view_images'] ) ) : ?>
+										<?php if ( ! empty( $category_image ) ) : ?>
 											<div class="image">
-												<img src="<?php echo esc_url( $category_image ); ?>"
-														alt="<?php echo esc_attr( $stm_term->name ); ?>"/>
+												<img src="<?php echo esc_url( $category_image ); ?>" alt="<?php echo esc_attr( $stm_term->name ); ?>"/>
 											</div>
 										<?php endif; ?>
 										<div class="name">

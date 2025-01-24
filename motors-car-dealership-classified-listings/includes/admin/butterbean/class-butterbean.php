@@ -739,6 +739,10 @@ if ( ! class_exists( 'ButterBean' ) ) {
 				wp_enqueue_script( 'stm-listings-js' );
 			}
 
+            if ( ! wp_script_is( 'stm-listings-old-js' ) ) {
+                wp_enqueue_script( 'stm-listings-old-js' );
+            }
+
 
 			// Loop through the manager and its controls and call each control's `enqueue()` method.
 			foreach ( $this->managers as $manager ) {

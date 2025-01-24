@@ -33,7 +33,6 @@ class OptionsHelper {
 		'use_on_car_filter'                     => 'checkbox',
 		'use_on_tabs'                           => 'checkbox',
 		'use_on_car_modern_filter'              => 'checkbox',
-		'use_on_car_modern_filter_view_images'  => 'checkbox',
 		'use_on_car_filter_links'               => 'checkbox',
 		'filter_links_default_expanded'         => 'radio',
 		'use_in_footer_search'                  => 'checkbox',

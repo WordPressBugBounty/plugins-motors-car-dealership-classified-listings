@@ -291,10 +291,10 @@ function mvl_setup_wizard_generate_pages() {
 			}
 
 			$post_data = array(
-				'post_title'   => $template['title'],
-				'post_name'    => $slug,
-				'post_status'  => 'publish',
-				'post_type'    => 'listing_template',
+				'post_title'  => $template['title'],
+				'post_name'   => $slug,
+				'post_status' => 'publish',
+				'post_type'   => 'listing_template',
 			);
 
 			$id = wp_insert_post( $post_data );

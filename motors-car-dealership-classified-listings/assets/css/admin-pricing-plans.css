@@ -528,3 +528,123 @@
         font-size: 18px
     }
 }
+
+.mvl-compare-wrapper {
+    margin-top: 50px;
+    .mvl-compare-title {
+        display: flex;
+        flex-direction: column;
+        .mvl-compare-heading {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+        .mvl-compare-subtitle {
+            text-align: center;
+            font-size: 16px;
+            font-weight: 400;
+            color: #35475ACC;
+        }
+    }
+    .mvl-compare-items-header-wrapper {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 15px;
+        .mvl-compare-items-header-wrapper-item {
+            min-width: 280px;
+            padding: 5px 20px;
+            background-color: #fff;
+            border-radius: 16px;
+            border-bottom: 2px solid #35475A66;
+            .mvl-compare-item-name {
+                font-size: 42px;
+                font-weight: 700;
+                margin-bottom: 5px;
+                color: #35475A;
+                margin-top: 30px;
+            }
+            .mvl-compare-item-descr {
+                font-size: 16px;
+                font-weight: 500;
+                color: #35475A;
+                margin-bottom: 10px;
+            }
+        }
+        .mvl-compare-items-header-wrapper-item.pro {
+            width: 100%;
+            margin-left: 40px;
+            background-color: rgba(18, 128, 223, 0.1);
+            border-bottom: 2px solid #1280DF;
+            .mvl-compare-item-name {
+                color: #1280DF;
+            }
+        }
+    }
+    .mvl-compare-table-wrapper {
+        display: flex;
+        justify-content: space-between;
+        .mvl-compare-table-item {
+            .mvl-compare-lists {
+                min-width: 280px;
+                padding: 20px;
+                border-bottom: 1px solid #e1e1e1;
+                display: flex;
+            }
+            .mvl-compare-features-list {
+                margin-top: 5px;
+            }
+            .mvl-compare-features-list-item {
+                margin-top: 15px;
+                margin-bottom: 0;
+                .mvl-compare-features-list-item-name {
+                    font-size: 14px;
+                    font-weight: 400;
+                    color: #35475A;
+                    i {
+                        color: #35475A66;
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+        .mvl-compare-table-item.pro {
+            width: 100%;
+            margin-left: 40px;
+            .mvl-compare-lists {
+                border-bottom: 1px solid #1280DF;
+            }
+            .mvl-compare-features-list {
+                display: flex;
+                flex-wrap: wrap;
+                width: 100%;
+                .mvl-compare-features-list-item {
+                    width: 50%;
+                }
+                .mvl-compare-features-list-item.full-width {
+                    width: 100%;
+                }
+            }
+            .mvl-compare-features-list-item {
+                .mvl-compare-features-list-item-name {
+                    i {
+                        color: #1280DF;
+                    }
+                }
+            }
+        }
+        .mvl-compare-get-wrapper {
+            display: flex;
+            margin-top: 20px;
+            .mvl-compare-get-btn {
+                padding: 10px 25px;
+                background-color: #1280DF;
+                border-radius: 10px;
+                color: #fff;
+                font-weight: 600;
+                outline: none;
+                box-shadow: none;
+            }
+        }
+    }
+}

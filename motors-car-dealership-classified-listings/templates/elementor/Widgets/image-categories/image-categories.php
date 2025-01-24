@@ -28,9 +28,7 @@ if ( ! empty( $taxonomy ) ) :
 			if ( empty( $image ) ) {
 				$terms_text[] = $stm_term;
 			} else {
-				if ( $taxonomy_info['use_on_car_modern_filter_view_images'] ) {
-					$terms_images[] = $stm_term;
-				}
+				$terms_images[] = $stm_term;
 			}
 		}
 	}
