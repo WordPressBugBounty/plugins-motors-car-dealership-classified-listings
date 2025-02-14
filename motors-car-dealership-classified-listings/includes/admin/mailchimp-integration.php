@@ -17,7 +17,7 @@ if ( file_exists( STM_LISTINGS_PATH . '/includes/lib/stm-mailchimp-integration/s
 		if ( ! function_exists( 'is_plugin_active' ) ) {
 			include_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
-		add_action( 'plugins_loaded', 'init_mvl_mailchimp', 10, 1 );
+		add_action( 'init', 'init_mvl_mailchimp', 10, 1 );
 		function init_mvl_mailchimp() {
 			$is_pro_exist = false;
 			$init_data    = array(

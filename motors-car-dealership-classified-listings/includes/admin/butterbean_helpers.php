@@ -221,6 +221,38 @@ function stm_listings_add_category_in() {
 
 add_action( 'wp_ajax_stm_listings_add_category_in', 'stm_listings_add_category_in' );
 
+add_action( 'save_post', 'stm_butterbean_add_new_listings_terms', 50, 1 );
+
+function stm_butterbean_add_new_listings_terms( $post_id ) {
+	$manager_slug = 'stm_car';
+	$options      = get_option( 'stm_vehicle_listing_options' );
+	$post_type    = get_post_type( $post_id );
+
+	if ( $post_type != apply_filters( 'stm_listings_post_type', 'listings' ) ) {
+		$manager_slug = $post_type;
+		$options      = get_option( "stm_{$post_type}_options" );
+	}
+	$field_prefix = 'butterbean_' . $manager_slug . '_manager_setting_';
+
+	foreach ( $_POST as $field_key => $field_value ) {
+		if ( str_starts_with( $field_key, $field_prefix ) ) {
+			$field_name = substr( $field_key, strlen( $field_prefix ) );
+			foreach ( $options as $option ) {
+				if ( $field_name === $option['slug'] && $option['numeric'] ) {
+					$term_slug = sanitize_title( $field_value );
+					$term_id   = term_exists( $term_slug, $field_name );
+					if ( 0 === $term_id || is_null( $term_id ) ) {
+						$new_term = wp_insert_term( $field_value, $field_name );
+						if ( ! is_wp_error( $new_term ) ) {
+							wp_set_object_terms( $post_id, $new_term['term_id'], $field_name, true );
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 add_action( 'save_post', 'stm_butterbean_save_post', 100, 1 );
 
 function stm_butterbean_save_post( $post_id ) {

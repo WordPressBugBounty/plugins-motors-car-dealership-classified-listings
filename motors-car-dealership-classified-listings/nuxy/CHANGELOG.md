@@ -1,4 +1,10 @@
-## 4.4.31
+## 4.4.35
+- **Fix:** Fix bugs on click by some search results
+## 4.4.34
+- **New:** Available search by settings
+## 4.4.33
+- **Fix:** Fixed Import/Export options.
+## 4.4.32
 - **Fix:** Fixed minor bug.
 ## 4.4.31
 - **Fix:** Fixed type string.

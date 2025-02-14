@@ -8,7 +8,7 @@
  * License: GNU General Public License v2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: stm_vehicles_listing
- * Version: 1.4.52
+ * Version: 1.4.53
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -49,7 +49,7 @@ if ( ! defined( 'STM_LISTINGS_PATH' ) ) {
 	define( 'STM_LISTINGS_URL', plugins_url( '', STM_LISTINGS_FILE ) );
 	define( 'STM_LISTINGS', 'stm_vehicles_listing' );
 	define( 'STM_THEME_V_NEED', '5.6.33' );
-	define( 'STM_LISTINGS_V', '1.4.52' );
+	define( 'STM_LISTINGS_V', '1.4.53' );
 	define( 'STM_LISTINGS_IMAGES', STM_LISTINGS_URL . '/includes/admin/butterbean/images/' );
 }
 
@@ -76,9 +76,16 @@ use MotorsVehiclesListing\Elementor\Nuxy\FeaturesSettings;
 use MotorsVehiclesListing\Helper\ListingStats;
 use Motors_Elementor_Widgets_Free\MotorsElementorWidgetsFree;
 
-if ( ! is_textdomain_loaded( 'stm_vehicles_listing' ) ) {
-	load_plugin_textdomain( 'stm_vehicles_listing', false, 'stm_vehicles_listing/languages' );
-}
+add_action(
+	'plugins_loaded',
+	function () {
+		if ( ! is_textdomain_loaded( 'stm_vehicles_listing' ) ) {
+			load_plugin_textdomain( 'stm_vehicles_listing', false, 'stm_vehicles_listing/languages' );
+		}
+	},
+	1
+);
+
 
 if ( ! in_array( 'stm-motors-extends/stm-motors-extends.php', (array) get_option( 'active_plugins', array() ), true ) ) {
 	add_action(
@@ -256,5 +263,6 @@ add_action(
 		} else {
 			require_once STM_LISTINGS_PATH . '/includes/email_templates/email_templates.php';
 		}
-	}
+	},
+	10
 );

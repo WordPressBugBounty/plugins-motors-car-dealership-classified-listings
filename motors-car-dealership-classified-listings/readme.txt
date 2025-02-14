@@ -5,7 +5,7 @@ Donate link: https://www.paypal.me/stylemix
 Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
 Tested up to: 6.7
-Stable tag: 1.4.52
+Stable tag: 1.4.53
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -132,6 +132,11 @@ After that, go to Tools -> Import, and via Wordpress Importer tool install dummy
 8. Additional features
 
 == Changelog ==
+
+= 1.4.53 =
+- **Enhancement:** Added a search bar to quickly find settings and options in the plugin settings.
+- **Fix:** Fixed an issue where terms were not saved for numeric fields when added while editing a listing.
+- **Fix:** Resolved a translation loading issue that caused warnings to appear.
 
 = 1.4.52 =
 - **Enhancement:** Upgraded the design of custom fields to make them more user-friendly and intuitive.
