@@ -90,6 +90,9 @@ $aria_label = sprintf(
 					}
 				} else {
 					echo esc_html( apply_filters( 'mvl_get_dynamic_string_translation', $option['label'], 'Listing Category ' . $option['label'] ) );
+					if ( ! empty( $show_count ) && ! empty( $option['count'] ) ) {
+						echo wp_kses_post( ' (' . $option['count'] ) . ')';
+					}
 				}
 				?>
 			</option>

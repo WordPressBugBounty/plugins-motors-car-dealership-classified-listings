@@ -785,9 +785,99 @@ function stm_listings_init() {
 			'register_meta_box_cb' => 'stm_add_test_drives_metaboxes',
 		)
 	);
+
+	if ( apply_filters( 'is_mvl_pro', false ) && ! apply_filters( 'stm_is_motors_theme', false ) ) {
+		register_post_type(
+			'dealer_review',
+			array(
+				'labels'             => array(
+					'name'               => __( 'Dealer Reviews', 'stm_vehicles_listing' ),
+					'singular_name'      => __( 'Dealer Reviews', 'stm_vehicles_listing' ),
+					'add_new'            => __( 'Add New', 'stm_vehicles_listing' ),
+					'add_new_item'       => __( 'Add New Dealer Reviews', 'stm_vehicles_listing' ),
+					'edit_item'          => __( 'Edit Dealer Reviews', 'stm_vehicles_listing' ),
+					'new_item'           => __( 'New Dealer Reviews', 'stm_vehicles_listing' ),
+					'all_items'          => __( 'All Dealer Reviews', 'stm_vehicles_listing' ),
+					'view_item'          => __( 'View Dealer Reviews', 'stm_vehicles_listing' ),
+					'search_items'       => __( 'Search Dealer Reviews', 'stm_vehicles_listing' ),
+					'not_found'          => __( 'No Dealer Reviews found', 'stm_vehicles_listing' ),
+					'not_found_in_trash' => __( 'No Dealer Reviews found in Trash', 'stm_vehicles_listing' ),
+					'parent_item_colon'  => '',
+					'menu_name'          => __( 'Dealer Reviews', 'stm_vehicles_listing' ),
+				),
+				'public'               => true,
+				'publicly_queryable'   => false,
+				'show_ui'              => true,
+				'show_in_menu'         => 'admin.php?page=mvl_plugin_settings',
+				'show_in_nav_menus'    => false,
+				'query_var'            => true,
+				'has_archive'          => true,
+				'hierarchical'         => false,
+				'menu_position'        => null,
+				'menu_icon'            => null,
+				'supports'             => array( 'title', 'editor' ),
+				'register_meta_box_cb' => 'stm_add_dealer_review_metabox',
+			)
+		);
+	}
 }
 
 add_filter( 'get_pagenum_link', 'stm_listings_get_pagenum_link' );
+
+function stm_add_dealer_review_metabox() {
+	$rates = array();
+	for ( $i = 1; $i < 6; $i ++ ) {
+		$rates[ $i ] = $i;
+	}
+
+	$likes = array(
+		'neutral' => esc_html__( 'Neutral', 'stm_vehicles_listing' ),
+		'yes'     => esc_html__( 'Yes', 'stm_vehicles_listing' ),
+		'no'      => esc_html__( 'No', 'stm_vehicles_listing' ),
+	);
+	add_meta_box(
+		'dealer_review_form',
+		__( 'Dealer Reviews', 'stm_vehicles_listing' ),
+		'display_metaboxes',
+		'dealer_review',
+		'normal',
+		'',
+		array(
+			'fields' => array(
+				'stm_review_added_by' => array(
+					'label'   => __( 'User added by', 'stm_vehicles_listing' ),
+					'type'    => 'select',
+					'options' => stm_listings_get_user_list(),
+				),
+				'stm_review_added_on' => array(
+					'label'   => __( 'User added on', 'stm_vehicles_listing' ),
+					'type'    => 'select',
+					'options' => stm_listings_get_user_list(),
+				),
+				'stm_rate_1'          => array(
+					'label'   => __( 'Rate 1', 'stm_vehicles_listing' ),
+					'type'    => 'select',
+					'options' => $rates,
+				),
+				'stm_rate_2'          => array(
+					'label'   => __( 'Rate 2', 'stm_vehicles_listing' ),
+					'type'    => 'select',
+					'options' => $rates,
+				),
+				'stm_rate_3'          => array(
+					'label'   => __( 'Rate 3', 'stm_vehicles_listing' ),
+					'type'    => 'select',
+					'options' => $rates,
+				),
+				'stm_recommended'     => array(
+					'label'   => __( 'Recommended', 'stm_vehicles_listing' ),
+					'type'    => 'select',
+					'options' => $likes,
+				),
+			),
+		)
+	);
+}
 
 function stm_add_test_drives_metaboxes() {
 	add_meta_box(
@@ -845,6 +935,13 @@ function display_metaboxes( $post, $metabox ) {
 					$html .= '<p class="textfield-description">' . $field['description'] . '</p>';
 				}
 				break;
+			case 'select':
+				$html .= '<select name="' . esc_attr( $key ) . '" id="' . esc_attr( $key ) . '">';
+				foreach ( $field['options'] as $option_key => $option_value ) {
+					$html .= '<option' . ( $meta == $option_key ? ' selected="selected"' : '' ) . ' value="' . esc_attr( $option_key ) . '">' . esc_html( $option_value ) . '</option>';
+				}
+				$html .= '</select>';
+				break;
 		}
 		$html .= '</td></tr>';
 	}
@@ -881,6 +978,31 @@ function stm_save_metaboxes( $post_id ) {
 			'date'  => array(
 				'label' => __( 'Day', 'stm_vehicles_listing' ),
 				'type'  => 'text',
+			),
+			//dealer reviews
+			'stm_review_added_by' => array(
+				'label' => __( 'User added by', 'stm_vehicles_listing' ),
+				'type'  => 'select',
+			),
+			'stm_review_added_on' => array(
+				'label' => __( 'User added on', 'stm_vehicles_listing' ),
+				'type'  => 'select',
+			),
+			'stm_rate_1'          => array(
+				'label' => __( 'Rate 1', 'stm_vehicles_listing' ),
+				'type'  => 'select',
+			),
+			'stm_rate_2'          => array(
+				'label' => __( 'Rate 2', 'stm_vehicles_listing' ),
+				'type'  => 'select',
+			),
+			'stm_rate_3'          => array(
+				'label' => __( 'Rate 3', 'stm_vehicles_listing' ),
+				'type'  => 'select',
+			),
+			'stm_recommended'     => array(
+				'label' => __( 'Recommended', 'stm_vehicles_listing' ),
+				'type'  => 'select',
 			),
 		),
 	);
@@ -920,6 +1042,8 @@ function stm_save_metaboxes( $post_id ) {
 		}
 	}
 }
+
+add_action( 'save_post', 'stm_save_metaboxes' );
 
 function stm_listings_get_pagenum_link( $link ) {
 	return remove_query_arg( 'ajax_action', $link );

@@ -32,6 +32,11 @@ $data = apply_filters( 'stm_get_car_archive_listings', array() );
 	(function ($) {
 		"use strict";
 		$(document).ready(function () {
+			var $container = $('.stm-isotope-sorting');
+			if ($container.length && !$container.data('isotope')) {
+				$container.isotope();
+			}
+
 			$('body').on('click', '.stm-sort-list-params ul li', function (e) {
 				var $sort = $(this).attr('data-sort');
 				
@@ -46,33 +51,35 @@ $data = apply_filters( 'stm_get_car_archive_listings', array() );
 					$('.stm-sort-list-params ul li').attr('data-sort', 'none');
 					$(this).attr('data-sort', 'high');
 				}
+
+				$container.isotope('updateSortData').isotope();
 			});
 		});
-		
 	})(jQuery);
-	
+
 	function stm_isotope_sort_function_horizontal(currentChoice) {
 		var $ = jQuery;
 		var stm_choice = currentChoice;
 		var $container = $('.stm-isotope-sorting');
+
+		$container.isotope('updateSortData').isotope();
+
 		switch (stm_choice) {
-	
-	<?php
-		if ( ! empty( $listing_list_sort_slug ) ) {
-			stm_display_script_sort( $listing_list_sort_slug );
-		};
-		if ( ! empty( $data ) ) {
-			foreach ( $data as $single_data ) {
-				stm_display_script_sort( $single_data );
+			<?php
+			if ( ! empty( $listing_list_sort_slug ) ) {
+				stm_display_script_sort( $listing_list_sort_slug );
+			};
+			if ( ! empty( $data ) ) {
+				foreach ( $data as $single_data ) {
+					stm_display_script_sort( $single_data );
+				}
 			}
-		}
-		stm_display_script_sort( array( 'slug' => 'price', 'numeric' => 1 ) );
-		?>
+			stm_display_script_sort( array( 'slug' => 'price', 'numeric' => 1 ) );
+			?>
 			default:
-			
+				break;
 		}
-		
-		// $container.isotope('updateSortData').isotope();
+
 		$('img').trigger('appear');
 	}
 </script>

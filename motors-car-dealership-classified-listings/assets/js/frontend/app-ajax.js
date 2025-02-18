@@ -52,7 +52,7 @@
 			$.ajax({
 				url: ajaxurl,
 				data: {
-					action: 'stm_ajax_dealer_load_cars',
+					action: 'mvl_ajax_dealer_load_cars',
 					offset: offset,
 					user_id: user_id,
 					popular: popular,
@@ -105,4 +105,63 @@
         var newUrl = window.location.origin + window.location.pathname;
         window.history.replaceState({}, document.title, newUrl);
     }
+
+	$('#sort_by_select').on('change', function () {
+		var sortBy = $(this).val()
+		var user_id = $(this).data('user')
+		var posts_per_page = $(this).data('posts-per-page')
+		var data = {
+			action: 'stm_sort_listings',
+			sort_by: sortBy,
+			user_id: user_id,
+			page: 1,
+			posts_per_page: posts_per_page,
+		}
+		$.ajax({
+			url: ajaxurl,
+			type: 'POST',
+			data: data,
+			success: function (response) {
+				if (response.success) {
+					$('.car-listing-row').html(response.data.listings_html)
+					$('.pagination-container').html(response.data.pagination_html)
+					$('#sort_by_select').data('page', 1)
+
+					if (response.data.show_more_button) {
+						$('.stm-load-more-dealer-cars').show()
+					} else {
+						$('.stm-load-more-dealer-cars').hide()
+					}
+				}
+			},
+		})
+	})
+
+	$(document).on('click', '.pagination-container a', function (e) {
+		e.preventDefault()
+		var page = $(this).attr('href').split('page=')[1]
+		var sortBy = $('#sort_by_select').val()
+		var user_id = $('#sort_by_select').data('user')
+		var posts_per_page = $('#sort_by_select').data('posts-per-page')
+		var data = {
+			action: 'stm_sort_listings',
+			sort_by: sortBy,
+			user_id: user_id,
+			page: page,
+			posts_per_page: posts_per_page,
+		}
+		$.ajax({
+			url: ajaxurl,
+			type: 'POST',
+			data: data,
+			success: function (response) {
+				if (response.success) {
+					$('.car-listing-row').html(response.data.listings_html)
+					$('.pagination-container').html(response.data.pagination_html)
+					$('#sort_by_select').data('page', page)
+				}
+			},
+		})
+	})
+
 })(jQuery)

@@ -1077,3 +1077,69 @@ if ( ! function_exists( 'stm_filter_media_upload_size' ) ) {
 
 	add_filter( 'stm_listing_media_upload_size', 'stm_filter_media_upload_size' );
 }
+
+function stm_sort_listings_callback() {
+	if ( ! isset( $_POST['sort_by'] ) || ! isset( $_POST['user_id'] ) ) {
+		wp_send_json_error( 'Invalid request' );
+	}
+	$sort_by        = sanitize_text_field( $_POST['sort_by'] );
+	$user_id        = intval( $_POST['user_id'] );
+	$page           = isset( $_POST['page'] ) ? intval( $_POST['page'] ) : 1;
+	$posts_per_page = isset( $_POST['posts_per_page'] ) ? intval( $_POST['posts_per_page'] ) : 6;
+	$offset         = $posts_per_page * ( $page - 1 );
+	$status         = 'any';
+	if ( 'pending' === $sort_by ) {
+		$status = 'pending';
+	} elseif ( 'draft' === $sort_by ) {
+		$status = 'draft';
+	}
+	$query = stm_user_listings_query( $user_id, $status, $posts_per_page, false, $offset );
+	ob_start();
+	if ( $query->have_posts() ) {
+		while ( $query->have_posts() ) {
+			$query->the_post();
+			?>
+			<div class="stm_listing_edit_car <?php echo esc_attr( get_post_status( get_the_id() ) ); ?>">
+				<?php do_action( 'stm_listings_load_template', 'listing-cars/listing-list-directory-edit-loop' ); ?>
+			</div>
+			<?php
+		}
+		wp_reset_postdata();
+	} else {
+		echo wp_kses_post( '<h4 class="stm-seller-title">' . __( 'No listings found.', 'stm_vehicles_listing' ) . '</h4>' );
+	}
+	$listings_html = ob_get_clean();
+	ob_start();
+	$total_pages = $query->max_num_pages;
+	if ( $total_pages > 1 ) {
+		echo wp_kses_post(
+			paginate_links(
+				array(
+					'type'      => 'list',
+					'format'    => '?page=%#%',
+					'current'   => $page,
+					'total'     => $total_pages,
+					'prev_text' => '<i class="fas fa-angle-left"></i>',
+					'next_text' => '<i class="fas fa-angle-right"></i>',
+				)
+			)
+		);
+	}
+	$pagination_html = ob_get_clean();
+
+	$show_more_button = ( $query->found_posts > $posts_per_page && $page < $total_pages );
+
+	wp_send_json_success(
+		array(
+			'listings_html'    => $listings_html,
+			'pagination_html'  => $pagination_html,
+			'total_pages'      => $total_pages,
+			'current_page'     => $page,
+			'show_more_button' => $show_more_button,
+		)
+	);
+	wp_die();
+}
+
+add_action( 'wp_ajax_stm_sort_listings', 'stm_sort_listings_callback' );
+add_action( 'wp_ajax_nopriv_stm_sort_listings', 'stm_sort_listings_callback' );

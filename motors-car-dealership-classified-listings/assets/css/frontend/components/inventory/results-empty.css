@@ -39,3 +39,10 @@
     color: #888888;
     margin-bottom: 45px;
 }
+
+.stm-listings-empty .motors-icons-search-list {
+    display: block;
+    font-size: 60px;
+    color: #888888;
+    margin-bottom: 45px;
+}

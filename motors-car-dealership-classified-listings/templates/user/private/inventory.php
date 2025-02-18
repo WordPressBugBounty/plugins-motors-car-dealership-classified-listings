@@ -1,8 +1,9 @@
 <?php
+mvl_enqueue_header_scripts_styles( 'stmselect2' );
+mvl_enqueue_header_scripts_styles( 'app-select2' );
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-
 $posts_per_page   = apply_filters( 'motors_vl_get_nuxy_mod', 6, 'post_per_page_user_inventory' );
 $page             = ( ! empty( $_GET['page'] ) ) ? intval( $_GET['page'] ) : 1;//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 $offset           = $posts_per_page * ( $page - 1 );
@@ -12,7 +13,35 @@ $query = stm_user_listings_query( $user_id, 'any', $posts_per_page, false, $offs
 
 if ( $query->have_posts() ) : ?>
 	<div class="archive-listing-page">
+		<div class="archive-listing-page-heading">
+			<div class="stm-sort-private-my-cars">
+			<?php if ( stm_is_multilisting() ) : ?>
+				<?php
+				$listings = stm_listings_multi_type( true );
+				if ( ! empty( $listings ) ) :
+					?>
+					<div class="select-type select-listing-type" style="margin-right: 15px;">
+						<div class="stm-label-type"><?php esc_html_e( 'Listing type', 'stm_vehicles_listing' ); ?></div>
+						<select data-user="<?php echo esc_attr( $user_id ); ?>" data-user-private="1">
+							<option value="all" selected><?php esc_html_e( 'All listing types', 'stm_vehicles_listing' ); ?></option>
+							<?php foreach ( $listings as $slug => $label ) : ?>
+								<option value="<?php echo esc_attr( $slug ); ?>" <?php echo ( isset( $_GET['listing_type'] ) && $_GET['listing_type'] === $slug ) ? 'selected' : ''; ?>><?php echo esc_html( $label ); ?></option>
+							<?php endforeach; ?>
+						</select>
+					</div>
+				<?php endif; ?>
+			<?php endif; ?>
+			<div class="select-type select-order-by">
+				<div class="stm-label-type"><?php esc_html_e( 'Sort by', 'stm_vehicles_listing' ); ?></div>
+				<select id="sort_by_select" data-user="<?php echo esc_attr( $user_id ); ?>" data-user-private="1" data-posts-per-page="<?php echo esc_attr( $posts_per_page ); ?>" data-page="<?php echo esc_attr( $page ); ?>">
+					<option value="all"><?php esc_html_e( 'All', 'stm_vehicles_listing' ); ?></option>
+					<option value="pending"><?php esc_html_e( 'Pending', 'stm_vehicles_listing' ); ?></option>
+					<option value="draft"><?php esc_html_e( 'Disabled', 'stm_vehicles_listing' ); ?></option>
+				</select>
+			</div>
+		</div>
 		<h1><?php esc_html_e( 'My Listings', 'stm_vehicles_listing' ); ?></h1>
+		</div>
 		<div class="car-listing-row">
 			<?php
 			while ( $query->have_posts() ) :
@@ -35,6 +64,9 @@ if ( $query->have_posts() ) : ?>
 			</div>
 			<?php
 			else :
+				?>
+				<div class="pagination-container">
+				<?php
 				echo paginate_links( //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					array(
 						'type'           => 'list',
@@ -46,6 +78,9 @@ if ( $query->have_posts() ) : ?>
 						'next_text'      => '<i class="fas fa-angle-right"></i>',
 					)
 				);
+				?>
+			</div>
+				<?php
 		endif;
 			?>
 	</div>

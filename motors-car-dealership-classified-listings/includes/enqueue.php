@@ -187,6 +187,7 @@ function stm_listings_enqueue_scripts_styles() {
 		true
 	);
 	wp_enqueue_script( 'mlv-plugin-scripts', STM_LISTINGS_URL . '/assets/js/frontend/plugin.js', array( 'listings-init' ), STM_LISTINGS_V, true );
+	wp_enqueue_script( 'mvl-user-sidebar', STM_LISTINGS_URL . '/assets/js/frontend/app-user-sidebar.js', array( 'jquery' ), STM_LISTINGS_V, true );
 	wp_enqueue_script( 'listings-filter', STM_LISTINGS_URL . '/assets/js/frontend/filter.js', array( 'listings-init', 'stmselect2' ), STM_LISTINGS_V, true );
 	wp_enqueue_script( 'app-ajax', STM_LISTINGS_URL . '/assets/js/frontend/app-ajax.js', array( 'jquery' ), STM_LISTINGS_V, true );
 	$inline_script_recaptcha = "var onloadRecaptchaCallback = function() {

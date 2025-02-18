@@ -246,6 +246,28 @@ class Settings {
 				}
 			);
 		}
+
+		$dealer_reviews_data = get_post_type_object( 'dealer_review' );
+		if ( ! empty( $dealer_reviews_data ) && apply_filters( 'is_mvl_pro', false ) && ! apply_filters( 'stm_is_motors_theme', false ) ) {
+			add_submenu_page(
+				'mvl_plugin_settings',
+				ucwords( $dealer_reviews_data->label ),
+				ucwords( $dealer_reviews_data->label ),
+				'manage_options',
+				'/edit.php?post_type=' . $dealer_reviews_data->name,
+				'',
+				10
+			);
+
+			add_filter(
+				'mvl_submenu_positions',
+				function ( $positions ) use ( $dealer_reviews_data ) {
+					$positions[ 'edit.php?post_type=' . $dealer_reviews_data->name ] = 20;
+
+					return $positions;
+				}
+			);
+		}
 	}
 
 	public function mvl_add_submenu_settings() {

@@ -1233,9 +1233,9 @@ if ( ! function_exists( 'stm_ajax_add_a_car' ) ) {
 		}
 
 		if ( empty( $_POST['stm_car_price'] ) ) {
-			$error               = true;
-			$price               = '';
-			$normal_price        = '';
+			$error        = true;
+			$price        = '';
+			$normal_price = '';
 		} else {
 			$price = stm_convert_to_normal_price( abs( intval( $_POST['stm_car_price'] ) ) );
 		}
@@ -2289,7 +2289,6 @@ if ( ! function_exists( 'stm_edit_delete_user_car' ) ) {
 					update_post_meta( $post_id, 'car_mark_as_sold', isset( $_GET['stm_mark_as_sold_car'] ) ? 'on' : '' );
 				}
 			}
-
 			if ( ! empty( $_GET['stm_disable_user_car'] ) && wp_verify_nonce( $_GET['_wpnonce'], 'stm_disable_user_car' ) ) {
 
 				$car    = intval( $_GET['stm_disable_user_car'] );

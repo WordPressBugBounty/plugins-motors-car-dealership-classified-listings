@@ -22,6 +22,10 @@ a.motors-profile-button span {
     color: #35475A;
 }
 
+.elementor-widget-motors-profile-button {
+    z-index: 1;
+}
+
 .lOffer-account-dropdown {
     position: absolute;
     top: 110%;
@@ -123,6 +127,31 @@ a.motors-profile-button span {
 
 .lOffer-account-dropdown.stm-login-form-unregistered h4 {
     margin-bottom: 14px;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.lOffer-account-dropdown.stm-login-form-unregistered form .stm-listing-loader {
+    display: none;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.lOffer-account-dropdown.stm-login-form-unregistered form .stm-listing-loader i {
+    display: inline-block;
+    animation: spin 1s linear infinite;
+}
+
+.lOffer-account-dropdown.stm-login-form-unregistered form .stm-listing-loader.visible {
+    display: flex;
 }
 
 .lOffer-account-dropdown.stm-login-form-unregistered form input[type=submit] {

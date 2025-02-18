@@ -4,6 +4,7 @@
 namespace MotorsVehiclesListing\User;
 
 use MotorsVehiclesListing\User\Model\UserReviewsModel as UserReviewsModel;
+use WP_Query;
 
 class UserReviewsController {
 	public static function get_reviews( $user_id ) {
@@ -93,5 +94,35 @@ class UserReviewsController {
 		}
 
 		return $ratings;
+	}
+
+	public static function get_dealer_reviews( $dealer_id = '', $user_id = '', $per_page = 6, $offset = 0 ) {
+		if ( ! empty( $dealer_id ) ) {
+			$args = array(
+				'post_type'      => 'dealer_review',
+				'posts_per_page' => intval( $per_page ),
+				'offset'         => intval( $offset ),
+				'post_status'    => 'publish',
+				'meta_query'     => array(
+					array(
+						'key'     => 'stm_review_added_on',
+						'value'   => intval( $dealer_id ),
+						'compare' => '=',
+					),
+				),
+			);
+
+			if ( ! empty( $user_id ) ) {
+				$args['meta_query'][] = array(
+					'key'     => 'stm_review_added_by',
+					'value'   => intval( $user_id ),
+					'compare' => '=',
+				);
+			}
+
+			$query = new WP_Query( $args );
+
+			return $query;
+		}
 	}
 }

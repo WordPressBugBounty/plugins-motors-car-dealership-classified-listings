@@ -503,10 +503,6 @@ if ( ! function_exists( 'stm_display_script_sort' ) ) {
 		$slug      = sanitize_title( str_replace( '-', '_', $tax_info['slug'] ) );
 		$sort_asc  = 'true';
 		$sort_desc = 'false';
-		if ( ! empty( $tax_info['numeric'] ) && $tax_info['numeric'] ) {
-			$sort_asc  = 'false';
-			$sort_desc = 'true';
-		}
 		?>
 		$container.isotope({
 		getSortData: {
@@ -516,12 +512,17 @@ if ( ! function_exists( 'stm_display_script_sort' ) ) {
 			if(typeof(<?php echo esc_attr( $slug ); ?>) == 'undefined') {
 			<?php echo esc_attr( $slug ); ?> = '0';
 			}
+			if (typeof(<?php echo esc_attr( $slug ); ?>) == 'string') {
+				<?php echo esc_attr( $slug ); ?> = <?php echo esc_attr( $slug ); ?>.replace(/[^0-9.]/g, '');
+			}
+
 			return parseFloat(<?php echo esc_attr( $slug ); ?>);
 		<?php else : ?>
 			var <?php echo esc_attr( $slug ); ?> = $(itemElem).data('<?php echo esc_attr( $tax_info['slug'] ); ?>');
 			if(typeof(<?php echo esc_attr( $slug ); ?>) == 'undefined') {
 			<?php echo esc_attr( $slug ); ?> = 'n/a';
 			}
+
 			return <?php echo esc_attr( $slug ); ?>;
 		<?php endif; ?>
 
@@ -540,12 +541,17 @@ if ( ! function_exists( 'stm_display_script_sort' ) ) {
 			if(typeof(<?php echo esc_attr( $slug ); ?>) == 'undefined') {
 			<?php echo esc_attr( $slug ); ?> = '0';
 			}
+			if (typeof(<?php echo esc_attr( $slug ); ?>) == 'string') {
+				<?php echo esc_attr( $slug ); ?> = <?php echo esc_attr( $slug ); ?>.replace(/[^0-9.]/g, '');
+			}
+
 			return parseFloat(<?php echo esc_attr( $slug ); ?>);
 		<?php else : ?>
 			var <?php echo esc_attr( $slug ); ?> = $(itemElem).data('<?php echo esc_attr( $tax_info['slug'] ); ?>');
 			if(typeof(<?php echo esc_attr( $slug ); ?>) == 'undefined') {
 			<?php echo esc_attr( $slug ); ?> = 'n/a';
 			}
+
 			return <?php echo esc_attr( $slug ); ?>;
 		<?php endif; ?>
 
@@ -1139,3 +1145,51 @@ function delear_public_page_pagination_action( $query, $page, $posts_per_page, $
 	);
 }
 add_action( 'delear_public_page_pagination', 'delear_public_page_pagination_action', 4, 99 );
+
+
+function mvl_dealer_gmap( $lat, $lng ) {
+	do_action( 'stm_google_places_script', 'enqueue', true );
+	if ( ! empty( apply_filters( 'motors_vl_get_nuxy_mod', '', 'google_pin' ) ) ) {
+		$pin_url = wp_get_attachment_url( apply_filters( 'motors_vl_get_nuxy_mod', '', 'google_pin' ) );
+	} else {
+		$pin_url = STM_LISTINGS_URL . '/assets/elementor/img/marker-listing-two.png';
+	}
+	?>
+
+	<div id="stm-dealer-gmap"></div>
+	<script>
+		jQuery(document).ready(function ($) {
+			var center, map;
+
+			function init() {
+				center = new google.maps.LatLng(<?php echo esc_js( $lat ); ?>, <?php echo esc_js( $lng ); ?>);
+				var mapOptions = {
+					zoom: 15,
+					center: center,
+					fullscreenControl: true,
+					scrollwheel: false
+				};
+				var mapElement = document.getElementById('stm-dealer-gmap');
+				map = new google.maps.Map(mapElement, mapOptions);
+				var marker = new google.maps.Marker({
+					position: center,
+					icon: '<?php echo esc_url( $pin_url ); ?>',
+					map: map
+				});
+			}
+
+			$(window).on('resize', function () {
+				if (typeof map != 'undefined' && typeof center != 'undefined') {
+					setTimeout(function () {
+						map.setCenter(center);
+					}, 1000);
+				}
+			});
+
+			document.body.addEventListener('stm_gmap_api_loaded', init, false);
+		});
+	</script>
+	<?php
+}
+
+add_action( 'mvl_dealer_gmap_hook', 'mvl_dealer_gmap', 10, 2 );

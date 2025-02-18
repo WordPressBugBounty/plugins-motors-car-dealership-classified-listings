@@ -72,9 +72,9 @@ function get_freemius_info() {
 					),
 				),
 			),
-			'5'    => array(
+			'10'   => array(
 				'classname' => 'stm_plan--popular',
-				'text'      => __( 'Up to 5 Sites', 'stm_vehicles_listing' ),
+				'text'      => __( 'Up to 10 Sites', 'stm_vehicles_listing' ),
 				'type'      => __( 'Most Popular', 'stm_vehicles_listing' ),
 				'features'  => array(
 					'annual'   => array_merge(
@@ -82,7 +82,7 @@ function get_freemius_info() {
 						array(
 							'license' => array(
 								'icon'        => 'globe.svg',
-								'description' => __( '5 Sites License', 'stm_vehicles_listing' ),
+								'description' => __( '10 Sites License', 'stm_vehicles_listing' ),
 							),
 						),
 					),
@@ -91,7 +91,7 @@ function get_freemius_info() {
 						array(
 							'license' => array(
 								'icon'        => 'globe.svg',
-								'description' => __( '5 Sites License', 'stm_vehicles_listing' ),
+								'description' => __( '10 Sites License', 'stm_vehicles_listing' ),
 							),
 							'update'  => array(
 								'icon'        => 'cloud-download.svg',
@@ -136,6 +136,9 @@ function get_freemius_info() {
 			if ( 'premium' === $plan->name ) {
 				if ( isset( $plan->pricing ) ) {
 					foreach ( $plan->pricing as $pricing ) {
+						if ( ! empty( $pricing->is_hidden ) ) {
+							continue;
+						}
 						$plan_info[ 'licenses_' . $pricing->licenses ]      = $pricing;
 						$plan_info[ 'licenses_' . $pricing->licenses ]->url = STM_FREEMIUS_CHECKOUT_LINK . "{$plugin_id}/plan/{$pricing->plan_id}/licenses/{$pricing->licenses}/";
 

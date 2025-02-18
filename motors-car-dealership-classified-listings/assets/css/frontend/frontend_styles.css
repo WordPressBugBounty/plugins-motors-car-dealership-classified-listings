@@ -1338,12 +1338,14 @@ span.video-preview {
 
 .stm-login-register-form .stm-login-form form .stm-listing-loader {
     position: relative;
-    top: 1px;
+    top: 10px;
     color: #fff;
     font-size: 15px;
     line-height: 15px;
     visibility: hidden;
     opacity: 0;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .stm-login-register-form .stm-login-form form .stm-listing-loader i {
@@ -1363,6 +1365,7 @@ span.video-preview {
     background-color: #fff;
     border-radius: 5px;
     font-size: 13px;
+    color: #35475A;
 }
 
 .stm-login-register-form .stm-register-form {
@@ -1503,7 +1506,7 @@ span.video-preview {
 
 .stm-login-register-form .stm-register-form form .stm-listing-loader {
     position: relative;
-    top: 1px;
+    top: 10px;
     color: #1280DF;
     font-size: 15px;
     line-height: 15px;
@@ -1989,6 +1992,10 @@ span.video-preview {
     flex-wrap: wrap;
 }
 
+.stm-user-public-listing .archive-listing-page .stm-sort-private-my-cars {
+    float: right;
+}
+
 .stm-user-public-listing .user-listings-pagination {
     display: none;
 }
@@ -1999,6 +2006,15 @@ span.video-preview {
 
 .row-no-border-last .listing-list-loop:last-child {
     border-color: transparent;
+}
+
+.listing-list-loop-edit.stm-invisible {
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    opacity: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .stm-user-private .stm-car-listing-sort-units {
@@ -2298,6 +2314,18 @@ span.video-preview {
     margin-top: 0;
     margin-bottom: 0;
     padding-bottom: 0;
+}
+
+.stm-user-private .stm-user-private-main .archive-listing-page .archive-listing-page-heading {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.stm-user-private .stm-user-private-main .archive-listing-page .archive-listing-page-heading h1 {
+    font-size: 28px;
 }
 
 .stm-user-private .stm-user-private-main .stm-seller-title {
@@ -2913,7 +2941,7 @@ span.video-preview {
     text-decoration: line-through;
     position: relative;
     left: -4px;
-    z-index: 100;
+    z-index: 10;
 }
 
 @media (max-width: 767px) {
@@ -2934,7 +2962,7 @@ span.video-preview {
     text-align: right;
     padding: 0 8px 0 4px;
     position: relative;
-    z-index: 100;
+    z-index: 10;
 }
 
 .listing-list-loop .content .meta-top .price.discounted-price .sale-price .label-price {

@@ -486,6 +486,7 @@ i {
 
 .motors-icons-search-list:before {
     content: "\e9e5";
+    font-family: "motors-icons";
 }
 
 .motors-icons-ac-paper-pen:before {
