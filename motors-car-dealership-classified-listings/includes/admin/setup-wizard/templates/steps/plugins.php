@@ -9,8 +9,8 @@ $install   = false;
 		<img src="<?php echo esc_url( STM_LISTINGS_URL . '/includes/admin/setup-wizard/images/' ); ?>plugins-full.png" width="720" height="300" alt="" />
 	</div>
 	<div class="mvl-welcome-content-body">
-		<h2>2. Install plugins</h2>
-		<p>Let’s install the required plugins from the plugins library to ensure everything works correctly.</p>
+		<h2><?php echo esc_html__( '5. Install plugins', 'stm_vehicles_listing' ); ?></h2>
+		<p><?php echo esc_html__( 'Let’s install the required plugins from the plugins library to ensure everything works correctly.', 'stm_vehicles_listing' ); ?></p>
 
 		<div class="mvl-welcome-todo">
 			<?php
@@ -26,14 +26,18 @@ $install   = false;
 							<?php echo esc_html( $plugin['title'] ); ?>
 						</strong>
 						<?php if ( $plugin['required'] ) : ?>
-							<span class="heading-label">(required)</span>
+							<span class="heading-label"><?php echo esc_html__( '(required)', 'stm_vehicles_listing' ); ?></span>
 						<?php endif; ?>
 					</div>
 					<div class="mvl-welcome-todo-item-description">
 
 					</div>
 					<div class="mvl-welcome-todo-item-status">
-						<span class="status-badge <?php echo esc_attr( $status_class ); ?>" data-label="Not Installed" data-label-processing="Installing..." data-label-done="Active" data-label-error="Failed"></span>
+						<span class="status-badge <?php echo esc_attr( $status_class ); ?>"
+								data-label="<?php esc_attr_e( 'Not Installed', 'stm_vehicles_listing' ); ?>"
+								data-label-processing="<?php esc_attr_e( 'Installing...', 'stm_vehicles_listing' ); ?>"
+								data-label-done="<?php esc_attr_e( 'Active', 'stm_vehicles_listing' ); ?>"
+								data-label-error="<?php esc_attr_e( 'Failed', 'stm_vehicles_listing' ); ?>"></span>
 					</div>
 				</div>
 			<?php endforeach; ?>
@@ -46,7 +50,7 @@ $install   = false;
 	</div>
 	<div class="mvl-welcome-content-body">
 		<div class="heading-block-inline">
-			<h2>2. Install Elementor plugin</h2>
+			<h2><?php echo esc_html__( '2. Install Elementor plugin', 'stm_vehicles_listing' ); ?></h2>
 			<?php
 			$status_class = '';
 			if ( is_plugin_active( 'elementor/elementor.php' ) ) {
@@ -58,27 +62,43 @@ $install   = false;
 				$free_next    = false;
 			}
 			?>
-			<span class="status-badge <?php echo esc_attr( $status_class ); ?>" id="elementor-status-badge" data-label="Not Installed" data-label-processing="Installing..." data-label-done="Active" data-label-error="Failed"></span>
+			<span class="status-badge <?php echo esc_attr( $status_class ); ?>" id="elementor-status-badge"
+					data-label="<?php esc_attr_e( 'Not Installed', 'stm_vehicles_listing' ); ?>"
+					data-label-processing="<?php esc_attr_e( 'Installing...', 'stm_vehicles_listing' ); ?>"
+					data-label-done="<?php esc_attr_e( 'Active', 'stm_vehicles_listing' ); ?>"
+					data-label-error="<?php esc_attr_e( 'Failed', 'stm_vehicles_listing' ); ?>"></span>
 		</div>
-		<p>We recommend installing the Elementor plugin to enhance functionality and customize your website. Install Elementor now or skip this step and continue.</p>
+		<p><?php echo esc_html__( 'We recommend installing the Elementor plugin to enhance functionality and customize your website. Install Elementor now or skip this step and continue.', 'stm_vehicles_listing' ); ?></p>
 	</div>
 <?php endif; ?>
 
 <div class="mvl-welcome-nav-actions">
 	<div>
-		<a href="<?php echo esc_url( apply_filters( 'mvl_setup_wizard_step_url', 'theme' ) ); ?>" class="button" id="mvl-prev-step-link" data-step="theme">Back</a>
+		<a href="<?php echo esc_url( apply_filters( 'mvl_setup_wizard_step_url', 'theme' ) ); ?>" class="button" id="mvl-prev-step-link" data-step="theme">
+			<?php echo esc_html__( 'Back', 'stm_vehicles_listing' ); ?>
+		</a>
 	</div>
 	<div>
 		<?php if ( $install ) : ?>
 			<?php if ( $settings['use_starter'] ) : ?>
-				<button class="button button-primary" id="mvl-install-plugins-btn">Install Plugins</button>
+				<button class="button button-primary" id="mvl-install-plugins-btn">
+					<?php echo esc_html__( 'Install Plugins', 'stm_vehicles_listing' ); ?>
+				</button>
 			<?php else : ?>
-				<a href="<?php echo esc_url( apply_filters( 'mvl_setup_wizard_step_url', 'demo-content' ) ); ?>" class="button button-secondary mvl-skip-btn" data-step="demo-content" id="mvl-skip-elementor-install">Skip this step</a>
-				<button class="button button-primary" id="mvl-install-elementor">Install Plugin</button>
+				<a href="<?php echo esc_url( apply_filters( 'mvl_setup_wizard_step_url', 'demo-content' ) ); ?>" class="button button-secondary mvl-skip-btn" data-step="demo-content" id="mvl-skip-elementor-install">
+					<?php echo esc_html__( 'Skip this step', 'stm_vehicles_listing' ); ?>
+				</a>
+				<button class="button button-primary" id="mvl-install-elementor">
+					<?php echo esc_html__( 'Install Plugin', 'stm_vehicles_listing' ); ?>
+				</button>
 			<?php endif; ?>
 		<?php endif; ?>
-		<?php $next_btn_class = ( $free_next ) ? '' : 'hidden'; ?>
-		<a href="<?php echo esc_url( apply_filters( 'mvl_setup_wizard_step_url', 'demo-content' ) ); ?>" class="button button-primary <?php echo esc_attr( $next_btn_class ); ?>" id="mvl-next-step-link" data-step="demo-content">Next Step</a>
+		<?php
+		$next_btn_class = ( $free_next ) ? '' : 'hidden';
+		?>
+		<a href="<?php echo esc_url( apply_filters( 'mvl_setup_wizard_step_url', 'single-listing' ) ); ?>" class="button button-primary <?php echo esc_attr( $next_btn_class ); ?>" id="mvl-next-step-link" data-step="single-listing">
+			<?php echo esc_html__( 'Next Step', 'stm_vehicles_listing' ); ?>
+		</a>
 	</div>
 </div>
 

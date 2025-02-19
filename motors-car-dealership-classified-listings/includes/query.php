@@ -192,7 +192,7 @@ function _stm_listings_build_query_args( $args = null, $source = null ) {
 
 	foreach ( $listing_atts as $attribute => $filter_option ) {
 
-		if ( $filter_option['numeric'] ) {
+		if ( ! empty( $filter_option['numeric'] ) && $filter_option['numeric'] ) {
 			// Compatibility for min_
 			if ( ! empty( $source[ 'min_' . $attribute ] ) ) {
 				$source[ $attribute ] = array( 'min' => $source[ 'min_' . $attribute ] );
@@ -211,7 +211,7 @@ function _stm_listings_build_query_args( $args = null, $source = null ) {
 
 		$_value = $source[ $attribute ];
 
-		if ( ! is_array( $_value ) && $filter_option['numeric'] ) {
+		if ( ! is_array( $_value ) && ! empty( $filter_option['numeric'] ) && $filter_option['numeric'] ) {
 			if ( strpos( trim( $_value, '-' ), '-' ) !== false ) {
 				$_value = explode( '-', $_value );
 				$_value = array(

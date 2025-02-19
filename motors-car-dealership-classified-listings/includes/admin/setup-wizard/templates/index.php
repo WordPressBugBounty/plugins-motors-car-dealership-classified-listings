@@ -21,7 +21,7 @@
 		</div>
 
 		<div class="mvl-welcome-footer">
-			StylemixThemes &copy; All rights reserved.
+			<?php echo esc_html__( 'StylemixThemes &copy; All rights reserved.', 'stm_vehicles_listing' ); ?>
 		</div>
 
 	</div>

@@ -25,23 +25,9 @@ function mvl_setup_wizard_load_step() {
 
 	if ( ! empty( $settings_to_update ) ) {
 
-		$settings_names = apply_filters( 'mvl_settings_option_names', array() );
-
-		foreach ( $settings_names as $settings_name ) {
-			$options = get_option( $settings_name, array() );
-
-			foreach ( $settings_to_update as $opt_name => $value ) {
-				if ( isset( $options[ $opt_name ] ) ) {
-					if ( in_array( strtolower( trim( $value ) ), array( 'true', 'false' ) ) ) {
-						$options[ $opt_name ] = ( 'true' === $value );
-					} else {
-						$options[ $opt_name ] = $value;
-					}
-				}
-			}
-
-			update_option( $settings_name, $options );
-		}
+		$options_draft = get_option( 'mvl_setup_wizard_settings_temp', array() );
+		update_option( 'mvl_setup_wizard_settings_temp', array_unique( array_merge( $options_draft, $settings_to_update ) ) );
+		mvl_setup_wizard_update_settings( $settings_to_update );
 
 		$response['plugin_settings_updated'] = true;
 	}
@@ -57,6 +43,28 @@ function mvl_setup_wizard_load_step() {
 }
 add_action( 'wp_ajax_mvl_setup_wizard_load_step', 'mvl_setup_wizard_load_step' );
 add_action( 'wp_ajax_nopriv_mvl_setup_wizard_load_step', 'mvl_setup_wizard_load_step' );
+
+function mvl_setup_wizard_update_settings( $settings_to_update ) {
+	$settings_names = apply_filters( 'mvl_settings_option_names', array() );
+
+	foreach ( $settings_names as $settings_key => $settings_name ) {
+		$options        = get_option( $settings_name, array() );
+		$options_map    = wpcfto_get_settings_map( 'settings', $settings_name );
+		$options_fields = $options_map[ $settings_key ]['fields'];
+
+		foreach ( $settings_to_update as $opt_name => $value ) {
+			if ( isset( $options_fields[ $opt_name ] ) ) {
+				if ( is_string( $value ) && in_array( strtolower( trim( $value ) ), array( 'true', 'false' ), true ) ) {
+					$options[ $opt_name ] = ( 'true' === $value );
+				} else {
+					$options[ $opt_name ] = $value;
+				}
+			}
+		}
+
+		update_option( $settings_name, $options );
+	}
+}
 
 function mvl_setup_wizard_install_starter_theme() {
 	check_ajax_referer( 'stm_mvl_setup_wizard_nonce', 'security' );
@@ -93,7 +101,7 @@ function mvl_setup_wizard_install_plugin() {
 	$plugin_slug = isset( $_POST['plugin'] ) ? sanitize_text_field( $_POST['plugin'] ) : '';
 
 	if ( empty( $plugin_slug ) ) {
-		wp_send_json_error( 'Plugin info not provided' );
+		wp_send_json_error( __( 'Plugin info not provided', 'stm_vehicles_listing' ) );
 	}
 
 	if ( ! file_exists( WP_PLUGIN_DIR . '/' . $plugin_slug . '/' ) ) {
@@ -102,12 +110,12 @@ function mvl_setup_wizard_install_plugin() {
 
 		$response = wp_remote_get( $plugin_api_url );
 		if ( is_wp_error( $response ) ) {
-			wp_send_json_error( 'Error requesting plugin' );
+			wp_send_json_error( __( 'Error requesting plugin', 'stm_vehicles_listing' ) );
 		}
 
 		$plugin_data = json_decode( wp_remote_retrieve_body( $response ), true );
 		if ( empty( $plugin_data['download_link'] ) ) {
-			wp_send_json_error( 'Error downloading plugin' );
+			wp_send_json_error( __( 'Error downloading plugin', 'stm_vehicles_listing' ) );
 		}
 
 		$plugin_url = esc_url_raw( $plugin_data['download_link'] );
@@ -120,16 +128,16 @@ function mvl_setup_wizard_install_plugin() {
 		$installed = $upgrader->install( $plugin_url );
 
 		if ( is_wp_error( $installed ) ) {
-			wp_send_json_error( 'Error installing plugin' );
+			wp_send_json_error( __( 'Error installing plugin', 'stm_vehicles_listing' ) );
 		}
 	}
 
 	$activated = activate_plugin( WP_PLUGIN_DIR . '/' . apply_filters( 'mvl_setup_wizard_plugin_main_file', $plugin_slug ), false, false, true );
 
 	if ( ! is_wp_error( $activated ) ) {
-		wp_send_json_success( 'Plugin succesfully activated' );
+		wp_send_json_success( __( 'Plugin succesfully activated', 'stm_vehicles_listing' ) );
 	} else {
-		wp_send_json_error( 'Error activating plugin' );
+		wp_send_json_error( __( 'Error activating plugin', 'stm_vehicles_listing' ) );
 	}
 	exit;
 }
@@ -144,7 +152,8 @@ function mvl_setup_wizard_starter_import_fields() {
 	if ( 200 === wp_remote_retrieve_response_code( $response ) ) {
 		$response = json_decode( wp_remote_retrieve_body( $response ), true );
 		if ( ! is_null( $response ) ) {
-			update_option( 'stm_vehicle_listing_options', $response );
+			$options_preset = get_option( 'stm_vehicle_listing_options', array() );
+			update_option( 'stm_vehicle_listing_options', array_merge( $options_preset, $response ) );
 			wp_send_json_success( $response );
 		}
 	}
@@ -164,7 +173,11 @@ function mvl_setup_wizard_starter_import_settings() {
 		$response = json_decode( wp_remote_retrieve_body( $response ), true );
 		if ( ! is_null( $response ) ) {
 
-			update_option( 'motors_vehicles_listing_plugin_settings', $response );
+			$options_draft     = get_option( 'mvl_setup_wizard_settings_temp', array() );
+			$combined_settings = array_merge( $response, $options_draft );
+
+			mvl_setup_wizard_update_settings( $combined_settings );
+			update_option( 'motors_vehicles_listing_plugin_settings_updated', true );
 
 			$home = get_page_by_path( 'home' );
 			if ( $home ) {
@@ -172,7 +185,7 @@ function mvl_setup_wizard_starter_import_settings() {
 				update_option( 'show_on_front', 'page' );
 			}
 
-			if ( ! is_plugin_active( 'elementor/elementor.php' ) ) {
+			if ( is_plugin_active( 'elementor/elementor.php' ) ) {
 				$elementor_cpt = get_option( 'elementor_cpt_support' );
 				if ( ! empty( $elementor_cpt ) ) {
 					if ( is_array( $elementor_cpt ) && ! isset( $elementor_cpt['listing_template'] ) ) {
@@ -182,6 +195,15 @@ function mvl_setup_wizard_starter_import_settings() {
 				} else {
 					$elementor_cpt = array( 'post', 'page', 'listing_template' );
 					update_option( 'elementor_cpt_support', $elementor_cpt );
+				}
+
+				if ( ! empty( $options_draft ) && ! empty( $options_draft['single_listing_template_name'] ) ) {
+					$selected_id = apply_filters( 'mvl_get_template_id_by_slug', $options_draft['single_listing_template_name'] );
+					$sl_options  = get_option( \MotorsVehiclesListing\Plugin\MVL_Const::LISTING_TEMPLATE_OPT_NAME, array() );
+					if ( $selected_id && ! empty( $sl_options ) ) {
+						$sl_options['single_listing_template'] = $selected_id;
+						update_option( \MotorsVehiclesListing\Plugin\MVL_Const::LISTING_TEMPLATE_OPT_NAME, $sl_options );
+					}
 				}
 			}
 
@@ -218,7 +240,7 @@ function mvl_setup_wizard_starter_import_content() {
 	$importer = mvl_setup_wizard_get_importer();
 
 	if ( ! is_object( $importer ) ) {
-		wp_send_json_error( 'Error creating Importer object' );
+		wp_send_json_error( __( 'Error creating Importer object', 'stm_vehicles_listing' ) );
 	}
 
 	$importer->fetch_attachments = true;
@@ -275,8 +297,6 @@ function mvl_setup_wizard_generate_pages() {
 				update_post_meta( $id, '_elementor_page_assets', array() );
 				update_post_meta( $id, '_elementor_data', wp_slash( $page['elementor-data'] ) );
 			}
-		} else {
-			error_log( 'Failed to import page ' . $page['title'] );
 		}
 	}
 
@@ -311,14 +331,16 @@ function mvl_setup_wizard_generate_pages() {
 				}
 				update_post_meta( $id, '_elementor_page_assets', array() );
 				update_post_meta( $id, '_elementor_data', wp_slash( $template['elementor-data'] ) );
+			}
+		}
 
-				$sl_options = get_option( \MotorsVehiclesListing\Plugin\MVL_Const::LISTING_TEMPLATE_OPT_NAME, array() );
-				if ( ! empty( $sl_options['single_listing_template'] ) ) {
-					$sl_options['single_listing_template'] = $id;
-				}
+		$settings_temp = get_option( 'mvl_setup_wizard_settings_temp', array() );
+		if ( ! empty( $settings_temp ) && ! empty( $settings_temp['single_listing_template_name'] ) ) {
+			$selected_id = apply_filters( 'mvl_get_template_id_by_slug', $settings_temp['single_listing_template_name'] );
+			$sl_options  = get_option( \MotorsVehiclesListing\Plugin\MVL_Const::LISTING_TEMPLATE_OPT_NAME, array() );
+			if ( $selected_id && ! empty( $sl_options ) ) {
+				$sl_options['single_listing_template'] = $selected_id;
 				update_option( \MotorsVehiclesListing\Plugin\MVL_Const::LISTING_TEMPLATE_OPT_NAME, $sl_options );
-			} else {
-				error_log( 'Failed to import template ' . $template['title'] );
 			}
 		}
 	}
@@ -332,6 +354,35 @@ function mvl_setup_wizard_generate_pages() {
 }
 add_action( 'wp_ajax_mvl_setup_wizard_generate_pages', 'mvl_setup_wizard_generate_pages' );
 add_action( 'wp_ajax_nopriv_mvl_setup_wizard_generate_pages', 'mvl_setup_wizard_generate_pages' );
+
+function mvl_setup_wizard_create_term() {
+	check_ajax_referer( 'stm_mvl_setup_wizard_nonce', 'security' );
+
+	$success  = true;
+	$response = array();
+
+	if ( ! empty( $_POST['terms'] ) && is_array( $_POST['terms'] ) ) {
+		foreach ( $_POST['terms'] as $term ) {
+			$new_born_term = wp_insert_term(
+				$term,
+				sanitize_key( $_POST['taxonomy'] ),
+			);
+			if ( is_wp_error( $new_born_term ) ) {
+				$success = false;
+			}
+		}
+	}
+
+	if ( $success ) {
+		wp_send_json_success( $response );
+	} else {
+		wp_send_json_error( $response );
+	}
+
+	exit;
+}
+add_action( 'wp_ajax_mvl_setup_wizard_create_term', 'mvl_setup_wizard_create_term' );
+add_action( 'wp_ajax_nopriv_mvl_setup_wizard_create_term', 'mvl_setup_wizard_create_term' );
 
 function mvl_setup_wizard_mock_event() {
 	check_ajax_referer( 'stm_mvl_setup_wizard_nonce', 'security' );

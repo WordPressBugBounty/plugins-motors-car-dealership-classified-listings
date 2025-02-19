@@ -972,7 +972,7 @@ function stm_listings_add_new_option() {
 	$reserved_terms = stm_listings_reserved_terms();
 
 	$new_option = $_POST;
-	$_per_page  = sanitize_text_field( $_POST['per_page'] );
+	$_per_page  = ( ! empty( $_POST['per_page'] ) ) ? sanitize_text_field( $_POST['per_page'] ) : 'all';
 
 	if ( empty( $new_option['slug'] ) && ! empty( $new_option['single_name'] ) ) {
 		$new_option['slug'] = sanitize_title( $new_option['single_name'] );
@@ -1001,7 +1001,7 @@ function stm_listings_add_new_option() {
 		}
 	}
 
-	if ( ! $data['error'] ) {
+	if ( empty( $data['error'] ) ) {
 
 		$settings = motors_page_options();
 
@@ -1029,7 +1029,7 @@ function stm_listings_add_new_option() {
 			$current_option['listing_rows_numbers']   = '';
 		}
 
-		$numeric = ( $new_option['numeric'] ) ? esc_html__( 'Yes', 'stm_vehicles_listing' ) : esc_html__( 'No', 'stm_vehicles_listing' );
+		$numeric = ( ! empty( $new_option['numeric'] ) ) ? esc_html__( 'Yes', 'stm_vehicles_listing' ) : esc_html__( 'No', 'stm_vehicles_listing' );
 		$link    = get_site_url() . '/wp-admin/edit-tags.php?taxonomy=' . esc_attr( $new_option['slug'] ) . '&post_type=listings';
 
 		$options[] = $current_option;

@@ -22,7 +22,7 @@
 		<?php echo esc_html( $option['slug'] ); ?>
 	</td>
 	<td class="stm_custom_fields__table--type" data-column="type">
-		<?php $option['numeric'] ? esc_html_e( 'Number', 'stm_vehicles_listing' ) : esc_html_e( 'Dropdown', 'stm_vehicles_listing' ); ?>
+		<?php ( ! empty( $option['numeric'] ) && $option['numeric'] ) ? esc_html_e( 'Number', 'stm_vehicles_listing' ) : esc_html_e( 'Dropdown', 'stm_vehicles_listing' ); ?>
 	</td>
 	<td class="stm_custom_fields__table--edit">
 		<i class="stm-admin-icon-edit"></i>

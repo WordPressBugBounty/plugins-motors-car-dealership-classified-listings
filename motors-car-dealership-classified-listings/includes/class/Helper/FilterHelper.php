@@ -193,7 +193,10 @@ class FilterHelper {
 		/** @var filter_terms - get terms based on vehicle listing categories */
 		$filter_numeric      = array_map(
 			function ( $item_filter ) {
-				return $item_filter['numeric'];
+				if ( ! empty( $item_filter['numeric'] ) ) {
+					return $item_filter['numeric'];
+				}
+				return false;
 			},
 			$this->filters
 		);

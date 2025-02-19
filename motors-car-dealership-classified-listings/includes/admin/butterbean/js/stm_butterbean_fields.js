@@ -102,13 +102,16 @@
             var $select = jQuery(this.el).find('select');
             $select.select2({
                 width: '100%',
-                dropdownParent: jQuery('#wpfooter'),
+                dropdownParent: jQuery('body'),
                 tags: true,
                 placeholder: this.model.get('l10n').field_placeholder,
                 dropdownPosition: 'below',
             })
 
             $select.on('select2:open', () => {
+                if (jQuery('#butterbean-stm_product_manager-section-stm_info').length) {
+                    return;
+                }
                 let $dropdown = jQuery('.select2-dropdown');
 
                 if (!$dropdown.find('.stm-add-new-wrapper').length) {

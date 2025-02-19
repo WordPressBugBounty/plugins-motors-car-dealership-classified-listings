@@ -28,7 +28,7 @@ if ( $multiple ) {
 
 $attr_data = stm_get_taxonomies_with_type( $name );
 
-if ( ! $attr_data['numeric'] ) {
+if ( ! empty( $attr_data['numeric'] ) && ! $attr_data['numeric'] ) {
 
 	$sort = $attr_data['terms_filters_sort_by'] ?? 'name_asc';
 
