@@ -1,5 +1,4 @@
 <?php
-
 namespace MotorsVehiclesListing\Plugin;
 
 require_once STM_LISTINGS_PATH . '/includes/class/Plugin/settings_patch.php';
@@ -59,6 +58,7 @@ class Settings {
 			'single-listing',
 			'single-listing/general',
 			'single-listing/single-listing-layout',
+			'appearance',
 			'user-main',
 			'user-settings/user-settings',
 			'monetization',
@@ -128,7 +128,7 @@ class Settings {
 		$motors_logo    = $this->assets_url . 'logo.png';
 
 		$setup[] = array(
-			'option_name'     => \MotorsVehiclesListing\Plugin\MVL_Const::MVL_PLUGIN_OPT_NAME,
+			'option_name'     => MVL_Const::MVL_PLUGIN_OPT_NAME,
 			'title'           => esc_html__( 'Motors Plugin', 'stm_vehicles_listing' ),
 			'sub_title'       => esc_html__( 'by StylemixThemes', 'stm_vehicles_listing' ),
 			'logo'            => $motors_logo,
@@ -339,33 +339,33 @@ class Settings {
 
 		update_option( 'motors_vehicles_listing_plugin_settings_updated', true );
 		update_option( 'motors_vehicles_listing_section_settings_updated', true );
-		update_option( \MotorsVehiclesListing\Plugin\MVL_Const::MVL_PLUGIN_OPT_NAME, $theme_settings );
+		update_option( MVL_Const::MVL_PLUGIN_OPT_NAME, $theme_settings );
 
 		if ( ! empty( $theme_settings ) ) {
-			$add_car_form_settings_map     = wpcfto_get_settings_map( 'settings', \MotorsVehiclesListing\Plugin\MVL_Const::ADD_CAR_FORM_OPT_NAME );
-			$filter_settings_map           = wpcfto_get_settings_map( 'settings', \MotorsVehiclesListing\Plugin\MVL_Const::FILTER_OPT_NAME );
-			$listing_details_settings_map  = wpcfto_get_settings_map( 'settings', \MotorsVehiclesListing\Plugin\MVL_Const::LISTING_DETAILS_OPT_NAME );
-			$search_result_settings_map    = wpcfto_get_settings_map( 'settings', \MotorsVehiclesListing\Plugin\MVL_Const::SEARCH_RESULTS_OPT_NAME );
-			$listing_template_settings_map = wpcfto_get_settings_map( 'settings', \MotorsVehiclesListing\Plugin\MVL_Const::LISTING_TEMPLATE_OPT_NAME );
+			$add_car_form_settings_map     = wpcfto_get_settings_map( 'settings', MVL_Const::ADD_CAR_FORM_OPT_NAME );
+			$filter_settings_map           = wpcfto_get_settings_map( 'settings', MVL_Const::FILTER_OPT_NAME );
+			$listing_details_settings_map  = wpcfto_get_settings_map( 'settings', MVL_Const::LISTING_DETAILS_OPT_NAME );
+			$search_result_settings_map    = wpcfto_get_settings_map( 'settings', MVL_Const::SEARCH_RESULTS_OPT_NAME );
+			$listing_template_settings_map = wpcfto_get_settings_map( 'settings', MVL_Const::LISTING_TEMPLATE_OPT_NAME );
 
 			if ( ! empty( $add_car_form_settings_map ) ) {
-				update_option( \MotorsVehiclesListing\Plugin\MVL_Const::ADD_CAR_FORM_OPT_NAME, array_intersect_key( $theme_settings, $add_car_form_settings_map['add_listing']['fields'] ) );
+				update_option( MVL_Const::ADD_CAR_FORM_OPT_NAME, array_intersect_key( $theme_settings, $add_car_form_settings_map['add_listing']['fields'] ) );
 			}
 
 			if ( ! empty( $filter_settings_map ) ) {
-				update_option( \MotorsVehiclesListing\Plugin\MVL_Const::FILTER_OPT_NAME, array_intersect_key( $theme_settings, $filter_settings_map['search_settings']['fields'] ) );
+				update_option( MVL_Const::FILTER_OPT_NAME, array_intersect_key( $theme_settings, $filter_settings_map['search_settings']['fields'] ) );
 			}
 
 			if ( ! empty( $listing_details_settings_map ) ) {
-				update_option( \MotorsVehiclesListing\Plugin\MVL_Const::LISTING_DETAILS_OPT_NAME, array_intersect_key( $theme_settings, $listing_details_settings_map['single_listing']['fields'] ) );
+				update_option( MVL_Const::LISTING_DETAILS_OPT_NAME, array_intersect_key( $theme_settings, $listing_details_settings_map['single_listing']['fields'] ) );
 			}
 
 			if ( ! empty( $search_result_settings_map ) ) {
-				update_option( \MotorsVehiclesListing\Plugin\MVL_Const::SEARCH_RESULTS_OPT_NAME, array_intersect_key( $theme_settings, $search_result_settings_map['listing_settings']['fields'] ) );
+				update_option( MVL_Const::SEARCH_RESULTS_OPT_NAME, array_intersect_key( $theme_settings, $search_result_settings_map['listing_settings']['fields'] ) );
 			}
 
 			if ( ! empty( $listing_template_settings_map ) ) {
-				update_option( \MotorsVehiclesListing\Plugin\MVL_Const::LISTING_TEMPLATE_OPT_NAME, array_intersect_key( $theme_settings, $listing_template_settings_map['single_listing_template']['fields'] ) );
+				update_option( MVL_Const::LISTING_TEMPLATE_OPT_NAME, array_intersect_key( $theme_settings, $listing_template_settings_map['single_listing_template']['fields'] ) );
 			}
 
 			update_option( 'motors_vehicles_listing_section_settings_updated', true );
@@ -399,4 +399,13 @@ class Settings {
 		update_option( 'mvl_feedback_added', true );
 	}
 
+
+	public static function update( $new_settings ) {
+		$settings = get_option( MVL_Const::MVL_PLUGIN_OPT_NAME, array() );
+		update_option( MVL_Const::MVL_PLUGIN_OPT_NAME, wp_parse_args( $new_settings, $settings ) );
+	}
+
+	public static function update_one( $setting, $value ) {
+		static::update( array( $setting => $value ) );
+	}
 }

@@ -3,7 +3,7 @@
 }
 
 .stm-elementor-contact-form-seven label {
-    color: #333 !important;
+    color: var(--motors-text-color);
 }
 
 .stm-elementor-contact-form-seven .icon-title {
@@ -13,7 +13,7 @@
 }
 
 .stm-elementor-contact-form-seven .icon-title i {
-    color: #6c98e1;
+    color: var(--motors-accent-color);
 }
 
 .stm-elementor-contact-form-seven .icon-title img, .stm-elementor-contact-form-seven .icon-title i {
@@ -123,13 +123,13 @@
 }
 
 .stm-elementor-contact-form-seven.stm_listing_car_form .stm-single-car-contact {
-    margin-bottom: 34px;
+    margin-bottom: 7px;
 }
 
 .stm-elementor-contact-form-seven.stm_listing_car_form .stm-single-car-contact .title {
     font-family: Montserrat;
     margin-bottom: 20px;
-    color: var(--mvl-third-color);
+    color: var(--motors-text-color);
     font-weight: 700;
     text-transform: uppercase;
     vertical-align: middle;
@@ -140,7 +140,7 @@
     position: relative;
     top: 4px;
     margin-right: 10px;
-    color: var(--mvl-primary-color);
+    color: var(--motors-accent-color);
     font-size: 26px;
 }
 
@@ -153,14 +153,23 @@
     margin-bottom: 25px;
 }
 
+.stm-elementor-contact-form-seven.stm_listing_car_form .stm-single-car-contact input:not([type=submit]) ~ .wpcf7-not-valid-tip {
+    margin-top: -20px;
+}
+
 .stm-elementor-contact-form-seven.stm_listing_car_form .stm-single-car-contact textarea {
     min-height: 141px;
 }
 
 .stm-elementor-contact-form-seven.stm_listing_car_form .stm-single-car-contact input:not([type=submit]),
 .stm-elementor-contact-form-seven.stm_listing_car_form .stm-single-car-contact textarea {
-    border: 1px solid #e1e2e4;
-    background-color: #ffffff;
+    border: 1px solid var(--motors-border-color);
+    background-color: var(--motors-bg-color);
+}
+
+.stm-elementor-contact-form-seven.stm_listing_car_form .stm-single-car-contact input:not([type=submit]):focus,
+.stm-elementor-contact-form-seven.stm_listing_car_form .stm-single-car-contact textarea:focus {
+    border-color: var(--motors-accent-color);
 }
 
 .stm-elementor-contact-form-seven.stm_listing_car_form .stm-single-car-contact .bottom {
@@ -188,7 +197,7 @@
     font-family: Montserrat;
     font-size: 14px;
     font-weight: 700;
-    color: var(--mvl-secondary-color);
+    color: var(--motors-text-color);
     font-style: normal;
     letter-spacing: normal;
     line-height: 36px;
@@ -206,7 +215,7 @@
 }
 
 .stm-elementor-contact-form-seven.stm_listing_car_form .stm-single-car-contact .wpcf7-not-valid .checker span {
-    border: 1px solid #ff2325;
+    border: 1px solid var(--motors-error-text-color);
 }
 
 .stm-elementor-contact-form-seven.stm_listing_car_form .stm-single-car-contact .wpcf7-form-control-wrap {
@@ -226,21 +235,21 @@
     margin-top: 25px !important;
     font-size: 13px;
     line-height: 18px;
-    color: #fff;
+    color: var(--motors-contrast-text-color);
 }
 
 .stm-elementor-contact-form-seven.stm_listing_car_form .stm-single-car-contact .wpcf7-response-output.wpcf7-validation-errors {
     font-size: 13px;
     line-height: 18px;
-    color: #fff;
+    color: var(--motors-contrast-text-color);
 }
 
 .stm-elementor-contact-form-seven.stm_listing_car_form .stm-single-car-contact .invalid .wpcf7-response-output,
 .stm-elementor-contact-form-seven.stm_listing_car_form .stm-single-car-contact .failed .wpcf7-response-output {
-    color: #ff0000 !important;
-    border-color: #ff0000 !important;
+    color: var(--motors-error-text-color) !important;
+    border-color: var(--motors-error-text-color) !important;
 }
 
 .stm-elementor-contact-form-seven.stm_listing_car_form .stm-single-car-contact .sent .wpcf7-response-output {
-    color: var(--mvl-primary-color);
+    color: var(--motors-accent-color);
 }

@@ -137,7 +137,7 @@
     left: 0;
     right: 0;
     height: 1px;
-    background-color: #d5d9e0;
+    background-color: var(--motors-bg-shade);
     margin: 0 15px;
 }
 
@@ -145,7 +145,7 @@
     display: block;
     font-size: 13px;
     padding: 5px 5px 5px 0;
-    color: #888888;
+    color: var(--motors-text-alpha-color);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -163,12 +163,12 @@
     text-align: center;
     vertical-align: top;
     max-height: 22px;
-    color: var(--mvl-primary-color);
+    color: var(--motors-accent-color);
 }
 
 .stm-single-car-listing-data .data-list-wrap .data-list-item > .heading-font {
     padding: 5px 0 5px 10px;
-    color: #222;
+    color: var(--motors-text-color);
     font-size: 14px;
     font-weight: 700;
     white-space: nowrap;

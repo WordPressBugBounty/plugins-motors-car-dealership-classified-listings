@@ -1,3 +1,8 @@
 .stm-listing-single-price-title .stm-single-title-wrap .title {
     overflow: visible;
+    color: var(--motors-text-color);
+}
+
+.stm-listing-single-price-title .stm-single-title-wrap span {
+    color: var(--motors-text-alpha-color);
 }

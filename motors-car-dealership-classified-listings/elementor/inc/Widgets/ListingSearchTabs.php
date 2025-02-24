@@ -182,6 +182,15 @@ class ListingSearchTabs extends WidgetBase {
 		);
 
 		$this->add_control(
+			'lst_show_tabs_buttons',
+			array(
+				'label'   => esc_html__( 'Show Tabs Buttons', 'stm_vehicles_listing' ),
+				'type'    => \Elementor\Controls_Manager::SWITCHER,
+				'default' => 'yes',
+			)
+		);
+
+		$this->add_control(
 			'lst_show_all_tab',
 			array(
 				'label'   => esc_html__( 'All Categories Tab', 'stm_vehicles_listing' ),
@@ -357,6 +366,15 @@ class ListingSearchTabs extends WidgetBase {
 		);
 
 		$this->add_control(
+			'lst_btn_text',
+			array(
+				'label'       => esc_html__( 'Search button text', 'stm_vehicles_listing' ),
+				'description' => esc_html__( 'Variables: {count}, {postfix}' ),
+				'default'     => esc_html__( '{count} {postfix}', 'stm_vehicles_listing' ),
+			)
+		);
+
+		$this->add_control(
 			'lst_btn_icon',
 			array(
 				'label'            => esc_html__( 'Icon', 'stm_vehicles_listing' ),
@@ -454,7 +472,7 @@ class ListingSearchTabs extends WidgetBase {
 			array(
 				'name'     => 'lst_fields_border',
 				'label'    => esc_html__( 'Fields Border', 'stm_vehicles_listing' ),
-				'selector' => '{{WRAPPER}} .filter-listing .tab-content .stm-filter-tab-selects .stm-select-col input, {{WRAPPER}} .filter-listing .tab-content .stm-filter-tab-selects .stm-select-col select',
+				'selector' => '{{WRAPPER}} .filter-listing .tab-content .stm-filter-tab-selects .stm-select-col input, {{WRAPPER}} .filter-listing .tab-content .stm-filter-tab-selects .stm-select-col select, {{WRAPPER}} .filter-listing .tab-content .stm-filter-tab-selects .stm-select-col .select2-selection__rendered',
 			)
 		);
 
@@ -465,6 +483,7 @@ class ListingSearchTabs extends WidgetBase {
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
+					'{{WRAPPER}} .filter-listing .tab-content .stm-filter-tab-selects .stm-select-col .select2-selection__rendered' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;',
 					'{{WRAPPER}} .filter-listing .tab-content .stm-filter-tab-selects .stm-select-col input'         => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;',
 					'{{WRAPPER}} .filter-listing .tab-content .stm-filter-tab-selects .stm-select-col select'        => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;',
 					'{{WRAPPER}} .stm_dynamic_listing_filter .select2-container--default .select2-selection--single' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;',
@@ -704,6 +723,18 @@ class ListingSearchTabs extends WidgetBase {
 			'buttons_style_sep',
 			array(
 				'type' => \Elementor\Controls_Manager::DIVIDER,
+			)
+		);
+
+		$this->add_responsive_control(
+			'lst_button_border_radius',
+			array(
+				'label'      => esc_html__( 'Button Border Radius', 'stm_vehicles_listing' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .filter-listing.stm_dynamic_listing_filter .tab-content .stm-filter-tab-selects button[type=submit]' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;',
+				),
 			)
 		);
 

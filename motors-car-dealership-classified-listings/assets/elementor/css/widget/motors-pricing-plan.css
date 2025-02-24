@@ -1,6 +1,7 @@
 .elementor-widget-motors-pricing-plan > .elementor-widget-container {
     position: relative;
     overflow: hidden;
+    background-color: var(--motors-bg-color);
 }
 
 .stm-pricing-plan {
@@ -58,8 +59,8 @@
     height: 32px;
     line-height: 32px;
     text-align: center;
-    background: var(--e-global-color-primary);
-    color: #fff;
+    background: var(--motors-spec-badge-color);
+    color: var(--motors-contrast-text-color);
     font-weight: 700;
     font-size: 11px;
     text-transform: uppercase;
@@ -171,7 +172,8 @@
 }
 
 .stm-pricing-plan__button > a {
-    background: #6b6b6b;
+    background: var(--motors-accent-color);
+    color: var(--motors-contrast-text-color);
     display: block;
     text-align: center;
     padding: 0 15px;
@@ -199,6 +201,11 @@
 .stm-pricing-plan__header-text__subtitle {
     font-size: 13px;
     line-height: 1.2;
+    color: var(--motors-text-alpha-color);
+}
+
+.stm-pricing-plan:hover .stm-pricing-plan__header-text .stm-pricing-plan__header-text__title {
+    color: var(--motors-accent-color);
 }
 
 .stm-pricing-plan__separator {
@@ -209,6 +216,7 @@
     transition: 0.3s ease;
     width: 100%;
     margin: auto;
+    background-color: var(--motors-border-color);
 }
 
 .stm-pricing-plan__price-section {
@@ -238,6 +246,7 @@
     font-size: 24px;
     line-height: 1;
     font-weight: 500;
+    color: var(--motors-text-alpha-color);
 }
 
 .stm-pricing-plan__period_text {
@@ -254,12 +263,13 @@
 .stm-pricing-plan__items__item {
     display: flex;
     align-items: center;
+    margin: 0 0 10px;
 }
 
 .stm-pricing-plan__items__item__icon {
     margin-right: 8px;
-    color: var(--e-global-color-primary);
-    fill: var(--e-global-color-primary);
+    color: var(--motors-accent-color);
+    fill: var(--motors-accent-color);
 }
 
 .stm-pricing-plan__items__item__text {
@@ -274,6 +284,7 @@
 
 .stm-pricing-plan:hover .stm-pricing-plan__separator__bottom_line > div {
     width: 100%;
+    background-color: var(--motors-accent-color);
 }
 
 .stm-pricing-plan.title_separator_narrow_effect:hover .stm-pricing-plan__separator__title > div {

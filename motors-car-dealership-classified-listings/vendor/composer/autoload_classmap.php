@@ -43,6 +43,8 @@ return array(
     'MotorsVehiclesListing\\Post\\PostController' => $baseDir . '/includes/class/Post/PostController.php',
     'MotorsVehiclesListing\\SellerNoteMetaBoxes' => $baseDir . '/includes/class/SellerNoteMetaBoxes.php',
     'MotorsVehiclesListing\\StarterTheme\\Helpers\\Themes' => $baseDir . '/includes/starter-theme/Helpers/Themes.php',
+    'MotorsVehiclesListing\\Stilization\\Color' => $baseDir . '/includes/class/Stilization/Color.php',
+    'MotorsVehiclesListing\\Stilization\\Colors' => $baseDir . '/includes/class/Stilization/Colors.php',
     'MotorsVehiclesListing\\Terms\\Model\\TermsModel' => $baseDir . '/includes/class/Terms/Model/TermsModel.php',
     'MotorsVehiclesListing\\Terms\\TermsController' => $baseDir . '/includes/class/Terms/TermsController.php',
     'MotorsVehiclesListing\\User\\Model\\UserListingsModel' => $baseDir . '/includes/class/User/Model/UserListingsModel.php',

@@ -130,8 +130,8 @@ body .container {
 .empty {
     height: 30px;
     margin: 5px 0 20px;
-    background: #eee;
-    border: 1px dashed #999;
+    background: var(--motors-bg-shade, #eee);
+    border: 1px dashed var(--motors=border-color, #999);
     padding-bottom: 2px;
 }
 
@@ -1303,7 +1303,7 @@ table > tbody > tr td {
     height: 49px;
     padding: 0 100px;
     line-height: 49px;
-    color: #fff !important;
+    color: #fff;
     text-transform: uppercase;
     text-align: center;
     font-size: 14px;
@@ -1332,7 +1332,7 @@ table > tbody > tr td {
     height: 33px;
     line-height: 33px;
     transform: rotate(45deg);
-    color: #fff !important;
+    color: #fff;
     font-size: 12px;
     text-transform: uppercase;
     font-weight: 700;
@@ -1535,14 +1535,14 @@ table > tbody > tr td {
     position: relative;
     display: block;
     padding: 15px 20px 15px 25px;
-    background-color: #fff;
-    border-top: 4px solid var(--mvl-third-color);
+    background-color: var(--motors-bg-color);
+    border-top: 4px solid var(--motors-text-color);
     text-decoration: none !important;
     margin-top: 0;
 }
 
 .stm-accordion-single-unit > a.title.collapsed {
-    border-top-color: var(--mvl-secondary-color);
+    border-top-color: var(--motors-bg-contrast);
 }
 
 .stm-accordion-single-unit > a.title.collapsed .minus {
@@ -1567,7 +1567,7 @@ table > tbody > tr td {
     margin-top: -1px;
     width: 11px;
     height: 3px;
-    background-color: #ccc;
+    background-color: var(--motors-border-color);
 }
 
 .stm-accordion-single-unit > a.title .minus:after {
@@ -1578,13 +1578,13 @@ table > tbody > tr td {
     left: 4px;
     height: 11px;
     width: 3px;
-    background-color: #ccc;
+    background-color: var(--motors-border-color);
     opacity: 0;
 }
 
 .stm-accordion-single-unit > a.title:hover .minus,
 .stm-accordion-single-unit > a.title:hover .minus:after {
-    background-color: var(--mvl-secondary-color);
+    background-color: var(--motors-accent-color);
 }
 
 .stm-accordion-single-unit .stm-accordion-content ul {
@@ -1609,7 +1609,7 @@ table > tbody > tr td {
     position: absolute;
     content: "";
     display: block;
-    background: rgba(255, 255, 255, 0.7);
+    background: var(--motors-contrast-text-alpha-color);
     top: 0;
     left: 20px;
     right: 20px;
@@ -1637,7 +1637,7 @@ table > tbody > tr td {
     -moz-osx-font-smoothing: grayscale;
     animation: rotating 2s infinite linear;
     font-size: 30px;
-    color: var(--mvl-secondary-color);
+    color: var(--motors-accent-color);
     visibility: hidden;
     opacity: 0;
     z-index: -1;
@@ -1747,12 +1747,12 @@ table > tbody > tr td {
     height: 49px;
     padding: 0 100px;
     line-height: 49px;
-    color: #fff !important;
+    color: var(--motors-contrast-text-color);
     text-transform: uppercase;
     text-align: center;
     font-size: 14px;
     font-weight: 700;
-    background-color: #fab637;
+    background-color: var(--motors-spec-badge-color);
     transform: rotate(-45deg) translateZ(0);
     transform-origin: 50% 50%;
     -webkit-transform-origin: 50% 50%;
@@ -1776,7 +1776,7 @@ table > tbody > tr td {
     height: 33px;
     line-height: 33px;
     transform: rotate(45deg);
-    color: #fff !important;
+    color: var(--motors-contrast-text-color);
     font-size: 12px;
     text-transform: uppercase;
     font-weight: 700;
@@ -1808,7 +1808,7 @@ table > tbody > tr td {
     right: 7px;
     bottom: 0;
     padding: 3px 5px;
-    color: #fff;
+    color: var(--motors-contrast-text-color);
     font-size: 14px;
     border-radius: 2px;
     opacity: 0;
@@ -1820,7 +1820,7 @@ table > tbody > tr td {
 }
 
 .stm-directory-grid-loop .image .stm_compare_unit.active, .stm-directory-grid-loop .image .stm-listing-compare.active {
-    background: linear-gradient(180deg, var(--mvl-secondary-color) 0%, var(--mvl-secondary-color-dark) 100%);
+    background-color: var(--motors-bg-contrast);
     opacity: 1;
 }
 
@@ -1830,7 +1830,7 @@ table > tbody > tr td {
     bottom: 7px;
     padding: 3px 5px 3px 6px;
     background: rgba(0, 0, 0, 0.3);
-    color: #fff;
+    color: var(--motors-contrast-text-color);
     border-radius: 2px;
     font-size: 16px;
     opacity: 0;
@@ -1842,7 +1842,7 @@ table > tbody > tr td {
 }
 
 .stm-directory-grid-loop .image .stm-listing-favorite.active {
-    background: linear-gradient(180deg, #32cd57 0%, #19b33e 100%);
+    background-color: var(--motors-accent-color);
     opacity: 1;
 }
 
@@ -1852,10 +1852,10 @@ table > tbody > tr td {
     top: 10px;
     padding: 5px 8px 4px 25px;
     border-radius: 2px;
-    color: #fff;
+    color: var(--motors-contrast-text-color);
     font-size: 10px;
     text-transform: uppercase;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: var(--motors-border-color);
     z-index: 20;
 }
 
@@ -1879,8 +1879,8 @@ table > tbody > tr td {
     margin-right: 9px;
     padding: 2px 5px 0 6px;
     border-radius: 2px;
-    background: rgba(0, 0, 0, 0.3);
-    color: #fff;
+    background: var(--motors-bg-alpha-contrast);
+    color: var(--motors-contrast-text-color);
     font-size: 11px;
     line-height: 22px;
     font-weight: 600;
@@ -1898,7 +1898,7 @@ table > tbody > tr td {
 
 .stm-directory-grid-loop .image .stm-car-medias > div:hover {
     cursor: pointer;
-    background: rgba(0, 0, 0, 0.6);
+    background: var(--motors-bg-contrast);
 }
 
 .stm-directory-grid-loop .image .stm-car-medias > div.stm-listing-videos-unit i {
@@ -1918,11 +1918,11 @@ table > tbody > tr td {
 
 .stm-directory-grid-loop .listing-car-item-meta .car-meta-top {
     padding-bottom: 17px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--motors-border-color);
 }
 
 .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .car-title {
-    color: #232628;
+    color: var(--motors-text-color);
     overflow: hidden;
     text-transform: uppercase;
     font-size: 14px;
@@ -1931,7 +1931,7 @@ table > tbody > tr td {
 }
 
 .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .car-title .colored {
-    color: #cc6119;
+    color: var(--motors-accent-color);
 }
 
 .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .price {
@@ -1977,7 +1977,7 @@ table > tbody > tr td {
 
 .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .price .normal-price,
 .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .price .sale-price {
-    color: #fff;
+    color: var(--motors-contrast-text-color);
     font-size: 14px;
     line-height: 20px;
 }
@@ -1995,7 +1995,7 @@ table > tbody > tr td {
 .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .sell-online-wrap .normal-price .normal_font {
     font-size: 10px;
     font-weight: 600;
-    color: #ffffff;
+    color: var(--motors-contrast-text-color);
     line-height: 12px;
     margin: 0;
     padding: 0;
@@ -2005,7 +2005,7 @@ table > tbody > tr td {
 .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .sell-online-wrap .normal-price .heading-font {
     line-height: 16px;
     margin: 5px 0 0;
-    color: #ffffff;
+    color: var(--motors-contrast-text-color);
 }
 
 .stm-directory-grid-loop .listing-car-item-meta .car-meta-bottom {
@@ -2027,7 +2027,7 @@ table > tbody > tr td {
     flex-wrap: nowrap;
     align-items: center;
     margin-right: 10px;
-    color: #a8a8a8;
+    color: var(--motors-text-color);
     font-size: 14px;
     padding-bottom: 10px;
 }
@@ -2035,7 +2035,7 @@ table > tbody > tr td {
 .stm-directory-grid-loop .listing-car-item-meta .car-meta-bottom ul li i {
     margin-right: -1px;
     font-size: 13px;
-    color: #aaaaaa;
+    color: var(--motors-text-alpha-color);
     vertical-align: middle;
 }
 

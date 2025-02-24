@@ -77,7 +77,7 @@ class CompareButton extends WidgetBase {
 				'label'     => __( 'Background Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .motors-profile-button' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .motors-compare-button' => 'background-color: {{VALUE}};',
 				),
 			)
 		);
@@ -88,9 +88,9 @@ class CompareButton extends WidgetBase {
 				'label'     => __( 'Text Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .motors-profile-button' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .motors-profile-button span' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .motors-profile-button svg' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .motors-compare-button' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .motors-compare-button span' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .motors-compare-button svg' => 'fill: {{VALUE}};',
 				),
 			)
 		);
@@ -110,7 +110,7 @@ class CompareButton extends WidgetBase {
 				'label'     => __( 'Background Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .motors-profile-button:hover' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .motors-compare-button:hover' => 'background-color: {{VALUE}};',
 				),
 			)
 		);
@@ -121,9 +121,9 @@ class CompareButton extends WidgetBase {
 				'label'     => __( 'Text Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .motors-profile-button' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .motors-profile-button span' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .motors-profile-button svg' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .motors-compare-button:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .motors-compare-button:hover span' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .motors-compare-button:hover svg' => 'fill: {{VALUE}};',
 				),
 			)
 		);
@@ -145,7 +145,7 @@ class CompareButton extends WidgetBase {
 			array(
 				'name'     => 'compare_btn_typography',
 				'label'    => __( 'Typography', 'stm_vehicles_listing' ),
-				'selector' => '{{WRAPPER}} .motors-profile-button',
+				'selector' => '{{WRAPPER}} .motors-compare-button span',
 			)
 		);
 
@@ -154,7 +154,7 @@ class CompareButton extends WidgetBase {
 			array(
 				'name'     => 'compare_btn_border',
 				'label'    => __( 'Border', 'stm_vehicles_listing' ),
-				'selector' => '{{WRAPPER}} .motors-profile-button',
+				'selector' => '{{WRAPPER}} .motors-compare-button',
 			)
 		);
 
@@ -165,7 +165,7 @@ class CompareButton extends WidgetBase {
 				'type'       => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
-					'{{WRAPPER}} .motors-profile-button' => 'border-radius: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .motors-compare-button' => 'border-radius: {{SIZE}}{{UNIT}};',
 				),
 			)
 		);
@@ -177,7 +177,7 @@ class CompareButton extends WidgetBase {
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%', 'em' ),
 				'selectors'  => array(
-					'{{WRAPPER}} .motors-profile-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .motors-compare-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);
@@ -189,8 +189,8 @@ class CompareButton extends WidgetBase {
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%', 'em' ),
 				'selectors'  => array(
-					'{{WRAPPER}} .motors-profile-button i' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-					'{{WRAPPER}} .motors-profile-button svg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .motors-compare-button i' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .motors-compare-button svg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);
@@ -220,8 +220,8 @@ class CompareButton extends WidgetBase {
 					'size' => 24,
 				),
 				'selectors'  => array(
-					'{{WRAPPER}} .motors-profile-button i' => 'font-size: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .motors-profile-button svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .motors-compare-button i' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .motors-compare-button svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
 				),
 			)
 		);
@@ -231,7 +231,7 @@ class CompareButton extends WidgetBase {
 			array(
 				'name'     => 'compare_btn_box_shadow',
 				'label'    => __( 'Box Shadow', 'stm_vehicles_listing' ),
-				'selector' => '{{WRAPPER}} .motors-profile-button',
+				'selector' => '{{WRAPPER}} .motors-compare-button',
 			)
 		);
 

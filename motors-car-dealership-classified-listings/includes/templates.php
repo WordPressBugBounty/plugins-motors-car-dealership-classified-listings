@@ -194,3 +194,47 @@ function stm_inventory_loop_items_after( $view_type ) {
 		echo '</div>';
 	}
 }
+
+add_action( 'stm_listing_image_hover_gallery', 'stm_listing_image_hover_gallery', 10, 4 );
+function stm_listing_image_hover_gallery( $thumbs, $img_size = 'stm-img-255', $img_attrs = array(), $wrapped = true ) {
+	$array_keys    = array_keys( $thumbs['gallery'] );
+	$last_item_key = array_pop( $array_keys );
+	?>
+	<?php if ( $wrapped ) : ?>
+	<div class="interactive-hoverable">
+	<?php endif; ?>
+		<div class="hoverable-wrap">
+			<?php foreach ( $thumbs['gallery'] as $key => $img_url ) : ?>
+				<div class="hoverable-unit <?php echo ( 0 === $key ) ? 'active' : ''; ?>">
+					<div class="thumb">
+						<?php if ( $key === $last_item_key && 5 === count( $thumbs['gallery'] ) && 0 < $thumbs['remaining'] ) : ?>
+							<div class="remaining">
+								<i class="stm-icon-album"></i>
+								<p>
+									<?php
+									echo esc_html(
+										sprintf(
+										/* translators: number of remaining photos */
+											_n( '%d more photo', '%d more photos', $thumbs['remaining'], 'stm_vehicles_listing' ),
+											$thumbs['remaining']
+										)
+									);
+									?>
+								</p>
+							</div>
+						<?php endif; ?>
+						<?php echo wp_kses_post( wp_get_attachment_image( $thumbs['ids'][ $key ], $img_size, false, $img_attrs ) ); ?>
+					</div>
+				</div>
+			<?php endforeach; ?>
+		</div>
+		<div class="hoverable-indicators">
+			<?php foreach ( $thumbs['gallery'] as $key => $thumb ) : ?>
+				<div class="indicator <?php echo ( 0 === $key ) ? 'active' : ''; ?>"></div>
+			<?php endforeach; ?>
+		</div>
+	<?php if ( $wrapped ) : ?>
+	</div>
+	<?php endif; ?>
+	<?php
+}

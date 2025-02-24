@@ -203,13 +203,13 @@ class ListingsGridTabs extends WidgetBase {
 
 		$this->stm_end_control_section();
 
-		$this->stm_start_style_controls_section( 'style_general', esc_html__( 'General', 'stm_vehicles_listing' ) );
+		$this->stm_start_style_controls_section( 'section_title', esc_html__( 'Section Title', 'stm_vehicles_listing' ) );
 
 		$this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'title_typography',
-				'label'    => esc_html__( 'Title Typography', 'stm_vehicles_listing' ),
+				'label'    => esc_html__( 'Typography', 'stm_vehicles_listing' ),
 				'exclude'  => array(
 					'font_family',
 					'font_style',
@@ -218,6 +218,21 @@ class ListingsGridTabs extends WidgetBase {
 				'selector' => '{{WRAPPER}} .stm_elementor_listings_grid_tabs_wrap h3',
 			)
 		);
+
+		$this->add_control(
+			'title_color',
+			array(
+				'label'     => esc_html__( 'Title Color', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .stm_elementor_listings_grid_tabs_wrap h3' => 'color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->stm_end_control_section();
+
+		$this->stm_start_style_controls_section( 'section_tabs', esc_html__( 'Section Tabs', 'stm_vehicles_listing' ) );
 
 		$this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
@@ -294,18 +309,6 @@ class ListingsGridTabs extends WidgetBase {
 				'condition' => array(
 					'tab_border_border!' => '',
 				),
-			)
-		);
-
-		$this->add_control(
-			'title_color',
-			array(
-				'label'     => esc_html__( 'Title Color', 'stm_vehicles_listing' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
-				'selectors' => array(
-					'{{WRAPPER}} .stm_elementor_listings_grid_tabs_wrap h3' => 'color: {{VALUE}};',
-				),
-				'separator' => 'before',
 			)
 		);
 
@@ -398,6 +401,98 @@ class ListingsGridTabs extends WidgetBase {
 
 		$this->stm_end_ctrl_tabs();
 
+		$this->stm_end_control_section();
+
+		$this->stm_start_style_controls_section( 'section_listing_item', esc_html__( 'Listing Item', 'stm_vehicles_listing' ) );
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'grid_title_typography',
+				'label'    => esc_html__( 'Title Typography', 'stm_vehicles_listing' ),
+				'exclude'  => array(
+					'font_style',
+					'word_spacing',
+				),
+				'selector' => '{{WRAPPER}} .stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .car-title',
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'grid_regular_price_typography',
+				'label'    => esc_html__( 'Regular Price Typography', 'stm_vehicles_listing' ),
+				'exclude'  => array(
+					'font_style',
+					'word_spacing',
+				),
+				'selector' => '{{WRAPPER}} .stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .price.discounted-price .regular-price',
+			)
+		);
+
+		$this->add_control(
+			'grid_regular_price_color',
+			array(
+				'label'     => esc_html__( 'Regular Price Color', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .price.discounted-price .regular-price' => 'color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'grid_sale_price_typography',
+				'label'    => esc_html__( 'Sale Price Typography', 'stm_vehicles_listing' ),
+				'exclude'  => array(
+					'font_style',
+					'word_spacing',
+				),
+				'selector' => '{{WRAPPER}} .stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .price.discounted-price .sale-price',
+			)
+		);
+
+		$this->add_control(
+			'grid_sale_price_color',
+			array(
+				'label'     => esc_html__( 'Sale Price Color', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .price.discounted-price .sale-price' => 'color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'grid_thumb_height',
+			array(
+				'label'      => __( 'Image Height', 'stm_vehicles_listing' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => array(
+					'px',
+				),
+				'range'      => array(
+					'px' => array(
+						'min'  => 100,
+						'max'  => 300,
+						'step' => 1,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .stm_listing_tabs_style_2 .image img'                        => 'height: {{SIZE}}{{UNIT}}; object-fit: cover;',
+					'{{WRAPPER}} .stm_listing_tabs_style_2 .image .interactive-hoverable'     => 'min-height: {{SIZE}}{{UNIT}}',
+					'{{WRAPPER}} .stm_listing_tabs_style_2 .image .interactive-hoverable img' => 'height: 100%',
+				),
+			)
+		);
+
+		$this->stm_end_control_section();
+
+		$this->stm_start_style_controls_section( 'section_button', esc_html__( 'Section Button', 'stm_vehicles_listing' ) );
+
 		$this->stm_start_ctrl_tabs(
 			'button_style',
 			array(
@@ -436,6 +531,30 @@ class ListingsGridTabs extends WidgetBase {
 			)
 		);
 
+		$this->add_control(
+			'button_border_radius',
+			array(
+				'label'     => esc_html__( 'Button Border Radius', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors' => array(
+					'{{WRAPPER}} .stm_elementor_listings_grid_tabs_wrap .load-more-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'button_typography',
+				'label'    => esc_html__( 'Button Typography', 'stm_vehicles_listing' ),
+				'exclude'  => array(
+					'font_style',
+					'word_spacing',
+				),
+				'selector' => '{{WRAPPER}} .stm_elementor_listings_grid_tabs_wrap .load-more-btn',
+			)
+		);
+
 		$this->stm_end_ctrl_tab();
 
 		$this->stm_start_ctrl_tab(
@@ -470,29 +589,6 @@ class ListingsGridTabs extends WidgetBase {
 		$this->stm_end_ctrl_tab();
 
 		$this->stm_end_ctrl_tabs();
-
-		$this->add_control(
-			'grid_thumb_height',
-			array(
-				'label'      => __( 'Image Height', 'stm_vehicles_listing' ),
-				'type'       => \Elementor\Controls_Manager::SLIDER,
-				'size_units' => array(
-					'px',
-				),
-				'range'      => array(
-					'px' => array(
-						'min'  => 100,
-						'max'  => 300,
-						'step' => 1,
-					),
-				),
-				'selectors'  => array(
-					'{{WRAPPER}} .stm_listing_tabs_style_2 .image img'                        => 'height: {{SIZE}}{{UNIT}}; object-fit: cover;',
-					'{{WRAPPER}} .stm_listing_tabs_style_2 .image .interactive-hoverable'     => 'min-height: {{SIZE}}{{UNIT}}',
-					'{{WRAPPER}} .stm_listing_tabs_style_2 .image .interactive-hoverable img' => 'height: 100%',
-				),
-			)
-		);
 
 		$this->stm_end_control_section();
 

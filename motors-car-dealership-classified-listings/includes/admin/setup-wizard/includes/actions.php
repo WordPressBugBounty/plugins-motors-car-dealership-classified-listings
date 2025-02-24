@@ -96,7 +96,7 @@ add_filter(
 
 		$settings = get_option( 'mvl_setup_wizard_data', array() );
 		if ( ! is_array( $settings ) ) {
-			$settings = unserialize( $settings );
+			$settings = maybe_unserialize( $settings );
 		}
 
 		$settings = array_merge( $default_fields, $settings );
@@ -203,25 +203,12 @@ add_action(
 add_action(
 	'mvl_check_if',
 	function( $current_value, $value = true ) {
-		if ( $current_value == $value ) {
+		if ( $current_value === $value ) {
 			echo esc_attr( ' checked' );
 		}
 	},
 	10,
 	2,
-);
-
-add_filter(
-	'mvl_import_data_url',
-	function( $file = '' ) {
-		if ( defined( 'STM_DEV_MODE' ) && STM_DEV_MODE && defined( 'MOTORS_STARTER_THEME_TEMPLATE_URI' ) ) {
-			$subfolder = ( 'starter_import.xml' === $file ) ? 'elementor/' : '';
-			return MOTORS_STARTER_THEME_TEMPLATE_URI . '/includes/demo/' . $subfolder . $file;
-		}
-		return 'https://motors-plugin.stylemixthemes.com/starter-theme-demo/' . $file;
-	},
-	10,
-	1,
 );
 
 add_filter(
@@ -269,15 +256,16 @@ add_filter(
 add_filter(
 	'mvl_get_template_id_by_slug',
 	function( $slug ) {
-		$templates = query_posts(
+		$templates = new WP_Query(
 			array(
-				'post_type'   => 'listing_template',
-				'name'        => strtolower( trim( $slug ) ),
-				'post_status' => 'publish',
+				'post_type'      => 'listing_template',
+				'name'           => strtolower( trim( $slug ) ),
+				'post_status'    => 'publish',
+				'posts_per_page' => 1,
 			)
 		);
-		if ( ! empty( $templates ) ) {
-			return $templates[0]->ID;
+		if ( ! empty( $templates->posts ) ) {
+			return $templates->posts[0]->ID;
 		}
 		return false;
 	}

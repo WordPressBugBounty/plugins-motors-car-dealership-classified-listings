@@ -1,3 +1,6 @@
+<?php
+use MotorsVehiclesListing\Stilization\Colors;
+?>
 <div class="modal" id="statistics-modal" tabindex="-1" role="dialog" aria-labelledby="stmStatisticsModal">
 	<div id="statistics-modal-wrap">
 		<div class="modal-dialog modal-lg" role="document">
@@ -45,6 +48,9 @@
 </div>
 
 <?php
+$accent_color       = Colors::value( 'accent_color' );
+$accent_alpha_color = Colors::value( 'accent_color', 0.7 );
+
 $query = ( function_exists( 'stm_user_listings_query' ) ) ? stm_user_listings_query( get_current_user_id(), 'any' ) : null;
 
 $start_date = strtotime( gmdate( 'Y-m-d', strtotime( '-30 days', time() ) ) );
@@ -146,10 +152,10 @@ if ( ! empty( $query ) && $query->have_posts() ) {
 					datasets: [
 						{
 							label: '<?php echo esc_html__( 'Listing views', 'stm_vehicles_listing' ); ?>',
-							backgroundColor: 'rgb(65, 123, 223, 0.4)',
-							borderColor: 'rgb(65, 123, 223)',
+							backgroundColor: '<?php echo esc_html( $accent_alpha_color ); ?>',
+							borderColor: '<?php echo esc_html( $accent_alpha_color ); ?>',
 							data: [],
-							pointBackgroundColor: 'rgb(65, 123, 223)'
+							pointBackgroundColor: '<?php echo esc_html( $accent_alpha_color ); ?>',
 						},
 						{
 							label: '<?php echo esc_html__( 'Phone views', 'stm_vehicles_listing' ); ?>',

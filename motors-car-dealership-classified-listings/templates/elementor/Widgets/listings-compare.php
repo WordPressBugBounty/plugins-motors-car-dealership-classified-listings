@@ -174,7 +174,7 @@ $compare_empty_placeholder = 'compare-empty.jpg';
 					<?php endwhile; ?>
 					<?php for ( $i = 0; $i < $empty_cars; $i++ ) { ?>
 						<div class="col-md-3 col-sm-3 col-xs-4 compare-col-stm-empty">
-							<a href="<?php echo esc_url( apply_filters( 'stm_inventory_page_url', '', $post_type ) ); ?>">
+							<a href="<?php echo esc_url( get_permalink( apply_filters( 'motors_vl_get_nuxy_mod', '', 'listing_archive' ) ) ); ?>">
 								<div class="image">
 									<span class="stm-icon-add-car-wrapper">
 										<?php echo wp_kses( apply_filters( 'stm_dynamic_icon_output', $add_icon ), apply_filters( 'stm_ew_kses_svg', array() ) ); ?>
@@ -323,7 +323,7 @@ $compare_empty_placeholder = 'compare-empty.jpg';
 				<?php $add_compare_mobile_class = ( $compares->post_count < 3 ) ? ' add-compare-mobile-show' : ''; ?>
 
 					<div class="add-compare-mobile <?php echo esc_attr( $add_compare_mobile_class ); ?>">
-						<a href="<?php echo esc_url( apply_filters( 'stm_inventory_page_url', '', $post_type ) ); ?>">
+						<a href="<?php echo esc_url( get_permalink( apply_filters( 'motors_vl_get_nuxy_mod', '', 'listing_archive' ) ) ); ?>">
 							<div class="image">
 								<?php echo wp_kses( apply_filters( 'stm_dynamic_icon_output', $add_icon ), apply_filters( 'stm_ew_kses_svg', array() ) ); ?>
 								<img
@@ -357,7 +357,7 @@ $compare_empty_placeholder = 'compare-empty.jpg';
 				</div>
 				<?php for ( $i = 0; $i < $empty_cars; $i++ ) { ?>
 					<div class="col-md-3 col-sm-3 col-xs-4 compare-col-stm-empty">
-						<a href="<?php echo esc_url( apply_filters( 'stm_inventory_page_url', '', $post_type ) ); ?>">
+						<a href="<?php echo esc_url( get_permalink( apply_filters( 'motors_vl_get_nuxy_mod', '', 'listing_archive' ) ) ); ?>">
 							<div class="image">
 								<span class="stm-icon-add-car-wrapper">
 									<?php echo wp_kses( apply_filters( 'stm_dynamic_icon_output', $add_icon ), apply_filters( 'stm_ew_kses_svg', array() ) ); ?>
@@ -444,7 +444,7 @@ $compare_empty_placeholder = 'compare-empty.jpg';
 
 	<div class="compare-empty-car-top">
 		<div class="col-md-3 col-sm-3 col-xs-4 compare-col-stm-empty">
-			<a href="<?php echo esc_url( apply_filters( 'stm_inventory_page_url', '', $post_type ) ); ?>">
+			<a href="<?php echo esc_url( get_permalink( apply_filters( 'motors_vl_get_nuxy_mod', '', 'listing_archive' ) ) ); ?>">
 				<div class="image">
 					<span class="stm-icon-add-car-wrapper">
 						<?php echo wp_kses( apply_filters( 'stm_dynamic_icon_output', $add_icon ), apply_filters( 'stm_ew_kses_svg', array() ) ); ?>

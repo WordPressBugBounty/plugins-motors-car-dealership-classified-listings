@@ -22,7 +22,7 @@
     right: 10px;
     margin-left: 0;
     font-size: 16px;
-    color: #888;
+    color: var(--motors-text-alpha-color);
     width: 15px;
     height: 15px;
     border: none;
@@ -39,13 +39,21 @@
     line-height: 40px;
     height: 46px;
     font-size: 14px;
-    color: #555;
+    color: var(--motors-text-alpha-color);
     font-weight: 400;
     padding: 0 40px 0 14px;
     outline: none !important;
-    background-color: #eceff3;
+    background-color: var(--motors-filter-inputs-color);
     border: none;
     width: 100%;
     -moz-appearance: none;
     -webkit-appearance: none;
+}
+
+.elementor-editor-active .stm_dynamic_listing_filter .stm-select-col:before {
+    right: 18px;
+}
+
+.elementor-editor-active .stm_dynamic_listing_filter .stm-select-col .stm-ajax-reloadable:before {
+    content: "";
 }

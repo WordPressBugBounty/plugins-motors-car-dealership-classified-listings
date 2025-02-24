@@ -39,7 +39,6 @@ class ImageCategories extends WidgetBase {
 		 */
 		$this->stm_ew_admin_register_ss(
 			$this->get_name() . '-admin',
-			$this->get_name() . '-admin',
 			STM_LISTINGS_PATH,
 			STM_LISTINGS_URL,
 			STM_LISTINGS_V,
@@ -486,9 +485,7 @@ class ImageCategories extends WidgetBase {
 					),
 				),
 				'exclude'        => array(
-					'font_family',
 					'font_style',
-					'text_transform',
 					'text_decoration',
 					'word_spacing',
 				),
@@ -541,7 +538,6 @@ class ImageCategories extends WidgetBase {
 					),
 				),
 				'exclude'        => array(
-					'font_family',
 					'font_style',
 					'word_spacing',
 				),

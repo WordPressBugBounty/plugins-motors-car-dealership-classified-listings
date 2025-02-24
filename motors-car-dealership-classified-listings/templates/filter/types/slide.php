@@ -54,7 +54,12 @@ $style = ( empty( $location ) ) ? 'display: none;' : '';
 	<div class="filter-<?php echo esc_attr( $vars['slug'] ); ?> stm-slider-filter-type-unit" style="<?php echo esc_attr( $style ); ?>">
 		<div class="clearfix">
 			<h5 class="pull-left"><?php echo esc_html( $taxonomy['single_name'] ); ?></h5>
-			<div class="stm-current-slider-labels"><?php echo esc_html( $vars['label'] ); ?></div>
+			<div class="stm-current-slider-labels">
+				<?php echo esc_html( $vars['label'] ); ?>
+				<?php if ( function_exists( 'stm_distance_measure_unit' ) ) : ?>
+					<span class="stm_unit_measurement"><?php echo esc_html( stm_distance_measure_unit() ); ?></span>
+				<?php endif; ?>
+			</div>
 		</div>
 		<div class="stm-price-range-unit">
 			<div class="stm-<?php echo esc_attr( $vars['slug'] ); ?>-range stm-filter-type-slider"></div>
@@ -76,9 +81,6 @@ $style = ( empty( $location ) ) ? 'display: none;' : '';
 							?>
 						"
 				/>
-				<?php if ( function_exists( 'stm_distance_measure_unit' ) ) : ?>
-					<span class="stm_unit_measurement"><?php echo esc_html( stm_distance_measure_unit() ); ?></span>
-				<?php endif; ?>
 			</div>
 		</div>
 	</div>

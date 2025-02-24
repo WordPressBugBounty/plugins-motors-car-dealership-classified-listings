@@ -2,6 +2,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+
 use \MotorsVehiclesListing\Plugin;
 /** @var \MotorsVehiclesListing\Plugin $plugin */
 

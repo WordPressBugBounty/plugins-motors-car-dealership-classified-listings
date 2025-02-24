@@ -87,13 +87,7 @@ if ( $dealer ) :
 					$btn_type = ( ! empty( get_post_meta( $_id, 'pay_per_listing', true ) ) ) ? 'edit-ppl' : $btn_type;
 					?>
 					<li class="btn-add-edit heading-font">
-						<button type="submit" class="heading-font enabled" data-load="<?php echo esc_attr( $btn_type ); ?>"
-							<?php
-							if ( empty( $_id ) ) {
-								echo 'data-toggle="tooltip" data-placement="top" title="' . esc_html__( 'Add a Listing using Free or Paid Plan limits', 'stm_vehicles_listing' ) . '"';
-							}
-							?>
-						>
+						<button type="submit" class="heading-font enabled" data-load="<?php echo esc_attr( $btn_type ); ?>">
 							<?php if ( ! empty( $_id ) ) : ?>
 								<i class="motors-icons-add_check"></i><?php esc_html_e( 'Update Listing', 'stm_vehicles_listing' ); ?>
 							<?php else : ?>
@@ -105,7 +99,7 @@ if ( $dealer ) :
 				<?php endif; ?>
 				<?php if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'dealer_pay_per_listing' ) && empty( $_id ) ) : ?>
 					<li class="btn-ppl">
-						<button type="submit" class="heading-font enabled" data-load="pay" data-toggle="tooltip" data-placement="top" title="<?php esc_attr_e( 'Pay for this Listing', 'stm_vehicles_listing' ); ?>">
+						<button type="submit" class="heading-font enabled" data-load="pay" title="<?php esc_attr_e( 'Pay for this Listing', 'stm_vehicles_listing' ); ?>">
 							<i class="motors-icons-payment_listing"></i>
 							<?php esc_html_e( 'Pay for Listing', 'stm_vehicles_listing' ); ?>
 						</button>
@@ -157,13 +151,7 @@ if ( $dealer ) :
 					$btn_type = ( ! empty( get_post_meta( $_id, 'pay_per_listing', true ) ) ) ? 'edit-ppl' : $btn_type;
 					?>
 					<li class="btn-add-edit heading-font">
-						<button type="submit" class="heading-font enabled" data-load="<?php echo esc_attr( $btn_type ); ?>"
-							<?php
-							if ( empty( $_id ) ) {
-								echo 'data-toggle="tooltip" data-placement="top" title="' . esc_attr__( 'Add a Listing using Free or Paid Plan limits', 'stm_vehicles_listing' ) . '"';
-							}
-							?>
-						>
+						<button type="submit" class="heading-font enabled" data-load="<?php echo esc_attr( $btn_type ); ?>">
 							<?php if ( ! empty( $_id ) ) : ?>
 								<i class="motors-icons-add_check"></i>
 								<?php esc_html_e( 'Update Listing', 'stm_vehicles_listing' ); ?>
@@ -177,7 +165,7 @@ if ( $dealer ) :
 				<?php endif; ?>
 				<?php if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'dealer_pay_per_listing' ) && empty( $_id ) ) : ?>
 					<li class="btn-ppl">
-						<button type="submit" class="heading-font enabled" data-load="pay" data-toggle="tooltip" data-placement="top" title="<?php esc_attr_e( 'Pay for this Listing', 'stm_vehicles_listing' ); ?>">
+						<button type="submit" class="heading-font enabled" data-load="pay" title="<?php esc_attr_e( 'Pay for this Listing', 'stm_vehicles_listing' ); ?>">
 							<i class="motors-icons-payment_listing"></i>
 							<?php esc_html_e( 'Pay for Listing', 'stm_vehicles_listing' ); ?>
 						</button>

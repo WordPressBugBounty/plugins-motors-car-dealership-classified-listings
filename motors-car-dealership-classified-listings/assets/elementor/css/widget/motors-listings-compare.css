@@ -5,11 +5,11 @@
 }
 
 .stm-car-compare-row .listing-car-item-meta .price .regular-price {
-    color: #fff;
+    color: var(--motors-contrast-text-color);
 }
 
 .stm-car-compare-row .listing-car-item-meta .price .sale-price {
-    color: #fff;
+    color: var(--motors-contrast-text-color);
     font-weight: 700;
 }
 

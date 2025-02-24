@@ -9,10 +9,10 @@
 
 		if (typeof $.datetimepicker === 'object' && date_time_picker.length) {
 			date_time_picker.datetimepicker({
-				timepicker: false,
-				format: 'd/m/Y',
+				timepicker: true,
+				format: 'd/m/Y H:i',
 				lang: stm_lang_code,
-				closeOnDateSelect: true,
+				closeOnDateSelect: false,
 			})
 		}
 

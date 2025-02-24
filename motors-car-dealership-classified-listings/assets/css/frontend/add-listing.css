@@ -38,11 +38,11 @@
     line-height: 47px;
     padding: 0 21px;
     font-weight: 400;
-    color: #888888;
-    border: 2px solid #eceff3;
+    color: var(--motors-text-alpha-color);
+    border: 1px solid var(--motors-border-color);
     font-size: 14px;
     outline: none !important;
-    background-color: #eceff3;
+    background-color: var(--motors-filter-inputs-color);
 }
 
 .stm-vl-plugin-pure input[type=text].form-error,
@@ -51,7 +51,7 @@
 .stm-vl-plugin-pure input[type=email].form-error,
 .stm-vl-plugin-pure input[type=search].form-error,
 .stm-vl-plugin-pure input[type=password].form-error {
-    border-color: #ff2325;
+    border-color: var(--motors-error-text-color);
 }
 
 .stm-vl-plugin-pure input[type=text]:focus,
@@ -60,25 +60,25 @@
 .stm-vl-plugin-pure input[type=email]:focus,
 .stm-vl-plugin-pure input[type=search]:focus,
 .stm-vl-plugin-pure input[type=password]:focus {
-    background-color: #fff;
-    border-color: #6c98e1;
-    color: #232628;
+    background-color: var(--motors-bg-color);
+    border-color: var(--motors-accent-color);
+    color: var(--motors-text-color);
 }
 
 .stm-vl-plugin-pure textarea {
     padding: 21px;
     width: 100%;
     max-width: 100%;
-    background-color: #eceff3;
-    border: 2px solid #eceff3;
-    color: #888;
+    background-color: var(--motors-filter-inputs-color);
+    border: 2px solid var(--motors-border-color);
+    color: var(--motors-text-alpha-color);
     resize: none;
 }
 
 .stm-vl-plugin-pure textarea:focus {
-    background-color: #fff;
-    border-color: #6c98e1;
-    color: #232628;
+    background-color: var(--motors-bg-color);
+    border-color: var(--motors-accent-color);
+    color: var(--motors-text-color);
 }
 
 .stm-vl-plugin-pure .form-group {
@@ -94,11 +94,11 @@
 .stm-vl-plugin-pure .has-error input[type=email],
 .stm-vl-plugin-pure .has-error input[type=search],
 .stm-vl-plugin-pure .has-error input[type=password] {
-    border-color: #ff2325;
+    border-color: var(--motors-error-text-color);
 }
 
 .stm-vl-plugin-pure .form-error {
-    border-color: #ff2325;
+    border-color: var(--motors-error-text-color);
 }
 
 .stm-vl-plugin-pure input[type=checkbox], .stm-vl-plugin-pure input[type=radio] {
@@ -131,18 +131,18 @@
 }
 
 .stm-vl-plugin-pure .stm-form-price-edit .stm_price_input:last-child {
-    border-top: 1px solid #ffffff;
+    border-top: 1px solid var(--motors-border-color);
 }
 
 .stm-vl-plugin-pure .stm-form-price-edit h4 {
-    color: #232628;
+    color: var(--motors-text-color);
     margin-bottom: 28px;
     text-transform: uppercase;
     font-weight: 700;
 }
 
 .stm-vl-plugin-pure .stm-form-price-edit p {
-    color: #888;
+    color: var(--motors-text-alpha-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_title_form {
@@ -158,7 +158,7 @@
 }
 
 .stm-vl-plugin-pure .stm-border-top-unit {
-    border-top: 4px solid #153e4d;
+    border-top: 4px solid var(--motors-bg-contrast);
     padding-top: 27px;
 }
 
@@ -169,7 +169,7 @@
     font-size: 20px;
     font-weight: 700;
     letter-spacing: -1px;
-    color: #153e4d;
+    color: var(--motors-text-color);
 }
 
 .stm-vl-plugin-pure input[type=submit],
@@ -183,15 +183,17 @@
     font-weight: 700;
     letter-spacing: 0.3px;
     text-transform: uppercase;
-    color: #fff;
+    color: var(--motors-contrast-text-color);
     border-radius: 3px;
-    background-color: #6c98e1;
+    background-color: var(--motors-accent-color);
     text-decoration: none;
     outline: none !important;
     visibility: visible;
     border: none;
     white-space: normal;
-    box-shadow: 0 2px 0 #567ab4;
+  /*-webkit-box-shadow: 0 2px 0 var(--motors-accent-color);
+  -moz-box-shadow: 0 2px 0 var(--motors-accent-color);
+  box-shadow: 0 2px 0 var(--motors-accent-color);*/
     transition: opacity 0.2s ease-in !important;
     transform: translateZ(0);
     opacity: 1;
@@ -217,7 +219,7 @@
 .stm-vl-plugin-pure .load-more-btn:active {
     position: relative;
     top: 2px;
-    box-shadow: 0 0 0 #567ab4;
+    box-shadow: 0 0 0 var(--motors-accent-color);
 }
 
 .stm-vl-plugin-pure input[type=submit].not-visible,
@@ -232,8 +234,8 @@
     overflow: hidden;
 }
 
-.stm-vl-plugin-pure a, .stm-vl-plugin-pure a:hover, .stm-vl-plugin-pure a:focus, .stm-vl-plugin-pure a:active {
-    color: #6c98e1;
+.stm-vl-plugin-pure a {
+    color: var(--motors-accent-color);
 }
 
 .stm-vl-plugin-pure a:hover, .stm-vl-plugin-pure a:focus {
@@ -269,7 +271,8 @@
 .stm-vl-plugin-pure .select2-search .add-new-term {
     display: block;
     position: absolute;
-    top: 12px;
+    top: 50%;
+    transform: translateY(-50%);
     right: 10px;
     font-size: 18px;
     cursor: pointer;
@@ -285,21 +288,21 @@
 }
 
 .stm-vl-plugin-pure .selection:hover b {
-    color: #6c98e1;
+    color: var(--motors-accent-color);
 }
 
 .stm-vl-plugin-pure .select2-container--default .select2-selection--single {
     height: 40px;
     border: none;
     border-radius: 0;
-    background-color: #eceff3;
+    background-color: var(--motors-filter-inputs-color);
     outline: none !important;
 }
 
 .stm-vl-plugin-pure .select2-container--default .select2-selection--single .select2-selection__rendered {
     line-height: 40px;
     font-size: 14px;
-    color: #555;
+    color: var(--motors-text-alpha-color);
     font-weight: 400;
     padding-left: 14px;
     padding-right: 40px;
@@ -322,7 +325,7 @@
     -moz-osx-font-smoothing: grayscale;
     left: -3px;
     margin-left: 0;
-    color: #888;
+    color: var(--motors-text-alpha-color);
     width: 15px;
     height: 15px;
     border: none;
@@ -377,9 +380,9 @@
 }
 
 .stm-vl-plugin-pure .select2-container--default .select2-results__option--highlighted[aria-selected] {
-    background-color: #f0f2f5;
-    border-bottom-color: #f0f2f5;
-    color: #555;
+    background-color: var(--motors-filter-inputs-color);
+    border-bottom-color: var(--motors-filter-inputs-color);
+    color: var(--motors-text-alpha-color);
 }
 
 .stm-vl-plugin-pure .select2-dropdown {
@@ -617,13 +620,13 @@
 .stm-vl-plugin-pure input[type=submit],
 .stm-vl-plugin-pure button,
 .stm-vl-plugin-pure html body .button {
-    color: #ffffff;
+    color: var(--motors-contrast-text-color);
 }
 
 .stm-vl-plugin-pure input[type=submit]:hover,
 .stm-vl-plugin-pure button:hover,
 .stm-vl-plugin-pure html body .button:hover {
-    color: #ffffff;
+    color: var(--motors-contrast-text-color);
 }
 
 .stm_select_overflowed .select2-container--default {
@@ -638,8 +641,8 @@
 }
 
 input:-webkit-autofill {
-    -o-box-shadow: inset 0 0 1000px #f0f2f5;
-    box-shadow: inset 0 0 1000px #f0f2f5;
+    -o-box-shadow: inset 0 0 1000px var(--motors-bg-shade);
+    box-shadow: inset 0 0 1000px var(--motors-bg-shade);
 }
 
 .stm-login-register-form {
@@ -657,7 +660,7 @@ input:-webkit-autofill {
 .stm-login-register-form .stm-login-form form .stm-listing-loader {
     position: relative;
     top: 10px;
-    color: #ffffff;
+    color: var(--motors-contrast-text-color);
     font-size: 15px;
     line-height: 15px;
     visibility: hidden;
@@ -679,7 +682,7 @@ input:-webkit-autofill {
     margin-top: 18px;
     padding: 10px;
     text-align: center;
-    background-color: #ffffff;
+    background-color: var(--motors-bg-color);
     border-radius: 5px;
     font-size: 13px;
 }
@@ -690,10 +693,10 @@ input:-webkit-autofill {
 
 .stm-login-register-form .stm-register-form form {
     padding: 37px 30px 30px;
-    background-color: #ffffff;
-    border-top: 4px solid #153e4d;
-    -o-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    background-color: var(--motors-bg-color);
+    border-top: 4px solid var(--motors-bg-shade);
+    -o-box-shadow: 0 5px 10px var(--motors-bg-lowestalpha-contrast);
+    box-shadow: 0 5px 10px var(--motors-bg-lowestalpha-contrast);
 }
 
 .stm-login-register-form .stm-register-form form h4 {
@@ -710,7 +713,7 @@ input:-webkit-autofill {
 
 .stm-login-register-form .stm-register-form form .form-group.form-checker {
     margin-bottom: 25px;
-    color: #888888;
+    color: var(--motors-text-alpha-color);
     font-size: 13px;
 }
 
@@ -730,7 +733,7 @@ input:-webkit-autofill {
 }
 
 .stm-login-register-form .stm-register-form form input[type=submit][disabled] {
-    background-color: #c9cccf !important;
+    background-color: var(--motors-filter-inputs-color) !important;
 }
 
 .stm-login-register-form .stm-register-form form input[type=submit][disabled]:hover {
@@ -753,7 +756,7 @@ input:-webkit-autofill {
 .stm-login-register-form .stm-register-form form .stm-listing-loader {
     position: relative;
     top: 10px;
-    color: #6c98e1;
+    color: var(--motors-accent-color);
     font-size: 15px;
     line-height: 15px;
     visibility: hidden;
@@ -773,8 +776,8 @@ input:-webkit-autofill {
 
 .stm-login-register-form .stm-register-form form .stm-message-ajax-validation {
     margin-bottom: 20px;
-    background-color: #35475A;
-    color: #ffffff;
+    background-color: var(--motors-bg-contrast);
+    color: var(--motors-contrast-text-color);
     padding: 10px 20px;
     text-align: center;
     border-radius: 5px;
@@ -820,7 +823,7 @@ input:-webkit-autofill {
     top: 30px;
     right: 0;
     text-transform: uppercase;
-    color: #6c98e1;
+    color: var(--motors-accent-color);
     font-weight: 700;
 }
 
@@ -838,21 +841,21 @@ input:-webkit-autofill {
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form1-intro-unit {
     padding: 23px 30px 11px;
-    background-color: #232628;
+    background-color: var(--motors-bg-contrast);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form1-intro-unit .select2.reuqired_field .select2-selection--single .select2-selection__rendered {
-    border: solid 1px red;
+    border: solid 1px var(--motors-error-text-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form1-intro-unit input[type=text].reuqired_field,
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form1-intro-unit input[type=number].reuqired_field {
-    border-color: red;
+    border-color: var(--motors-error-text-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form1-intro-unit .stm-label {
     margin-bottom: 8px;
-    color: #ffffff;
+    color: var(--motors-contrast-text-color);
     font-weight: 700;
     font-size: 15px;
 }
@@ -876,7 +879,7 @@ input:-webkit-autofill {
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form1-intro-unit .select2-container--default .select2-selection--single .select2-selection__rendered {
-    background-color: #ffffff;
+    background-color: var(--motors-filter-inputs-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit {
@@ -904,12 +907,12 @@ input:-webkit-autofill {
     max-width: 220px;
     padding-left: 13px;
     border-width: 1px !important;
-    color: #555;
+    color: var(--motors-text-alpha-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter input[type=text]:focus,
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter input[type=number]:focus {
-    border-color: #6c98e1;
+    border-color: var(--motors-border-color);
     box-shadow: none;
 }
 
@@ -920,13 +923,13 @@ input:-webkit-autofill {
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter input[type=text].reuqired_field,
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter input[type=number].reuqired_field {
-    border-color: red;
+    border-color: var(--motors-error-text-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter input[type=text].stm_has_value,
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter input[type=number].stm_has_value {
-    background-color: #ffffff;
-    border-color: #efefef;
+    background-color: var(--motors-bg-color);
+    border-color: var(--motors-border-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter input[type=number]::-webkit-outer-spin-button, .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter input[type=number]::-webkit-inner-spin-button {
@@ -939,12 +942,12 @@ input:-webkit-autofill {
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter .select2.reuqired_field {
-    border: solid 1px red;
+    border: solid 1px var(--motors-error-text-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter .stm-label {
     margin-top: 9px;
-    color: #232628;
+    color: var(--motors-text-alpha-color);
     font-size: 13px;
     vertical-align: top;
     overflow: hidden;
@@ -1019,8 +1022,8 @@ input:-webkit-autofill {
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter .select2-container--default .select2-selection--single .select2-selection__rendered {
-    background-color: #ffffff;
-    border: 1px solid #efefef;
+    background-color: var(--motors-filter-inputs-color);
+    border: 1px solid var(--motors-border-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-car-listing-data-single {
@@ -1031,7 +1034,7 @@ input:-webkit-autofill {
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-car-listing-data-single .title {
-    color: #232628;
+    color: var(--motors-contrast-text-color);
     font-size: 18px;
     font-weight: 500;
 }
@@ -1147,23 +1150,23 @@ input:-webkit-autofill {
     font-size: 14px;
     font-weight: 700;
     line-height: 1.2;
-    color: #888888;
+    color: var(--motors-text-alpha-color);
     text-transform: uppercase;
     margin: 10px 0 0;
     display: block;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-3-photos .stm-add-media-car .stm-media-car-gallery .stm-placeholder .inner {
-    background-color: #EBEBEB;
+    background-color: var(--motors-border-color);
     position: relative;
     min-height: 140px;
     line-height: 1;
-    color: #bebebe;
+    color: var(--motors-border-color);
     font-size: 41px;
     text-align: center;
     transition: 300ms ease;
     border-radius: 4px;
-    border: 1px solid #A8A8A8;
+    border: 1px solid var(--motors-border-color);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1172,7 +1175,7 @@ input:-webkit-autofill {
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-3-photos .stm-add-media-car .stm-media-car-gallery .stm-placeholder .inner:hover {
-    border-color: #153e4d;
+    border-color: var(--motors-accent-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-3-photos .stm-add-media-car .stm-media-car-gallery .stm-placeholder .inner .stm-image-preview {
@@ -1194,9 +1197,9 @@ input:-webkit-autofill {
     width: 32px;
     height: 32px;
     text-align: center;
-    background-color: #DE0000;
+    background-color: var(--motors-error-bg-color);
     border-radius: 50%;
-    color: #ffffff;
+    color: var(--motors-contrst-text-color);
     opacity: 0;
 }
 
@@ -1206,7 +1209,7 @@ input:-webkit-autofill {
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-3-photos .stm-add-media-car .stm-media-car-gallery .stm-placeholder .inner .stm-image-preview .fas:hover {
-    background-color: #f80b0b;
+    background-color: var(--motors-error-bg-color);
     cursor: pointer;
 }
 
@@ -1225,8 +1228,8 @@ input:-webkit-autofill {
     height: 22px;
     text-align: center;
     text-indent: -2px;
-    background-color: #6c98e1;
-    color: #ffffff;
+    background-color: var(--motors-accent-color);
+    color: var(--motors-contrast-text-color);
     opacity: 0;
 }
 
@@ -1245,15 +1248,15 @@ input:-webkit-autofill {
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-3-photos .stm-add-media-car .stm-media-car-gallery .stm-placeholder-native .inner {
     border-style: dashed;
-    border-color: #4e90cc;
+    border-color: var(--motors-border-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-3-photos .stm-add-media-car .stm-media-car-gallery .stm-placeholder-native:hover .inner {
-    border-color: #6c98e1;
+    border-color: var(--motors-accent-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-3-photos .stm-add-media-car .stm-media-car-gallery .stm-placeholder-native:hover .stm-placeholder__text {
-    color: #6c98e1;
+    color: var(--motors-accent-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-3-photos .stm-add-media-car .stm-media-car-gallery .stm-placeholder.deleting .stm-image-preview:before {
@@ -1262,7 +1265,7 @@ input:-webkit-autofill {
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-3-photos .stm-add-media-car .stm-media-car-gallery .stm-placeholder:hover .inner.deleting {
     border-width: 3px;
-    border-color: #f80b0b;
+    border-color: var(--motors-error-text-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-3-photos .stm-add-media-car .stm-media-car-gallery .stm-placeholder .stm-progress-bar {
@@ -1284,7 +1287,7 @@ input:-webkit-autofill {
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
     border-width: 3px;
     border-style: solid;
-    border-color: var(--mvl-primary-color) transparent transparent transparent;
+    border-color: var(--motors-success-color) transparent transparent transparent;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-3-photos .stm-add-media-car .stm-media-car-gallery .stm-placeholder .stm-progress-bar__item:nth-child(1) {
@@ -1321,7 +1324,7 @@ input:-webkit-autofill {
     font-size: 14px;
     line-height: 20px;
     font-weight: 600;
-    color: #153e4d;
+    color: var(--motors-success-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-3-photos .stm-add-media-car .stm-media-car-gallery .stm-placeholder .stm-progress-bar__percent {
@@ -1339,14 +1342,14 @@ input:-webkit-autofill {
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-media-car-add-nitofication h4 {
-    color: #808080;
+    color: var(--motors-text-alpha-color);
     font-weight: 600;
     font-size: 16px;
     margin-bottom: 10px;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-media-car-add-nitofication p {
-    color: #808080;
+    color: var(--motors-text-alpha-color);
     font-size: 16px;
     font-weight: 400;
     margin: 0 0 14px;
@@ -1367,12 +1370,12 @@ input:-webkit-autofill {
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-4-videos .stm-add-videos-unit {
     padding: 23px 30px 14px;
-    background-color: #232628;
+    background-color: var(--motors-bg-contrast);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-4-videos .stm-add-videos-unit .heading-font {
     margin-bottom: 8px;
-    color: #ffffff;
+    color: var(--motors-contrast-text-color);
     font-weight: 700;
     font-size: 15px;
 }
@@ -1385,7 +1388,7 @@ input:-webkit-autofill {
     position: relative;
     padding-left: 25px;
     margin-top: 27px;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--motors-contrast-text-alpha-color);
     font-size: 13px;
     line-height: 22px;
 }
@@ -1407,7 +1410,7 @@ input:-webkit-autofill {
     right: 0;
     width: 40px;
     height: 40px;
-    background: rgba(255, 255, 255, 0.5);
+    background: var(--motors-contrast-border-color);
     cursor: pointer;
 }
 
@@ -1415,7 +1418,7 @@ input:-webkit-autofill {
     content: "";
     position: absolute;
     display: block;
-    background-color: #ffffff;
+    background-color: var(--motors-bg-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-4-videos .stm-video-link-unit .stm-after-video:before {
@@ -1433,7 +1436,7 @@ input:-webkit-autofill {
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-4-videos .stm-video-link-unit .stm-after-video.active {
-    background-color: #6c98e1;
+    background-color: var(--motors-accent-color);
     cursor: default;
 }
 
@@ -1467,13 +1470,13 @@ input:-webkit-autofill {
     height: 202px;
     padding: 10px 10px 10px 12px;
     font-size: 13px;
-    color: #888888;
-    background-color: #efefef;
-    border: 1px solid #e1e2e4;
+    color: var(--motors-text-alpha-color);
+    background-color: var(--motors-filter-inputs-color);
+    border: 1px solid var(--motors-border-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-5-notes textarea:focus {
-    background-color: #ffffff;
+    background-color: var(--motors-bg-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-5-notes .stm-seller-notes-phrases {
@@ -1495,7 +1498,7 @@ input:-webkit-autofill {
     transform: translate(0, 0);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #ffffff;
+    color: var(--motors-contrast-text-color);
     line-height: 25px;
     top: 0;
     left: 7px;
@@ -1509,11 +1512,11 @@ input:-webkit-autofill {
     left: 0;
     height: 24px;
     width: 24px;
-    background-color: #6c98e1;
+    background-color: var(--motors-accent-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-5-notes .stm-seller-notes-phrases span {
-    border-bottom: 1px dashed #232628;
+    border-bottom: 1px dashed var(--motors-border-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-5-notes #wp-stm_seller_notes-wrap.required_field {
@@ -1526,17 +1529,17 @@ input:-webkit-autofill {
     right: 0;
     top: 50%;
     transform: translateY(-50%);
-    border-top: 4px solid #232628;
+    border-top: 4px solid var(--motors-border-color);
     opacity: 0;
     visibility: hidden;
     z-index: 20;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-5-notes .stm-phrases-unit .stm_phrases .inner {
-    background-color: #ffffff;
+    background-color: var(--motors-bg-color);
     padding: 30px;
-    -o-box-shadow: 0 5px 29px rgba(0, 0, 0, 0.24);
-    box-shadow: 0 5px 29px rgba(0, 0, 0, 0.24);
+    -o-box-shadow: 0 5px 29px var(--motors-border-color);
+    box-shadow: 0 5px 29px var(--motors-border-color);
     z-index: 2;
 }
 
@@ -1546,7 +1549,7 @@ input:-webkit-autofill {
     top: 0;
     right: 0;
     font-size: 14px;
-    color: #888888;
+    color: var(--motors-text-alpha-color);
     opacity: 0.5;
 }
 
@@ -1563,7 +1566,7 @@ input:-webkit-autofill {
     left: 0;
     height: 100%;
     width: 30px;
-    background-color: #ffffff;
+    background-color: var(--motors-bg-color);
     z-index: 3;
 }
 
@@ -1572,14 +1575,14 @@ input:-webkit-autofill {
     position: absolute;
     display: block;
     transform: rotate(-45deg);
-    -o-box-shadow: 0 5px 29px rgba(0, 0, 0, 0.24);
-    box-shadow: 0 5px 29px rgba(0, 0, 0, 0.24);
+    -o-box-shadow: 0 5px 29px var(--motors-border-color);
+    box-shadow: 0 5px 29px var(--motors-border-color);
     height: 20px;
     width: 20px;
     left: -10px;
     top: 50%;
     margin-top: -10px;
-    background-color: #ffffff;
+    background-color: var(--motors-bg-color);
     z-index: 1;
 }
 
@@ -1613,8 +1616,8 @@ input:-webkit-autofill {
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user {
     padding: 0 40px;
-    background-color: #f0f2f5;
-    border: 1px solid #dddddd;
+    background-color: var(--motors-bg-contrast);
+    border: 1px solid var(--motors-bg-contrast);
     margin-bottom: 40px;
     position: relative;
 }
@@ -1635,12 +1638,12 @@ input:-webkit-autofill {
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm-form-inner .add-car-btns-wrap li .tooltip-inner {
-    background-color: #232628;
+    background-color: var(--motors-bg-color);
     font-size: 14px;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm-form-inner .add-car-btns-wrap li .tooltip.top .tooltip-arrow {
-    border-top-color: #232628;
+    border-top-color: var(--motors-contrast-text-color);
     border-width: 5px 5px 0;
 }
 
@@ -1673,7 +1676,7 @@ input:-webkit-autofill {
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm-text {
     font-size: 13px;
     line-height: 24px;
-    color: #888888;
+    color: var(--motors-text-alpha-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm_register_title h3 {
@@ -1685,7 +1688,7 @@ input:-webkit-autofill {
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm_register_title .stm_login_me {
     margin-top: 3px;
     font-size: 13px;
-    color: #888888;
+    color: var(--motors-text-alpha-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm-login-register-form {
@@ -1695,7 +1698,7 @@ input:-webkit-autofill {
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm-login-register-form .stm-register-form form .stm-listing-loader.visible i {
     margin-left: 10px;
     visibility: visible;
-    color: var(--mvl-primary-color);
+    color: var(--motors-text-color);
     opacity: 1;
 }
 
@@ -1715,10 +1718,10 @@ input:-webkit-autofill {
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user button[type=submit].disabled {
-    background-color: #838588;
+    background-color: var(--motors-filter-inputs-color);
     opacity: 0.33;
-    -o-box-shadow: 0 2px 0 #686a6d;
-    box-shadow: 0 2px 0 #686a6d;
+    -o-box-shadow: 0 2px 0 var(--motors-text-alpha-color);
+    box-shadow: 0 2px 0 var(--motors-text-alpha-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user button[type=submit].disabled:hover {
@@ -1735,12 +1738,12 @@ input:-webkit-autofill {
     position: relative;
     width: 486px;
     padding: 30px 23px 30px;
-    background-color: #ffffff;
-    border-top: 4px solid #153e4d;
+    background-color: var(--motors-bg-color);
+    border-top: 4px solid var(--motors-border-color);
     z-index: 2;
     overflow: hidden;
-    -o-box-shadow: 0 5px 29px rgba(0, 0, 0, 0.24);
-    box-shadow: 0 5px 29px rgba(0, 0, 0, 0.24);
+    -o-box-shadow: 0 5px 29px var(--motors-border-color);
+    box-shadow: 0 5px 29px var(--motors-border-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-history-popup .inner .fa-times {
@@ -1755,7 +1758,7 @@ input:-webkit-autofill {
     content: "";
     position: absolute;
     display: block;
-    background-color: #ffffff;
+    background-color: var(--motors-bg-color);
     height: 20px;
 }
 
@@ -1773,8 +1776,8 @@ input:-webkit-autofill {
     margin-left: -10px;
     z-index: 1;
     transform: rotate(-45deg);
-    -o-box-shadow: 0 5px 29px rgba(0, 0, 0, 0.24);
-    box-shadow: 0 5px 29px rgba(0, 0, 0, 0.24);
+    -o-box-shadow: 0 5px 29px var(--motors-border-color);
+    box-shadow: 0 5px 29px var(--motors-border-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-history-popup h5 {
@@ -1845,7 +1848,7 @@ input:-webkit-autofill {
     border-radius: 50%;
     margin-right: 23px;
     overflow: hidden;
-    background-color: #eee;
+    background-color: var(--motors-contrast-text-color);
     text-align: center;
     flex-shrink: 0;
 }
@@ -1856,7 +1859,7 @@ input:-webkit-autofill {
     line-height: 75px;
     text-align: center;
     font-size: 34px;
-    color: #acb9bd;
+    color: var(--motors-text-alpha-color);
 }
 
 .stm-add-a-car-user .left-info.left-dealer-info {
@@ -1886,11 +1889,12 @@ input:-webkit-autofill {
     font-size: 20px;
     font-weight: 700;
     line-height: 1.5;
+    color: var(--motors-contrast-text-color);
 }
 
 .stm-add-a-car-user .left-info .user-info .stm-label {
     font-size: 13px;
-    color: #888888;
+    color: var(--motors-contrast-text-alpha-color);
 }
 
 .stm-add-a-car-user .right-info {
@@ -1898,7 +1902,7 @@ input:-webkit-autofill {
     text-align: right;
     font-size: 13px;
     padding: 40px 0 20px 30px;
-    border-left: 1px solid #dddddd;
+    border-left: 1px solid var(--motors-contrast-border-color);
 }
 
 .stm-add-a-car-user .right-info .fas.fa-external-link-alt {
@@ -1910,7 +1914,7 @@ input:-webkit-autofill {
 .stm-add-a-car-user .right-info .stm_logout {
     margin-top: 6px;
     letter-spacing: 0.2px;
-    color: #888888;
+    color: var(--motors-contrast-text-alpha-color);
 }
 
 .stm-not-enabled {
@@ -1947,7 +1951,7 @@ input:-webkit-autofill {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.89);
+    background: var(--motors-contrast-text-alpha-color);
     z-index: 9999;
     opacity: 0;
     visibility: hidden;
@@ -1969,30 +1973,30 @@ input:-webkit-autofill {
 }
 
 .stm-add-a-car-login .stm-login-form .motors-socials-head-text {
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--motors-text-alpha-color);
 }
 
 .stm-add-a-car-login .stm-login-form .motors-socials-head-text::before, .stm-add-a-car-login .stm-login-form .motors-socials-head-text::after {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: var(--motors-text-alpha-color);
 }
 
 .stm-add-a-car-login .stm-login-form form {
     padding: 41px 30px 36px;
-    background-color: rgb(53, 71, 90);
+    background-color: var(--motors-bg-contrast);
 }
 
 .stm-add-a-car-login .stm-login-form form input[type=text], .stm-add-a-car-login .stm-login-form form input[type=number], .stm-add-a-car-login .stm-login-form form input[type=tel], .stm-add-a-car-login .stm-login-form form input[type=email], .stm-add-a-car-login .stm-login-form form input[type=search], .stm-add-a-car-login .stm-login-form form input[type=password] {
-    background-color: rgb(243, 247, 252);
-    border-color: rgb(243, 247, 252);
+    background-color: var(--motors-filter-inputs-color);
+    border-color: var(--motors-filter-inputs-color);
     border-radius: 4px;
 }
 
 .stm-add-a-car-login .stm-login-form form input[type=text]:focus, .stm-add-a-car-login .stm-login-form form input[type=number]:focus, .stm-add-a-car-login .stm-login-form form input[type=tel]:focus, .stm-add-a-car-login .stm-login-form form input[type=email]:focus, .stm-add-a-car-login .stm-login-form form input[type=search]:focus, .stm-add-a-car-login .stm-login-form form input[type=password]:focus {
-    border-color: #1280DF;
+    border-color: var(--motors-accent-color);
 }
 
 .stm-add-a-car-login .stm-login-form form h4 {
-    color: #ffffff;
+    color: var(--motors-contrast-text-color);
     font-size: 15px;
     margin-bottom: 14px;
     letter-spacing: -0.5px;
@@ -2000,7 +2004,7 @@ input:-webkit-autofill {
 
 .stm-add-a-car-login .stm-login-form form .form-checker {
     margin-bottom: 26px !important;
-    color: #fff;
+    color: var(--motors-bg-color);
     font-size: 13px;
 }
 
@@ -2028,8 +2032,8 @@ input:-webkit-autofill {
 .stm-add-a-car-login .stm-login-form form input[type=search],
 .stm-add-a-car-login .stm-login-form form input[type=password] {
     padding-left: 17px;
-    border-color: #f0f2f5 !important;
-    background-color: #f0f2f5 !important;
+    border-color: var(--motors-border-color) !important;
+    background-color: var(--motors-filter-inputs-color) !important;
 }
 
 .stm-add-a-car-login .stm-login-form form input[type=text].form-error,
@@ -2038,7 +2042,7 @@ input:-webkit-autofill {
 .stm-add-a-car-login .stm-login-form form input[type=email].form-error,
 .stm-add-a-car-login .stm-login-form form input[type=search].form-error,
 .stm-add-a-car-login .stm-login-form form input[type=password].form-error {
-    border-color: #ff2325 !important;
+    border-color: var(--motors-error-text-color) !important;
 }
 
 .stm-add-a-car-login .stm-login-form form input[type=submit] {
@@ -2049,7 +2053,7 @@ input:-webkit-autofill {
     visibility: inherit;
     font-weight: 700;
     max-width: unset;
-    background-color: #1280DF;
+    background-color: var(--motors-accent-color);
     box-shadow: none;
     text-transform: unset;
     font-size: 14px;
@@ -2079,17 +2083,17 @@ input:-webkit-autofill {
     -webkit-appearance: none;
     width: 17px;
     height: 17px;
-    border: 1px solid rgb(236, 239, 243);
+    border: 1px solid var(--motors-border-color);
     border-radius: 3px;
     cursor: pointer;
     outline: none;
     position: relative;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--motors-bg-color);
 }
 
 .stm-add-a-car-login .stm-login-form form input[type=checkbox]:checked {
-    background-color: #1280DF !important;
-    border-color: #1280DF !important;
+    background-color: var(--motors-accent-color) !important;
+    border-color: var(--motors-accent-color) !important;
 }
 
 .stm-add-a-car-login .stm-login-form form input[type=checkbox]:checked::after {
@@ -2099,7 +2103,7 @@ input:-webkit-autofill {
     top: 3px;
     width: 5px;
     height: 7px;
-    border: solid white;
+    border: solid var(--motors-bg-color);
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }
@@ -2107,7 +2111,7 @@ input:-webkit-autofill {
 .stm-add-a-car-login .stm-login-form form .stm-listing-loader {
     position: relative;
     top: 10px;
-    color: #ffffff;
+    color: var(--motors-contrast-text-color);
     font-size: 15px;
     line-height: 15px;
     visibility: hidden;
@@ -2129,7 +2133,7 @@ input:-webkit-autofill {
     margin-top: 18px;
     padding: 10px;
     text-align: center;
-    background-color: #ffffff;
+    background-color: var(--motors-bg-color);
     border-radius: 5px;
     font-size: 13px;
 }
@@ -2150,7 +2154,7 @@ input:-webkit-autofill {
     left: 50%;
     margin: -10px 0 0 -10px;
     font-size: 30px;
-    color: #6c98e1;
+    color: var(--motors-accent-color);
     animation: rotating 2s infinite linear;
     opacity: 0;
     visibility: hidden;
@@ -2166,19 +2170,19 @@ input:-webkit-autofill {
     display: none;
     margin: 10px 0 25px;
     padding: 15px 30px;
-    background-color: #232628;
-    color: #ffffff !important;
+    background-color: var(--motors-notice-bg-color);
+    color: var(--motors-notice-text-color) !important;
     font-weight: 700;
     border-radius: 4px;
 }
 
 .alert.alert-info .fa-check {
-    color: var(--mvl-primary-color);
+    color: var(--motors-accent-color);
     margin-right: 15px;
 }
 
 .alert.alert-warning .fa-info {
-    color: #ed262c;
+    color: var(--motors-error-text-color);
     margin-right: 15px;
 }
 
@@ -2197,8 +2201,8 @@ input:-webkit-autofill {
     transform: translateX(-50%) translateY(-50%) translateZ(0);
     width: 426px;
     padding: 57px 40px 48px;
-    background-color: #ffffff;
-    border-top: 4px solid #232628;
+    background-color: var(--motors-bg-color);
+    border-top: 4px solid var(--motors-border-color);
     margin: 0;
     z-index: 9999;
 }
@@ -2210,7 +2214,7 @@ input:-webkit-autofill {
     height: 100%;
     top: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: var(--motors-bg-alpha-contrast);
     z-index: 99;
 }
 
@@ -2219,7 +2223,7 @@ input:-webkit-autofill {
 }
 
 .stm-no-available-adds h3 span {
-    color: #f80b0b;
+    color: var(--motors-error-text-color);
 }
 
 .stm-no-available-adds p {
@@ -2244,9 +2248,9 @@ input:-webkit-autofill {
 }
 
 .stm-no-available-adds .clearfix .stm-green-dk {
-    background-color: #232628;
-    -o-box-shadow: 0 2px 0 #11323e;
-    box-shadow: 0 2px 0 #11323e;
+    background-color: var(--motors-bg-color);
+    -o-box-shadow: 0 2px 0 var(--motors-text-alpha-color);
+    box-shadow: 0 2px 0 var(--motors-text-alpha-color);
 }
 
 .stm-no-available-adds .clearfix .stm-green-dk:active {
@@ -2264,17 +2268,17 @@ input:-webkit-autofill {
 
 .stm-vl-plugin-pure .stm-form-price-edit input {
     font-size: 14px;
-    color: #282828;
+    color: var(--motors-text-color);
 }
 
 .stm-vl-plugin-pure .stm-form-price-edit .stm_price_input {
     padding: 30px 40px 45px 40px;
-    background-color: #232628;
+    background-color: var(--motors-bg-contrast);
 }
 
 .stm-vl-plugin-pure .stm-form-price-edit .stm_price_input .stm_label {
     margin-bottom: 12px;
-    color: #ffffff;
+    color: var(--motors-contrast-text-color);
     letter-spacing: 0.3px;
     font-weight: 700;
 }
@@ -2287,7 +2291,7 @@ input:-webkit-autofill {
 }
 
 .stm-vl-plugin-pure .stm-form-price-edit .stm_price_input p {
-    color: #888888;
+    color: var(--motors-text-alpha-color);
     line-height: 24px;
 }
 
@@ -2310,12 +2314,12 @@ input:-webkit-autofill {
 
 .stm-forgot-password a {
     font-size: 13px;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--motors-contrast-text-alpha-color);
     text-decoration: none !important;
 }
 
 .stm-forgot-password a.active, .stm-forgot-password a:hover {
-    color: #ffffff;
+    color: var(--motors-contrast-text-color);
 }
 
 .stm-login-register-form .stm-login-form form.stm_forgot_password_send {
@@ -2333,7 +2337,7 @@ input:-webkit-autofill {
 .stm-vl-plugin-pure .motors-desc-slots-wrapper h3 {
     letter-spacing: -1px;
     word-spacing: -1px;
-    color: #232628;
+    color: var(--motors-contrast-text-color);
     font-size: 26px;
     line-height: 32px;
     font-weight: 700;
@@ -2348,14 +2352,14 @@ input:-webkit-autofill {
 .stm-vl-plugin-pure .mdsw-right .stm-posts-available-number {
     margin: 0 0 8px;
     text-align: right !important;
-    color: #888888 !important;
+    color: var(--motors-text-alpha-color) !important;
     font-size: 20px;
     letter-spacing: -1px;
 }
 
 .stm-vl-plugin-pure .mdsw-right .stm-posts-available-number span {
     letter-spacing: -0.5px;
-    color: #6c98e1;
+    color: var(--motors-accent-color);
     font-weight: 700;
 }
 
@@ -2370,7 +2374,7 @@ input:-webkit-autofill {
 .motors-desc-slots-wrapper .mdsw-right .stm-posts-available-number {
     margin: 0 0 8px;
     text-align: right !important;
-    color: #888888 !important;
+    color: var(--motors-text-alpha-color) !important;
     font-size: 20px;
     letter-spacing: -1px;
 }

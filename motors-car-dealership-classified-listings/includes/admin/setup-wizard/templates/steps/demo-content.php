@@ -22,7 +22,7 @@ $settings = apply_filters( 'mvl_setup_wizard_data', array() );
 
 	<p><?php echo esc_html__( 'Import demo content to quickly set up your site. You can customize or delete it anytime.', 'stm_vehicles_listing' ); ?></p>
 
-	<div class="mvl-welcome-todo">
+	<div class="mvl-welcome-todo loading">
 
 		<div class="mvl-welcome-todo-item" data-key="tax" data-action="mvl_setup_wizard_starter_import_fields">
 			<div class="mvl-welcome-todo-item-heading">
@@ -79,12 +79,10 @@ $settings = apply_filters( 'mvl_setup_wizard_data', array() );
 						data-label-error="<?php esc_attr_e( 'Failed', 'stm_vehicles_listing' ); ?>"></span>
 			</div>
 		</div>
-
 	</div>
-
 </div>
 
-<div class="mvl-welcome-nav-actions">
+<div class="mvl-welcome-nav-actions processing">
 	<div>
 		<a href="<?php echo esc_url( apply_filters( 'mvl_setup_wizard_step_url', 'plugins' ) ); ?>" class="button" id="mvl-prev-step-link" data-step="plugins">
 			<?php echo esc_html__( 'Back', 'stm_vehicles_listing' ); ?>

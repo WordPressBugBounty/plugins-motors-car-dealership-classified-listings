@@ -13,7 +13,7 @@
 #stm_sell_a_car_form .motors-vin-decoder-wrapper {
     margin-top: 20px;
     padding: 20px 0 20px;
-    border-top: 4px solid var(--mvl-third-color);
+    border-top: 4px solid var(--motors-border-color);
 }
 
 .stm_add_car_form input[type=text],
@@ -28,15 +28,15 @@
     line-height: 40px;
     padding: 0 21px;
     font-weight: 400;
-    color: #888888;
-    border: 2px solid #eceff3;
+    color: var(--motors-text-alpha-color);
+    border: 1px solid var(--motors-border-color);
     font-size: 14px;
     outline: none !important;
-    background-color: #eceff3;
+    background-color: var(--motors-filter-inputs-color);
 }
 
 .stm_add_car_form input.form-error {
-    border-color: #ff2325;
+    border-color: var(--motors-error-text-color);
 }
 
 .stm_add_car_form .stm-car-listing-data-single .stm_add_car_title_form {

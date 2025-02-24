@@ -31,18 +31,18 @@
 						<div class="row form-group">
 							<div class="col-md-6">
 								<h4><?php esc_html_e( 'First Name', 'stm_vehicles_listing' ); ?></h4>
-								<input class="form-control user_validated_field" type="text" name="stm_user_first_name" placeholder="<?php esc_attr_e( 'Enter First name', 'stm_vehicles_listing' ); ?>"/>
+								<input class="form-control user_validated_field" type="text" name="stm_user_first_name" autocomplete="given-name" placeholder="<?php esc_attr_e( 'Enter First name', 'stm_vehicles_listing' ); ?>"/>
 							</div>
 							<div class="col-md-6">
 								<h4><?php esc_html_e( 'Last Name', 'stm_vehicles_listing' ); ?></h4>
-								<input class="form-control user_validated_field" type="text" name="stm_user_last_name" placeholder="<?php esc_attr_e( 'Enter Last name', 'stm_vehicles_listing' ); ?>"/>
+								<input class="form-control user_validated_field" type="text" name="stm_user_last_name" autocomplete="family-name" placeholder="<?php esc_attr_e( 'Enter Last name', 'stm_vehicles_listing' ); ?>"/>
 							</div>
 						</div>
 
 						<div class="row form-group">
 							<div class="col-md-6">
 								<h4><?php esc_html_e( 'Phone number', 'stm_vehicles_listing' ); ?></h4>
-								<input type="tel" class="form-control user_validated_field" name="stm_user_phone" placeholder="<?php esc_attr_e( 'Enter Phone', 'stm_vehicles_listing' ); ?>"/>
+								<input type="tel" class="form-control user_validated_field" name="stm_user_phone" autocomplete="tel" placeholder="<?php esc_attr_e( 'Enter Phone', 'stm_vehicles_listing' ); ?>"/>
 								<label for="whatsapp-checker">
 									<input type="checkbox" name="stm_whatsapp_number" id="whatsapp-checker" />
 									<span>
@@ -54,20 +54,20 @@
 							</div>
 							<div class="col-md-6">
 								<h4><?php esc_html_e( 'Email *', 'stm_vehicles_listing' ); ?></h4>
-								<input type="email" class="form-control user_validated_field" name="stm_user_mail" placeholder="<?php esc_attr_e( 'Enter E-mail', 'stm_vehicles_listing' ); ?>"/>
+								<input type="email" class="form-control user_validated_field" name="stm_user_mail" autocomplete="email" placeholder="<?php esc_attr_e( 'Enter E-mail', 'stm_vehicles_listing' ); ?>"/>
 							</div>
 						</div>
 
 						<div class="row form-group">
 							<div class="col-md-6">
 								<h4><?php esc_html_e( 'Login *', 'stm_vehicles_listing' ); ?></h4>
-								<input type="text" class="form-control user_validated_field" name="stm_nickname" placeholder="<?php esc_attr_e( 'Enter Login', 'stm_vehicles_listing' ); ?>"/>
+								<input type="text" class="form-control user_validated_field" name="stm_nickname" autocomplete="username" placeholder="<?php esc_attr_e( 'Enter Login', 'stm_vehicles_listing' ); ?>"/>
 							</div>
 							<div class="col-md-6">
 								<h4><?php esc_html_e( 'Password *', 'stm_vehicles_listing' ); ?></h4>
 								<div class="stm-show-password">
 									<i class="fas fa-eye-slash"></i>
-									<input type="password" class="form-control user_validated_field" name="stm_user_password" placeholder="<?php esc_attr_e( 'Enter Password', 'stm_vehicles_listing' ); ?>"/>
+									<input type="password" class="form-control user_validated_field" name="stm_user_password" autocomplete="new-password" placeholder="<?php esc_attr_e( 'Enter Password', 'stm_vehicles_listing' ); ?>"/>
 								</div>
 							</div>
 						</div>

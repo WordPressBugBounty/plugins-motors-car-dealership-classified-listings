@@ -1,10 +1,15 @@
 <?php
+use MotorsVehiclesListing\Plugin\MVL_Const;
+use MotorsVehiclesListing\Plugin\PluginOptions;
+use MotorsVehiclesListing\Stilization\Color;
+use MotorsVehiclesListing\Stilization\Colors;
+
 /**
  * Use for get value by option key
  **/
 add_filter( 'motors_vl_get_nuxy_mod', 'motors_vl_get_nuxy_mod', 10, 3 );
 function motors_vl_get_nuxy_mod( $default = '', $opt_name = '', $return_default = false ) {
-	$options = \MotorsVehiclesListing\Plugin\PluginOptions::getInstance();
+	$options = PluginOptions::getInstance();
 	$options = $options::$options_map;
 
 	$value_or_false = ( isset( $options[ $opt_name ] ) ) ? $options[ $opt_name ] : $default;
@@ -28,7 +33,7 @@ function motors_vl_get_nuxy_mod( $default = '', $opt_name = '', $return_default 
  * Needed for demo import set content
  */
 function mvl_set_wpcfto_mod( $opt_name, $value ) {
-	$settings_name = \MotorsVehiclesListing\Plugin\MVL_Const::MVL_PLUGIN_OPT_NAME;
+	$settings_name = MVL_Const::MVL_PLUGIN_OPT_NAME;
 	$options       = get_option( $settings_name, array() );
 
 	if ( ! empty( $options[ $opt_name ] ) ) {
@@ -153,7 +158,7 @@ add_filter( 'mvl_nuxy_sortby', 'mvl_nuxy_sortby' );
 
 function mvl_print_settings( $settings_name = null ) {
 	if ( empty( $settings_name ) ) {
-		$settings_name = \MotorsVehiclesListing\Plugin\MVL_Const::MVL_PLUGIN_OPT_NAME;
+		$settings_name = MVL_Const::MVL_PLUGIN_OPT_NAME;
 	}
 
 	echo wp_json_encode( get_option( $settings_name ), true );
@@ -205,6 +210,19 @@ function mvl_wp_kses_allowed_html( $allowed_html ) {
 	$allowed_html['input']              = $allowed_atts;
 	$allowed_html['option']             = $allowed_atts;
 	$allowed_html['option']['selected'] = array();
+
+	$allowed_html['img'] = array(
+		'src'      => true,
+		'srcset'   => true,
+		'sizes'    => true,
+		'class'    => true,
+		'id'       => true,
+		'width'    => true,
+		'height'   => true,
+		'alt'      => true,
+		'loading'  => true,
+		'decoding' => true,
+	);
 
 	return $allowed_html;
 }
@@ -435,13 +453,6 @@ if ( ! function_exists( 'stm_get_hoverable_thumbs' ) ) {
 				$img = wp_get_attachment_image_url( $attachment_id, $thumb_size );
 
 				if ( ! empty( $img ) ) {
-					if ( has_image_size( $thumb_size . '-x-2' ) ) {
-						$imgs   = array();
-						$imgs[] = $img;
-						$imgs[] = wp_get_attachment_image_url( $attachment_id, $thumb_size . '-x-2' );
-						$img    = $imgs;
-					}
-
 					array_push( $returned_value['gallery'], $img );
 					array_push( $returned_value['ids'], $attachment_id );
 					$count ++;
@@ -450,7 +461,7 @@ if ( ! function_exists( 'stm_get_hoverable_thumbs' ) ) {
 		}
 
 		// get remaining count of gallery images
-		$remaining                   = count( $ids ) - count( $returned_value['gallery'] );
+		$remaining                   = count( $ids ) - count( $returned_value['ids'] );
 		$returned_value['remaining'] = ( 0 <= $remaining ) ? $remaining : 0;
 
 		return $returned_value;
@@ -1130,6 +1141,14 @@ add_filter(
 	99
 );
 
+// Disable auto-sizing responsive images
+add_filter(
+	'wp_img_tag_add_auto_sizes',
+	function() {
+		return false;
+	},
+);
+
 function delear_public_page_pagination_action( $query, $page, $posts_per_page, $sort_by ) {
 	echo paginate_links( //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		array(
@@ -1145,6 +1164,47 @@ function delear_public_page_pagination_action( $query, $page, $posts_per_page, $
 	);
 }
 add_action( 'delear_public_page_pagination', 'delear_public_page_pagination_action', 4, 99 );
+
+if ( ! function_exists( 'motors_skin_name' ) ) {
+	function motors_get_skin_name() {
+		return get_option( MVL_Const::ACTIVE_SKIN_OPT_NAME, 'free' );
+	}
+}
+
+if ( ! function_exists( 'motors_get_demo_data' ) ) {
+	function motors_get_demo_data( $filename ) {
+		$file_url    = motors_get_demo_file_url( $filename );
+		$remote_args = array();
+		if ( defined( 'STM_DEV_MODE' ) && STM_DEV_MODE ) {
+			$remote_args = array(
+				'sslverify' => false,
+			);
+		}
+		$demo_data = wp_remote_get( $file_url, $remote_args );
+		return apply_filters( 'motors_demo_data', $demo_data, $filename, $file_url );
+	}
+	add_filter( 'motors_get_demo_data', 'motors_get_demo_data' );
+}
+
+if ( ! function_exists( 'motors_get_demo_file_url' ) ) {
+	function motors_get_demo_file_url( $filename ) {
+		$skin_name = motors_get_skin_name();
+		if ( defined( 'STM_DEV_MODE' ) && STM_DEV_MODE && defined( 'MOTORS_STARTER_THEME_TEMPLATE_URI' ) ) {
+			$file_url = MOTORS_STARTER_THEME_TEMPLATE_URI . '/includes/demo/' . $skin_name . '/' . $filename;
+		} else {
+			$file_url = 'https://motors-plugin.stylemixthemes.com/starter-theme-demo/' . $skin_name . '/' . $filename;
+		}
+		return apply_filters( 'motors_demo_file_url', $file_url, $filename );
+	}
+}
+
+if ( ! function_exists( 'motors_get_demo_file_path' ) ) {
+	function motors_get_demo_file_path( $filename ) {
+		$skin_name = motors_get_skin_name();
+		$filepath  = MOTORS_STARTER_THEME_TEMPLATE_DIR . '/includes/demo/' . $skin_name . '/' . $filename;
+		return apply_filters( 'motors_demo_file_path', $filepath, $filename );
+	}
+}
 
 
 function mvl_dealer_gmap( $lat, $lng ) {

@@ -169,12 +169,15 @@
     float: right;
     margin-left: 15px;
     margin-right: 20px;
-    border-bottom: 1px dashed;
+    border-bottom: 1px dashed var(--motors-text-alpha-color);
     line-height: 17px;
+    color: var(--motors-text-alpha-color);
 }
 
 .stm_icon_filter_label:hover {
     cursor: pointer;
+    color: var(--motors-accent-color);
+    border-color: var(--motors-accent-color);
 }
 
 .stm_listing_icon_filter {
@@ -235,12 +238,12 @@
 .stm_listing_icon_filter .stm_listing_icon_filter_single .inner .name {
     margin-top: 5px;
     font-size: 13px;
-    color: #777;
+    color: var(--motors-text-alpha-color);
     text-decoration: underline;
 }
 
 .stm_listing_icon_filter .stm_listing_icon_filter_single:hover .name {
-    color: #4e90cc;
+    color: var(--motors-accent-color);
 }
 
 .stm_listing_icon_filter .stm_listing_icon_filter_single:hover .image {

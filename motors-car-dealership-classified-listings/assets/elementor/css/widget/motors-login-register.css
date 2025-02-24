@@ -2,12 +2,8 @@
     color: inherit;
 }
 
-.stm-login-register-form .stm-register-form form .form-group.form-checker, .stm-login-register-form .stm-login-form form .form-group.form-checker {
-    color: inherit;
-}
-
 .stm-login-register-form .stm-register-form form .form-group.form-checker span a, .stm-login-register-form .stm-login-form form .form-group.form-checker span a {
-    color: #1280DF;
+    color: var(--motors-accent-color);
     text-decoration: none;
 }
 

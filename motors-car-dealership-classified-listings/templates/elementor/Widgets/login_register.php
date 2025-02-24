@@ -91,12 +91,12 @@ $can_register = apply_filters( 'motors_vl_get_nuxy_mod', false, 'new_user_regist
 					<div class="row form-group">
 						<div class="col-md-6">
 							<h4><?php esc_html_e( 'First Name', 'stm_vehicles_listing' ); ?></h4>
-							<input class="user_validated_field" type="text" name="stm_user_first_name"
+							<input class="user_validated_field" type="text" name="stm_user_first_name" autocomplete="given-name"
 									placeholder="<?php esc_attr_e( 'Enter First name', 'stm_vehicles_listing' ); ?>"/>
 						</div>
 						<div class="col-md-6">
 							<h4><?php esc_html_e( 'Last Name', 'stm_vehicles_listing' ); ?></h4>
-							<input class="user_validated_field" type="text" name="stm_user_last_name"
+							<input class="user_validated_field" type="text" name="stm_user_last_name" autocomplete="family-name"
 									placeholder="<?php esc_attr_e( 'Enter Last name', 'stm_vehicles_listing' ); ?>"/>
 						</div>
 					</div>
@@ -104,7 +104,7 @@ $can_register = apply_filters( 'motors_vl_get_nuxy_mod', false, 'new_user_regist
 					<div class="row form-group">
 						<div class="col-md-6">
 							<h4><?php esc_html_e( 'Phone number', 'stm_vehicles_listing' ); ?></h4>
-							<input class="user_validated_field" type="tel" name="stm_user_phone"
+							<input class="user_validated_field" type="tel" name="stm_user_phone" autocomplete="tel"
 									placeholder="<?php esc_attr_e( 'Enter Phone', 'stm_vehicles_listing' ); ?>"/>
 							<label for="whatsapp-checker">
 								<input type="checkbox" name="stm_whatsapp_number" id="whatsapp-checker"/>
@@ -114,7 +114,7 @@ $can_register = apply_filters( 'motors_vl_get_nuxy_mod', false, 'new_user_regist
 						</div>
 						<div class="col-md-6">
 							<h4><?php esc_html_e( 'Email *', 'stm_vehicles_listing' ); ?></h4>
-							<input class="user_validated_field" type="email" name="stm_user_mail"
+							<input class="user_validated_field" type="email" name="stm_user_mail" autocomplete="email"
 									placeholder="<?php esc_attr_e( 'Enter E-mail', 'stm_vehicles_listing' ); ?>"/>
 						</div>
 					</div>
@@ -122,14 +122,14 @@ $can_register = apply_filters( 'motors_vl_get_nuxy_mod', false, 'new_user_regist
 					<div class="row form-group">
 						<div class="col-md-6">
 							<h4><?php esc_html_e( 'Login *', 'stm_vehicles_listing' ); ?></h4>
-							<input class="user_validated_field" type="text" name="stm_nickname"
+							<input class="user_validated_field" type="text" name="stm_nickname" autocomplete="username"
 									placeholder="<?php esc_attr_e( 'Enter Login', 'stm_vehicles_listing' ); ?>"/>
 						</div>
 						<div class="col-md-6">
 							<h4><?php esc_html_e( 'Password *', 'stm_vehicles_listing' ); ?></h4>
 							<div class="stm-show-password">
 								<i class="fas fa-eye-slash"></i>
-								<input class="user_validated_field" type="password" name="stm_user_password"
+								<input class="user_validated_field" type="password" name="stm_user_password" autocomplete="new-password"
 										placeholder="<?php esc_attr_e( 'Enter Password', 'stm_vehicles_listing' ); ?>"/>
 							</div>
 						</div>

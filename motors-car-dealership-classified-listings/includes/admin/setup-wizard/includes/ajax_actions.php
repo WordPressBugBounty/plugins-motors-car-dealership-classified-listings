@@ -1,4 +1,5 @@
 <?php
+
 function mvl_setup_wizard_load_step() {
 	check_ajax_referer( 'stm_mvl_setup_wizard_nonce', 'security' );
 
@@ -24,7 +25,6 @@ function mvl_setup_wizard_load_step() {
 	}
 
 	if ( ! empty( $settings_to_update ) ) {
-
 		$options_draft = get_option( 'mvl_setup_wizard_settings_temp', array() );
 		update_option( 'mvl_setup_wizard_settings_temp', array_unique( array_merge( $options_draft, $settings_to_update ) ) );
 		mvl_setup_wizard_update_settings( $settings_to_update );
@@ -147,7 +147,7 @@ add_action( 'wp_ajax_nopriv_mvl_setup_wizard_install_plugin', 'mvl_setup_wizard_
 function mvl_setup_wizard_starter_import_fields() {
 	check_ajax_referer( 'stm_mvl_setup_wizard_nonce', 'security' );
 
-	$response = wp_remote_get( apply_filters( 'mvl_import_data_url', 'listing_categories.json' ) );
+	$response = motors_get_demo_data( 'listing_categories.json' );
 
 	if ( 200 === wp_remote_retrieve_response_code( $response ) ) {
 		$response = json_decode( wp_remote_retrieve_body( $response ), true );
@@ -167,7 +167,13 @@ add_action( 'wp_ajax_nopriv_mvl_setup_wizard_starter_import_fields', 'mvl_setup_
 function mvl_setup_wizard_starter_import_settings() {
 	check_ajax_referer( 'stm_mvl_setup_wizard_nonce', 'security' );
 
-	$response = wp_remote_get( apply_filters( 'mvl_import_data_url', 'mvl_settings.json' ) );
+	if ( defined( 'STM_DEV_MODE' ) && STM_DEV_MODE ) {
+		$remote_args = array(
+			'sslverify' => false,
+		);
+	}
+
+	$response = motors_get_demo_data( 'mvl_settings.json' );
 
 	if ( 200 === wp_remote_retrieve_response_code( $response ) ) {
 		$response = json_decode( wp_remote_retrieve_body( $response ), true );
@@ -205,6 +211,13 @@ function mvl_setup_wizard_starter_import_settings() {
 						update_option( \MotorsVehiclesListing\Plugin\MVL_Const::LISTING_TEMPLATE_OPT_NAME, $sl_options );
 					}
 				}
+			}
+
+			if ( defined( 'MOTORS_STARTER_THEME_TEMPLATE_DIR' ) ) {
+				\MotorsVehiclesListing\Plugin\Settings::update_one( 'replace_elementor_colors', 1 );
+				add_filter( 'motors_vl_get_nuxy_mod', 'mvl_setup_wizard_replace_elementor_colors_filter', 100, 2 );
+				\MotorsVehiclesListing\Stilization\Colors::import_to_elementor();
+				remove_filter( 'motors_vl_get_nuxy_mod', 'mvl_setup_wizard_replace_elementor_colors_filter', 100, 2 );
 			}
 
 			global $wp_rewrite;
@@ -245,7 +258,7 @@ function mvl_setup_wizard_starter_import_content() {
 
 	$importer->fetch_attachments = true;
 
-	$import_file = ( defined( 'MOTORS_STARTER_THEME_TEMPLATE_DIR' ) ) ? MOTORS_STARTER_THEME_TEMPLATE_DIR . '/includes/demo/elementor/starter_import.xml' : STM_LISTINGS_PATH . '/dummy_content/demo-listings.xml';
+	$import_file = ( defined( 'MOTORS_STARTER_THEME_TEMPLATE_DIR' ) ) ? MOTORS_STARTER_THEME_TEMPLATE_DIR . '/includes/demo/' . motors_get_skin_name() . '/demo.xml' : STM_LISTINGS_PATH . '/dummy_content/demo-listings.xml';
 
 	ob_start();
 
@@ -354,6 +367,13 @@ function mvl_setup_wizard_generate_pages() {
 }
 add_action( 'wp_ajax_mvl_setup_wizard_generate_pages', 'mvl_setup_wizard_generate_pages' );
 add_action( 'wp_ajax_nopriv_mvl_setup_wizard_generate_pages', 'mvl_setup_wizard_generate_pages' );
+
+function mvl_setup_wizard_replace_elementor_colors_filter( $value, $option ) {
+	if ( 'replace_elementor_colors' === $option ) {
+		$value = true;
+	}
+	return $value;
+}
 
 function mvl_setup_wizard_create_term() {
 	check_ajax_referer( 'stm_mvl_setup_wizard_nonce', 'security' );

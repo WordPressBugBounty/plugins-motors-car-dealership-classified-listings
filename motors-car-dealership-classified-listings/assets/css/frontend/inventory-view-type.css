@@ -17,7 +17,7 @@
 .stm-view-by .view-type {
     display: block;
     float: left;
-    color: #8f8f8f;
+    color: var(--motors-text-alpha-color);
     margin-left: 10px;
     width: 32px;
     height: 32px;
@@ -27,7 +27,7 @@
 }
 
 .stm-view-by .view-type:hover {
-    color: #6c98e1;
+    color: var(--motors-accent-color);
     cursor: pointer;
 }
 
@@ -45,10 +45,10 @@
 }
 
 .stm-view-by .view-type.active {
-    background-color: #f0f2f5;
-    color: #8f8f8f;
+    background-color: var(--motors-filter-inputs-color);
+    color: var(--motors-text-alpha-color);
 }
 
 .stm-view-by .view-type.active:hover {
-    color: #6c98e1;
+    color: var(--motors-accent-color);
 }

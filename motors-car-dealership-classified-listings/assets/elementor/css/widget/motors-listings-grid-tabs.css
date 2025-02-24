@@ -1,5 +1,5 @@
 #wrapper .stm_elementor_listings_grid_tabs_wrap {
-    border-top: 4px solid var(--mvl-third-color);
+    border-top: 4px solid var(--motors-bg-contrast);
 }
 
 .stm_elementor_listings_grid_tabs_wrap {
@@ -7,27 +7,35 @@
 }
 
 .stm_elementor_listings_grid_tabs_wrap .load-more-btn {
-    color: #fff;
-    display: block;
+    color: var(--motors-contrast-text-color);
+    display: table;
     text-align: center;
+    margin: 0 auto;
     padding: 17px 28px 15px;
     font-size: 14px;
     line-height: 14px;
     font-weight: 700;
     letter-spacing: 0.3px;
     text-transform: uppercase;
-    color: #fff;
     border-radius: 3px;
-    background-color: var(--mvl-secondary-color);
+    background-color: var(--motors-bg-contrast);
     text-decoration: none !important;
     outline: none !important;
     visibility: visible;
     border: none;
     white-space: normal;
-    box-shadow: 0 2px 0 #567ab4;
-    transition: opacity 0.2s ease-in !important;
+    transition: 0.2s ease-in !important;
     transform: translateZ(0);
     opacity: 1;
+}
+
+.stm_elementor_listings_grid_tabs_wrap .load-more-btn:hover {
+    background-color: var(--motors-accent-color);
+}
+
+.stm_elementor_listings_grid_tabs_wrap .load-more-btn:active {
+    position: relative;
+    top: 1px;
 }
 
 .stm_elementor_listings_grid_tabs_wrap .car-listing-row {
@@ -84,8 +92,8 @@
 }
 
 .stm_elementor_listings_grid_tabs_wrap .stm_listing_nav_list li.active a {
-    background-color: var(--mvl-secondary-color);
-    color: #fff;
+    background-color: var(--motors-accent-color);
+    color: var(--motors-contrast-text-color);
 }
 
 .stm_elementor_listings_grid_tabs_wrap .stm_listing_nav_list li.active a:after {
@@ -100,7 +108,7 @@
 .stm_elementor_listings_grid_tabs_wrap .stm_listing_nav_list li a {
     position: relative;
     padding: 14px 24px;
-    color: var(--mvl-third-color);
+    color: var(--motors-text-color);
     text-decoration: none;
 }
 
@@ -116,13 +124,19 @@
     height: 0;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-top: 8px solid var(--mvl-secondary-color);
+    border-top: 8px solid var(--motors-accent-color);
     opacity: 0;
 }
 
 .stm_elementor_listings_grid_tabs_wrap .stm_listing_nav_list li a span {
-    border-bottom: 1px dashed var(--mvl-third-color);
+    border-bottom: 1px dashed var(--motors-text-color);
     letter-spacing: -0.5px;
+    transition: 0.3s;
+}
+
+.stm_elementor_listings_grid_tabs_wrap .stm_listing_nav_list li:not(.active) a span:hover {
+    color: var(--motors-accent-color);
+    border-color: var(--motors-accent-color);
 }
 
 .stm_elementor_listings_grid_tabs_wrap .tab-pane {
@@ -135,6 +149,18 @@
 
 .stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop a {
     text-decoration: none;
+}
+
+.stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop a:hover .listing-car-item-meta .car-meta-top .car-title {
+    color: var(--motors-accent-color);
+}
+
+.stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop a:hover .listing-car-item-meta .car-meta-bottom ul li {
+    color: var(--motors-text-color);
+}
+
+.stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop a:hover .listing-car-item-meta .car-meta-bottom ul li i {
+    color: var(--motors-text-color);
 }
 
 .stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop .image {
@@ -153,12 +179,12 @@
     height: 49px;
     padding: 0 100px;
     line-height: 49px;
-    color: #fff !important;
+    color: var(--motors-contrast-text-color);
     text-transform: uppercase;
     text-align: center;
     font-size: 14px;
     font-weight: 700;
-    background-color: #fab637;
+    background-color: var(--motors-spec-badge-color);
     transform: rotate(-45deg) translateZ(0);
     transform-origin: 50% 50%;
     -webkit-transform-origin: 50% 50%;
@@ -182,8 +208,8 @@
     height: 33px;
     line-height: 33px;
     transform: rotate(45deg);
-    background-color: var(--mvl-primary-color);
-    color: #fff !important;
+    background-color: var(--motors-accent-color);
+    color: var(--motors-contrast-text-color);
     font-size: 12px;
     text-transform: uppercase;
     font-weight: 700;
@@ -198,8 +224,8 @@
     right: 7px;
     bottom: 7px;
     padding: 3px 5px;
-    background: rgba(0, 0, 0, 0.3);
-    color: #fff;
+    background: transparent;
+    color: var(--motors-contrast-text-color);
     font-size: 14px;
     border-radius: 2px;
     opacity: 0;
@@ -211,7 +237,7 @@
 }
 
 .stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop .image .stm_compare_unit.active, .stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop .image .stm-listing-compare.active {
-    background: linear-gradient(180deg, var(--mvl-primary-color) 0%, #169f36 100%);
+    background: var(--motors-accent-color);
     opacity: 1;
 }
 
@@ -220,8 +246,8 @@
     left: 7px;
     bottom: 7px;
     padding: 3px 5px 3px 6px;
-    background: rgba(0, 0, 0, 0.3);
-    color: #fff;
+    background: var(--motors-bg-alpha-contrast);
+    color: var(--motors-contrast-text-color);
     border-radius: 2px;
     font-size: 16px;
     opacity: 0;
@@ -233,7 +259,7 @@
 }
 
 .stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop .image .stm-listing-favorite.active {
-    background: linear-gradient(180deg, #32cd57 0%, #19b33e 100%);
+    background-color: var(--motors-accent-color);
     opacity: 1;
 }
 
@@ -243,10 +269,10 @@
     top: 10px;
     padding: 5px 8px 4px 25px;
     border-radius: 2px;
-    color: #fff;
+    color: var(--motors-contrast-text-color);
     font-size: 10px;
     text-transform: uppercase;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: var(--motors-text-alpha-color);
     z-index: 20;
 }
 
@@ -270,8 +296,8 @@
     margin-right: 9px;
     padding: 2px 5px 0 6px;
     border-radius: 2px;
-    background: rgba(0, 0, 0, 0.3);
-    color: #fff;
+    background: var(--motors-bg-lowalpha-contrast);
+    color: var(--motors-contrast-text-color);
     font-size: 11px;
     line-height: 22px;
     font-weight: 600;
@@ -289,7 +315,7 @@
 
 .stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop .image .stm-car-medias > div:hover {
     cursor: pointer;
-    background: rgba(0, 0, 0, 0.6);
+    background: var(--motors-bg-alpha-contrast);
 }
 
 .stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop .image .stm-car-medias > div.stm-listing-videos-unit i {
@@ -309,20 +335,21 @@
 
 .stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop .listing-car-item-meta .car-meta-top {
     padding-bottom: 17px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--motors-border-color);
 }
 
 .stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .car-title {
-    color: #232628;
+    color: var(--motors-text-color);
     overflow: hidden;
     text-transform: uppercase;
     font-size: 14px;
     line-height: 18px;
     font-weight: 700;
+    transition: 0.3s;
 }
 
 .stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .car-title .colored {
-    color: var(--mvl-primary-color);
+    color: var(--motors-accent-color);
 }
 
 .stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .price {
@@ -330,7 +357,7 @@
     float: right;
     padding: 6px 10px 4px 4px;
     margin-left: 18px;
-    background-color: var(--mvl-secondary-color);
+    background-color: var(--motors-accent-color);
     text-align: right;
 }
 
@@ -342,7 +369,7 @@
     left: -12px;
     height: 100%;
     width: 32px;
-    background-color: var(--mvl-secondary-color);
+    background-color: var(--motors-accent-color);
     transform: skew(-14deg, 0deg);
     z-index: 5;
 }
@@ -365,13 +392,13 @@
 .stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .price .regular-price {
     font-size: 13px;
     line-height: normal;
-    color: #fff;
+    color: var(--motors-contrast-text-color);
     text-decoration: line-through;
 }
 
 .stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .price .normal-price,
 .stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .price .sale-price {
-    color: #fff;
+    color: var(--motors-contrast-text-color);
     font-size: 14px;
     line-height: 20px;
     font-weight: 700;
@@ -390,7 +417,7 @@
 .stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .sell-online-wrap .normal-price .normal_font {
     font-size: 10px;
     font-weight: 600;
-    color: #ffffff;
+    color: var(--motors-contrast-text-color);
     line-height: 12px;
     margin: 0;
     padding: 0;
@@ -400,7 +427,7 @@
 .stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .sell-online-wrap .normal-price .heading-font {
     line-height: 16px;
     margin: 5px 0 0;
-    color: #ffffff;
+    color: var(--motors-contrast-text-color);
 }
 
 .stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop .listing-car-item-meta .car-meta-bottom {
@@ -422,15 +449,16 @@
     flex-wrap: nowrap;
     align-items: center;
     margin-right: 10px;
-    color: #a8a8a8;
+    color: var(--motors-text-alpha-color);
     font-size: 14px;
     padding-bottom: 10px;
+    transition: 0.3s;
 }
 
 .stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop .listing-car-item-meta .car-meta-bottom ul li i {
     margin-right: -1px;
     font-size: 13px;
-    color: #aaaaaa;
+    transition: 0.3s;
     vertical-align: middle;
 }
 
@@ -448,7 +476,7 @@
     position: relative;
     top: 1px;
     vertical-align: top;
-    margin-left: 2px;
+    margin-left: 5px;
     font-size: 13px;
 }
 

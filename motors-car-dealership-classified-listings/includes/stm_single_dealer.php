@@ -78,7 +78,7 @@
 								<?php echo esc_html( $dealer_category_labels ); ?>
 							</div>
 							<div class="dealer-cars-count">
-								<i class="stm-service-icon-body_type"></i>
+								<i class="motors-icons-body_type"></i>
 								<?php echo esc_attr( $cars_count_text ); ?>
 							</div>
 						</a>
@@ -91,11 +91,11 @@
 							<?php $showNumber = apply_filters( 'motors_vl_get_nuxy_mod', false, 'stm_show_number' ); ?>
 							<?php if ( $showNumber ) : ?>
 								<div class="phone heading-font">
-									<i class="stm-service-icon-phone_2"></i>
+									<i class="motors-icons-phone_2"></i>
 									<?php echo esc_attr( $dealer_info->stm_phone ); ?>
 								</div>
 							<?php else : ?>
-								<i class="stm-service-icon-phone_2"></i>
+								<i class="motors-icons-phone_2"></i>
 								<div class="phone heading-font">
 									<?php echo substr_replace( $dealer_info->stm_phone, '*******', 3, strlen( $dealer_info->stm_phone ) );//phpcs:ignore ?>
 								</div>

@@ -2,15 +2,15 @@
     margin-bottom: 25px;
     position: relative;
     padding-right: 120px;
-    border-bottom: 3px solid var(--mvl-secondary-color);
+    border-bottom: 3px solid var(--motors-accent-color);
 }
 
 .motors-elementor-inventory-search-results#listings-result .stm-featured-top-cars-title .heading-font {
     position: relative;
     display: inline-block;
     padding: 3px 16px;
-    color: #ffffff;
-    background-color: var(--mvl-secondary-color);
+    color: var(--motors-contrast-text-color);
+    background-color: var(--motors-accent-color);
     font-weight: 700;
     font-size: 13px;
     text-transform: uppercase;
@@ -26,7 +26,7 @@
     right: -14px;
     height: 100%;
     width: 32px;
-    background-color: var(--mvl-secondary-color);
+    background-color: var(--motors-accent-color);
     transform: skew(45deg, 0deg);
     z-index: -1;
 }
@@ -36,18 +36,19 @@
     right: 3px;
     bottom: 3px;
     font-size: 13px;
-    color: #777;
+    color: var(--motors-text-alpha-color);
+    font-weight: 500;
 }
 
 .motors-elementor-inventory-search-results#listings-result .stm-location-top-listings-title {
     position: relative;
-    border-bottom: 3px solid var(--mvl-secondary-color);
+    border-bottom: 3px solid var(--motors-bg-contrast);
     padding: 13px 120px 8px 0;
     margin: 40px 0 25px;
 }
 
 .motors-elementor-inventory-search-results#listings-result .stm-location-top-listings-title .heading-font {
-    color: #232628;
+    color: var(--motors-text-color);
     font-weight: 600;
     font-size: 18px;
     line-height: 1.2;
@@ -120,8 +121,8 @@
     height: 35px;
     margin: 0 8px;
     padding: 0;
-    background-color: var(--mvl-secondary-color);
-    color: #fff;
+    background-color: var(--motors-accent-color);
+    color: var(--motors-contrast-text-color);
     border-top: none;
     border-radius: 3px;
     line-height: 35px;
@@ -148,8 +149,8 @@
     height: 35px;
     margin: 0 8px;
     padding: 0;
-    background-color: #dddddd;
-    color: #fff;
+    background-color: var(--motors-filter-inputs-color);
+    color: var(--motors-text-color);
     border-top: none;
     border-radius: 3px;
     line-height: 35px;
@@ -223,12 +224,12 @@
     height: 49px;
     padding: 0 100px;
     line-height: 49px;
-    color: #fff !important;
+    color: var(--motors-contrast-text-color);
     text-transform: uppercase;
     text-align: center;
     font-size: 12px;
     font-weight: 700;
-    background-color: #fab637;
+    background-color: var(--motors-spec-badge-color);
     transform: rotate(-45deg) translateZ(0);
     transform-origin: 50% 50%;
     -webkit-transform-origin: 50% 50%;

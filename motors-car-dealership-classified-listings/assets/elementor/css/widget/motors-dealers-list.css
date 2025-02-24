@@ -8,7 +8,7 @@
 
 .stm_dynamic_listing_filter.stm_dynamic_listing_dealer_filter .tab-content {
     padding: 38px 30px 13px;
-    background: var(--mvl-third-color);
+    background: var(--motors-bg-contrast);
 }
 
 .stm_dynamic_listing_filter.stm_dynamic_listing_dealer_filter .tab-content .tab-pane {
@@ -17,18 +17,18 @@
 }
 
 .stm_dynamic_listing_filter.stm_dynamic_listing_dealer_filter .tab-content .tab-pane button svg {
-    fill: #ffffff;
+    fill: var(--motors-contrast-text-color);
 }
 
 .dealer-search-results {
     margin-top: 35px;
     margin-bottom: 30px;
     padding-top: 17px;
-    border-top: 4px solid var(--mvl-third-color);
+    border-top: 4px solid var(--motors-text-alpha-color);
 }
 
 .dealer-search-results .heading-font {
-    color: var(--mvl-third-color) !important;
+    color: var(--motors-text-color) !important;
 }
 
 .dealer-search-results table.stm_dealer_list_table {
@@ -36,7 +36,7 @@
 }
 
 .dealer-search-results table.stm_dealer_list_table tr.dealer-single-divider {
-    border-bottom: 1px solid #d5d9e0;
+    border-bottom: 1px solid var(--motors-border-color);
 }
 
 .dealer-search-results table.stm_dealer_list_table tr.stm-single-dealer > td:not(:last-child) {
@@ -60,7 +60,7 @@
     padding: 5px;
     max-width: 130px;
     border-radius: 5px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--motors-border-color);
 }
 
 .dealer-search-results table.stm_dealer_list_table tr.stm-single-dealer td.image a img {
@@ -72,10 +72,12 @@
     width: 280px;
 }
 
+.dealer-search-results table.stm_dealer_list_table tr.stm-single-dealer td.dealer-info .title .h4,
 .dealer-search-results table.stm_dealer_list_table tr.stm-single-dealer td.dealer-info .title h4 {
     margin-bottom: 0;
-    font-size: 18px;
-    color: var(--mvl-third-color);
+    font-size: 16px;
+    color: var(--motors-text-color);
+    font-weight: 700;
 }
 
 .dealer-search-results table.stm_dealer_list_table tr.stm-single-dealer td.dealer-info .rating .stm-rate-unit {
@@ -107,7 +109,7 @@
 .dealer-search-results table.stm_dealer_list_table tr.stm-single-dealer td.dealer-cars .dealer-labels {
     font-weight: 700;
     font-size: 14px;
-    color: var(--mvl-third-color);
+    color: var(--motors-text-color);
 }
 
 .dealer-search-results table.stm_dealer_list_table tr.stm-single-dealer td.dealer-cars .dealer-cars-count {
@@ -117,7 +119,7 @@
 
 .dealer-search-results table.stm_dealer_list_table tr.stm-single-dealer td.dealer-phone {
     width: 190px;
-    color: var(--mvl-third-color);
+    color: var(--motors-text-color);
 }
 
 .dealer-search-results table.stm_dealer_list_table tr.stm-single-dealer td.dealer-phone .inner .phone {
@@ -159,7 +161,7 @@
 
 .dealer-search-results table.stm_dealer_list_table tr.stm-single-dealer td.dealer-location {
     width: 255px;
-    color: var(--mvl-third-color);
+    color: var(--motors-text-color);
 }
 
 .dealer-search-results table.stm_dealer_list_table tr.stm-single-dealer td.dealer-location .clearfix {
@@ -169,7 +171,7 @@
 .dealer-search-results table.stm_dealer_list_table tr.stm-single-dealer td.dealer-location .dealer-location-label {
     font-size: 14px;
     font-weight: 700;
-    color: var(--mvl-third-color);
+    color: var(--motors-text-color);
 }
 
 .dealer-search-results table.stm_dealer_list_table tr.stm-single-dealer td.dealer-location .map_link {
@@ -193,7 +195,7 @@
 
 .dealer-search-results table.stm_dealer_list_table tr.stm-single-dealer td.dealer-location .inner .stm-label {
     margin-top: -4px;
-    color: #888;
+    color: var(--motors-text-alpha-color);
     font-size: 13px;
     font-weight: 400;
     white-space: nowrap;
@@ -211,7 +213,7 @@
     position: absolute;
     top: 5px;
     left: 0;
-    color: var(--mvl-primary-color);
+    color: var(--motors-accent-color);
 }
 
 .dealer-search-results table.stm_dealer_list_table tr.stm-single-dealer td .inner i.stm-service-icon-pin_big {
@@ -220,11 +222,11 @@
     font-size: 18px;
 }
 
-.dealer-search-results table.stm_dealer_list_table tr.stm-single-dealer td .inner i.stm-service-icon-phone_2 {
+.dealer-search-results table.stm_dealer_list_table tr.stm-single-dealer td .inner i.motors-icons-phone_2 {
     font-size: 14px;
 }
 
-.dealer-search-results table.stm_dealer_list_table tr.stm-single-dealer td .inner i.stm-service-icon-body_type {
+.dealer-search-results table.stm_dealer_list_table tr.stm-single-dealer td .inner i.motors-icons-body_type {
     font-size: 11px;
 }
 
@@ -257,7 +259,7 @@
     margin-right: 9px;
     text-transform: uppercase;
     font-size: 12px;
-    color: #888;
+    color: var(--motors-text-alpha-color);
 }
 
 .dealer-search-title .stm-car-listing-sort-units .stm-sort-by-options .stm-select-sorting {
@@ -271,18 +273,18 @@
 .dealer-search-title .stm-listing-directory-title div.title {
     font-size: 20px;
     font-weight: 700;
-    color: var(--mvl-secondary-color-dark);
+    color: var(--motors-text-color);
     letter-spacing: -0.8px;
 }
 
 .dealer-search-title .stm-listing-directory-title div.title .green {
-    color: var(--mvl-primary-color);
+    color: var(--motors-accent-color);
 }
 
 .stm-load-more-dealers.button {
     display: inline-block;
     position: relative;
-    background-color: var(--mvl-secondary-color-dark);
+    background-color: var(--motors-accent-color);
     box-shadow: none;
     padding: 14px 24px 12px;
     font-size: 12px;
@@ -290,7 +292,7 @@
 
 .stm-load-more-dealers.button.not-clickable {
     padding: 14px 0 12px;
-    background-color: #aaa !important;
+    background-color: var(--motors-bg-shade);
 }
 
 .stm-load-more-dealers.button.not-clickable span {

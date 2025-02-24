@@ -1,15 +1,15 @@
 .filter-sidebar {
     --location-field-border-width: 2px;
-    --location-field-color: black;
-    --location-field-border-color: #eceff3;
-    --location-field-placeholder-color: #888888;
-    --location-field-empty-color: black;
-    --location-field-empty-border-color: #eceff3;
-    --location-field-empty-placeholder-color: #888888;
-    --location-field-focus-color: black;
-    --location-field-focus-border-color: #1bc744;
-    --location-field-focus-placeholder-color: #888888;
-    --location-field-bg-color: #eceff3;
+    --location-field-color: var(--motors-text-color, black);
+    --location-field-border-color: var(--motors-border-color, black);
+    --location-field-placeholder-color: var(--motors-text-alpha-color, #888888);
+    --location-field-empty-color: var(--motors-text-color, black);
+    --location-field-empty-border-color: var(--motors-border-color, black);
+    --location-field-empty-placeholder-color: var(--motors-text-alpha-color, #888888);
+    --location-field-focus-color: var(--motors-text-color, black);
+    --location-field-focus-border-color: var(--motors-accent-color, #1bc744);
+    --location-field-focus-placeholder-color: var(--motors-text-alpha-color, #888888);
+    --location-field-bg-color: var(--motors-filter-inputs-color, #eceff3);
 }
 
 #ca_location_listing_filter {

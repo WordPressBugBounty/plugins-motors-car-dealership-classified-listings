@@ -73,6 +73,8 @@ class ComposerStaticInit5db859e1dab632b715b93d33219eb1cf
         'MotorsVehiclesListing\\Post\\PostController' => __DIR__ . '/../..' . '/includes/class/Post/PostController.php',
         'MotorsVehiclesListing\\SellerNoteMetaBoxes' => __DIR__ . '/../..' . '/includes/class/SellerNoteMetaBoxes.php',
         'MotorsVehiclesListing\\StarterTheme\\Helpers\\Themes' => __DIR__ . '/../..' . '/includes/starter-theme/Helpers/Themes.php',
+        'MotorsVehiclesListing\\Stilization\\Color' => __DIR__ . '/../..' . '/includes/class/Stilization/Color.php',
+        'MotorsVehiclesListing\\Stilization\\Colors' => __DIR__ . '/../..' . '/includes/class/Stilization/Colors.php',
         'MotorsVehiclesListing\\Terms\\Model\\TermsModel' => __DIR__ . '/../..' . '/includes/class/Terms/Model/TermsModel.php',
         'MotorsVehiclesListing\\Terms\\TermsController' => __DIR__ . '/../..' . '/includes/class/Terms/TermsController.php',
         'MotorsVehiclesListing\\User\\Model\\UserListingsModel' => __DIR__ . '/../..' . '/includes/class/User/Model/UserListingsModel.php',

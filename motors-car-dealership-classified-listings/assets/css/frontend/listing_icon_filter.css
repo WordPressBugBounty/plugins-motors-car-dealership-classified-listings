@@ -3,7 +3,7 @@
     margin-bottom: 22px;
     font-size: 20px;
     font-weight: 700;
-    color: #6c98e1;
+    color: var(--motors-accent-color);
 }
 
 .stm_icon_filter_label {
@@ -11,19 +11,19 @@
     float: right;
     margin-left: 15px;
     margin-right: 20px;
-    color: #777;
-    border-bottom: 1px dashed #777;
+    color: var(--motors-text-alpha-color);
+    border-bottom: 1px dashed var(--motors-border-color);
     line-height: 17px;
 }
 
 .stm_icon_filter_label.active {
-    color: #6c98e1;
-    border-bottom-color: #6c98e1;
+    color: var(--motors-accent-color);
+    border-bottom-color: var(--motors-accent-color);
 }
 
 .stm_icon_filter_label:hover {
-    color: #6c98e1;
-    border-bottom-color: #6c98e1;
+    color: var(--motors-accent-color);
+    border-bottom-color: var(--motors-accent-color);
     cursor: pointer;
 }
 
@@ -112,12 +112,12 @@
 .stm_listing_icon_filter .stm_listing_icon_filter_single .inner .name {
     margin-top: 5px;
     font-size: 13px;
-    color: #777;
+    color: var(--motors-text-alpha-color);
     text-decoration: underline;
 }
 
 .stm_listing_icon_filter .stm_listing_icon_filter_single:hover .name {
-    color: #6c98e1;
+    color: var(--motors-accent-color);
 }
 
 .stm_listing_icon_filter .stm_listing_icon_filter_single:hover .image {

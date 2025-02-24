@@ -88,8 +88,8 @@
 .car-listing-modern-grid .stm-isotope-listing-item .listing-car-item-meta .price {
     float: right;
     position: relative;
-    background-color: #6c98e1;
-    color: #fff;
+    background-color: var(--motors-accent-color);
+    color: var(--motors-contrast-text-color);
     padding: 5px 12px 5px 6px;
     margin-left: 15px;
     font-weight: 500;
@@ -105,7 +105,7 @@
     left: -12px;
     height: 100%;
     width: 20px;
-    background-color: #6c98e1;
+    background-color: var(--motors-accent-color);
     transform: skew(-14deg, 0deg);
     z-index: 5;
 }
@@ -152,7 +152,7 @@
 
 .archive-listing-page .stm-isotope-listing-item .listing-car-item-meta .car-meta-bottom,
 .car-listing-modern-grid .stm-isotope-listing-item .listing-car-item-meta .car-meta-bottom {
-    border-top: 1px solid #ddd;
+    border-top: 1px solid var(--motors-border-color);
     padding-top: 3px;
 }
 
@@ -172,7 +172,7 @@
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: center;
-    color: #a8a8a8;
+    color: var(--motors-text-alpha-color);
     font-size: 14px;
     width: 33.3333%;
     margin: 5px 0 5px;
@@ -201,7 +201,7 @@
     bottom: 9px;
     padding: 3px 5px 3px 6px;
     background: rgba(0, 0, 0, 0.3);
-    color: white;
+    color: var(--motors-contrast-text-color);
     border-radius: 2px;
     font-size: 16px;
     opacity: 0;
@@ -216,7 +216,7 @@
 
 .archive-listing-page .stm-listing-favorite.active,
 .car-listing-modern-grid .stm-listing-favorite.active {
-    background: linear-gradient(180deg, #6c98e1 0%, #6c98e1 100%);
+    background-color: var(--motors-accent-color);
     opacity: 1;
 }
 
@@ -247,10 +247,10 @@
     top: 10px;
     padding: 5px 8px 4px 25px;
     border-radius: 2px;
-    color: #fff;
+    color: var(--motors-contrast-text-color);
     font-size: 10px;
     text-transform: uppercase;
-    background-color: #6c98e1;
+    background-color: var(--motors-accent-color);
     z-index: 20;
 }
 

@@ -518,6 +518,10 @@ input.butterbean-datepicker {
     transition: all 0.2s ease;
 }
 
+.stm-multiselect-wrapper .select2-container.select2-container--default {
+    z-index: unset;
+}
+
 .stm-multiselect-wrapper.stm_loading {
     opacity: 0.8;
 }
@@ -1292,6 +1296,7 @@ input::placeholder {
     justify-content: center;
     font-size: 13px;
     max-height: 24px;
+    color: #3c434a;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 3px 1px;
     border: none;
@@ -1305,6 +1310,10 @@ input::placeholder {
     font-size: 17px;
     font-weight: 300;
     margin-left: 5px;
+    background-color: transparent;
+    padding: unset;
+    position: unset;
+    border-right: unset;
 }
 
 .stm_features.butterbean-section.butterbean-section-default .butterbean-control-multiselect .select2-selection.select2-selection--multiple .select2-selection__rendered,

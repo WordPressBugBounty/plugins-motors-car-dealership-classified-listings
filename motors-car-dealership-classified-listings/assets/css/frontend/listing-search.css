@@ -1,5 +1,5 @@
 .filter-listing.motors_dynamic_listing_filter {
-    background-color: #153e4d;
+    background-color: var(--motors-bg-contrast);
     padding: 42px 30px 20px;
 }
 
@@ -67,7 +67,7 @@
 .filter-listing.motors_dynamic_listing_filter .stm-filter-tab-selects .row .stm-select-col .stm-ajax-reloadable .select2-container--default .select2-selection--single .select2-selection__rendered {
     line-height: 46px;
     font-size: 14px;
-    color: #555;
+    color: var(--motors-text-alpha-color);
     font-weight: 400;
     padding-left: 14px;
     padding-right: 40px;
@@ -79,7 +79,7 @@
 }
 
 .filter-listing.motors_dynamic_listing_filter .stm-filter-tab-selects .row .stm-select-col label {
-    color: #ffffff;
+    color: var(--motors-contrast-text-color);
     line-height: 14px;
     vertical-align: top;
     font-size: 14px;
@@ -91,7 +91,7 @@
     margin: -2px 0 8px;
     text-align: right;
     font-size: 13px;
-    color: #ffffff;
+    color: var(--motors-contrast-text-color);
 }
 
 .filter-listing.motors_dynamic_listing_filter .stm-filter-tab-selects .row .stm-select-col .stm-taxonomy-range-unit {
@@ -104,21 +104,21 @@
 }
 
 .filter-listing.motors_dynamic_listing_filter .stm-filter-tab-selects .row .stm-select-col .ui-slider {
-    background-color: #dfe1e5;
+    background-color: var(--motors-bg-color);
 }
 
 .filter-listing.motors_dynamic_listing_filter .stm-filter-tab-selects .row .stm-select-col .ui-slider .ui-slider-range {
-    background-color: #6c98e1;
+    background-color: var(--motors-accent-color);
 }
 
 .filter-listing.motors_dynamic_listing_filter .stm-filter-tab-selects .row .stm-select-col .ui-slider .ui-slider-handle {
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.36);
+    box-shadow: 0 2px 5px var(--motors-bg-alpha-contrast);
     border-radius: 50%;
     width: 20px;
     height: 20px;
     top: -9px;
     margin-left: -10px;
-    background-color: #fff;
+    background-color: var(--motors-bg-color);
 }
 
 .filter-listing.motors_dynamic_listing_filter .stm-filter-tab-selects .row .stm-select-col .ui-slider .ui-slider-handle:after {
@@ -130,7 +130,7 @@
     margin: -5px 0 0 -5px;
     width: 10px;
     height: 10px;
-    background-color: #6c98e1;
+    background-color: var(--motors-accent-color);
     border-radius: 50%;
 }
 

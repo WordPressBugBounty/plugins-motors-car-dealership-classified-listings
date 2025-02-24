@@ -112,12 +112,12 @@ $_taxonomy = ( ! $_taxonomy ) ? array() : $_taxonomy;
 
 			.stm-form1-intro-unit .select2-selection__rendered[title="<?php esc_html_e('Select', 'stm_vehicles_listing'); ?> <?php echo esc_html( apply_filters( 'stm_listings_dynamic_string_translation', $tax_name, 'Add A Car Step 1 Slug Name' ) ); ?>"] {
 				background-color: transparent !important;
-				border: 1px solid rgba(255, 255, 255, 0.5);
-				color: #fff !important;
+				border: 1px solid var(--motors-contrast-border-color);
+				color: var(--motors-contrast-text-color) !important;
 			}
 
-			.stm-form1-intro-unit .select2-selection__rendered[title="<?php esc_html_e('Select', 'stm_vehicles_listing'); ?> <?php echo esc_html( apply_filters( 'stm_listings_dynamic_string_translation', $tax_name, 'Add A Car Step 1 Slug Name' ) ); ?>"] + .select2-selection__arrow b {
-				color: rgba(255, 255, 255, 0.5);
+			.stm-form1-intro-unit .select2-selection__rendered[title="<?php esc_html_e('Select', 'stm_vehicles_listing'); ?> <?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $tax_name, 'Add A Car Step 1 Slug Name' ) ); ?>"] + .select2-selection__arrow b {
+				color: var(--motors-contrast-text-color) !important;
 			}
 
 			<?php endforeach; ?>
@@ -234,8 +234,8 @@ $_taxonomy = ( ! $_taxonomy ) ? array() : $_taxonomy;
 
 				.stm-form-1-end-unit .select2-selection__rendered[title="<?php echo esc_attr__( 'Select', 'stm_vehicles_listing' ); ?> <?php echo esc_html( apply_filters( 'stm_listings_dynamic_string_translation', $data_unit['single_name'], 'Add A Car Step 1 Taxonomy Label' ) ); ?>"] {
 					background-color: transparent !important;
-					border: 1px solid rgba(255, 255, 255, 0.5);
-					color: #888 !important;
+					border: 1px solid var(--motors-contrast-border-color);
+					color: var(--motors-text-alpha-color) !important;
 				}
 
 				<?php endforeach; ?>

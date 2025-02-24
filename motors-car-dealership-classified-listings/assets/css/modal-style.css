@@ -19,7 +19,7 @@
 #get-car-price-form .form-error,
 #request-trade-offer-form .form-error,
 #request-test-drive-form .form-error {
-    border: 1px solid #ff2325 !important;
+    border: 1px solid var(--motors-error-text-color, #ff2325) !important;
 }
 
 #get-car-price-form .modal-dialog,
@@ -82,11 +82,11 @@
     line-height: 37px;
     padding: 0 21px;
     font-weight: 400;
-    color: #888888;
-    border: 2px solid #eceff3;
+    color: var(--motors-text-alpha-color, #888888);
+    border: 2px solid var(--motors-filter-inputs-color, #eceff3);
     font-size: 14px;
     outline: none !important;
-    background-color: #eceff3;
+    background-color: var(--motors-filter-inputs-color, #eceff3);
 }
 
 #get-car-price-form .stm-loader.circle,
@@ -104,7 +104,7 @@
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    border: 5px solid #eceff3;
+    border: 5px solid var(--motors-filter-inputs-color, #eceff3);
     border-top-color: transparent;
     animation: spin 1s linear infinite;
 }
@@ -150,18 +150,18 @@
 .modal-header-iconed {
     padding: 28px 37px 23px 105px !important;
     position: relative;
-    background-color: #232628;
+    background-color: var(--motors-bg-contrast, #232628);
     display: block;
 }
 
 .modal-header-iconed h3 {
     text-transform: uppercase;
-    color: #ffffff;
+    color: var(--motors-contrast-text-color, #ffffff);
 }
 
 .modal-header-iconed .test-drive-car-name {
     margin-top: -5px;
-    color: #aaaaaa;
+    color: var(--motors-text-alpha-color, #aaaaaa);
 }
 
 .modal-header-iconed i {
@@ -169,7 +169,7 @@
     top: 35px;
     left: 32px;
     font-size: 47px;
-    color: #6c98e1;
+    color: var(--motors-accent-color, #6c98e1);
 }
 
 .stm-ajax-loader {
@@ -189,25 +189,25 @@
     right: 0;
     padding-top: 17px;
     min-height: 71px;
-    background-color: #6c98e1;
+    background-color: var(--motors-accent-color, #6c98e1);
     z-index: 99999;
     opacity: 0;
 }
 
 .single-add-to-compare.danger, .single-add-to-compare.overadded {
-    background-color: #ff0000;
+    background-color: var(--motors-error-bg-color, #ff0000);
 }
 
 .single-add-to-compare.danger .compare-fixed-link:hover, .single-add-to-compare.overadded .compare-fixed-link:hover {
-    color: #ff0000;
+    color: var(--motors-error-text-color, #ff0000);
 }
 
 .single-add-to-compare.warning {
-    background-color: #cc6119;
+    background-color: var(--motors-notice-color, #cc6119);
 }
 
 .single-add-to-compare.warning .compare-fixed-link:hover {
-    color: #cc6119;
+    color: var(--motors-accent-color, #cc6119);
 }
 
 .single-add-to-compare.single-add-to-compare-visible {
@@ -217,18 +217,18 @@
 }
 
 .single-add-to-compare.single-add-to-compare-visible.danger {
-    background-color: #eb232c;
+    background-color: var(--motors-error-text-color, #eb232c);
 }
 
 .single-add-to-compare.single-add-to-compare-visible.warning {
-    background-color: #8a6d3b;
+    background-color: var(--motors-notice-text-color, #8a6d3b);
 }
 
 .single-add-to-compare .compare-fixed-link {
     display: block;
     padding: 8px 23px 6px;
-    color: #ffffff;
-    border: 1px solid #ffffff;
+    color: var(--motors-contrast-text-color, #ffffff);
+    border: 1px solid var(--motors-contrast-text-color, #ffffff);
     border-radius: 3px;
     font-size: 12px;
     text-transform: uppercase;
@@ -240,8 +240,8 @@
 }
 
 .single-add-to-compare .compare-fixed-link:hover {
-    background-color: #ffffff;
-    color: #6c98e1;
+    background-color: var(--motors-bg-color, #ffffff);
+    color: var(--motors-accent-color, #6c98e1);
 }
 
 @media (max-width: 767px) {
@@ -261,7 +261,7 @@
     position: absolute;
     left: 0;
     top: 50%;
-    color: #ffffff;
+    color: var(--motors-contrast-text-color, #ffffff);
     font-size: 35px;
     transform: translateY(-50%);
 }
@@ -281,7 +281,7 @@
 .single-add-to-compare .single-add-to-compare-left .stm-title {
     display: block;
     padding-top: 10px;
-    color: #ffffff;
+    color: var(--motors-contrast-text-color, #ffffff);
     font-weight: 400;
     font-size: 14px;
 }
@@ -301,18 +301,18 @@
 }
 
 #request-trade-in-offer .form-error {
-    border: 1px solid #ff2325 !important;
+    border: 1px solid var(--motors-error-text-color, #ff2325) !important;
 }
 
 #request-trade-in-offer .stm-label-type-2 {
     margin-bottom: 5px;
     font-weight: 400;
     font-size: 14px;
-    color: #000000;
+    color: var(--motors-text-color, #000000);
 }
 
 #request-trade-in-offer .stm-sell-a-car-form .form-navigation-unit .title {
-    color: #232628;
+    color: var(--motors-text-color, #232628);
 }
 
 #request-trade-in-offer .pull-left {
@@ -322,19 +322,19 @@
 #request-trade-in-offer .wpcf7-response-output {
     margin: 10px 0 0 !important;
     padding: 15px !important;
-    border: 2px solid #6c98e1 !important;
-    color: #6c98e1 !important;
+    border: 2px solid var(--motors-accent-color, #6c98e1) !important;
+    color: var(--motors-accent-color, #6c98e1) !important;
     border-radius: 5px;
 }
 
 #request-trade-in-offer .wpcf7-response-output.wpcf7-validation-errors {
-    border-color: #ff2325;
-    color: #ff2325;
+    border-color: var(--motors-error-text-color, #ff2325);
+    color: var(--motors-error-text-color, #ff2325);
 }
 
 #request-trade-in-offer .wpcf7-response-output.wpcf7-mail-sent-ok {
-    border-color: #32cd32 !important;
-    color: #32cd32 !important;
+    border-color: var(--motors-success-text-color, #32cd32) !important;
+    color: var(--motors-success-text-color, #32cd32) !important;
 }
 
 #request-trade-in-offer .stm-loader.circle {
@@ -348,7 +348,7 @@
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    border: 5px solid #eceff3;
+    border: 5px solid var(--motors-bg-shade, #eceff3);
     border-top-color: transparent;
     animation: spin 1s linear infinite;
 }
@@ -403,7 +403,7 @@
 .form-modal-label {
     margin-bottom: 3px;
     font-size: 13px;
-    color: #888888;
+    color: var(--motors-text-alpha-color, #888888);
 }
 
 #request-trade-offer-form,
@@ -456,7 +456,7 @@
     right: 18px;
     top: 50%;
     margin-top: unset;
-    color: #6c98e1;
+    color: var(--motors-accent-color, #6c98e1);
     font-size: 16px;
     content: "\f017";
 }
@@ -470,7 +470,7 @@
     font-weight: 700;
     letter-spacing: 0.3px;
     text-transform: uppercase;
-    color: #fff !important;
+    color: var(--motors-contrast-text-color, #fff) !important;
     border-radius: 3px;
     text-decoration: none !important;
     outline: none !important;

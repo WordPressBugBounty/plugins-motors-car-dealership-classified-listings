@@ -7,7 +7,7 @@
     display: block;
     text-decoration: none !important;
     padding-bottom: 17px;
-    border-bottom: 6px solid #eaedf0;
+    border-bottom: 6px solid var(--motors-border-color);
 }
 
 .stm-sell-a-car-form .form-navigation .form-navigation-unit.validated .number {
@@ -27,12 +27,12 @@
     margin-bottom: 13px;
     width: 31px;
     height: 31px;
-    border: 3px solid #6c98e1;
+    border: 3px solid --motors-accent-color;
     border-radius: 50%;
     line-height: 25px;
     font-weight: 700;
     text-align: center;
-    color: #6c98e1;
+    color: var(--motors-accent-color);
     font-size: 16px;
     text-indent: 3px;
     overflow: hidden;
@@ -67,17 +67,17 @@
 
 .stm-sell-a-car-form .form-navigation .form-navigation-unit .sub-title {
     margin-left: 4px;
-    color: rgba(35, 38, 40, 0.5);
+    color: var(--motors-text-alpha-color);
     font-size: 13px;
 }
 
 .stm-sell-a-car-form .form-navigation .form-navigation-unit.active {
-    border-bottom-color: #6c98e1;
+    border-bottom-color: var(--motors-accent-color);
 }
 
 .stm-sell-a-car-form .form-navigation .form-navigation-unit.active .number {
-    background-color: #6c98e1;
-    color: #ffffff;
+    background-color: var(--motors-accent-color);
+    color: var(--motors-contrast-text-color);
 }
 
 @media (max-width: 767px) {
@@ -123,7 +123,7 @@
 }
 
 .stm-sell-a-car-form .form-content .sell-a-car-proceed, .stm-sell-a-car-form .form-content .sell-a-car-proceed:hover {
-    color: #ffffff;
+    color: var(--motors-contrast-text-color);
 }
 
 .stm-sell-a-car-form .form-content .form-content-unit {
@@ -135,7 +135,7 @@
 }
 
 .stm-sell-a-car-form .form-content .form-content-unit .contact-us-label {
-    color: #555555;
+    color: var(--motors-text-alpha-color);
 }
 
 .stm-sell-a-car-form .form-content .vehicle-condition {
@@ -145,13 +145,13 @@
 .stm-sell-a-car-form .form-content .vehicle-condition .vehicle-condition-unit {
     padding-bottom: 33px;
     margin-bottom: 34px;
-    border-bottom: 1px solid #e2e5e8;
+    border-bottom: 1px solid var(--motors-border-color);
 }
 
 .stm-sell-a-car-form .form-content .vehicle-condition .vehicle-condition-unit .icon {
     margin-bottom: 13px;
     font-size: 30px;
-    color: #121e24;
+    color: var(--motors-text-color);
 }
 
 .stm-sell-a-car-form .form-content .vehicle-condition .vehicle-condition-unit .icon.buoy {
@@ -177,7 +177,7 @@
 .stm-sell-a-car-form .form-content .contact-details {
     margin: 6px 0 43px;
     padding: 40px 41px 36px;
-    background-color: #ebedef;
+    background-color: var(--motors-bg-shade);
 }
 
 .stm-sell-a-car-form .form-content .contact-details textarea {
@@ -193,7 +193,7 @@
 }
 
 .stm-sell-a-car-form .form-content .contact-details input[type=text], .stm-sell-a-car-form .form-content .contact-details input[type=tel], .stm-sell-a-car-form .form-content .contact-details input[type=email], .stm-sell-a-car-form .form-content .contact-details input[type=search], .stm-sell-a-car-form .form-content .contact-details input[type=password], .stm-sell-a-car-form .form-content .contact-details textarea {
-    background-color: #ffffff;
+    background-color: var(--motors-bg-color);
 }
 
 .stm-sell-a-car-form .form-upload-files .stm-unit-photos {
@@ -216,7 +216,7 @@
     margin-top: 2px;
     line-height: 22px;
     overflow: hidden;
-    color: #555555;
+    color: var(--motors-contrast-text-color);
 }
 
 .sell-a-car-proceed {
@@ -227,7 +227,7 @@
 .form-upload-files {
     padding: 30px 30px 35px;
     margin: 15px 0 5px;
-    border: 3px solid #ebedef;
+    border: 3px solid var(--motors-border-color);
 }
 
 .stm-pseudo-file-input {
@@ -263,7 +263,7 @@
   /* Better Font Rendering =========== */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #c0c1c3;
+    color: var(--motors-text-alpha-color);
     top: 10px;
     left: 15px;
 }
@@ -274,7 +274,7 @@
     height: 42px;
     top: 0;
     right: 0;
-    background-color: #ebedef;
+    background-color: var(--motors-filter-inputs-color);
     z-index: 20;
 }
 
@@ -284,7 +284,7 @@
     display: block;
     top: 50%;
     left: 50%;
-    background-color: #aaaaaa;
+    background-color: var(--motors-text-alpha-color);
 }
 
 .stm-pseudo-file-input .stm-plus:after {
@@ -302,8 +302,8 @@
 .stm-pseudo-file-input .stm-filename {
     padding: 10px 10px 10px 40px;
     margin-right: 56px;
-    background-color: #ebedef;
-    color: #888888;
+    background-color: var(--motors-filter-inputs-color);
+    color: var(--motors-text-alpha-color);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -329,5 +329,5 @@
 }
 
 .form-error {
-    border-color: #a94442;
+    border-color: var(--motors-error-text-color);
 }

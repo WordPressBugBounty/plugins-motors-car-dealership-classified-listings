@@ -1,6 +1,6 @@
 .motors_listings_tabs {
     padding-top: 29px;
-    border-top: 4px solid #153e4d;
+    border-top: 4px solid var(--motors-text-color);
 }
 
 .motors_listings_tabs > .clearfix {
@@ -44,8 +44,8 @@
 }
 
 .motors_listings_tabs .stm_listing_nav_list li.active a {
-    background-color: #6c98e1;
-    color: #fff;
+    background-color: var(--motors-accent-color);
+    color: var(--motors-contrast-text-color);
 }
 
 .motors_listings_tabs .stm_listing_nav_list li.active a:after {
@@ -59,7 +59,7 @@
 .motors_listings_tabs .stm_listing_nav_list li a {
     position: relative;
     padding: 14px 24px;
-    color: #153e4d;
+    color: var(--motors-text-color);
     text-decoration: none !important;
 }
 
@@ -75,12 +75,12 @@
     height: 0;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-top: 8px solid #6c98e1;
+    border-top: 8px solid var(--motors-accent-color);
     opacity: 0;
 }
 
 .motors_listings_tabs .stm_listing_nav_list li a span {
-    border-bottom: 1px dashed #153e4d;
+    border-bottom: 1px dashed var(--motors-text-color);
     letter-spacing: -0.5px;
 }
 
@@ -112,12 +112,12 @@
     height: 49px;
     padding: 0 100px;
     line-height: 49px;
-    color: #fff !important;
+    color: var(--motors-contrast-text-color);
     text-transform: uppercase;
     text-align: center;
     font-size: 14px;
     font-weight: 700;
-    background-color: #fab637;
+    background-color: var(--motors-spec-badge-color);
     transform: rotate(-45deg) translateZ(0);
     transform-origin: 50% 50%;
     -webkit-transform-origin: 50% 50%;
@@ -141,8 +141,8 @@
     height: 33px;
     line-height: 33px;
     transform: rotate(45deg);
-    background-color: #6c98e1;
-    color: #fff !important;
+    background-color: var(--motors-accent-color);
+    color: var(--motors-contrast-text-color);
     font-size: 12px;
     text-transform: uppercase;
     font-weight: 700;
@@ -157,8 +157,8 @@
     right: 7px;
     bottom: 7px;
     padding: 3px 5px;
-    background: rgba(0, 0, 0, 0.3);
-    color: #fff;
+    background: var(--motors-filter-inputs-color);
+    color: var(--motors-contrast-text-color);
     font-size: 14px;
     border-radius: 2px;
     opacity: 0;
@@ -170,7 +170,7 @@
 }
 
 .motors_listings_tabs .tab-pane .row .stm-directory-grid-loop .image .stm-listing-compare.active {
-    background: linear-gradient(180deg, #6c98e1 0%, #169f36 100%);
+    background-color: var(--motors-accent-color);
     opacity: 1;
 }
 
@@ -180,7 +180,7 @@
     bottom: 7px;
     padding: 3px 5px 3px 6px;
     background: rgba(0, 0, 0, 0.3);
-    color: #fff;
+    color: var(--motors-contrast-text-color);
     border-radius: 2px;
     font-size: 16px;
     opacity: 0;
@@ -192,7 +192,7 @@
 }
 
 .motors_listings_tabs .tab-pane .row .stm-directory-grid-loop .image .stm-listing-favorite.active {
-    background: linear-gradient(180deg, #32cd57 0%, #19b33e 100%);
+    background-color: var(--motors-accent-color);
     opacity: 1;
 }
 
@@ -202,10 +202,10 @@
     top: 10px;
     padding: 5px 8px 4px 25px;
     border-radius: 2px;
-    color: #fff;
+    color: var(--motors-contrast-text-color);
     font-size: 10px;
     text-transform: uppercase;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: var(--motors-border-color);
     z-index: 20;
 }
 
@@ -229,8 +229,8 @@
     margin-right: 9px;
     padding: 2px 5px 0 6px;
     border-radius: 2px;
-    background: rgba(0, 0, 0, 0.3);
-    color: #fff;
+    background: var(--motors-border-color);
+    color: var(--motors-contrast-text-color);
     font-size: 11px;
     line-height: 22px;
     font-weight: 600;
@@ -248,7 +248,7 @@
 
 .motors_listings_tabs .tab-pane .row .stm-directory-grid-loop .image .stm-car-medias > div:hover {
     cursor: pointer;
-    background: rgba(0, 0, 0, 0.6);
+    background: var(--motors-bg-alpha-contrast);
 }
 
 .motors_listings_tabs .tab-pane .row .stm-directory-grid-loop .image .stm-car-medias > div.stm-listing-videos-unit i {
@@ -268,11 +268,11 @@
 
 .motors_listings_tabs .tab-pane .row .stm-directory-grid-loop .listing-car-item-meta .car-meta-top {
     padding-bottom: 17px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--motors-border-color);
 }
 
 .motors_listings_tabs .tab-pane .row .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .car-title {
-    color: #232628;
+    color: var(--motors-text-color);
     overflow: hidden;
     text-transform: uppercase;
     font-size: 14px;
@@ -281,7 +281,7 @@
 }
 
 .motors_listings_tabs .tab-pane .row .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .car-title .colored {
-    color: #cc6119;
+    color: var(--motors-notice-text-color);
 }
 
 .motors_listings_tabs .tab-pane .row .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .price {
@@ -289,7 +289,7 @@
     float: right;
     padding: 6px 10px 4px 4px;
     margin-left: 18px;
-    background-color: #6c98e1;
+    background-color: var(--motors-accent-color);
     text-align: right;
 }
 
@@ -301,7 +301,7 @@
     left: -12px;
     height: 100%;
     width: 32px;
-    background-color: #6c98e1;
+    background-color: var(--motors-accent-color);
     transform: skew(-14deg, 0deg);
     z-index: 5;
 }
@@ -329,7 +329,7 @@
 
 .motors_listings_tabs .tab-pane .row .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .price .normal-price,
 .motors_listings_tabs .tab-pane .row .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .price .sale-price {
-    color: #fff;
+    color: var(--contrast-text-color);
     font-size: 14px;
     line-height: 20px;
 }
@@ -347,7 +347,7 @@
 .motors_listings_tabs .tab-pane .row .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .sell-online-wrap .normal-price .normal_font {
     font-size: 10px;
     font-weight: 600;
-    color: #ffffff;
+    color: var(--motors-contrast-text-color);
     line-height: 12px;
     margin: 0;
     padding: 0;
@@ -357,7 +357,7 @@
 .motors_listings_tabs .tab-pane .row .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .sell-online-wrap .normal-price .heading-font {
     line-height: 16px;
     margin: 5px 0 0;
-    color: #ffffff;
+    color: var(--motors-contrast-text-color);
 }
 
 .motors_listings_tabs .tab-pane .row .stm-directory-grid-loop .listing-car-item-meta .car-meta-bottom {
@@ -379,7 +379,7 @@
     flex-wrap: nowrap;
     align-items: center;
     margin-right: 10px;
-    color: #a8a8a8;
+    color: var(--motors-text-alpha-color);
     font-size: 14px;
     padding-bottom: 10px;
 }

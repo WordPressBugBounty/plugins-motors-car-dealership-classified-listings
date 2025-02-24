@@ -18,7 +18,7 @@
 
 .stm-single-listing-car-features ul li i {
     margin-right: 13px;
-    color: var(--mvl-primary-color);
+    color: var(--motors-accent-color);
     line-height: 20px;
 }
 
@@ -30,7 +30,7 @@
 
 .stm-single-listing-car-features ul li svg {
     margin-right: 13px;
-    fill: var(--mvl-primary-color);
+    fill: var(--motors-accent-color);
     flex-shrink: 0;
     width: 14px;
     height: 14px;
@@ -100,7 +100,7 @@
 
 .stm-single-listing-car-features.grouped_features ul li i {
     margin-right: 13px;
-    color: var(--mvl-primary-color);
+    color: var(--motors-accent-color);
     line-height: 20px;
 }
 
@@ -130,6 +130,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    margin-bottom: 20px;
 }
 
 .stm-single-listing-car-features.grouped_features .lists-horizontal .grouped_checkbox-2 {

@@ -32,8 +32,12 @@ $tpl = 'inventory';
 			<div class="col-md-9 col-sm-12">
 				<div class="stm-user-private-main">
 					<?php
-					if ( isset( $_GET['page'] ) && apply_filters( 'get_saved_searches_page', sanitize_text_field( $_GET['page'] ) ) === 'saved-searches' ) {
-						do_action( 'load_saved_searches_page' );
+					if ( isset( $_GET['page'] ) ) {
+						if ( apply_filters( 'get_saved_searches_page', sanitize_text_field( $_GET['page'] ) ) === 'saved-searches' ) {
+							do_action( 'load_saved_searches_page' );
+						} else {
+							do_action( 'stm_listings_load_template', $path . $_GET['page'], array( 'user_id' => $user_id ) );
+						}
 					} else {
 						do_action( 'stm_listings_load_template', $path . $tpl, array( 'user_id' => $user_id ) );
 					}

@@ -1,4 +1,6 @@
 <?php
+use MotorsVehiclesListing\Stilization\Colors;
+
 defined( 'ABSPATH' ) || exit;
 
 if ( ! function_exists( 'stm_google_places_enable_script' ) ) {
@@ -155,6 +157,7 @@ function stm_listings_enqueue_scripts_styles() {
 	wp_register_style( 'listing-search', STM_LISTINGS_URL . '/assets/css/frontend/listing-search.css', null, STM_LISTINGS_V );
 	wp_register_style( 'motors-single-listing', STM_LISTINGS_URL . '/assets/css/frontend/single-listing.css', null, STM_LISTINGS_V );
 	wp_register_style( 'inventory', STM_LISTINGS_URL . '/assets/css/frontend/inventory.css', null, STM_LISTINGS_V );
+	wp_register_style( 'motors-tinymce', STM_LISTINGS_URL . '/assets/css/frontend/tinymce.css', null, STM_LISTINGS_V );
 
 	wp_enqueue_script( 'jquery', false, array(), STM_LISTINGS_V, false );
 	wp_enqueue_script( 'jquery-migrate', false, array(), STM_LISTINGS_V, false );
@@ -225,12 +228,12 @@ function stm_listings_enqueue_scripts_styles() {
 			'motors_vl_config'                  => array(
 				'enable_friendly_urls' => apply_filters( 'motors_vl_get_nuxy_mod', false, 'friendly_url' ),
 			),
-			'required_fields'       => __( 'Please enter required fields', 'stm_vehicles_listing' ),
-			'image_upload_required' => __( 'Please upload a photo to create a listing', 'stm_vehicles_listing' ),
-			'seller_notes_required' => __( 'Please leave a seller’s note to create a listing', 'stm_vehicles_listing' ),
-			'features_required'     => __( 'Please choose at least one feature to create a listing', 'stm_vehicles_listing' ),
-			'video_required'        => __( 'Please share a video URL to create a listing', 'stm_vehicles_listing' ),
-			'car_price_required'    => __( 'Please add item price', 'stm_vehicles_listing' ),
+			'required_fields'                   => __( 'Please enter required fields', 'stm_vehicles_listing' ),
+			'image_upload_required'             => __( 'Please upload a photo to create a listing', 'stm_vehicles_listing' ),
+			'seller_notes_required'             => __( 'Please leave a seller’s note to create a listing', 'stm_vehicles_listing' ),
+			'features_required'                 => __( 'Please choose at least one feature to create a listing', 'stm_vehicles_listing' ),
+			'video_required'                    => __( 'Please share a video URL to create a listing', 'stm_vehicles_listing' ),
+			'car_price_required'                => __( 'Please add item price', 'stm_vehicles_listing' ),
 		)
 	);
 
@@ -256,20 +259,53 @@ if ( ! function_exists( 'init_motors_root_colors' ) ) {
 		$secondary_color_dark = '#5a7db6';
 		$third_color          = '#232628'; //'#153e4d';
 		$fourth_color         = '#153e4d';
+		$active_elementor_kit = get_option( 'elementor_active_kit' );
 
 		$colors_css = '
 			:root{
-				--motors-default-base-color: #cc6119;
-				--motors-default-secondary-color: #6c98e1;
-				--motors-base-color: #cc6119;
-				--motors-secondary-color: #6c98e1;
 				--mvl-primary-color: ' . $primary_color . ';
 				--mvl-secondary-color: ' . $secondary_color . ';
 				--mvl-secondary-color-dark: ' . $secondary_color_dark . ';
 				--mvl-third-color: ' . $third_color . ';
 				--mvl-fourth-color: ' . $fourth_color . ';
+				
+				--motors-accent-color: ' . Colors::value( 'accent_color' ) . ';
+				--motors-bg-shade: ' . Colors::value( 'bg_shade' ) . ';
+				--motors-bg-color: ' . Colors::value( 'bg_color' ) . ';
+				--motors-bg-lowalpha-color: ' . Colors::value( 'bg_color', 0.3 ) . ';
+				--motors-bg-alpha-color: ' . Colors::value( 'bg_color', 0.5 ) . ';
+				--motors-bg-highalpha-color: ' . Colors::value( 'bg_color', 0.7 ) . ';
+				--motors-bg-contrast: ' . Colors::value( 'bg_contrast' ) . ';
+				--motors-bg-lowestalpha-contrast: ' . Colors::value( 'bg_contrast', 0.1 ) . ';
+				--motors-bg-lowalpha-contrast: ' . Colors::value( 'bg_contrast', 0.3 ) . ';
+				--motors-bg-alpha-contrast: ' . Colors::value( 'bg_contrast', 0.5 ) . ';
+				--motors-bg-highalpha-contrast: ' . Colors::value( 'bg_contrast', 0.7 ) . ';
+				--motors-text-color: ' . Colors::value( 'text_color' ) . ';
+				--motors-contrast-text-color: ' . Colors::value( 'contrast_text_color' ) . ';
+				--motors-text-highalpha-color: ' . Colors::value( 'text_color', 0.7 ) . ';
+				--motors-text-alpha-color: ' . Colors::value( 'text_color', 0.5 ) . ';
+				--motors-contrast-text-alpha-color: ' . Colors::value( 'contrast_text_color', 0.7 ) . ';
+				--motors-border-color: ' . Colors::value( 'text_color', 0.15 ) . ';
+				--motors-contrast-border-color: ' . Colors::value( 'contrast_text_color', 0.15 ) . ';
+				--motors-spec-badge-color: ' . Colors::value( 'spec_badge_color' ) . ';
+				--motors-sold-badge-color: ' . Colors::value( 'sold_badge_color' ) . ';
+				--motors-error-bg-color: ' . Colors::value( 'error_bg_color' ) . ';
+				--motors-notice-bg-color: ' . Colors::value( 'notice_bg_color' ) . ';
+				--motors-success-bg-color: ' . Colors::value( 'success_bg_color' ) . ';
+				--motors-error-text-color: ' . Colors::value( 'error_text_color' ) . ';
+				--motors-notice-text-color: ' . Colors::value( 'notice_text_color' ) . ';
+				--motors-success-text-color: ' . Colors::value( 'success_text_color' ) . ';
+				--motors-filter-inputs-color: ' . Colors::value( 'filter_inputs_color' ) . ';
 			}
 		';
+
+		$colors_css .= ':root ';
+
+		if ( $active_elementor_kit ) {
+			$colors_css .= '.elementor-kit-' . $active_elementor_kit . ' ';
+		}
+
+		$colors_css .= '{' . PHP_EOL . Colors::elementor_global_vars_css() . PHP_EOL . '}';
 
 		wp_add_inline_style( 'motors-style', $colors_css );
 	}
@@ -300,3 +336,21 @@ if ( ! function_exists( 'mvl_enqueue_header_scripts_styles' ) ) {
 		}
 	}
 }
+
+//Colors from settings for tinymce textarea on frontend
+if ( ! function_exists( 'mvl_tinymce_custom_colors' ) ) {
+	function mvl_tinymce_custom_colors( $init_array ) {
+		if ( ! is_admin() ) {
+			wp_enqueue_style( 'motors-tinymce' );
+
+			$bg_color                    = Colors::value( 'bg_color' );
+			$text_color                  = Colors::value( 'text_color' );
+			$init_array['content_style'] = 'body { background-color: ' . $bg_color . '; color: ' . $text_color . '; }';
+		}
+
+		return $init_array;
+	}
+}
+
+add_filter( 'teeny_mce_before_init', 'mvl_tinymce_custom_colors' );
+add_filter( 'tiny_mce_before_init', 'mvl_tinymce_custom_colors' );

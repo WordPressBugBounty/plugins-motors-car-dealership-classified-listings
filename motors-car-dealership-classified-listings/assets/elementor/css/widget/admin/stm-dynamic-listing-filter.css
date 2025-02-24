@@ -11,23 +11,27 @@
 .stm_dynamic_listing_filter .stm_dynamic_listing_filter_nav li {
     float: left;
     margin-bottom: 0;
-    background: var(--mvl-secondary-color);
+    border-color: transparent;
 }
 
 .stm_dynamic_listing_filter .stm_dynamic_listing_filter_nav li:not(:last-child) {
-    border-right: 1px solid #133340;
+    border-right: 1px solid var(--motors-bg-contrast);
 }
 
 .stm_dynamic_listing_filter .stm_dynamic_listing_filter_nav li a {
     position: relative;
     display: block;
     padding: 15px 35px 12px 35px;
-    color: #fff;
+    color: var(--motors-contrast-text-color);
     font-weight: 700;
     font-size: 15px;
     text-decoration: none !important;
     letter-spacing: -0.4px;
     z-index: 2;
+}
+
+.stm_dynamic_listing_filter .stm_dynamic_listing_filter_nav li.active a {
+    color: var(--motors-text-color);
 }
 
 .stm_dynamic_listing_filter .tab-content {
@@ -79,7 +83,7 @@
     align-self: flex-start;
     position: relative;
     min-width: 170px;
-    padding: 16px 25px 13px 25px;
+    padding: 16px 25px 16px 25px;
     font-weight: 700;
     display: flex;
     justify-content: center;
@@ -87,11 +91,19 @@
     transition: 0.3s ease;
     opacity: 1;
     align-items: center;
-    color: #fff;
+    color: var(--motors-contrast-text-color);
+    background-color: var(--motors-accent-color);
+    border: 1px solid var(--motors-accent-color);
 }
 
 .stm_dynamic_listing_filter .tab-content button[type=submit] > svg {
     margin-right: 6px;
+}
+
+.stm_dynamic_listing_filter .tab-content button[type=submit]:hover {
+    background-color: transparent;
+    color: var(--motors-accent-color);
+    border: 1px solid var(--motors-accent-color);
 }
 
 .stm_dynamic_listing_filter .tab-content button[type=submit] span {
@@ -105,7 +117,7 @@
 }
 
 .stm_dynamic_listing_filter .tab-content button[type=submit]:active {
-    top: -1px;
+    top: 1px;
 }
 
 .stm_dynamic_listing_filter .tab-content .stm-slide-content {

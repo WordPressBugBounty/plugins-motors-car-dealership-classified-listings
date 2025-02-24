@@ -12,7 +12,7 @@
     height: 5px;
     transform: skew(-40deg, 0deg);
     border-radius: 2px;
-    background: var(--motors-base-color);
+    background: var(--motors-accent-color);
 }
 
 .colored-separator .first-long {

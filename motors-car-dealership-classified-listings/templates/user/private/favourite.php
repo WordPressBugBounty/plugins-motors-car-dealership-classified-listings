@@ -12,7 +12,7 @@ if ( ! empty( $_GET['view'] ) && $_GET['view'] == 'grid' ) { //phpcs:ignore
 }
 ?>
 
-<div class="stm-car-listing-sort-units stm-car-listing-directory-sort-units clearfix">
+<div class="stm-car-listing-sort-units stm-car-listing-directory-sort-units clearfix stm-favorites">
 	<input type="hidden" id="stm_dealer_view_type" value="<?php echo esc_attr( $active ); ?>">
 	<div class="stm-listing-directory-title">
 		<h4 class="stm-seller-title"><?php esc_html_e( 'My Favorites', 'stm_vehicles_listing' ); ?></h4>

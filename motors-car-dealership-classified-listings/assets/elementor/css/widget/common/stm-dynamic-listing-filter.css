@@ -11,11 +11,11 @@
 .stm_dynamic_listing_filter .stm_dynamic_listing_filter_nav li {
     float: left;
     margin-bottom: 0;
-    background: var(--mvl-secondary-color);
+    background: var(--motors-bg-contrast);
 }
 
 .stm_dynamic_listing_filter .stm_dynamic_listing_filter_nav li:not(:last-child) {
-    border-right: 1px solid #133340;
+    border-right: 1px solid var(--motors-text-color);
 }
 
 .stm_dynamic_listing_filter .stm_dynamic_listing_filter_nav li a {
@@ -79,7 +79,7 @@
     align-self: flex-start;
     position: relative;
     min-width: 170px;
-    padding: 16px 25px 13px 25px;
+    padding: 16px 25px 16px 25px;
     font-weight: 700;
     display: flex;
     justify-content: center;

@@ -13,7 +13,7 @@
     top: 4px;
     margin-right: 10px;
     font-size: 12px;
-    color: #aaaaaa;
+    color: var(--motors-text-alpha-color);
     text-transform: uppercase;
 }
 
@@ -23,11 +23,11 @@
     width: 59px;
     height: 32px;
     vertical-align: top;
-    border: 1px solid rgba(170, 170, 170, 0.4);
+    border: 1px solid var(--motors-border-color);
 }
 
 .stm-inventory-items-per-page-wrap .stm_per_page.active {
-    border: 1px solid rgb(170, 170, 170);
+    border: 1px solid var(--motors-border-color);
 }
 
 .stm-inventory-items-per-page-wrap .stm_per_page:after {
@@ -86,14 +86,14 @@
     padding-right: 0;
     display: block;
     font-size: 13px;
-    color: #ffffff;
-    background: rgba(36, 49, 54, 0.8);
+    color: var(--motors-contract-text-color);
+    background: var(--motors-bg-contrast);
     text-decoration: none !important;
     text-align: center;
 }
 
 .stm-inventory-items-per-page-wrap .stm_per_page ul li a:hover {
-    background: rgb(36, 49, 54);
+    background: var(--motors-accent-color);
 }
 
 .stm-inventory-items-per-page-wrap .stm_per_page ul li.active {
@@ -114,12 +114,12 @@
     background: transparent;
     text-align: right;
     cursor: default;
-    color: #aaaaaa;
+    color: var(--motors-contract-text-alpha-color);
 }
 
 .stm-inventory-items-per-page-wrap.left-mode {
     margin: 0 15px;
     padding: 30px 0 0;
-    border-top: 1px solid #4b4e4f;
+    border-top: 1px solid var(--motors-border-color);
     text-align: right;
 }

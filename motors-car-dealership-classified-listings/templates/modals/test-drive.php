@@ -1,3 +1,6 @@
+<?php
+mvl_enqueue_header_scripts_styles( 'motors-datetimepicker' );
+?>
 <div class="modal" id="test-drive" tabindex="-1" role="dialog" aria-labelledby="myModalLabelTestDrive">
 	<form id="request-test-drive-form" action="<?php echo esc_url( home_url( '/' ) ); ?>" method="post">
 		<div class="modal-dialog" role="document">

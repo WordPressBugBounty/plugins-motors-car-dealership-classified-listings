@@ -51,7 +51,7 @@ $query_popular = stm_user_listings_query( $user_id, 'publish', $posts_per_page, 
 							<?php if ( ! empty( $image ) ) : ?>
 								<img src="<?php echo esc_url( $image ); ?>"/>
 							<?php else : ?>
-								<i class="stm-service-icon-user"></i>
+								<i class="motors-icons-user"></i>
 							<?php endif; ?>
 						</div>
 						<div class="title">
@@ -210,8 +210,7 @@ $query_popular = stm_user_listings_query( $user_id, 'publish', $posts_per_page, 
 					endif;
 					?>
 				<?php else : ?>
-					<h4 class="stm-seller-title"
-						style="color:#aaa;"><?php esc_html_e( 'No Inventory added yet.', 'stm_vehicles_listing' ); ?></h4>
+					<h4 class="stm-seller-title"><?php esc_html_e( 'No Inventory added yet.', 'stm_vehicles_listing' ); ?></h4>
 				<?php endif; ?>
 			</div>
 

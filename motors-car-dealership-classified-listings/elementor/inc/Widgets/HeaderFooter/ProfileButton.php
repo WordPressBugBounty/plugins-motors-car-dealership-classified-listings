@@ -109,7 +109,7 @@ class ProfileButton extends WidgetBase {
 				'label'     => __( 'Background Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .motors-profile-button:hover' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}}.elementor-widget-motors-profile-button:hover .motors-profile-button' => 'background-color: {{VALUE}};',
 				),
 			)
 		);
@@ -120,9 +120,9 @@ class ProfileButton extends WidgetBase {
 				'label'     => __( 'Text Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .motors-profile-button' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .motors-profile-button span' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .motors-profile-button svg' => 'fill: {{VALUE}};',
+					'{{WRAPPER}}.elementor-widget-motors-profile-button:hover .motors-profile-button' => 'color: {{VALUE}};',
+					'{{WRAPPER}}.elementor-widget-motors-profile-button:hover .motors-profile-button span' => 'color: {{VALUE}};',
+					'{{WRAPPER}}.elementor-widget-motors-profile-button:hover .motors-profile-button svg' => 'fill: {{VALUE}};',
 				),
 			)
 		);

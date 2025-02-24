@@ -790,7 +790,7 @@ function stm_listings_init() {
 		register_post_type(
 			'dealer_review',
 			array(
-				'labels'             => array(
+				'labels'               => array(
 					'name'               => __( 'Dealer Reviews', 'stm_vehicles_listing' ),
 					'singular_name'      => __( 'Dealer Reviews', 'stm_vehicles_listing' ),
 					'add_new'            => __( 'Add New', 'stm_vehicles_listing' ),
@@ -963,19 +963,19 @@ function stm_save_metaboxes( $post_id ) {
 	}
 	$metaboxes = array(
 		'fields' => array(
-			'name'  => array(
+			'name'                => array(
 				'label' => __( 'Name', 'stm_vehicles_listing' ),
 				'type'  => 'text',
 			),
-			'email' => array(
+			'email'               => array(
 				'label' => __( 'E-mail', 'stm_vehicles_listing' ),
 				'type'  => 'text',
 			),
-			'phone' => array(
+			'phone'               => array(
 				'label' => __( 'Phone', 'stm_vehicles_listing' ),
 				'type'  => 'text',
 			),
-			'date'  => array(
+			'date'                => array(
 				'label' => __( 'Day', 'stm_vehicles_listing' ),
 				'type'  => 'text',
 			),
@@ -1534,7 +1534,7 @@ function mvl_admin_bar_item( $admin_bar ) {
 					'title'  => '<span>' . esc_html__( 'Unlock PRO', 'stm_vehicles_listing' ) . '</span>',
 					'href'   => admin_url( 'admin.php?page=mvl-go-pro' ),
 					'meta'   => array(
-						'title'  => esc_html__( 'Unlock PRO', 'stm_vehicles_listing' ),
+						'title' => esc_html__( 'Unlock PRO', 'stm_vehicles_listing' ),
 					),
 				)
 			);
@@ -1609,3 +1609,5 @@ add_action(
 		}
 	}
 );
+
+add_filter( 'motors_get_demo_data', 'motors_get_demo_data' );

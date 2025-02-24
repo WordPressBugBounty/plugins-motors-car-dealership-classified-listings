@@ -465,7 +465,7 @@ class InventorySearchFilter extends WidgetBase {
 			array(
 				'name'     => 'isf_fields_typography',
 				'label'    => __( 'Text Style', 'stm_vehicles_listing' ),
-				'selector' => '{{WRAPPER}} .classic-filter-row.motors-elementor-widget .select2-container--default .select2-selection--single .select2-selection__rendered, {{WRAPPER}} .classic-filter-row.motors-elementor-widget .filter-sidebar input',
+				'selector' => '{{WRAPPER}} .classic-filter-row.motors-elementor-widget .select2-container--default .select2-selection--single .select2-selection__rendered, {{WRAPPER}} .classic-filter-row.motors-elementor-widget .filter-sidebar input, {{WRAPPER}} .classic-filter-row.motors-elementor-widget .filter-sidebar input::placeholder',
 			)
 		);
 

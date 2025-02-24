@@ -9,9 +9,10 @@ jQuery(function($){
 	$('body').on('click', '#mvl-starter-install-btn', function(e) {
 		$('.install-progress').removeClass('hidden');
 		$('.mvl-welcome-nav-actions').addClass('processing');
+		$('.mvl-welcome-todo').addClass('loading');
 		$(this).html('Installing...');
 		$('#starter-status-badge').addClass('processing');
-
+		
 		ajaxPromise('mvl_setup_wizard_install_starter_theme')
 			.then((response) => {
 				$(this).html('Installed');
@@ -53,7 +54,14 @@ jQuery(function($){
 		$('.mvl-welcome-nav-actions').addClass('processing');
 		for ( i=0; i < $('.mvl-welcome-todo-item').length; i++ ) {
 			const item = $('.mvl-welcome-todo-item:eq(' + i + ')');
-			if ( item.hasClass('done') )
+			const itemCheckbox = item.find('.mvl-step-item-install');
+			
+			if ( itemCheckbox.length && ! itemCheckbox.prop('checked') ) {			
+				item.addClass('skip').find('.status-badge').addClass('skip');
+				updateButtons( item, true );
+			}
+
+			if ( item.hasClass('done') || item.hasClass('skip') )
 				continue;
 
 			let action = ( item.attr('data-action') ) ? item.attr('data-action') : 'mvl_setup_wizard_mock_event';
@@ -83,6 +91,7 @@ jQuery(function($){
 							$('.mvl-welcome-nav-actions').removeClass('processing');
 							$('#mvl-import-demo-btn').removeClass('retry-mode');
 						}
+						updateButtons( item, response.success );
 					})
 					.catch((error) => {
 						item.addClass('failed').find('.status-badge').removeClass('processing').addClass('error');
@@ -92,8 +101,25 @@ jQuery(function($){
 			}
 
 		}
+
+		function updateButtons( item, success ) {
+			item.removeClass('processing').find('.status-badge').removeClass('processing');
+			if ( success ) {
+				if ( ! item.hasClass( 'skip' ) ) {
+					item.addClass('done').find('.status-badge').addClass('done');
+				}
+			} else {
+				item.addClass('failed').find('.status-badge').addClass('error');
+				$('.mvl-welcome-nav-actions').removeClass('processing');
+			}
+			if ( $('.mvl-welcome-todo-item').not('.done, .processing, .error, .skip').length === 0 ) {
+				item.find('.status-badge').removeClass('processing');
+				$('.mvl-welcome-nav-actions').removeClass('processing');
+			}
+		}
 	}
 	$('body').on('click', '#mvl-import-demo-btn', function(e) {
+		$('.mvl-welcome-todo').addClass('loading');
 		demoContentChain().then(() => {
 			if ( $('.mvl-welcome-todo-item.failed').length ) {
 				$('#mvl-import-demo-btn').addClass('retry-mode');
@@ -363,6 +389,7 @@ jQuery(function($){
 			.finally(() => {
 				slideContentBox.removeClass('loading').addClass('loaded');
 				stepNav.removeClass('loading');
+				initActions();
 			});
 
 	}
@@ -404,6 +431,7 @@ jQuery(function($){
 		let _step = this.getAttribute('data-step');
 		let _target = ( this.hasAttribute('href') && this.getAttribute('href') !== '#' ) ? this.getAttribute('href') : null;
 		toStep(_step, _target);
+		initActions();
 
 		return false;
 	});
@@ -434,5 +462,16 @@ jQuery(function($){
 		console.log('popstate', e.currentTarget.location.href, e.currentTarget.location.search);
 	});
 
-});
+	initActions();
 
+	function initActions() {
+		if ( $('.mvl-welcome-nav-actions').hasClass('processing') ) {
+			$('.mvl-welcome-nav-actions').removeClass('processing');
+		}
+		
+		if ( $('.mvl-welcome-todo').hasClass('loading') ) {
+			$('.mvl-welcome-todo').removeClass('loading');
+		}
+	}
+
+});

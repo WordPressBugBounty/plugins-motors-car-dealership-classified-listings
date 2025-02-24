@@ -63,7 +63,7 @@
     overflow: hidden;
     font-size: 28px;
     line-height: 28px;
-    color: var(--mvl-secondary-color);
+    color: var(--motors-accent-color);
 }
 
 @media (max-width: 1024px) {
@@ -74,7 +74,7 @@
 
 .stm-listing-single-price-title .title .labels {
     margin: -3px 0 7px;
-    color: var(--mvl-secondary-color);
+    color: var(--motors-accent-color);
     font-size: 14px;
     line-height: 16px;
     text-transform: uppercase;
@@ -86,9 +86,9 @@
     min-width: 113px;
     padding: 14px 10px 14px 10px;
     font-size: 24px;
-    color: #ffffff;
+    color: var(--motors-contrast-text-color);
     font-weight: 700;
-    background-color: var(--mvl-secondary-color);
+    background-color: var(--motors-accent-color);
 }
 
 .stm-listing-single-price-title .price.discounted-price {
@@ -154,7 +154,7 @@
     left: -18px;
     height: 100%;
     width: 32px;
-    background-color: var(--mvl-secondary-color);
+    background-color: var(--motors-accent-color);
     transform: skew(-23deg, 0deg);
     z-index: -1;
 }

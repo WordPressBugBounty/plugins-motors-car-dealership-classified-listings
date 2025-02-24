@@ -4,6 +4,7 @@
  * @var $lst_amount
  * @var $lst_show_all_text
  * @var $lst_show_tabs
+ * @var $lst_show_tabs_buttons
  * @var $lst_condition_tabs
  * @var $lst_enable_reviews
  * @var $lst_enable_value_my_car
@@ -11,6 +12,7 @@
  * @var $lst_advanced_search_label
  * @var $__button_icon_html__
  * @var $lst_btn_postfix
+ * @var $lst_btn_text
  * @var $lst_reviews_taxonomies
  * @var $tab_prefix
  * @var $tab_suffix
@@ -61,7 +63,7 @@ $nonce_field = apply_filters( 'stm_listings_filter_nonce', false );
 >
 	<!-- Nav tabs -->
 	<ul class="stm_dynamic_listing_filter_nav clearfix heading-font" role="tablist">
-		<?php if ( ! empty( $lst_show_all_tab ) ) : ?>
+		<?php if ( 'yes' === $lst_show_tabs_buttons && ! empty( $lst_show_all_tab ) ) : ?>
 			<li role="presentation" class="<?php echo esc_attr( $tab_activity_class ); ?>">
 				<a href="<?php echo esc_attr( sprintf( '#stm_all_listing_tab-%s', $uniq_id ) ); ?>" aria-controls="stm_all_listing_tab" role="tab" data-toggle="tab">
 					<?php echo wp_kses_post( $tab_prefix . $lst_show_all_text . $tab_suffix ); ?>
@@ -71,7 +73,7 @@ $nonce_field = apply_filters( 'stm_listings_filter_nonce', false );
 		<?php endif; ?>
 
 		<?php
-		if ( 'yes' === $lst_show_tabs && is_array( $lst_condition_tabs ) && count( $lst_condition_tabs ) > 0 ) :
+		if ( 'yes' === $lst_show_tabs_buttons && 'yes' === $lst_show_tabs && is_array( $lst_condition_tabs ) && count( $lst_condition_tabs ) > 0 ) :
 			foreach ( $lst_condition_tabs as $item ) :
 
 				$data   = explode( '|', $item );
@@ -134,10 +136,17 @@ $nonce_field = apply_filters( 'stm_listings_filter_nonce', false );
 						<?php endif; ?>
 						<button type="submit" class="search-submit heading-font">
 							<i class="fas fa-search"></i>
+							
 							<?php
-								$all = new WP_Query( $args );
+							$all              = new WP_Query( $args );
+							$lst_btn_text     = str_replace( '{postfix}', esc_html( $lst_btn_postfix ), $lst_btn_text );
+							$explode_by_count = explode( '{count}', $lst_btn_text );
 
-								printf( '<span> %s </span> %s', esc_html( $all->found_posts ), esc_html( $lst_btn_postfix ) );
+							if ( count( $explode_by_count ) > 1 ) {
+								echo esc_html( $explode_by_count[0] ) . '<span>' . esc_html( $all->found_posts ) . '</span>' . esc_html( $explode_by_count[1] );
+							} else {
+								echo esc_html( $explode_by_count[0] );
+							}
 							?>
 						</button>
 					</div>
@@ -177,7 +186,16 @@ $nonce_field = apply_filters( 'stm_listings_filter_nonce', false );
 									value="<?php echo esc_attr( $_term ); ?>" class="no-cascading hidden_tax"/>
 							<button type="submit" class="search-submit heading-font">
 								<i class="fas fa-search"></i>
-								<?php printf( '<span> %s </span> %s', esc_html( $all->found_posts ), esc_html( $lst_btn_postfix ) ); ?>
+								<?php
+								$lst_btn_text     = str_replace( '{postfix}', esc_html( $lst_btn_postfix ), $lst_btn_text );
+								$explode_by_count = explode( '{count}', $lst_btn_text );
+
+								if ( count( $explode_by_count ) > 1 ) {
+									echo esc_html( $explode_by_count[0] ) . '<span>' . esc_html( $all->found_posts ) . '</span>' . esc_html( $explode_by_count[1] );
+								} else {
+									echo esc_html( $explode_by_count[0] );
+								}
+								?>
 							</button>
 						</div>
 					</form>
@@ -218,9 +236,16 @@ $nonce_field = apply_filters( 'stm_listings_filter_nonce', false );
 									$args
 								);
 
-								$all = new WP_Query( $args );
+								$all              = new WP_Query( $args );
+								$lst_btn_text     = str_replace( '{postfix}', esc_html( $lst_btn_postfix ), $lst_btn_text );
+								$explode_by_count = explode( '{count}', $lst_btn_text );
 
-								printf( '<span> %s </span> %s', esc_html( $all->found_posts ), esc_html( $lst_btn_postfix ) );
+							if ( count( $explode_by_count ) > 1 ) {
+								echo esc_html( $explode_by_count[0] ) . '<span>' . esc_html( $all->found_posts ) . '</span>' . esc_html( $explode_by_count[1] );
+							} else {
+								echo esc_html( $explode_by_count[0] );
+							}
+							?>
 							?>
 						</button>
 					</div>

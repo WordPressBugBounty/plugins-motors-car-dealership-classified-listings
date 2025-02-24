@@ -8,7 +8,7 @@
 
 .stm-listing-car-dealer-info-simple {
     padding: 29px 0;
-    border-bottom: 1px solid #e5e8ec;
+    border-bottom: 1px solid var(--motors-border-color);
 }
 
 .stm-listing-car-dealer-info-simple .stm-no-text-decoration:hover, .stm-listing-car-dealer-info-simple .stm-no-text-decoration:active, .stm-listing-car-dealer-info-simple .stm-no-text-decoration:focus {
@@ -32,7 +32,7 @@
 }
 
 .stm-listing-car-dealer-info-simple .dealer-rating .stm-rate-sum {
-    color: #888;
+    color: var(--motors-text-alpha-color);
     font-size: 13px;
 }
 
@@ -56,7 +56,7 @@
 }
 
 .stm-listing-car-dealer-info-simple .stm-rate-unit .stm-rate-not-filled:after {
-    color: #edab1f;
+    color: var(--motors-accent-color);
     font-family: "Font Awesome 6 Free";
     font-weight: 400;
     font-style: normal;
@@ -75,7 +75,7 @@
 }
 
 .stm-listing-car-dealer-info-simple .stm-rate-unit .stm-rate-filled:after {
-    color: #edab1f;
+    color: var(--motors-accent-color);
     font-family: "Font Awesome 6 Free";
     font-weight: 600;
     font-style: normal;
@@ -91,11 +91,12 @@
 .stm-listing-car-dealer-info-simple.stm-common-user .stm-user-main-info-c a .title {
     margin: 1px 0 0;
     font-size: 16px;
+    color: var(--motors-text-color);
 }
 
 .stm-listing-car-dealer-info-simple.stm-common-user .stm-user-main-info-c a .stm-label {
     font-size: 13px;
-    color: #888;
+    color: var(--motors-text-alpha-color);
 }
 
 .stm-listing-car-dealer-info-simple.stm-common-user .stm-user-main-info-c .image {
@@ -114,8 +115,8 @@
 .stm-listing-car-dealer-info-simple.stm-common-user .stm-user-main-info-c .image .no-avatar {
     width: 40px;
     height: 40px;
-    background-color: #eeeeee;
-    color: #5b6771;
+    background-color: var(--motors-filter-inputs-color);
+    color: var(--motors-text-alpha-color);
     border-radius: 50%;
     font-size: 16px;
     text-indent: 2px;
@@ -127,7 +128,7 @@
 
 .stm-template-listing_four .stm-listing-car-dealer-info-simple, .stm-template-listing_four_elementor .stm-listing-car-dealer-info-simple {
     padding: 22px 23px 8px;
-    border: 3px solid #e4e6ea;
+    border: 3px solid var(--motors-border-color);
 }
 
 .stm-template-listing_four .stm-listing-car-dealer-info-simple .stm-border-bottom-unit, .stm-template-listing_four_elementor .stm-listing-car-dealer-info-simple .stm-border-bottom-unit {
@@ -165,11 +166,11 @@
 }
 
 .stm-template-car_dealer_two.inventory-light .stm-listing-car-dealer-info-simple.stm-common-user .stm-user-main-info-c a .title {
-    color: #121e24;
+    color: var(--motors-text-alpha-color);
 }
 
 .stm-template-car_dealer_two.inventory-light .stm-listing-car-dealer-info-simple.stm-common-user .stm-user-main-info-c .stm-label {
-    color: #121e24;
+    color: var(--motors-text-alpha-color);
 }
 
 .stm-template-car_dealer_two.inventory-dark .stm-listing-car-dealer-info-simple {
@@ -177,13 +178,13 @@
 }
 
 .stm-template-car_dealer_two.inventory-dark .stm-listing-car-dealer-info-simple.stm-common-user .stm-user-main-info-c a .title {
-    color: #ffffff;
+    color: var(--motors-contrast-text-color);
 }
 
 .stm-template-car_dealer_two.inventory-dark .stm-listing-car-dealer-info-simple.stm-common-user .stm-user-main-info-c .stm-label {
-    color: #ffffff;
+    color: var(--motors-contrast-text-color);
 }
 
 .stm-template-car_dealer_two.inventory-dark .stm-listing-car-dealer-info-simple .title {
-    color: #ffffff;
+    color: var(--motors-contrast-text-color);
 }

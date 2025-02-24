@@ -68,7 +68,7 @@ $actions_visibility = ( $show_actions_onhover ) ? ' actions-onhover' : '';
 				</a>
 			</div>
 		<?php endif; ?>
-		<?php if ( apply_filters( 'is_listing', array() ) && ! empty( $show_featured ) && 'yes' === $show_featured ) : ?>
+		<?php if ( ! empty( $show_featured ) && 'yes' === $show_featured ) : ?>
 			<div class="stm-gallery-action-unit stm-listing-favorite-action" data-id="<?php echo esc_attr( $listing_id ); ?>" data-toggle="tooltip" data-placement="bottom" title="<?php esc_attr_e( 'Add to favorites', 'stm_vehicles_listing' ); ?>">
 				<i class="motors-icons-staricon"></i>
 			</div>

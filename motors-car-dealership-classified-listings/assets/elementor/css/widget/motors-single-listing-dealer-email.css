@@ -2,8 +2,23 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    border: 1px solid var(--motors-border-color);
+    transition: 0.2s;
+}
+
+.dealer-contact-unit.mail .email-btn:hover {
+    color: var(--motors-contrast-text-color);
+    background-color: var(--motors-accent-color);
+}
+
+.dealer-contact-unit.mail .email-btn:hover span {
+    color: var(--motors-contrast-text-color);
 }
 
 .dealer-contact-unit.mail .email-btn i {
     margin: 0 20px 0 0;
+}
+
+.dealer-contact-unit.mail .email-btn span {
+    color: var(--motors-text-color);
 }

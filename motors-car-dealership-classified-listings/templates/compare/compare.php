@@ -8,7 +8,6 @@ $add_to_text        = esc_html__( 'Add to compare', 'stm_vehicles_listing' );
 $title_text         = esc_html__( 'Compare Vehicles', 'stm_vehicles_listing' );
 
 $compare_empty_placeholder = 'compare-empty.jpg';
-$archive_link              = apply_filters( 'stm_filter_listing_link', '' );
 ?>
 
 <div class="container">
@@ -290,7 +289,7 @@ $archive_link              = apply_filters( 'stm_filter_listing_link', '' );
 			</div>
 			<?php for ( $i = 0; $i < $empty_cars; $i ++ ) { ?>
 				<div class="col-md-3 col-sm-3 col-xs-4 compare-col-stm-empty">
-					<a href="<?php echo esc_url( $archive_link ); ?>">
+					<a href="<?php echo esc_url( get_permalink( apply_filters( 'motors_vl_get_nuxy_mod', '', 'listing_archive' ) ) ); ?>">
 						<div class="image">
 							<i class="motors-icons-add_car"></i>
 							<img class="stm-compare-empty"

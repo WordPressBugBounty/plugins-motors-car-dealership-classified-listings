@@ -91,6 +91,7 @@ class AddCarButton extends WidgetBase {
 					'{{WRAPPER}} .listing_add_cart'      => 'color: {{VALUE}};',
 					'{{WRAPPER}} .listing_add_cart span' => 'color: {{VALUE}};',
 					'{{WRAPPER}} .listing_add_cart svg'  => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .listing_add_cart i'    => 'color: {{VALUE}};',
 				),
 			)
 		);
@@ -121,9 +122,10 @@ class AddCarButton extends WidgetBase {
 				'label'     => __( 'Text Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .listing_add_cart'      => 'color: {{VALUE}};',
-					'{{WRAPPER}} .listing_add_cart span' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .listing_add_cart svg'  => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .listing_add_cart:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .listing_add_cart:hover span' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .listing_add_cart:hover svg' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .listing_add_cart:hover i' => 'color: {{VALUE}};',
 				),
 			)
 		);

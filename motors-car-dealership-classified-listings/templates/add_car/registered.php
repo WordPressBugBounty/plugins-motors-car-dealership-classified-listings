@@ -21,7 +21,7 @@ if ( ! is_wp_error( $user ) ) { ?>
 					<?php if ( ! empty( $user['image'] ) ) : ?>
 						<img src="<?php echo esc_url( $user['image'] ); ?>"/>
 					<?php else : ?>
-						<i class="stm-service-icon-user"></i>
+						<i class="motors-icons-user"></i>
 					<?php endif; ?>
 				</div>
 				<div class="user-info">

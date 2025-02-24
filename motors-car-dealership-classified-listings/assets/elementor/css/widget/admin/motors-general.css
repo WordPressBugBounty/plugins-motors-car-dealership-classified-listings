@@ -16,7 +16,7 @@
     right: 10px;
     margin-left: 0;
     font-size: 16px;
-    color: #888;
+    color: var(--motors-text-alpha-color);
     width: 15px;
     height: 15px;
     border: none;
@@ -31,11 +31,11 @@
     width: 100%;
     height: 40px;
     font-size: 14px;
-    color: #555;
+    color: var(--motors-text-alpha-color);
     font-weight: 400;
     padding: 0 40px 0 14px;
     outline: none !important;
-    background-color: #eceff3;
+    background-color: var(--motors-filter-inputs-color);
     border: none;
     -moz-appearance: none;
     -webkit-appearance: none;
@@ -55,11 +55,11 @@
     line-height: 40px;
     height: 40px;
     font-size: 14px;
-    color: #555;
+    color: var(--motors-text-alpha-color);
     font-weight: 400;
     padding: 0 40px 0 14px;
     outline: none !important;
-    background-color: #eceff3;
+    background-color: var(--motors-filter-inputs-color);
     border: none;
     width: 100%;
 }
@@ -83,11 +83,11 @@
     line-height: 40px;
     height: 40px;
     font-size: 14px;
-    color: #555;
+    color: var(--motors-text-alpha-color);
     font-weight: 400;
     padding: 0 40px 0 14px;
     outline: none !important;
-    background-color: #eceff3;
+    background-color: var(--motors-filter-inputs-color);
     border: none;
     width: 64%;
 }
@@ -110,7 +110,7 @@
     right: 10px;
     margin-left: 0;
     font-size: 16px;
-    color: #888;
+    color: var(--motors-text-alpha-color);
     width: 15px;
     height: 15px;
     border: none;
@@ -124,11 +124,11 @@
     line-height: 32px;
     height: 32px;
     font-size: 14px;
-    color: #555;
+    color: var(--motors-text-color);
     font-weight: 400;
     padding: 0 40px 0 14px;
     outline: none !important;
-    background-color: #eceff3;
+    background-color: var(--motors-filter-inputs-color);
     border: none;
     -moz-appearance: none;
     -webkit-appearance: none;
@@ -141,11 +141,11 @@
     line-height: 38px;
     height: 38px;
     font-size: 14px;
-    color: #555;
+    color: var(--motors-text-alpha-color);
     font-weight: 400;
     padding: 0 40px 0 14px;
     outline: none !important;
-    background-color: #eceff3;
+    background-color: var(--motors-filter-inputs-color);
     border: none;
     border-radius: 0;
     overflow-y: hidden;

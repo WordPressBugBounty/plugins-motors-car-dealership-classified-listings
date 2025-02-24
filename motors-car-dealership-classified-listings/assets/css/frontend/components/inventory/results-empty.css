@@ -1,9 +1,9 @@
 .stm-listings-empty {
     text-align: center;
     margin: 30px 0;
-    --stm-listings-empty-button-color: #1bc744;
-    --stm-listings-empty-not-found-color: #000;
-    --stm-listings-empty-another-color: #545454;
+    --stm-listings-empty-button-color: var(--motors-accent-color);
+    --stm-listings-empty-not-found-color: var(--motors-text-color);
+    --stm-listings-empty-another-color: var(--motors-text-alpha-color);
 }
 
 .stm-listings-empty__not-found, .stm-listings-empty__another {

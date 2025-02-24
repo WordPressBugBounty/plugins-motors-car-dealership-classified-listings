@@ -163,9 +163,6 @@ class STMMailChimpBase {
 		$integrationData = self::getMailchimpIntegrationData();
 
 		if ( self::memberKeyIfExist( $integrationData ) === false ) {
-			if ( empty( $integrationData ) ) {
-				$integrationData = [];
-			}
 
 			$integrationData[] = [
 				'email'      => self::$currentUser->data->user_email,

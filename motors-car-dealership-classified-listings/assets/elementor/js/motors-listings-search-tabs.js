@@ -115,13 +115,16 @@ class FilterListing extends elementorModules.frontend.handlers.Base {
 
 }
 
-jQuery( window ).on(
-	'elementor/frontend/init',
-	function() {
-		const addHandler = function ($element) {
-			elementorFrontend.elementsHandler.addHandler( FilterListing, {$element} );
-		};
-
-		elementorFrontend.hooks.addAction( 'frontend/element_ready/motors-listings-search-tabs.default', addHandler );
+jQuery(document).ready(function () {
+	if (typeof elementorFrontend !== 'undefined' && elementorFrontend.hooks) {
+		elementorFrontend.hooks.addAction(
+			'frontend/element_ready/motors-listings-search-tabs.default',
+			function ($element) {
+				elementorFrontend.elementsHandler.addHandler(FilterListing, {
+					$element,
+				})
+			}
+		)
 	}
-);
+})
+

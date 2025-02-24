@@ -2,8 +2,8 @@
     display: block;
     position: relative;
     padding: 12px 20px 10px 20px;
-    background: var(--mvl-secondary-color);
-    color: #fff;
+    background: var(--motors-accent-color);
+    color: var(--motors-contrast-text-color);
     font-size: 12px;
     font-weight: 600;
     border-radius: 2px;
@@ -15,10 +15,10 @@
 }
 
 .motors-add-car-button.listing_add_cart span {
-    color: #fff;
+    color: var(--motors-contrast-text-color);
 }
 
 .motors-add-car-button.listing_add_cart i {
-    color: #fff;
+    color: var(--motors-contrast-text-color);
     font-size: 17px;
 }

@@ -107,7 +107,7 @@ class Gallery extends WidgetBase {
 			)
 		);
 
-		if ( boolval( apply_filters( 'is_listing', array() ) ) ) {
+		if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_featured_btn' ) ) {
 			$this->add_control(
 				'show_featured',
 				array(

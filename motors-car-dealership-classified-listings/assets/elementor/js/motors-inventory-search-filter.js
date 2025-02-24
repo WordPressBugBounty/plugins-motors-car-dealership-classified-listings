@@ -164,9 +164,16 @@ class MotorsInventorySearchFilter extends elementorModules.frontend.handlers.Bas
 	
 }
 
-jQuery(window).on('elementor/frontend/init', () => {
-	const addHandler = ($element) => {
-		elementorFrontend.elementsHandler.addHandler(MotorsInventorySearchFilter, { $element })
+jQuery(document).ready(function () {
+	if (typeof elementorFrontend !== 'undefined' && elementorFrontend.hooks) {
+		elementorFrontend.hooks.addAction(
+			'frontend/element_ready/motors-inventory-search-filter.default',
+			function ($element) {
+				elementorFrontend.elementsHandler.addHandler(
+					MotorsInventorySearchFilter,
+					{ $element }
+				)
+			}
+		)
 	}
-	elementorFrontend.hooks.addAction('frontend/element_ready/motors-inventory-search-filter.default', addHandler);
 })
