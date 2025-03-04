@@ -34,6 +34,7 @@ a.motors-profile-button span {
     width: 215px;
     margin: 14px 0 0 -94px;
     opacity: 0;
+    left: 50%;
     visibility: hidden;
     box-shadow: -1px 2px 10px var(--motors-bg-lowalpha-contrast);
 }

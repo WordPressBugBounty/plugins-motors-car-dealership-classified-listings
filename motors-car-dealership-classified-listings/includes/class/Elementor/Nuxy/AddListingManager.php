@@ -99,7 +99,7 @@ class AddListingManager {
 		return array(
 			'addl_group_ds_title' => array(
 				'type'             => 'group_title',
-				'label'            => esc_html__( 'Listing description & availability', 'stm_vehicles_listing' ),
+				'label'            => esc_html__( 'Listing description', 'stm_vehicles_listing' ),
 				'submenu'          => esc_html__( 'Listing creation form', 'stm_vehicles_listing' ),
 				'description'      => esc_html__( 'Add a detailed description of the vehicle listing and specify the available slots ', 'stm_vehicles_listing' ),
 				'preview'          => STM_LISTINGS_URL . '/assets/images/previews/listing-descr-addl.png',

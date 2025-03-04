@@ -104,11 +104,11 @@ $can_register = apply_filters( 'motors_vl_get_nuxy_mod', false, 'new_user_regist
 									</label>
 								</div>
 							<?php endif; ?>
-							<?php if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'allow_user_register_as_dealer' ) ) : ?>
+							<?php if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'allow_user_register_as_dealer' ) && apply_filters( 'is_mvl_pro', false ) ) : ?>
 								<div class="stm-register-as-dealer form-group form-checker">
 									<label>
 										<input type="checkbox" name="register_as_dealer" value="1"/>
-										<span><?php esc_html_e( 'As Dealer', 'stm_vehicles_listing' ); ?></span>
+										<span><?php esc_html_e( 'Sign Up as a Dealer', 'stm_vehicles_listing' ); ?></span>
 									</label>
 								</div>
 							<?php endif; ?>

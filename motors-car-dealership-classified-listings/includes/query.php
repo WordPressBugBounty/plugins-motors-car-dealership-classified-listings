@@ -715,3 +715,96 @@ if ( ! function_exists( 'stm_theme_clauses_filter' ) ) {
 }
 
 add_filter( 'stm_listings_clauses_filter', 'stm_theme_clauses_filter', 10, 2 );
+
+if ( ! apply_filters( 'stm_is_motors_theme', false ) || ( apply_filters( 'stm_is_motors_theme', false ) && version_compare( wp_get_theme( 'motors' )->get( 'Version' ), '5.6.57' ) > 0 ) ) {
+	function stm_listing_pre_get_vehicles( $query_vars ) {
+
+		if ( ! isset( $query_vars['meta_query'] ) ) {
+			$query_vars['meta_query'] = array();
+		}
+
+		if ( ! empty( $_GET['featured_top'] ) ) {
+			if ( apply_filters( 'stm_is_listing', false ) ) {
+				$query_vars['meta_query'] = array(
+					array(
+						'key'     => 'special_car',
+						'value'   => 'on',
+						'compare' => '=',
+					),
+					$query_vars['meta_query'],
+				);
+			} else {
+				$query_vars['meta_query'][] = array(
+					'key'     => 'special_car',
+					'value'   => 'on',
+					'compare' => '=',
+				);
+			}
+		}
+
+		if ( ! empty( $_GET['sale_cars'] ) ) {
+			if ( boolval( apply_filters( 'is_listing', array() ) ) ) {
+				$query_vars['meta_query'] = array(
+					array(
+						'key'     => 'sale_price',
+						'value'   => '',
+						'compare' => '!=',
+					),
+					array(
+						'key'     => 'car_price_form',
+						'value'   => '',
+						'compare' => '==',
+					),
+					$query_vars['meta_query'],
+				);
+			} else {
+				$query_vars['meta_query'] = array(
+					array(
+						'key'     => 'sale_price',
+						'value'   => '',
+						'compare' => '!=',
+					),
+					array(
+						'key'     => 'car_price_form',
+						'value'   => '',
+						'compare' => '==',
+					),
+				);
+			}
+		}
+
+		if ( ! is_admin() ) {
+			$posts_per_page = intval( apply_filters( 'stm_listings_input', null, 'posts_per_page' ) );
+
+			if ( empty( $posts_per_page ) ) {
+				$archive_id     = apply_filters( 'stm_listings_user_defined_filter_page', '' );
+				$view_type      = sanitize_file_name( apply_filters( 'stm_listings_input', apply_filters( 'motors_vl_get_nuxy_mod', 'list', 'listing_view_type' ), 'view_type' ) );
+				$posts_per_page = ( ! empty( get_post_meta( apply_filters( 'stm_get_listing_archive_page_id', $archive_id ), ( 'grid' === $view_type ) ? 'ppp_on_grid' : 'ppp_on_list', true ) ) ) ? get_post_meta( apply_filters( 'stm_get_listing_archive_page_id', $archive_id ), ( 'grid' === $view_type ) ? 'ppp_on_grid' : 'ppp_on_list', true ) : get_option( 'posts_per_page' );
+			}
+
+			$query_vars['posts_per_page'] = intval( $posts_per_page );
+
+			if ( ! empty( $_GET['stm-footer-search-name'] ) ) {
+				$query_vars['s'] = sanitize_text_field( $_GET['stm-footer-search-name'] );
+			} elseif ( ! empty( $_GET['s'] ) ) {
+				$query_vars['s'] = sanitize_text_field( $_GET['s'] );
+			}
+
+			$features = apply_filters( 'stm_listings_input', null, 'stm_features' );
+			if ( ! empty( $features ) && is_array( $features ) ) {
+				$query_vars['tax_query'][] = array(
+					'relation' => 'OR',
+					array(
+						'taxonomy' => 'stm_additional_features',
+						'field'    => 'slug',
+						'terms'    => array_map( 'sanitize_title', $features ),
+					),
+				);
+			}
+		}
+
+		return $query_vars;
+	}
+
+	add_filter( 'stm_listings_build_query_args', 'stm_listing_pre_get_vehicles', 20 );
+}

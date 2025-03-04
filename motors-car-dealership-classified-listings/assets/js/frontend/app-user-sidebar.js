@@ -1,6 +1,5 @@
 ;(function ($) {
 	'use strict'
-	console.log('app-user-sidebar.js')
 
 	$(window).on('load', function () {
 		stm_scroll_user_sidebar()

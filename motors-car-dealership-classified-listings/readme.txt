@@ -5,7 +5,7 @@ Donate link: https://www.paypal.me/stylemix
 Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
 Tested up to: 6.7
-Stable tag: 1.4.56
+Stable tag: 1.4.57
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -132,6 +132,17 @@ After that, go to Tools -> Import, and via Wordpress Importer tool install dummy
 8. Additional features
 
 == Changelog ==
+
+= 1.4.57 =
+- **Fix:** Fixed the feedback notice not closing after clicking "No thanks".
+- **Fix:** Resolved the Motors Skins installation notification reappearing after deactivating the  the Motors Skins.
+- **Fix:** Resolved an issue with the "Save search" not storing data from numeric fields.
+- **Fix:** Corrected the plugin logo misaligned in the admin top bar.
+- **Fix:** Fixed the misaligned headers in plugin settings.
+- **Fix:** Fixed an issue with the Inventory filter by Featured displaying all listings instead of filtering correctly.
+- **Fix:** Fixed an issue when features were not saved when edited a listing in the Add Car form.
+- **Fix:** Addressed the issue with Fatal Error when deactivating Pro license.
+- **Fix:** Fixed a missing option to add custom icons for Listing types
 
 = 1.4.56 =
 - **Enhancement:** Added an option to choose and apply custom colors.

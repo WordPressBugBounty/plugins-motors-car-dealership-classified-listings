@@ -1527,6 +1527,10 @@ table > tbody > tr td {
     padding: 3px 10px;
 }
 
+.wpcfto-box-group_title .wpcfto_generic_field .wpcfto-group-title-wrapper {
+    width: 100%;
+}
+
 .stm-accordion-single-unit {
     margin-top: 20px;
 }

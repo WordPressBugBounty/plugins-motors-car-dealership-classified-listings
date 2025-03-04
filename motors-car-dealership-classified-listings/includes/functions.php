@@ -12,7 +12,12 @@ add_filter(
 
 if ( ! function_exists( 'is_mvl_pro' ) ) {
 	function is_mvl_pro() {
-		return defined( 'STM_LISTINGS_PRO_PATH' );
+
+		if ( defined( 'STM_LISTINGS_PRO_PATH' ) && function_exists( 'mp_fs' ) && mp_fs()->_get_license() ) {
+			return true;
+		}
+
+		return false;
 	}
 
 	add_filter( 'is_mvl_pro', 'is_mvl_pro' );
@@ -1440,7 +1445,7 @@ function mvl_admin_bar_item( $admin_bar ) {
 		return;
 	}
 
-	$admin_bar_icon = '<span class="ab-icon"><img style="margin-top: -6px; max-height: 22px;" height="22" width="22" src="' . STM_LISTINGS_URL . '/includes/class/Plugin/assets/img/icon.png" alt="" /></span>';
+	$admin_bar_icon = '<span class="ab-icon"><img style="margin-top: 2px; max-height: 22px;" height="22" width="22" src="' . STM_LISTINGS_URL . '/includes/class/Plugin/assets/img/icon.png" alt="" /></span>';
 
 	if ( apply_filters( 'stm_disable_settings_setup', true ) ) {
 		$admin_bar->add_menu(

@@ -1,15 +1,13 @@
 <?php
 $theme_v            = wp_get_theme()->parent()->version ?? wp_get_theme()->version;
-$active_theme       = wp_get_theme()->get( 'TextDomain' );
 $start_theme_notice = get_transient( 'stm_starter_theme_notice_setting' );
+$themes             = wp_get_themes();
 
-$theme_exists = array(
-	'motors-starter-theme',
-	'motors-child',
-	'motors-starter-theme-child',
-	'motors-child-theme',
-	'motors',
-);
+if ( ! empty( $themes ) ) {
+	foreach ( $themes as $theme ) {
+		$theme_exists[] = $theme->get( 'TextDomain' );
+	}
+}
 
 $init_data = array();
 
@@ -23,7 +21,8 @@ if ( apply_filters( 'stm_is_motors_theme', false ) && version_compare( $theme_v,
 		'notice_btn_one_title' => 'Update Theme',
 	);
 }
-if ( ! in_array( $active_theme, $theme_exists, true ) && empty( $start_theme_notice ) ) {
+
+if ( ! in_array( 'motors-starter-theme', $theme_exists, true ) && empty( $start_theme_notice ) ) {
 	$init_data['starter-theme-notice'] = array(
 		'notice_type'            => 'starter-theme-notice',
 		'notice_logo'            => 'motors_plugin.svg',

@@ -8,8 +8,8 @@ defined( 'ABSPATH' ) || exit;
 $_id = apply_filters( 'stm_listings_input', null, 'item_id' );
 
 if ( ! empty( $user_features ) && is_array( $user_features ) ) :
-	if ( ! empty( $id ) ) {
-		$features_car = get_post_meta( $id, 'additional_features', true );
+	if ( ! empty( $_id ) ) {
+		$features_car = get_post_meta( $_id, 'additional_features', true );
 		$features_car = explode( ',', addslashes( $features_car ) );
 	} else {
 		$features_car = array();
@@ -32,7 +32,7 @@ if ( ! empty( $user_features ) && is_array( $user_features ) ) :
 									type="checkbox"
 									value="<?php echo esc_attr( $feature['label'] ); ?>"
 									name="stm_car_features_labels[]"
-									<?php checked( in_array( $feature['value'], $features_car, true ) ); ?>
+									<?php checked( in_array( $feature['label'], $features_car, true ) ); ?>
 								>
 								<span><?php echo esc_attr( $feature['label'] ); ?></span>
 							</label>

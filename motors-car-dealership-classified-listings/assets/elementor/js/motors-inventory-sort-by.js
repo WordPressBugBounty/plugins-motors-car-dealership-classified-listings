@@ -1,6 +1,5 @@
 ;(function ($) {
 	function initSelect2() {
-		console.log('motors-inventory-sort-by.js')
 		$('select[data-elementor-widget-class="inventory-sort-by"]')
 			.select2({
 				minimumResultsForSearch: Infinity,
