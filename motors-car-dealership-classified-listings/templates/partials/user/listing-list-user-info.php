@@ -67,7 +67,7 @@ if ( ! empty( $user_added ) ) :
 										<div class="phone"><i class="motors-icons-phone"></i><?php echo esc_attr( $user_phone ); ?></div>
 									<?php else : ?>
 										<i class="motors-icons-phone"></i><div class="phone"><?php echo substr_replace( $user_phone, '*******', 3, strlen( $user_phone ) );//phpcs:ignore ?></div>
-										<span class="stm-show-number" data-listing-id="<?php echo get_the_ID(); ?>" data-id="<?php echo esc_attr( $user->ID ); ?>"><?php echo esc_html__( 'Show number', 'stm_vehicles_listing' ); ?></span>
+										<span class="stm-show-number" data-listing-id="<?php echo esc_attr( get_the_ID() ); ?>" data-id="<?php echo esc_attr( $user->ID ); ?>"><?php echo esc_html__( 'Show number', 'stm_vehicles_listing' ); ?></span>
 									<?php endif; ?>
 								<?php endif; ?>
 								<?php

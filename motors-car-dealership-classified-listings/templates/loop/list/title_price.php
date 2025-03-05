@@ -34,7 +34,7 @@ $is_sell_online = ( $sell_online ) ? ! empty( get_post_meta( get_the_ID(), 'car_
 		<?php if ( false === $hide_labels && ! empty( $car_price_form_label ) ) : ?>
 			<div class="price">
 				<div class="normal-price">
-					<a href="#" class="rmv_txt_drctn archive_request_price" data-toggle="modal" data-target="#get-car-price" data-title="<?php echo esc_html( get_the_title( get_the_ID() ) ); ?>" data-id="<?php echo get_the_ID(); ?>">
+					<a href="#" class="rmv_txt_drctn archive_request_price" data-toggle="modal" data-target="#get-car-price" data-title="<?php echo esc_html( get_the_title( get_the_ID() ) ); ?>" data-id="<?php echo esc_attr( get_the_ID() ); ?>">
 						<span class="<?php echo esc_attr( $heading_font ); ?>"><?php echo esc_attr( $car_price_form_label ); ?></span>
 					</a>
 				</div>
@@ -62,7 +62,7 @@ $is_sell_online = ( $sell_online ) ? ! empty( get_post_meta( get_the_ID(), 'car_
 							<span class="label-price"><?php echo esc_attr( $regular_price_label ); ?></span>
 						<?php endif; ?>
 						<?php if ( ! empty( $car_price_form_label ) ) : ?>
-							<a href="#" class="rmv_txt_drctn archive_request_price" data-toggle="modal" data-target="#get-car-price" data-title="<?php echo esc_html( get_the_title( get_the_ID() ) ); ?>" data-id="<?php echo get_the_ID(); ?>">
+							<a href="#" class="rmv_txt_drctn archive_request_price" data-toggle="modal" data-target="#get-car-price" data-title="<?php echo esc_html( get_the_title( get_the_ID() ) ); ?>" data-id="<?php echo esc_attr( get_the_ID() ); ?>">
 								<span class="heading-font"><?php echo esc_attr( $car_price_form_label ); ?></span>
 							</a>
 						<?php else : ?>

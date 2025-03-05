@@ -51,7 +51,7 @@ do_action(
 	<!---Media-->
 	<div class="stm-car-medias">
 		<?php if ( ! empty( $car_media['car_photos_count'] ) ) : ?>
-			<div class="stm-listing-photos-unit stm-car-photos-<?php echo get_the_ID(); ?>">
+			<div class="stm-listing-photos-unit stm-car-photos-<?php echo esc_attr( get_the_ID() ); ?>">
 				<i class="motors-icons-photo"></i>
 				<span><?php echo esc_html( $car_media['car_photos_count'] ); ?></span>
 			</div>
@@ -80,7 +80,7 @@ do_action(
 			<?php //phpcs:enable ?>
 		<?php endif; ?>
 		<?php if ( ! empty( $car_media['car_videos_count'] ) ) : ?>
-			<div class="stm-listing-videos-unit stm-car-videos-<?php echo get_the_ID(); ?>">
+			<div class="stm-listing-videos-unit stm-car-videos-<?php echo esc_attr( get_the_ID() ); ?>">
 				<i class="fas fa-film"></i>
 				<span><?php echo esc_html( $car_media['car_videos_count'] ); ?></span>
 			</div>

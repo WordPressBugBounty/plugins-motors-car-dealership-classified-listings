@@ -37,7 +37,7 @@ $car_media           = apply_filters( 'stm_get_car_medias', array(), get_the_id(
 			</script>
 		<?php endif; ?>
 		<?php if ( ! empty( $car_media['car_videos_count'] ) ) : ?>
-			<div class="stm-listing-videos-unit stm-car-videos-<?php echo get_the_ID(); ?> <?php echo esc_attr( $dynamic_class_video ); ?>">
+			<div class="stm-listing-videos-unit stm-car-videos-<?php echo esc_attr( get_the_ID() ); ?> <?php echo esc_attr( $dynamic_class_video ); ?>">
 				<i class="fas fa-film"></i>
 				<span><?php echo esc_html( $car_media['car_videos_count'] ); ?></span>
 			</div>

@@ -149,6 +149,10 @@ class TemplateManager {
 	public function motors_create_template() {
 		check_ajax_referer( 'motors_create_template', 'security' );
 
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'You do not have permission to create listing template', 'stm_vehicles_listing' ) ) );
+		}
+
 		$found_posts = new \WP_Query(
 			array(
 				'post_type'   => $this->post_type,
@@ -190,6 +194,10 @@ class TemplateManager {
 
 	public function motors_delete_template() {
 		check_ajax_referer( 'motors_delete_template', 'security' );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'You do not have permission to delete listing template', 'stm_vehicles_listing' ) ) );
+		}
 
 		$data = array(
 			'error' => true,

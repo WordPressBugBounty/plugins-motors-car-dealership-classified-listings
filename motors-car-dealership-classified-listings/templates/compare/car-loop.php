@@ -10,9 +10,9 @@ while ( $compares->have_posts() ) :
 			<div class="compare-values">
 				<div class="stm_compare_col_top">
 					<button class="button add-to-compare stm_remove_after"
-						data-id="<?php echo get_the_ID(); ?>"
+						data-id="<?php echo esc_attr( get_the_ID() ); ?>"
 						data-post-type="<?php echo esc_attr( get_post_type( get_the_ID() ) ); ?>"
-						data-title="<?php echo get_the_title(); ?>">
+						data-title="<?php echo esc_attr( get_the_title() ); ?>">
 						<?php echo esc_html__( 'Remove', 'stm_vehicles_listing' ); ?>
 					</button>
 					<h4 class="text-transform compare-car-visible"><?php the_title(); ?></h4>
@@ -39,7 +39,7 @@ while ( $compares->have_posts() ) :
 													foreach ( $data_meta_array as $data_meta_single ) {
 														$data_meta = get_term_by( 'slug', $data_meta_single, $filter_option['slug'] );
 														if ( ! empty( $data_meta->name ) ) {
-															$datas[] = esc_attr( $data_meta->name );
+															$datas[] = esc_html( $data_meta->name );
 														}
 													}
 												}

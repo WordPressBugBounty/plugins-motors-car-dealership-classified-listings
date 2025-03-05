@@ -34,7 +34,7 @@ class STMListingDataStoreCPT extends WC_Product_Data_Store_CPT implements WC_Obj
 		$post_object  = get_post( $product->get_id() );
 
 		if ( ! $product->get_id() || ! ( $post_object ) || ! ( in_array( $post_object->post_type, $post_types, true ) ) ) {
-			throw new Exception( __( 'Invalid product.', 'stm_vehicles_listing' ) );
+			throw new Exception( esc_html__( 'Invalid product.', 'stm_vehicles_listing' ) );
 		}
 
 		$product->set_id( $post_object->ID );
