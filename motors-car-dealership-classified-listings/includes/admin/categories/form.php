@@ -36,12 +36,14 @@ if ( 'edit' === $form_type ) {
 						</div>
 						<div class="stm-admin-notification__content">
 							<?php esc_html_e( 'Please configure the options to ensure each field works correctly. You can edit or remove existing taxonomies.', 'stm_vehicles_listing' ); ?>
-							<a href="https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/listing-management/custom-fields#how-to-deal-with-taxonomies-on-the-custom-fields-listing-categories" target="_blank" class="stm-admin-notification__link">
+							<a href="https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/listing-management/custom-fields#how-to-deal-with-taxonomies-on-the-custom-fields-listing-categories"
+								target="_blank" class="stm-admin-notification__link">
 								<?php esc_html_e( 'Learn more', 'stm_vehicles_listing' ); ?>
 							</a>
 						</div>
 						<div class="stm-admin-notification__bottom">
-							<button type="button" class="stm-admin-button stm-admin-button-primary stm-admin-notification__button">
+							<button type="button"
+									class="stm-admin-button stm-admin-button-primary stm-admin-notification__button">
 								<?php esc_html_e( 'Got it', 'stm_vehicles_listing' ); ?>
 							</button>
 							<div class="stm_custom_fields__checkbox--wrapper">
@@ -109,7 +111,9 @@ if ( 'edit' === $form_type ) {
 	</div>
 	<div class="stm_custom_fields__form--bottom">
 		<div class="stm_custom_fields__message hide"></div>
-		<button type="button" data-action="<?php echo esc_attr( $button_type ); ?>" <?php echo wp_kses_post( $button_attr ); ?> class="stm-admin-button stm-admin-button-primary stm-admin-button-save">
+		<button type="button"
+				data-action="<?php echo esc_attr( $button_type ); ?>" <?php echo wp_kses_post( $button_attr ); ?>
+				class="stm-admin-button stm-admin-button-primary stm-admin-button-save">
 			<?php echo esc_html( $save_button ); ?>
 			<i class="lnr lnr-sync"></i>
 		</button>

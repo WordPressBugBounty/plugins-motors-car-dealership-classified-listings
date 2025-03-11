@@ -1,11 +1,11 @@
-=== Motors – Car Dealer, Classifieds & Listing ===
+=== Motors – Car Dealership & Classified Listings Plugin ===
 
 Contributors: Stylemix
 Donate link: https://www.paypal.me/stylemix
 Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
 Tested up to: 6.7
-Stable tag: 1.4.59
+Stable tag: 1.4.60
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,7 +13,7 @@ Manage classified listings with WordPress, and allow users to post classified li
 
 == Description ==
 
-The Motors plugin makes it easy for vehicle dealers to create and manage listings on their WordPress sites. It's perfect for anyone **selling cars**, **motorcycles**, **boats**, and more. With this plugin, you can **create and organize your listings**, attract more customers, and boost your sales.
+Create a fully functional car dealership website in minutes. Manage your vehicle inventory, showcase detailed listings, and offer advanced search filters to your visitors. Perfect for small/medium dealerships, auto classifieds, or agencies building sites for their clients.
 
 ⭐ [Motors  Pro Plugin](https://stylemixthemes.com/car-dealer-plugin/?utm_source=wporg-motors&utm_medium=description)
 ⭐ [Motors  Live Demo](https://motors-plugin.stylemixthemes.com/?utm_source=wporg-motors&utm_medium=description)
@@ -132,6 +132,10 @@ After that, go to Tools -> Import, and via Wordpress Importer tool install dummy
 8. Additional features
 
 == Changelog ==
+
+= 1.4.60 =
+- **New:** Added a new listing card skin for Grid and List views on the Inventory page (Pro).
+- **New:** Added an option to select the listing card skins in the Motors Plugin settings (Pro).
 
 = 1.4.59 =
 - **Fix:** Minor bug fixes.

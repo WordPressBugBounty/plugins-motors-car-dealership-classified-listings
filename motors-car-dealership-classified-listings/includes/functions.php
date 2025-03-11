@@ -13,7 +13,7 @@ add_filter(
 if ( ! function_exists( 'is_mvl_pro' ) ) {
 	function is_mvl_pro() {
 
-		if ( defined( 'STM_LISTINGS_PRO_PATH' ) && function_exists( 'mp_fs' ) && mp_fs()->_get_license() ) {
+		if ( ( defined( 'STM_LISTINGS_PRO_PATH' ) && function_exists( 'mp_fs' ) && mp_fs()->_get_license() ) ) {
 			return true;
 		}
 
@@ -943,7 +943,7 @@ function display_metaboxes( $post, $metabox ) {
 			case 'select':
 				$html .= '<select name="' . esc_attr( $key ) . '" id="' . esc_attr( $key ) . '">';
 				foreach ( $field['options'] as $option_key => $option_value ) {
-					$html .= '<option' . ( $meta == $option_key ? ' selected="selected"' : '' ) . ' value="' . esc_attr( $option_key ) . '">' . esc_html( $option_value ) . '</option>';
+					$html .= '<option' . ( $meta === $option_key ? ' selected="selected"' : '' ) . ' value="' . esc_attr( $option_key ) . '">' . esc_html( $option_value ) . '</option>';
 				}
 				$html .= '</select>';
 				break;
@@ -1372,7 +1372,7 @@ add_filter( 'get_top_vehicles_for_mm', 'get_top_vehicles_for_mm', 10, 2 );
 function add_footer_template() {
 	global $wp_query;
 
-	if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_quote' ) || ( is_singular( apply_filters( 'stm_listings_post_type', 'listings' ) ) && 'on' === get_post_meta( get_the_ID(), 'car_price_form', true ) ) ) {
+	if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_quote_grid' ) || apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_quote' ) || ( is_singular( apply_filters( 'stm_listings_post_type', 'listings' ) ) && 'on' === get_post_meta( get_the_ID(), 'car_price_form', true ) ) ) {
 		stm_listings_load_template( 'modals/get-car-price' );
 	}
 
@@ -1385,7 +1385,8 @@ function add_footer_template() {
 	}
 
 	if (
-		apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_trade' )
+		apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_trade_grid' )
+		|| apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_trade' )
 		|| apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_offer_price' )
 		|| ( class_exists( 'Elementor\Plugin' ) && $wp_query->get( 'show_offer_price' ) )
 	) {

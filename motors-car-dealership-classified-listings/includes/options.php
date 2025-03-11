@@ -798,7 +798,11 @@ function stm_listings_save_single_option_row() {
 
 			if ( ! empty( $user_choice[ $setting_name ] ) ) {
 				if ( 'field_type' === $setting_name ) {
-					$current_option['numeric'] = ( 'numeric' === $user_choice[ $setting_name ] );
+					$current_option['numeric']       = ( 'numeric' === $user_choice[ $setting_name ] );
+					$current_option[ $setting_name ] = sanitize_text_field( $user_choice[ $setting_name ] );
+
+					mvl_save_location_settings( $user_choice );
+
 				} elseif ( in_array( $setting_name, array( 'slider_in_tabs', 'slider' ), true ) ) {
 					$current_option[ $setting_name ] = ( 'slider' === $user_choice[ $setting_name ] );
 				} else {
@@ -819,7 +823,20 @@ function stm_listings_save_single_option_row() {
 
 		stm_vehicle_listings_save_options( $options );
 
-		$current_option['type']           = ( ! empty( $current_option['numeric'] ) ) ? __( 'Number', 'stm_vehicles_listing' ) : __( 'Dropdown', 'stm_vehicles_listing' );
+		if ( ! empty( $current_option['field_type'] ) ) {
+			$choices = apply_filters(
+				'mvl_field_type_choices',
+				array(
+					'dropdown' => esc_html__( 'Dropdown select', 'stm_vehicles_listing' ),
+					'numeric'  => esc_html__( 'Number', 'stm_vehicles_listing' ),
+				)
+			);
+
+			$current_option['type'] = $choices[ $current_option['field_type'] ];
+		} else {
+			$current_option['type'] = ( ! empty( $current_option['numeric'] ) ) ? __( 'Number', 'stm_vehicles_listing' ) : __( 'Dropdown', 'stm_vehicles_listing' );
+		}
+
 		$current_option['slider_in_tabs'] = ( ! empty( $current_option['slider_in_tabs'] ) ) ? 'slider' : 'dropdown';
 		$current_option['slider']         = ( ! empty( $current_option['slider'] ) ) ? 'slider' : 'dropdown';
 
@@ -875,6 +892,11 @@ function stm_listings_delete_single_option_row() {
 
 		if ( ! empty( $current_option ) ) {
 			unset( $options[ $option_key ] );
+
+			if ( 'location' === $current_option['field_type'] ) {
+				delete_option( 'mvl_location_settings' );
+			}
+
 			if ( stm_vehicle_listings_save_options( $options ) ) {
 
 				$_options = stm_listings_get_my_options_list();
@@ -1006,11 +1028,14 @@ function stm_listings_add_new_option() {
 		$settings = motors_page_options();
 
 		foreach ( $settings as $setting_name => $setting ) {
-
 			if ( ! empty( $new_option[ $setting_name ] ) ) {
 				if ( 'field_type' === $setting_name ) {
-					$current_option['numeric'] = ( 'numeric' === $new_option[ $setting_name ] );
-					$new_option['numeric']     = ( 'numeric' === $new_option[ $setting_name ] );
+					$current_option['numeric']       = ( 'numeric' === $new_option[ $setting_name ] );
+					$new_option['numeric']           = ( 'numeric' === $new_option[ $setting_name ] );
+					$current_option[ $setting_name ] = sanitize_text_field( $new_option[ $setting_name ] );
+
+					mvl_save_location_settings( $new_option );
+
 				} elseif ( in_array( $setting_name, array( 'slider_in_tabs', 'slider' ), true ) ) {
 					$current_option[ $setting_name ] = ( 'slider' === $new_option[ $setting_name ] );
 					$new_option[ $setting_name ]     = ( 'slider' === $new_option[ $setting_name ] );
@@ -1038,12 +1063,13 @@ function stm_listings_add_new_option() {
 		do_action( 'wpml_register_single_string', 'stm_vehicles_listing', 'Listing Category ' . $new_option['plural_name'], $new_option['plural_name'] );
 
 		$data['option'] = array(
-			'key'     => max( array_keys( $options ) ),
-			'name'    => $new_option['single_name'],
-			'plural'  => $new_option['plural_name'],
-			'slug'    => $new_option['slug'],
-			'numeric' => $numeric,
-			'link'    => $link,
+			'key'        => max( array_keys( $options ) ),
+			'name'       => $new_option['single_name'],
+			'plural'     => $new_option['plural_name'],
+			'slug'       => $new_option['slug'],
+			'field_type' => $new_option['field_type'],
+			'numeric'    => $numeric,
+			'link'       => $link,
 		);
 
 		stm_vehicle_listings_save_options( $options );
@@ -1087,6 +1113,18 @@ function stm_listings_add_new_option() {
 }
 
 add_action( 'wp_ajax_stm_listings_add_new_option', 'stm_listings_add_new_option' );
+
+function mvl_save_location_settings( $option ) {
+	if ( 'location' === $option['field_type'] ) {
+		$location_settings                                 = array();
+		$location_settings['enable_distance_search']       = sanitize_text_field( $option['enable_distance_search'] );
+		$location_settings['recommend_items_empty_result'] = sanitize_text_field( $option['recommend_items_empty_result'] );
+		$location_settings['distance_measure_unit']        = sanitize_text_field( $option['distance_measure_unit'] );
+		$location_settings['distance_search']              = sanitize_text_field( $option['distance_search'] );
+
+		update_option( 'mvl_location_settings', $location_settings );
+	}
+}
 
 function stm_listings_form_edit_disable_notification() {
 	check_ajax_referer( 'stm_listings_form_edit_disable_notification', 'security' );

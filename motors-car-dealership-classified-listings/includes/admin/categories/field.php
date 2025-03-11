@@ -122,6 +122,46 @@ if ( 2 === $column ) {
 				</div>
 			<?php endforeach; ?>
 		</div>
+	<?php elseif ( 'radio-image' === $field['type'] ) : ?>
+		<?php if ( ! empty( $field['label'] ) ) : ?>
+			<label>
+				<span class="stm_custom_fields__radio--label">
+					<?php
+					echo esc_html( $field['label'] );
+
+					if ( ! empty( $field['description'] ) ) :
+						?>
+						<span class="stm_custom_fields__tooltip" data-bs-offset="10,15" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="<?php echo esc_attr( $field['description'] ); ?>">
+							<img src="<?php echo esc_url( STM_LISTINGS_URL . '/assets/images/admin/help.svg' ); ?>" alt="<?php esc_attr_e( 'Field description', 'stm_vehicles_listing' ); ?>">
+						</span>
+					<?php endif; ?>
+				</span>
+				<?php motors_custom_field_preview( $field ); ?>
+			</label>
+		<?php endif; ?>
+		<div class="stm_custom_fields__radio--wrapper stm_custom_fields__radio-image-grid">
+			<?php
+			foreach ( $field['choices'] as $choice_value => $choice_args ) :
+				$checked = ( ! empty( $field['value'] ) ) ? checked( $field['value'], $choice_value, false ) : '';
+				?>
+				<div class="stm_custom_fields__radio--inside">
+					<input
+						type="radio"
+						id="<?php echo esc_attr( $prefix_id . $field_key . '-' . $choice_value ); ?>"
+						value="<?php echo esc_attr( $choice_value ); ?>"
+						name="<?php echo esc_attr( $field_key ); ?>"
+						class="stm_custom_fields__radio"
+						<?php echo wp_kses_post( $checked ); ?>
+					>
+					<label for="<?php echo esc_attr( $prefix_id . $field_key . '-' . $choice_value ); ?>">
+						<span class="stm_custom_fields__radio--button"></span>
+						<span class="stm_custom_fields__radio--label">
+							<img src="<?php echo esc_html( $choice_args['url'] ); ?>" />
+						</span>
+					</label>
+				</div>
+			<?php endforeach; ?>
+		</div>
 	<?php endif; ?>
 	<span class="stm_custom_field__message"></span>
 </div>

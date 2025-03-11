@@ -1,17 +1,25 @@
 <?php
 /*Inventory*/
 function motors_listing_inventory( $atts ) {
-	mvl_enqueue_header_scripts_styles( 'stmselect2' );
-	mvl_enqueue_header_scripts_styles( 'app-select2' );
-	mvl_enqueue_header_scripts_styles( 'motors-datetimepicker' );
-	mvl_enqueue_header_scripts_styles( 'items-per-page' );
-	mvl_enqueue_header_scripts_styles( 'inventory' );
-	mvl_enqueue_header_scripts_styles( 'inventory-view-type' );
-	mvl_enqueue_header_scripts_styles( 'loop-list' );
-	mvl_enqueue_header_scripts_styles( 'loop-grid' );
+	$selected_inventory_skin = apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'inventory_skin' );
 
 	ob_start();
-	do_action( 'stm_listings_load_template', 'filter/inventory/main' );
+
+	if ( 'default' !== $selected_inventory_skin ) {
+		mvl_enqueue_header_scripts_styles( $selected_inventory_skin );
+		do_action( 'stm_listings_load_template', 'inventory/' . $selected_inventory_skin );
+	} else {
+		mvl_enqueue_header_scripts_styles( 'stmselect2' );
+		mvl_enqueue_header_scripts_styles( 'app-select2' );
+		mvl_enqueue_header_scripts_styles( 'motors-datetimepicker' );
+		mvl_enqueue_header_scripts_styles( 'items-per-page' );
+		mvl_enqueue_header_scripts_styles( 'inventory' );
+		mvl_enqueue_header_scripts_styles( 'inventory-view-type' );
+		mvl_enqueue_header_scripts_styles( 'loop-list' );
+		mvl_enqueue_header_scripts_styles( 'loop-grid' );
+
+		do_action( 'stm_listings_load_template', 'filter/inventory/main' );
+	}
 
 	return ob_get_clean();
 }

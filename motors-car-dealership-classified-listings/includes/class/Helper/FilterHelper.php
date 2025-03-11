@@ -168,6 +168,7 @@ class FilterHelper {
 			}
 
 			$options[ $term->slug ] = array(
+				'id'       => $term->term_id,
 				'label'    => $term->name,
 				'selected' => $selected,
 				'disabled' => $disabled,

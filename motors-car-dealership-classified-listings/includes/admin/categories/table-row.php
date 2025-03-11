@@ -22,7 +22,21 @@
 		<?php echo esc_html( $option['slug'] ); ?>
 	</td>
 	<td class="stm_custom_fields__table--type" data-column="type">
-		<?php ( ! empty( $option['numeric'] ) && $option['numeric'] ) ? esc_html_e( 'Number', 'stm_vehicles_listing' ) : esc_html_e( 'Dropdown', 'stm_vehicles_listing' ); ?>
+		<?php
+		if ( ! empty( $option['field_type'] ) ) {
+			$choices = apply_filters(
+				'mvl_field_type_choices',
+				array(
+					'dropdown' => esc_html__( 'Dropdown select', 'stm_vehicles_listing' ),
+					'numeric'  => esc_html__( 'Number', 'stm_vehicles_listing' ),
+				)
+			);
+
+			echo esc_html( $choices[ $option['field_type'] ] );
+		} else {
+			( ! empty( $option['numeric'] ) && $option['numeric'] ) ? esc_html_e( 'Number', 'stm_vehicles_listing' ) : esc_html_e( 'Dropdown', 'stm_vehicles_listing' );
+		}
+		?>
 	</td>
 	<td class="stm_custom_fields__table--edit">
 		<i class="stm-admin-icon-edit"></i>

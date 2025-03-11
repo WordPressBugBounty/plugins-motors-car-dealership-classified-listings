@@ -120,6 +120,19 @@ if ( isset( $isf_pal_icon ) && ! empty( $isf_pal_icon ) ) {
 						$parent_list = array();
 					}
 					foreach ( $filter['filters'] as $attribute => $config ) :
+
+						if ( isset( $config['field_type'] ) && apply_filters( 'mvl_filter_field_template', false, $config['field_type'], $config[ $config['field_type'] . '_skins' ] . '.php' ) ) {
+							do_action(
+								'stm_listings_load_template',
+								'inventory/filter/' . $config['field_type'] . '/' . $config[ $config['field_type'] . '_skins' ] . '.php',
+								array(
+									'taxonomy' => $config,
+									'options'  => $filter['options'][ $attribute ],
+								)
+							);
+							continue;
+						}
+
 						if ( ! array_key_exists( 'is_multiple_select', $config ) ) {
 							$config['is_multiple_select'] = false;
 						}

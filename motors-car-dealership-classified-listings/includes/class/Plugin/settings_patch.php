@@ -1,4 +1,27 @@
 <?php
+
+use MotorsVehiclesListing\Plugin\MVL_Const;
+
+add_action(
+	'plugins_loaded',
+	function () {
+		if ( ! is_mvl_pro() ) {
+			$search_results_opt                   = get_option( MVL_Const::SEARCH_RESULTS_OPT_NAME, array() );
+			$search_results_opt['grid_card_skin'] = 'default';
+			$search_results_opt['list_card_skin'] = 'default';
+			update_option( MVL_Const::SEARCH_RESULTS_OPT_NAME, $search_results_opt );
+
+			$listing_template_opts                         = get_option( MVL_Const::LISTING_TEMPLATE_OPT_NAME, array() );
+			$listing_template_opts['listing_details_skin'] = 'default';
+			update_option( MVL_Const::LISTING_TEMPLATE_OPT_NAME, $listing_template_opts );
+
+			$filter_opts                   = get_option( MVL_Const::FILTER_OPT_NAME, array() );
+			$filter_opts['inventory_skin'] = 'default';
+			update_option( MVL_Const::FILTER_OPT_NAME, $filter_opts );
+		}
+	}
+);
+
 add_action(
 	'wp_loaded',
 	function () {

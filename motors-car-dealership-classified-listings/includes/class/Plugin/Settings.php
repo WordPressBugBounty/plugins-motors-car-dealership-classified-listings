@@ -78,7 +78,7 @@ class Settings {
 					'pro/search-settings/filter-position',
 					'pro/search-settings/sorting',
 					'pro/search-settings/search',
-					'pro/search-settings/filter-location',
+					'pro/search-settings/listing-card',
 					'pro/single-listing/general',
 					'pro/single-listing/single-listing-layout',
 					'pro/single-listing/loan-calculator',
@@ -92,6 +92,15 @@ class Settings {
 					'pro/monetization/paypal-options',
 					'pro/monetization/sell-online',
 					'pro/google-services/google-maps',
+				)
+			);
+		}
+
+		if ( defined( 'STM_MOTORS_EXTENDS_PLUGIN_VERSION' ) && version_compare( STM_MOTORS_EXTENDS_PLUGIN_VERSION, '2.3.7' ) > 0 ) {
+			$config_map = array_merge(
+				$config_map,
+				array(
+					'pro/search-settings/filter-location',
 				)
 			);
 		}
@@ -211,7 +220,7 @@ class Settings {
 				'manage_options',
 				'/edit.php?post_type=' . $post_type,
 				'',
-				2
+				1
 			);
 
 			add_filter(

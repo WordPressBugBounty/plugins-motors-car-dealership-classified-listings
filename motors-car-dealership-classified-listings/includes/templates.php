@@ -183,8 +183,9 @@ function stm_author_template_loader( $template ) {
 
 add_action( 'stm_inventory_loop_items_before', 'stm_inventory_loop_items_before' );
 function stm_inventory_loop_items_before( $view_type ) {
+	$skin = apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'grid_card_skin' );
 	if ( 'grid' === $view_type ) {
-		echo '<div class="row row-3 car-listing-row car-listing-modern-grid">';
+		echo wp_kses_post( '<div class="row row-3 car-listing-row car-listing-modern-grid' . ( 'default' !== $skin ? ' ' . $skin : '' ) . '">' );
 	}
 }
 

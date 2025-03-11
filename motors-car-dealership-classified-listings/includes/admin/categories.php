@@ -443,6 +443,7 @@ function stm_add_listing_theme_menu_item() {
 		'mvl_submenu_positions',
 		function ( $positions ) {
 			$positions['listing_categories'] = 15;
+
 			return $positions;
 		}
 	);
@@ -460,12 +461,13 @@ function stm_listings_vehicle_listing_settings_page() {
 
 /**
  * @used-by stm_vehicles_listings_show_field
- * @uses motors_custom_field_icon to get the html of the icon field
+ *
  * @param $name
  * @param $settings
  * @param $values
  *
  * @return void
+ * @uses    motors_custom_field_icon to get the html of the icon field
  */
 function motors_custom_field_icon( $name, $settings, $values ) {
 	$icon  = ( ! empty( $values[ $name ] ) ) ? $values[ $name ] : '';
@@ -477,12 +479,14 @@ function motors_custom_field_icon( $name, $settings, $values ) {
 			echo esc_html( $settings['label'] . ':' );
 			if ( ! empty( $settings['description'] ) ) :
 				?>
-			<span class="stm_custom_fields__tooltip" data-bs-offset="10,15" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="<?php echo esc_attr( $settings['description'] ); ?>">
-				<img src="<?php echo esc_url( STM_LISTINGS_URL . '/assets/images/admin/help.svg' ); ?>" alt="<?php esc_attr_e( 'Field description', 'stm_vehicles_listing' ); ?>">
+				<span class="stm_custom_fields__tooltip" data-bs-offset="10,15" data-bs-toggle="tooltip"
+					data-bs-placement="top" data-bs-title="<?php echo esc_attr( $settings['description'] ); ?>">
+				<img src="<?php echo esc_url( STM_LISTINGS_URL . '/assets/images/admin/help.svg' ); ?>"
+					alt="<?php esc_attr_e( 'Field description', 'stm_vehicles_listing' ); ?>">
 			</span>
-		<?php endif; ?>
+			<?php endif; ?>
 		</label>
-		<input type="hidden" name="<?php echo esc_attr( $name ); ?>" value="<?php echo esc_attr( $value ); ?>" />
+		<input type="hidden" name="<?php echo esc_attr( $name ); ?>" value="<?php echo esc_attr( $value ); ?>"/>
 		<div class="stm_vehicles_listing_icon <?php echo ( ! empty( $icon ) ) ? '' : 'stm_vehicles_listing_icon__empty'; ?>">
 			<div class="icon">
 				<i class="<?php echo esc_attr( $icon ); ?>"></i>
@@ -554,9 +558,9 @@ function motors_custom_field_preview( $settings ) {
 		$url = ( ! empty( $settings['preview_url'] ) ) ? $settings['preview_url'] : STM_LISTINGS_URL . '/assets/images/tmp/';
 		?>
 		<span
-			class="stm_custom_fields__preview"
-			data-bs-toggle="tooltip-preview"
-			title="<img class='tooltip-image' src='<?php echo esc_url( $url . $settings['preview'] ); ?>' alt='<?php echo esc_attr( $settings['label'] ); ?>'>">
+				class="stm_custom_fields__preview"
+				data-bs-toggle="tooltip-preview"
+				title="<img class='tooltip-image' src='<?php echo esc_url( $url . $settings['preview'] ); ?>' alt='<?php echo esc_attr( $settings['label'] ); ?>'>">
 			<?php esc_html_e( 'Preview', 'stm_vehicles_listing' ); ?>
 		</span>
 
@@ -632,6 +636,7 @@ function stm_listings_add_sticky_column( $columns ) {
 	}
 
 	$columns['date'] = $column_date;
+
 	return array_merge( $new_columns, $columns );
 }
 
@@ -653,5 +658,6 @@ function stm_get_numeric_admin_fields() {
 			}
 		}
 	}
+
 	return $cols;
 }

@@ -1,5 +1,4 @@
 <?php
-
 $regular_price_label = get_post_meta( get_the_ID(), 'regular_price_label', true );
 $special_price_label = get_post_meta( get_the_ID(), 'special_price_label', true );
 
@@ -24,9 +23,8 @@ if ( ! empty( $custom_img_size ) ) {
 	$data['custom_img_size'] = $custom_img_size;
 }
 
-if ( ! empty( $columns ) ) {
-	$data['columns'] = $columns;
-}
+$columns         = ( empty( $columns ) ) ? 4 : $columns;
+$data['columns'] = $columns;
 
 if ( empty( $price ) && ! empty( $sale_price ) ) {
 	$price = $sale_price;
@@ -43,28 +41,54 @@ foreach ( $taxonomies as $val ) {
 	}
 }
 
-?>
+if ( ! isset( $skin ) ) {
+	$skin = apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'grid_card_skin' );
+}
 
-<?php do_action( 'stm_listings_load_template', 'loop/grid/start', $data ); ?>
+if ( 'default' !== $skin ) {
+	if ( function_exists( 'mvl_pro_enqueue_header_scripts_styles' ) ) {
+		mvl_pro_enqueue_header_scripts_styles( $skin, 'listing-card/grid' );
+	}
+	$show_logo = apply_filters( 'motors_vl_get_nuxy_mod', '', 'grid_skin_show_logo' );
 
-<?php do_action( 'stm_listings_load_template', 'loop/grid/image', $data ); ?>
-
-<div class="listing-car-item-meta">
-
-	<?php
-	do_action(
-		'stm_listings_load_template',
-		'loop/grid/title_price',
-		array(
-			'price'                => $price,
-			'sale_price'           => $sale_price,
-			'car_price_form_label' => $car_price_form_label,
-		)
+	$args = array(
+		'regular_price_label'  => $regular_price_label,
+		'special_price_label'  => $special_price_label,
+		'price'                => $price,
+		'sale_price'           => $sale_price,
+		'car_price_form_label' => $car_price_form_label,
+		'data'                 => $data,
+		'show_logo'            => $show_logo,
+		'skin'                 => $skin,
+		'columns'              => $columns,
 	);
 
-	do_action( 'stm_listings_load_template', 'loop/grid/data' );
+	do_action( 'stm_listings_load_template', '/listing-cars/grid/' . $skin . '.php', $args );
+} else {
 	?>
 
-</div>
-</a>
-</div>
+	<?php do_action( 'stm_listings_load_template', 'loop/grid/start', $data ); ?>
+
+	<?php do_action( 'stm_listings_load_template', 'loop/grid/image', $data ); ?>
+
+	<div class="listing-car-item-meta">
+
+		<?php
+		do_action(
+			'stm_listings_load_template',
+			'loop/grid/title_price',
+			array(
+				'price'                => $price,
+				'sale_price'           => $sale_price,
+				'car_price_form_label' => $car_price_form_label,
+			)
+		);
+
+		do_action( 'stm_listings_load_template', 'loop/grid/data' );
+		?>
+
+	</div>
+	</a>
+	</div>
+
+<?php } ?>

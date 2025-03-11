@@ -5,8 +5,10 @@ if ( ! empty( $_GET['view_type'] ) && in_array( $_GET['view_type'], array( 'grid
 	$view_type = sanitize_text_field( $_GET['view_type'] );
 }
 
-$ppp             = ${'ppp_on_' . $view_type};
-$custom_img_size = ${$view_type . '_thumb_img_size'};
+$ppp = ${'ppp_on_' . $view_type};
+if ( isset( $grid_thumb_img_size ) && isset( $list_thumb_img_size ) ) {
+	$custom_img_size = ${$view_type . '_thumb_img_size'};
+}
 
 if ( ! isset( $post_type ) || empty( $post_type ) ) {
 	$post_type = 'listings';

@@ -20,6 +20,74 @@ i {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.motors-icons-flame-skin:before {
+    content: "\e9fa";
+}
+
+.motors-icons-phone-call-skin:before {
+    content: "\e9fb";
+}
+
+.motors-icons-share-skin:before {
+    content: "\e9fc";
+}
+
+.motors-icons-steering-wheel-skin:before {
+    content: "\e9fd";
+}
+
+.motors-icons-switch-horizontal-skin:before {
+    content: "\e9fe";
+}
+
+.motors-icons-photoaparat:before {
+    content: "\e9e6";
+}
+
+.motors-icons-actions-fav-white:before {
+    content: "\e9e7";
+}
+
+.motors-icons-arrow-top-right:before {
+    content: "\e9e8";
+}
+
+.motors-icons-calendar-icon:before {
+    content: "\e9e9";
+}
+
+.motors-icons-check-circle:before {
+    content: "\e9ea";
+}
+
+.motors-icons-dots-vertical:before {
+    content: "\e9eb";
+}
+
+.motors-icons-gas-pump:before {
+    content: "\e9f4";
+}
+
+.motors-icons-gear-arrow:before {
+    content: "\e9f5";
+}
+
+.motors-icons-gearbox:before {
+    content: "\e9f6";
+}
+
+.motors-icons-pin-map:before {
+    content: "\e9f7";
+}
+
+.motors-icons-scales:before {
+    content: "\e9f8";
+}
+
+.motors-icons-tachometer:before {
+    content: "\e9f9";
+}
+
 .motors-icons-checked-ico:before {
     content: "\e9ed";
 }
@@ -486,7 +554,6 @@ i {
 
 .motors-icons-search-list:before {
     content: "\e9e5";
-    font-family: "motors-icons";
 }
 
 .motors-icons-ac-paper-pen:before {

@@ -12,6 +12,37 @@ function motors_vl_get_nuxy_mod( $default = '', $opt_name = '', $return_default 
 	$options = PluginOptions::getInstance();
 	$options = $options::$options_map;
 
+	if ( is_mvl_pro() && in_array(
+		$opt_name,
+		array(
+			'enable_location',
+			'enable_distance_search',
+			'distance_measure_unit',
+			'distance_search',
+			'recommend_items_empty_result',
+			'recommend_distance_measure_unit',
+			'recommend_distance_search',
+		),
+		true
+	)
+	) {
+		$location_settings = get_option( 'mvl_location_settings', '' );
+
+		if ( ! empty( $location_settings ) ) {
+			if ( 'enable_location' === $opt_name ) {
+				return true;
+			}
+
+			if ( 'recommend_distance_measure_unit' === $opt_name || 'recommend_distance_search' === $opt_name ) {
+				return ( 'recommend_distance_measure_unit' === $opt_name ) ? $location_settings['distance_measure_unit'] : $location_settings['distance_search'];
+			}
+
+			if ( isset( $location_settings[ $opt_name ] ) ) {
+				return $location_settings[ $opt_name ];
+			}
+		}
+	}
+
 	$value_or_false = ( isset( $options[ $opt_name ] ) ) ? $options[ $opt_name ] : $default;
 
 	if ( has_filter( 'wpcfto_motors_' . $opt_name ) ) {
@@ -56,6 +87,41 @@ function mvl_get_nuxy_img_src( $default, $opt_name, $size = 'full' ) {
 	}
 
 	return $image;
+}
+
+add_filter( 'mvl_get_nuxy_icon', 'mvl_get_nuxy_icon', 100, 3 );
+function mvl_get_nuxy_icon( $option_name, $default_icon, $other_classes = '' ) {
+	$icon_array = motors_vl_get_nuxy_mod( $default_icon, $option_name, false );
+
+	$style_array = array();
+
+	// if color is not default.
+	if ( ! empty( $icon_array['color'] ) && '#000' !== $icon_array['color'] ) {
+		$style_array['color'] = $icon_array['color'];
+	}
+
+	// if icon size is not default.
+	if ( ! empty( $icon_array['size'] ) && 15 !== $icon_array['size'] ) {
+		$style_array['size'] = $icon_array['size'];
+	}
+
+	// if icon is set.
+	if ( $icon_array && ! empty( $icon_array['icon'] ) ) {
+		$default_icon = $icon_array['icon'];
+	}
+
+	// style string.
+	$style_string = '';
+	if ( ! empty( $style_array['color'] ) ) {
+		$style_string .= 'color: ' . $style_array['color'] . '; ';
+	}
+	if ( ! empty( $style_array['size'] ) ) {
+		$style_string .= 'font-size: ' . $style_array['size'] . 'px;';
+	}
+
+	$icon_element = '<i class="' . esc_attr( $default_icon . ' ' . $other_classes ) . '" style="' . esc_attr( $style_string ) . '"></i>';
+
+	return $icon_element;
 }
 
 if ( ! function_exists( 'stm_add_to_any_shortcode' ) ) {

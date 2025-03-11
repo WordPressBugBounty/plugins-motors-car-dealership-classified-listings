@@ -99,6 +99,8 @@ function stm_listings_admin_enqueue( $hook ) {
 	wp_enqueue_style( 'motors_starter_theme', STM_LISTINGS_URL . '/includes/starter-theme/assets/main.css', array( 'wp-admin' ), STM_LISTINGS_V );
 	wp_enqueue_script( 'motors_starter_theme', STM_LISTINGS_URL . '/includes/starter-theme/assets/main.js', array( 'jquery-core' ), STM_LISTINGS_V, true );
 
+	wp_enqueue_style( 'motors_nuxy', STM_LISTINGS_URL . '/assets/css/nuxy/motors-vl-nuxy-styles.css', array(), STM_LISTINGS_V );
+
 	wp_enqueue_media();
 
 	if ( 'product' === get_post_type() || in_array( get_post_type(), apply_filters( 'stm_listings_multi_type', array( 'listings' ) ), true ) || 'page' === get_post_type() || 'listings_page_listing_categories' === $hook || 'motors-plugin_page_listing_categories' === $hook || 'toplevel_page_listing_categories' === $hook ) {

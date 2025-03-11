@@ -23,6 +23,13 @@ class MotorsNuxyHelpers {
 				return STM_LISTINGS_PATH . '/includes/nuxy/custom-fields/nuxy-hidden.php';
 			}
 		);
+
+		add_filter(
+			'wpcfto_field_nuxy-radio',
+			function () {
+				return STM_LISTINGS_PATH . '/includes/nuxy/custom-fields/nuxy-radio.php';
+			}
+		);
 	}
 
 	public function is_pro( $pro ) {

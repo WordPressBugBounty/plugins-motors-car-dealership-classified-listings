@@ -43,6 +43,9 @@ if ( ! empty( $args['custom_img_size'] ) && has_image_size( $args['custom_img_si
 	$template_args['custom_img_size'] = $args['custom_img_size'];
 }
 
+if ( 'default' !== $skin && wp_is_mobile() ) {
+	$view_type = 'grid';
+}
 if ( $featured->have_posts() ) : ?>
 	<div class="stm-featured-top-cars-title">
 		<div class="heading-font"><?php esc_html_e( 'Featured Listings', 'stm_vehicles_listing' ); ?></div>
@@ -61,7 +64,7 @@ if ( $featured->have_posts() ) : ?>
 			<?php
 			while ( $featured->have_posts() ) :
 				$featured->the_post();
-				do_action( 'stm_listings_load_template', 'listing-' . $view_type );
+				do_action( 'stm_listings_load_template', 'listing-' . $view_type, $__vars );
 			endwhile;
 			?>
 			<?php if ( 'grid' === $view_type ) : ?>

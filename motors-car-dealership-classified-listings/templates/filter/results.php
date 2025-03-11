@@ -15,6 +15,17 @@ if ( function_exists( 'stm_is_multilisting' ) && stm_is_multilisting() && wp_is_
 
 $inventory_view = apply_filters( 'stm_listings_input', $inventory_view, 'view_type' );
 
+if ( apply_filters( 'is_mvl_pro', false ) ) {
+	$skin = apply_filters( 'motors_vl_get_nuxy_mod', 'default', "{$inventory_view}_card_skin" );
+} else {
+	$skin = 'default';
+}
+
+if ( 'default' !== $skin && wp_is_mobile() ) {
+	$inventory_view = 'grid';
+}
+
+$__vars['skin'] = $skin;
 
 if ( have_posts() ) :
 
@@ -22,13 +33,12 @@ if ( have_posts() ) :
 	<div class="stm-isotope-sorting stm-isotope-sorting-<?php echo esc_attr( $inventory_view ); ?> motors-alignwide">
 
 		<?php
-		do_action( 'stm_listings_load_template', 'filter/featured' );
 
 		do_action( 'stm_inventory_loop_items_before', $inventory_view );
 
 		while ( have_posts() ) :
 			the_post();
-			do_action( 'stm_listings_load_template', 'listing-' . $inventory_view );
+			do_action( 'stm_listings_load_template', 'listing-' . $inventory_view, $__vars );
 		endwhile;
 
 		do_action( 'stm_inventory_loop_items_after', $inventory_view );
