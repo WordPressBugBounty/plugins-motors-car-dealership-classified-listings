@@ -218,6 +218,7 @@ function mvl_setup_wizard_starter_import_settings() {
 				add_filter( 'motors_vl_get_nuxy_mod', 'mvl_setup_wizard_replace_elementor_colors_filter', 100, 2 );
 				\MotorsVehiclesListing\Stilization\Colors::import_to_elementor();
 				remove_filter( 'motors_vl_get_nuxy_mod', 'mvl_setup_wizard_replace_elementor_colors_filter', 100, 2 );
+				update_option( 'motors_starter_demo_activated', 1 );
 			}
 
 			global $wp_rewrite;
@@ -258,13 +259,45 @@ function mvl_setup_wizard_starter_import_content() {
 
 	$importer->fetch_attachments = true;
 
-	$import_file = ( defined( 'MOTORS_STARTER_THEME_TEMPLATE_DIR' ) ) ? MOTORS_STARTER_THEME_TEMPLATE_DIR . '/includes/demo/' . motors_get_skin_name() . '/demo.xml' : STM_LISTINGS_PATH . '/dummy_content/demo-listings.xml';
+	if ( defined( 'MOTORS_STARTER_THEME_TEMPLATE_DIR' ) ) {
+		$response = motors_get_demo_data( 'demo.xml' );
+		$demo     = motors_get_skin_name();
+
+		if ( is_wp_error( $response ) ) {
+			wp_send_json_error( __( 'Failed to download demo content.', 'motors-starter-theme' ) );
+		}
+
+		$xml_content = wp_remote_retrieve_body( $response );
+
+		if ( empty( $xml_content ) ) {
+			wp_send_json_error( __( 'Demo content is empty or unavailable.', 'motors-starter-theme' ) );
+		}
+
+		$upload_dir  = wp_upload_dir();
+		$import_file = $upload_dir['path'] . '/' . $demo . '-demo-content.xml';
+
+		file_put_contents( $import_file, $xml_content );//phpcs:ignore
+
+		if ( ! file_exists( $import_file ) ) {
+			wp_send_json_error( __( 'Failed to save demo content locally.', 'motors-starter-theme' ) );
+		}
+
+		if ( ! defined( 'WP_LOAD_IMPORTERS' ) ) {
+			define( 'WP_LOAD_IMPORTERS', true );
+		}
+	} else {
+		$import_file = STM_LISTINGS_PATH . '/dummy_content/demo-listings.xml';
+	}
 
 	ob_start();
 
 	$importer->import( $import_file );
 
 	ob_end_clean();
+
+	if ( defined( 'MOTORS_STARTER_THEME_TEMPLATE_DIR' ) ) {
+		unlink( $import_file );
+	}
 
 	if ( ! empty( $importer->processed_posts ) ) {
 		wp_send_json_success();

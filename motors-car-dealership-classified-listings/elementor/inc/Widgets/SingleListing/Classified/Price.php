@@ -63,6 +63,62 @@ class Price extends WidgetBase {
 		);
 
 		$this->stm_end_control_section();
+
+		$this->stm_start_style_controls_section( 'price_style', __( 'Style', 'stm_vehicles_listing' ) );
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'regular_price_typography',
+				'label'    => __( 'Regular Price Typography', 'stm_vehicles_listing' ),
+				'exclude'  => array(
+					'font_style',
+					'text_decoration',
+					'letter_spacing',
+					'word_spacing',
+				),
+				'selector' => '{{WRAPPER}} .stm-listing-single-price-title .price.discounted-price .regular-price .value',
+			)
+		);
+
+		$this->add_control(
+			'regular_price_color',
+			array(
+				'label'     => __( 'Regular Price Color', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .stm-listing-single-price-title .price.discounted-price .regular-price .value' => 'color: {{VALUE}}',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'sale_price_typography',
+				'label'    => __( 'Sale Price Typography', 'stm_vehicles_listing' ),
+				'exclude'  => array(
+					'font_style',
+					'text_decoration',
+					'letter_spacing',
+					'word_spacing',
+				),
+				'selector' => '{{WRAPPER}} .stm-listing-single-price-title .price.discounted-price .sale-price .value',
+			)
+		);
+
+		$this->add_control(
+			'sale_price_color',
+			array(
+				'label'     => __( 'Sale Price Color', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .stm-listing-single-price-title .price.discounted-price .sale-price .value' => 'color: {{VALUE}}',
+				),
+			)
+		);
+
+		$this->stm_end_control_section();
 	}
 
 	protected function render() {

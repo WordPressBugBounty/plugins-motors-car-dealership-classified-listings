@@ -34,6 +34,11 @@ class Color {
 	protected $alphachannel = 1.0;
 
 	/**
+	 * @var string
+	 */
+	protected $default_value = '';
+
+	/**
 	 * @var array
 	 */
 	protected $children = array();
@@ -52,6 +57,8 @@ class Color {
 					'css_id'       => $css_id,
 				)
 			);
+
+			$this->children[ $css_id ]->default_value = $this->children[ $css_id ]->value;
 		}
 	}
 
@@ -107,12 +114,13 @@ class Color {
 	 */
 	public function get_value( $alphachannel = -1.0 ) {
 		if ( $alphachannel <= 0 ) {
-			return apply_filters( 'stm_color_value', $this->value, $this->id, $this->alphachannel );
+			return $this->default_value;
 		} else {
-			$default_alphachannel = $this->alphachannel;
+			;
+			$default = $this->alphachannel;
 			$this->set_alphachannel( $alphachannel );
-			$value = apply_filters( 'stm_color_value', $this->value, $this->id, $this->alphachannel );
-			$this->set_alphachannel( $default_alphachannel );
+			$value = apply_filters( 'stm_color_value', $this->value, $this->id, $alphachannel );
+			$this->set_alphachannel( $default );
 			return $value;
 		}
 	}
@@ -133,9 +141,10 @@ class Color {
 
 	/**
 	 * @param float $alphachannel
+	 * @return void
 	 */
 	protected function set_alphachannel( $alphachannel ) {
-		if ( $alphachannel < 1 ) {
+		if ( $alphachannel >= 0 && $alphachannel <= 1 ) {
 			$this->hex_to_rgb();
 			$exploded_color = explode( ',', $this->value );
 
@@ -200,14 +209,17 @@ class Color {
 	 */
 	public static function load( $id, $active_skin = 'free' ) {
 		$color_data = Colors::data_for_elementor( $id );
+		$value      = apply_filters( 'motors_vl_get_nuxy_mod', Colors::DEFAULT[ $active_skin ][ $id ], $id );
+
 		return new static(
 			array(
-				'id'           => $id,
-				'name'         => isset( $color_data['name'] ) ? $color_data['name'] : '',
-				'value'        => apply_filters( 'motors_vl_get_nuxy_mod', Colors::DEFAULT[ $active_skin ][ $id ], $id ),
-				'elementor_id' => isset( $color_data['id'] ) ? $color_data['id'] : '',
-				'children'     => isset( $color_data['children'] ) ? $color_data['children'] : array(),
-				'css_id'       => $id,
+				'id'            => $id,
+				'name'          => isset( $color_data['name'] ) ? $color_data['name'] : '',
+				'value'         => $value,
+				'default_value' => $value,
+				'elementor_id'  => isset( $color_data['id'] ) ? $color_data['id'] : '',
+				'children'      => isset( $color_data['children'] ) ? $color_data['children'] : array(),
+				'css_id'        => $id,
 			)
 		);
 	}

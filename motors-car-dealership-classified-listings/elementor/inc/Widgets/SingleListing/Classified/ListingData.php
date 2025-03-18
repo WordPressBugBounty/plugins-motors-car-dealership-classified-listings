@@ -160,7 +160,6 @@ class ListingData extends WidgetBase {
 				'name'           => 'label_typography',
 				'label'          => esc_html__( 'Label Typography', 'stm_vehicles_listing' ),
 				'exclude'        => array(
-					'font_family',
 					'font_style',
 					'text_decoration',
 					'letter_spacing',
@@ -204,7 +203,6 @@ class ListingData extends WidgetBase {
 				'name'           => 'value_typography',
 				'label'          => esc_html__( 'Value Typography', 'stm_vehicles_listing' ),
 				'exclude'        => array(
-					'font_family',
 					'font_style',
 					'text_decoration',
 					'letter_spacing',

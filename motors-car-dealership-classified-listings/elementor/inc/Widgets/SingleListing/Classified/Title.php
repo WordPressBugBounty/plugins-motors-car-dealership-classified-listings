@@ -83,9 +83,7 @@ class Title extends WidgetBase {
 				'name'           => 'title_typography',
 				'label'          => __( 'Title Typography', 'stm_vehicles_listing' ),
 				'exclude'        => array(
-					'font_family',
 					'font_style',
-					'text_transform',
 					'text_decoration',
 					'letter_spacing',
 					'word_spacing',
@@ -129,10 +127,7 @@ class Title extends WidgetBase {
 				'name'           => 'label_typography',
 				'label'          => __( 'Label Typography', 'stm_vehicles_listing' ),
 				'exclude'        => array(
-					'font_family',
 					'font_style',
-					'font_weight',
-					'text_transform',
 					'text_decoration',
 					'letter_spacing',
 					'word_spacing',
@@ -161,10 +156,7 @@ class Title extends WidgetBase {
 				'name'           => 'date_added_typography',
 				'label'          => __( 'Added Date Typography', 'stm_vehicles_listing' ),
 				'exclude'        => array(
-					'font_family',
 					'font_style',
-					'font_weight',
-					'text_transform',
 					'text_decoration',
 					'letter_spacing',
 					'word_spacing',

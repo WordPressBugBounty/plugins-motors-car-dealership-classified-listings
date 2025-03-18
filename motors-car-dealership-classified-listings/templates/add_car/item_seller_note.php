@@ -17,7 +17,7 @@ $is_required = apply_filters( 'motors_vl_get_nuxy_mod', false, 'addl_seller_note
 		do_action( 'stm_listings_load_template', 'add_car/step-title', $vars );
 	?>
 	<div class="row stm-relative">
-		<div class="col-md-9 col-sm-9 stm-non-relative">
+		<div class="stm-non-relative stm-phrases-unit-col">
 			<div class="stm-phrases-unit">
 				<?php
 				if ( ! empty( $stm_phrases ) ) :
@@ -66,7 +66,7 @@ $is_required = apply_filters( 'motors_vl_get_nuxy_mod', false, 'addl_seller_note
 			</div>
 		</div>
 		<?php if ( ! empty( $stm_phrases ) ) : ?>
-			<div class="col-md-3 col-sm-3 hidden-xs">
+			<div class="stm-seller-notes-phrases-col">
 				<div class="stm-seller-notes-phrases heading-font">
 					<span><?php esc_html_e( 'Add the Template Phrases', 'stm_vehicles_listing' ); ?></span>
 				</div>

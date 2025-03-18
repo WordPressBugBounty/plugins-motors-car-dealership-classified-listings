@@ -80,6 +80,7 @@
     padding: unset;
     width: unset;
     text-transform: capitalize;
+    border: none;
 }
 
 .classic-filter-row.motors-elementor-widget .filter-sidebar .sidebar-action-units a.button i {
@@ -550,7 +551,7 @@ html.mobile-overflow-hidden {
         top: 50%;
         left: 0;
         transform: translateY(-50%);
-        background-color: var(--motors-contrast-text-color);
+        background-color: var(--motors-bg-contrast);
     }
 
     .classic-filter-row.motors-elementor-widget .search-filter-form .sidebar-entry-header-mobile .close-btn span:first-child {

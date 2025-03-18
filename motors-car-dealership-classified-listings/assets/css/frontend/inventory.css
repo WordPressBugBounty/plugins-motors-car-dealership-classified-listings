@@ -68,7 +68,7 @@
 
 .archive-listing-page .archive-listing-page_side .filter-sidebar {
     padding: 0 22px 30px;
-    background-color: var(--motors-contrast-text-color);
+    background-color: var(--motors-bg-contrast);
     box-shadow: 0 5px 18px var(--motors-bg-alpha-contrast);
 }
 

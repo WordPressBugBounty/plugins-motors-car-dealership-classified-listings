@@ -91,6 +91,13 @@
     background-color: var(--motors-accent-color);
 }
 
+@media (max-width: 420px) {
+    .stm-listing-single-price-title .price {
+        font-size: 14px;
+        min-width: 80px;
+    }
+}
+
 .stm-listing-single-price-title .price.discounted-price {
     text-align: right;
     padding: 11px 13px 11px 2px;

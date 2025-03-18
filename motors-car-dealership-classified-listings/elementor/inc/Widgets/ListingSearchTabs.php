@@ -437,7 +437,7 @@ class ListingSearchTabs extends WidgetBase {
 			\Elementor\Group_Control_Border::get_type(),
 			array(
 				'name'           => 'tab_border',
-				'label'          => __( 'Tab Border', 'motors-elementor-widgets' ),
+				'label'          => __( 'Tab Border', 'stm_vehicles_listing' ),
 				'fields_options' => array(
 					'border' => array(
 						'default' => 'solid',

@@ -1,16 +1,26 @@
 @media (max-width: 767px) {
     .stm-car-compare-row .compare-title {
-        text-align: center;
+        text-align: left;
     }
 }
 
 .stm-car-compare-row .listing-car-item-meta .price .regular-price {
-    color: var(--motors-contrast-text-color);
+    color: var(--motors-contrast-text-alpha-color);
 }
 
 .stm-car-compare-row .listing-car-item-meta .price .sale-price {
     color: var(--motors-contrast-text-color);
     font-weight: 700;
+}
+
+@media (max-width: 645px) {
+    .elementor-widget-motors-listings-compare {
+        overflow: auto;
+    }
+}
+
+.stm-compare-cars-module {
+    min-width: 600px;
 }
 
 .stm-compare-cars-module .compare-col-stm-empty .image .stm-icon-add-car-wrapper {
@@ -28,4 +38,10 @@
     top: unset;
     left: unset;
     margin: unset;
+}
+
+@media (max-width: 767px) {
+    .stm-compare-cars-module table > tbody tr td {
+        font-size: 11px;
+    }
 }

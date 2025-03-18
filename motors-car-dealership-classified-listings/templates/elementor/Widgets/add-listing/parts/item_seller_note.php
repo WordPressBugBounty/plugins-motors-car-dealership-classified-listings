@@ -24,7 +24,7 @@ if ( $custom_listing_type && $listing_types_options && isset( $listing_types_opt
 		</div>
 	</div>
 	<div class="row stm-relative">
-		<div class="col-md-9 col-sm-9 stm-non-relative">
+		<div class="stm-non-relative stm-phrases-unit-col">
 			<div class="stm-phrases-unit">
 				<?php
 				if ( ! empty( $stm_phrases ) ) :
@@ -73,7 +73,7 @@ if ( $custom_listing_type && $listing_types_options && isset( $listing_types_opt
 			</div>
 		</div>
 		<?php if ( ! empty( $stm_phrases ) ) : ?>
-			<div class="col-md-3 col-sm-3 hidden-xs">
+			<div class="stm-seller-notes-phrases-col">
 				<div class="stm-seller-notes-phrases heading-font">
 					<span><?php esc_html_e( 'Add the Template Phrases', 'stm_vehicles_listing' ); ?></span>
 				</div>

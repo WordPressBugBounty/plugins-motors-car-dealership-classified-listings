@@ -33,16 +33,19 @@
 .stm-vl-plugin-pure input[type=search],
 .stm-vl-plugin-pure input[type=password] {
     display: block;
-    width: 100%;
+    width: auto;
+    flex: 1;
     height: 40px;
     line-height: 47px;
-    padding: 0 21px;
+    padding: 0 12px;
     font-weight: 400;
     color: var(--motors-text-alpha-color);
     border: 1px solid var(--motors-border-color);
     font-size: 14px;
     outline: none !important;
     background-color: var(--motors-filter-inputs-color);
+    min-width: 205px;
+    max-width: 100%;
 }
 
 .stm-vl-plugin-pure input[type=text].form-error,
@@ -66,7 +69,7 @@
 }
 
 .stm-vl-plugin-pure textarea {
-    padding: 21px;
+    padding: 12px;
     width: 100%;
     max-width: 100%;
     background-color: var(--motors-filter-inputs-color);
@@ -147,6 +150,12 @@
 
 .stm-vl-plugin-pure .stm_add_car_title_form {
     margin: 25px 0;
+}
+
+@media (max-width: 1024px) {
+    .stm-vl-plugin-pure .stm_add_car_title_form {
+        margin: 0 0 25px;
+    }
 }
 
 .stm-vl-plugin-pure .stm_add_car_title_form input {
@@ -387,12 +396,12 @@
 
 .stm-vl-plugin-pure .select2-dropdown {
     border-radius: 0;
-    border-color: #e7e8e8;
+    border-color: var(--motors-border-color);
 }
 
 .stm-vl-plugin-pure .select2-results__options li {
     font-size: 13px;
-    border-bottom: 1px solid #f0f2f5;
+    border-bottom: 1px solid var(--motors-border-color);
 }
 
 .stm-vl-plugin-pure .select2-results__options li:last-child {
@@ -688,11 +697,11 @@ input:-webkit-autofill {
 }
 
 .stm-login-register-form .stm-register-form {
-    margin-bottom: 30px;
+    margin-bottom: 0;
 }
 
 .stm-login-register-form .stm-register-form form {
-    padding: 37px 30px 30px;
+    padding: 37px 30px 0;
     background-color: var(--motors-bg-color);
     border-top: 4px solid var(--motors-bg-shade);
     -o-box-shadow: 0 5px 10px var(--motors-bg-lowestalpha-contrast);
@@ -708,7 +717,7 @@ input:-webkit-autofill {
 }
 
 .stm-login-register-form .stm-register-form form .form-group h4 {
-    margin-bottom: 14px;
+    margin-bottom: 5px;
 }
 
 .stm-login-register-form .stm-register-form form .form-group.form-checker {
@@ -726,10 +735,6 @@ input:-webkit-autofill {
 
 .stm-login-register-form .stm-register-form form .form-group label[for=whatsapp-checker] {
     margin-top: 10px;
-}
-
-.stm-login-register-form .stm-register-form form .form-group.form-group-submit {
-    margin-bottom: 0;
 }
 
 .stm-login-register-form .stm-register-form form input[type=submit][disabled] {
@@ -775,7 +780,7 @@ input:-webkit-autofill {
 }
 
 .stm-login-register-form .stm-register-form form .stm-message-ajax-validation {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     background-color: var(--motors-bg-contrast);
     color: var(--motors-contrast-text-color);
     padding: 10px 20px;
@@ -809,7 +814,8 @@ input:-webkit-autofill {
 }
 
 .stm-vl-plugin-pure .stm_add_car_form {
-    margin-top: 3px;
+    padding: 0 15px;
+    margin-top: 30px;
     --wp--style--global--content-size: 1140px;
 }
 
@@ -832,11 +838,11 @@ input:-webkit-autofill {
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .select2.select2-container.required_field .selection .select2-selection--single .select2-selection__rendered, .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form1-intro-unit .select2.select2-container.required_field .selection .select2-selection--single .select2-selection__rendered {
-    border: 1px solid red;
+    border: 1px solid var(--motors-error-text-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .row .stm-form-1-selects input.required_field, .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form1-intro-unit .row .stm-form-1-selects input.required_field {
-    border: 1px solid red;
+    border: 1px solid var(--motors-error-text-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form1-intro-unit {
@@ -864,6 +870,11 @@ input:-webkit-autofill {
     margin-bottom: 15px;
 }
 
+.stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form1-intro-unit .stm-form-1-selects input[type=number] {
+    min-width: auto;
+    width: 100%;
+}
+
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form1-intro-unit .select2-container--default .select2-selection--single,
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form1-intro-unit .select2-container--default .select2-selection--single .select2-selection__rendered {
     height: 40px;
@@ -884,27 +895,43 @@ input:-webkit-autofill {
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit {
     margin: 41px -15px 30px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit:before {
+    content: none;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter {
     position: relative;
-    float: left;
     padding: 0 15px;
     margin-bottom: 12px;
-    width: 33.333%;
     min-height: 48px;
+    display: flex;
+    flex: 0 0 33.333333%;
+}
+
+@media (max-width: 1141px) {
+    .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter {
+        flex: 1 1 33.333333%;
+    }
+}
+
+@media (max-width: 521px) {
+    .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter {
+        flex-wrap: wrap;
+    }
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter a {
-    clear: both;
-    float: left;
     margin-top: 5px;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter input[type=text],
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter input[type=number] {
     float: right;
-    max-width: 220px;
+    max-width: 100%;
     padding-left: 13px;
     border-width: 1px !important;
     color: var(--motors-text-alpha-color);
@@ -918,7 +945,7 @@ input:-webkit-autofill {
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter input[type=text]:nth-child(2),
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter input[type=number]:nth-child(2) {
-    margin: 5px 0;
+    margin: 2px 0;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter input[type=text].reuqired_field,
@@ -932,13 +959,19 @@ input:-webkit-autofill {
     border-color: var(--motors-border-color);
 }
 
+.stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter input[type=number] {
+    margin: 0;
+}
+
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter input[type=number]::-webkit-outer-spin-button, .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter input[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter .select2 {
-    float: right;
-    max-width: 220px;
+    flex: 1;
+    max-width: none;
+    width: auto !important;
+    min-width: 205px;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter .select2.reuqired_field {
@@ -946,14 +979,23 @@ input:-webkit-autofill {
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter .stm-label {
-    margin-top: 9px;
-    color: var(--motors-text-alpha-color);
+    color: var(--motors-text-color);
     font-size: 13px;
     vertical-align: top;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding-right: 5px;
+    padding: 5px 5px 5px 0;
     white-space: nowrap;
+    order: -1;
+    min-width: 145px;
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 521px) {
+    .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter .stm-label {
+        min-width: 100%;
+    }
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter .stm-label i {
@@ -961,7 +1003,7 @@ input:-webkit-autofill {
     position: relative;
     min-width: 20px;
     margin-right: 5px;
-    top: 3px;
+    top: 0;
     font-size: 14px;
     vertical-align: top;
     text-align: center;
@@ -969,17 +1011,17 @@ input:-webkit-autofill {
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter .stm-label i.motors-icons-road {
     font-size: 16px;
-    top: 4px;
+    top: 0;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter .stm-label i.motors-icons-body_type {
     font-size: 11px;
-    top: 6px;
+    top: 0px;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter .stm-label i.motors-icons-hashtag {
     font-size: 13px;
-    top: 4px;
+    top: 0px;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter .stm-label i.motors-icons-engine_fill, .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter .stm-label i.motors-icons-time, .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter .stm-label i.motors-icons-drive_2 {
@@ -987,11 +1029,11 @@ input:-webkit-autofill {
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter .stm-label i.motors-icons-engine_fill, .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter .stm-label i.motors-icons-time {
-    top: 1px;
+    top: -1px;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter .stm-label i.motors-icons-key {
-    top: 2px;
+    top: 0px;
     font-size: 19px;
 }
 
@@ -1004,7 +1046,7 @@ input:-webkit-autofill {
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter .stm-label i.motors-icons-pin_2 {
-    top: 4px;
+    top: 0px;
     font-size: 16px;
 }
 
@@ -1051,39 +1093,84 @@ input:-webkit-autofill {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    justify-content: space-between;
+    padding: 0;
+    margin: -5px 0 7px;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stn-add-car-location-wrap .stm-form-1-quarter .stm-location-input-wrap {
     display: flex;
-    overflow: hidden;
-    width: 31.5%;
-    justify-content: space-between;
     align-items: center;
+    padding: 5px 15px;
+    flex: 0 0 33.333333%;
+    justify-content: flex-end;
+}
+
+@media (max-width: 1171px) {
+    .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stn-add-car-location-wrap .stm-form-1-quarter .stm-location-input-wrap {
+        justify-content: flex-start;
+        flex: 1;
+    }
+}
+
+@media (max-width: 521px) {
+    .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stn-add-car-location-wrap .stm-form-1-quarter .stm-location-input-wrap {
+        flex-wrap: wrap;
+    }
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stn-add-car-location-wrap .stm-form-1-quarter .stm-location-input-wrap .stm-label {
     margin-top: 0;
+    order: 0;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-link-lat-lng-wrap {
     display: block;
     width: 100%;
     text-align: right;
+    padding: 0 15px;
+    margin: 0 0 0 auto;
+    min-width: 210px;
+}
+
+@media (max-width: 1171px) {
+    .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-link-lat-lng-wrap {
+        margin: 0;
+        flex: 0 !important;
+    }
+}
+
+@media (max-width: 521px) {
+    .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-link-lat-lng-wrap {
+        min-width: 100%;
+    }
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-link-lat-lng-wrap a {
-    float: right;
+    transition: 0.1s;
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-link-lat-lng-wrap a:hover {
+    color: var(--motors-text-color);
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-2-features {
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 100%;
+    max-width: none;
+    margin: 0 -15px;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-2-features .stm-border-top-unit {
-    margin-bottom: 7px;
+    min-width: 90%;
+    margin: 0 15px;
+    flex: 1;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-2-features .stm-single-feature {
-    float: left;
-    width: 16.6666%;
     margin-bottom: 38px;
+    padding: 0 15px;
+    min-width: 20%;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-2-features .stm-single-feature .heading-font {
@@ -1100,8 +1187,12 @@ input:-webkit-autofill {
     cursor: pointer;
 }
 
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-2-features .stm-single-feature .feature-single .checker {
+    margin-right: 5px;
+}
+
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-2-features .stm-single-feature .feature-single .checker.required_field span {
-    border: 1px solid red;
+    border: 1px solid var(--motors-error-text-color);
     border-radius: 3px;
 }
 
@@ -1119,7 +1210,7 @@ input:-webkit-autofill {
 
 @media (max-width: 991px) {
     .stm-vl-plugin-pure .stm_add_car_form .stm-form-3-photos .stm-add-media-car {
-        margin-top: 20px;
+        margin-top: 10px;
     }
 }
 
@@ -1199,7 +1290,7 @@ input:-webkit-autofill {
     text-align: center;
     background-color: var(--motors-error-bg-color);
     border-radius: 50%;
-    color: var(--motors-contrst-text-color);
+    color: var(--motors-contrast-text-color);
     opacity: 0;
 }
 
@@ -1238,12 +1329,12 @@ input:-webkit-autofill {
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-3-photos .stm-add-media-car .stm-media-car-gallery .stm-placeholder .inner.required_field {
-    border-color: red;
-    color: red;
+    border-color: var(--motors-error-text-color);
+    color: var(--motors-error-text-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-3-photos .stm-add-media-car .stm-media-car-gallery .stm-placeholder .inner.required_field span {
-    color: red;
+    color: var(--motors-error-text-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-3-photos .stm-add-media-car .stm-media-car-gallery .stm-placeholder-native .inner {
@@ -1369,7 +1460,7 @@ input:-webkit-autofill {
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-4-videos .stm-add-videos-unit {
-    padding: 23px 30px 14px;
+    padding: 25px 30px 35px;
     background-color: var(--motors-bg-contrast);
 }
 
@@ -1381,7 +1472,8 @@ input:-webkit-autofill {
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-4-videos .stm-add-videos-unit input[type=text] {
-    margin-bottom: 26px;
+    width: 100%;
+    min-width: 100px;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-4-videos .stm-simple-notice {
@@ -1412,6 +1504,11 @@ input:-webkit-autofill {
     height: 40px;
     background: var(--motors-contrast-border-color);
     cursor: pointer;
+    transition: 0.1s;
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-4-videos .stm-video-link-unit .stm-after-video:hover {
+    background-color: var(--motors-accent-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-4-videos .stm-video-link-unit .stm-after-video:before, .stm-vl-plugin-pure .stm_add_car_form .stm-form-4-videos .stm-video-link-unit .stm-after-video:after {
@@ -1455,7 +1552,7 @@ input:-webkit-autofill {
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-4-videos .stm-video-link-unit.required_field input {
-    border: 1px solid red;
+    border: 1px solid var(--motors-error-text-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-5-notes {
@@ -1479,11 +1576,38 @@ input:-webkit-autofill {
     background-color: var(--motors-bg-color);
 }
 
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-5-notes .stm-phrases-unit-col {
+    flex: 1;
+    min-width: 270px;
+    padding: 0 15px;
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-5-notes .stm-seller-notes-phrases-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-self: stretch;
+    padding: 15px;
+}
+
+@media (max-width: 767px) {
+    .stm-vl-plugin-pure .stm_add_car_form .stm-form-5-notes .stm-seller-notes-phrases-col {
+        min-width: 100%;
+        order: -1;
+    }
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-5-notes .stm-seller-notes-phrases-col:after {
+    content: "";
+    display: block;
+    height: 1px;
+}
+
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-5-notes .stm-seller-notes-phrases {
     position: relative;
-    margin-top: 75px;
-    text-align: center;
+    text-align: left;
     cursor: pointer;
+    padding: 0 0 0 38px;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-5-notes .stm-seller-notes-phrases:after {
@@ -1520,7 +1644,7 @@ input:-webkit-autofill {
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-5-notes #wp-stm_seller_notes-wrap.required_field {
-    border: 1px solid red;
+    border: 1px solid var(--motors-error-text-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-5-notes .stm-phrases-unit .stm_phrases {
@@ -1533,6 +1657,7 @@ input:-webkit-autofill {
     opacity: 0;
     visibility: hidden;
     z-index: 20;
+    max-width: 100%;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-5-notes .stm-phrases-unit .stm_phrases .inner {
@@ -1615,26 +1740,57 @@ input:-webkit-autofill {
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user {
-    padding: 0 40px;
-    background-color: var(--motors-bg-contrast);
-    border: 1px solid var(--motors-bg-contrast);
+    padding: 40px;
+    background-color: var(--motors-bg-shade);
+    border: 1px solid var(--motors-bg-shade);
     margin-bottom: 40px;
     position: relative;
+}
+
+@media (max-width: 521px) {
+    .stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user {
+        margin: 0 -30px;
+    }
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm-add-a-car-user-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm-add-a-car-user-wrapper:before {
+    content: "";
+    min-width: 1px;
+    min-height: 1px;
+    display: block;
+    background-color: var(--motors-contrast-border-color);
+    order: 1;
+    margin: -10px 15px;
+}
+
+@media (max-width: 1141px) {
+    .stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm-add-a-car-user-wrapper:before {
+        flex: 1;
+        min-width: 85%;
+        margin: 0 15px;
+    }
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm-form-inner .add-car-btns-wrap {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 0;
+    padding: 12px;
     align-self: center;
-    margin: 20px 0;
     list-style: none;
+    max-width: none;
+    margin: 0;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm-form-inner .add-car-btns-wrap li {
-    margin: 7px 3px;
-    padding: 0;
+    margin: 0;
+    padding: 3px;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm-form-inner .add-car-btns-wrap li .tooltip-inner {
@@ -1647,8 +1803,8 @@ input:-webkit-autofill {
     border-width: 5px 5px 0;
 }
 
-.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm-form-inner .stm-add-a-car-user .add-car-btns-wrap {
-    justify-content: center;
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm-form-inner .add-car-btns-wrap .stm-add-a-car-loader {
+    display: none;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm-form-inner .form-group-submit .motors-icons-load1 {
@@ -1667,7 +1823,7 @@ input:-webkit-autofill {
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm-title {
-    margin: -5px 0 23px;
+    margin: -5px 0 15px;
     text-transform: uppercase;
     font-size: 14px;
     font-weight: 700;
@@ -1679,8 +1835,119 @@ input:-webkit-autofill {
     color: var(--motors-text-alpha-color);
 }
 
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm_register_form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    min-width: 100%;
+    max-width: none;
+    margin: 0 -15px;
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm_register_form_note {
+    margin: 0 0 27px;
+    flex: 1;
+    min-width: 170px;
+    padding: 0 15px;
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .motors-socials {
+    min-width: 100%;
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .motors-socials-inner {
+    display: flex;
+    min-width: 100%;
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm-listing-loader {
+    position: static;
+    margin: 0 auto;
+    display: none;
+    pointer-events: none;
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .add-car-register-form {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 521px) {
+    .stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .add-car-register-form {
+        margin: 0 -20px;
+        padding: 20px 5px 0;
+    }
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .add-car-register-form .stm-social-providers {
+    padding: 15px;
+    margin: 0;
+    flex: 1;
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .add-car-register-form .motors-socials-head {
+    min-width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .add-car-register-form .motors-socials-head:before, .stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .add-car-register-form .motors-socials-head:after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    display: block;
+    background-color: var(--motors-border-color);
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .add-car-register-form .motors-socials-head .motors-socials-head-text {
+    margin: 0 8px;
+    font-size: 14px;
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .add-car-register-form .motors-socials-head .input[type=submit] {
+    margin: 0;
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .add-car-register-form .stm-validation-message {
+    padding: 15px;
+    min-width: 100%;
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .add-car-register-form .form-group {
+    max-width: 100%;
+    min-width: 240px;
+    flex: 1;
+    padding: 10px 15px;
+    margin: 0;
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .add-car-register-form .form-group .stm-show-password i {
+    right: 0;
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .add-car-register-form .form-group.form-group-submit {
+    min-width: 100%;
+    padding: 15px;
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .add-car-register-form .form-group input[type=email],
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .add-car-register-form .form-group input[type=password],
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .add-car-register-form .form-group input[type=tel],
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .add-car-register-form .form-group input[type=text] {
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm_register_title {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0;
+}
+
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm_register_title h3 {
-    float: left;
     margin-right: 42px;
     font-size: 20px;
 }
@@ -1691,8 +1958,19 @@ input:-webkit-autofill {
     color: var(--motors-text-alpha-color);
 }
 
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm_register_title .stm_login_me a {
+    transition: 0.3s;
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm_register_title .stm_login_me a:hover {
+    color: var(--motors-text-color);
+}
+
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm-login-register-form {
     margin-top: 0;
+    flex: 1;
+    min-width: 70%;
+    padding: 0 15px;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user .stm-login-register-form .stm-register-form form .stm-listing-loader.visible i {
@@ -1706,8 +1984,14 @@ input:-webkit-autofill {
     display: inline-block;
     vertical-align: top;
     position: relative;
-    padding: 17px 20px 11px 62px;
+    padding: 15px 20px 13px 62px;
     font-size: 12px;
+    border: 1px solid var(--motors-accent-color);
+    transition: 0.1s;
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user button[type=submit]:hover {
+    color: var(--motors-accent-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user button[type=submit] i {
@@ -1732,26 +2016,41 @@ input:-webkit-autofill {
     position: absolute;
     bottom: 100%;
     z-index: 1000;
+    left: 0;
+    right: 0;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-history-popup .inner {
     position: relative;
     width: 486px;
-    padding: 30px 23px 30px;
+    border: 1px solid var(--motors-border-color);
+    max-width: 100%;
+    padding: 26px 26px 30px;
     background-color: var(--motors-bg-color);
-    border-top: 4px solid var(--motors-border-color);
+    border-top: 4px solid var(--motors-accent-color);
     z-index: 2;
     overflow: hidden;
-    -o-box-shadow: 0 5px 29px var(--motors-border-color);
-    box-shadow: 0 5px 29px var(--motors-border-color);
+    -o-box-shadow: 0 5px 29px var(--motors-bg-lowestalpha-contrast);
+    box-shadow: 0 5px 29px var(--motors-bg-lowestalpha-contrast);
+}
+
+@media (max-width: 521px) {
+    .stm-vl-plugin-pure .stm_add_car_form .stm-history-popup .inner {
+        align-items: initial;
+    }
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-history-popup .inner .fa-times {
     position: absolute;
     right: 10px;
-    top: 20px;
+    top: 12px;
     padding: 10px;
     cursor: pointer;
+    transition: 0.1s;
+}
+
+.stm-vl-plugin-pure .stm_add_car_form .stm-history-popup .inner .fa-times:hover {
+    color: var(--motors-accent-color);
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-history-popup .inner:before, .stm-vl-plugin-pure .stm_add_car_form .stm-history-popup .inner:after {
@@ -1800,16 +2099,19 @@ input:-webkit-autofill {
     height: 40px !important;
     line-height: 40px !important;
     margin-bottom: 20px !important;
+    width: 100%;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-history-popup .button {
     display: inline-block;
+    min-width: 100%;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-history-popup.stm-invisible {
     opacity: 0;
     visibility: hidden;
     bottom: 110%;
+    pointer-events: none;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form .stm-video-link-unit-wrap .video-label {
@@ -1829,16 +2131,19 @@ input:-webkit-autofill {
     z-index: 5;
 }
 
-.stm-add-a-car-user-wrapper {
-    display: flex;
-    justify-content: space-between;
+@media (max-width: 521px) {
+    .stm-add-a-car-user {
+        margin: -15px;
+    }
 }
 
 .stm-add-a-car-user .left-info {
     display: flex;
     align-items: center;
-    padding: 30px 0;
-    max-width: 300px;
+    padding: 15px;
+    min-width: 240px;
+    flex: 1;
+    margin: 0 auto 0 0;
 }
 
 .stm-add-a-car-user .left-info .avatar {
@@ -1848,7 +2153,7 @@ input:-webkit-autofill {
     border-radius: 50%;
     margin-right: 23px;
     overflow: hidden;
-    background-color: var(--motors-contrast-text-color);
+    background-color: var(--motors-filter-inputs-color);
     text-align: center;
     flex-shrink: 0;
 }
@@ -1901,8 +2206,14 @@ input:-webkit-autofill {
     overflow: hidden;
     text-align: right;
     font-size: 13px;
-    padding: 40px 0 20px 30px;
-    border-left: 1px solid var(--motors-contrast-border-color);
+    padding: 15px;
+    order: 2;
+}
+
+@media (max-width: 1141px) {
+    .stm-add-a-car-user .right-info {
+        min-width: 100%;
+    }
 }
 
 .stm-add-a-car-user .right-info .fas.fa-external-link-alt {
@@ -1915,6 +2226,11 @@ input:-webkit-autofill {
     margin-top: 6px;
     letter-spacing: 0.2px;
     color: var(--motors-contrast-text-alpha-color);
+    display: block;
+}
+
+.stm-add-a-car-user .right-info a:hover {
+    color: var(--motors-contrast-text-color);
 }
 
 .stm-not-enabled {
@@ -1972,12 +2288,16 @@ input:-webkit-autofill {
     margin-bottom: 30px;
 }
 
+.stm-add-a-car-login .stm-login-form .motors-socials-head {
+    min-width: 100%;
+}
+
 .stm-add-a-car-login .stm-login-form .motors-socials-head-text {
     color: var(--motors-text-alpha-color);
 }
 
 .stm-add-a-car-login .stm-login-form .motors-socials-head-text::before, .stm-add-a-car-login .stm-login-form .motors-socials-head-text::after {
-    background-color: var(--motors-text-alpha-color);
+    background-color: var(--motors-border-color);
 }
 
 .stm-add-a-car-login .stm-login-form form {
@@ -2269,10 +2589,13 @@ input:-webkit-autofill {
 .stm-vl-plugin-pure .stm-form-price-edit input {
     font-size: 14px;
     color: var(--motors-text-color);
+    width: 100%;
+    min-width: auto;
 }
 
 .stm-vl-plugin-pure .stm-form-price-edit .stm_price_input {
     padding: 30px 40px 45px 40px;
+    min-width: 160px;
     background-color: var(--motors-bg-contrast);
 }
 
@@ -2296,11 +2619,7 @@ input:-webkit-autofill {
 }
 
 .stm-vl-plugin-pure .stm-form-price-edit .stm_price_input input.required_field {
-    border: 1px solid red;
-}
-
-.stm_edit_car_form .stm_logout {
-    display: none;
+    border: 1px solid var(--motors-error-text-color);
 }
 
 /*Adds*/
@@ -2384,6 +2703,11 @@ input:-webkit-autofill {
     font-weight: 700;
 }
 
+body.logged-in.stm-vl-plugin-pure .stm_add_car_form .stm-form-checking-user {
+    background-color: var(--motors-bg-contrast);
+    padding: 25px;
+}
+
 @media (max-width: 1100px) {
     .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter input[type=text],
   .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter .select2 {
@@ -2392,22 +2716,6 @@ input:-webkit-autofill {
 }
 
 @media (max-width: 991px) {
-    .stm-login-register-form .stm-register-form form .form-group h4 {
-        margin-top: 15px;
-    }
-
-    .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter {
-        width: 50%;
-    }
-
-    .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stn-add-car-location-wrap .stm-form-1-quarter .stm-location-input-wrap {
-        width: 48%;
-    }
-
-    .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-link-lat-lng-wrap {
-        width: 48%;
-    }
-
     .stm_add_car_form .stm-form-2-features .stm-single-feature {
         width: 33.33333%;
     }
@@ -2415,35 +2723,9 @@ input:-webkit-autofill {
     .stm_add_car_form .stm-form-4-videos .stm-simple-notice {
         margin: 10px 0 15px;
     }
-
-    .stm_add_car_form .stm-form-5-notes .stm-seller-notes-phrases:before, .stm_add_car_form .stm-form-5-notes .stm-seller-notes-phrases:after {
-        top: -27px;
-        left: 50%;
-    }
-
-    .stm_add_car_form .stm-form-5-notes .stm-seller-notes-phrases:before {
-        margin-left: -12px;
-    }
-
-    .stm_add_car_form .stm-form-5-notes .stm-seller-notes-phrases:after {
-        margin-left: -5px;
-    }
-
-    .stm-login-register-form .stm-register-form form .form-group h4 {
-        margin-top: 15px;
-    }
-
-    .stm-add-media-car {
-        margin-top: 20px;
-    }
 }
 
 @media (max-width: 767px) {
-    .stm-form-checking-user .stm-add-a-car-user .left-info {
-        float: none;
-        padding: 30px 0 0;
-    }
-
     .stm-add-a-car-user .left-info .user-info h4 {
         margin-top: 0;
     }
@@ -2460,13 +2742,8 @@ input:-webkit-autofill {
         float: none;
     }
 
-    .stm-login-register-form .stm-register-form {
-        margin-top: 30px;
-    }
-
     .stm-form-price-edit .stm_price_input {
         padding: 20px 15px 25px;
-        margin-bottom: 30px;
     }
 
     .stm_add_car_form .stm-form-2-features .stm-single-feature {
@@ -2477,52 +2754,12 @@ input:-webkit-autofill {
         width: 100%;
     }
 
-    .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter input[type=text],
-  .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter input[type=number],
-  .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter .select2 {
-        float: left;
-        margin-right: 15px;
-    }
-
     .stm_add_car_form .stm-form-checking-user {
         padding: 0 10px;
     }
 
     .stm_add_car_form .stm-form-checking-user .stm-form-inner .add-car-btns-wrap li .stm-add-a-car-loader {
         margin-right: -10px;
-    }
-
-    .stm_add_car_form .right-info {
-        border-left: none;
-        padding: 20px;
-    }
-  /*Dealer*/
-    .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stn-add-car-location-wrap .stm-form-1-quarter {
-        flex-direction: column;
-    }
-
-    .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stn-add-car-location-wrap .stm-form-1-quarter .stm-location-input-wrap {
-        width: 100%;
-        flex-direction: row-reverse;
-        justify-content: flex-end;
-    }
-
-    .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stn-add-car-location-wrap .stm-form-1-quarter .stm-location-input-wrap .stm-label {
-        margin-left: 14px;
-    }
-
-    .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-link-lat-lng-wrap {
-        width: 48%;
-        text-align: left;
-    }
-
-    .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-link-lat-lng-wrap a {
-        float: inherit;
-    }
-
-    .stm-add-a-car-user .left-info {
-        float: none;
-        margin-bottom: 20px;
     }
 
     .stm-add-a-car-user .right-info {
@@ -2533,13 +2770,8 @@ input:-webkit-autofill {
         float: none;
     }
 
-    .stm-login-register-form .stm-register-form {
-        margin-top: 30px;
-    }
-
     .stm-form-price-edit .stm_price_input {
         padding: 20px 15px 25px;
-        margin-bottom: 30px;
     }
 
     .stm-add-media-car {
@@ -2552,16 +2784,6 @@ input:-webkit-autofill {
 
     .stm_add_car_form .stm-form-2-features .stm-single-feature {
         width: 50%;
-    }
-
-    .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter {
-        width: 100%;
-    }
-
-    .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter input[type=text],
-  .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .stm-form-1-quarter .select2 {
-        float: left;
-        margin-right: 15px;
     }
 }
 

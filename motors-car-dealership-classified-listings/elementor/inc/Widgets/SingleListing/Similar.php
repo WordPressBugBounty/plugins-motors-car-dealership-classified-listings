@@ -101,7 +101,7 @@ class Similar extends WidgetBase {
 
 		$this->stm_end_control_section();
 
-		$this->stm_start_style_controls_section( 'similar_start', __( 'Style', 'stm_vehicles_listing' ) );
+		$this->stm_start_style_controls_section( 'similar_start', __( 'Widget Title', 'stm_vehicles_listing' ) );
 
 		$this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
@@ -110,7 +110,6 @@ class Similar extends WidgetBase {
 				'label'          => __( 'Label Typography', 'stm_vehicles_listing' ),
 				'separator'      => 'before',
 				'exclude'        => array(
-					'font_family',
 					'font_style',
 					'text_decoration',
 					'letter_spacing',
@@ -209,6 +208,25 @@ class Similar extends WidgetBase {
 				'selectors' => array(
 					'{{WRAPPER}} .similar-listings .similar-listings-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
+			)
+		);
+
+		$this->stm_end_control_section();
+
+		$this->stm_start_style_controls_section( 'similar_item', __( 'Similar item', 'stm_vehicles_listing' ) );
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'similar_item_title_typography',
+				'label'    => __( 'Title Typography', 'stm_vehicles_listing' ),
+				'exclude'  => array(
+					'font_style',
+					'text_decoration',
+					'letter_spacing',
+					'word_spacing',
+				),
+				'selector' => '{{WRAPPER}} .stm-similar-cars-units .stm-similar-car .right-unit .title',
 			)
 		);
 

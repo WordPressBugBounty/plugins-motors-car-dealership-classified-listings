@@ -1303,12 +1303,12 @@ table > tbody > tr td {
     height: 49px;
     padding: 0 100px;
     line-height: 49px;
-    color: #fff;
+    color: var(--motors-contrast-text-color, #fff);
     text-transform: uppercase;
     text-align: center;
     font-size: 14px;
     font-weight: 700;
-    background-color: #fab637;
+    background-color: var(--motors-spec-badge-color, #fab637);
     transform: rotate(-45deg) translateZ(0);
     transform-origin: 50% 50%;
     -webkit-transform-origin: 50% 50%;
@@ -1539,14 +1539,14 @@ table > tbody > tr td {
     position: relative;
     display: block;
     padding: 15px 20px 15px 25px;
-    background-color: var(--motors-bg-color);
-    border-top: 4px solid var(--motors-text-color);
+    background-color: var(--motors-bg-shade);
+    border-top: 4px solid var(--motors-accent-color);
     text-decoration: none !important;
     margin-top: 0;
 }
 
 .stm-accordion-single-unit > a.title.collapsed {
-    border-top-color: var(--motors-bg-contrast);
+    border-top-color: var(--motors-border-color);
 }
 
 .stm-accordion-single-unit > a.title.collapsed .minus {
@@ -1794,6 +1794,10 @@ table > tbody > tr td {
     margin-bottom: 30px;
 }
 
+.stm-directory-grid-loop:hover .listing-car-item-meta .car-meta-top .car-title {
+    color: var(--motors-accent-color);
+}
+
 .stm-directory-grid-loop a {
     text-decoration: none;
 }
@@ -1932,6 +1936,7 @@ table > tbody > tr td {
     font-size: 14px;
     line-height: 18px;
     font-weight: 700;
+    transition: 0.3s;
 }
 
 .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .car-title .colored {
@@ -1974,6 +1979,7 @@ table > tbody > tr td {
 }
 
 .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .price .regular-price {
+    color: var(--motors-contrast-text-alpha-color);
     font-size: 13px;
     line-height: normal;
     text-decoration: line-through;
@@ -2031,16 +2037,18 @@ table > tbody > tr td {
     flex-wrap: nowrap;
     align-items: center;
     margin-right: 10px;
-    color: var(--motors-text-color);
+    color: var(--motors-text-alpha-color);
     font-size: 14px;
     padding-bottom: 10px;
+    transition: 0.1s;
 }
 
 .stm-directory-grid-loop .listing-car-item-meta .car-meta-bottom ul li i {
-    margin-right: -1px;
+    margin-right: 2px;
     font-size: 13px;
     color: var(--motors-text-alpha-color);
     vertical-align: middle;
+    transition: 0.1s;
 }
 
 .stm-directory-grid-loop .listing-car-item-meta .car-meta-bottom ul li i.stm-icon-road {
@@ -2059,6 +2067,7 @@ table > tbody > tr td {
     vertical-align: top;
     margin-left: 2px;
     font-size: 13px;
+    transition: 0.1s;
 }
 
 .stm-directory-grid-loop .listing-car-item-meta .car-meta-bottom ul li .special-text {

@@ -147,6 +147,14 @@ a.motors-profile-button span {
     padding: 25px 20px 25px 20px;
 }
 
+@media (max-width: 1024px) {
+    .lOffer-account-dropdown.stm-login-form-unregistered {
+        width: 280px;
+        right: -110px;
+        left: auto;
+    }
+}
+
 .lOffer-account-dropdown.stm-login-form-unregistered .stm-listing-loader {
     display: none;
 }
@@ -209,6 +217,12 @@ a.motors-profile-button span {
     cursor: pointer;
 }
 
+@media (max-width: 1024px) {
+    .lOffer-account-dropdown.stm-login-form-unregistered form .form-checker label span {
+        font-size: 12px;
+    }
+}
+
 .lOffer-account-dropdown.stm-login-form-unregistered form .form-checker label span:hover {
     color: var(--motors-accent-color);
 }
@@ -232,6 +246,7 @@ a.motors-profile-button span {
     border: 1px solid var(--motors-border-color);
     border-radius: 0;
     outline: none;
+    width: 100%;
 }
 
 .lOffer-account-dropdown.stm-login-form-unregistered form input:not([type=submit])::-webkit-input-placeholder {

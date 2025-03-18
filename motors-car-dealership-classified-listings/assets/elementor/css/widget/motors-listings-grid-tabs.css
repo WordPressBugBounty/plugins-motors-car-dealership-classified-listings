@@ -155,14 +155,6 @@
     color: var(--motors-accent-color);
 }
 
-.stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop a:hover .listing-car-item-meta .car-meta-bottom ul li {
-    color: var(--motors-text-color);
-}
-
-.stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop a:hover .listing-car-item-meta .car-meta-bottom ul li i {
-    color: var(--motors-text-color);
-}
-
 .stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop .image {
     position: relative;
     overflow: hidden;
@@ -392,7 +384,7 @@
 .stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .price .regular-price {
     font-size: 13px;
     line-height: normal;
-    color: var(--motors-contrast-text-color);
+    color: var(--motors-contrast-text-alpha-color);
     text-decoration: line-through;
 }
 

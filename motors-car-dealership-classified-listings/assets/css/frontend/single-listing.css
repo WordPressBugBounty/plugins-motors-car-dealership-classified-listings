@@ -1209,6 +1209,14 @@ select {
     height: auto;
 }
 
+.stm-listing-car-dealer-info .stm-user-main-info-c:hover .title {
+    color: var(--motors-accent-color);
+}
+
+.stm-listing-car-dealer-info .stm-user-main-info-c:hover .stm-label {
+    color: var(--motors-text-color);
+}
+
 .stm-listing-car-dealer-info .stm-no-text-decoration:hover, .stm-listing-car-dealer-info .stm-no-text-decoration:active, .stm-listing-car-dealer-info .stm-no-text-decoration:focus {
     text-decoration: none !important;
 }
@@ -1220,6 +1228,7 @@ select {
     letter-spacing: -0.4px;
     line-height: 32px;
     color: var(--motors-text-color);
+    transition: 0.2s;
 }
 
 .stm-listing-car-dealer-info .dealer-image {
@@ -1386,7 +1395,7 @@ select {
 
 .stm-listing-car-dealer-info .dealer-contacts .dealer-contact-unit.whatsapp, .stm-listing-car-dealer-info .dealer-contacts .dealer-contact-unit.address {
     margin-top: 14px;
-    color: var(--motors-accent-colot);
+    color: var(--motors-accent-color);
     font-weight: 400;
     font-style: normal;
     letter-spacing: normal;
@@ -2368,7 +2377,7 @@ ul.list-style-2 li:before {
 }
 
 .single-add-to-compare .compare-fixed-link:hover {
-    background-color: var(--motors-contrast-text-color);
+    background-color: var(--motors-bg-contrast);
     color: var(--motors-text-color);
 }
 
@@ -2507,6 +2516,7 @@ ul.list-style-2 li:before {
     font-weight: 700;
     line-height: 14px;
     color: var(--motors-text-color);
+    transition: 0.2s;
 }
 
 .stm-similar-cars-units .stm-similar-car .right-unit .stm-dealer-name {
@@ -2539,6 +2549,11 @@ ul.list-style-2 li:before {
     margin-right: 3px;
     font-size: 15px;
     color: var(--motors-text-alpha-color);
+    transition: 0.2s;
+}
+
+.stm-similar-cars-units .stm-similar-car:hover .right-unit .title {
+    color: var(--motors-accent-color);
 }
 
 .listing-features .rating {
@@ -2711,9 +2726,9 @@ ul.list-style-2 li:before {
         max-width: 580px;
         width: auto;
         margin: 0 auto;
-        top: 40%;
-        left: inherit;
-        transform: translateY(-50%);
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%) translateX(-50%);
         z-index: 9999;
     }
 

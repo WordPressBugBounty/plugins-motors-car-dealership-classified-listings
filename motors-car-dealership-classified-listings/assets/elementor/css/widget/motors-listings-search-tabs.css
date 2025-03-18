@@ -197,16 +197,23 @@
     }
 }
 
+.elementor-widget-motors-listings-search-tabs .elementor-widget-container .filter-listing.stm_dynamic_listing_filter .stm_dynamic_listing_filter_nav li {
+    width: auto;
+    min-width: none;
+    flex: 1;
+    text-align: center;
+}
+
 @media (max-width: 767px) {
     .elementor-widget-motors-listings-search-tabs .elementor-widget-container .filter-listing.stm_dynamic_listing_filter .stm_dynamic_listing_filter_nav li {
         white-space: nowrap;
     }
 
     .elementor-widget-motors-listings-search-tabs .elementor-widget-container .filter-listing.stm_dynamic_listing_filter .stm_dynamic_listing_filter_nav li a {
-        padding: 4.2vw 3.2vw;
-        font-size: 3.8vw;
+        min-width: 55px;
+        padding: 15px 15px 12px;
+        font-size: 12px;
         text-align: center;
-        min-width: 20vw;
     }
 }
 

@@ -3,6 +3,7 @@
 		<div class="modal-content">
 			<div id="request-trade-in-offer">
 				<div class="modal-header modal-header-iconed">
+					<i class="modal-close motors-icons-close-times" data-dismiss="modal"></i>
 					<i class="motors-icons-trade"></i>
 					<h3 class="modal-title" id="myModalLabelTradeIn">
 						<?php esc_html_e( 'Trade in', 'stm_vehicles_listing' ); ?>

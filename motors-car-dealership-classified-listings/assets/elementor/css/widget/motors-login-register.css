@@ -23,10 +23,6 @@
     margin: 0;
 }
 
-.stm-login-register-form .stm-login-form .form-checker .stm-forgot-password {
-    line-height: 1;
-}
-
 .stm-login-register-form .stm-login-form .form-checker .stm-forgot-password a {
     text-decoration: none;
     font-size: 13px;

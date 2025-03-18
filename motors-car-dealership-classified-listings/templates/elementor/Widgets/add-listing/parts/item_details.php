@@ -293,7 +293,7 @@ $_taxonomy = ( ! $_taxonomy ) ? array() : $_taxonomy;
 							</div>
 							<input type="text" class="text_stm_lng" name="stm_lng" value="<?php echo esc_attr( $data_value_lng ); ?>" placeholder="<?php esc_attr_e( 'Enter Longitude', 'stm_vehicles_listing' ); ?>"/>
 						</div>
-						<div class="stm-link-lat-lng-wrap">
+						<div class="stm-link-lat-lng-wrap stm-location-input-wrap">
 							<a href="https://www.latlong.net/" target="_blank"><?php echo esc_html__( 'Lat and Long Finder', 'stm_vehicles_listing' ); ?></a>
 						</div>
 						<input type="hidden" name="stm_location_address" id="stm_location_address" value="<?php echo esc_attr( $data_location_address ); ?>">

@@ -22,7 +22,7 @@ class ContactFormSeven extends WidgetBase {
 	}
 
 	public function get_title() {
-		return esc_html__( 'Contact form 7', 'motors-elementor-widgets' );
+		return esc_html__( 'Contact form 7', 'stm_vehicles_listing' );
 	}
 
 	public function get_icon() {
@@ -46,12 +46,12 @@ class ContactFormSeven extends WidgetBase {
 
 	protected function register_controls() {
 
-		$this->stm_start_content_controls_section( 'section_content', __( 'General', 'motors-elementor-widgets' ) );
+		$this->stm_start_content_controls_section( 'section_content', __( 'General', 'stm_vehicles_listing' ) );
 
 		$this->add_control(
 			'title',
 			array(
-				'label' => esc_html__( 'Title', 'motors-elementor-widgets' ),
+				'label' => esc_html__( 'Title', 'stm_vehicles_listing' ),
 				'type'  => \Elementor\Controls_Manager::TEXT,
 			)
 		);
@@ -59,16 +59,16 @@ class ContactFormSeven extends WidgetBase {
 		$this->add_control(
 			'title_heading',
 			array(
-				'label'   => __( 'Title Heading', 'motors-elementor-widgets' ),
+				'label'   => __( 'Title Heading', 'stm_vehicles_listing' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'default' => 'h4',
 				'options' => array(
-					'h1' => __( 'Heading 1', 'motors-elementor-widgets' ),
-					'h2' => __( 'Heading 2', 'motors-elementor-widgets' ),
-					'h3' => __( 'Heading 3', 'motors-elementor-widgets' ),
-					'h4' => __( 'Heading 4', 'motors-elementor-widgets' ),
-					'h5' => __( 'Heading 5', 'motors-elementor-widgets' ),
-					'h6' => __( 'Heading 6', 'motors-elementor-widgets' ),
+					'h1' => __( 'Heading 1', 'stm_vehicles_listing' ),
+					'h2' => __( 'Heading 2', 'stm_vehicles_listing' ),
+					'h3' => __( 'Heading 3', 'stm_vehicles_listing' ),
+					'h4' => __( 'Heading 4', 'stm_vehicles_listing' ),
+					'h5' => __( 'Heading 5', 'stm_vehicles_listing' ),
+					'h6' => __( 'Heading 6', 'stm_vehicles_listing' ),
 				),
 			)
 		);
@@ -76,7 +76,7 @@ class ContactFormSeven extends WidgetBase {
 		$this->add_control(
 			'icon',
 			array(
-				'label'       => esc_html__( 'Icon', 'motors-elementor-widgets' ),
+				'label'       => esc_html__( 'Icon', 'stm_vehicles_listing' ),
 				'type'        => \Elementor\Controls_Manager::ICONS,
 				'label_block' => false,
 				'skin'        => 'inline',
@@ -86,7 +86,7 @@ class ContactFormSeven extends WidgetBase {
 		$this->add_control(
 			'form_id',
 			array(
-				'label'   => __( 'Contact Form', 'motors-elementor-widgets' ),
+				'label'   => __( 'Contact Form', 'stm_vehicles_listing' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'options' => Helper::stm_ew_get_cf7_select(),
 			)
@@ -95,7 +95,7 @@ class ContactFormSeven extends WidgetBase {
 		$this->add_control(
 			'form_wide',
 			array(
-				'label'   => esc_html__( 'Wide', 'motors-elementor-widgets' ),
+				'label'   => esc_html__( 'Wide', 'stm_vehicles_listing' ),
 				'type'    => \Elementor\Controls_Manager::SWITCHER,
 				'default' => '',
 			)
@@ -104,13 +104,13 @@ class ContactFormSeven extends WidgetBase {
 		$this->stm_end_control_section();
 
 		/*Start style section*/
-		$this->stm_start_style_controls_section( 'section_styles', __( 'Styles', 'motors-elementor-widgets' ) );
+		$this->stm_start_style_controls_section( 'section_styles', __( 'Styles', 'stm_vehicles_listing' ) );
 
 		$this->add_group_control(
 			\Elementor\Group_Control_Box_Shadow::get_type(),
 			array(
 				'name'     => 'content_box_shadow',
-				'label'    => __( 'Box Shadow', 'motors-elementor-widgets' ),
+				'label'    => __( 'Box Shadow', 'stm_vehicles_listing' ),
 				'selector' => '{{WRAPPER}}',
 			)
 		);
@@ -118,7 +118,7 @@ class ContactFormSeven extends WidgetBase {
 		$this->add_control(
 			'svg_width',
 			array(
-				'label'      => __( 'Icon Size', 'motors-elementor-widgets' ),
+				'label'      => __( 'Icon Size', 'stm_vehicles_listing' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => array(
 					'px',
@@ -145,19 +145,57 @@ class ContactFormSeven extends WidgetBase {
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'title_typography',
-				'label'    => __( 'Title Text Style', 'motors-elementor-widgets' ),
+				'label'    => __( 'Title Text Style', 'stm_vehicles_listing' ),
 				'selector' => '{{WRAPPER}} .stm-elementor-contact-form-seven .icon-title .title',
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'label_typography',
+				'label'    => __( 'Label Typography', 'stm_vehicles_listing' ),
+				'selector' => '{{WRAPPER}} .stm-elementor-contact-form-seven.stm_listing_car_form .stm-single-car-contact .bottom > div label',
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'inputs_typography',
+				'label'    => __( 'Inputs Typography', 'stm_vehicles_listing' ),
+				'selector' => '{{WRAPPER}} .stm-elementor-contact-form-seven.stm_listing_car_form textarea, {{WRAPPER}} .stm-elementor-contact-form-seven.stm_listing_car_form textarea::placeholder, {{WRAPPER}} .stm-elementor-contact-form-seven.stm_listing_car_form input:not([type=submit]), {{WRAPPER}} .stm-elementor-contact-form-seven.stm_listing_car_form input:not([type=submit])::placeholder',
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'button_typography',
+				'label'    => __( 'Button Typography', 'stm_vehicles_listing' ),
+				'selector' => '{{WRAPPER}} .stm-elementor-contact-form-seven.stm_listing_car_form .stm-single-car-contact .wpcf7-submit',
+			)
+		);
+
+		$this->add_control(
+			'inputs_border_radius',
+			array(
+				'label'     => __( 'Inputs Border Radius', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors' => array(
+					'{{WRAPPER}} .stm-elementor-contact-form-seven.stm_listing_car_form .stm-single-car-contact .wpcf7-submit, {{WRAPPER}} .stm-elementor-contact-form-seven.stm_listing_car_form .stm-single-car-contact input:not([type=submit]), {{WRAPPER}} .stm-elementor-contact-form-seven.stm_listing_car_form .stm-single-car-contact textarea, .stm-elementor-contact-form-seven.stm_listing_car_form .stm-single-car-contact input' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
 			)
 		);
 
 		$this->stm_end_control_section();
 
-		$this->stm_start_style_controls_section( 'section_colors', __( 'Colors', 'motors-elementor-widgets' ) );
+		$this->stm_start_style_controls_section( 'section_colors', __( 'Colors', 'stm_vehicles_listing' ) );
 
 		$this->add_control(
 			'icon_color',
 			array(
-				'label'     => __( 'Icon Color', 'motors-elementor-widgets' ),
+				'label'     => __( 'Icon Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .stm-elementor-contact-form-seven .icon-title i'   => 'color: {{VALUE}}',
@@ -169,7 +207,7 @@ class ContactFormSeven extends WidgetBase {
 		$this->add_control(
 			'title_color',
 			array(
-				'label'     => __( 'Title Color', 'motors-elementor-widgets' ),
+				'label'     => __( 'Title Color', 'stm_vehicles_listing' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'default'   => '#232628',
 				'selectors' => array(

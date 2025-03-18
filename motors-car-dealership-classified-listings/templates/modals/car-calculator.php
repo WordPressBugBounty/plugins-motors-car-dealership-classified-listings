@@ -4,7 +4,7 @@
 			<div class="modal-content">
 				<div class="modal-header modal-header-iconed">
 					<i class="motors-icons-steering_wheel"></i>
-
+					<i class="modal-close motors-icons-close-times" data-dismiss="modal"></i>
 					<h3 class="modal-title" id="myModalLabelCalc">
 						<?php esc_html_e( 'Calculate Payment', 'stm_vehicles_listing' ); ?>
 					</h3>

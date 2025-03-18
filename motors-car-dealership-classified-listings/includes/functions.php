@@ -1456,7 +1456,7 @@ function mvl_admin_bar_item( $admin_bar ) {
 				'group'  => null,
 				'title'  => $admin_bar_icon . '<span class="ab-label">' . esc_html__( 'Motors Plugin Settings', 'stm_vehicles_listing' ),
 				'</span>',
-				'href'   => admin_url( '?page=mvl_plugin_settings' ),
+				'href'   => admin_url( 'admin.php?page=mvl_plugin_settings' ),
 				'meta'   => array(
 					'title' => esc_html__( 'Motors Plugin Settings', 'stm_vehicles_listing' ),
 				),

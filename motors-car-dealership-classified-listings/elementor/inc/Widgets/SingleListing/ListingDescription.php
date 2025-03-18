@@ -49,6 +49,17 @@ class ListingDescription extends WidgetBase {
 			)
 		);
 
+		$this->add_control(
+			'description_color',
+			array(
+				'label'     => esc_html__( 'Description Color', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .mvl-listing-description p' => 'color: {{VALUE}};',
+				),
+			)
+		);
+
 		$this->end_controls_section();
 	}
 

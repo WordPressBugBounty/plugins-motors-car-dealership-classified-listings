@@ -20,6 +20,34 @@ i {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.motors-icons-people-outline:before {
+    content: "\ea01";
+}
+
+.motors-icons-pricetags-outline:before {
+    content: "\ea02";
+}
+
+.motors-icons-time-outline:before {
+    content: "\ea05";
+}
+
+.motors-icons-call-outline:before {
+    content: "\ea03";
+}
+
+.motors-icons-car-sport-outline:before {
+    content: "\ea04";
+}
+
+.motors-icons-location-outline:before {
+    content: "\e9ff";
+}
+
+.motors-icons-mail-outline:before {
+    content: "\ea00";
+}
+
 .motors-icons-flame-skin:before {
     content: "\e9fa";
 }

@@ -540,3 +540,11 @@ function updateGridItemTitles() {
         }
     });
 }
+
+//Prevent default for show share button
+document.addEventListener('click', e => {
+	var parent = e.target.closest('.stm-share');
+	if (e.target.classList.contains('stm-share') || parent) {
+		e.preventDefault();
+	}
+});

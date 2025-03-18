@@ -8,7 +8,7 @@ $unique_id = 'single_contact_form_' . wp_rand( 1, 99999 );
 		if ( ! empty( $icon ) && ! empty( $icon['value'] ) ) :
 			if ( 'svg' === $icon['library'] && ! empty( $icon['value']['url'] ) ) :
 				?>
-				<img src="<?php echo esc_attr( $icon['value']['url'] ); ?>" class="svg-icon" alt="<?php esc_html_e( 'SVG icon', 'motors-elementor-widgets' ); ?>">
+				<img src="<?php echo esc_attr( $icon['value']['url'] ); ?>" class="svg-icon" alt="<?php esc_html_e( 'SVG icon', 'stm_vehicles_listing' ); ?>">
 				<?php else : ?>
 				<i class="stm-elementor-icon <?php echo esc_attr( $icon['value'] ); ?>"></i>
 					<?php

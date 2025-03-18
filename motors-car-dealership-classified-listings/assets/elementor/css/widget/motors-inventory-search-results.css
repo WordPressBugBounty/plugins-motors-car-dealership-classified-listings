@@ -38,6 +38,11 @@
     font-size: 13px;
     color: var(--motors-text-alpha-color);
     font-weight: 500;
+    transition: 0.2s;
+}
+
+.motors-elementor-inventory-search-results#listings-result .stm-featured-top-cars-title a:hover {
+    color: var(--motors-text-color);
 }
 
 .motors-elementor-inventory-search-results#listings-result .stm-location-top-listings-title {

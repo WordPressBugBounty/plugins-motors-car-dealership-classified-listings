@@ -7,6 +7,7 @@ mvl_enqueue_header_scripts_styles( 'motors-datetimepicker' );
 			<div class="modal-content">
 				<div class="modal-header modal-header-iconed">
 					<i class="motors-icons-steering_wheel"></i>
+					<i class="modal-close motors-icons-close-times" data-dismiss="modal"></i>
 					<h3 class="modal-title"
 						id="myModalLabelTestDrive"><?php esc_html_e( 'Schedule a Test Drive', 'stm_vehicles_listing' ); ?></h3>
 					<div class="test-drive-car-name"><?php echo wp_kses_post( apply_filters( 'stm_generate_title_from_slugs', get_the_title( get_the_ID() ), get_the_ID(), false ) ); ?></div>

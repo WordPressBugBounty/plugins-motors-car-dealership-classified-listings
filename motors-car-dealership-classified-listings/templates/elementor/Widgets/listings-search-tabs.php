@@ -17,7 +17,7 @@
  * @var $tab_prefix
  * @var $tab_suffix
  * @var $lst_show_all_tab
- * */
+ **/
 
 use Motors_Elementor_Widgets_Free\Helpers\Helper;
 
@@ -135,8 +135,7 @@ $nonce_field = apply_filters( 'stm_listings_filter_nonce', false );
 							</div>
 						<?php endif; ?>
 						<button type="submit" class="search-submit heading-font">
-							<i class="fas fa-search"></i>
-							
+							<i class="fas fa-search"></i>			
 							<?php
 							$all              = new WP_Query( $args );
 							$lst_btn_text     = str_replace( '{postfix}', esc_html( $lst_btn_postfix ), $lst_btn_text );
@@ -245,7 +244,6 @@ $nonce_field = apply_filters( 'stm_listings_filter_nonce', false );
 							} else {
 								echo esc_html( $explode_by_count[0] );
 							}
-							?>
 							?>
 						</button>
 					</div>

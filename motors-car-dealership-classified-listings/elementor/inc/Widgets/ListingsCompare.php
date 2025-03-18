@@ -161,7 +161,6 @@ class ListingsCompare extends WidgetBase {
 				'name'           => 'title_typography',
 				'label'          => __( 'Title Typography', 'stm_vehicles_listing' ),
 				'exclude'        => array(
-					'font_family',
 					'font_style',
 					'text_decoration',
 					'letter_spacing',
@@ -199,6 +198,24 @@ class ListingsCompare extends WidgetBase {
 				'selectors' => array(
 					'{{WRAPPER}} .colored-separator div' => 'background-color: {{VALUE}}',
 				),
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'listing_title_typography',
+				'label'    => __( 'Listing Title Typography', 'stm_vehicles_listing' ),
+				'selector' => '{{WRAPPER}} .car-listing-row .listing-car-item-meta .car-title',
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'characteristics_value_typography',
+				'label'    => __( 'Characteristics Values Typography', 'stm_vehicles_listing' ),
+				'selector' => '{{WRAPPER}} .compare-values table > tbody tr td .h5',
 			)
 		);
 

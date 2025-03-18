@@ -342,7 +342,7 @@ $compare_empty_placeholder = 'compare-empty.jpg';
 		else : // show empty placeholders if compare is empty.
 			?>
 			<div class="row row-4 car-listing-row stm-car-compare-row stm-no-cars">
-				<div class="col-md-3 col-sm-3">
+				<div class="col-3">
 					<h2 class="compare-title">
 						<?php echo esc_html( $widget_title ); ?>
 					</h2>
@@ -356,7 +356,7 @@ $compare_empty_placeholder = 'compare-empty.jpg';
 					</div>
 				</div>
 				<?php for ( $i = 0; $i < $empty_cars; $i++ ) { ?>
-					<div class="col-md-3 col-sm-3 col-xs-4 compare-col-stm-empty">
+					<div class="col-3 compare-col-stm-empty">
 						<a href="<?php echo esc_url( get_permalink( apply_filters( 'motors_vl_get_nuxy_mod', '', 'listing_archive' ) ) ); ?>">
 							<div class="image">
 								<span class="stm-icon-add-car-wrapper">
@@ -372,7 +372,7 @@ $compare_empty_placeholder = 'compare-empty.jpg';
 				<?php } ?>
 			</div> <!--row-->
 			<div class="row row-4 stm-compare-row hidden-xs">
-				<div class="col-md-3 col-sm-3 col-xs-4 hidden-xs">
+				<div class="col-3 hidden-xs">
 					<?php if ( ! empty( $filter_options ) ) : ?>
 						<div class="compare-options">
 							<table>
@@ -393,7 +393,7 @@ $compare_empty_placeholder = 'compare-empty.jpg';
 				</div>
 				<?php for ( $i = 0; $i < $empty_cars; $i++ ) { ?>
 					<?php if ( ! empty( $filter_options ) ) : ?>
-						<div class="col-md-3 col-sm-3 col-xs-4">
+						<div class="col-3">
 							<div class="compare-options">
 								<table>
 									<?php foreach ( $filter_options as $filter_option ) : ?>
@@ -415,7 +415,7 @@ $compare_empty_placeholder = 'compare-empty.jpg';
 		<?php if ( ! empty( $compares ) ) : ?>
 			<?php if ( $compares->have_posts() ) : ?>
 				<div class="row row-4 row-compare-features hidden-xs">
-					<div class="col-md-3 col-sm-3">
+					<div class="col-3">
 						<h4 class="stm-compare-features"><?php esc_html_e( 'Additional features', 'stm_vehicles_listing' ); ?></h4>
 					</div>
 					<?php
@@ -424,7 +424,7 @@ $compare_empty_placeholder = 'compare-empty.jpg';
 						?>
 						<?php $features = get_post_meta( get_the_ID(), 'additional_features', true ); ?>
 						<?php if ( ! empty( $features ) ) : ?>
-						<div class="col-md-3 col-sm-3 compare-col-stm-<?php echo esc_attr( get_the_ID() ); ?>">
+						<div class="col-3 compare-col-stm-<?php echo esc_attr( get_the_ID() ); ?>">
 							<?php $features = explode( ',', $features ); ?>
 							<ul class="list-style-2">
 								<?php foreach ( $features as $feature ) : ?>
@@ -433,7 +433,7 @@ $compare_empty_placeholder = 'compare-empty.jpg';
 							</ul>
 						</div>
 					<?php else : ?>
-						<div class="col-md-3 col-sm-3 compare-col-stm-<?php echo esc_attr( get_the_ID() ); ?>"></div>
+						<div class="col-3 compare-col-stm-<?php echo esc_attr( get_the_ID() ); ?>"></div>
 					<?php endif; ?>
 					<?php endwhile; ?>
 
@@ -443,7 +443,7 @@ $compare_empty_placeholder = 'compare-empty.jpg';
 	</div>
 
 	<div class="compare-empty-car-top">
-		<div class="col-md-3 col-sm-3 col-xs-4 compare-col-stm-empty">
+		<div class="col-3 compare-col-stm-empty">
 			<a href="<?php echo esc_url( get_permalink( apply_filters( 'motors_vl_get_nuxy_mod', '', 'listing_archive' ) ) ); ?>">
 				<div class="image">
 					<span class="stm-icon-add-car-wrapper">
@@ -460,7 +460,7 @@ $compare_empty_placeholder = 'compare-empty.jpg';
 
 	<div class="compare-empty-car-bottom">
 		<?php if ( ! empty( $filter_options ) ) : ?>
-			<div class="col-md-3 col-sm-3 col-xs-4 hidden-xs">
+			<div class="col-3">
 				<div class="compare-options">
 					<table>
 						<?php foreach ( $filter_options as $filter_option ) : ?>

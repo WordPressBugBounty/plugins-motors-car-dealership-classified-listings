@@ -10,10 +10,9 @@
     max-width: 100%;
     width: 580px;
     left: 50%;
-    margin-left: -290px;
     top: 50%;
     z-index: 9999;
-    transform: translateY(-50%);
+    transform: translateY(-50%) translateX(-50%);
 }
 
 #get-car-price-form .form-error,
@@ -143,8 +142,28 @@
     opacity: 0.5;
 }
 
-.modal-header {
+.modal .modal-header {
     border-bottom: none;
+}
+
+.modal .modal-header .modal-close {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    font-size: 16px;
+    display: block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: var(--motors-contrast-text-color, #333333);
+    left: auto;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.modal .modal-header .modal-close:hover {
+    color: var(--motors-accent-color, #333333);
 }
 
 .modal-header-iconed {
@@ -413,9 +432,8 @@
     max-width: 100%;
     width: 580px;
     left: 50%;
-    margin-left: -290px;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-50%) translateX(-50%);
     z-index: 9999;
 }
 

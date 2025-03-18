@@ -57,9 +57,7 @@ class Title extends WidgetBase {
 				'name'           => 'title_typography',
 				'label'          => __( 'Typography', 'stm_vehicles_listing' ),
 				'exclude'        => array(
-					'font_family',
 					'font_style',
-					'text_transform',
 					'text_decoration',
 					'letter_spacing',
 					'word_spacing',

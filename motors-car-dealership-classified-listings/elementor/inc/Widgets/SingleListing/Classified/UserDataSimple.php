@@ -57,7 +57,6 @@ class UserDataSimple extends WidgetBase {
 				'label'          => __( 'User Name Typography', 'stm_vehicles_listing' ),
 				'separator'      => 'before',
 				'exclude'        => array(
-					'font_family',
 					'font_style',
 					'text_decoration',
 					'letter_spacing',
@@ -108,7 +107,6 @@ class UserDataSimple extends WidgetBase {
 				'description'    => esc_html__( 'Only for User Role Subscriber', 'stm_vehicles_listing' ),
 				'separator'      => 'before',
 				'exclude'        => array(
-					'font_family',
 					'font_style',
 					'text_decoration',
 					'letter_spacing',

@@ -7,7 +7,7 @@ namespace MotorsVehiclesListing\Stilization;
  */
 class Colors {
 	public const DEFAULT = array(
-		'free' => array(
+		'free'   => array(
 			'accent_color'        => '#1280DF',
 			'bg_color'            => '#FFFFFF',
 			'bg_shade'            => '#F0F3F7',
@@ -16,6 +16,23 @@ class Colors {
 			'contrast_text_color' => '#FFFFFF',
 			'filter_inputs_color' => '#F6F7F9',
 			'spec_badge_color'    => '#FAB637',
+			'sold_badge_color'    => '#FC4E4E',
+			'success_bg_color'    => 'rgba(219,243,160,1)',
+			'success_text_color'  => 'rgba(70,191,19,1)',
+			'notice_bg_color'     => 'rgba(251,197,93,1)',
+			'notice_text_color'   => 'rgba(251,149,19,1)',
+			'error_bg_color'      => 'rgba(255,127,127,1)',
+			'error_text_color'    => 'rgba(244,43,43,1)',
+		),
+		'luxury' => array(
+			'accent_color'        => '#A08254',
+			'bg_color'            => '#0C1315',
+			'bg_shade'            => '#161A1D',
+			'bg_contrast'         => '#161A1D',
+			'text_color'          => '#E9E9E9',
+			'contrast_text_color' => '#E9E9E9',
+			'filter_inputs_color' => 'rgba(115,115,115,0.15)',
+			'spec_badge_color'    => '#A08154',
 			'sold_badge_color'    => '#FC4E4E',
 			'success_bg_color'    => 'rgba(219,243,160,1)',
 			'success_text_color'  => 'rgba(70,191,19,1)',
@@ -126,10 +143,21 @@ class Colors {
 	/**
 	 * @param string $id
 	 * @param float $alphachannel
+	 * @param string $default_color
 	 * @return string
 	 */
-	public static function value( $id, $alphachannel = 1.0 ) {
-		return static::instance()->get_value( $id, $alphachannel );
+	public static function value( $id, $alphachannel = -1.0, $default_color = '#000000' ) {
+		$value = static::instance()->get_value( $id, $alphachannel );
+		return $value ? $value : $default_color;
+	}
+
+	/**
+	 * @param string $id
+	 * @return string
+	 */
+	public static function default_value( $id ) {
+		$skin_name = motors_get_skin_name();
+		return static::DEFAULT[ $skin_name ][ $id ];
 	}
 
 	/**

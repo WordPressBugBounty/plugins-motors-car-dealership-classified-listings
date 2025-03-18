@@ -3,6 +3,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header modal-header-iconed">
+					<i class="modal-close motors-icons-close-times" data-dismiss="modal"></i>
 					<i class="motors-icons-cash"></i>
 					<h3 class="modal-title" id="myModalLabelTestDrive">
 						<?php esc_html_e( 'Offer Price', 'stm_vehicles_listing' ); ?>

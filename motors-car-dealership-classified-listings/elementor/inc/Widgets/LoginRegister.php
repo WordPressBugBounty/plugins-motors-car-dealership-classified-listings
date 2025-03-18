@@ -105,6 +105,33 @@ class LoginRegister extends WidgetBase {
 
 		$this->stm_start_style_controls_section( 'section_style_general', esc_html__( 'General', 'stm_vehicles_listing' ) );
 
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'title_typography',
+				'label'    => esc_html__( 'Title Typography', 'stm_vehicles_listing' ),
+				'selector' => '{{WRAPPER}} .stm-login-register-form h3',
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'label_typography',
+				'label'    => esc_html__( 'Labels Typography', 'stm_vehicles_listing' ),
+				'selector' => '{{WRAPPER}} .stm-login-register-form .stm-register-form .form-group h4, {{WRAPPER}} .stm-login-register-form .stm-login-form form h4',
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'buttons_typography',
+				'label'    => esc_html__( 'Buttons Typography', 'stm_vehicles_listing' ),
+				'selector' => '{{WRAPPER}} .stm-login-register-form .stm-login-form form input[type=submit], {{WRAPPER}} .stm-login-register-form .stm-register-form form .form-group-submit input[type=submit]',
+			)
+		);
+
 		$this->stm_start_ctrl_tabs( 'btn_style' );
 
 		$this->stm_start_ctrl_tab(

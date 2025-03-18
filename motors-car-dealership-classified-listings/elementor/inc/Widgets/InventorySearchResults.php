@@ -264,6 +264,30 @@ class InventorySearchResults extends WidgetBase {
 			)
 		);
 
+		$this->add_control(
+			'isr_pagination_item_height',
+			array(
+				'label'      => __( 'Pagination Item Height', 'stm_vehicles_listing' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => array(
+					'px',
+				),
+				'range'      => array(
+					'px' => array(
+						'min'  => 30,
+						'max'  => 60,
+						'step' => 1,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .motors-elementor-inventory-search-results#listings-result ul.page-numbers li > span'  => 'height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .motors-elementor-inventory-search-results#listings-result ul.page-numbers li > a'     => 'height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .motors-elementor-inventory-search-results#listings-result ul.page-numbers li .next' => 'height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .motors-elementor-inventory-search-results#listings-result ul.page-numbers li .prev' => 'height: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+
 		$this->stm_start_ctrl_tabs( 'pagination_style' );
 
 		$this->stm_start_ctrl_tab(
@@ -333,6 +357,46 @@ class InventorySearchResults extends WidgetBase {
 				'name'     => 'isr_pagination_item_box_shadow',
 				'label'    => __( 'Box Shadow', 'stm_vehicles_listing' ),
 				'selector' => '{{WRAPPER}} .motors-elementor-inventory-search-results#listings-result ul.page-numbers li > a',
+			)
+		);
+
+		$this->stm_end_ctrl_tab();
+
+		$this->stm_start_ctrl_tab(
+			'pagination_hover',
+			array(
+				'label' => __( 'Hover', 'stm_vehicles_listing' ),
+			)
+		);
+
+		$this->add_control(
+			'isr_pagination_hover_item_color',
+			array(
+				'label'     => __( 'Text Color', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .motors-elementor-inventory-search-results#listings-result ul.page-numbers li a:hover' => 'color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'isr_pagination_hover_item_bg',
+			array(
+				'label'     => __( 'Background', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .motors-elementor-inventory-search-results#listings-result ul.page-numbers li a:hover' => 'background-color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			array(
+				'name'     => 'isr_pagination_hover_item_border',
+				'label'    => __( 'Border', 'stm_vehicles_listing' ),
+				'selector' => '{{WRAPPER}} .motors-elementor-inventory-search-results#listings-result ul.page-numbers li a:hover',
 			)
 		);
 

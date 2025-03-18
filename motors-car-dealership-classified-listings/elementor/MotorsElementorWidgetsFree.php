@@ -46,7 +46,29 @@ class MotorsElementorWidgetsFree {
 
 		add_filter( 'elementor/document/urls/edit', array( $this, 'listing_template_edit_url' ) );
 
+		add_action( 'elementor/icons_manager/additional_tabs', array( $this, 'enqueue_motors_icons_library' ), 9, 1 );
+
 		require_once STM_LISTINGS_PATH . '/elementor/inc/Helpers/ListingsCardControls.php';
+	}
+
+	public function enqueue_motors_icons_library( $tabs = array() ) {
+		// Custom icons for Elementor
+		if ( defined( 'ELEMENTOR_VERSION' ) ) {
+			$tabs['motors-icons'] = array(
+				'name'          => 'motors-icons',
+				'label'         => __( 'Motors Icons', 'stm_vehicles_listing' ),
+				'url'           => STM_LISTINGS_URL . '/assets/css/frontend/icons.css',
+				'enqueue'       => array( STM_LISTINGS_URL . '/assets/css/frontend/icons.css' ),
+				'prefix'        => 'motors-icons-',
+				'displayPrefix' => 'motors-icons',
+				'labelIcon'     => 'motors-icons-star',
+				'ver'           => '1.0',
+				'fetchJson'     => STM_LISTINGS_URL . '/assets/fonts/motors/selection-fetch.json',
+				'native'        => true,
+			);
+		}
+
+		return $tabs;
 	}
 
 	public function listing_template_edit_url( $url ) {

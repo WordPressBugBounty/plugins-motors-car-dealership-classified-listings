@@ -10,13 +10,11 @@ if ( $custom_listing_type && $listing_types_options && isset( $listing_types_opt
 ?>
 <div class="stm-form-2-features clearfix">
 	<div class="stm-car-listing-data-single stm-border-top-unit ">
-		<div class="stm-car-listing-data-single stm-border-top-unit ">
 			<div class="title heading-font">
 				<?php esc_html_e( 'Select Your Listing Features', 'stm_vehicles_listing' ); ?>
 				<?php echo $is_required_features ? esc_html( '*' ) : ''; ?>
 			</div>
 		</div>
-	</div>
 	<?php
 	if ( is_array( $user_features ) ) {
 		if ( ! empty( $_id ) ) {

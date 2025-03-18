@@ -4,6 +4,7 @@
 			<div class="modal-content">
 				<div class="modal-header modal-header-iconed">
 					<i class="motors-icons-steering_wheel"></i>
+					<i class="modal-close motors-icons-close-times" data-dismiss="modal"></i>
 					<h3 class="modal-title" id="myModalLabel">
 						<?php esc_html_e( 'Request car price', 'stm_vehicles_listing' ); ?>
 					</h3>
