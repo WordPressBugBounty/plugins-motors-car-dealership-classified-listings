@@ -37,7 +37,7 @@ $data_binding = apply_filters( 'stm_data_binding_func', array(), true );
 		<div role="tabpanel" class="tab-pane fade in active stm_dynamic_listing_dealer_filter_form"
 			id="stm_all_listing_tab"
 			data-options="<?php echo esc_attr( wp_json_encode( $data_binding ) ); ?>">
-			<form action="<?php echo esc_url( apply_filters( 'stm_get_dealer_list_page', '' ) ); ?>" method="GET">
+			<form action="<?php echo esc_url( apply_filters( 'mvl_get_dealer_list_page', '' ) ); ?>" method="GET">
 				<input type="hidden" name="stm_dealer_show_taxonomies" value="<?php echo esc_attr( $dealer_category_fields ); ?>"/>
 				<input type="hidden" name="stm_sort_by" value="<?php echo esc_attr( $sort_by ); ?>"/>
 				<?php wp_nonce_field( 'dealer_list' ); ?>

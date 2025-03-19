@@ -16,6 +16,10 @@
     opacity: 1;
 }
 
+.stm_dynamic_listing_filter.stm_dynamic_listing_dealer_filter .tab-content .tab-pane .stm-filter-tab-selects.dealer-filter .row select {
+    width: 100%;
+}
+
 .stm_dynamic_listing_filter.stm_dynamic_listing_dealer_filter .tab-content .tab-pane button svg {
     fill: var(--motors-contrast-text-color);
 }

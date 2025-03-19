@@ -71,11 +71,11 @@ $can_register = apply_filters( 'motors_vl_get_nuxy_mod', false, 'new_user_regist
 					</div>
 				</form>
 			</div>
-			<?php if ( boolval( apply_filters( 'is_listing', array() ) ) && defined( 'WORDPRESS_SOCIAL_LOGIN_ABS_PATH' ) && is_user_logged_in() ) : ?>
+			<?php if ( defined( 'WORDPRESS_SOCIAL_LOGIN_ABS_PATH' ) && is_user_logged_in() ) : ?>
 				<div class="stm-social-login-wrap">
 					<?php echo wp_kses_post( $__social_login_html__ ); ?>
 				</div>
-			<?php elseif ( boolval( apply_filters( 'is_listing', array() ) ) && defined( 'WORDPRESS_SOCIAL_LOGIN_ABS_PATH' ) ) : ?>
+			<?php elseif ( defined( 'WORDPRESS_SOCIAL_LOGIN_ABS_PATH' ) ) : ?>
 				<div class="stm-social-login-wrap">
 					<?php do_action( 'wordpress_social_login' ); ?>
 				</div>

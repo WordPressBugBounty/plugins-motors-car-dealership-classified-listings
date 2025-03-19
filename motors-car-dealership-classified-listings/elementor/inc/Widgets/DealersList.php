@@ -40,7 +40,7 @@ class DealersList extends WidgetBase {
 	}
 
 	public function get_script_depends(): array {
-		return array_merge( array( 'stmselect2', 'app-select2' ) );
+		return array( $this->get_name(), 'stmselect2', 'app-select2' );
 	}
 
 	public function get_style_depends(): array {

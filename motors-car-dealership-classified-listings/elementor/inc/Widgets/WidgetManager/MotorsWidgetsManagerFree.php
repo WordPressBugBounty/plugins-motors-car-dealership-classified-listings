@@ -71,7 +71,6 @@ class MotorsWidgetsManagerFree {
 			OfferPriceButton::class,
 			Similar::class,
 			ContactFormSeven::class,
-			DealersList::class,
 			PricingPlan::class,
 			ListingsCompare::class,
 			AddCarButton::class,
@@ -80,6 +79,15 @@ class MotorsWidgetsManagerFree {
 			ListingsGridTabs::class,
 			LoginRegister::class,
 		);
+
+		if ( stm_is_motors_theme() || is_mvl_pro() ) {
+			$widgets = array_merge(
+				$widgets,
+				array(
+					DealersList::class,
+				)
+			);
+		}
 
 		$widgets = array_merge(
 			array(

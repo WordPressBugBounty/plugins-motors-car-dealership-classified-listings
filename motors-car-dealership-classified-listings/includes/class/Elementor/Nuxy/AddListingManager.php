@@ -8,7 +8,7 @@ class AddListingManager {
 	}
 
 	public function motors_config_map_tab_add_listing( $global_conf ) {
-		if ( apply_filters( 'stm_is_motors_theme', false ) && ! apply_filters( 'is_listing', false, array( 'listing_one_elementor', 'listing_two_elementor', 'listing_three_elementor', 'listing_four_elementor', 'listing_five_elementor' ) ) ) { //phpcs:ignore
+		if ( apply_filters( 'stm_is_motors_theme', false ) && 'classified' !== get_option( 'motors_layout_type', 'classified' ) ) { //phpcs:ignore
 			return $global_conf;
 		}
 
@@ -171,11 +171,11 @@ class AddListingManager {
 				'type'             => 'group_title',
 				'label'            => esc_html__( 'Details', 'stm_vehicles_listing' ),
 				'submenu'          => esc_html__( 'Listing creation form', 'stm_vehicles_listing' ),
-				'dependency' => array(
-					'key' => 'sorted_steps',
+				'dependency'       => array(
+					'key'   => 'sorted_steps',
 					'value' => 'item_details',
 				),
-				'dependency_mode' => 'sorted',
+				'dependency_mode'  => 'sorted',
 				'preview'          => STM_LISTINGS_URL . '/assets/images/previews/details-addl.png',
 				'preview_position' => 'preview_bottom',
 				'group'            => 'started',

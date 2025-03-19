@@ -23,9 +23,10 @@ $placeholder_path = ( apply_filters( 'stm_is_motors_theme', false ) ) ? get_styl
 						<div class="image">
 							<?php the_post_thumbnail( 'stm-img-350-356', array( 'class' => 'img-responsive' ) ); ?>
 						</div>
-						<?php else : ?>
+					<?php else : ?>
 						<div class="image">
-							<img src="<?php echo esc_url( $placeholder_path ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>">
+							<img src="<?php echo esc_url( $placeholder_path ); ?>"
+								 alt="<?php echo esc_attr( get_the_title() ); ?>">
 						</div>
 					<?php endif; ?>
 					<div class="right-unit">
@@ -36,15 +37,13 @@ $placeholder_path = ( apply_filters( 'stm_is_motors_theme', false ) ) ? get_styl
 						if ( ! empty( $user_added_by ) ) {
 							$user_exist = get_userdata( $user_added_by );
 						}
-						if ( boolval( apply_filters( 'is_listing', array() ) ) ) :
-							?>
-							<div class="stm-dealer-name">
-								<?php if ( ! empty( $user_exist ) && $user_exist ) : ?>
-									<?php echo wp_kses_post( apply_filters( 'stm_display_user_name', $user_added_by, '', '', '' ) ); ?>
-								<?php endif; ?>
-							</div>
-							<?php
-						endif;
+						?>
+						<div class="stm-dealer-name">
+							<?php if ( ! empty( $user_exist ) && $user_exist ) : ?>
+								<?php echo wp_kses_post( apply_filters( 'stm_display_user_name', $user_added_by, '', '', '' ) ); ?>
+							<?php endif; ?>
+						</div>
+						<?php
 						$price_label = get_post_meta( get_the_ID(), 'car_price_form_label', true );
 						$price       = get_post_meta( get_the_ID(), 'price', true );
 						$sale_price  = get_post_meta( get_the_ID(), 'sale_price', true );

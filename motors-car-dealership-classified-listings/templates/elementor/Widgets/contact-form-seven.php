@@ -43,7 +43,7 @@ $unique_id = 'single_contact_form_' . wp_rand( 1, 99999 );
 
 <?php
 $user_added_by = get_post_meta( get_the_id(), 'stm_car_user', true );
-if ( ! empty( $user_added_by ) && boolval( apply_filters( 'is_listing', array() ) ) ) :
+if ( ! empty( $user_added_by ) ) :
 	$user_data = get_userdata( $user_added_by );
 	if ( $user_data ) :
 		?>

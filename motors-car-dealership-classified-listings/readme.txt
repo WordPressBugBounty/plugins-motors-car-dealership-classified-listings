@@ -5,7 +5,7 @@ Donate link: https://www.paypal.me/stylemix
 Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
 Tested up to: 6.7
-Stable tag: 1.4.61
+Stable tag: 1.4.62
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -132,6 +132,16 @@ After that, go to Tools -> Import, and via Wordpress Importer tool install dummy
 8. Additional features
 
 == Changelog ==
+
+= 1.4.62 =
+- **Fix:** Fixed the incorrect appearance of Featured Listings count on the Inventory page when set to "0" in settings.
+- **Fix:** Corrected the ordering of Listing Templates and Listings tabs in the admin area.
+- **Fix:** Removed "Show in listing info page" option in Custom Fields for better clarity.
+- **Fix:** Resolved the conflict issue with two galleries in the Single Listing view in Motors Skins.
+- **Fix:** Addressed "Show More" and "Sort By" buttons in the Dealers List widget working incorrectly.
+- **Fix:** Fixed an issue that prevented changing the listing author.
+- **Fix:** Fixed an issue where users couldn't access the dealer page from a Single Listing.
+- **Fix:** Fixed an issue where clicking on a dealer's page from the Dealer List redirected authorized users to their own account instead of the dealer's profile.
 
 = 1.4.61 =
 - **New:** Added a premium Luxury Skin for enhanced design customization.

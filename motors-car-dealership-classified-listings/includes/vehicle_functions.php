@@ -17,6 +17,7 @@ if ( ! function_exists( 'stm_ajaxurl' ) ) {
             stm_lang_code = '<?php echo esc_js( ICL_LANGUAGE_CODE ); ?>';
 			<?php endif; ?>
 			var ajaxurl = '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>';
+            var mvl_current_ajax_url = '<?php echo esc_url( get_the_permalink( get_the_ID() ) ); ?>';
 			var stm_site_blog_id = "<?php echo get_current_blog_id(); ?>";
 			var stm_added_to_compare_text = "<?php esc_html_e( 'Added to compare', 'stm_vehicles_listing' ); ?>";
 			var stm_removed_from_compare_text = "<?php esc_html_e( 'was removed from compare', 'stm_vehicles_listing' ); ?>";

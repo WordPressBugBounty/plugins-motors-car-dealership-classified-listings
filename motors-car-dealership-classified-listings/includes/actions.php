@@ -56,7 +56,7 @@ function stm_listings_template_actions() {
 				stm_listings_items();
 				break;
 			case 'stm_load_dealers_list':
-				stm_load_dealers_list();
+				mvl_load_dealers_list();
 				break;
 		}
 	}
@@ -1077,6 +1077,51 @@ if ( ! function_exists( 'stm_filter_media_upload_size' ) ) {
 	}
 
 	add_filter( 'stm_listing_media_upload_size', 'stm_filter_media_upload_size' );
+}
+
+if ( ! function_exists( 'stm_load_dealers_list' ) ) {
+	function mvl_load_dealers_list() {
+		check_ajax_referer( 'stm_security_nonce', 'security' );
+
+		$response = array();
+
+		$per_page = 12;
+
+		$remove_button = '';
+		$new_offset    = 0;
+
+		if ( ! empty( $_GET['offset'] ) ) {
+			$offset = intval( $_GET['offset'] );
+		}
+
+		if ( ! empty( $offset ) ) {
+			$dealers = \MotorsVehiclesListing\User\UserController::get_dealers_data( array(), $offset, $per_page );
+			if ( 'show' === $dealers['button'] ) {
+				$new_offset = $offset + $per_page;
+			} else {
+				$remove_button = 'hide';
+			}
+			if ( ! empty( $dealers['users'] ) ) {
+				ob_start();
+				$user_list = $dealers['users'];
+				if ( ! empty( $user_list ) ) {
+					foreach ( $user_list as $user ) {
+						apply_filters( 'stm_get_single_dealer', '', $user );
+					}
+				}
+				$response['user_html'] = ob_get_clean();
+			}
+		}
+
+		$response['remove']     = $remove_button;
+		$response['new_offset'] = $new_offset;
+
+		wp_send_json( $response );
+		exit;
+	}
+
+	add_action( 'wp_ajax_stm_load_dealers_list', 'mvl_load_dealers_list' );
+	add_action( 'wp_ajax_nopriv_stm_load_dealers_list', 'mvl_load_dealers_list' );
 }
 
 function stm_sort_listings_callback() {

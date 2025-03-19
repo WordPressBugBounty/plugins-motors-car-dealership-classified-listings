@@ -298,13 +298,6 @@ function motors_page_options() {
 			'type'        => 'checkbox',
 			'group'       => 'filter',
 		),
-		'use_on_single_listing_page'            => array(
-			'label'       => esc_html__( 'Show in listing info page', 'stm_vehicles_listing' ),
-			'description' => esc_html__( 'Check if you want to see this category on single page', 'stm_vehicles_listing' ),
-			'value'       => '',
-			'type'        => 'checkbox',
-			'group'       => 'filter',
-		),
 		'listing_rows_numbers_enable'           => array(
 			'label'       => esc_html__( 'Show as checkboxes in the inventory filter', 'stm_vehicles_listing' ),
 			'description' => esc_html__( 'Use as checkboxes with images 1 or 2 columns', 'stm_vehicles_listing' ),

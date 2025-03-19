@@ -20,7 +20,7 @@ $listing_id = ( is_null( $listing_id ) ) ? get_the_ID() : $listing_id;
 				$ratings = stm_get_dealer_marks( $user_added_by );
 				?>
 				<div class="stm-listing-car-dealer-info-simple">
-					<a class="stm-no-text-decoration" href="<?php echo ( boolval( apply_filters( 'is_listing', array() ) ) || apply_filters( 'stm_is_aircrafts', false ) ) ? esc_url( apply_filters( 'stm_get_author_link', $user_added_by ) ) : '#!'; ?>">
+					<a class="stm-no-text-decoration" href="<?php echo esc_url( apply_filters( 'stm_get_author_link', $user_added_by ) ); ?>">
 						<h3 class="title">
 							<?php echo wp_kses_post( apply_filters( 'stm_display_user_name', $user_added_by, '', '', '' ) ); ?>
 						</h3>
@@ -28,7 +28,7 @@ $listing_id = ( is_null( $listing_id ) ) ? get_the_ID() : $listing_id;
 					<div class="clearfix">
 						<div class="dealer-image">
 							<div class="stm-dealer-image-custom-view">
-								<a href="<?php echo ( boolval( apply_filters( 'is_listing', array() ) ) || apply_filters( 'stm_is_aircrafts', false ) ) ? esc_url( apply_filters( 'stm_get_author_link', $user_added_by ) ) : '#!'; ?>">
+								<a href="<?php echo esc_url( apply_filters( 'stm_get_author_link', $user_added_by ) ); ?>">
 									<?php if ( ! empty( $user_fields['logo'] ) ) : ?>
 										<img src="<?php echo esc_url( $user_fields['logo'] ); ?>"/>
 									<?php else : ?>
@@ -57,7 +57,7 @@ $listing_id = ( is_null( $listing_id ) ) ? get_the_ID() : $listing_id;
 				<div class="stm-listing-car-dealer-info-simple stm-common-user">
 					<div class="clearfix stm-user-main-info-c">
 						<div class="image">
-							<a href="<?php echo ( boolval( apply_filters( 'is_listing', array() ) ) || apply_filters( 'stm_is_aircrafts', false ) ) ? esc_url( apply_filters( 'stm_get_author_link', $user_added_by ) ) : '#!'; ?>">
+							<a href="<?php echo esc_url( apply_filters( 'stm_get_author_link', $user_added_by ) ); ?>">
 								<?php if ( ! empty( $user_fields['image'] ) ) : ?>
 									<img src="<?php echo esc_url( $user_fields['image'] ); ?>"/>
 								<?php else : ?>
@@ -67,7 +67,7 @@ $listing_id = ( is_null( $listing_id ) ) ? get_the_ID() : $listing_id;
 								<?php endif; ?>
 							</a>
 						</div>
-						<a class="stm-no-text-decoration" href="<?php echo ( boolval( apply_filters( 'is_listing', array() ) ) || apply_filters( 'stm_is_aircrafts', false ) ) ? esc_url( apply_filters( 'stm_get_author_link', $user_added_by ) ) : '#!'; ?>">
+						<a class="stm-no-text-decoration" href="<?php echo esc_url( apply_filters( 'stm_get_author_link', $user_added_by ) ); ?>">
 							<h3 class="title"><?php echo wp_kses_post( apply_filters( 'stm_display_user_name', $user_added_by, '', '', '' ) ); ?></h3>
 							<div class="stm-label"><?php esc_html_e( 'Private Seller', 'stm_vehicles_listing' ); ?></div>
 						</a>

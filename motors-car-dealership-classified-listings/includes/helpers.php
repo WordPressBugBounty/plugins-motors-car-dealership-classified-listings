@@ -1231,6 +1231,20 @@ function delear_public_page_pagination_action( $query, $page, $posts_per_page, $
 }
 add_action( 'delear_public_page_pagination', 'delear_public_page_pagination_action', 4, 99 );
 
+
+if ( ! function_exists( 'mvl_get_dealer_list_page' ) ) {
+	function mvl_get_dealer_list_page() {
+		$dealer_list_page = apply_filters( 'motors_vl_get_nuxy_mod', 2173, 'dealer_list_page' );
+
+		$dealer_list_page = apply_filters( 'stm_motors_wpml_is_page', $dealer_list_page );
+		$link = get_permalink( $dealer_list_page );
+
+		return $link;
+	}
+
+	add_filter( 'mvl_get_dealer_list_page', 'mvl_get_dealer_list_page' );
+}
+
 if ( ! function_exists( 'motors_skin_name' ) ) {
 	function motors_get_skin_name() {
 		return get_option( MVL_Const::ACTIVE_SKIN_OPT_NAME, 'free' );

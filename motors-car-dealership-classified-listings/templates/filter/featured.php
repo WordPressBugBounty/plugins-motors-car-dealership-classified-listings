@@ -46,7 +46,7 @@ if ( ! empty( $args['custom_img_size'] ) && has_image_size( $args['custom_img_si
 if ( 'default' !== $skin && wp_is_mobile() ) {
 	$view_type = 'grid';
 }
-if ( $featured->have_posts() ) : ?>
+if ( $featured->have_posts() && ! empty( $args['posts_per_page'] ) ) : ?>
 	<div class="stm-featured-top-cars-title">
 		<div class="heading-font"><?php esc_html_e( 'Featured Listings', 'stm_vehicles_listing' ); ?></div>
 		<?php if ( $inventory_link ) : ?>

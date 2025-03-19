@@ -104,10 +104,6 @@ class ListingMetaboxes {
 	}
 
 	public function save_metaboxes( $post_id ) {
-		if ( ! isset( $_POST['stm_custom_nonce'] ) ) {
-			return $post_id;
-		}
-
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return $post_id;
 		}
