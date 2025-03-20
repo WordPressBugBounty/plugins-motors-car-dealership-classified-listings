@@ -196,8 +196,10 @@
     height: 40px;
     line-height: 40px;
     border-radius: 0;
+    border: none;
     background-color: var(--motors-filter-inputs-color);
     color: var(--motors-text-color);
+    font-family: Montserrat;
 }
 
 .classic-filter-row.motors-elementor-widget input[type=text]::-moz-placeholder {
@@ -301,8 +303,9 @@
 }
 
 .classic-filter-row.motors-elementor-widget .select2-selection--multiple.filter-select .select2-selection__rendered input.select2-search__field {
+    font-family: Montserrat;
     padding-left: 5px;
-    margin-top: 8px;
+    margin-top: 10px;
     line-height: inherit;
     height: inherit;
 }
@@ -315,12 +318,14 @@
     padding-left: 0;
     padding-inline-start: 0;
     color: var(--motors-text-alpha-color);
+    font-family: Montserrat;
 }
 
 .classic-filter-row.motors-elementor-widget .select2-selection--multiple.filter-select .select2-selection__rendered input.select2-search__field::placeholder {
     padding-left: 0;
     padding-inline-start: 0;
     color: var(--motors-text-alpha-color);
+    font-family: Montserrat;
 }
 
 .classic-filter-row.motors-elementor-widget .select2-selection--multiple.filter-select .select2-selection__rendered li.select2-search {

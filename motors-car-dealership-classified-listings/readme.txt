@@ -5,7 +5,7 @@ Donate link: https://www.paypal.me/stylemix
 Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
 Tested up to: 6.7
-Stable tag: 1.4.62
+Stable tag: 1.4.63
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -132,6 +132,11 @@ After that, go to Tools -> Import, and via Wordpress Importer tool install dummy
 8. Additional features
 
 == Changelog ==
+
+= 1.4.63 =
+- **Fix:** Fixed an issue when filtering by features was working incorrectly.
+- **Fix:** Resolved an issue with Listings Grid Tabs not showing more than 8 listings on a page.
+- **Fix:** Resolved compatibility issues between the Motors Free plugin and Motors Theme in custom fields.
 
 = 1.4.62 =
 - **Fix:** Fixed the incorrect appearance of Featured Listings count on the Inventory page when set to "0" in settings.

@@ -24,6 +24,10 @@
     fill: var(--motors-contrast-text-color);
 }
 
+.stm_dynamic_listing_filter.stm_dynamic_listing_dealer_filter .select2 {
+    width: 100% !important;
+}
+
 .dealer-search-results {
     margin-top: 35px;
     margin-bottom: 30px;

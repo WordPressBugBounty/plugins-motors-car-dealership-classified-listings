@@ -1647,6 +1647,10 @@ input:-webkit-autofill {
     border: 1px solid var(--motors-error-text-color);
 }
 
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-5-notes #wp-stm_seller_notes-wrap {
+    width: 99% !important;
+}
+
 .stm-vl-plugin-pure .stm_add_car_form .stm-form-5-notes .stm-phrases-unit .stm_phrases {
     position: absolute;
     width: 445px;

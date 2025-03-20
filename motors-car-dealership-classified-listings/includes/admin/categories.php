@@ -351,7 +351,7 @@ function motors_page_options() {
 	$group_4 = apply_filters( 'stm_listings_page_options_group_4', $group_4 );
 
 	$options   = array_merge( $group_1, $group_2, $group_3, $group_4 );
-	$post_type = filter_input( INPUT_GET, 'post_type', FILTER_SANITIZE_STRING );
+	$post_type = filter_input( INPUT_GET, 'post_type', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 
 	// remove "Listing price field" if multilisting is deactivated OR current post type is the default one
 	if ( ! stm_is_multilisting() || ( ! empty( $post_type ) && apply_filters( 'stm_listings_post_type', 'listings' ) === $post_type ) ) {

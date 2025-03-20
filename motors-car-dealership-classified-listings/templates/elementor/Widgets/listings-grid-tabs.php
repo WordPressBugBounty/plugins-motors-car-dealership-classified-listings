@@ -222,7 +222,7 @@ $uniqid = uniqid();
 									url: ajaxurl,
 									dataType: 'json',
 									async: true,
-									data: 'action=grid_tabs_widget&tab_type=popular&per_page=8&template=<?php echo esc_js( $template ); ?>&img_size=<?php echo esc_js( $img_ajax_args ); ?>&security=' + mew_nonces.motors_grid_tabs,
+									data: 'action=grid_tabs_widget&tab_type=popular&per_page=<?php echo esc_js( $listings_number ); ?>&template=<?php echo esc_js( $template ); ?>&img_size=<?php echo esc_js( $img_ajax_args ); ?>&security=' + mew_nonces.motors_grid_tabs,
 									success: function(data) {
 										if( data.hasOwnProperty('html') ) $('#popular-tab-content').html(data.html);
 										updateGridItemTitles();
@@ -260,7 +260,7 @@ $uniqid = uniqid();
 									url: ajaxurl,
 									dataType: 'json',
 									async: true,
-									data: 'action=grid_tabs_widget&tab_type=recent&per_page=8&template=<?php echo esc_js( $template ); ?>&img_size=<?php echo esc_js( $img_ajax_args ); ?>&security=' + mew_nonces.motors_grid_tabs,
+									data: 'action=grid_tabs_widget&tab_type=recent&per_page=<?php echo esc_js( $listings_number ); ?>&template=<?php echo esc_js( $template ); ?>&img_size=<?php echo esc_js( $img_ajax_args ); ?>&security=' + mew_nonces.motors_grid_tabs,
 									success: function(data) {
 										if( data.hasOwnProperty('html') ) $('#recent-tab-content').html(data.html);
 										updateGridItemTitles();
