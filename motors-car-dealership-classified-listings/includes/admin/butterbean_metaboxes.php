@@ -164,7 +164,7 @@ function stm_listings_register_manager( $butterbean, $post_type ) {
 			'section' => 'stm_additional_features',
 			'heading' => esc_html__( 'Extra Features', 'stm_vehicles_listing' ),
 			'preview' => 'features',
-			'link'    => esc_url( admin_url( 'admin.php?page=mvl_listing_details_settings' ) ),
+			'link'    => esc_url( admin_url( 'admin.php?page=mvl_listing_details_settings#features_settings' ) ),
 		)
 	);
 
@@ -272,12 +272,12 @@ function stm_listings_register_manager( $butterbean, $post_type ) {
 	$manager->register_control(
 		'instant_savings_label',
 		array(
-			'type'    => 'text',
-			'section' => 'stm_price',
-			'label'   => esc_html__( 'instant savings label', 'stm_vehicles_listing' ),
+			'type'        => 'text',
+			'section'     => 'stm_price',
+			'label'       => esc_html__( 'instant savings label', 'stm_vehicles_listing' ),
 			'description' => esc_html__( 'Show the difference between the regular price and sale price', 'stm_vehicles_listing' ),
-			'preview' => 'price_instant',
-			'attr'    => array(
+			'preview'     => 'price_instant',
+			'attr'        => array(
 				'class' => 'widefat',
 			),
 		)
@@ -286,11 +286,11 @@ function stm_listings_register_manager( $butterbean, $post_type ) {
 	$manager->register_control(
 		'car_price_form',
 		array(
-			'type'    => 'checkbox',
-			'section' => 'stm_price',
-			'preview' => 'price_request',
-			'value'   => '1',
-			'label'   => esc_html__( 'Request a Price Option', 'stm_vehicles_listing' ),
+			'type'        => 'checkbox',
+			'section'     => 'stm_price',
+			'preview'     => 'price_request',
+			'value'       => '1',
+			'label'       => esc_html__( 'Request a Price Option', 'stm_vehicles_listing' ),
 			'description' => esc_html__( 'Opens a form to request a price quote', 'stm_vehicles_listing' ),
 		)
 	);

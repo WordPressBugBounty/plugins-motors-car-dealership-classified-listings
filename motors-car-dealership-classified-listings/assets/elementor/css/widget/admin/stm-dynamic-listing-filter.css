@@ -170,6 +170,7 @@
 .stm_dynamic_listing_filter .select2-container--default .select2-selection--single {
     height: 46px;
     opacity: 1 !important;
+    border: 1px solid var(--motors-border-color);
 }
 
 .stm_dynamic_listing_filter .select2-container--default .select2-selection--single .select2-selection__rendered {

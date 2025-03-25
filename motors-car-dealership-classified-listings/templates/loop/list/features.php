@@ -70,7 +70,7 @@ if ( ! empty( $sale_price ) ) {
 				</div>
 			</li>
 		<?php endif; ?>
-
+		<li class="w-100 my-0"></li>
 		<!--Schedule-->
 		<?php if ( ! empty( $show_test_drive ) && $show_test_drive ) : ?>
 			<li>

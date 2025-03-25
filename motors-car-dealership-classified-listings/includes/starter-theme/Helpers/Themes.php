@@ -13,7 +13,7 @@ class Themes {
 		return array(
 			array(
 				'slug' => 'motors-starter-theme',
-				'name' => __( 'Motors Starter Theme', 'stm_vehicles_listing' ),
+				'name' => __( 'Motors Skins', 'stm_vehicles_listing' ),
 				'type' => 'theme',
 				'src'  => 'https://stylemixthemes-public.s3.us-west-2.amazonaws.com/motors-starter-theme.zip',
 			),

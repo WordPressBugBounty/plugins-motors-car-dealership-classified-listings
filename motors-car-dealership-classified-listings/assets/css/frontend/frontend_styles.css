@@ -26,13 +26,13 @@ button[type=submit] {
     border: 1px solid var(--motors-accent-color);
 }
 
-.button:hover, .button:active, .button:focus,
-input[type=submit]:hover,
-input[type=submit]:active,
-input[type=submit]:focus,
-button[type=submit]:hover,
-button[type=submit]:active,
-button[type=submit]:focus {
+.button:not([disabled="1"]):hover, .button:not([disabled="1"]):active, .button:not([disabled="1"]):focus,
+input[type=submit]:not([disabled="1"]):hover,
+input[type=submit]:not([disabled="1"]):active,
+input[type=submit]:not([disabled="1"]):focus,
+button[type=submit]:not([disabled="1"]):hover,
+button[type=submit]:not([disabled="1"]):active,
+button[type=submit]:not([disabled="1"]):focus {
     text-decoration: none;
     outline: none;
     background-color: var(--motors-bg-contrast);
@@ -1038,6 +1038,10 @@ ul.list-style-2 li:before {
     margin-right: 0;
 }
 
+.stm-slider-filter-type-unit .stm-price-range-unit ~ .row > div {
+    padding: 0 5px;
+}
+
 .clearfix:before,
 .clearfix:after,
 .row:after {
@@ -1076,8 +1080,8 @@ ul.list-style-2 li:before {
     height: 35px;
     margin: 0 8px;
     padding: 0;
-    background-color: var(--motors-bg-shade);
-    color: var(--motors-contrast-text-color);
+    background-color: var(--motors-filter-inputs-color);
+    color: var(--motors-text-highalpha-color);
     border-top: none;
     border-radius: 3px;
     line-height: 35px;
@@ -1122,14 +1126,14 @@ ul.list-style-2 li:before {
 }
 
 .stm_compare_unit span {
-    height: 24px;
-    width: 25px;
+    height: 30px;
+    width: 29px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: absolute;
-    right: 7px;
-    bottom: 9px;
+    right: 0;
+    bottom: 0;
     padding: 0px 6.5px;
     background: var(--motors-bg-alpha-contrast);
     color: var(--motors-contrast-text-color);
@@ -3883,7 +3887,7 @@ body.stm-vl-plugin-pure.post-type-archive-listings .container {
 
 .stm-my-profile-settings .stm-image-unit .stm-upload-new-avatar .stm-new-upload-area .button {
     display: inline-block;
-    padding: 17px 24px 11px 25px;
+    padding: 12px 24px;
     margin-right: 14px;
     width: auto;
 }
@@ -3916,8 +3920,10 @@ body.stm-vl-plugin-pure.post-type-archive-listings .container {
 }
 
 .stm-my-profile-settings .stm-image-unit .stm-upload-new-avatar .stm-new-upload-area .stm-new-file-label {
-    margin-top: 17px;
+    margin-top: 7px;
     color: var(--motors-text-alpha-color);
+    position: relative;
+    top: 3px;
 }
 
 .stm-my-profile-settings .stm-image-unit .stm-upload-new-avatar .stm-label {

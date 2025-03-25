@@ -391,7 +391,7 @@
 .stm-vl-plugin-pure .select2-container--default .select2-results__option--highlighted[aria-selected] {
     background-color: var(--motors-filter-inputs-color);
     border-bottom-color: var(--motors-filter-inputs-color);
-    color: var(--motors-text-alpha-color);
+    color: var(--motors-text-color);
 }
 
 .stm-vl-plugin-pure .select2-dropdown {

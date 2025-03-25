@@ -233,6 +233,7 @@
 
 .stm_listing_icon_filter .stm_listing_icon_filter_single .inner img {
     display: inline-block;
+    max-height: 42px;
 }
 
 .stm_listing_icon_filter .stm_listing_icon_filter_single .inner .name {

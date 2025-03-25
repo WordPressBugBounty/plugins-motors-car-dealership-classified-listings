@@ -122,7 +122,7 @@ class STMMailChimpBase {
 				'opt_out'    => false,
 				'created_at' => wp_date( 'Y-m-d H:i:s' ),
 			];
-			$result            = update_option( 'stm_mailchimp_integration_member_data_' . self::$pluginSlug, serialize( $integrationData ) );
+			$result            = add_option( 'stm_mailchimp_integration_member_data_' . self::$pluginSlug, serialize( $integrationData ) );
 
 		} else {
 
@@ -163,9 +163,6 @@ class STMMailChimpBase {
 		$integrationData = self::getMailchimpIntegrationData();
 
 		if ( self::memberKeyIfExist( $integrationData ) === false ) {
-			if ( empty( $integrationData ) ) {
-				$integrationData = [];
-			}
 
 			$integrationData[] = [
 				'email'      => self::$currentUser->data->user_email,
@@ -175,7 +172,7 @@ class STMMailChimpBase {
 				'created_at' => wp_date( 'Y-m-d H:i:s' ),
 			];
 
-			update_option( 'stm_mailchimp_integration_member_data_' . self::$pluginSlug, serialize( $integrationData ) );
+			add_option( 'stm_mailchimp_integration_member_data_' . self::$pluginSlug, serialize( $integrationData ) );
 
 		}
 

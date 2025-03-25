@@ -17,10 +17,10 @@ class Colors {
 			'filter_inputs_color' => '#F6F7F9',
 			'spec_badge_color'    => '#FAB637',
 			'sold_badge_color'    => '#FC4E4E',
-			'success_bg_color'    => 'rgba(219,243,160,1)',
-			'success_text_color'  => 'rgba(70,191,19,1)',
-			'notice_bg_color'     => 'rgba(251,197,93,1)',
-			'notice_text_color'   => 'rgba(251,149,19,1)',
+			'success_bg_color'    => '#dbf2a2',
+			'success_text_color'  => '#5eac3f',
+			'notice_bg_color'     => '#fbc45d',
+			'notice_text_color'   => '#e4961a',
 			'error_bg_color'      => 'rgba(255,127,127,1)',
 			'error_text_color'    => 'rgba(244,43,43,1)',
 		),
@@ -39,7 +39,7 @@ class Colors {
 			'notice_bg_color'     => 'rgba(251,197,93,1)',
 			'notice_text_color'   => 'rgba(251,149,19,1)',
 			'error_bg_color'      => 'rgba(255,127,127,1)',
-			'error_text_color'    => 'rgba(244,43,43,1)',
+			'error_text_color'    => 'rgba(209,52,52,1)',
 		),
 	);
 

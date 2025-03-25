@@ -66,6 +66,7 @@ class ComposerStaticInit5db859e1dab632b715b93d33219eb1cf
         'MotorsVehiclesListing\\MenuPages\\SingleListingTemplateSettings' => __DIR__ . '/../..' . '/includes/class/MenuPages/SingleListingTemplateSettings.php',
         'MotorsVehiclesListing\\Plugin' => __DIR__ . '/../..' . '/includes/class/Plugin.php',
         'MotorsVehiclesListing\\Plugin\\MVL_Const' => __DIR__ . '/../..' . '/includes/class/Plugin/MVL_Const.php',
+        'MotorsVehiclesListing\\Plugin\\MVL_Patcher' => __DIR__ . '/../..' . '/includes/class/Plugin/MVL_Patcher.php',
         'MotorsVehiclesListing\\Plugin\\PluginOptions' => __DIR__ . '/../..' . '/includes/class/Plugin/PluginOptions.php',
         'MotorsVehiclesListing\\Plugin\\Settings' => __DIR__ . '/../..' . '/includes/class/Plugin/Settings.php',
         'MotorsVehiclesListing\\Post\\Model\\PostMetaModel' => __DIR__ . '/../..' . '/includes/class/Post/Model/PostMetaModel.php',

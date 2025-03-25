@@ -200,13 +200,14 @@
 .elementor-widget-motors-listings-search-tabs .elementor-widget-container .filter-listing.stm_dynamic_listing_filter .stm_dynamic_listing_filter_nav li {
     width: auto;
     min-width: none;
-    flex: 1;
+    flex: none;
     text-align: center;
 }
 
 @media (max-width: 767px) {
     .elementor-widget-motors-listings-search-tabs .elementor-widget-container .filter-listing.stm_dynamic_listing_filter .stm_dynamic_listing_filter_nav li {
         white-space: nowrap;
+        flex: 1;
     }
 
     .elementor-widget-motors-listings-search-tabs .elementor-widget-container .filter-listing.stm_dynamic_listing_filter .stm_dynamic_listing_filter_nav li a {

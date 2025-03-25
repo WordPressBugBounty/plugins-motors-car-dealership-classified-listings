@@ -57,7 +57,7 @@ class MVL_Loader {
 	}
 
 	public function motors_add_starter_install__admin_menu() {
-		$page_title = esc_html__( 'Motors Starter Theme', 'motors-car-dealership-classified-listings' );
+		$page_title = esc_html__( 'Motors Skins', 'motors-car-dealership-classified-listings' );
 
 		add_submenu_page(
 			'mvl_plugin_settings',

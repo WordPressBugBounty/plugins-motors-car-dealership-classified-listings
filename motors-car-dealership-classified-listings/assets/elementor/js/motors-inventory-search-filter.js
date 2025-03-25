@@ -36,6 +36,12 @@ class MotorsInventorySearchFilter extends elementorModules.frontend.handlers.Bas
 	}
 	onInit() {
 		super.onInit()
+		if (!this.elements.$footer.length) {
+			this.elements.$footer = jQuery('div[data-elementor-type="footer"]')
+		}
+		if (this.elements.$footer.length === 0) {
+			this.elements.$footer = this.elements.$wrapper
+		}
 		const overlay = jQuery('<div>').addClass('mobile-filter-overlay')
 		const wrapper = this.elements.$wrapper
 		let initialPosition = this.elements.$filter_row.prev()
@@ -54,9 +60,8 @@ class MotorsInventorySearchFilter extends elementorModules.frontend.handlers.Bas
 		const updatePosition = () => {
 			const html = document.getElementsByTagName('html')
 			if (window.innerWidth < 1025) {
-				this.elements.$filter_row
-					.addClass('fixed-search-filter')
-					.insertBefore(this.elements.$footer)
+				this.elements.$filter_row.addClass('fixed-search-filter').insertBefore(this.elements.$footer)
+				this.elements.$footer.append(this.elements.$filter_row)
 				this.elements.$filter_row.addClass('mobile-filter-row')
 				this.elements.$sticky_mobile_filter.insertBefore(this.elements.$footer)
 			} else {

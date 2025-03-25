@@ -36,6 +36,7 @@ return array(
     'MotorsVehiclesListing\\MenuPages\\SingleListingTemplateSettings' => $baseDir . '/includes/class/MenuPages/SingleListingTemplateSettings.php',
     'MotorsVehiclesListing\\Plugin' => $baseDir . '/includes/class/Plugin.php',
     'MotorsVehiclesListing\\Plugin\\MVL_Const' => $baseDir . '/includes/class/Plugin/MVL_Const.php',
+    'MotorsVehiclesListing\\Plugin\\MVL_Patcher' => $baseDir . '/includes/class/Plugin/MVL_Patcher.php',
     'MotorsVehiclesListing\\Plugin\\PluginOptions' => $baseDir . '/includes/class/Plugin/PluginOptions.php',
     'MotorsVehiclesListing\\Plugin\\Settings' => $baseDir . '/includes/class/Plugin/Settings.php',
     'MotorsVehiclesListing\\Post\\Model\\PostMetaModel' => $baseDir . '/includes/class/Post/Model/PostMetaModel.php',

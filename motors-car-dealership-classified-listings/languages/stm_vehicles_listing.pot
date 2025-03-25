@@ -3946,11 +3946,11 @@ msgid "Motors Pro"
 msgstr ""
 
 #: includes/starter-theme/Helpers/Themes.php:16
-msgid "Motors Starter Theme"
+msgid "Motors Skins"
 msgstr ""
 
 #: includes/notices.php:30
-msgid "Motors Starter Theme!"
+msgid "Motors Skins!"
 msgstr ""
 
 #. Name of the plugin

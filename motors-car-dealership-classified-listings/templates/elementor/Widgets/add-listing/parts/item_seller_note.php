@@ -19,7 +19,7 @@ if ( $custom_listing_type && $listing_types_options && isset( $listing_types_opt
 <div class="stm-form-5-notes clearfix">
 	<div class="stm-car-listing-data-single stm-border-top-unit ">
 		<div class="title heading-font">
-			<?php esc_html_e( 'Enter Seller\'s notes', 'stm_vehicles_listing' ); ?>
+			<?php esc_html_e( 'Enter Description', 'stm_vehicles_listing' ); ?>
 			<?php echo $is_required ? esc_html( '*' ) : ''; ?>
 		</div>
 	</div>

@@ -110,6 +110,7 @@
     padding: 14px 24px;
     color: var(--motors-text-color);
     text-decoration: none;
+    transition: 0.1s;
 }
 
 .stm_elementor_listings_grid_tabs_wrap .stm_listing_nav_list li a:after {
@@ -131,7 +132,7 @@
 .stm_elementor_listings_grid_tabs_wrap .stm_listing_nav_list li a span {
     border-bottom: 1px dashed var(--motors-text-color);
     letter-spacing: -0.5px;
-    transition: 0.3s;
+    transition: 0.1;
 }
 
 .stm_elementor_listings_grid_tabs_wrap .stm_listing_nav_list li:not(.active) a span:hover {

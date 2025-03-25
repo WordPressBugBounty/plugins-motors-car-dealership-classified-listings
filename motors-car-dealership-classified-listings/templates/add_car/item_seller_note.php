@@ -12,7 +12,7 @@ $is_required = apply_filters( 'motors_vl_get_nuxy_mod', false, 'addl_seller_note
 
 <div class="stm-form-5-notes clearfix">
 	<?php
-		$vars['step_title']  = __( 'Enter Seller\'s notes', 'stm_vehicles_listing' ) . ( $is_required ? '*' : '' );
+		$vars['step_title']  = __( 'Enter Description', 'stm_vehicles_listing' );
 		$vars['step_number'] = 5;
 		do_action( 'stm_listings_load_template', 'add_car/step-title', $vars );
 	?>

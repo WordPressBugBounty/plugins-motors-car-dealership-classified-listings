@@ -5,6 +5,7 @@ namespace MotorsVehiclesListing\Elementor\Nuxy;
 class FeaturesSettings {
 
 	public function __construct() {
+		add_action( 'wpcfto_screen_motors_vehicles_listing_plugin_settings_added', array( $this, 'mvl_menu_features_settings' ), 11, 1 );
 		add_filter( 'me_car_settings_conf', array( $this, 'motors_config_map_tab_features_settings' ), 41, 1 );
 	}
 
@@ -69,9 +70,9 @@ class FeaturesSettings {
 				'group'            => 'started',
 			),
 			'fs_user_features'        => array(
-				'type'    => 'repeater',
-				'label'   => esc_html__( 'List', 'stm_vehicles_listing' ),
-				'fields'  => array(
+				'type'   => 'repeater',
+				'label'  => esc_html__( 'List', 'stm_vehicles_listing' ),
+				'fields' => array(
 					'tab_title_single'          => array(
 						'type'  => 'text',
 						'label' => esc_html__( 'Title', 'stm_vehicles_listing' ),
@@ -80,12 +81,47 @@ class FeaturesSettings {
 						'type'    => 'multiselect',
 						'label'   => esc_html__( 'Add features to the list', 'stm_vehicles_listing' ),
 						'options' => $this->motors_get_features_list(),
+						'new_tag_settings' => array(
+							'add_label'     => esc_html__( 'Add New Feature', 'stm_vehicles_listing' ),
+							'taxonomy_name' => 'stm_additional_features',
+							'placeholder'   => 'Enter feature name',
+							'add_btn'       => 'Add',
+							'cancel_btn'    => 'Cancel',
+						),
 					),
 				),
-				'value'   => $new_settings ?? array(),
+				'load_labels' => array(
+					'add_label' => esc_html__( 'Add New List', 'stm_vehicles_listing' ),
+				),
+				'value'  => $new_settings ?? array(),
 				'submenu' => esc_html__( 'Features list', 'stm_vehicles_listing' ),
-				'group'   => 'ended',
+				'group'  => 'ended',
 			),
+		);
+	}
+
+	public function mvl_menu_features_settings() {
+		$title = esc_html__( 'Extra Features', 'stm_vehicles_listing' );
+
+		$post_type = apply_filters( 'stm_listings_post_type', 'listings' );
+
+		add_submenu_page(
+			'mvl_plugin_settings',
+			$title,
+			$title,
+			'manage_options',
+			'edit-tags.php?taxonomy=stm_additional_features&post_type=' . $post_type,
+			'',
+			50
+		);
+
+		add_filter(
+			'mvl_submenu_positions',
+			function ( $positions ) use ( $post_type ) {
+				$positions[ 'edit-tags.php?taxonomy=stm_additional_features&post_type=' . $post_type ] = 50;
+
+				return $positions;
+			}
 		);
 	}
 }

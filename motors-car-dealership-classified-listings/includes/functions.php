@@ -13,7 +13,7 @@ add_filter(
 if ( ! function_exists( 'is_mvl_pro' ) ) {
 	function is_mvl_pro() {
 
-		if ( ( defined( 'STM_LISTINGS_PRO_PATH' ) && function_exists( 'mp_fs' ) && mp_fs()->_get_license() ) ) {
+		if ( ( defined( 'STM_LISTINGS_PRO_PATH' ) && function_exists( 'mp_fs' ) && mp_fs()->_get_license() ) || ( defined( 'STM_DEV_MODE' ) && STM_DEV_MODE ) ) {
 			return true;
 		}
 
@@ -93,7 +93,7 @@ if ( ! function_exists( 'stm_get_listing_seller_note' ) ) {
 	 * @return mixed|string
 	 */
 	function stm_get_listing_seller_note( $listing_id ) {
-		return get_post_meta( $listing_id, 'listing_seller_note', true ) ?? '';
+		return ( defined( 'WPB_VC_VERSION' ) ) ? get_post_meta( $listing_id, 'listing_seller_note', true ) : wp_kses_post( get_the_content( null, null, $listing_id ) );
 	}
 
 	add_filter( 'stm_get_listing_seller_note', 'stm_get_listing_seller_note' );

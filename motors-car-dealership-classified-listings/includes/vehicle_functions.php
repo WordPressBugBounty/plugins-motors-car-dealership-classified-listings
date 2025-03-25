@@ -1292,6 +1292,8 @@ if ( ! function_exists( 'stm_ajax_add_a_car' ) ) {
 
 			if ( ! $update && apply_filters( 'stm_get_wpb_def_tmpl', false ) ) {
 				$post_data['post_content'] = apply_filters( 'stm_get_wpb_def_tmpl', false );
+			} elseif ( ! defined( 'WPB_VC_VERSION' ) ) {
+				$post_data['post_content'] = $notes;
 			}
 
 			foreach ( $first_step as $taxonomy => $title_part ) {
@@ -1448,7 +1450,10 @@ if ( ! function_exists( 'stm_ajax_add_a_car' ) ) {
 
 				update_post_meta( $post_id, 'price', $price );
 				update_post_meta( $post_id, 'stm_genuine_price', $price );
-				update_post_meta( $post_id, 'listing_seller_note', $notes );
+
+				if ( defined( 'WPB_VC_VERSION' ) ) {
+					update_post_meta( $post_id, 'listing_seller_note', $notes );
+				}
 
 				if ( ! empty( $price_label ) ) {
 					update_post_meta( $post_id, 'regular_price_label', $price_label );

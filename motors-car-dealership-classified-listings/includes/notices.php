@@ -27,7 +27,7 @@ if ( ! in_array( 'motors-starter-theme', $theme_exists, true ) && empty( $start_
 		'notice_type'            => 'starter-theme-notice',
 		'notice_logo'            => 'motors_plugin.svg',
 		'notice_title'           => '',
-		'notice_desc'            => '<h4>' . esc_html__( 'For the best experience with the Motors plugin, install the ', 'stm_vehicles_listing' ) . '<a href="' . esc_url( 'https://motors-plugin.stylemixthemes.com/' ) . '" target="_blank">' . esc_html__( 'Motors Starter Theme!', 'stm_vehicles_listing' ) . '</a></h4>',
+		'notice_desc'            => '<h4>' . esc_html__( 'For the best experience with the Motors plugin, install the ', 'stm_vehicles_listing' ) . '<a href="' . esc_url( 'https://motors-plugin.stylemixthemes.com/' ) . '" target="_blank">' . esc_html__( 'Motors Skins!', 'stm_vehicles_listing' ) . '</a></h4>',
 		'notice_btn_one_title'   => esc_html__( 'Install', 'stm_vehicles_listing' ),
 		'notice_btn_one_class'   => 'ms_start_theme_install',
 		'notice_btn_one'         => esc_url( get_site_url() . '/wp-admin/admin.php?page=motors_starter_demo_installer' ),

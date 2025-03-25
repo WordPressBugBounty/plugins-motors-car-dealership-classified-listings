@@ -35,7 +35,7 @@
 	<div>
 		<?php if ( ! $settings['use_starter'] ) : ?>
 			<a href="<?php echo esc_url( apply_filters( 'mvl_setup_wizard_step_url', 'plugins' ) ); ?>" class="button button-secondary mvl-skip-btn" id="mvl-use-default-theme" data-step="plugins"><?php echo esc_html__( 'Use current theme', 'stm_vehicles_listing' ); ?></a>
-			<button class="button button-primary" id="mvl-starter-install-btn" data-default-label="Install Motors starter theme"><?php echo esc_html__( 'Install Motors starter theme', 'stm_vehicles_listing' ); ?></button>
+			<button class="button button-primary" id="mvl-starter-install-btn" data-default-label="Install Motors skins"><?php echo esc_html__( 'Install Motors skins', 'stm_vehicles_listing' ); ?></button>
 		<?php else : ?>
 			<a href="<?php echo esc_url( apply_filters( 'mvl_setup_wizard_step_url', 'plugins' ) ); ?>" class="button button-secondary mvl-skip-btn" id="mvl-use-default-theme" data-step="plugins"><?php echo esc_html__( 'Use another theme', 'stm_vehicles_listing' ); ?></a>
 		<?php endif; ?>
