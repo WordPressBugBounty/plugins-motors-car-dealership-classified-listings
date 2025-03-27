@@ -2,11 +2,16 @@
 
 use MotorsVehiclesListing\Addons\Addons;
 
-if ( ! defined( 'STM_LISTINGS_PRO_PATH' ) && ! stm_is_motors_theme() ) {
+if ( ! defined( 'STM_LISTINGS_PRO_PATH' ) ) {
 	add_action( 'wpcfto_screen_motors_vehicles_listing_plugin_settings_added', 'mvl_addons_add_submenu_pages', 100 );
 
 	function mvl_addons_add_submenu_pages() {
-		if ( ! defined( 'STM_LMS_PRO_PATH' ) ) {
+
+		if ( apply_filters( 'stm_hide_pro_if_is_premium_theme', false ) ) {
+			return;
+		}
+
+		if ( ! defined( 'STM_LISTINGS_PRO_PATH' ) ) {
 			$addons   = Addons::list();
 			$position = 110;
 

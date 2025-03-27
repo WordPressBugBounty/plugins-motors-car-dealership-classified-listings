@@ -91,7 +91,7 @@ $user_bio = get_user_meta( $user['user_id'], 'description', true );
 						<div class="col-md-6 col-sm-6">
 							<div class="form-group">
 								<div class="stm-label h4"><?php esc_html_e( 'Phone', 'stm_vehicles_listing' ); ?></div>
-								<input class="form-control" type="text" name="stm_phone" value="<?php echo esc_attr( $user['phone'] ); ?>"
+								<input class="form-control" type="tel" name="stm_phone" value="<?php echo esc_attr( $user['phone'] ); ?>"
 									placeholder="<?php esc_html_e( 'Enter Phone', 'stm_vehicles_listing' ); ?>"/>
 							</div>
 						</div>

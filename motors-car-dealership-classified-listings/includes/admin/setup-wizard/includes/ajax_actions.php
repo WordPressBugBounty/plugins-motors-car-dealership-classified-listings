@@ -98,6 +98,10 @@ add_action( 'wp_ajax_nopriv_mvl_setup_wizard_install_starter_theme', 'mvl_setup_
 function mvl_setup_wizard_install_plugin() {
 	check_ajax_referer( 'stm_mvl_setup_wizard_nonce', 'security' );
 
+	if ( ! current_user_can( 'install_plugins' ) ) {
+		wp_send_json_error( __( 'You do not have permission to install plugins', 'stm_vehicles_listing' ) );
+	}
+
 	$plugin_slug = isset( $_POST['plugin'] ) ? sanitize_text_field( $_POST['plugin'] ) : '';
 
 	if ( empty( $plugin_slug ) ) {
@@ -132,17 +136,24 @@ function mvl_setup_wizard_install_plugin() {
 		}
 	}
 
-	$activated = activate_plugin( WP_PLUGIN_DIR . '/' . apply_filters( 'mvl_setup_wizard_plugin_main_file', $plugin_slug ), false, false, true );
+	$plugins = get_plugins( '/' . $plugin_slug );
+
+	if ( empty( $plugins ) ) {
+		wp_send_json_error( __( 'Could not find main plugin file', 'stm_vehicles_listing' ) );
+	}
+
+	$plugin_main_file = key( $plugins );
+	$activated        = activate_plugin( $plugin_slug . '/' . $plugin_main_file, false, false, true );
 
 	if ( ! is_wp_error( $activated ) ) {
-		wp_send_json_success( __( 'Plugin succesfully activated', 'stm_vehicles_listing' ) );
+		wp_send_json_success( __( 'Plugin successfully activated', 'stm_vehicles_listing' ) );
 	} else {
 		wp_send_json_error( __( 'Error activating plugin', 'stm_vehicles_listing' ) );
 	}
 	exit;
 }
+
 add_action( 'wp_ajax_mvl_setup_wizard_install_plugin', 'mvl_setup_wizard_install_plugin' );
-add_action( 'wp_ajax_nopriv_mvl_setup_wizard_install_plugin', 'mvl_setup_wizard_install_plugin' );
 
 function mvl_setup_wizard_starter_import_fields() {
 	check_ajax_referer( 'stm_mvl_setup_wizard_nonce', 'security' );

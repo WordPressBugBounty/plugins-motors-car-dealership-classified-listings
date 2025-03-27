@@ -3,7 +3,7 @@ $sold_car         = get_post_meta( $post->ID, 'car_mark_as_sold', true );
 $sell_car_online  = get_post_meta( $post->ID, 'car_mark_woo_online', true );
 $car_stock_number = get_post_meta( $post->ID, 'stm_car_stock', true );
 ?>
-<?php if ( apply_filters( 'is_mvl_pro', false ) || apply_filters( 'stm_is_motors_theme', false ) ) : ?>
+<?php if ( apply_filters( 'is_mvl_pro', false ) ) : ?>
 
 <div class="mvl-checkbox-metabox">
 	<label for="car_mark_as_sold" class="car-mark-as-sold">

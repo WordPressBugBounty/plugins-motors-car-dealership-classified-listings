@@ -1511,7 +1511,7 @@ function mvl_admin_bar_item( $admin_bar ) {
 			array_splice( $submenus, 2, 0, array( $listing_template_menu ) );
 		}
 
-		if ( apply_filters( 'is_mvl_pro', false ) && ! apply_filters( 'stm_is_motors_theme', false ) ) {
+		if ( is_mvl_pro() ) {
 			$listing_template_menu = array(
 				'id'    => 'mvl-plugin-pro',
 				'title' => esc_html__( 'Addons', 'stm_vehicles_listing' ),
@@ -1532,7 +1532,12 @@ function mvl_admin_bar_item( $admin_bar ) {
 			);
 		}
 
-		if ( ! apply_filters( 'stm_is_motors_theme', false ) && ! apply_filters( 'is_mvl_pro', false ) ) {
+		if ( ! is_mvl_pro() ) {
+
+			if ( apply_filters( 'stm_hide_pro_if_is_premium_theme', false ) ) {
+				return;
+			}
+
 			$admin_bar->add_menu(
 				array(
 					'id'     => 'mvl-plugin-unlock-pro',
@@ -1617,3 +1622,26 @@ add_action(
 );
 
 add_filter( 'motors_get_demo_data', 'motors_get_demo_data' );
+
+add_filter(
+	'mvl_add_listing_form_enable',
+	function () {
+		if ( apply_filters( 'stm_is_motors_theme', false ) ) {
+			$chosen_template = get_option( 'stm_motors_chosen_template', 'car_dealer' );
+
+			return in_array(
+				$chosen_template,
+				array(
+					'listing_one_elementor',
+					'listing_two_elementor',
+					'listing_three_elementor',
+					'listing_four_elementor',
+					'listing_five_elementor',
+				),
+				true
+			);
+		}
+
+		return true;
+	}
+);

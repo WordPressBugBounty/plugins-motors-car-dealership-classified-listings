@@ -25,9 +25,9 @@ if ( ! function_exists( 'stm_show_user_extra_fields' ) ) {
 				<th><label for="stm_phone"><?php esc_html_e( 'Phone', 'stm_vehicles_listing' ); ?></label></th>
 
 				<td>
-					<input type="text" name="stm_phone" id="stm_phone"
-						   value="<?php echo esc_attr( get_the_author_meta( 'stm_phone', $user->ID ) ); ?>"
-						   class="regular-text"/><br/>
+					<input type="tel" name="stm_phone" id="stm_phone"
+							value="<?php echo esc_attr( get_the_author_meta( 'stm_phone', $user->ID ) ); ?>"
+							class="regular-text"/><br/>
 					<span class="description"><?php esc_html_e( 'User phone', 'stm_vehicles_listing' ); ?></span>
 				</td>
 			</tr>
@@ -48,11 +48,11 @@ if ( ! function_exists( 'stm_show_user_extra_fields' ) ) {
 
 				<td>
 					<input type="text" name="stm_user_avatar" id="stm_user_avatar"
-						   value="<?php echo esc_attr( get_the_author_meta( 'stm_user_avatar', $user->ID ) ); ?>"
-						   class="regular-text"/><br/>
+							value="<?php echo esc_attr( get_the_author_meta( 'stm_user_avatar', $user->ID ) ); ?>"
+							class="regular-text"/><br/>
 					<input type="text" name="stm_user_avatar_path" id="stm_user_avatar_path"
-						   value="<?php echo esc_attr( get_the_author_meta( 'stm_user_avatar_path', $user->ID ) ); ?>"
-						   class="regular-text"/><br/>
+							value="<?php echo esc_attr( get_the_author_meta( 'stm_user_avatar_path', $user->ID ) ); ?>"
+							class="regular-text"/><br/>
 					<span class="description"><?php esc_html_e( 'User avatar(stores URL and path to image)', 'stm_vehicles_listing' ); ?></span>
 				</td>
 			</tr>
@@ -67,8 +67,8 @@ if ( ! function_exists( 'stm_show_user_extra_fields' ) ) {
 
 				<td>
 					<input type="text" name="stm_user_facebook" id="stm_user_facebook"
-						   value="<?php echo esc_attr( get_the_author_meta( 'stm_user_facebook', $user->ID ) ); ?>"
-						   class="regular-text"/>
+							value="<?php echo esc_attr( get_the_author_meta( 'stm_user_facebook', $user->ID ) ); ?>"
+							class="regular-text"/>
 				</td>
 			</tr>
 
@@ -77,8 +77,8 @@ if ( ! function_exists( 'stm_show_user_extra_fields' ) ) {
 
 				<td>
 					<input type="text" name="stm_user_twitter" id="stm_user_twitter"
-						   value="<?php echo esc_attr( get_the_author_meta( 'stm_user_twitter', $user->ID ) ); ?>"
-						   class="regular-text"/>
+							value="<?php echo esc_attr( get_the_author_meta( 'stm_user_twitter', $user->ID ) ); ?>"
+							class="regular-text"/>
 				</td>
 			</tr>
 
@@ -87,8 +87,8 @@ if ( ! function_exists( 'stm_show_user_extra_fields' ) ) {
 
 				<td>
 					<input type="text" name="stm_user_linkedin" id="stm_user_linkedin"
-						   value="<?php echo esc_attr( get_the_author_meta( 'stm_user_linkedin', $user->ID ) ); ?>"
-						   class="regular-text"/>
+							value="<?php echo esc_attr( get_the_author_meta( 'stm_user_linkedin', $user->ID ) ); ?>"
+							class="regular-text"/>
 				</td>
 			</tr>
 
@@ -97,8 +97,8 @@ if ( ! function_exists( 'stm_show_user_extra_fields' ) ) {
 
 				<td>
 					<input type="text" name="stm_user_youtube" id="stm_user_youtube"
-						   value="<?php echo esc_attr( get_the_author_meta( 'stm_user_youtube', $user->ID ) ); ?>"
-						   class="regular-text"/>
+							value="<?php echo esc_attr( get_the_author_meta( 'stm_user_youtube', $user->ID ) ); ?>"
+							class="regular-text"/>
 				</td>
 			</tr>
 
@@ -107,8 +107,8 @@ if ( ! function_exists( 'stm_show_user_extra_fields' ) ) {
 
 				<td>
 					<input type="text" name="stm_user_favourites" id="stm_user_favourites"
-						   value="<?php echo esc_attr( get_the_author_meta( 'stm_user_favourites', $user->ID ) ); ?>"
-						   class="regular-text"/>
+							value="<?php echo esc_attr( get_the_author_meta( 'stm_user_favourites', $user->ID ) ); ?>"
+							class="regular-text"/>
 				</td>
 			</tr>
 
@@ -137,8 +137,8 @@ if ( ! function_exists( 'stm_show_user_extra_fields' ) ) {
 
 				<td>
 					<input type="text" name="stm_company_name" id="stm_company_name"
-						   value="<?php echo esc_attr( get_the_author_meta( 'stm_company_name', $user->ID ) ); ?>"
-						   class="regular-text"/>
+							value="<?php echo esc_attr( get_the_author_meta( 'stm_company_name', $user->ID ) ); ?>"
+							class="regular-text"/>
 				</td>
 			</tr>
 
@@ -147,8 +147,8 @@ if ( ! function_exists( 'stm_show_user_extra_fields' ) ) {
 
 				<td>
 					<input type="text" name="stm_website_url" id="stm_website_url"
-						   value="<?php echo esc_attr( get_the_author_meta( 'stm_website_url', $user->ID ) ); ?>"
-						   class="regular-text"/>
+							value="<?php echo esc_attr( get_the_author_meta( 'stm_website_url', $user->ID ) ); ?>"
+							class="regular-text"/>
 				</td>
 			</tr>
 
@@ -157,8 +157,8 @@ if ( ! function_exists( 'stm_show_user_extra_fields' ) ) {
 
 				<td>
 					<input type="text" name="stm_company_license" id="stm_company_license"
-						   value="<?php echo esc_attr( get_the_author_meta( 'stm_company_license', $user->ID ) ); ?>"
-						   class="regular-text"/>
+							value="<?php echo esc_attr( get_the_author_meta( 'stm_company_license', $user->ID ) ); ?>"
+							class="regular-text"/>
 				</td>
 			</tr>
 
@@ -167,11 +167,11 @@ if ( ! function_exists( 'stm_show_user_extra_fields' ) ) {
 
 				<td>
 					<input type="text" name="stm_dealer_logo" id="stm_dealer_logo"
-						   value="<?php echo esc_attr( get_the_author_meta( 'stm_dealer_logo', $user->ID ) ); ?>"
-						   class="regular-text"/><br/>
+							value="<?php echo esc_attr( get_the_author_meta( 'stm_dealer_logo', $user->ID ) ); ?>"
+							class="regular-text"/><br/>
 					<input type="text" name="stm_dealer_logo_path" id="stm_dealer_logo_path"
-						   value="<?php echo esc_attr( get_the_author_meta( 'stm_dealer_logo_path', $user->ID ) ); ?>"
-						   class="regular-text"/><br/>
+							value="<?php echo esc_attr( get_the_author_meta( 'stm_dealer_logo_path', $user->ID ) ); ?>"
+							class="regular-text"/><br/>
 					<span class="description"><?php esc_html_e( 'Dealer logo(stores URL and path to image)', 'stm_vehicles_listing' ); ?></span>
 				</td>
 			</tr>
@@ -181,11 +181,11 @@ if ( ! function_exists( 'stm_show_user_extra_fields' ) ) {
 
 				<td>
 					<input type="text" name="stm_dealer_image" id="stm_dealer_image"
-						   value="<?php echo esc_attr( get_the_author_meta( 'stm_dealer_image', $user->ID ) ); ?>"
-						   class="regular-text"/><br/>
+							value="<?php echo esc_attr( get_the_author_meta( 'stm_dealer_image', $user->ID ) ); ?>"
+							class="regular-text"/><br/>
 					<input type="text" name="stm_dealer_image_path" id="stm_dealer_image_path"
-						   value="<?php echo esc_attr( get_the_author_meta( 'stm_dealer_image_path', $user->ID ) ); ?>"
-						   class="regular-text"/><br/>
+							value="<?php echo esc_attr( get_the_author_meta( 'stm_dealer_image_path', $user->ID ) ); ?>"
+							class="regular-text"/><br/>
 					<span class="description"><?php esc_html_e( 'Dealer image(stores URL and path to image)', 'stm_vehicles_listing' ); ?></span>
 				</td>
 			</tr>
@@ -195,16 +195,16 @@ if ( ! function_exists( 'stm_show_user_extra_fields' ) ) {
 
 				<td>
 					<input type="text" name="stm_dealer_location" id="stm_dealer_location"
-						   value="<?php echo esc_attr( get_the_author_meta( 'stm_dealer_location', $user->ID ) ); ?>"
-						   class="regular-text"/>
+							value="<?php echo esc_attr( get_the_author_meta( 'stm_dealer_location', $user->ID ) ); ?>"
+							class="regular-text"/>
 					<div class="description"><?php esc_html_e( 'Dealer location address', 'stm_vehicles_listing' ); ?></div>
 					<input type="text" name="stm_dealer_location_lat" id="stm_dealer_location_lat"
-						   value="<?php echo esc_attr( get_the_author_meta( 'stm_dealer_location_lat', $user->ID ) ); ?>"
-						   class="regular-text"/>
+							value="<?php echo esc_attr( get_the_author_meta( 'stm_dealer_location_lat', $user->ID ) ); ?>"
+							class="regular-text"/>
 					<div class="description"><?php esc_html_e( 'Dealer location latitude', 'stm_vehicles_listing' ); ?></div>
 					<input type="text" name="stm_dealer_location_lng" id="stm_dealer_location_lng"
-						   value="<?php echo esc_attr( get_the_author_meta( 'stm_dealer_location_lng', $user->ID ) ); ?>"
-						   class="regular-text"/>
+							value="<?php echo esc_attr( get_the_author_meta( 'stm_dealer_location_lng', $user->ID ) ); ?>"
+							class="regular-text"/>
 					<div class="description"><?php esc_html_e( 'Dealer location longitude', 'stm_vehicles_listing' ); ?></div>
 				</td>
 			</tr>
@@ -232,16 +232,14 @@ if ( ! function_exists( 'stm_show_user_extra_fields' ) ) {
 
 				<td>
 					<input type="text" name="stm_payment_status" id="stm_payment_status"
-						   value="<?php echo esc_attr( get_the_author_meta( 'stm_payment_status', $user->ID ) ); ?>"
-						   class="regular-text"/>
+							value="<?php echo esc_attr( get_the_author_meta( 'stm_payment_status', $user->ID ) ); ?>"
+							class="regular-text"/>
 				</td>
 			</tr>
 
 			<tr>
 				<td>
-					<input type="hidden" name="stm_lost_password_hash" id="stm_lost_password_hash"
-						   value="<?php echo esc_attr( get_the_author_meta( 'stm_lost_password_hash', $user->ID ) ); ?>"
-						   class="regular-text"/>
+					<input type="hidden" name="stm_lost_password_hash" id="stm_lost_password_hash" value="<?php echo esc_attr( get_the_author_meta( 'stm_lost_password_hash', $user->ID ) ); ?>" class="regular-text"/>
 				</td>
 			</tr>
 
@@ -261,7 +259,9 @@ if ( ! function_exists( 'stm_save_user_extra_fields' ) ) {
 			return false;
 		}
 
-		update_user_meta( $user_id, 'stm_phone', sanitize_text_field( $_POST['stm_phone'] ) );
+		$phone = sanitize_text_field( preg_replace( '/[^0-9+]/', '', $_POST['stm_phone'] ?? '' ) );
+		update_user_meta( $user_id, 'stm_phone', $phone );
+
 		update_user_meta( $user_id, 'stm_whatsapp_number', sanitize_text_field( $_POST['stm_whatsapp_number'] ) );
 
 		// remove 'has whatsapp account' if no number is provided

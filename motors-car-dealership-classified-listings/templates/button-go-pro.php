@@ -399,116 +399,118 @@ if ( $is_promotion && ! empty( $freemius_info ) ) {
 		</div>
 	</section>
 	<?php
-	$feature_list_free = array(
-		__( 'Advanced Search Filters', 'stm_vehicles_listing' ),
-		__( 'Unlimited Custom Fields', 'stm_vehicles_listing' ),
-		__( 'Custom Field’s Filters', 'stm_vehicles_listing' ),
-		__( 'User Registration', 'stm_vehicles_listing' ),
-		__( 'Email Confirmation', 'stm_vehicles_listing' ),
-		__( 'Listings Management', 'stm_vehicles_listing' ),
-		__( 'Frontend Listing Submission', 'stm_vehicles_listing' ),
-		__( 'Comparing Listings', 'stm_vehicles_listing' ),
-		__( 'Test Drive Form', 'stm_vehicles_listing' ),
-		__( 'Add to Favorites', 'stm_vehicles_listing' ),
-		__( 'Free Listing Submission', 'stm_vehicles_listing' ),
-		__( 'Import Listings', 'stm_vehicles_listing' ),
-	);
+	if ( ! stm_is_motors_theme() ) {
+		$feature_list_free = array(
+			__( 'Advanced Search Filters', 'stm_vehicles_listing' ),
+			__( 'Unlimited Custom Fields', 'stm_vehicles_listing' ),
+			__( 'Custom Field’s Filters', 'stm_vehicles_listing' ),
+			__( 'User Registration', 'stm_vehicles_listing' ),
+			__( 'Email Confirmation', 'stm_vehicles_listing' ),
+			__( 'Listings Management', 'stm_vehicles_listing' ),
+			__( 'Frontend Listing Submission', 'stm_vehicles_listing' ),
+			__( 'Comparing Listings', 'stm_vehicles_listing' ),
+			__( 'Test Drive Form', 'stm_vehicles_listing' ),
+			__( 'Add to Favorites', 'stm_vehicles_listing' ),
+			__( 'Free Listing Submission', 'stm_vehicles_listing' ),
+			__( 'Import Listings', 'stm_vehicles_listing' ),
+		);
 
-	$feature_list_pro = array(
-		__( 'Dealer Registration', 'stm_vehicles_listing' ),
-		__( 'Similar Listings', 'stm_vehicles_listing' ),
-		__( 'Paid Featured Listing', 'stm_vehicles_listing' ),
-		__( 'Mark as Sold', 'stm_vehicles_listing' ),
-		__( 'Pay Per Submit', 'stm_vehicles_listing' ),
-		__( 'Loan Calculator', 'stm_vehicles_listing' ),
-		__( 'Sell a Listing Online', 'stm_vehicles_listing' ),
-		__( 'Listing Statistics', 'stm_vehicles_listing' ),
-		__( 'Search by location', 'stm_vehicles_listing' ),
-		__( 'WooCommerce Payment Gateways', 'stm_vehicles_listing' ),
-		__( 'Search by keywords', 'stm_vehicles_listing' ),
-		__( 'Social Login Addon', 'stm_vehicles_listing' ),
-		__( 'Radius Distance Search', 'stm_vehicles_listing' ),
-		__( 'Saved Searches Addon', 'stm_vehicles_listing' ),
-		__( 'Custom Sorting Options', 'stm_vehicles_listing' ),
-		__( 'VIN Decoder Addon', 'stm_vehicles_listing' ),
-		__( 'SEO-friendly URLs', 'stm_vehicles_listing' ),
-		__( 'Premium Elementor Widgets', 'stm_vehicles_listing' ),
-		__( 'Listing Templates', 'stm_vehicles_listing' ),
-		__( 'Motors Skins', 'stm_vehicles_listing' ),
-		__( 'WhatsApp Integration', 'stm_vehicles_listing' ),
-		__( 'Google Maps', 'stm_vehicles_listing' ),
-	);
+		$feature_list_pro = array(
+			__( 'Dealer Registration', 'stm_vehicles_listing' ),
+			__( 'Similar Listings', 'stm_vehicles_listing' ),
+			__( 'Paid Featured Listing', 'stm_vehicles_listing' ),
+			__( 'Mark as Sold', 'stm_vehicles_listing' ),
+			__( 'Pay Per Submit', 'stm_vehicles_listing' ),
+			__( 'Loan Calculator', 'stm_vehicles_listing' ),
+			__( 'Sell a Listing Online', 'stm_vehicles_listing' ),
+			__( 'Listing Statistics', 'stm_vehicles_listing' ),
+			__( 'Search by location', 'stm_vehicles_listing' ),
+			__( 'WooCommerce Payment Gateways', 'stm_vehicles_listing' ),
+			__( 'Search by keywords', 'stm_vehicles_listing' ),
+			__( 'Social Login Addon', 'stm_vehicles_listing' ),
+			__( 'Radius Distance Search', 'stm_vehicles_listing' ),
+			__( 'Saved Searches Addon', 'stm_vehicles_listing' ),
+			__( 'Custom Sorting Options', 'stm_vehicles_listing' ),
+			__( 'VIN Decoder Addon', 'stm_vehicles_listing' ),
+			__( 'SEO-friendly URLs', 'stm_vehicles_listing' ),
+			__( 'Premium Elementor Widgets', 'stm_vehicles_listing' ),
+			__( 'Listing Templates', 'stm_vehicles_listing' ),
+			__( 'Motors Skins', 'stm_vehicles_listing' ),
+			__( 'WhatsApp Integration', 'stm_vehicles_listing' ),
+			__( 'Google Maps', 'stm_vehicles_listing' ),
+		);
 
-	?>
-	<section class="mvl-compare">
-		<div class="container">
-			<div class="mvl-compare-wrapper">
-				<div class="mvl-compare-title">
-					<h2 class="heading mvl-compare-heading"><?php esc_html_e( 'Сomparison Table', 'stm_vehicle_listings' ); ?></h2>
-					<p class="mvl-compare-subtitle">
-						<?php esc_html_e( 'Choose the best option. Upgrade to Pro version just for', 'stm_vehicle_listings' ); ?>
-						<?php if ( $is_promotion ) : ?>
-							<span class="mvl-compare-price">
-								<?php echo esc_html( '$' . number_format( $freemius_info['plan']['licenses_1']->annual_price * 0.70, 0, '.', '' ) ); ?>
-							</span>
-						<?php else : ?>
-							<span class="mvl-compare-price">
-								<?php echo esc_html( '$' . number_format( $freemius_info['plan']['licenses_1']->annual_price, 0, '.', '' ) ); ?>
-							</span>
-						<?php endif; ?>
-					</p>
-				</div>
-				<div class="mvl-compare-items-header-wrapper">
-					<div class="mvl-compare-items-header-wrapper-item">
-						<h1 class="heading mvl-compare-item-name"><?php esc_html_e( 'Free', 'stm_vehicle_listings' ); ?></h1>
-						<p class="mvl-compare-item-descr"><?php esc_html_e( 'Motors Plugin', 'stm_vehicle_listings' ); ?></p>
+		?>
+		<section class="mvl-compare">
+			<div class="container">
+				<div class="mvl-compare-wrapper">
+					<div class="mvl-compare-title">
+						<h2 class="heading mvl-compare-heading"><?php esc_html_e( 'Сomparison Table', 'stm_vehicle_listings' ); ?></h2>
+						<p class="mvl-compare-subtitle">
+							<?php esc_html_e( 'Choose the best option. Upgrade to Pro version just for', 'stm_vehicle_listings' ); ?>
+							<?php if ( $is_promotion ) : ?>
+								<span class="mvl-compare-price">
+									<?php echo esc_html( '$' . number_format( $freemius_info['plan']['licenses_1']->annual_price * 0.70, 0, '.', '' ) ); ?>
+								</span>
+							<?php else : ?>
+								<span class="mvl-compare-price">
+									<?php echo esc_html( '$' . number_format( $freemius_info['plan']['licenses_1']->annual_price, 0, '.', '' ) ); ?>
+								</span>
+							<?php endif; ?>
+						</p>
 					</div>
-					<div class="mvl-compare-items-header-wrapper-item pro">
-						<h1 class="heading mvl-compare-item-name"><?php esc_html_e( 'Pro', 'stm_vehicle_listings' ); ?></h1>
-						<p class="mvl-compare-item-descr"><?php esc_html_e( 'including everything in the Free Plan plus:', 'stm_vehicle_listings' ); ?></p>
-					</div>
-				</div>
-				<div class="mvl-compare-table-wrapper">
-					<div class="mvl-compare-table-item">
-						<div class="mvl-compare-lists">
-							<ul class="mvl-compare-features-list">
-								<?php foreach ( $feature_list_free as $feature ) : ?>
-									<li class="mvl-compare-features-list-item">
-										<span class="mvl-compare-features-list-item-name"><i class="fa-solid fa-circle-check"></i><?php echo esc_html( $feature ); ?></span>
-									</li>
-								<?php endforeach; ?>
-							</ul>
+					<div class="mvl-compare-items-header-wrapper">
+						<div class="mvl-compare-items-header-wrapper-item">
+							<h1 class="heading mvl-compare-item-name"><?php esc_html_e( 'Free', 'stm_vehicle_listings' ); ?></h1>
+							<p class="mvl-compare-item-descr"><?php esc_html_e( 'Motors Plugin', 'stm_vehicle_listings' ); ?></p>
+						</div>
+						<div class="mvl-compare-items-header-wrapper-item pro">
+							<h1 class="heading mvl-compare-item-name"><?php esc_html_e( 'Pro', 'stm_vehicle_listings' ); ?></h1>
+							<p class="mvl-compare-item-descr"><?php esc_html_e( 'including everything in the Free Plan plus:', 'stm_vehicle_listings' ); ?></p>
 						</div>
 					</div>
-					<div class="mvl-compare-table-item pro">
-						<div class="mvl-compare-lists">
-							<ul class="mvl-compare-features-list">
-								<?php foreach ( $feature_list_pro as $index => $feature ) : ?>
-									<li class="mvl-compare-features-list-item <?php echo $index >= count( $feature_list_pro ) - 2 ? 'full-width' : ''; ?>">
-										<span class="mvl-compare-features-list-item-name"><i class="fa-solid fa-circle-check"></i><?php echo esc_html( $feature ); ?></span>
-									</li>
-								<?php endforeach; ?>
-							</ul>
+					<div class="mvl-compare-table-wrapper">
+						<div class="mvl-compare-table-item">
+							<div class="mvl-compare-lists">
+								<ul class="mvl-compare-features-list">
+									<?php foreach ( $feature_list_free as $feature ) : ?>
+										<li class="mvl-compare-features-list-item">
+											<span class="mvl-compare-features-list-item-name"><i class="fa-solid fa-circle-check"></i><?php echo esc_html( $feature ); ?></span>
+										</li>
+									<?php endforeach; ?>
+								</ul>
+							</div>
 						</div>
-						<div class="mvl-compare-get-wrapper">
-							<a href="<?php echo esc_url( 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=motorswpadmin&utm_campaign=motors-plugin&licenses=1' ); ?>" class="mvl-compare-get-btn" target="_blank">
-								<?php esc_html_e( 'Get From', 'stm_vehicle_listings' ); ?>
-								<?php if ( $is_promotion ) : ?>
-									<span class="mvl-compare-price">
-										<?php echo esc_html( '$' . number_format( $freemius_info['plan']['licenses_1']->annual_price * 0.70, 0, '.', '' ) ); ?>
-									</span>
-								<?php else : ?>
-									<span class="mvl-compare-price">
-										<?php echo esc_html( '$' . number_format( $freemius_info['plan']['licenses_1']->annual_price, 0, '.', '' ) ); ?>
-									</span>
-								<?php endif; ?>
-							</a>
+						<div class="mvl-compare-table-item pro">
+							<div class="mvl-compare-lists">
+								<ul class="mvl-compare-features-list">
+									<?php foreach ( $feature_list_pro as $index => $feature ) : ?>
+										<li class="mvl-compare-features-list-item <?php echo $index >= count( $feature_list_pro ) - 2 ? 'full-width' : ''; ?>">
+											<span class="mvl-compare-features-list-item-name"><i class="fa-solid fa-circle-check"></i><?php echo esc_html( $feature ); ?></span>
+										</li>
+									<?php endforeach; ?>
+								</ul>
+							</div>
+							<div class="mvl-compare-get-wrapper">
+								<a href="<?php echo esc_url( 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=motorswpadmin&utm_campaign=motors-plugin&licenses=1' ); ?>" class="mvl-compare-get-btn" target="_blank">
+									<?php esc_html_e( 'Get From', 'stm_vehicle_listings' ); ?>
+									<?php if ( $is_promotion ) : ?>
+										<span class="mvl-compare-price">
+											<?php echo esc_html( '$' . number_format( $freemius_info['plan']['licenses_1']->annual_price * 0.70, 0, '.', '' ) ); ?>
+										</span>
+									<?php else : ?>
+										<span class="mvl-compare-price">
+											<?php echo esc_html( '$' . number_format( $freemius_info['plan']['licenses_1']->annual_price, 0, '.', '' ) ); ?>
+										</span>
+									<?php endif; ?>
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</section>
+		</section>
+	<?php } ?>
 </div>
 
 <script>

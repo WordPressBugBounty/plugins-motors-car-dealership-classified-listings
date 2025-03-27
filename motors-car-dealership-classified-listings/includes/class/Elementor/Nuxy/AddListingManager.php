@@ -167,7 +167,7 @@ class AddListingManager {
 	private function listing_details() {
 
 		return array(
-			'addl_group_details_title' => array(
+			'addl_group_details_title'      => array(
 				'type'             => 'group_title',
 				'label'            => esc_html__( 'Details', 'stm_vehicles_listing' ),
 				'submenu'          => esc_html__( 'Listing creation form', 'stm_vehicles_listing' ),
@@ -180,42 +180,48 @@ class AddListingManager {
 				'preview_position' => 'preview_bottom',
 				'group'            => 'started',
 			),
-			'addl_required_fields'     => array(
+			'addl_required_fields'          => array(
 				'label'       => esc_html__( 'Required Categories', 'stm_vehicles_listing' ),
 				'description' => sprintf( esc_html__( 'Specify the categories under the Details section that must be filled out when creating a listing. Add new %s', 'stm_vehicles_listing' ), '<a href="' . admin_url( 'edit.php?post_type=listings&page=listing_categories' ) . '" target="_blank">' . esc_html__( 'category', 'stm_vehicles_listing' ) . '</a>' ),
 				'type'        => 'multi_checkbox',
 				'options'     => $this->get_main_taxonomies_to_fill(),
 				'submenu'     => esc_html__( 'Listing creation form', 'stm_vehicles_listing' ),
 			),
-			'addl_number_as_input'     => array(
+			'allow_dealer_add_new_category' => array(
+				'label'       => esc_html__( 'Enable category creation for dealers and users', 'stm_vehicles_listing' ),
+				'description' => esc_html__( 'Allow dealers and users to create new listing categories', 'stm_vehicles_listing' ),
+				'type'        => 'checkbox',
+				'submenu'     => esc_html__( 'Listing creation form', 'stm_vehicles_listing' ),
+			),
+			'addl_number_as_input'          => array(
 				'label'       => esc_html__( 'Convert numeric categories to input field', 'stm_vehicles_listing' ),
 				'description' => esc_html__( 'Modify numeric required categories into input fields', 'stm_vehicles_listing' ),
 				'type'        => 'checkbox',
 				'value'       => true,
 				'submenu'     => esc_html__( 'Listing creation form', 'stm_vehicles_listing' ),
 			),
-			'addl_show_registered'     => array(
+			'addl_show_registered'          => array(
 				'label'       => esc_html__( 'Vehicle production date', 'stm_vehicles_listing' ),
 				'description' => esc_html__( 'Include a field for entering date when vehicles were manufactured', 'stm_vehicles_listing' ),
 				'type'        => 'checkbox',
 				'value'       => true,
 				'submenu'     => esc_html__( 'Listing creation form', 'stm_vehicles_listing' ),
 			),
-			'addl_show_vin'            => array(
+			'addl_show_vin'                 => array(
 				'label'       => esc_html__( 'VIN', 'stm_vehicles_listing' ),
 				'description' => esc_html__( 'Include a field for entering VIN for detailed listing information', 'stm_vehicles_listing' ),
 				'type'        => 'checkbox',
 				'value'       => true,
 				'submenu'     => esc_html__( 'Listing creation form', 'stm_vehicles_listing' ),
 			),
-			'addl_show_history'        => array(
+			'addl_show_history'             => array(
 				'label'       => esc_html__( 'History', 'stm_vehicles_listing' ),
 				'description' => esc_html__( 'Add a field to enter information about the vehicle history', 'stm_vehicles_listing' ),
 				'type'        => 'checkbox',
 				'value'       => true,
 				'submenu'     => esc_html__( 'Listing creation form', 'stm_vehicles_listing' ),
 			),
-			'addl_history_report'      => array(
+			'addl_history_report'           => array(
 				'label'       => esc_html__( 'Services to check history', 'stm_vehicles_listing' ),
 				'description' => esc_html__( 'Specify the allowed services to add links to the reports, separated by commas, such as Carfax, AutoCheck, etc.', 'stm_vehicles_listing' ),
 				'type'        => 'text',
@@ -226,7 +232,7 @@ class AddListingManager {
 					'value' => 'not_empty',
 				),
 			),
-			'addl_details_location'    => array(
+			'addl_details_location'         => array(
 				'label'   => esc_html__( 'Location', 'stm_vehicles_listing' ),
 				'type'    => 'checkbox',
 				'value'   => true,

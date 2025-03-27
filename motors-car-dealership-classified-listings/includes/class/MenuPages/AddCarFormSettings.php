@@ -11,7 +11,6 @@ class AddCarFormSettings extends MenuBase {
 		$this->nuxy_option_name = MVL_Const::ADD_CAR_FORM_OPT_NAME;
 		$this->nuxy_title       = esc_html__( 'Add Listing Form', 'stm_vehicles_listing' );
 		$this->nuxy_subtitle    = esc_html__( 'Add Listing Form', 'stm_vehicles_listing' );
-		$this->nuxy_title       = esc_html__( 'Add Listing Form', 'stm_vehicles_listing' );
 		$this->nuxy_menu_slug   = MVL_Const::ADD_CAR_FORM_OPT_NAME;
 		$this->menu_position    = 12;
 

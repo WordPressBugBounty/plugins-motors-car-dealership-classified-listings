@@ -489,8 +489,13 @@ function stm_listings_ajax_save_user_data() {
 		);
 
 		foreach ( $changed_info as $change_to_key => $change_info ) {
-			if ( ! empty( $_POST[ $change_to_key ] ) ) {
-				$escaped_value = sanitize_text_field( $_POST[ $change_to_key ] );
+			if ( isset( $_POST[ $change_to_key ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
+				$escaped_value = $_POST[ $change_to_key ];
+				if ( 'stm_phone' === $change_to_key ) {
+					$escaped_value = preg_replace( '/[^0-9+\-\(\)\s]/', '', $escaped_value );
+				} else {
+					$escaped_value = sanitize_text_field( $escaped_value );
+				}
 				update_user_meta( $user_id, $change_info, $escaped_value );
 			}
 		}
@@ -764,7 +769,8 @@ if ( ! function_exists( 'stm_ajax_get_seller_phone' ) ) {
 	function stm_ajax_get_seller_phone() {
 		check_ajax_referer( 'stm_security_nonce', 'security' );
 
-		$phone_number = get_user_meta( filter_var( $_GET['phone_owner_id'], FILTER_SANITIZE_NUMBER_INT ), 'stm_phone', true );
+		$phone_owner_id = isset( $_GET['phone_owner_id'] ) ? intval( $_GET['phone_owner_id'] ) : 0;
+		$phone_number   = get_user_meta( $phone_owner_id, 'stm_phone', true );
 
 		if ( isset( $_GET['listing_id'] ) && ! empty( $_GET['listing_id'] ) && 0 !== $_GET['listing_id'] ) {
 

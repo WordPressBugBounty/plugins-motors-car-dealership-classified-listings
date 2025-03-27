@@ -5,10 +5,6 @@ add_filter(
 	'mvl_get_all_nuxy_config',
 	function ( $global_conf ) {
 
-		if ( ! apply_filters( 'motors_plugin_setting_classified_show', true ) || get_template() === 'motors' ) {
-			return $global_conf;
-		}
-
 		$config_fields = array();
 
 		if ( get_template() === 'motors-starter-theme' ) {
@@ -198,18 +194,83 @@ add_filter(
 			),
 		);
 
-		$fields = apply_filters(
-			'style_settings_colors',
-			array_merge(
-				$config_fields,
-				$palette_fields,
-				$font_color_fields,
-				$other_colors_fields,
-				$success_colors_fields,
-				$notices_colors_fields,
-				$errors_colors_fields,
-			)
+		$card_palette = array(
+			'card_color_title'          => array(
+				'type'    => 'group_title',
+				'label'   => esc_html__( 'Grid/List card', 'stm_vehicles_listing' ),
+				'submenu' => esc_html__( 'Colors', 'stm_vehicles_listing' ),
+				'group'   => 'started',
+			),
+			'card_bg_color'             => array(
+				'label'         => esc_html__( 'Background', 'stm_vehicles_listing' ),
+				'type'          => 'color',
+				'value'         => Colors::value( 'card_bg_color' ),
+				'submenu'       => esc_html__( 'Colors', 'stm_vehicles_listing' ),
+				'default_value' => '#ffffff',
+			),
+			'card_title_color'          => array(
+				'label'         => esc_html__( 'Title & Price', 'stm_vehicles_listing' ),
+				'type'          => 'color',
+				'value'         => Colors::value( 'card_title_color' ),
+				'submenu'       => esc_html__( 'Colors', 'stm_vehicles_listing' ),
+				'default_value' => '#111827',
+			),
+			'card_options_color'        => array(
+				'label'         => esc_html__( 'Listing Options & Popup Items', 'stm_vehicles_listing' ),
+				'type'          => 'color',
+				'value'         => Colors::value( 'card_options_color' ),
+				'submenu'       => esc_html__( 'Colors', 'stm_vehicles_listing' ),
+				'default_value' => '#4E5562',
+			),
+			'card_popup_hover_bg_color' => array(
+				'label'         => esc_html__( 'Popup Item Hover BG', 'stm_vehicles_listing' ),
+				'type'          => 'color',
+				'value'         => Colors::value( 'card_popup_hover_bg_color' ),
+				'submenu'       => esc_html__( 'Colors', 'stm_vehicles_listing' ),
+				'default_value' => '#f9f9f9',
+			),
+			'card_btn_color'            => array(
+				'label'         => esc_html__( 'Button', 'stm_vehicles_listing' ),
+				'type'          => 'color',
+				'value'         => Colors::value( 'accent_color' ),
+				'submenu'       => esc_html__( 'Colors', 'stm_vehicles_listing' ),
+				'default_value' => '#1280DF',
+				'group'         => 'ended',
+			),
 		);
+
+		if ( stm_is_motors_theme() ) {
+
+			unset( $other_colors_fields['filter_inputs_color'] );
+
+			if ( 'default' === apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'grid_card_skin' ) && 'default' === apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'list_card_skin' ) ) {
+				return $global_conf;
+			}
+
+			$other_colors_fields['other_colors_title']['label'] = esc_html__( 'Badges', 'stm_vehicles_listing' );
+
+			$fields = apply_filters(
+				'style_settings_colors',
+				array_merge(
+					$other_colors_fields,
+					$card_palette
+				)
+			);
+		} else {
+			$fields = apply_filters(
+				'style_settings_colors',
+				array_merge(
+					$config_fields,
+					$palette_fields,
+					$font_color_fields,
+					$other_colors_fields,
+					$success_colors_fields,
+					$notices_colors_fields,
+					$errors_colors_fields,
+					$card_palette
+				)
+			);
+		}
 
 		$conf = array(
 			'name'   => esc_html__( 'Appearance', 'stm_vehicles_listing' ),

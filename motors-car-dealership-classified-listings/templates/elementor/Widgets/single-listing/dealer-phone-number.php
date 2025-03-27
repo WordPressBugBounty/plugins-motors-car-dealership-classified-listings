@@ -19,7 +19,7 @@ $user          = apply_filters( 'stm_get_user_custom_fields', $user_id );
 				<span class="phone"><?php echo esc_attr( $user['phone'] ); ?></span>
 			<?php endif; ?>
 		<?php else : ?>
-			<span class="phone"><?php echo wp_kses_post( substr_replace( $user['phone'], '*******', 3, strlen( $user['phone'] ) ) ); ?></span>
+			<span class="phone"><?php echo esc_html( substr_replace( $user['phone'], '*******', 3, strlen( $user['phone'] ) ) ); ?></span>
 			<span class="stm-show-number" data-listing-id="<?php echo intval( $listing_id ); ?>" data-id="<?php echo esc_attr( $user['user_id'] ); ?>"><?php echo esc_html( $dpn_show_number ); ?></span>
 		<?php endif; ?>
 	</div>

@@ -23,7 +23,7 @@ if ( ! empty( $special_img_id ) ) {
 		<input type="text" name="badge_text" value="<?php echo esc_attr( $badge_text ); ?>" />
 		<h4><?php esc_html_e( 'Badge Color', 'stm_vehicles_listing' ); ?></h4>
 		<input type="text" name="badge_bg_color" id="badge_bg_color" class="color-field" value="<?php echo esc_attr( $badge_color ); ?>" />
-		<?php if ( apply_filters( 'is_mvl_pro', false ) || apply_filters( 'stm_is_motors_theme', false ) ) : ?>
+		<?php if ( apply_filters( 'is_mvl_pro', false ) ) : ?>
 			<div class="special-offer-wrapper">
 				<hr>
 				<h4><?php esc_html_e( 'Special Offer Text', 'stm_vehicles_listing' ); ?></h4>

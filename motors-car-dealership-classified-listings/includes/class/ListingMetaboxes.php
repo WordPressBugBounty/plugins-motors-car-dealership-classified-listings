@@ -42,7 +42,7 @@ class ListingMetaboxes {
 			'side',
 			'default',
 		);
-		if ( apply_filters( 'is_mvl_pro', false ) || apply_filters( 'stm_is_motors_theme', false ) ) {
+		if ( apply_filters( 'is_mvl_pro', false ) ) {
 			add_meta_box(
 				'sell_car_online',
 				esc_html__( 'Listing Sale Actions', 'stm_vehicles_listing' ),
@@ -121,7 +121,7 @@ class ListingMetaboxes {
 			'badge_bg_color',
 		);
 
-		if ( apply_filters( 'is_mvl_pro', false ) || apply_filters( 'stm_is_motors_theme', false ) ) {
+		if ( apply_filters( 'is_mvl_pro', false ) ) {
 			$metabox_fields[] = 'car_mark_as_sold';
 			$metabox_fields[] = 'special_text';
 			$metabox_fields[] = 'special_image';

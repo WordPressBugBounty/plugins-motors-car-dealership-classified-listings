@@ -42,7 +42,12 @@
 					parent.find('.stm-show-number').hide()
 					parent
 						.find('.phone')
-						.html('<a href="tel:' + data + '">' + data + '</a>')
+						.html('')
+						.append(
+							$('<a>')
+								.attr('href', 'tel:' + data)
+								.text(data)
+						)
 				},
 			})
 		})

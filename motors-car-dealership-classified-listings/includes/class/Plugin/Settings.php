@@ -304,7 +304,12 @@ class Settings {
 	}
 
 	public function mvl_add_submenu_upgrade() {
-		if ( ! is_mvl_pro() && ! stm_is_motors_theme() ) {
+
+		if ( apply_filters( 'stm_hide_pro_if_is_premium_theme', false ) ) {
+			return;
+		}
+
+		if ( ! is_mvl_pro() ) {
 			add_submenu_page(
 				'mvl_plugin_settings',
 				__( 'Upgrade', 'stm_vehicles_listing' ),

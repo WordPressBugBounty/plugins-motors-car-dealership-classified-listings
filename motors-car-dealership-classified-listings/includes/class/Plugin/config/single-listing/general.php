@@ -20,21 +20,3 @@ add_filter(
 	10,
 	1
 );
-
-add_filter(
-	'single_listing_conf',
-	function ( $conf_for_merge ) {
-		$conf = array(
-			'allow_dealer_add_new_category'            => array(
-				'label'       => esc_html__( 'Enable category creation for dealers and users', 'stm_vehicles_listing' ),
-				'description' => esc_html__( 'Allow dealers and users to create new listing categories', 'stm_vehicles_listing' ),
-				'type'        => 'checkbox',
-				'submenu'     => esc_html__( 'General', 'stm_vehicles_listing' ),
-			),
-		);
-
-		return array_merge( $conf_for_merge, $conf );
-	},
-	10,
-	1
-);

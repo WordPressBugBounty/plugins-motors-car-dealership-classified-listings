@@ -124,5 +124,20 @@ add_action(
 				update_option( 'motors_vehicles_listing_section_settings_updated', true );
 			}
 		}
+
+		if ( version_compare( STM_LISTINGS_V, '1.4.37' ) > 0 ) {
+			$add_car_form_settings_map = wpcfto_get_settings_map( 'settings', \MotorsVehiclesListing\Plugin\MVL_Const::ADD_CAR_FORM_OPT_NAME );
+			$listing_details           = get_option( \MotorsVehiclesListing\Plugin\MVL_Const::LISTING_DETAILS_OPT_NAME, array() );
+
+			if ( isset( $add_car_form_settings_map['add_listing']['fields']['allow_dealer_add_new_category'] ) && isset( $listing_details['allow_dealer_add_new_category'] ) ) {
+				$allow_dealer_add_new_category = $listing_details['allow_dealer_add_new_category'];
+				unset( $listing_details['allow_dealer_add_new_category'] );
+				update_option( \MotorsVehiclesListing\Plugin\MVL_Const::LISTING_DETAILS_OPT_NAME, $listing_details );
+
+				$add_car_options                                  = get_option( \MotorsVehiclesListing\Plugin\MVL_Const::ADD_CAR_FORM_OPT_NAME, array() );
+				$add_car_options['allow_dealer_add_new_category'] = $allow_dealer_add_new_category;
+				update_option( \MotorsVehiclesListing\Plugin\MVL_Const::ADD_CAR_FORM_OPT_NAME, $add_car_options );
+			}
+		}
 	}
 );

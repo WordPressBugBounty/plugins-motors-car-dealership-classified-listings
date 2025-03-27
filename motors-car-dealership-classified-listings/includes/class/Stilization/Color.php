@@ -116,7 +116,6 @@ class Color {
 		if ( $alphachannel <= 0 ) {
 			return $this->default_value;
 		} else {
-			;
 			$default = $this->alphachannel;
 			$this->set_alphachannel( $alphachannel );
 			$value = apply_filters( 'stm_color_value', $this->value, $this->id, $alphachannel );

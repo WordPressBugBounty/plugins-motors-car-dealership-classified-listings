@@ -969,7 +969,6 @@ if ( ! function_exists( 'stm_verify_user_by_token' ) ) {
 
 			if ( ! is_wp_error( $user_id ) ) {
 				$redirect_url = get_author_posts_url( $user_id );
-
 				update_user_meta( $user_id, 'stm_phone', $user_phone );
 				update_user_meta( $user_id, 'stm_show_email', 'on' );
 
