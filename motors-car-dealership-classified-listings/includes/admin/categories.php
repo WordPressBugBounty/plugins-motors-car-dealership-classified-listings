@@ -396,7 +396,7 @@ function motors_page_options_groups() {
 	$response['display']['label'] = __( 'Display Settings', 'stm_vehicles_listing' );
 	$response['filter']['label']  = __( 'Filter settings', 'stm_vehicles_listing' );
 
-	return $response;
+	return apply_filters( 'mvl_custom_fields_settings', $response );
 }
 
 function stm_listings_categories_admin_enqueue( $hook ) {

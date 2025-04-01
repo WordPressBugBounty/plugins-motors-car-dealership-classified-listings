@@ -6,11 +6,13 @@ add_filter(
 		if ( ! apply_filters( 'is_mvl_pro', false ) ) {
 			$conf = array(
 				'dealer_settings_banner' => array(
-					'type'    => 'pro_banner',
-					'label'   => esc_html__( 'Dealer Settings', 'stm_vehicles_listing' ),
-					//'img'   => STM_LISTINGS_URL . '/assets/images/pro/payouts.png',
-					'desc'    => esc_html__( 'Manage settings for users with the Dealer role', 'stm_vehicles_listing' ),
-					'submenu' => esc_html__( 'Dealer', 'stm_vehicles_listing' ),
+					'type'            => 'pro_banner',
+					'label'           => esc_html__( 'Dealer Settings', 'stm_vehicles_listing' ),
+					'img'             => STM_LISTINGS_URL . '/assets/images/pro/dealer_settings_banner.png',
+					'desc'            => esc_html__( 'Let dealers submit listings for free or charge a fee, and control how their listings are published. Enable user reviews to rate dealers on customer service, buying experience, and overall satisfaction.', 'stm_vehicles_listing' ),
+					'submenu'         => esc_html__( 'Dealer', 'stm_vehicles_listing' ),
+					'second_btn_text' => esc_html__( 'Learn more', 'stm_vehicles_listing' ),
+					'second_btn_link' => esc_url( 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/motors-plugin-settings/profile/dealer-pro-feature' ),
 				),
 			);
 		} else {

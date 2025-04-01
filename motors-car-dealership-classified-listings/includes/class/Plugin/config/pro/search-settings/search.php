@@ -29,10 +29,12 @@ add_filter(
 		if ( ! apply_filters( 'is_mvl_pro', false ) ) {
 			$search = array(
 				'search_by_key_settings_banner' => array(
-					'type'  => 'pro_banner',
-					'label' => esc_html__( 'Search by keywords', 'stm_vehicles_listing' ),
-					//'img'   => STM_LISTINGS_URL . '/assets/images/pro/payouts.png',
-					'desc'  => esc_html__( 'Users can make a search based on the keywords through all listings', 'stm_vehicles_listing' ),
+					'type'            => 'pro_banner',
+					'label'           => esc_html__( 'Keyword Search', 'stm_vehicles_listing' ),
+					'img'             => STM_LISTINGS_URL . '/assets/images/pro/search_by_key_settings_banner.png',
+					'desc'            => esc_html__( 'Add flexible search options and let users search listings using specific keywords or phrases. Improve the user experience so they can find exactly what they need with relevant search terms.', 'stm_vehicles_listing' ),
+					'second_btn_text' => esc_html__( 'Learn more', 'stm_vehicles_listing' ),
+					'second_btn_link' => esc_url( 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/listing-manager-settings/search-filters#search-by-keywords-pro-feature' ),
 					'preview'     => STM_LISTINGS_URL . '/assets/images/previews/search-by-keywords-sf.png',
 				),
 			);

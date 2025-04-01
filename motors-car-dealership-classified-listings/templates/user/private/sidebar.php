@@ -43,6 +43,13 @@ $current_page = apply_filters( 'stm_account_current_page', '' );
 
 	</div>
 
+	<?php if ( ! apply_filters( 'stm_pricing_enabled', false ) && apply_filters( 'motors_vl_get_nuxy_mod', false, 'become_a_dealer' ) ) : ?>
+		<div class="stm-became-dealer">
+			<a href="<?php echo esc_url( add_query_arg( array( 'become_dealer' => 1 ), apply_filters( 'stm_get_author_link', '' ) ) ); ?>"
+			   class="button stm-dp-in"><?php esc_html_e( 'Become a dealer', 'motors' ); ?></a>
+		</div>
+	<?php endif; ?>
+
 	<div class="stm-actions-list heading-font">
 
 		<a class="<?php echo esc_attr( 'inventory' === $current_page ) ? 'active' : ''; ?>" href="<?php echo esc_url( apply_filters( 'stm_get_author_link', '' ) ); ?>">

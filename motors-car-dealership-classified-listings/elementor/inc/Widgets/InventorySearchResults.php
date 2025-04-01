@@ -26,6 +26,7 @@ class InventorySearchResults extends WidgetBase {
 				'action-buttons-popup' => '/assets/css/listing-card/actions-popup.css',
 				'special_label'        => '/assets/css/listing-card/special-label.css',
 				'certificates'         => '/assets/css/listing-card/certificates.css',
+				'label'                => '/assets/css/listing-card/label.css',
 			);
 
 			foreach ( $styles as $key => $path ) {
@@ -62,7 +63,7 @@ class InventorySearchResults extends WidgetBase {
 		$widget_styles[] = 'motors-listing-card-action-buttons-popup';
 		$widget_styles[] = 'motors-listing-card-special_label';
 		$widget_styles[] = 'motors-listing-card-certificates';
-
+		$widget_styles[] = 'motors-listing-card-label';
 		return $widget_styles;
 	}
 

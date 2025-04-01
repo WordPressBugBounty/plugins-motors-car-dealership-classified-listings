@@ -5,10 +5,12 @@ add_filter(
 		if ( ! apply_filters( 'is_mvl_pro', false ) ) {
 			$conf = array(
 				'location_settings_banner' => array(
-					'type'  => 'pro_banner',
-					'label' => esc_html__( 'Filter by location Settings', 'stm_vehicles_listing' ),
-					//'img'   => STM_LISTINGS_URL . '/assets/images/pro/payouts.png', //phpcs:ignore
-					'desc'  => esc_html__( 'The search results can be filtered based on location', 'stm_vehicles_listing' ),
+					'type'            => 'pro_banner',
+					'label'           => esc_html__( 'Filter by Location Feature', 'stm_vehicles_listing' ),
+					'img'             => STM_LISTINGS_URL . '/assets/images/pro/location_settings_banner.png',
+					'desc'            => esc_html__( 'Let users search listings based on their preferred location. It allows potential buyers to narrow down their search to listings in their area, making it quicker for them to find the vehicle nearby.', 'stm_vehicles_listing' ),
+					'second_btn_text' => esc_html__( 'Learn more', 'stm_vehicles_listing' ),
+					'second_btn_link' => esc_url( 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/listing-manager-settings/search-filters#filter-by-location-pro-feature' ),
 					'preview'     => STM_LISTINGS_URL . '/assets/images/previews/filter-by-location-sf.png',
 				),
 			);

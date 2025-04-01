@@ -59,6 +59,10 @@ $templatePart = 'inc/email_template_manager/templates';
 				<a class="nav-link" id="v-pills-user_listing_approved-tab" data-toggle="pill"
 					href="#v-pills-user_listing_approved" role="tab" aria-controls="v-pills-user_listing_approved"
 					aria-selected="false">User listing approved</a>
+					<?php if ( is_mvl_addon_enabled( 'saved_search' ) ) : ?>
+				<a class="nav-link" id="v-pills-saved_search-tab" data-toggle="pill" href="#v-pills-saved_search"
+					role="tab" aria-controls="v-pills-saved_search" aria-selected="false">Saved Search</a>
+					<?php endif; ?>
 			</div>
 			<div class="tab-content" id="v-pills-tabContent">
 				<div class="tab-pane fade show active" id="v-pills-welcome" role="tabpanel"
@@ -127,6 +131,12 @@ $templatePart = 'inc/email_template_manager/templates';
 					aria-labelledby="v-pills-settings-tab">
 					<?php do_action( 'etm_load_template', 'user_listing_approved_form' ); ?>
 				</div>
+				<?php if ( is_mvl_addon_enabled( 'saved_search' ) ) : ?>
+				<div class="tab-pane fade" id="v-pills-saved_search" role="tabpanel"
+					aria-labelledby="v-pills-settings-tab">
+					<?php do_action( 'etm_load_template', 'saved_search' ); ?>
+				</div>
+				<?php endif; ?>
 			</div>
 		</div>
 		<input type="hidden" name="update_email_templates" value="true"/>

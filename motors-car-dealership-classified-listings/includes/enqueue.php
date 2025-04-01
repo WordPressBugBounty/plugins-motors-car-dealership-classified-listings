@@ -270,6 +270,7 @@ if ( ! function_exists( 'init_motors_root_colors' ) ) {
 				--mvl-fourth-color: ' . $fourth_color . ';
 				
 				--motors-accent-color: ' . Colors::value( 'accent_color' ) . ';
+				--motors-accent-color-lowalpha: ' . Colors::value( 'accent_color', 0.6 ) . ';
 				--motors-bg-shade: ' . Colors::value( 'bg_shade' ) . ';
 				--motors-bg-color: ' . Colors::value( 'bg_color' ) . ';
 				--motors-bg-lowalpha-color: ' . Colors::value( 'bg_color', 0.3 ) . ';
@@ -296,14 +297,18 @@ if ( ! function_exists( 'init_motors_root_colors' ) ) {
 				--motors-notice-text-color: ' . Colors::value( 'notice_text_color' ) . ';
 				--motors-success-text-color: ' . Colors::value( 'success_text_color' ) . ';
 				--motors-filter-inputs-color: ' . Colors::value( 'filter_inputs_color' ) . ';
-				
+
 				--motors-card-bg-color: ' . Colors::value( 'card_bg_color', -1.0, '#ffffff' ) . ';
+				--motors-card-bg-hover-color: ' . Colors::value( 'card_bg_color_hover', -1.0, '#ffffff' ) . ';
 				--motors-card-title-color: ' . Colors::value( 'card_title_color', -1.0, '#111827' ) . ';
-				--motors-card-price-color: ' . Colors::value( 'card_title_color', 0.6, '#11182706' ) . ';
+				--motors-card-price-color: ' . Colors::value( 'card_title_color', 0.4, '#11182706' ) . ';
+				--motors-card-border-color: ' . Colors::value( 'card_title_color', 0.15, '#11182706' ) . ';
 				--motors-card-options-color: ' . Colors::value( 'card_options_color', -1.0, '#4E5562' ) . ';
+				--motors-card-options-color-super-low-alpha: ' . Colors::value( 'card_options_color', 0.15, '#4E5562' ) . ';
 				--motors-card-btn-color: ' . Colors::value( 'card_btn_color', -1.0, '#1280DF' ) . ';
 				--motors-card-popup-hover-bg-color: ' . Colors::value( 'card_popup_hover_bg_color', -1.0, '#f9f9f9' ) . ';
 				--motors-card-popup-border-color: ' . Colors::value( 'card_title_color', 0.15, '#11182706' ) . ';
+				--motors-card-btn-color-lowalpha: ' . Colors::value( 'card_btn_color', 0.6 ) . ';
 			}
 		';
 

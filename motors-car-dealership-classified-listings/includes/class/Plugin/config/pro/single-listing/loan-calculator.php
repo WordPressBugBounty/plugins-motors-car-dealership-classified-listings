@@ -5,11 +5,13 @@ add_filter(
 		if ( ! apply_filters( 'is_mvl_pro', false ) ) {
 			$conf = array(
 				'loan_calculator_settings_banner' => array(
-					'type'    => 'pro_banner',
-					'label'   => esc_html__( 'Loan Calculator Settings', 'stm_vehicles_listing' ),
-					//'img'   => STM_LISTINGS_URL . '/assets/images/pro/payouts.png',
-					'desc'    => esc_html__( 'Calculate auto loans by entering the item price and loan conditions', 'stm_vehicles_listing' ),
-					'submenu' => esc_html__( 'Loan calculator', 'stm_vehicles_listing' ),
+					'type'            => 'pro_banner',
+					'label'           => esc_html__( 'Loan Calculator', 'stm_vehicles_listing' ),
+					'img'             => STM_LISTINGS_URL . '/assets/images/pro/loan_calculator_settings_banner.png',
+					'desc'            => esc_html__( 'Define values and settings for calculating loan payments. Users can calculate their estimated monthly payments based on key inputs such as vehicle price, interest rate, loan term, and down payment.', 'stm_vehicles_listing' ),
+					'submenu'         => esc_html__( 'Loan calculator', 'stm_vehicles_listing' ),
+					'second_btn_text' => esc_html__( 'Learn More', 'stm_vehicles_listing' ),
+					'second_btn_link' => esc_url( 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/listing-manager-settings/listing-page-details/loan-calculator-pro-feature' ),
 				),
 			);
 		} else {

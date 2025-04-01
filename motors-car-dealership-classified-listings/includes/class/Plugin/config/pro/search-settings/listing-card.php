@@ -17,7 +17,7 @@ function mvl_listing_grid_card_settings( $conf ) {
 		array(
 			'grid_card_skin'      => array(
 				'type'       => 'nuxy-radio',
-				'label'      => esc_html__( 'Grid Card Skins', 'stm_vehicles_listing' ),
+				'label'      => esc_html__( 'Listing Card Skins', 'stm_vehicles_listing' ),
 				'value'      => 'skin_1',
 				'options'    => array(
 					array(
@@ -30,7 +30,40 @@ function mvl_listing_grid_card_settings( $conf ) {
 						'alt'           => 'Modern',
 						'img'           => STM_LISTINGS_URL . '/assets/images/pro/listing-card/grid-1.png',
 						'disabled'      => ! is_mvl_pro(),
-						'preview_url'   => 'https://motors-plugin.stylemixthemes.com/inventory/?mvl=pro',
+						'preview_url'   => 'https://motors-plugin.stylemixthemes.com/modern-card-skin?view_type=grid',
+						'preview_label' => esc_html__( 'Preview', 'stm_vehicles_listing' ),
+						'pricing_url'   => admin_url( 'admin.php?page=mvl-go-pro' ),
+						'pricing_label' => esc_html__( 'Upgrade to PRO', 'stm_vehicles_listing' ),
+						'lock_icon'     => esc_url( STM_LISTINGS_URL . '/assets/images/pro/lock-pro.svg' ),
+					),
+					array(
+						'value'         => 'skin_2',
+						'alt'           => 'Elegant',
+						'img'           => STM_LISTINGS_URL . '/assets/images/pro/listing-card/grid-2.png',
+						'disabled'      => ! is_mvl_pro(),
+						'preview_url'   => 'https://motors-plugin.stylemixthemes.com/elegant-card-skin?view_type=grid',
+						'preview_label' => esc_html__( 'Preview', 'stm_vehicles_listing' ),
+						'pricing_url'   => admin_url( 'admin.php?page=mvl-go-pro' ),
+						'pricing_label' => esc_html__( 'Upgrade to PRO', 'stm_vehicles_listing' ),
+						'lock_icon'     => esc_url( STM_LISTINGS_URL . '/assets/images/pro/lock-pro.svg' ),
+					),
+					array(
+						'value'         => 'skin_3',
+						'alt'           => 'Compact',
+						'img'           => STM_LISTINGS_URL . '/assets/images/pro/listing-card/grid-3.png',
+						'disabled'      => ! is_mvl_pro(),
+						'preview_url'   => 'https://motors-plugin.stylemixthemes.com/compact-card-skin?view_type=grid',
+						'preview_label' => esc_html__( 'Preview', 'stm_vehicles_listing' ),
+						'pricing_url'   => admin_url( 'admin.php?page=mvl-go-pro' ),
+						'pricing_label' => esc_html__( 'Upgrade to PRO', 'stm_vehicles_listing' ),
+						'lock_icon'     => esc_url( STM_LISTINGS_URL . '/assets/images/pro/lock-pro.svg' ),
+					),
+					array(
+						'value'         => 'skin_4',
+						'alt'           => 'Luxury',
+						'img'           => STM_LISTINGS_URL . '/assets/images/pro/listing-card/grid-4.png',
+						'disabled'      => ! is_mvl_pro(),
+						'preview_url'   => 'https://motors-plugin.stylemixthemes.com/luxury-card-skin?view_type=grid',
 						'preview_label' => esc_html__( 'Preview', 'stm_vehicles_listing' ),
 						'pricing_url'   => admin_url( 'admin.php?page=mvl-go-pro' ),
 						'pricing_label' => esc_html__( 'Upgrade to PRO', 'stm_vehicles_listing' ),
@@ -45,11 +78,11 @@ function mvl_listing_grid_card_settings( $conf ) {
 				'group'      => 'started',
 			),
 			'grid_skin_show_logo' => array(
-				'label'        => esc_html__( 'Field to display as logo', 'stm_vehicles_listing' ),
+				'label'        => esc_html__( 'Field for Listing Logo', 'stm_vehicles_listing' ),
 				'type'         => 'select',
 				'options'      => $taxonomies,
 				'default'      => 'make',
-				'description'  => esc_html__( 'Choose a custom field that will be displayed as the logo on listing cards', 'stm_vehicles_listing' ),
+				'description'  => esc_html__( 'Select a custom field (e.g., Make, Model, Year) to show as the main logo on listing cards.', 'stm_vehicles_listing' ),
 				'dependency'   => array(
 					array(
 						'key'   => 'listing_view_type',
@@ -57,7 +90,7 @@ function mvl_listing_grid_card_settings( $conf ) {
 					),
 					array(
 						'key'   => 'grid_card_skin',
-						'value' => 'skin_1',
+						'value' => 'skin_1||skin_2||skin_3||skin_4',
 					),
 				),
 				'dependencies' => '&&',
@@ -67,7 +100,7 @@ function mvl_listing_grid_card_settings( $conf ) {
 			),
 			'list_card_skin'      => array(
 				'type'       => 'data_select',
-				'label'      => esc_html__( 'List Card Skins', 'stm_vehicles_listing' ),
+				'label'      => esc_html__( 'Listing Card Skins', 'stm_vehicles_listing' ),
 				'value'      => 'skin_1',
 				'options'    => array(
 					array(
@@ -80,7 +113,40 @@ function mvl_listing_grid_card_settings( $conf ) {
 						'alt'           => 'Modern',
 						'img'           => STM_LISTINGS_URL . '/assets/images/pro/listing-card/list-1.png',
 						'disabled'      => ! is_mvl_pro(),
-						'preview_url'   => 'https://motors-plugin.stylemixthemes.com/inventory/?mvl=pro',
+						'preview_url'   => 'https://motors-plugin.stylemixthemes.com/modern-card-skin?view_type=list',
+						'preview_label' => esc_html__( 'Preview', 'stm_vehicles_listing' ),
+						'pricing_url'   => admin_url( 'admin.php?page=mvl-go-pro' ),
+						'pricing_label' => esc_html__( 'Upgrade to PRO', 'stm_vehicles_listing' ),
+						'lock_icon'     => esc_url( STM_LISTINGS_URL . '/assets/images/pro/lock-pro.svg' ),
+					),
+					array(
+						'value'         => 'skin_2',
+						'alt'           => 'Elegant',
+						'img'           => STM_LISTINGS_URL . '/assets/images/pro/listing-card/list-2.png',
+						'disabled'      => ! is_mvl_pro(),
+						'preview_url'   => 'https://motors-plugin.stylemixthemes.com/elegant-card-skin?view_type=list',
+						'preview_label' => esc_html__( 'Preview', 'stm_vehicles_listing' ),
+						'pricing_url'   => admin_url( 'admin.php?page=mvl-go-pro' ),
+						'pricing_label' => esc_html__( 'Upgrade to PRO', 'stm_vehicles_listing' ),
+						'lock_icon'     => esc_url( STM_LISTINGS_URL . '/assets/images/pro/lock-pro.svg' ),
+					),
+					array(
+						'value'         => 'skin_3',
+						'alt'           => 'Compact',
+						'img'           => STM_LISTINGS_URL . '/assets/images/pro/listing-card/list-3.png',
+						'disabled'      => ! is_mvl_pro(),
+						'preview_url'   => 'https://motors-plugin.stylemixthemes.com/compact-card-skin?view_type=list',
+						'preview_label' => esc_html__( 'Preview', 'stm_vehicles_listing' ),
+						'pricing_url'   => admin_url( 'admin.php?page=mvl-go-pro' ),
+						'pricing_label' => esc_html__( 'Upgrade to PRO', 'stm_vehicles_listing' ),
+						'lock_icon'     => esc_url( STM_LISTINGS_URL . '/assets/images/pro/lock-pro.svg' ),
+					),
+					array(
+						'value'         => 'skin_4',
+						'alt'           => 'Luxury',
+						'img'           => STM_LISTINGS_URL . '/assets/images/pro/listing-card/list-4.png',
+						'disabled'      => ! is_mvl_pro(),
+						'preview_url'   => 'https://motors-plugin.stylemixthemes.com/luxury-card-skin?view_type=list',
 						'preview_label' => esc_html__( 'Preview', 'stm_vehicles_listing' ),
 						'pricing_url'   => admin_url( 'admin.php?page=mvl-go-pro' ),
 						'pricing_label' => esc_html__( 'Upgrade to PRO', 'stm_vehicles_listing' ),
@@ -99,7 +165,7 @@ function mvl_listing_grid_card_settings( $conf ) {
 				'type'         => 'select',
 				'options'      => $taxonomies,
 				'default'      => 'make',
-				'description'  => esc_html__( 'Choose a custom field that will be displayed as the logo on listing cards', 'stm_vehicles_listing' ),
+				'description'  => esc_html__( 'Select a custom field (e.g., Make, Model, Year) to show as the main logo on listing cards.', 'stm_vehicles_listing' ),
 				'dependency'   => array(
 					array(
 						'key'   => 'listing_view_type',
@@ -107,7 +173,7 @@ function mvl_listing_grid_card_settings( $conf ) {
 					),
 					array(
 						'key'   => 'list_card_skin',
-						'value' => 'skin_1',
+						'value' => 'skin_1||skin_2||skin_3||skin_4',
 					),
 				),
 				'dependencies' => '&&',
@@ -122,24 +188,32 @@ function mvl_listing_grid_card_settings( $conf ) {
 add_filter( 'btns_conf_skin_dependency', 'mvl_btns_conf_skin_dependency', 10, 1 );
 
 function mvl_btns_conf_skin_dependency( $conf ) {
-	$list_skins = 'skin_1||skin_2';
+	$list_skins = 'skin_1||skin_2||skin_3||skin_4';
 	$grid_skins = 'skin_1||skin_2||skin_3||skin_4||skin_5';
 
 	$list_conf = array(
 		'show_view_details_button'       => array(
-			'label'      => esc_html__( 'View Details Button', 'stm_vehicles_listing' ),
-			'type'       => 'checkbox',
-			'dependency' => array(
-				'key'   => 'listing_view_type',
-				'value' => 'list',
+			'label'        => esc_html__( 'Listing Details Button', 'stm_vehicles_listing' ),
+			'type'         => 'checkbox',
+			'dependency'   => array(
+				array(
+					'key'   => 'listing_view_type',
+					'value' => 'list',
+				),
+				array(
+					'key'   => 'list_card_skin',
+					'value' => 'skin_1||skin_2||skin_3',
+				),
 			),
-			'submenu'    => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
-			'preview'    => STM_LISTINGS_URL . '/assets/images/previews/list-btns.png',
-			'group'      => 'started',
+			'dependencies' => '&&',
+			'submenu'      => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
+			'preview'      => STM_LISTINGS_URL . '/assets/images/previews/list-btns.png',
+			'group'        => 'started',
 		),
 		'show_view_details_title'        => array(
 			'label'        => esc_html__( 'Button Title', 'stm_vehicles_listing' ),
 			'type'         => 'text',
+			'value'        => esc_html__( 'View Details', 'stm_vehicles_listing' ),
 			'dependency'   => array(
 				array(
 					'key'   => 'listing_view_type',
@@ -151,14 +225,14 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 				),
 				array(
 					'key'   => 'list_card_skin',
-					'value' => $list_skins,
+					'value' => 'skin_1||skin_2||skin_3',
 				),
 			),
 			'dependencies' => '&&',
 			'submenu'      => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
 		),
 		'show_view_detail_icon'          => array(
-			'label'        => esc_html__( 'Icon', 'stm_vehicles_listing' ),
+			'label'        => esc_html__( 'Button Icon', 'stm_vehicles_listing' ),
 			'type'         => 'icon_picker',
 			'previewLabel' => 'icon',
 			'dependency'   => array(
@@ -172,7 +246,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 				),
 				array(
 					'key'   => 'list_card_skin',
-					'value' => $list_skins,
+					'value' => 'skin_1||skin_2||skin_3',
 				),
 			),
 			'dependencies' => '&&',
@@ -182,6 +256,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 		'show_listing_test_drive'        => array(
 			'label'        => esc_html__( 'Test Drive', 'stm_vehicles_listing' ),
 			'type'         => 'checkbox',
+			'value'        => true,
 			'dependency'   => array(
 				array(
 					'key'   => 'listing_view_type',
@@ -189,7 +264,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 				),
 				array(
 					'key'   => 'list_card_skin',
-					'value' => $list_skins,
+					'value' => 'skin_1||skin_2||default',
 				),
 			),
 			'dependencies' => '&&',
@@ -198,8 +273,9 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 			'group'        => 'started',
 		),
 		'show_listing_test_drive_as_btn' => array(
-			'label'        => esc_html__( 'Display as button', 'stm_vehicles_listing' ),
+			'label'        => esc_html__( 'Show as Button', 'stm_vehicles_listing' ),
 			'type'         => 'checkbox',
+			'value'        => true,
 			'dependency'   => array(
 				array(
 					'key'   => 'listing_view_type',
@@ -207,7 +283,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 				),
 				array(
 					'key'   => 'list_card_skin',
-					'value' => $list_skins,
+					'value' => 'skin_1||skin_2||skin_3',
 				),
 			),
 			'dependencies' => '&&',
@@ -217,6 +293,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 		'show_listing_test_drive_title'  => array(
 			'label'        => esc_html__( 'Button title', 'stm_vehicles_listing' ),
 			'type'         => 'text',
+			'value'      => esc_html__( 'Test Drive', 'stm_vehicles_listing' ),
 			'dependency'   => array(
 				array(
 					'key'   => 'listing_view_type',
@@ -231,7 +308,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 			'submenu'      => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
 		),
 		'show_listing_test_drive_icon'   => array(
-			'label'        => esc_html__( 'Icon', 'stm_vehicles_listing' ),
+			'label'        => esc_html__( 'Button Icon', 'stm_vehicles_listing' ),
 			'type'         => 'icon_picker',
 			'previewLabel' => 'icon',
 			'dependency'   => array(
@@ -251,6 +328,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 		'show_listing_share'             => array(
 			'label'        => esc_html__( 'Share Listing Button', 'stm_vehicles_listing' ),
 			'type'         => 'checkbox',
+			'value'        => true,
 			'dependency'   => array(
 				array(
 					'key'   => 'listing_view_type',
@@ -258,7 +336,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 				),
 				array(
 					'key'   => 'list_card_skin',
-					'value' => $list_skins,
+					'value' => 'skin_1||skin_2||default',
 				),
 			),
 			'dependencies' => '&&',
@@ -267,7 +345,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 			'group'        => 'started',
 		),
 		'show_listing_share_as_btn'      => array(
-			'label'        => esc_html__( 'Display as button', 'stm_vehicles_listing' ),
+			'label'        => esc_html__( 'Show as Button', 'stm_vehicles_listing' ),
 			'type'         => 'checkbox',
 			'dependency'   => array(
 				array(
@@ -276,7 +354,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 				),
 				array(
 					'key'   => 'list_card_skin',
-					'value' => $list_skins,
+					'value' => 'skin_1||skin_2||skin_3',
 				),
 			),
 			'dependencies' => '&&',
@@ -286,6 +364,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 		'show_listing_share_title'       => array(
 			'label'        => esc_html__( 'Button title', 'stm_vehicles_listing' ),
 			'type'         => 'text',
+			'value'        => esc_html__( 'Share', 'stm_vehicles_listing' ),
 			'dependency'   => array(
 				array(
 					'key'   => 'listing_view_type',
@@ -300,7 +379,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 			'submenu'      => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
 		),
 		'show_listing_share_icon'        => array(
-			'label'        => esc_html__( 'Icon', 'stm_vehicles_listing' ),
+			'label'        => esc_html__( 'Button Icon', 'stm_vehicles_listing' ),
 			'type'         => 'icon_picker',
 			'previewLabel' => 'icon',
 			'dependency'   => array(
@@ -320,6 +399,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 		'show_listing_pdf'               => array(
 			'label'        => esc_html__( 'PDF Brochure Button', 'stm_vehicles_listing' ),
 			'type'         => 'checkbox',
+			'value'        => true,
 			'dependency'   => array(
 				array(
 					'key'   => 'listing_view_type',
@@ -327,7 +407,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 				),
 				array(
 					'key'   => 'list_card_skin',
-					'value' => $list_skins,
+					'value' => 'skin_1||skin_2||default',
 				),
 			),
 			'dependencies' => '&&',
@@ -336,7 +416,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 			'group'        => 'started',
 		),
 		'show_listing_pdf_as_btn'        => array(
-			'label'        => esc_html__( 'Display as button', 'stm_vehicles_listing' ),
+			'label'        => esc_html__( 'Show as Button', 'stm_vehicles_listing' ),
 			'type'         => 'checkbox',
 			'dependency'   => array(
 				array(
@@ -345,7 +425,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 				),
 				array(
 					'key'   => 'list_card_skin',
-					'value' => $list_skins,
+					'value' => 'skin_1||skin_2||skin_3',
 				),
 			),
 			'dependencies' => '&&',
@@ -355,6 +435,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 		'show_listing_pdf_title'         => array(
 			'label'        => esc_html__( 'Button title', 'stm_vehicles_listing' ),
 			'type'         => 'text',
+			'value'        => esc_html__( 'PDF Brochure', 'stm_vehicles_listing' ),
 			'dependency'   => array(
 				array(
 					'key'   => 'listing_view_type',
@@ -369,7 +450,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 			'submenu'      => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
 		),
 		'show_listing_pdf_icon'          => array(
-			'label'        => esc_html__( 'Icon', 'stm_vehicles_listing' ),
+			'label'        => esc_html__( 'Button Icon', 'stm_vehicles_listing' ),
 			'type'         => 'icon_picker',
 			'previewLabel' => 'icon',
 			'dependency'   => array(
@@ -389,6 +470,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 		'show_listing_quote'             => array(
 			'label'        => esc_html__( 'Request Listing Price Button', 'stm_vehicles_listing' ),
 			'type'         => 'checkbox',
+			'value'        => true,
 			'dependency'   => array(
 				array(
 					'key'   => 'listing_view_type',
@@ -396,7 +478,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 				),
 				array(
 					'key'   => 'list_card_skin',
-					'value' => $list_skins,
+					'value' => 'skin_1||skin_2||default',
 				),
 			),
 			'dependencies' => '&&',
@@ -405,8 +487,9 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 			'group'        => 'started',
 		),
 		'show_listing_quote_as_btn'      => array(
-			'label'        => esc_html__( 'Display as button', 'stm_vehicles_listing' ),
+			'label'        => esc_html__( 'Show as Button', 'stm_vehicles_listing' ),
 			'type'         => 'checkbox',
+			'value'        => true,
 			'dependency'   => array(
 				array(
 					'key'   => 'listing_view_type',
@@ -414,7 +497,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 				),
 				array(
 					'key'   => 'list_card_skin',
-					'value' => $list_skins,
+					'value' => 'skin_1||skin_2||skin_3',
 				),
 			),
 			'dependencies' => '&&',
@@ -424,6 +507,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 		'show_listing_quote_title'       => array(
 			'label'        => esc_html__( 'Button title', 'stm_vehicles_listing' ),
 			'type'         => 'text',
+			'value'        => esc_html__( 'Quote by phone', 'stm_vehicles_listing' ),
 			'dependency'   => array(
 				array(
 					'key'   => 'listing_view_type',
@@ -438,7 +522,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 			'submenu'      => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
 		),
 		'show_listing_quote_icon'        => array(
-			'label'        => esc_html__( 'Icon', 'stm_vehicles_listing' ),
+			'label'        => esc_html__( 'Button Icon', 'stm_vehicles_listing' ),
 			'type'         => 'icon_picker',
 			'previewLabel' => 'icon',
 			'dependency'   => array(
@@ -458,6 +542,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 		'show_listing_trade'             => array(
 			'label'        => esc_html__( 'Trade-In Button', 'stm_vehicles_listing' ),
 			'type'         => 'checkbox',
+			'value'        => true,
 			'dependency'   => array(
 				array(
 					'key'   => 'listing_view_type',
@@ -465,7 +550,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 				),
 				array(
 					'key'   => 'list_card_skin',
-					'value' => $list_skins,
+					'value' => 'skin_1||skin_2||default',
 				),
 			),
 			'dependencies' => '&&',
@@ -474,7 +559,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 			'group'        => 'started',
 		),
 		'show_listing_trade_as_btn'      => array(
-			'label'        => esc_html__( 'Display as button', 'stm_vehicles_listing' ),
+			'label'        => esc_html__( 'Show as Button', 'stm_vehicles_listing' ),
 			'type'         => 'checkbox',
 			'dependency'   => array(
 				array(
@@ -483,7 +568,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 				),
 				array(
 					'key'   => 'list_card_skin',
-					'value' => $list_skins,
+					'value' => 'skin_1||skin_2||skin_3',
 				),
 			),
 			'dependencies' => '&&',
@@ -493,6 +578,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 		'show_listing_trade_title'       => array(
 			'label'        => esc_html__( 'Button title', 'stm_vehicles_listing' ),
 			'type'         => 'text',
+			'value'        => esc_html__( 'Trade-In', 'stm_vehicles_listing' ),
 			'dependency'   => array(
 				array(
 					'key'   => 'listing_view_type',
@@ -507,7 +593,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 			'submenu'      => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
 		),
 		'show_listing_trade_icon'        => array(
-			'label'        => esc_html__( 'Icon', 'stm_vehicles_listing' ),
+			'label'        => esc_html__( 'Button Icon', 'stm_vehicles_listing' ),
 			'type'         => 'icon_picker',
 			'previewLabel' => 'icon',
 			'dependency'   => array(
@@ -534,8 +620,9 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 
 	$grid_conf = array(
 		'show_view_details_button_grid'       => array(
-			'label'        => esc_html__( 'View Details Button', 'stm_vehicles_listing' ),
+			'label'        => esc_html__( 'Listing Details Button', 'stm_vehicles_listing' ),
 			'type'         => 'checkbox',
+			'value'        => true,
 			'dependency'   => array(
 				array(
 					'key'   => 'listing_view_type',
@@ -554,6 +641,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 		'show_view_details_title_grid'        => array(
 			'label'        => esc_html__( 'Button Title', 'stm_vehicles_listing' ),
 			'type'         => 'text',
+			'value'        => esc_html__( 'View Details', 'stm_vehicles_listing' ),
 			'dependency'   => array(
 				array(
 					'key'   => 'listing_view_type',
@@ -572,7 +660,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 			'submenu'      => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
 		),
 		'show_view_detail_icon_grid'          => array(
-			'label'        => esc_html__( 'Icon', 'stm_vehicles_listing' ),
+			'label'        => esc_html__( 'Button Icon', 'stm_vehicles_listing' ),
 			'type'         => 'icon_picker',
 			'previewLabel' => 'icon',
 			'dependency'   => array(
@@ -596,6 +684,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 		'show_listing_test_drive_grid'        => array(
 			'label'        => esc_html__( 'Test Drive', 'stm_vehicles_listing' ),
 			'type'         => 'checkbox',
+			'value'        => true,
 			'dependency'   => array(
 				array(
 					'key'   => 'listing_view_type',
@@ -612,7 +701,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 			'group'        => 'started',
 		),
 		'show_listing_test_drive_grid_as_btn' => array(
-			'label'        => esc_html__( 'Display as button', 'stm_vehicles_listing' ),
+			'label'        => esc_html__( 'Show as Button', 'stm_vehicles_listing' ),
 			'type'         => 'checkbox',
 			'dependency'   => array(
 				array(
@@ -631,6 +720,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 		'show_listing_test_drive_grid_title'  => array(
 			'label'        => esc_html__( 'Button title', 'stm_vehicles_listing' ),
 			'type'         => 'text',
+			'value'      => esc_html__( 'Test Drive', 'stm_vehicles_listing' ),
 			'dependency'   => array(
 				array(
 					'key'   => 'listing_view_type',
@@ -645,7 +735,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 			'submenu'      => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
 		),
 		'show_listing_test_drive_grid_icon'   => array(
-			'label'        => esc_html__( 'Icon', 'stm_vehicles_listing' ),
+			'label'        => esc_html__( 'Button Icon', 'stm_vehicles_listing' ),
 			'type'         => 'icon_picker',
 			'previewLabel' => 'icon',
 			'dependency'   => array(
@@ -665,6 +755,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 		'show_listing_share_grid'             => array(
 			'label'        => esc_html__( 'Share Listing Button', 'stm_vehicles_listing' ),
 			'type'         => 'checkbox',
+			'value'        => true,
 			'dependency'   => array(
 				array(
 					'key'   => 'listing_view_type',
@@ -681,7 +772,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 			'group'        => 'started',
 		),
 		'show_listing_share_grid_as_btn'      => array(
-			'label'        => esc_html__( 'Display as button', 'stm_vehicles_listing' ),
+			'label'        => esc_html__( 'Show as Button', 'stm_vehicles_listing' ),
 			'type'         => 'checkbox',
 			'dependency'   => array(
 				array(
@@ -700,6 +791,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 		'show_listing_share_grid_title'       => array(
 			'label'        => esc_html__( 'Button title', 'stm_vehicles_listing' ),
 			'type'         => 'text',
+			'value'        => esc_html__( 'Share', 'stm_vehicles_listing' ),
 			'dependency'   => array(
 				array(
 					'key'   => 'listing_view_type',
@@ -714,7 +806,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 			'submenu'      => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
 		),
 		'show_listing_share_grid_icon'        => array(
-			'label'        => esc_html__( 'Icon', 'stm_vehicles_listing' ),
+			'label'        => esc_html__( 'Button Icon', 'stm_vehicles_listing' ),
 			'type'         => 'icon_picker',
 			'previewLabel' => 'icon',
 			'dependency'   => array(
@@ -734,6 +826,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 		'show_listing_pdf_grid'               => array(
 			'label'        => esc_html__( 'PDF Brochure Button', 'stm_vehicles_listing' ),
 			'type'         => 'checkbox',
+			'value'        => true,
 			'dependency'   => array(
 				array(
 					'key'   => 'listing_view_type',
@@ -750,7 +843,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 			'group'        => 'started',
 		),
 		'show_listing_pdf_grid_as_btn'        => array(
-			'label'        => esc_html__( 'Display as button', 'stm_vehicles_listing' ),
+			'label'        => esc_html__( 'Show as Button', 'stm_vehicles_listing' ),
 			'type'         => 'checkbox',
 			'dependency'   => array(
 				array(
@@ -769,6 +862,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 		'show_listing_pdf_grid_title'         => array(
 			'label'        => esc_html__( 'Button title', 'stm_vehicles_listing' ),
 			'type'         => 'text',
+			'value'        => esc_html__( 'PDF Brochure', 'stm_vehicles_listing' ),
 			'dependency'   => array(
 				array(
 					'key'   => 'listing_view_type',
@@ -783,7 +877,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 			'submenu'      => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
 		),
 		'show_listing_pdf_grid_icon'          => array(
-			'label'        => esc_html__( 'Icon', 'stm_vehicles_listing' ),
+			'label'        => esc_html__( 'Button Icon', 'stm_vehicles_listing' ),
 			'type'         => 'icon_picker',
 			'previewLabel' => 'icon',
 			'dependency'   => array(
@@ -803,6 +897,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 		'show_listing_quote_grid'             => array(
 			'label'        => esc_html__( 'Request Listing Price Button', 'stm_vehicles_listing' ),
 			'type'         => 'checkbox',
+			'value'        => true,
 			'dependency'   => array(
 				array(
 					'key'   => 'listing_view_type',
@@ -819,7 +914,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 			'group'        => 'started',
 		),
 		'show_listing_quote_grid_as_btn'      => array(
-			'label'        => esc_html__( 'Display as button', 'stm_vehicles_listing' ),
+			'label'        => esc_html__( 'Show as Button', 'stm_vehicles_listing' ),
 			'type'         => 'checkbox',
 			'dependency'   => array(
 				array(
@@ -838,6 +933,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 		'show_listing_quote_grid_title'       => array(
 			'label'        => esc_html__( 'Button title', 'stm_vehicles_listing' ),
 			'type'         => 'text',
+			'value'        => esc_html__( 'Quote by phone', 'stm_vehicles_listing' ),
 			'dependency'   => array(
 				array(
 					'key'   => 'listing_view_type',
@@ -852,7 +948,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 			'submenu'      => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
 		),
 		'show_listing_quote_grid_icon'        => array(
-			'label'        => esc_html__( 'Icon', 'stm_vehicles_listing' ),
+			'label'        => esc_html__( 'Button Icon', 'stm_vehicles_listing' ),
 			'type'         => 'icon_picker',
 			'previewLabel' => 'icon',
 			'dependency'   => array(
@@ -888,7 +984,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 			'group'        => 'started',
 		),
 		'show_listing_trade_grid_as_btn'      => array(
-			'label'        => esc_html__( 'Display as button', 'stm_vehicles_listing' ),
+			'label'        => esc_html__( 'Show as Button', 'stm_vehicles_listing' ),
 			'type'         => 'checkbox',
 			'dependency'   => array(
 				array(
@@ -907,6 +1003,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 		'show_listing_trade_grid_title'       => array(
 			'label'        => esc_html__( 'Button title', 'stm_vehicles_listing' ),
 			'type'         => 'text',
+			'value'        => esc_html__( 'Trade-In', 'stm_vehicles_listing' ),
 			'dependency'   => array(
 				array(
 					'key'   => 'listing_view_type',
@@ -921,7 +1018,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 			'submenu'      => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
 		),
 		'show_listing_trade_grid_icon'        => array(
-			'label'        => esc_html__( 'Icon', 'stm_vehicles_listing' ),
+			'label'        => esc_html__( 'Button Icon', 'stm_vehicles_listing' ),
 			'type'         => 'icon_picker',
 			'previewLabel' => 'icon',
 			'dependency'   => array(
@@ -939,8 +1036,8 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 			'group'        => 'ended',
 		), /*Ended Trade-In*/
 		'show_actions_button_on_hover_grid'   => array(
-			'label'        => esc_html__( 'Show Actions Button On Hover', 'stm_vehicles_listing' ),
-			'description'  => esc_html__( 'Action buttons appear below the listing when you hover over it', 'stm_vehicles_listing' ),
+			'label'        => esc_html__( 'Actions Button on Hover', 'stm_vehicles_listing' ),
+			'description'  => esc_html__( 'Show action buttons (Test Drive, PDF Brochure, etc.) when hovering over a listing card.', 'stm_vehicles_listing' ),
 			'type'         => 'checkbox',
 			'submenu'      => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
 			'dependency'   => array(

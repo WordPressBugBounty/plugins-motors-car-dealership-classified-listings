@@ -5,11 +5,13 @@ add_filter(
 		if ( ! apply_filters( 'is_mvl_pro', false ) ) {
 			$conf = array(
 				'optimize_image_settings_banner' => array(
-					'type'    => 'pro_banner',
-					'label'   => esc_html__( 'Optimizing Image Settings', 'stm_vehicles_listing' ),
-					//'img'   => STM_LISTINGS_URL . '/assets/images/pro/payouts.png',
-					'desc'    => esc_html__( 'Optimize the size of listing images uploaded by the user', 'stm_vehicles_listing' ),
-					'submenu' => esc_html__( 'General', 'stm_vehicles_listing' ),
+					'type'            => 'pro_banner',
+					'label'           => esc_html__( 'Image Optimization', 'stm_vehicles_listing' ),
+					'img'             => STM_LISTINGS_URL . '/assets/images/pro/optimize_image_settings_banner.png',
+					'desc'            => esc_html__( 'Crop images to the right dimensions, set custom width and height and control maximum upload size to ensure fast page load times and a smooth user experience. Keep your site visually appealing while optimizing performance.', 'stm_vehicles_listing' ),
+					'submenu'         => esc_html__( 'General', 'stm_vehicles_listing' ),
+					'second_btn_text' => esc_html__( 'Learn more', 'stm_vehicles_listing' ),
+					'second_btn_link' => esc_url( 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/listing-manager-settings/listing-page-details/general#optimizing-image-pro-feature' ),
 				),
 			);
 		} else {

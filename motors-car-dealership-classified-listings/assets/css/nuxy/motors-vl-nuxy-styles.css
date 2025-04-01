@@ -24,9 +24,7 @@ body div.stm_metaboxes_grid__inner .listing_settings_listing-info-card .listing_
 }
 
 body div.stm_metaboxes_grid__inner .listing_settings_listing-info-card .listing_settings-list_card_skin .wpcfto_data_select label.wpcfto_data_select__label .wpcfto_data_select__img img {
-    width: auto;
-    height: auto;
-    transform: translateZ(0);
-    -o-object-fit: contain;
-    object-fit: contain;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
 }

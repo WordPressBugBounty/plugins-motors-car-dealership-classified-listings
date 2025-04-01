@@ -15,16 +15,16 @@ add_filter(
 		$conf = array(
 			'listing_directory_title_frontend' =>
 				array(
-					'label'       => esc_html__( 'Autogenerate a listing title', 'stm_vehicles_listing' ),
+					'label'       => esc_html__( 'Auto-Generate Listing Title', 'stm_vehicles_listing' ),
 					'type'        => 'text',
 					'value'       => '{make} {serie} {ca-year}',
-					'description' => esc_html__( 'The title will be generated based on the listing categories. Put the category in curly brackets, for example, {make} {serie} {ca-year}. Leave this field empty if you want a custom title to be added to each listing', 'stm_vehicles_listing' ),
+					'description' => esc_html__( 'Automatically create listing titles based on custom fields. Use curly brackets to pull data, e.g., {make} {model} {year}. Leave blank to enter titles manually.', 'stm_vehicles_listing' ),
 					'submenu'     => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
 					'preview'     => STM_LISTINGS_URL . '/assets/images/previews/list-title.png',
 				),
 			'listing_view_type'                => array(
-				'label'       => esc_html__( 'Default desktop view for the listing page', 'stm_vehicles_listing' ),
-				'description' => esc_html__( 'Choose how you want to display your listing page by default on desktop', 'stm_vehicles_listing' ),
+				'label'       => esc_html__( 'Default Desktop Layout for Listings', 'stm_vehicles_listing' ),
+				'description' => esc_html__( 'Choose how listing pages are displayed by default on desktop. Users can still switch views if needed.', 'stm_vehicles_listing' ),
 				'type'        => 'radio',
 				'options'     => array(
 					'grid' => 'Grid',
@@ -48,9 +48,9 @@ add_filter(
 			array(
 				'show_generated_title_as_label'        =>
 				array(
-					'label'       => esc_html__( 'Show the First Two Words of the Listing Title as a Badge', 'stm_vehicles_listing' ),
+					'label'       => esc_html__( 'First Two Words as Badge', 'stm_vehicles_listing' ),
 					'type'        => 'checkbox',
-					'description' => esc_html__( 'Listings Page and Listing Detail Page', 'stm_vehicles_listing' ),
+					'description' => esc_html__( 'Show the first two words of the listing title as a badge on listing pages.', 'stm_vehicles_listing' ),
 					'dependency'  =>
 						array(
 							'key'   => 'listing_view_type',
@@ -58,20 +58,6 @@ add_filter(
 						),
 					'submenu'     => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
 					'preview'     => STM_LISTINGS_URL . '/assets/images/previews/first-two-param-srp.png',
-				),
-				'listing_view_type_mobile'             =>
-				array(
-					'label'        => esc_html__( 'Default mobile view for the listing page', 'stm_vehicles_listing' ),
-					'description'  => esc_html__( 'Choose how you want to display your listing page by default on mobile devices', 'stm_vehicles_listing' ),
-					'type'         => 'radio',
-					'options'      =>
-						array(
-							'grid' => 'Grid',
-							'list' => 'List',
-						),
-					'value'        => 'grid',
-					'submenu'      => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
-					$mobile_view_type_deps,
 				),
 				'grid_title_max_length'                =>
 				array_merge(
@@ -100,10 +86,17 @@ add_filter(
 				array(
 					'label'      => esc_html__( 'Listing ID', 'stm_vehicles_listing' ),
 					'type'       => 'checkbox',
-					'dependency' => array(
-						'key'   => 'listing_view_type',
-						'value' => 'list',
+					'dependency'   => array(
+						array(
+							'key'   => 'listing_view_type',
+							'value' => 'list',
+						),
+						array(
+							'key'   => 'list_card_skin',
+							'value' => 'default',
+						),
 					),
+					'dependencies' => '&&',
 					'submenu'    => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
 					'preview'    => STM_LISTINGS_URL . '/assets/images/previews/listing-id-srp.png',
 				),
@@ -170,16 +163,16 @@ add_filter(
 			array(
 				'show_listing_compare'  =>
 					array(
-						'label'       => esc_html__( 'Compare button', 'stm_vehicles_listing' ),
-						'description' => esc_html__( 'The listing will have a separate button so that users can compare the separate vehicles', 'stm_vehicles_listing' ),
+						'label'       => esc_html__( 'Compare Button', 'stm_vehicles_listing' ),
+						'description' => esc_html__( 'Add a separate button on the listing card to compare vehicles.', 'stm_vehicles_listing' ),
 						'type'        => 'checkbox',
 						'submenu'     => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
 						'preview'     => STM_LISTINGS_URL . '/assets/images/previews/grid-compare.png',
 					),
 				'enable_favorite_items' =>
 					array(
-						'label'       => esc_html__( 'Add to favorites button', 'stm_vehicles_listing' ),
-						'description' => esc_html__( 'When hovering over the listing image users will have the option to save the listing to their favorites', 'stm_vehicles_listing' ),
+						'label'       => esc_html__( 'Add to Favorites Button', 'stm_vehicles_listing' ),
+						'description' => esc_html__( 'Let users save listings to their favorites by hovering over the image.', 'stm_vehicles_listing' ),
 						'type'        => 'checkbox',
 						'submenu'     => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
 						'preview'     => STM_LISTINGS_URL . '/assets/images/previews/grid-favorites.png',

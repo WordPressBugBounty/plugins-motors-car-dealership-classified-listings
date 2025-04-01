@@ -208,6 +208,13 @@ add_filter(
 				'submenu'       => esc_html__( 'Colors', 'stm_vehicles_listing' ),
 				'default_value' => '#ffffff',
 			),
+			'card_bg_color_hover'       => array(
+				'label'         => esc_html__( 'Background Hover', 'stm_vehicles_listing' ),
+				'type'          => 'color',
+				'value'         => Colors::value( 'card_bg_color_hover' ),
+				'submenu'       => esc_html__( 'Colors', 'stm_vehicles_listing' ),
+				'default_value' => '#F1F5F9',
+			),
 			'card_title_color'          => array(
 				'label'         => esc_html__( 'Title & Price', 'stm_vehicles_listing' ),
 				'type'          => 'color',

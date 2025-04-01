@@ -1,92 +1,98 @@
 <?php
-$regular_price_label = get_post_meta( get_the_ID(), 'regular_price_label', true );
-$special_price_label = get_post_meta( get_the_ID(), 'special_price_label', true );
-
-$price      = get_post_meta( get_the_id(), 'price', true );
-$sale_price = get_post_meta( get_the_id(), 'sale_price', true );
-
-$car_price_form_label = get_post_meta( get_the_ID(), 'car_price_form_label', true );
-
 $data = array(
-	'data_price' => 0,
+	'price'                  => get_post_meta( get_the_ID(), 'price', true ),
+	'sale_price'             => get_post_meta( get_the_ID(), 'sale_price', true ),
+	'car_price_form_label'   => get_post_meta( get_the_ID(), 'car_price_form_label', true ),
+	'special_price_label'    => get_post_meta( get_the_ID(), 'special_price_label', true ),
+	'regular_price_label'    => get_post_meta( get_the_ID(), 'regular_price_label', true ),
+	'post_type'              => get_post_type(),
+	'show_logo'              => '',
+	'columns'                => isset( $columns ) ? $columns : 4,
+	'listing_id'             => get_the_ID(),
+	'skin'                   => $skin,
+	'action_buttons_hover'   => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_actions_button_on_hover_grid' ),
+	'image_sizes'            => array(
+		'width'  => 380,
+		'height' => 260,
+	),
+	'certificates'           => array(
+		'certificate_1' => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_certified_logo_1' ),
+		'certificate_2' => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_certified_logo_2' ),
+	),
+	'special_car_data'       => array(
+		'special_car'    => get_post_meta( get_the_ID(), 'special_car', true ),
+		'badge_text'     => get_post_meta( get_the_ID(), 'badge_text', true ),
+		'badge_bg_color' => get_post_meta( get_the_ID(), 'badge_bg_color', true ),
+	),
+	'sold_label_data'        => array(
+		'show_sold_label'  => apply_filters( 'motors_vl_get_nuxy_mod', '', 'show_sold_listings' ),
+		'asSold'           => get_post_meta( get_the_ID(), 'car_mark_as_sold', true ),
+		'sold_badge_color' => apply_filters( 'motors_vl_get_nuxy_mod', '', 'sold_badge_bg_color' ),
+	),
+	'grid_action_buttons'    => array(
+		'listing_test_drive' => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_test_drive_grid_as_btn' ),
+		'listing_share'      => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_share_grid_as_btn' ),
+		'listing_pdf'        => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_pdf_grid_as_btn' ),
+		'listing_quote'      => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_quote_grid_as_btn' ),
+		'listing_trade'      => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_trade_grid_as_btn' ),
+	),
+	'grid_action_popup_btns' => array(
+		'listing_test_drive' => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_test_drive_grid' ),
+		'listing_share'      => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_share_grid' ),
+		'listing_pdf'        => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_pdf_grid' ),
+		'listing_quote'      => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_quote_grid' ),
+		'listing_trade'      => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_trade_grid' ),
+	),
 );
 
-if ( ! empty( $price ) ) {
-	$data['data_price'] = $price;
+if ( ! isset( $data['skin'] ) ) {
+	$data['skin'] = apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'list_card_skin' );
 }
 
-if ( ! empty( $sale_price ) ) {
-	$data['data_price'] = $sale_price;
-}
+$data['data_price'] = ! empty( $data['sale_price'] ) ? $data['sale_price'] : ( ! empty( $data['price'] ) ? $data['price'] : 0 );
 
-if ( ! empty( $custom_img_size ) ) {
+if ( isset( $custom_img_size ) ) {
 	$data['custom_img_size'] = $custom_img_size;
-}
-
-$columns         = ( empty( $columns ) ) ? 4 : $columns;
-$data['columns'] = $columns;
-
-if ( empty( $price ) && ! empty( $sale_price ) ) {
-	$price = $sale_price;
 }
 
 $taxonomies = apply_filters( 'stm_get_taxonomies', array() );
 foreach ( $taxonomies as $val ) {
-	$taxData = stm_get_taxonomies_with_type( $val );
-	if ( ! empty( $taxData['numeric'] ) && ! empty( $taxData['slider'] ) ) {
+	$tax_data = stm_get_taxonomies_with_type( $val );
+	if ( ! empty( $tax_data['numeric'] ) && ! empty( $tax_data['slider'] ) ) {
 		$replace_val                    = str_replace( '-', '__', $val );
-		$value                          = get_post_meta( get_the_id(), $val, true );
+		$value                          = get_post_meta( get_the_ID(), $val, true );
 		$data[ 'data_' . $replace_val ] = $value;
 		$data['atts'][]                 = $replace_val;
 	}
 }
 
-if ( ! isset( $skin ) ) {
-	$skin = apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'grid_card_skin' );
-}
-
-if ( 'default' !== $skin ) {
+if ( 'default' !== $data['skin'] && apply_filters( 'is_mvl_pro', false ) && defined( 'STM_LISTINGS_PRO_PATH' ) ) {
 	if ( function_exists( 'mvl_pro_enqueue_header_scripts_styles' ) ) {
-		mvl_pro_enqueue_header_scripts_styles( $skin, 'listing-card/grid' );
+		mvl_pro_enqueue_header_scripts_styles( $data['skin'], 'listing-card/grid' );
 	}
-	$show_logo = apply_filters( 'motors_vl_get_nuxy_mod', '', 'grid_skin_show_logo' );
+	$data['show_logo'] = apply_filters( 'motors_vl_get_nuxy_mod', '', 'grid_skin_show_logo' );
 
-	$args = array(
-		'regular_price_label'  => $regular_price_label,
-		'special_price_label'  => $special_price_label,
-		'price'                => $price,
-		'sale_price'           => $sale_price,
-		'car_price_form_label' => $car_price_form_label,
-		'data'                 => $data,
-		'show_logo'            => $show_logo,
-		'skin'                 => $skin,
-		'columns'              => $columns,
-	);
-
-	do_action( 'stm_listings_load_template', '/listing-cars/grid/' . $skin . '.php', $args );
+	do_action( 'stm_listings_load_template', '/listing-cars/grid/' . $data['skin'] . '.php', $data );
 } else {
 	?>
 
 	<?php do_action( 'stm_listings_load_template', 'loop/grid/start', $data ); ?>
-
 	<?php do_action( 'stm_listings_load_template', 'loop/grid/image', $data ); ?>
 
 	<div class="listing-car-item-meta">
-
 		<?php
 		do_action(
 			'stm_listings_load_template',
 			'loop/grid/title_price',
 			array(
-				'price'                => $price,
-				'sale_price'           => $sale_price,
-				'car_price_form_label' => $car_price_form_label,
+				'price'                => $data['price'],
+				'sale_price'           => $data['sale_price'],
+				'car_price_form_label' => $data['car_price_form_label'],
 			)
 		);
 
 		do_action( 'stm_listings_load_template', 'loop/grid/data' );
 		?>
-
 	</div>
 	</a>
 	</div>

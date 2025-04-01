@@ -1189,6 +1189,141 @@ if ( ! function_exists( 'stm_account_current_page' ) ) {
 	add_filter( 'stm_account_current_page', 'stm_account_current_page' );
 }
 
+if ( ! function_exists( 'mvl_payment_enabled' ) ) {
+	function mvl_payment_enabled() {
+		$paypal_options = array(
+			'enabled' => false,
+		);
+
+		$paypal_email    = apply_filters( 'motors_vl_get_nuxy_mod', '', 'paypal_email' );
+		$paypal_currency = apply_filters( 'motors_vl_get_nuxy_mod', 'USD', 'paypal_currency' );
+		$paypal_mode     = apply_filters( 'motors_vl_get_nuxy_mod', 'sandbox', 'paypal_mode' );
+		$membership_cost = apply_filters( 'motors_vl_get_nuxy_mod', '', 'membership_cost' );
+
+		if ( ! empty( $paypal_email ) && ! empty( $paypal_currency ) && ! empty( $paypal_mode ) && ! empty( $membership_cost ) ) {
+			$paypal_options['enabled'] = true;
+		}
+
+		$paypal_options['email']    = $paypal_email;
+		$paypal_options['currency'] = $paypal_currency;
+		$paypal_options['mode']     = $paypal_mode;
+		$paypal_options['price']    = $membership_cost;
+
+		return $paypal_options;
+	}
+
+	add_filter( 'mvl_payment_enabled', 'mvl_payment_enabled' );
+}
+
+if ( ! function_exists( 'mvl_generate_payment' ) ) {
+	function mvl_generate_payment() {
+		$user = wp_get_current_user();
+
+		if ( ! empty( $user->ID ) ) {
+
+			$user_id = $user->ID;
+
+			$return['result'] = true;
+
+			$base = 'https://' . apply_filters( 'mvl_paypal_url', '' ) . '/cgi-bin/webscr';
+
+			$return_url = add_query_arg( array( 'become_dealer' => 1 ), apply_filters( 'stm_get_author_link', $user_id ) );
+
+			$url_args = array(
+				'cmd'           => '_xclick',
+				'business'      => apply_filters( 'motors_vl_get_nuxy_mod', '', 'paypal_email' ),
+				'item_name'     => $user->data->user_login,
+				'item_number'   => $user_id,
+				'amount'        => apply_filters( 'motors_vl_get_nuxy_mod', '', 'membership_cost' ),
+				'no_shipping'   => '1',
+				'no_note'       => '1',
+				'currency_code' => apply_filters( 'motors_vl_get_nuxy_mod', 'USD', 'paypal_currency' ),
+				'bn'            => 'PP%2dBuyNowBF',
+				'charset'       => 'UTF%2d8',
+				'invoice'       => $user_id,
+				'return'        => $return_url,
+				'rm'            => '2',
+				'notify_url'    => home_url(),
+			);
+
+			$return = add_query_arg( $url_args, $base );
+		}
+
+		return $return;
+	}
+
+	add_filter( 'mvl_generate_payment', 'mvl_generate_payment' );
+}
+
+if ( ! function_exists( 'mvl_paypal_url' ) ) {
+	function mvl_paypal_url() {
+		$paypal_mode = apply_filters( 'motors_vl_get_nuxy_mod', 'sandbox', 'paypal_mode' );
+		$paypal_url  = ( 'live' === $paypal_mode ) ? 'www.paypal.com' : 'www.sandbox.paypal.com';
+
+		return $paypal_url;
+	}
+
+	add_filter( 'mvl_paypal_url', 'mvl_paypal_url' );
+}
+
+if ( ! function_exists( 'mvl_check_payment' ) ) {
+
+	function mvl_check_payment( $data ) {
+		if ( ! empty( $data['invoice'] ) ) {
+
+			$invoice = $data['invoice'];
+
+			$req = 'cmd=_notify-validate';
+
+			foreach ( $data as $key => $value ) {
+				$value = rawurlencode( stripslashes( $value ) );
+				$req  .= "&$key=$value";
+			}
+
+			echo 'https://' . esc_url( apply_filters( 'mvl_paypal_url', '' ) ) . '/cgi-bin/webscr';
+
+			$ch = curl_init( 'https://' . apply_filters( 'mvl_paypal_url', '' ) . '/cgi-bin/webscr' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_init
+			curl_setopt( $ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1 ); // phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt
+			curl_setopt( $ch, CURLOPT_POST, 1 ); // phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt
+			curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 ); // phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt
+			curl_setopt( $ch, CURLOPT_POSTFIELDS, $req ); // phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt
+			curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, 1 ); // phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt
+			curl_setopt( $ch, CURLOPT_SSL_VERIFYHOST, 2 ); // phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt
+			curl_setopt( $ch, CURLOPT_FORBID_REUSE, 1 ); // phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt
+			curl_setopt( $ch, CURLOPT_SSLVERSION, 6 ); // phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt
+			curl_setopt( $ch, CURLOPT_HTTPHEADER, array( 'Connection: Close' ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt
+
+			$res = curl_exec( $ch ); // phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_exec
+
+			if ( empty( $res ) ) {
+				echo( 'Got ' . esc_html( curl_error( $ch ) ) . ' when processing IPN data' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_error
+				curl_close( $ch ); // phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_close
+				return false;
+			}
+
+			curl_close( $ch ); // phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_close
+
+			if ( 0 === strcmp( $res, 'VERIFIED' ) ) {
+
+				update_user_meta( intval( $invoice ), 'stm_payment_status', 'completed' );
+
+				$member_admin_email_subject = esc_html__( 'New Payment received', 'stm_vehicles_listing' );
+				$member_admin_email_message = esc_html__( 'User paid for submission. User ID:', 'stm_vehicles_listing' ) . ' ' . $invoice;
+
+				do_action( 'stm_set_html_content_type' );
+
+				$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
+				$wp_email = 'wordpress@' . preg_replace( '#^www\.#', '', strtolower( apply_filters( 'stm_get_global_server_val', 'SERVER_NAME' ) ) );
+				$headers  = 'From: ' . $blogname . ' <' . $wp_email . '>' . "\r\n";
+
+				do_action( 'stm_wp_mail_files', get_bloginfo( 'admin_email' ), $member_admin_email_subject, nl2br( $member_admin_email_message ), $headers );
+			}
+		}
+	}
+
+	add_filter( 'mvl_check_payment', 'mvl_check_payment' );
+}
+
 //this function is used to check if the value is empty except zero
 add_filter( 'is_empty_value', 'is_empty_value' );
 function is_empty_value( $value ) {

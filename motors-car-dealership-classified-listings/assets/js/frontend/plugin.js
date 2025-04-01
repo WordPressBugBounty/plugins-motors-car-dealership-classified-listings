@@ -211,7 +211,6 @@
 		'click',
 		'.add-to-compare, .mvl-skins-add-to-compare',
 		function (e) {
-			console.log('add-to-compare')
 			e.preventDefault()
 			let $this = $(this),
 				stm_cookies = $.cookie(),

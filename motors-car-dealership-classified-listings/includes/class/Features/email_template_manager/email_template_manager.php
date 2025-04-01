@@ -279,6 +279,9 @@ if ( ! function_exists( 'get_default_subject' ) ) {
 		$user_listing_wait       = esc_html__( 'Add a car', 'stm_vehicles_listing' );
 		$user_listing_approved   = esc_html__( 'Car Approved', 'stm_vehicles_listing' );
 		$user_email_confirmation = esc_html__( 'User Email Confirm', 'stm_vehicles_listing' );
+		if ( is_mvl_addon_enabled( 'saved_search' ) ) {
+			$saved_search = esc_html__( 'Saved Search', 'stm_vehicles_listing' );
+		}
 
 		return ${'' . $template_name};
 	}
@@ -543,6 +546,15 @@ if ( ! function_exists( 'getDefaultTemplate' ) ) {
         </tr>
     </table>';
 
+		if ( is_mvl_addon_enabled( 'saved_search' ) ) {
+			$saved_search = '<p>' . esc_html__( 'Hello', 'stm_vehicles_listing' ) . ', [user_name]!</p>
+		<p>' . esc_html__( 'We have found new listings for your saved search:', 'stm_vehicles_listing' ) . '</p>
+		<p>[search_data_str]</p>
+		<p>' . esc_html__( 'You can view them by following this link:', 'stm_vehicles_listing' ) . ' 
+			<a href="[search_url]">' . esc_html__( 'View new listings', 'stm_vehicles_listing' ) . '</a>
+		</p>';
+		}
+
 		return ${'' . $template_name};
 	}
 }
@@ -680,6 +692,10 @@ if ( ! function_exists( 'updateTemplates' ) ) {
 			'user_email_confirmation_',
 		);
 
+		if ( is_mvl_addon_enabled( 'saved_search' ) ) {
+			$opt[] = 'saved_search_';
+		}
+
 		foreach ( $opt as $key ) {
 			update_option( $key . 'template', $_POST[ $key . 'template' ] ); // todo sanitize
 			update_option( $key . 'subject', $_POST[ $key . 'subject' ] ); // todo sanitize
@@ -715,23 +731,24 @@ if ( ! function_exists( 'stm_generate_subject_view' ) ) {
 	add_filter( 'get_generate_subject_view', 'stm_generate_subject_view', 20, 3 );
 }
 
-if ( ! function_exists( 'stm_generate_template_view' ) ) {
-	function stm_generate_template_view( $default, $template_name, $args ) {
-		$template = stripslashes( get_option( $template_name . '_template', getDefaultTemplate( $template_name ) ) );
+function stm_generate_template_view( $default, $template_name, $args ) {
+	$template = stripslashes( get_option( $template_name . '_template', getDefaultTemplate( $template_name ) ) );
 
-		if ( ! empty( $template ) ) {
-			foreach ( $args as $k => $val ) {
-				if ( ! empty( $val ) ) {
-					$template = str_replace( "[{$k}]", $val, $template );
-				} else {
-					$template = str_replace( "[{$k}]", 'N/A', $template );
-				}
+	if ( ! empty( $template ) ) {
+		foreach ( $args as $k => $val ) {
+			if ( is_array( $val ) ) {
+				$val = implode( ', ', $val );
 			}
-			return $template;
+			if ( ! empty( $val ) ) {
+				$template = str_replace( "[{$k}]", $val, $template );
+			} else {
+				$template = str_replace( "[{$k}]", 'N/A', $template );
+			}
 		}
-
-		return $default;
+		return $template;
 	}
 
-	add_filter( 'get_generate_template_view', 'stm_generate_template_view', 20, 3 );
+	return $default;
 }
+
+add_filter( 'get_generate_template_view', 'stm_generate_template_view', 20, 3 );

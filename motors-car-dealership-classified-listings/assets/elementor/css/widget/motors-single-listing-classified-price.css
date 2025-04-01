@@ -113,8 +113,8 @@
 }
 
 .stm-listing-single-price-title .price.discounted-price:before {
-    left: -20px;
-    width: 40px;
+    left: -32px;
+    width: 70px;
 }
 
 .stm-listing-single-price-title .price.discounted-price .label-price {
@@ -151,6 +151,12 @@
 
 .stm-listing-single-price-title .price.discounted-price .regular-price .value {
     text-decoration: line-through;
+}
+
+@media (max-width: 767px) {
+    .stm-listing-single-price-title .price.discounted-price .sale-price .value {
+        font-size: 14px;
+    }
 }
 
 .stm-listing-single-price-title .price:before {

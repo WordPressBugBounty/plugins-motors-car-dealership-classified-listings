@@ -4,7 +4,7 @@ add_filter(
 	function ( $conf_for_merge ) {
 
 		if ( ! apply_filters( 'stm_is_motors_theme', false ) || apply_filters( 'disable_monetization_subscription', false ) || ! apply_filters( 'is_mvl_pro', false ) ) {
-			return $conf_for_merge;
+			return apply_filters( 'mvl_monetization_subscription_settings', $conf_for_merge );
 		}
 
 		$conf = array(
@@ -16,6 +16,8 @@ add_filter(
 					'submenu'     => esc_html__( 'Monetization', 'stm_vehicles_listing' ),
 				),
 		);
+
+		$conf = apply_filters( 'mvl_monetization_subscription_settings', $conf );
 
 		return array_merge( $conf_for_merge, $conf );
 	},

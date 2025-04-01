@@ -8,8 +8,7 @@ $user_id     = $user->ID;
 $user_fields = apply_filters( 'stm_get_user_custom_fields', $user_id );
 $path        = 'user/private/';
 
-$tpl = isset( $_GET['page'] ) && $_GET['page'] ? sanitize_text_field( $_GET['page'] ) : 'inventory';
-
+$tpl = apply_filters( 'stm_account_current_page', '' );
 ?>
 
 <div class="stm-user-private">
