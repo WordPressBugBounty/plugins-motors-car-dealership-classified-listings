@@ -2060,6 +2060,16 @@ footer .lOffer-account-dropdown {
     flex-wrap: wrap;
 }
 
+.stm-user-public-listing .archive-listing-page .mvl-card-skin.car-listing-row {
+    gap: 16px;
+}
+
+.stm-user-public-listing .archive-listing-page .mvl-card-skin.car-listing-row.row {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: unset;
+}
+
 .stm-user-public-listing .archive-listing-page .stm-sort-private-my-cars {
     float: right;
 }

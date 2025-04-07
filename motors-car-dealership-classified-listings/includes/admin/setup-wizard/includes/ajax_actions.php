@@ -3,6 +3,10 @@
 function mvl_setup_wizard_load_step() {
 	check_ajax_referer( 'stm_mvl_setup_wizard_nonce', 'security' );
 
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_send_json_error( __( 'You do not have permission to perform this action', 'stm_vehicles_listing' ) );
+	}
+
 	$response = array();
 
 	$prefix_data        = 'mvl_data_';
@@ -42,14 +46,18 @@ function mvl_setup_wizard_load_step() {
 	exit;
 }
 add_action( 'wp_ajax_mvl_setup_wizard_load_step', 'mvl_setup_wizard_load_step' );
-add_action( 'wp_ajax_nopriv_mvl_setup_wizard_load_step', 'mvl_setup_wizard_load_step' );
 
 function mvl_setup_wizard_update_settings( $settings_to_update ) {
 	$settings_names = apply_filters( 'mvl_settings_option_names', array() );
 
 	foreach ( $settings_names as $settings_key => $settings_name ) {
-		$options        = get_option( $settings_name, array() );
-		$options_map    = wpcfto_get_settings_map( 'settings', $settings_name );
+		$options     = get_option( $settings_name, array() );
+		$options_map = wpcfto_get_settings_map( 'settings', $settings_name );
+
+		if ( ! is_array( $options_map ) || ! isset( $options_map[ $settings_key ] ) || ! isset( $options_map[ $settings_key ]['fields'] ) ) {
+			continue;
+		}
+
 		$options_fields = $options_map[ $settings_key ]['fields'];
 
 		foreach ( $settings_to_update as $opt_name => $value ) {
@@ -68,6 +76,10 @@ function mvl_setup_wizard_update_settings( $settings_to_update ) {
 
 function mvl_setup_wizard_install_starter_theme() {
 	check_ajax_referer( 'stm_mvl_setup_wizard_nonce', 'security' );
+
+	if ( ! current_user_can( 'install_themes' ) ) {
+		wp_send_json_error( __( 'You do not have permission to install themes', 'stm_vehicles_listing' ) );
+	}
 
 	$install_class = \MotorsVehiclesListing\StarterTheme\Helpers\Themes::class;
 
@@ -93,7 +105,6 @@ function mvl_setup_wizard_install_starter_theme() {
 	exit;
 }
 add_action( 'wp_ajax_mvl_setup_wizard_install_starter_theme', 'mvl_setup_wizard_install_starter_theme' );
-add_action( 'wp_ajax_nopriv_mvl_setup_wizard_install_starter_theme', 'mvl_setup_wizard_install_starter_theme' );
 
 function mvl_setup_wizard_install_plugin() {
 	check_ajax_referer( 'stm_mvl_setup_wizard_nonce', 'security' );
@@ -158,6 +169,10 @@ add_action( 'wp_ajax_mvl_setup_wizard_install_plugin', 'mvl_setup_wizard_install
 function mvl_setup_wizard_starter_import_fields() {
 	check_ajax_referer( 'stm_mvl_setup_wizard_nonce', 'security' );
 
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_send_json_error( __( 'You do not have permission to perform this action', 'stm_vehicles_listing' ) );
+	}
+
 	$response = motors_get_demo_data( 'listing_categories.json' );
 
 	if ( 200 === wp_remote_retrieve_response_code( $response ) ) {
@@ -173,12 +188,16 @@ function mvl_setup_wizard_starter_import_fields() {
 	exit;
 }
 add_action( 'wp_ajax_mvl_setup_wizard_starter_import_fields', 'mvl_setup_wizard_starter_import_fields' );
-add_action( 'wp_ajax_nopriv_mvl_setup_wizard_starter_import_fields', 'mvl_setup_wizard_starter_import_fields' );
 
 function mvl_setup_wizard_starter_import_settings() {
 	check_ajax_referer( 'stm_mvl_setup_wizard_nonce', 'security' );
 
-	if ( defined( 'STM_DEV_MODE' ) && STM_DEV_MODE ) {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_send_json_error( __( 'You do not have permission to perform this action', 'stm_vehicles_listing' ) );
+	}
+
+	$remote_args = array();
+	if ( defined( 'STM_DEV_MODE' ) && true === STM_DEV_MODE ) {
 		$remote_args = array(
 			'sslverify' => false,
 		);
@@ -244,7 +263,6 @@ function mvl_setup_wizard_starter_import_settings() {
 	exit;
 }
 add_action( 'wp_ajax_mvl_setup_wizard_starter_import_settings', 'mvl_setup_wizard_starter_import_settings' );
-add_action( 'wp_ajax_nopriv_mvl_setup_wizard_starter_import_settings', 'mvl_setup_wizard_starter_import_settings' );
 
 function mvl_setup_wizard_get_importer() {
 
@@ -261,6 +279,10 @@ function mvl_setup_wizard_get_importer() {
 
 function mvl_setup_wizard_starter_import_content() {
 	check_ajax_referer( 'stm_mvl_setup_wizard_nonce', 'security' );
+
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_send_json_error( __( 'You do not have permission to perform this action', 'stm_vehicles_listing' ) );
+	}
 
 	$importer = mvl_setup_wizard_get_importer();
 
@@ -317,10 +339,13 @@ function mvl_setup_wizard_starter_import_content() {
 	}
 }
 add_action( 'wp_ajax_mvl_setup_wizard_starter_import_content', 'mvl_setup_wizard_starter_import_content' );
-add_action( 'wp_ajax_nopriv_mvl_setup_wizard_starter_import_content', 'mvl_setup_wizard_starter_import_content' );
 
 function mvl_setup_wizard_generate_pages() {
 	check_ajax_referer( 'stm_mvl_setup_wizard_nonce', 'security' );
+
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_send_json_error( __( 'You do not have permission to perform this action', 'stm_vehicles_listing' ) );
+	}
 
 	if ( defined( 'MOTORS_STARTER_THEME_VERSION' ) ) {
 		wp_send_json_success();
@@ -410,7 +435,6 @@ function mvl_setup_wizard_generate_pages() {
 	exit;
 }
 add_action( 'wp_ajax_mvl_setup_wizard_generate_pages', 'mvl_setup_wizard_generate_pages' );
-add_action( 'wp_ajax_nopriv_mvl_setup_wizard_generate_pages', 'mvl_setup_wizard_generate_pages' );
 
 function mvl_setup_wizard_replace_elementor_colors_filter( $value, $option ) {
 	if ( 'replace_elementor_colors' === $option ) {
@@ -421,6 +445,10 @@ function mvl_setup_wizard_replace_elementor_colors_filter( $value, $option ) {
 
 function mvl_setup_wizard_create_term() {
 	check_ajax_referer( 'stm_mvl_setup_wizard_nonce', 'security' );
+
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_send_json_error( __( 'You do not have permission to perform this action', 'stm_vehicles_listing' ) );
+	}
 
 	$success  = true;
 	$response = array();
@@ -446,10 +474,13 @@ function mvl_setup_wizard_create_term() {
 	exit;
 }
 add_action( 'wp_ajax_mvl_setup_wizard_create_term', 'mvl_setup_wizard_create_term' );
-add_action( 'wp_ajax_nopriv_mvl_setup_wizard_create_term', 'mvl_setup_wizard_create_term' );
 
 function mvl_setup_wizard_mock_event() {
 	check_ajax_referer( 'stm_mvl_setup_wizard_nonce', 'security' );
+
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_send_json_error( __( 'You do not have permission to perform this action', 'stm_vehicles_listing' ) );
+	}
 
 	$response = array(
 		'success' => true,
@@ -459,4 +490,3 @@ function mvl_setup_wizard_mock_event() {
 	exit;
 }
 add_action( 'wp_ajax_mvl_setup_wizard_mock_event', 'mvl_setup_wizard_mock_event' );
-add_action( 'wp_ajax_nopriv_mvl_setup_wizard_mock_event', 'mvl_setup_wizard_mock_event' );

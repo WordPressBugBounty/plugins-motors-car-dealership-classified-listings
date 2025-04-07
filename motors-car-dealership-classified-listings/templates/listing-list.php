@@ -4,6 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $listing_id = get_the_ID();
+$skin       = isset( $skin ) ? $skin : apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'list_card_skin' );
 
 $skins = array(
 	'skin_2' => array(
@@ -51,20 +52,12 @@ $data = array(
 		'asSold'           => get_post_meta( $listing_id, 'car_mark_as_sold', true ),
 		'sold_badge_color' => apply_filters( 'motors_vl_get_nuxy_mod', '', 'sold_badge_bg_color' ),
 	),
-	'list_action_buttons'    => array(
-		'listing_test_drive' => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_test_drive_as_btn' ),
-		'listing_share'      => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_share_as_btn' ),
-		'listing_pdf'        => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_pdf_as_btn' ),
-		'listing_quote'      => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_quote_as_btn' ),
-		'listing_trade'      => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_trade_as_btn' ),
-	),
-	'list_action_popup_btns' => array(
-		'listing_test_drive' => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_test_drive' ),
-		'listing_share'      => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_share' ),
-		'listing_pdf'        => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_pdf' ),
-		'listing_quote'      => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_quote' ),
-		'listing_trade'      => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_trade' ),
-	),
+	'list_action_buttons'    => isset( $list_action_buttons ) ? $list_action_buttons : array(),
+	'list_action_popup_btns' => isset( $list_action_popup_btns ) ? $list_action_popup_btns : array(),
+	'veiw_details_grid'      => isset( $veiw_details_grid ) ? $veiw_details_grid : array(),
+	'veiw_details_list'      => isset( $veiw_details_list ) ? $veiw_details_list : array(),
+	'listing_options_list'   => isset( $listing_options_list ) ? $listing_options_list : array(),
+	'listing_options_grid'   => isset( $listing_options_grid ) ? $listing_options_grid : array(),
 );
 
 if ( ! isset( $data['skin'] ) ) {

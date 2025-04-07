@@ -12,8 +12,11 @@ add_filter(
 
 if ( ! function_exists( 'is_mvl_pro' ) ) {
 	function is_mvl_pro() {
+		if ( defined( 'STM_DEV_MODE' ) && STM_DEV_MODE ) {
+			return true;
+		}
 
-		if ( ( defined( 'STM_LISTINGS_PRO_PATH' ) && function_exists( 'mp_fs' ) && mp_fs()->_get_license() ) || ( defined( 'STM_DEV_MODE' ) && STM_DEV_MODE ) ) {
+		if ( defined( 'STM_LISTINGS_PRO_PATH' ) && ( ( function_exists( 'mp_fs' ) && mp_fs()->_get_license() ) || ( function_exists( 'mvl_deal' ) && mvl_deal()->is_activated() ) ) ) {
 			return true;
 		}
 

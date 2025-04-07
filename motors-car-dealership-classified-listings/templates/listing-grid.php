@@ -9,8 +9,8 @@ $data = array(
 	'show_logo'              => '',
 	'columns'                => isset( $columns ) ? $columns : 4,
 	'listing_id'             => get_the_ID(),
-	'skin'                   => $skin,
-	'action_buttons_hover'   => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_actions_button_on_hover_grid' ),
+	'skin'                   => isset( $skin ) ? $skin : apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'grid_card_skin' ),
+	'action_buttons_hover'   => isset( $__vars['action_buttons_hover'] ) ? $__vars['action_buttons_hover'] : apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_actions_button_on_hover_grid' ),
 	'image_sizes'            => array(
 		'width'  => 380,
 		'height' => 260,
@@ -29,24 +29,16 @@ $data = array(
 		'asSold'           => get_post_meta( get_the_ID(), 'car_mark_as_sold', true ),
 		'sold_badge_color' => apply_filters( 'motors_vl_get_nuxy_mod', '', 'sold_badge_bg_color' ),
 	),
-	'grid_action_buttons'    => array(
-		'listing_test_drive' => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_test_drive_grid_as_btn' ),
-		'listing_share'      => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_share_grid_as_btn' ),
-		'listing_pdf'        => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_pdf_grid_as_btn' ),
-		'listing_quote'      => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_quote_grid_as_btn' ),
-		'listing_trade'      => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_trade_grid_as_btn' ),
-	),
-	'grid_action_popup_btns' => array(
-		'listing_test_drive' => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_test_drive_grid' ),
-		'listing_share'      => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_share_grid' ),
-		'listing_pdf'        => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_pdf_grid' ),
-		'listing_quote'      => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_quote_grid' ),
-		'listing_trade'      => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_trade_grid' ),
-	),
+	'grid_action_buttons'    => isset( $grid_action_buttons ) ? $grid_action_buttons : array(),
+	'grid_action_popup_btns' => isset( $grid_action_popup_btns ) ? $grid_action_popup_btns : array(),
+	'veiw_details_grid'      => isset( $veiw_details_grid ) ? $veiw_details_grid : array(),
+	'veiw_details_list'      => isset( $veiw_details_list ) ? $veiw_details_list : array(),
+	'listing_options_list'   => isset( $listing_options_list ) ? $listing_options_list : array(),
+	'listing_options_grid'   => isset( $listing_options_grid ) ? $listing_options_grid : array(),
 );
 
 if ( ! isset( $data['skin'] ) ) {
-	$data['skin'] = apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'list_card_skin' );
+	$data['skin'] = apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'grid_card_skin' );
 }
 
 $data['data_price'] = ! empty( $data['sale_price'] ) ? $data['sale_price'] : ( ! empty( $data['price'] ) ? $data['price'] : 0 );

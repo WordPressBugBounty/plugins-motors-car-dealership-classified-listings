@@ -64,7 +64,7 @@ $show_sold = apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_sold_listings
 
 				foreach ( $filter['filters'] as $attribute => $config ) :
 
-					if ( apply_filters( 'mvl_filter_field_template', false, $config['field_type'], $config[ $config['field_type'] . '_skins' ] . '.php' ) ) {
+					if ( isset( $config['field_type'] ) && isset( $config[ $config['field_type'] . '_skins' ] ) && apply_filters( 'mvl_filter_field_template', false, $config['field_type'], $config[ $config['field_type'] . '_skins' ] . '.php' ) ) {
 						do_action(
 							'stm_listings_load_template',
 							'inventory/filter/' . $config['field_type'] . '/' . $config[ $config['field_type'] . '_skins' ] . '.php',

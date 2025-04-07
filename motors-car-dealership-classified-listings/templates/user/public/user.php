@@ -35,6 +35,12 @@ if ( ! empty( $_GET['view_type'] ) && 'list' === $_GET['view_type'] ) {
 	$row    = 'row-no-border-last';
 }
 
+$additional_class = '';
+$skin             = apply_filters( 'motors_vl_get_nuxy_mod', 'default', $active . '_card_skin' );
+
+if ( 'default' !== $skin ) {
+	$additional_class = 'mvl-card-skin';
+}
 
 $query         = stm_user_listings_query( $user_id, 'publish', $posts_per_page, false, $offset );
 $query_popular = stm_user_listings_query( $user_id, 'publish', $posts_per_page, true, $offset_popular );
@@ -158,7 +164,7 @@ $query_popular = stm_user_listings_query( $user_id, 'publish', $posts_per_page, 
 					<div class="archive-listing-page row">
 						<div class="col-md-12">
 							<div class="user-listings-wrapper active" id="recent">
-								<div class="car-listing-row <?php echo esc_attr( $row ); ?>">
+								<div class="car-listing-row <?php echo esc_attr( $row ); ?> <?php echo esc_attr( $additional_class ); ?>">
 									<?php
 									while ( $query->have_posts() ) :
 										$query->the_post();
@@ -175,7 +181,7 @@ $query_popular = stm_user_listings_query( $user_id, 'publish', $posts_per_page, 
 								<?php endif; ?>
 							</div>
 							<div class="user-listings-wrapper" id="popular">
-								<div class="car-listing-row <?php echo esc_attr( $row ); ?>">
+								<div class="car-listing-row <?php echo esc_attr( $row ); ?> <?php echo esc_attr( $additional_class ); ?>">
 									<?php
 									while ( $query_popular->have_posts() ) :
 										$query_popular->the_post();

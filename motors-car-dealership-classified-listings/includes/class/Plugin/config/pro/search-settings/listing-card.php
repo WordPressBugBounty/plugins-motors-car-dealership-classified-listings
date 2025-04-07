@@ -264,7 +264,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 				),
 				array(
 					'key'   => 'list_card_skin',
-					'value' => 'skin_1||skin_2||default',
+					'value' => 'skin_1||skin_2||skin_3||default',
 				),
 			),
 			'dependencies' => '&&',
@@ -336,7 +336,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 				),
 				array(
 					'key'   => 'list_card_skin',
-					'value' => 'skin_1||skin_2||default',
+					'value' => 'skin_1||skin_2||skin_3||default',
 				),
 			),
 			'dependencies' => '&&',
@@ -407,7 +407,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 				),
 				array(
 					'key'   => 'list_card_skin',
-					'value' => 'skin_1||skin_2||default',
+					'value' => 'skin_1||skin_2||skin_3||default',
 				),
 			),
 			'dependencies' => '&&',
@@ -478,7 +478,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 				),
 				array(
 					'key'   => 'list_card_skin',
-					'value' => 'skin_1||skin_2||default',
+					'value' => 'skin_1||skin_2||skin_3||default',
 				),
 			),
 			'dependencies' => '&&',
@@ -550,7 +550,7 @@ function mvl_btns_conf_skin_dependency( $conf ) {
 				),
 				array(
 					'key'   => 'list_card_skin',
-					'value' => 'skin_1||skin_2||default',
+					'value' => 'skin_1||skin_2||skin_3||default',
 				),
 			),
 			'dependencies' => '&&',
