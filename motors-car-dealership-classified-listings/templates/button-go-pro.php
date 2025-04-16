@@ -188,8 +188,8 @@ function get_freemius_info() {
 }
 
 $freemius_info = get_freemius_info();
-$start_date    = new DateTime( '10th March 2025' );
-$deadline      = new DateTime( '17th March 2025' );
+$start_date    = new DateTime( '2025-04-16 00:00:00' );
+$deadline      = new DateTime( '2025-04-21 23:59:00' );
 $current_time  = time();
 $is_promotion  = $current_time >= $start_date->format('U') && $current_time < $deadline->format('U'); //phpcs:ignore
 $only_annual   = true;
@@ -229,7 +229,7 @@ if ( $is_promotion && ! empty( $freemius_info ) ) {
 					<?php endif; ?>
 				</p>
 				<?php if ( $is_promotion ) : ?>
-					<div class="stm-discount"><a href="<?php echo esc_url( 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wpadmin&utm_medium=gopro&utm_campaign=springsale' ); ?>" target="_blank"></a></div>
+					<div class="stm-discount"><a href="<?php echo esc_url( 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wpadmin&utm_medium=gopro&utm_campaign=easter25' ); ?>" target="_blank"></a></div>
 				<?php endif; ?>
 			</div>
 			<?php if ( isset( $freemius_info['plan'] ) ) : ?>
@@ -257,10 +257,10 @@ if ( $is_promotion && ! empty( $freemius_info ) ) {
 										?>
 										<sup>$</sup>
 										<span class="stm_price__value"
-											data-price-annual="<?php echo esc_attr( number_format( $plan->annual_price * 0.70, 0, '.', '' ) ); ?>"
-											data-price-lifetime="<?php echo esc_attr( number_format( $plan->lifetime_price * 0.70, 0, '.', '' ) ); ?>"
+											data-price-annual="<?php echo esc_attr( number_format( $plan->annual_price * 0.75, 0, '.', '' ) ); ?>"
+											data-price-lifetime="<?php echo esc_attr( number_format( $plan->lifetime_price * 0.75, 0, '.', '' ) ); ?>"
 											data-price-old-annual="<?php echo esc_attr( number_format( $plan->annual_price, 2, '.', '' ) ); ?>">
-											<?php echo esc_html( number_format( $plan->annual_price * 0.70, 0, '.', '' ) ); ?>
+											<?php echo esc_html( number_format( $plan->annual_price * 0.75, 0, '.', '' ) ); ?>
 										</span>
 										<div class="discount">
 											<sup>$</sup>

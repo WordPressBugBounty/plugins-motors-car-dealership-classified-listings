@@ -1340,6 +1340,7 @@ table > tbody > tr td {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    background-color: #cc6119;
 }
 
 .swiper-container {
@@ -1435,6 +1436,16 @@ table > tbody > tr td {
     border: 1px solid #CED4DA;
     padding: 5px;
     border-radius: 4px;
+}
+
+.car-listing-row .image {
+    overflow: hidden;
+}
+
+.dp-in {
+    display: inline-block;
+    vertical-align: top;
+    max-width: 100%;
 }
 
 .mvl-checkbox-metabox label {
