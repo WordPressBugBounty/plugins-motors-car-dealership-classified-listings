@@ -1050,6 +1050,21 @@ ul.list-style-2 li:before {
     clear: both;
 }
 
+.mvl-card-skin-pagination ul.page-numbers {
+    border-top: none;
+    padding-top: 30px;
+}
+
+@media (max-width: 1024px) {
+    .mvl-card-skin-pagination ul.page-numbers {
+        padding-top: 15px;
+    }
+}
+
+.mvl-card-skin-pagination ul.page-numbers .next, .mvl-card-skin-pagination ul.page-numbers .prev {
+    top: 30px;
+}
+
 .page-numbers {
     display: block;
     position: relative;
@@ -1078,7 +1093,7 @@ ul.list-style-2 li:before {
     display: block;
     width: 34px;
     height: 35px;
-    margin: 0 8px;
+    margin: 0;
     padding: 0;
     background-color: var(--motors-filter-inputs-color);
     color: var(--motors-text-highalpha-color);
@@ -4344,6 +4359,10 @@ body .select2-container--default .select2-search--dropdown .select2-search__fiel
 
 .stm_auto_loan_calculator .calculate_loan_payment {
     margin-bottom: 16px;
+    border-radius: 4px;
+    padding: 10px 20px;
+    color: var(--motors-contrast-text-color);
+    font-weight: bold;
 }
 
 .stm_auto_loan_calculator .stm_calculator_results {
@@ -4566,6 +4585,43 @@ body .select2-container--default .select2-search--dropdown .select2-search__fiel
     display: block;
 }
 
+a.motors-compare-button {
+    display: flex;
+    align-items: center;
+    color: var(--motors-text-highalpha-color);
+}
+
+a.motors-compare-button:hover {
+    color: var(--motors-text-color);
+}
+
+a.motors-compare-button .compare-icon-wrapper {
+    display: flex;
+    position: relative;
+    font-size: 23px;
+    margin-right: 10px;
+    color: var(--motors-text-highalpha-color--motors-text-color);
+}
+
+a.motors-compare-button .compare-icon-wrapper i {
+    font-size: 19px;
+}
+
+a.motors-compare-button span {
+    font-weight: 500;
+    color: var(--motors-text-highalpha-color);
+    font-size: 14px;
+}
+
+a.motors-compare-button .stm-current-cars-in-compare {
+    background-color: var(--motors-accent-color);
+    color: var(--motors-contrast-text-color);
+    font-size: 12px;
+    border-radius: 50%;
+    margin-left: 5px;
+    padding: 0 6px;
+}
+
 /*Car gurus*/
 .stm_cargurus_wrapper {
     border-top: 1px solid var(--motors-border-color);
@@ -4611,6 +4667,10 @@ body .select2-container--default .select2-search--dropdown .select2-search__fiel
 
 .whats-button-wrap .whatsapp .whatsapp-btn:hover svg {
     fill: var(--motors-contrast-text-color);
+}
+
+.motors-icons-search-list {
+    font-family: "motors-icons";
 }
 
 .stm-load-more-dealer-cars {

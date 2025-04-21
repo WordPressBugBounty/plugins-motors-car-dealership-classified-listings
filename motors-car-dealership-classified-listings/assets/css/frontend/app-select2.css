@@ -113,10 +113,6 @@
     border-bottom: none;
 }
 
-.select2-container--default .select2-results__option[aria-disabled=true] {
-    display: none;
-}
-
 .select2-container--open.stm-multi-currency {
     z-index: 1065;
 }

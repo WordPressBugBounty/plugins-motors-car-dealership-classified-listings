@@ -75,6 +75,7 @@ class Settings {
 					'pro/listing-settings/general',
 					'pro/listing-settings/currency',
 					'pro/listing-settings/listing-card',
+					'pro/search-settings/inventory-templates',
 					'pro/search-settings/filter-position',
 					'pro/search-settings/sorting',
 					'pro/search-settings/search',
@@ -82,6 +83,7 @@ class Settings {
 					'pro/single-listing/general',
 					'pro/single-listing/single-listing-layout',
 					'pro/single-listing/loan-calculator',
+					'pro/single-listing/single-listing-skins',
 					'pro/user-settings/user-main',
 					'pro/user-settings/dealer-settings',
 					'pro/pages-settings/pages-settings',
@@ -96,14 +98,12 @@ class Settings {
 			);
 		}
 
-		if ( defined( 'STM_MOTORS_EXTENDS_PLUGIN_VERSION' ) && version_compare( STM_MOTORS_EXTENDS_PLUGIN_VERSION, '2.3.7' ) > 0 ) {
-			$config_map = array_merge(
-				$config_map,
-				array(
-					'pro/search-settings/filter-location',
-				)
-			);
-		}
+		$config_map = array_merge(
+			$config_map,
+			array(
+				'pro/search-settings/filter-location',
+			),
+		);
 
 		if ( ! stm_is_motors_theme() ) {
 			$config_map = array_merge(

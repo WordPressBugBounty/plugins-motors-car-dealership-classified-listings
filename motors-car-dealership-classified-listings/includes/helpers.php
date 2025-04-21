@@ -1372,7 +1372,7 @@ if ( ! function_exists( 'mvl_get_dealer_list_page' ) ) {
 		$dealer_list_page = apply_filters( 'motors_vl_get_nuxy_mod', 2173, 'dealer_list_page' );
 
 		$dealer_list_page = apply_filters( 'stm_motors_wpml_is_page', $dealer_list_page );
-		$link = get_permalink( $dealer_list_page );
+		$link             = get_permalink( $dealer_list_page );
 
 		return $link;
 	}
@@ -1468,3 +1468,115 @@ function mvl_dealer_gmap( $lat, $lng ) {
 }
 
 add_action( 'mvl_dealer_gmap_hook', 'mvl_dealer_gmap', 10, 2 );
+
+if ( ! function_exists( 'stm_get_filter_badges' ) ) {
+	function stm_get_filter_badges() {
+		$attributes    = stm_listings_filter_terms();
+		$filter_badges = array();
+		foreach ( $attributes as $attribute => $terms ) {
+			/*Text field*/
+			$options = apply_filters( 'stm_vl_get_all_by_slug', array(), $attribute );
+
+			/*Field affix like mi, km or another defined by user*/
+			$affix = '';
+			if ( ! empty( $options['number_field_affix'] ) ) {
+				$affix = apply_filters( 'stm_dynamic_string_translation', $options['number_field_affix'], 'Affix text' );
+			}
+
+			$numeric_skins = array(
+				'skin_2',
+				'skin_3',
+			);
+
+			/*Slider badge*/
+			if ( ( ! empty( $options['slider'] ) && $options['slider'] ) || ( ! empty( $options['numeric_skins'] ) && in_array( $options['numeric_skins'], $numeric_skins, true ) ) ) {
+				if ( isset( $_GET[ 'max_' . $attribute ] ) && ( isset( $_GET[ 'min_' . $attribute ] ) ) ) {
+					reset( $terms );
+					$start_value = key( $terms );
+					end( $terms );
+					$end_value = key( $terms );
+
+					if ( 'price' === $attribute ) {
+						if ( 0 === $start_value ) {
+							$start_value = apply_filters( 'stm_filter_price_view', '', 0 );
+							$value       = $start_value . ' - ' . apply_filters( 'stm_filter_price_view', '', apply_filters( 'stm_listings_input', $end_value, 'max_' . $attribute ) );
+						} else {
+							$value = apply_filters( 'stm_filter_price_view', '', apply_filters( 'stm_listings_input', $start_value, 'min_' . $attribute ) ) . ' - ' . apply_filters( 'stm_filter_price_view', '', apply_filters( 'stm_listings_input', $end_value, 'max_' . $attribute ) );
+						}
+					} else {
+						$value = apply_filters( 'stm_listings_input', $start_value, 'min_' . $attribute ) . ' - ' . apply_filters( 'stm_listings_input', $end_value, 'max_' . $attribute ) . ' ' . $affix;
+					}
+
+					$filter_badges[ $attribute ] = array(
+						'slug'   => $attribute,
+						'name'   => stm_get_name_by_slug( $attribute ),
+						'type'   => ( ! empty( $options['slider'] ) && $options['slider'] ) ? 'slider' : 'number',
+						'value'  => $value,
+						'origin' => array( 'min_' . $attribute, 'max_' . $attribute ),
+					);
+
+					$filter_badges[ $attribute ]['url'] = stm_get_filter_badge_url( $filter_badges[ $attribute ] );
+				}
+				/*Badge of number field*/
+			} elseif ( ! empty( $options['numeric'] ) && $options['numeric'] ) {
+				if ( ! empty( $_GET[ $attribute ] ) ) {
+					$filter_badges[ $attribute ] = array(
+						'slug'   => $attribute,
+						'name'   => stm_get_name_by_slug( $attribute ),
+						'value'  => sanitize_text_field( $_GET[ $attribute ] ) . ' ' . $affix,
+						'type'   => 'number',
+						'origin' => array( $attribute ),
+					);
+
+					$filter_badges[ $attribute ]['url'] = stm_get_filter_badge_url( $filter_badges[ $attribute ] );
+				}
+				/*Badge of text field*/
+			} else {
+				if ( ! empty( $_GET[ $attribute ] ) || ( class_exists( \MotorsVehiclesListing\Features\FriendlyUrl::class ) && ! empty( \MotorsVehiclesListing\Features\FriendlyUrl::$for_filter[ $attribute ] ) ) ) {
+
+					$selected = ( ! empty( $_GET[ $attribute ] ) ) ? $_GET[ $attribute ] : '';
+
+					if ( class_exists( \MotorsVehiclesListing\Features\FriendlyUrl::class ) && ! empty( \MotorsVehiclesListing\Features\FriendlyUrl::$for_filter[ $attribute ] ) ) {
+						$selected = \MotorsVehiclesListing\Features\FriendlyUrl::$for_filter[ $attribute ];
+					}
+
+					$txt = '';
+					if ( is_array( $selected ) ) {
+						foreach ( $selected as $k => $val ) {
+							if ( ! isset( $terms[ $val ] ) ) {
+								continue;
+							}
+
+							$txt .= $terms[ $val ]->name;
+							$txt .= ( count( $selected ) - 1 !== $k ) ? ', ' : '';
+						}
+					} else {
+						$txt = ( ! empty( $terms[ $selected ] ) ) ? $terms[ $selected ]->name : '';
+					}
+
+					$filter_badges[ $attribute ]        = array(
+						'slug'     => $attribute,
+						'name'     => stm_get_name_by_slug( $attribute ),
+						'value'    => $txt,
+						'origin'   => array( $attribute ),
+						'type'     => 'select',
+						'multiple' => array_key_exists( 'is_multiple_select', $options ) ? $options['is_multiple_select'] : 0,
+					);
+					$filter_badges[ $attribute ]['url'] = stm_get_filter_badge_url( $filter_badges[ $attribute ] );
+				}
+			}
+		}
+		return $filter_badges;
+	}
+
+	add_filter( 'stm_get_filter_badges', 'stm_get_filter_badges' );
+}
+
+if ( ! function_exists( 'stm_get_filter_badge_url' ) ) {
+	function stm_get_filter_badge_url( $badge_info ) {
+		$remove_args   = $badge_info['origin'];
+		$remove_args[] = 'ajax_action';
+
+		return apply_filters( 'stm_get_filter_badge_url', remove_query_arg( $remove_args ), $badge_info, $remove_args );
+	}
+}

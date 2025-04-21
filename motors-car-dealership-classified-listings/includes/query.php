@@ -192,7 +192,7 @@ function _stm_listings_build_query_args( $args = null, $source = null ) {
 
 	foreach ( $listing_atts as $attribute => $filter_option ) {
 
-		if ( ! empty( $filter_option['numeric'] ) && $filter_option['numeric'] ) {
+		if ( ( ! empty( $filter_option['numeric'] ) && $filter_option['numeric'] ) || ( isset( $filter_option['field_type'] ) && 'price' === $filter_option['field_type'] ) ) {
 			// Compatibility for min_
 			if ( ! empty( $source[ 'min_' . $attribute ] ) ) {
 				$source[ $attribute ] = array( 'min' => $source[ 'min_' . $attribute ] );

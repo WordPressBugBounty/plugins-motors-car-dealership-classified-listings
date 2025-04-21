@@ -10,112 +10,251 @@
     }
 }
 
-.archive-listing-page .archive-listing-page_side .sidebar-entry-header {
+.archive-listing-page .archive-listing-page_side .select2-container--default .select2-selection--single .select2-selection__rendered {
+    background-color: unset !important;
+    color: unset !important;
+}
+
+.archive-listing-page .sidebar-entry-header {
     position: relative;
     min-height: 40px;
     padding: 26px 22px 21px 76px;
     margin: 0 -22px 8px;
-    background-color: var(--motors-bg-contrast);
+    background-color: var(--motors-filter-bg-color);
 }
 
-.archive-listing-page .archive-listing-page_side .sidebar-entry-header i {
+.archive-listing-page .sidebar-entry-header i {
     position: absolute;
     top: 32px;
     left: 21px;
     font-size: 29px;
-    color: var(--motors-contrast-text-color);
+    color: var(--motors-filter-text-color);
 }
 
-.archive-listing-page .archive-listing-page_side .sidebar-entry-header .h4 {
+.archive-listing-page .sidebar-entry-header .h4 {
     display: block;
     padding-top: 10px;
-    color: var(--motors-contrast-text-color);
+    color: var(--motors-filter-text-color);
     font-weight: 700;
     font-size: 18px;
     letter-spacing: -0.3px;
 }
 
-.archive-listing-page .archive-listing-page_side input[type=text], .archive-listing-page .archive-listing-page_side input[type=search] {
+.archive-listing-page input[type=text], .archive-listing-page input[type=search] {
     height: 40px;
     line-height: 40px;
 }
 
-.archive-listing-page .archive-listing-page_side .form-group {
+.archive-listing-page .form-group {
     margin: 0;
 }
 
-.archive-listing-page .archive-listing-page_side .row .col-md-12 {
+.archive-listing-page .row .col-md-12 {
     margin: 8px 0;
 }
 
-.archive-listing-page .archive-listing-page_side .row .col-md-12 h5 {
+.archive-listing-page .row .col-md-12 h5 {
     font-size: 16px;
-    margin: 0 0 10px;
 }
 
-.archive-listing-page .archive-listing-page_side .row .col-md-12 .select2.select2-container.select2-container--default {
+.archive-listing-page .row .col-md-12 .select2.select2-container.select2-container--default {
     width: 100% !important;
 }
 
-.archive-listing-page .archive-listing-page_side .filter-price {
+.archive-listing-page .filter-price {
     margin: 15px 0;
 }
 
-.archive-listing-page .archive-listing-page_side .filter-price h5 {
+.archive-listing-page .filter-price h5 {
     font-size: 16px;
     margin: 0;
 }
 
-.archive-listing-page .archive-listing-page_side .filter-sidebar {
+.archive-listing-page .filter-sidebar {
     padding: 0 22px 30px;
-    background-color: var(--motors-bg-contrast);
-    box-shadow: 0 5px 18px var(--motors-bg-alpha-contrast);
+    background-color: var(--motors-filter-bg-color) !important;
+    box-shadow: 0 5px 18px var(--motors-bg-alpha-contrast) !important;
 }
 
-.archive-listing-page .archive-listing-page_side .stm-inventory-sidebar {
+.archive-listing-page .filter-sidebar .number-field-label {
+    color: var(--motors-filter-text-color);
+}
+
+.archive-listing-page .filter-sidebar .number-field-label .pull-left {
+    color: var(--motors-filter-text-color);
+}
+
+.archive-listing-page .filter-sidebar .number-field-label .stm-current-slider-labels {
+    color: var(--motors-filter-text-color);
+}
+
+.archive-listing-page .filter-sidebar .stm-search_keywords h5 {
+    color: var(--motors-filter-text-color);
+}
+
+.archive-listing-page .filter-sidebar .select2-container--default .select2-selection--single {
+    background-color: var(--motors-filter-field-bg-color) !important;
+    color: var(--motors-filter-field-text-color) !important;
+    border: 1px solid var(--motors-filter-field-border-color);
+}
+
+.archive-listing-page .filter-sidebar .select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: var(--motors-filter-field-text-color);
+}
+
+.archive-listing-page .filter-sidebar .select2-container--default .select2-selection--single .select2-selection__arrow b {
+    color: var(--motors-filter-field-text-color) !important;
+}
+
+.archive-listing-page .filter-sidebar .select2-container--default .select2-selection--multiple {
+    background-color: var(--motors-filter-field-bg-color) !important;
+    color: var(--motors-filter-field-text-color) !important;
+    border: 1px solid var(--motors-filter-field-border-color) !important;
+}
+
+.archive-listing-page .filter-sidebar .select2-container--default .select2-selection--multiple .select2-selection__rendered .select2-search--inline .select2-search__field::-moz-placeholder {
+    color: var(--motors-filter-field-text-color-lowalpha) !important;
+}
+
+.archive-listing-page .filter-sidebar .select2-container--default .select2-selection--multiple .select2-selection__rendered .select2-search--inline .select2-search__field::placeholder {
+    color: var(--motors-filter-field-text-color-lowalpha) !important;
+}
+
+.archive-listing-page .filter-sidebar .stm-location-search-unit .stm_listing_search_location {
+    background-color: var(--motors-filter-field-bg-color) !important;
+    color: var(--motors-filter-field-text-color) !important;
+    border: 1px solid var(--motors-filter-field-border-color) !important;
+}
+
+.archive-listing-page .filter-sidebar .stm-location-search-unit input.stm_listing_search_location::-moz-placeholder {
+    color: var(--motors-filter-field-text-color-lowalpha) !important;
+}
+
+.archive-listing-page .filter-sidebar .stm-location-search-unit input.stm_listing_search_location::placeholder {
+    color: var(--motors-filter-field-text-color-lowalpha) !important;
+}
+
+.archive-listing-page .filter-sidebar .stm-search_keywords #stm_keywords {
+    background-color: var(--motors-filter-field-bg-color) !important;
+    color: var(--motors-filter-field-text-color) !important;
+    border: 1px solid var(--motors-filter-field-border-color) !important;
+}
+
+.archive-listing-page .filter-sidebar .stm-search_keywords #stm_keywords::-moz-placeholder {
+    color: var(--motors-filter-field-text-color-lowalpha) !important;
+}
+
+.archive-listing-page .filter-sidebar .stm-search_keywords #stm_keywords::placeholder {
+    color: var(--motors-filter-field-text-color-lowalpha) !important;
+}
+
+.archive-listing-page .classic-filter-row .filter-sidebar .stm-slider-filter-type-unit {
+    background-color: var(--motors-filter-bg-color) !important;
+    color: var(--motors-filter-text-color) !important;
+}
+
+.archive-listing-page .classic-filter-row .sidebar-entry-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.archive-listing-page .stm-location-search-unit #ca_location_listing_filter {
+    background-color: var(--motors-filter-field-bg-color) !important;
+    color: var(--motors-filter-field-text-color) !important;
+}
+
+.archive-listing-page .stm-slider-filter-type-unit .stm-price-range-unit {
+    padding: unset;
+}
+
+.archive-listing-page .stm-slider-filter-type-unit .ui-slider-range {
+    top: -1px;
+}
+
+.archive-listing-page .stm-slider-filter-type-unit .ui-slider {
+    height: 4px !important;
+    background: unset;
+}
+
+.archive-listing-page .stm-slider-filter-type-unit .ui-slider .ui-widget-header {
+    background-color: var(--motors-filter-field-link-color);
+    border: 2px solid var(--motors-filter-field-link-color);
+}
+
+.archive-listing-page .stm-slider-filter-type-unit .ui-slider .ui-slider-handle {
+    top: -7px;
+    background-color: var(--motors-filter-field-link-color);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
+}
+
+.archive-listing-page .stm-slider-filter-type-unit .ui-slider .ui-slider-handle::after {
+    background-color: var(--motors-filter-field-link-color);
+}
+
+.archive-listing-page .sidebar-action-units .button {
+    background-color: var(--motors-filter-field-link-color);
+    color: var(--motors-filter-field-text-color);
+    border: 1px solid var(--motors-filter-field-link-color);
+    box-shadow: none;
+}
+
+.archive-listing-page .sidebar-action-units .button:hover {
+    opacity: 0.8;
+}
+
+.archive-listing-page .stm-inventory-sidebar {
     margin-top: 25px;
 }
 
-.archive-listing-page .archive-listing-page_side .stm-accordion-single-unit.price .stm-accordion-content {
+.archive-listing-page .stm-accordion-single-unit.price .stm-accordion-content {
     padding: 5px 25px 40px;
 }
 
-.archive-listing-page .archive-listing-page_side .sidebar-action-units .button {
+.archive-listing-page .sidebar-action-units .button {
     width: 100%;
     max-width: 100%;
 }
 
-.archive-listing-page .archive-listing-page_content .stm-sort-by-options {
+.archive-listing-page #listings-result ul.stm-filter-chosen-units-list li {
+    white-space: nowrap;
+}
+
+.archive-listing-page_content .stm-sort-by-options {
     float: left;
     font-size: 14px;
 }
 
-.archive-listing-page .archive-listing-page_content .stm-sort-by-options .stm-select-sorting {
+.archive-listing-page_content .stm-sort-by-options .stm-select-sorting {
     display: inline-block;
     margin: 0 10px;
 }
 
-.archive-listing-page .archive-listing-page_content .stm-sort-by-options .stm-select-sorting .select2 {
+.archive-listing-page_content .stm-sort-by-options .stm-select-sorting .select2 {
     font-size: 14px;
 }
 
-.archive-listing-page .archive-listing-page_content .stm-sort-by-options .stm-select-sorting .select2 .select2-selection--single, .archive-listing-page .archive-listing-page_content .stm-sort-by-options .stm-select-sorting .select2 .select2-selection__rendered {
+.archive-listing-page_content .stm-sort-by-options .stm-select-sorting .select2 .select2-selection--single, .archive-listing-page_content .stm-sort-by-options .stm-select-sorting .select2 .select2-selection__rendered {
     height: 32px;
     line-height: 32px;
 }
 
-.archive-listing-page .archive-listing-page_content .stm-sort-by-options .stm-select-sorting .select2 .select2-selection__arrow {
+.archive-listing-page_content .stm-sort-by-options .stm-select-sorting .select2 .select2-selection__arrow {
     height: 32px;
 }
 
-.archive-listing-page .archive-listing-page_content .stm-featured-top-cars-title {
+.archive-listing-page_content .stm-featured-top-cars-title {
     margin-bottom: 25px;
     position: relative;
     padding-right: 120px;
     border-bottom: 3px solid var(--motors-accent-color);
 }
 
-.archive-listing-page .archive-listing-page_content .stm-featured-top-cars-title .heading-font {
+.archive-listing-page_content .stm-featured-top-cars-title .heading-font {
     position: relative;
     display: inline-block;
     padding: 3px 16px;
@@ -128,7 +267,7 @@
     white-space: nowrap;
 }
 
-.archive-listing-page .archive-listing-page_content .stm-featured-top-cars-title .heading-font:after {
+.archive-listing-page_content .stm-featured-top-cars-title .heading-font:after {
     position: absolute;
     content: "";
     display: block;
@@ -141,7 +280,7 @@
     z-index: -1;
 }
 
-.archive-listing-page .archive-listing-page_content .stm-featured-top-cars-title a {
+.archive-listing-page_content .stm-featured-top-cars-title a {
     position: absolute;
     right: 3px;
     bottom: 3px;
@@ -149,10 +288,59 @@
     color: var(--motors-text-alpha-color);
 }
 
-.archive-listing-page .archive-listing-page_content .stm-isotope-sorting.stm-isotope-sorting-featured-top .listing-list-loop:last-child {
-    border-bottom: 3px solid var(--motors-accent-color);
+.archive-listing-page .sidebar-entry-header {
+    display: flex;
+    align-items: center;
 }
 
-.archive-listing-page .archive-listing-page_content .stm-isotope-sorting-list .listing-list-loop:last-child {
-    border-bottom: 0;
+.archive-listing-page .sidebar-entry-header i {
+    margin-right: 10px;
+    color: var(--motors-filter-text-color) !important;
+}
+
+.archive-listing-page .sidebar-entry-header .h4 {
+    color: var(--motors-filter-text-color) !important;
+}
+
+.archive-listing-page .number-field-label {
+    color: var(--motors-filter-text-color);
+}
+
+.archive-listing-page .number-field-label .pull-left {
+    color: var(--motors-filter-text-color);
+}
+
+.archive-listing-page .number-field-label .stm-current-slider-labels {
+    color: var(--motors-filter-text-color);
+}
+
+.archive-listing-page .stm-search_keywords h5 {
+    color: var(--motors-filter-text-color);
+}
+
+.select2-dropdown.filter-sidebar {
+    background-color: var(--motors-filter-bg-color) !important;
+    border: 1px solid var(--motors-filter-field-border-color) !important;
+}
+
+.select2-dropdown.filter-sidebar .select2-results__option {
+    color: var(--motors-filter-field-text-color) !important;
+    border-color: var(--motors-filter-field-border-color) !important;
+}
+
+.select2-dropdown.filter-sidebar .select2-results__option:hover {
+    background-color: var(--motors-filter-field-link-color-super-lowalpha) !important;
+}
+
+.select2-dropdown.filter-sidebar .select2-results__option--highlighted {
+    background-color: var(--motors-filter-field-link-color-super-lowalpha) !important;
+}
+
+.select2-dropdown {
+    background-color: var(--motors-filter-bg-color) !important;
+    border-radius: 8px;
+}
+
+.select2-dropdown .select2-results__option {
+    color: var(--motors-filter-text-color) !important;
 }

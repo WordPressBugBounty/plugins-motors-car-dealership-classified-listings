@@ -154,8 +154,11 @@ if ( 2 === $column ) {
 						<?php echo wp_kses_post( $checked ); ?>
 					>
 					<label for="<?php echo esc_attr( $prefix_id . $field_key . '-' . $choice_value ); ?>">
-						<span class="stm_custom_fields__radio--button"></span>
 						<span class="stm_custom_fields__radio--label">
+							<span class="stm_custom_fields__radio--button"></span>
+							<?php echo esc_html( $choice_args['label'] ); ?>
+						</span>
+						<span class="stm_custom_fields__radio--image">
 							<img src="<?php echo esc_html( $choice_args['url'] ); ?>" />
 						</span>
 					</label>

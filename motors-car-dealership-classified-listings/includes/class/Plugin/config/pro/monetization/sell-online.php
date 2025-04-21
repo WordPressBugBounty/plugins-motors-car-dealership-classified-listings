@@ -3,7 +3,7 @@ add_filter(
 	'monetization_settings',
 	function ( $conf_for_merge ) {
 
-		if ( apply_filters( 'disable_monetization_sell_online', false ) || ! apply_filters( 'is_mvl_pro', false ) || ! apply_filters( 'stm_is_motors_theme', false ) ) {
+		if ( apply_filters( 'disable_monetization_sell_online', false ) || ! apply_filters( 'is_mvl_pro', false ) ) {
 			return $conf_for_merge;
 		}
 

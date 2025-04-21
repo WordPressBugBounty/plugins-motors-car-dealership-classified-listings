@@ -5,7 +5,7 @@ Donate link: https://www.paypal.me/stylemix
 Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
 Tested up to: 6.8
-Stable tag: 1.4.68
+Stable tag: 1.4.69
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -138,6 +138,17 @@ After that, go to Tools -> Import, and via Wordpress Importer tool install dummy
 You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability](https://patchstack.com/database/vdp/motors-car-dealership-classified-listings). 
 
 == Changelog ==
+
+= 1.4.69 =
+- **New Feature:** Added skins for custom fields to personalize the inventory design. (Pro)
+- **New Feature:** Added a new widget "Sell Listing Online" for monetization. (Pro)
+- **Enhancement:** Improved the Inventory filter view. (Pro)
+- **Enhancement:** Improved the responsiveness of the inventory layout across all devices. (Pro)
+- **Enhancement:** Added an option for Custom Fields to show the number of listings assigned to a specific Custom Field value.
+- **Enhancement:** Added color settings for Inventory page filters.
+- **Enhancement:** Updated the action header for search results in the Inventory.
+- **Fix:** Resolved an issue where Share buttons didn't work properly on the Single Listing Page.
+- **Fix:** Fixed an issue with broken "Calculate" button styles in the Loan Calculator popup on Single Listing Page.
 
 = 1.4.68 =
 - **Fix:** Minor bug fixes.

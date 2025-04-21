@@ -246,23 +246,67 @@ add_filter(
 			),
 		);
 
+		$filter_colors = array(
+			'filter_colors_title'          => array(
+				'type'    => 'group_title',
+				'label'   => esc_html__( 'Filter', 'stm_vehicles_listing' ),
+				'submenu' => esc_html__( 'Colors', 'stm_vehicles_listing' ),
+				'group'   => 'started',
+			),
+			'filter_bg_color'              => array(
+				'label'         => esc_html__( 'Background', 'stm_vehicles_listing' ),
+				'type'          => 'color',
+				'value'         => Colors::value( 'filter_bg_color' ),
+				'submenu'       => esc_html__( 'Colors', 'stm_vehicles_listing' ),
+				'default_value' => '#ffffff',
+			),
+			'filter_text_color'            => array(
+				'label'         => esc_html__( 'Base Text', 'stm_vehicles_listing' ),
+				'type'          => 'color',
+				'value'         => Colors::value( 'filter_text_color' ),
+				'submenu'       => esc_html__( 'Colors', 'stm_vehicles_listing' ),
+				'default_value' => '#010101',
+			),
+			'filter_text_color_secondary'  => array(
+				'label'         => esc_html__( 'Secondary Text', 'stm_vehicles_listing' ),
+				'type'          => 'color',
+				'value'         => Colors::value( 'filter_text_color_secondary' ),
+				'submenu'       => esc_html__( 'Colors', 'stm_vehicles_listing' ),
+				'default_value' => '#010101',
+			),
+			'filter_field_bg_color'        => array(
+				'label'         => esc_html__( 'Field Background', 'stm_vehicles_listing' ),
+				'type'          => 'color',
+				'value'         => Colors::value( 'filter_field_bg_color' ),
+				'submenu'       => esc_html__( 'Colors', 'stm_vehicles_listing' ),
+				'default_value' => '#ffffff',
+			),
+			'filter_field_text_color'      => array(
+				'label'         => esc_html__( 'Field Text', 'stm_vehicles_listing' ),
+				'type'          => 'color',
+				'value'         => Colors::value( 'filter_field_text_color' ),
+				'submenu'       => esc_html__( 'Colors', 'stm_vehicles_listing' ),
+				'default_value' => '#010101',
+			),
+			'filter_field_link_color'      => array(
+				'label'         => esc_html__( 'Links/Actions', 'stm_vehicles_listing' ),
+				'type'          => 'color',
+				'value'         => Colors::value( 'filter_field_link_color' ),
+				'submenu'       => esc_html__( 'Colors', 'stm_vehicles_listing' ),
+				'default_value' => '#1280DF',
+				'group'         => 'ended',
+			),
+		);
+
 		if ( stm_is_motors_theme() ) {
 
 			unset( $other_colors_fields['filter_inputs_color'] );
 
-			if ( 'default' === apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'grid_card_skin' ) && 'default' === apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'list_card_skin' ) ) {
-				return $global_conf;
-			}
-
 			$other_colors_fields['other_colors_title']['label'] = esc_html__( 'Badges', 'stm_vehicles_listing' );
 
-			$fields = apply_filters(
-				'style_settings_colors',
-				array_merge(
-					$other_colors_fields,
-					$card_palette
-				)
-			);
+			$fields_to_merge = defined( 'STM_LISTINGS_PRO_PATH' ) ? array( $other_colors_fields, $card_palette, $filter_colors ) : array( $filter_colors );
+
+			$fields = apply_filters( 'style_settings_colors', array_merge( ...$fields_to_merge ) );
 		} else {
 			$fields = apply_filters(
 				'style_settings_colors',
@@ -274,7 +318,8 @@ add_filter(
 					$success_colors_fields,
 					$notices_colors_fields,
 					$errors_colors_fields,
-					$card_palette
+					$card_palette,
+					$filter_colors,
 				)
 			);
 		}

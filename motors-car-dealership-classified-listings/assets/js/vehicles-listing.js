@@ -252,7 +252,9 @@
                 '.closer',
                 function () {
                     var item = $(this).closest('.item');
-					item.fadeTo( 200, 0, function(){ item.remove(); } )
+                    item.fadeTo(200, 0, function () {
+                        item.remove();
+                    })
                     $(this).closest('.target-unit').find('input').val('');
                 }
             );
@@ -855,11 +857,11 @@
                                     field.attr('checked', (response.option[field_key] === 1));
                                 } else if ('select' === field.attr('tagName')) {
                                     field.val(response.option[field_key]);
-								} else if ( 'numeric' === field_key ) {
-									if ( response.option[ field_key ] ) {
-										$( '.stm_custom_fields__select[name="field_type"]', Form.data.editForm ).val( 'numeric' );
-									} else {
-										$( '.stm_custom_fields__select[name="field_type"]', Form.data.editForm ).val( 'dropdown' );
+                                } else if ('field_type' === field_key) {
+                                    field.val(response.option[field_key]);
+                                    if('location' === response.option[field_key]) {
+                                        $('.stm-admin-button__configure').hide();
+                                        Form.data.notification.display = false;
                                     }
                                 } else if ('radio' === field.attr('type')) {
                                     let item_checked = false;
@@ -1289,11 +1291,15 @@
                 }
 
                 if ('SELECT' === $(field).prop('tagName')) {
-					if ( 'numeric' === depValue ) {
-						dependent.show();
+                    dependent.each(function () {
+                            if ($(this).data('value').split(',').includes(depValue)) {
+                                $(this).show();
                             } else {
-						dependent.hide();
+                                $(this).hide();
                             }
+                        }
+                    )
+
                 } else if (depValue && 'radio' === depType) {
                     dependent.each(
                         function () {
@@ -1319,9 +1325,15 @@
                     function () {
                         let $field = $(this),
                             $field_name = $field.attr('name'),
+                            $field_value = $field.val(),
                             $form = $field.closest(Form.data.el),
-							dependencyBlock  = $( '.stm_custom_fields__dependency[data-slug="' + $field_name + '"]', $form ),
+                            dependencyBlock = ($field_name === 'field_type') ? $('.stm_custom_fields__dependency[data-slug="' + $field_name + '"][data-value="' + $field_value + '"]', $form) : $('.stm_custom_fields__dependency[data-slug="' + $field_name + '"]', $form),
                             dependencyFields = $(Field.data.el + '[data-slug]', $form);
+
+                        if (dependencyBlock.length) {
+                            $('.stm_custom_fields__dependency[data-slug="' + $field_name + '"]', $form).hide();
+                            dependencyBlock.show();
+                        }
 
                         if (dependencyFields.length) {
                             dependencyFields.each(
@@ -1337,10 +1349,6 @@
                             $('.stm-admin-button-save', $form).prop('disabled', false);
                             data.edited = true;
                         }
-
-						if ( dependencyBlock.length ) {
-							hideUseless( $field, dependencyBlock );
-						}
                     }
                 );
 

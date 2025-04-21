@@ -11,28 +11,30 @@ class InventorySearchResults extends WidgetBase {
 	public function __construct( array $data = array(), array $args = null ) {
 		parent::__construct( $data, $args );
 
-		$skins = array(
-			'grid' => apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'grid_card_skin' ),
-			'list' => apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'list_card_skin' ),
-		);
-
-		if ( 'default' !== $skins['grid'] || 'default' !== $skins['list'] ) {
-
-			$styles = array(
-				'grid'                 => "/assets/css/listing-card/grid/{$skins['grid']}.css",
-				'list'                 => "/assets/css/listing-card/list/{$skins['list']}.css",
-				'action-buttons_grid'  => '/assets/css/listing-card/grid/actions-buttons.css',
-				'action-buttons_list'  => '/assets/css/listing-card/list/actions-buttons.css',
-				'action-buttons-popup' => '/assets/css/listing-card/actions-popup.css',
-				'special_label'        => '/assets/css/listing-card/special-label.css',
-				'certificates'         => '/assets/css/listing-card/certificates.css',
-				'label'                => '/assets/css/listing-card/label.css',
+		if ( apply_filters( 'is_mvl_pro', false ) && defined( 'STM_LISTINGS_PRO_PATH' ) ) {
+			$skins = array(
+				'grid' => apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'grid_card_skin' ),
+				'list' => apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'list_card_skin' ),
 			);
 
-			foreach ( $styles as $key => $path ) {
-				$full_path = STM_LISTINGS_PRO_PATH . $path;
-				if ( file_exists( $full_path ) ) {
-					wp_register_style( "motors-listing-card-{$key}", STM_LISTINGS_PRO_URL . $path, array(), STM_LISTINGS_PRO_V, 'all' );
+			if ( 'default' !== $skins['grid'] || 'default' !== $skins['list'] ) {
+
+				$styles = array(
+					'grid'                 => "/assets/css/listing-card/grid/{$skins['grid']}.css",
+					'list'                 => "/assets/css/listing-card/list/{$skins['list']}.css",
+					'action-buttons_grid'  => '/assets/css/listing-card/grid/actions-buttons.css',
+					'action-buttons_list'  => '/assets/css/listing-card/list/actions-buttons.css',
+					'action-buttons-popup' => '/assets/css/listing-card/actions-popup.css',
+					'special_label'        => '/assets/css/listing-card/special-label.css',
+					'certificates'         => '/assets/css/listing-card/certificates.css',
+					'label'                => '/assets/css/listing-card/label.css',
+				);
+
+				foreach ( $styles as $key => $path ) {
+					$full_path = STM_LISTINGS_PRO_PATH . $path;
+					if ( file_exists( $full_path ) ) {
+						wp_register_style( "motors-listing-card-{$key}", STM_LISTINGS_PRO_URL . $path, array(), STM_LISTINGS_PRO_V, 'all' );
+					}
 				}
 			}
 		}
@@ -63,6 +65,7 @@ class InventorySearchResults extends WidgetBase {
 		$widget_styles[] = 'motors-listing-card-action-buttons-popup';
 		$widget_styles[] = 'motors-listing-card-special_label';
 		$widget_styles[] = 'motors-listing-card-certificates';
+		$widget_styles[] = 'motors-listing-card-label';
 		$widget_styles[] = 'motors-listing-card-label';
 		return $widget_styles;
 	}

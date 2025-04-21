@@ -172,7 +172,7 @@ function stm_get_cat_icons( $font_pack = 'fa', $icon_picker = false ) {
 
 		if ( ! empty( $_icons ) ) {
 			foreach ( $_icons['icons'] as $icon ) {
-				$attrs = array_filter( $icon['attrs'] );
+				$attrs = isset( $icon['attrs'] ) && is_array( $icon['attrs'] ) ? array_filter( $icon['attrs'] ) : array();
 
 				// Exclude icons with two or more colors
 				if ( ! empty( $attrs ) ) {

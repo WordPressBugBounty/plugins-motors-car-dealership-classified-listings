@@ -4,6 +4,8 @@
 $listing_details_skin = apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'listing_details_skin' );
 
 if ( 'default' !== $listing_details_skin ) :
+	//mvl_pro_enqueue_header_scripts_styles( $listing_details_skin, 'listing-details' ); //phpcs:ignore
+
 	do_action( 'stm_listings_load_template', '/listing-details/' . $listing_details_skin . '.php' );
 elseif ( class_exists( 'Elementor\Plugin' ) && class_exists( 'MotorsVehiclesListing\Features\Elementor\Nuxy\TemplateManager' ) ) :
 	\MotorsVehiclesListing\Features\Elementor\Nuxy\TemplateManager::motors_display_template();

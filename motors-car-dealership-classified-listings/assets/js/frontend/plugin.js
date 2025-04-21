@@ -48,6 +48,12 @@
 								.attr('href', 'tel:' + data)
 								.text(data)
 						)
+						.html('')
+						.append(
+							$('<a>')
+								.attr('href', 'tel:' + data)
+								.text(data)
+						)
 				},
 			})
 		})
@@ -211,140 +217,145 @@
 		'click',
 		'.add-to-compare, .mvl-skins-add-to-compare',
 		function (e) {
-			e.preventDefault()
-			let $this = $(this),
-				stm_cookies = $.cookie(),
-				stm_car_compare = [],
-				stm_car_add_to = $this.data('id'),
-				post_type = $this.data('post-type'),
-				car_title = $this.data('title'),
-				view = $this.data('view')
+		e.preventDefault()
+		let $this = $(this),
+			stm_cookies = $.cookie(),
+			stm_car_compare = [],
+			stm_car_add_to = $this.data('id'),
+			post_type = $this.data('post-type'),
+			car_title = $this.data('title'),
+			view = $this.data('view')
 
-			for (var key in stm_cookies) {
-				if (stm_cookies.hasOwnProperty(key)) {
-					if (key.indexOf(cc_prefix + post_type) > -1) {
-						stm_car_compare.push(stm_cookies[key])
-					}
+		for (var key in stm_cookies) {
+			if (stm_cookies.hasOwnProperty(key)) {
+				if (key.indexOf(cc_prefix + post_type) > -1) {
+					stm_car_compare.push(stm_cookies[key])
 				}
 			}
+		}
+		let stm_compare_cars_counter = stm_car_compare.length
+		$.cookie.raw = true
+		if ($.inArray(stm_car_add_to.toString(), stm_car_compare) === -1) {
+			if (stm_car_compare.length < 3) {
+				$.cookie(
+					cc_prefix + post_type + '[' + stm_car_add_to + ']',
+					stm_car_add_to,
+					{ expires: 7, path: '/' }
+				)
+				stm_compare_cars_counter++
 
-			let stm_compare_cars_counter = stm_car_compare.length
-
-			$.cookie.raw = true
-			if ($.inArray(stm_car_add_to.toString(), stm_car_compare) === -1) {
-				if (stm_car_compare.length < 3) {
-					$.cookie(
-						cc_prefix + post_type + '[' + stm_car_add_to + ']',
-						stm_car_add_to,
-						{ expires: 7, path: '/' }
-					)
-					stm_compare_cars_counter++
-
-					$('.stm-gallery-action-unit.compare').addClass('active')
+				$('.stm-gallery-action-unit.compare').addClass('active')
 					$this.addClass('active stm-added')
 
 					$this.attr('title', stm_i18n.stm_label_remove)
 
 					if (!$this.hasClass('mvl-skins-add-to-compare')) {
-						let compareHtml =
-							'<i class="motors-icons-added stm-unhover"></i>\n' +
-							'<span class="stm-unhover">' +
-							stm_i18n.stm_label_in_compare +
-							'</span>\n' +
-							'<div class="stm-show-on-hover">\n' +
-							'<i class="motors-icons-remove"></i>\n' +
-							stm_i18n.stm_label_remove_list +
-							'</div>'
+				let compareHtml =
+					'<i class="motors-icons-added stm-unhover"></i>\n' +
+					'<span class="stm-unhover">' +
+					stm_i18n.stm_label_in_compare +
+					'</span>\n' +
+					'<div class="stm-show-on-hover">\n' +
+					'<i class="motors-icons-remove"></i>\n' +
+					stm_i18n.stm_label_remove_list +
+					'</div>'
 
-						if (
-							typeof stm_i18n.stm_label_remove !== 'undefined' &&
-							'grid' !== view
-						) {
-							$this.html(compareHtml)
-						}
-						if ('grid' === view) {
-							$this
-								.find('i')
+				if (
+					typeof stm_i18n.stm_label_remove !== 'undefined' &&
+					'grid' !== view
+				) {
+					$this.html(compareHtml)
+				}
+				if ('grid' === view) {
+					$this
+						.find('i')
 								.removeClass('motors-icons-remove motors-icons-add')
-								.addClass('motors-icons-added')
-						}
+						.addClass('motors-icons-added')
+				}
 					}
 
-					showCompareNotification('added', car_title)
-				} else {
-					showCompareNotification('filled', '', post_type)
-				}
+				showCompareNotification('added', car_title)
 			} else {
-				$.removeCookie(cc_prefix + post_type + '[' + stm_car_add_to + ']', {
-					path: '/',
-				})
+				showCompareNotification('filled', '', post_type)
+			}
+		} else {
+			$.removeCookie(cc_prefix + post_type + '[' + stm_car_add_to + ']', {
+				path: '/',
+			})
 				$this.removeClass('active stm-added')
 
 				$this.attr('title', stm_i18n.stm_label_add)
 
 				if (!$this.hasClass('mvl-skins-add-to-compare')) {
-					$this.find('.stm-show-on-hover').remove()
-					if (typeof stm_i18n.stm_label_add !== 'undefined') {
-						$this
-							.find('i')
+			$this.find('.stm-show-on-hover').remove()
+			if (typeof stm_i18n.stm_label_add !== 'undefined') {
+				$this
+					.find('i')
 							.removeClass('motors-icons-remove motors-icons-added')
-							.addClass('motors-icons-add')
-						$this
-							.find('span')
-							.removeClass('stm-unhover')
-							.html(stm_i18n.stm_label_add)
+					.addClass('motors-icons-add')
+				$this
+					.find('span')
+					.removeClass('stm-unhover')
+					.html(stm_i18n.stm_label_add)
 					}
 				}
 
 				if ($('.add-to-compare.active').length === 0) {
 					$('.stm-gallery-action-unit.compare').removeClass('active')
-				}
+			}
 
-				if ($this.hasClass('stm_remove_after')) {
-					window.location.reload()
-				}
+			stm_compare_cars_counter--
 
-				if ($this.hasClass('remove-from-compare')) {
-					$('.car-listing-row .compare-col-stm-' + stm_car_add_to).hide(
-						'slide',
-						{ direction: 'left' },
-						function () {
-							$('.car-listing-row .compare-col-stm-' + stm_car_add_to).remove()
-							$('.car-listing-row').append($('.compare-empty-car-top').html())
-						}
-					)
+			if ($this.hasClass('stm_remove_after')) {
+				window.location.reload()
+			}
 
-					$('.stm-compare-row .compare-col-stm-' + stm_car_add_to).hide(
-						'slide',
-						{ direction: 'left' },
-						function () {
-							$('.stm-compare-row .compare-col-stm-' + stm_car_add_to).remove()
+			if ($this.hasClass('remove-from-compare')) {
+				$('.car-listing-row .compare-col-stm-' + stm_car_add_to).hide(
+					'slide',
+					{ direction: 'left' },
+					function () {
+						$('.car-listing-row .compare-col-stm-' + stm_car_add_to).remove()
+						$('.car-listing-row').append($('.compare-empty-car-top').html())
+					}
+				)
+
+				$('.stm-compare-row .compare-col-stm-' + stm_car_add_to).hide(
+					'slide',
+					{ direction: 'left' },
+					function () {
+						$('.stm-compare-row .compare-col-stm-' + stm_car_add_to).remove()
 							$('.stm-compare-row').append(
 								$('.compare-empty-car-bottom').html()
 							)
-						}
-					)
+					}
+				)
 
-					$('.row-compare-features .compare-col-stm-' + stm_car_add_to).hide(
-						'slide',
-						{ direction: 'left' },
-						function () {
-							$(
-								'.row-compare-features .compare-col-stm-' + stm_car_add_to
-							).remove()
-							if ($('.row-compare-features .col-md-3').length < 2) {
-								$('.row-compare-features').slideUp()
-							}
+				$('.row-compare-features .compare-col-stm-' + stm_car_add_to).hide(
+					'slide',
+					{ direction: 'left' },
+					function () {
+						$(
+							'.row-compare-features .compare-col-stm-' + stm_car_add_to
+						).remove()
+						if ($('.row-compare-features .col-md-3').length < 2) {
+							$('.row-compare-features').slideUp()
 						}
-					)
-				} else {
-					showCompareNotification('removed', car_title)
-				}
+					}
+				)
+			} else {
+				showCompareNotification('removed', car_title)
 			}
+		}
+		totalCompareCars(stm_compare_cars_counter);
 		}
 	)
 
 	$(document).on('click', '.compare-remove-all', remove_all_compare)
+
+	function totalCompareCars(compare_count) {
+		$('.stm-current-cars-in-compare').text(compare_count)
+	}
 
 	function showCompareNotification($status, $title, $post_type) {
 		if ('filled' === $status) {
@@ -513,6 +524,29 @@
 		$('#request-test-drive-form').find('.alert-modal').remove()
 		$('#request-test-drive-form').find('.form-error').removeClass('form-error')
 	}
+
+	let shareTimer;
+
+	$('.stm-a2a-popup').closest('.stm-gallery-action-unit').on({
+		mouseenter: function () {
+			if (shareTimer) {
+				clearTimeout(shareTimer);
+			}
+			$(this).find('.stm-a2a-popup').addClass('stm-a2a-popup-active');
+		},
+		mouseleave: function () {
+			shareTimer = setTimeout(function () {
+				if ($('.stm-a2a-popup-active:hover').length == 0) {
+					$('.stm-a2a-popup').removeClass('stm-a2a-popup-active');
+				}
+			}, 500);
+
+			$('.stm-a2a-popup-active').mouseleave(function () {
+				$('.stm-a2a-popup').removeClass('stm-a2a-popup-active');
+			});
+		}
+	});
+
 })(jQuery)
 
 function updateGridItemTitles() {

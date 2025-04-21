@@ -2,12 +2,26 @@
 /*Inventory*/
 function motors_listing_inventory( $atts ) {
 	$selected_inventory_skin = apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'inventory_skin' );
+	$card_skin               = apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'grid_card_skin' );
+	$list_card_skin          = apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'list_card_skin' );
+
+	if ( ! empty( $atts['inventory_skin'] ) ) {
+		$selected_inventory_skin = $atts['inventory_skin'];
+	}
 
 	ob_start();
 
 	if ( 'default' !== $selected_inventory_skin ) {
 		mvl_enqueue_header_scripts_styles( $selected_inventory_skin );
-		do_action( 'stm_listings_load_template', 'inventory/' . $selected_inventory_skin );
+		mvl_enqueue_header_scripts_styles( 'stmselect2' );
+		mvl_enqueue_header_scripts_styles( 'app-select2' );
+		mvl_enqueue_header_scripts_styles( 'inventory-view-type' );
+		mvl_enqueue_header_scripts_styles( 'loop-list' );
+		mvl_enqueue_header_scripts_styles( 'loop-grid' );
+		mvl_enqueue_header_scripts_styles( $list_card_skin, 'listing-card/list' );
+		mvl_enqueue_header_scripts_styles( $card_skin, 'listing-card/grid' );
+
+		do_action( 'stm_listings_load_template', 'inventory/' . $selected_inventory_skin, $atts );
 	} else {
 		mvl_enqueue_header_scripts_styles( 'stmselect2' );
 		mvl_enqueue_header_scripts_styles( 'app-select2' );

@@ -284,7 +284,7 @@ if (typeof (STMListings) == 'undefined') {
 
     /** init Select2 for filter select , on other select2 inits was added exception for .filter-select **/
     STMListings.init_select = function() {
-        $("select.filter-select").each(function () {
+        $("select.filter-select").each(function() {
             let selectElement = $(this),
                 selectClass   = selectElement.attr( 'class' );
 
@@ -292,18 +292,96 @@ if (typeof (STMListings) == 'undefined') {
             if ( selectElement.hasClass( "stm-multiple-select" ) ) {
                 closeOnSelect = false;
             }
+            let proDropdown = selectElement.hasClass('stm-pro-filter-select');
+            let parent = $('body');
+            if ( selectElement.hasClass('stm-pro-filter-select') ) {
+                parent = $('#' + selectElement.attr('data-dropdown'));
+                closeOnSelect = false;
+            }
             selectElement.select2({
                 width: '100%',
-                dropdownParent: $('body'),
+                dropdownParent: parent,
                 minimumResultsForSearch: 0,
                 containerCssClass: 'filter-select',
                 closeOnSelect: closeOnSelect,
-                dropdownCssClass: selectClass,
+                dropdownCssClass: selectClass + ' ' + selectElement.closest('.filter-sidebar').attr('class'),
                 "language": {
                     "noResults": function(){
                         return noFoundSelect2;
                     }
                 },
+                matcher: function(params, data) {
+                    if (data.element && data.element.index === 0 && proDropdown === true) {
+                        return null;
+                    }
+                    if (!params.term) {
+                        return data;
+                    }
+                    if (data.text.toLowerCase().indexOf(params.term.toLowerCase()) > -1) {
+                        return data;
+                    }
+                    
+                    return null;
+                },
+                templateResult: function(data) {
+                    if (!data.id) {
+                        return data.text;
+                    }
+
+                    let $option = $(data.element);
+                    let count = $option.data('option-count');
+                    let image = $option.data('option-image');
+                    
+                    let $wrapper = $('<span class="stm-filter-pro-item-content"></span>');
+
+                    if (image) {
+                        $wrapper.append($('<img src="' + image + '" class="select2-option-image" />'));
+                    }
+
+                    $wrapper.append($('<span class="select2-option-text">' + data.text + '</span>'));
+
+                    if (count !== undefined) {
+                        if(count == 0) {
+                            $wrapper.addClass('disabled');
+                        }
+                        $wrapper.append($('<span class="option-count">(' + count + ')</span>'));
+                    }
+
+                    return $wrapper;
+                },
+                templateSelection: function(data) {
+                    if (!data.id) {
+                        return data.text;
+                    }
+
+                    let $option = $(data.element);
+                    let count = $option.data('option-count');
+                    let image = $option.data('option-image');
+                    
+                    let $wrapper = $('<span class="stm-filter-pro-item-content"></span>');
+
+                    if (image) {
+                        $wrapper.append($('<img src="' + image + '" class="select2-option-image" />'));
+                    }
+
+                    $wrapper.append($('<span class="select2-option-text">' + data.text + '</span>'));
+                    if (count !== undefined && count != 0) {
+                        $wrapper.append($('<span class="option-count">(' + count + ')</span>'));
+                    }
+
+                    return $wrapper;
+                }
+            }).on('select2:open', function() {
+                if(proDropdown) {
+                    $('.select2-search__field').attr('placeholder', 'Search');
+                }
+            });
+
+            selectElement.find('option').each(function() {
+                let count = $(this).data('option-count');
+                if(count !== undefined && count == 0) {
+                    $(this).prop('disabled', true);
+                }
             });
         });
 
@@ -502,11 +580,14 @@ if (typeof (STMListings) == 'undefined') {
         window.stm_favourites = new Favorites();
 
         $(document).on('change', '.stm-sort-by-options select', function () {
-            var form = $('input[name="sort_order"]').val($(this).val()).closest('form');
-            form.trigger('submit');
+            var $form = $('.search-filter-form');
+            if ($form.length) {
+                $form.find('input[name="sort_order"]').val($(this).val());
+                $form.trigger('submit');
+            }
         });
 
-        $(document).on('change', '.ajax-filter select, .stm-sort-by-options select, .stm-slider-filter-type-unit', function () {
+        $(document).on('change', '.ajax-filter select, .stm-sort-by-options select, .stm-slider-filter-type-unit, .stm-filter-pro-options-list input[type="checkbox"]', function () {
             STMListings.clean_select_child_if_parent_changed($(this));
             $(this).closest('form').trigger('submit');
         });

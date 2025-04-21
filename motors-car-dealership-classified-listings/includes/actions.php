@@ -116,9 +116,11 @@ function stm_listings_ajax_results( $source = null, $type = null, $navigation_ty
 		$excluded_params[] = 'stm_lng';
 	}
 
-	$r['sorts'] = $sorts;
-	$r['url']   = remove_query_arg( $excluded_params );
-	$r          = apply_filters( 'stm_listings_ajax_results', $r );
+	$r['sorts']    = $sorts;
+	$r['url']      = remove_query_arg( $excluded_params );
+	$r             = apply_filters( 'stm_listings_ajax_results', $r );
+	$filter_badges = apply_filters( 'stm_get_filter_badges', array() );
+
 	if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'friendly_url' ) ) {
 		$query_vars = $_GET;
 		unset( $query_vars['security'] );
@@ -178,7 +180,8 @@ function stm_listings_ajax_results( $source = null, $type = null, $navigation_ty
 	if ( $fragments ) {
 		$r = array_intersect_key( $r, array_flip( $fragments ) );
 	}
-
+	//add filter badges
+	$r['filter_badges'] = $filter_badges;
 	wp_send_json( $r );
 	exit;
 }

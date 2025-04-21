@@ -54,7 +54,7 @@ $vars = array(
 	'min_value'   => $min_value,
 	'max_value'   => $max_value,
 	'slider_step' => $slider_step,
-	'show_inputs' => ! empty( $info['show_inputs'] ) ? $info['show_inputs'] : false,
+	'show_inputs' => ! empty( $taxonomy['show_inputs'] ) ? $taxonomy['show_inputs'] : false,
 );
 
 $label_affix = $vars['min_value'] . $affix . ' — ' . $vars['max_value'] . $affix;
@@ -68,9 +68,9 @@ $hide_input    = $vars['show_inputs'] ? 'numeric' : 'hidden';
 ?>
 <div class="col-md-12 col-sm-12">
 	<div class="filter-<?php echo esc_attr( $vars['slug'] ); ?> stm-slider-filter-type-unit">
-		<div class="clearfix">
+		<div class="clearfix number-field-label">
 			<h5 class="pull-left"><?php echo esc_html( apply_filters( 'stm_listings_dynamic_string_translation', $taxonomy['single_name'], 'Filter Option Label for ' . $taxonomy['single_name'] ) ); ?></h5>
-			<div class="stm-current-slider-labels"><?php echo esc_html( $vars['label'] ); ?></div>
+			<div class="stm-current-slider-labels <?php echo esc_attr( $vars['show_inputs'] ? 'hidden' : '' ); ?>"><?php echo esc_html( $vars['label'] ); ?></div>
 		</div>
 			<div class="stm-price-range-unit">
 			<div class="stm-<?php echo esc_attr( $vars['slug'] ); ?>-range stm-filter-type-slider"></div>

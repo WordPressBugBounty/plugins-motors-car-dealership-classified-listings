@@ -4,6 +4,7 @@ $badge_color    = get_post_meta( $post->ID, 'badge_bg_color', true );
 $badge_text     = get_post_meta( $post->ID, 'badge_text', true );
 $special_text   = get_post_meta( $post->ID, 'special_text', true );
 $special_img_id = get_post_meta( $post->ID, 'special_image', true );
+$special_im     = '';
 
 if ( ! empty( $special_img_id ) ) {
 	$special_img = wp_get_attachment_url( $special_img_id );

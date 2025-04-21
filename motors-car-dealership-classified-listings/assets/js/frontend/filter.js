@@ -14,10 +14,32 @@ if (typeof (STMListings) == 'undefined') {
     Filter.prototype.init = function () {
         $(this.form).on("submit", $.proxy(this.submit, this));
         this.getTarget().on('click', 'a.page-numbers', $.proxy(this.paginationClick, this));
+
+        let badgeWrapper = $('.stm-filter-chosen-units');
+        let listBadgesWrapper = $('.stm-filter-chosen-units-list')
+        if (!window.matchMedia('(max-width: 768px)').matches) {
+            if (listBadgesWrapper.find('li').length > 0) {
+                badgeWrapper.show()
+                $('.search-results-actions-result').show()
+            } else {
+                badgeWrapper.hide()
+                $('.search-results-actions-result').hide()
+            }
+        } else {
+            badgeWrapper.hide()
+            $('.search-results-actions-result').hide()
+        }
+        
     };
 
 	Filter.prototype.getFormParams = function () {
 		let url = new URL( $( this.form ).attr( 'action' ) );
+		let currentUrl = new URL(window.location.href);
+		let viewType = currentUrl.searchParams.get('view_type');
+		
+		if (viewType) {
+			url.searchParams.delete('view_type');
+		}
 
 		$.each(
 			$( this.form ).serializeArray(),
@@ -34,12 +56,15 @@ if (typeof (STMListings) == 'undefined') {
 			}
 		);
 
+		if (viewType) {
+			url.searchParams.append('view_type', viewType);
+		}
+
 		return url;
 	};
 
     Filter.prototype.submit = function (event) {
 		event.preventDefault();
-
 		if ( typeof stm_elementor_editor_mode === "undefined" ) {
 			this.performAjax( this.getFormParams() );
 		}
@@ -51,6 +76,9 @@ if (typeof (STMListings) == 'undefined') {
 
         url.searchParams.set('security', stm_security_nonce);
         this.performAjax(url.toString());
+        $('html, body').animate({
+            scrollTop: 0
+        }, 500);
     };
 
     Filter.prototype.pushState = function (url) {
@@ -90,6 +118,11 @@ if (typeof (STMListings) == 'undefined') {
         if (res.url) {
             this.pushState(res.url);
         }
+
+        //Update Filter Badges
+        updateFilterBadges(res.filter_badges);
+        //Update Total Founded
+        updateTotalfounded(res.total);
     };
 
     Filter.prototype.ajaxComplete = function () {
@@ -369,11 +402,93 @@ if (typeof (STMListings) == 'undefined') {
 
 							if( !tabs_filter ) {
 								$( 'select', $_form ).select2( 'destroy' );
-								$( 'select', $_form ).select2(
-									{
-										dropdownParent: $( 'body' ),
+								$( 'select', $_form ).each(function() {
+									let dropdownParent = $('body');
+									let closeOnSelect = true;
+									let proDropdown = false;
+									if ($(this).parent().next().hasClass('stm-pro-filter-dropdown-box')) {
+										dropdownParent = $(this).parent().next();
+										closeOnSelect = false;
+										proDropdown = true;
 									}
-								);
+									$(this).select2({
+										dropdownParent: dropdownParent,
+										closeOnSelect: closeOnSelect,
+										width: '100%',
+										minimumResultsForSearch: 0,
+										containerCssClass: 'filter-select',
+										dropdownCssClass: $(this).attr('class'),
+										"language": {
+											"noResults": function() {
+												return noFoundSelect2;
+											}
+										},
+										matcher: function(params, data) {
+											if (data.element && data.element.index === 0 && proDropdown === true) {
+												return null;
+											}
+											if (!params.term) {
+												return data;
+											}
+											if (data.text.toLowerCase().indexOf(params.term.toLowerCase()) > -1) {
+												return data;
+											}
+											
+											return null;
+										},
+										templateResult: function(data) {
+											if (!data.id) {
+												return data.text;
+											}
+
+											let $option = $(data.element);
+											let count = $option.data('option-count');
+											let image = $option.data('option-image');
+											
+											let $wrapper = $('<span class="stm-filter-pro-item-content"></span>');
+											
+											if (image) {
+												$wrapper.append($('<img src="' + image + '" class="select2-option-image" />'));
+											}
+											
+											$wrapper.append($('<span class="select2-option-text">' + data.text + '</span>'));
+											
+											if (count !== undefined) {
+												if(count == 0 && proDropdown) {
+													$wrapper.addClass('disabled');
+												}
+												$wrapper.append($('<span class="option-count">(' + count + ')</span>'));
+											}
+
+											return $wrapper;
+										},
+										templateSelection: function(data) {
+											if (!data.id) {
+												return data.text;
+											}
+
+											let $option = $(data.element);
+											let count = $option.data('option-count');
+											let image = $option.data('option-image');
+											
+											let $wrapper = $('<span class="stm-filter-pro-item-content"></span>');
+											
+											if (image) {
+												$wrapper.append($('<img src="' + image + '" class="select2-option-image" />'));
+											}
+											
+											$wrapper.append($('<span class="select2-option-text">' + data.text + '</span>'));
+											
+											if (count !== undefined && count != 0) {
+												$wrapper.append($('<span class="option-count">(' + count + ')</span>'));
+											}
+
+											return $wrapper;
+										}
+									}).on('select2:open', function() {
+										$('.select2-search__field').attr('placeholder', stm_i18n.mvl_search_placeholder);
+									});
+								});
 							}
 
 							/*Change total*/
@@ -382,6 +497,7 @@ if (typeof (STMListings) == 'undefined') {
 							$( '.mobile-search-filter #show-car-btn-mobile span' ).text( res.total );
 							$( '.filter-listing.motors_dynamic_listing_filter .stm-filter-tab-selects .search-submit span' ).text( res.total );
 							$( '.filter-listing.stm_dynamic_listing_filter .stm-filter-tab-selects .search-submit span' ).text( res.total );
+							$( '.stm-inventory-pro-total-found' ).text( res.total );
 
 							$( '.stm-listing-directory-total-matches' ).show();
 						}
@@ -392,7 +508,7 @@ if (typeof (STMListings) == 'undefined') {
 
 	$( document ).on(
 			'change',
-			'.archive-listing-page form input, .archive-listing-page form select',
+			'.archive-listing-page form input, .archive-listing-page form select, .stm-inventory-pro-filter form input, .stm-inventory-pro-filter form select',
 			function () {
 				if ( typeof STMListings.clean_select_child_if_parent_changed === "function" ) {
 					STMListings.clean_select_child_if_parent_changed( $( this ) );
@@ -421,4 +537,265 @@ if (typeof (STMListings) == 'undefined') {
 
 			}
 	);
+
+    $(document).on('click', '.action-reset', function () {
+        let _box = $(this).closest('.stm-filter-pro-item-heading').parent()
+        _box
+            .find('.stm-filter-pro-options-list label input[type="checkbox"]')
+            .prop('checked', false)
+        _box.find('.stm-filter-chosen-units li .stm-clear-listing-one-unit').click()
+        $(this).closest('form').trigger('submit')
+    })
+
+    /*Remove badge*/
+    $(document).on(
+        'click',
+        'ul.stm-filter-chosen-units-list li > i',
+        function () {
+            let $this = $(this),
+                form = $('form[data-trigger=filter]').data('Filter')
+
+            let stmType = $this.data('type')
+            let stmSlug = $this.data('slug')
+
+            $('input[name="' + stmSlug + '[]"]:checked').each(function () {
+                let $input = $(this)
+                $input.parent().removeClass('checked')
+                $input.prop('checked', false)
+                $input.closest('.stm-option-label').removeClass('checked')
+                let heading = $input.closest('.stm-filter-item').find('.stm-filter-pro-item-heading')
+                heading.removeClass('selected').find('.results-count').html('0')
+            })
+			
+            if (stmType == 'select') {
+                $('select[name="' + stmSlug + '[]"]').val(null);
+                $('select[name="' + stmSlug + '[]"]').trigger('change');
+                $('select[name="' + stmSlug + '"]').val('');
+                let $select = $('select[name="' + stmSlug + '"]');
+                $select.find('option').prop('disabled', false);
+                
+                $select.select2('destroy');
+                let dropdownParent = $('body');
+                let closeOnSelect = true;
+                let proDropdown = false;
+                
+                if ($select.parent().next().hasClass('stm-pro-filter-dropdown-box')) {
+                    dropdownParent = $select.parent().next();
+                    closeOnSelect = false;
+                    proDropdown = true;
+                }
+                
+                $select.select2({
+                    dropdownParent: dropdownParent,
+                    closeOnSelect: closeOnSelect,
+                    width: '100%',
+                    minimumResultsForSearch: 0,
+                    containerCssClass: 'filter-select',
+                    dropdownCssClass: $select.attr('class'),
+                    "language": {
+                        "noResults": function() {
+                            return noFoundSelect2;
+                        }
+                    },
+                    matcher: function(params, data) {
+                        if (data.element && data.element.index === 0 && proDropdown === true) {
+                            return null;
+                        }
+                        if (!params.term) {
+                            return data;
+                        }
+                        if (data.text.toLowerCase().indexOf(params.term.toLowerCase()) > -1) {
+                            return data;
+                        }
+                        return null;
+                    },
+                    templateResult: function(data) {
+                        if (!data.id) {
+                            return data.text;
+                        }
+                        let $option = $(data.element);
+                        let count = $option.data('option-count');
+                        let image = $option.data('option-image');
+                        
+                        let $wrapper = $('<span class="stm-filter-pro-item-content"></span>');
+                        
+                        if (image) {
+                            $wrapper.append($('<img src="' + image + '" class="select2-option-image" />'));
+                        }
+                        
+                        $wrapper.append($('<span class="select2-option-text">' + data.text + '</span>'));
+                        
+                        if (count !== undefined) {
+                            if(count == 0 && proDropdown) {
+                                $wrapper.addClass('disabled');
+                            }
+                            $wrapper.append($('<span class="option-count">(' + count + ')</span>'));
+                        }
+                        return $wrapper;
+                    },
+                    templateSelection: function(data) {
+                        if (!data.id) {
+                            return data.text;
+                        }
+                        let $option = $(data.element);
+                        let count = $option.data('option-count');
+                        let image = $option.data('option-image');
+                        
+                        let $wrapper = $('<span class="stm-filter-pro-item-content"></span>');
+                        
+                        if (image) {
+                            $wrapper.append($('<img src="' + image + '" class="select2-option-image" />'));
+                        }
+                        
+                        $wrapper.append($('<span class="select2-option-text">' + data.text + '</span>'));
+                        
+                        if (count !== undefined && count != 0) {
+                            $wrapper.append($('<span class="option-count">(' + count + ')</span>'));
+                        }
+                        return $wrapper;
+                    }
+                }).on('select2:open', function() {
+                    $('.select2-search__field').attr('placeholder', stm_i18n.mvl_search_placeholder);
+                });
+                
+                let heading = $select.closest('.stm-filter-item').find('.stm-filter-pro-item-heading');
+                heading.removeClass('selected').find('.results-count').html('0');
+            }
+
+			if ( stmType == 'number') {
+				$('select[name="' + stmSlug + '[]"]').val(null)
+                $('select[name="' + stmSlug + '[]"]').trigger('change')
+                $('select[name="' + stmSlug + '"]').val('')
+                let $select = $('select[name="' + stmSlug + '"]')
+                $select
+                    .find('option')
+                    .prop('disabled', false)
+                $select
+                    .select2('destroy')
+                    .select2()
+                    .select2('val', '')
+
+				$('input[name="min_' + stmSlug + '"]')
+					.val('')
+				$('input[name="max_' + stmSlug + '"]')
+					.val('')
+				
+				$('select[name="min_' + stmSlug + '"]').find('option').prop('disabled', false)
+				$('select[name="min_' + stmSlug + '"]').select2('destroy').select2().select2('val', '')
+                
+                let heading = $select.closest('.stm-filter-item').find('.stm-filter-pro-item-heading')
+                heading.removeClass('selected').find('.results-count').html('0')
+
+			}
+
+            if (stmType == 'slider') {
+                let sliderObj = $('.stm-' + stmSlug + '-range').slider('instance')
+                if (typeof sliderObj !== 'undefined') {
+                    $('.stm-' + stmSlug + '-range').slider('values', [
+                        sliderObj.options.min,
+                        sliderObj.options.max,
+                    ])
+                    $('input[name="min_' + stmSlug + '"]')
+                        .val('')
+                        .attr('placeholder', sliderObj.options.min)
+                    $('input[name="max_' + stmSlug + '"]')
+                        .val('')
+                        .attr('placeholder', sliderObj.options.max)
+                }
+            }
+
+            $(this).closest('li').hide()
+
+            let form_url = form.getFormParams()
+            var hasSearchParam = hasSearchParams(form_url)
+            if (!hasSearchParam) {
+                $('.stm-listing-directory-total-matches').hide()
+            }
+            form.performAjax(form_url)
+        }
+
+    )
+
+    function hasSearchParams(url) {
+        const urlObj = new URL(url)
+        const searchParams = urlObj.searchParams
+
+        for (let key of searchParams.keys()) {
+            if (key !== 'security' && key !== 'ajax_action' && key !== 'posttype') {
+                return true
+            }
+        }
+
+        return false
+    }
+
+    function updateFilterBadges(filterBadges) {
+        let badgeContainer = $('.stm-filter-chosen-units-list')
+        badgeContainer.empty()
+
+        if (filterBadges && Object.keys(filterBadges).length > 0) {
+			
+            $.each(filterBadges, function (slug, badge_info) {
+                let badge = $(`
+                <li>
+                    <span class="stm-filter-chosen-units-list-name">${badge_info.name}: </span><span class="stm-filter-chosen-units-list-value">${badge_info.value}</span>
+                    <i data-url="${badge_info.url}"
+                       data-type="${badge_info.type}"
+                       data-slug="${badge_info.slug}"
+                       data-multiple="${
+													badge_info.multiple ? badge_info.multiple : ''
+												}"
+                       class="motors-icons-cross-ico stm-clear-listing-one-unit stm-clear-listing-one-unit-classic"></i>
+                </li>
+            `)
+
+                badgeContainer.append(badge)
+            })
+
+            $('.stm-filter-chosen-units').show()
+            $('.search-results-actions-result').show()
+        } else {
+            $('.search-results-actions-result').hide()
+            $('.stm-filter-chosen-units').hide()
+        }
+    }
+
+    function updateTotalfounded(total) {
+        $('span.mvl-total-count').text(total)
+    }
+
+    $(document).on('click', '.mvl-reset-all', function () {
+        if (typeof stm_i18n !== 'undefined' && stm_i18n.mvl_current_page_url) {
+            let url = new URL(stm_i18n.mvl_current_page_url);
+            window.location = url.toString();
+        } else {
+            let currentUrl = window.location.href.split('?')[0];
+            let url = new URL(currentUrl);
+            let params = new URLSearchParams(window.location.search);
+            if (params.has('posttype')) {
+                url.searchParams.set('posttype', params.get('posttype'));
+            }
+            
+            window.location = url.toString();
+        }
+    })
+
+    $(document).ready(function() {
+        $('.stm-inventory-pro-filter-mobile-apparent .stm-filter-item-search-input input').on('input', function() {
+            let searchValue = $(this).val();
+            $('form.search-filter-form input[name="stm_keywords"]').val(searchValue).trigger('change');
+        });
+
+        $('.stm-inventory-pro-filter-mobile-apparent .stm-filter-item-search-input .motors-icons-mvl-search').on('click', function() {
+            $(this).closest('form').trigger('submit');
+        });
+
+        $('.stm-inventory-pro-filter-mobile-apparent .stm-filter-item-search-input input').on('keypress', function(e) {
+            if (e.which == 13) {
+                e.preventDefault();
+                $('form.search-filter-form').trigger('submit');
+            }
+        });
+    });
+
 })(jQuery);

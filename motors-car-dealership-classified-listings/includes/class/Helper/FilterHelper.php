@@ -187,7 +187,7 @@ class FilterHelper {
 	 *
 	 * @return mixed|void
 	 */
-	public function get_all_filter_data_with_options( $hide_empty_terms = false, $sort_by_count_asc = false ) {
+	public function get_all_filter_data_with_options( $hide_empty_terms = false, $sort_by_count_asc = false, $modern_fields = false ) {
 
 		$this->request_options = OptionsHelper::get_listing_options_from_request();
 
@@ -252,11 +252,15 @@ class FilterHelper {
 				$parent = $filter['listing_taxonomy_parent'];
 			}
 
-			if ( $filter['numeric'] && ! empty( $filter['slider'] ) ) {
+			if ( $modern_fields && ( ( isset( $filter['field_type'] ) && 'price' === $filter['field_type'] ) || ( $filter['numeric'] && isset( $filter['numeric_skins'] ) && 'skin_2' === $filter['numeric_skins'] ) ) ) {
 
 				$options = $this->generate_num_slider_filter_option( $filter_key, $parent );
 
-			} elseif ( $filter['numeric'] && empty( $filter['slider'] ) ) {
+			} elseif ( ( ( isset( $filter['field_type'] ) && 'price' === $filter['field_type'] ) || $filter['numeric'] ) && ! empty( $filter['slider'] ) ) {
+
+				$options = $this->generate_num_slider_filter_option( $filter_key, $parent );
+
+			} elseif ( ( ( isset( $filter['field_type'] ) && 'price' === $filter['field_type'] ) || $filter['numeric'] ) && empty( $filter['slider'] ) ) {
 				$options['']    = array(
 					'label'    => sprintf(
 						/* translators: %s max value */

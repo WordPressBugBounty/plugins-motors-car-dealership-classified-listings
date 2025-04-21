@@ -5,8 +5,6 @@
 
 /* Get options to show */
 $groups       = motors_page_options_groups();
-$dependencies = $groups['dependency'];
-unset( $groups['dependency'] );
 $groups       = array_values( $groups );
 $_title       = __( 'Add new field', 'stm_vehicles_listing' );
 $save_button  = __( 'Save', 'stm_vehicles_listing' );
@@ -88,21 +86,8 @@ if ( 'edit' === $form_type ) {
 				<div class="stm_custom_fields__accordion--content" <?php echo wp_kses_post( $content_attr ); ?>>
 					<?php
 					foreach ( $group['items'] as $field_key => $field ) :
+						$main_key = $field_key;
 						require STM_LISTINGS_PATH . '/includes/admin/categories/field.php';
-
-						if ( array_key_exists( $field_key, $dependencies ) ) :
-							?>
-							<div class="stm_custom_fields__dependency" data-slug="<?php echo esc_attr( $field_key ); ?>" style="display: none;">
-								<?php
-								foreach ( $dependencies[ $field_key ] as $_field_key => $_field ) {
-									$field_key = $_field_key;
-									$field     = $_field;
-									require STM_LISTINGS_PATH . '/includes/admin/categories/field.php';
-								}
-								?>
-							</div>
-							<?php
-						endif;
 					endforeach;
 					?>
 				</div>

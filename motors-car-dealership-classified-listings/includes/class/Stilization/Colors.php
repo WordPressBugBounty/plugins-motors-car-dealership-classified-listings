@@ -8,50 +8,62 @@ namespace MotorsVehiclesListing\Stilization;
 class Colors {
 	public const DEFAULT = array(
 		'free'   => array(
-			'accent_color'              => '#1280DF',
-			'bg_color'                  => '#FFFFFF',
-			'bg_shade'                  => '#F0F3F7',
-			'bg_contrast'               => '#35475A',
-			'text_color'                => '#010101',
-			'contrast_text_color'       => '#FFFFFF',
-			'filter_inputs_color'       => '#F6F7F9',
-			'spec_badge_color'          => '#FAB637',
-			'sold_badge_color'          => '#FC4E4E',
-			'success_bg_color'          => '#dbf2a2',
-			'success_text_color'        => '#5eac3f',
-			'notice_bg_color'           => '#fbc45d',
-			'notice_text_color'         => '#e4961a',
-			'error_bg_color'            => 'rgba(255,127,127,1)',
-			'error_text_color'          => 'rgba(244,43,43,1)',
-			'card_bg_color'             => '#ffffff',
-			'card_bg_color_hover'       => '#F1F5F9',
-			'card_title_color'          => '#111827',
-			'card_options_color'        => '#4E5562',
-			'card_btn_color'            => '#1280DF',
-			'card_popup_hover_bg_color' => '#f9f9f9',
+			'accent_color'                => '#1280DF',
+			'bg_color'                    => '#FFFFFF',
+			'bg_shade'                    => '#F0F3F7',
+			'bg_contrast'                 => '#35475A',
+			'text_color'                  => '#010101',
+			'contrast_text_color'         => '#FFFFFF',
+			'filter_inputs_color'         => '#F6F7F9',
+			'spec_badge_color'            => '#FAB637',
+			'sold_badge_color'            => '#FC4E4E',
+			'success_bg_color'            => '#dbf2a2',
+			'success_text_color'          => '#5eac3f',
+			'notice_bg_color'             => '#fbc45d',
+			'notice_text_color'           => '#e4961a',
+			'error_bg_color'              => 'rgba(255,127,127,1)',
+			'error_text_color'            => 'rgba(244,43,43,1)',
+			'card_bg_color'               => '#ffffff',
+			'card_bg_color_hover'         => '#F1F5F9',
+			'card_title_color'            => '#111827',
+			'card_options_color'          => '#4E5562',
+			'card_btn_color'              => '#1280DF',
+			'card_popup_hover_bg_color'   => '#f9f9f9',
+			'filter_bg_color'             => '#ffffff',
+			'filter_text_color'           => '#010101',
+			'filter_text_color_secondary' => '#010101',
+			'filter_field_bg_color'       => '#ffffff',
+			'filter_field_text_color'     => '#010101',
+			'filter_field_link_color'     => '#1280DF',
 		),
 		'luxury' => array(
-			'accent_color'              => '#A08254',
-			'bg_color'                  => '#0C1315',
-			'bg_shade'                  => '#161A1D',
-			'bg_contrast'               => '#161A1D',
-			'text_color'                => '#E9E9E9',
-			'contrast_text_color'       => '#E9E9E9',
-			'filter_inputs_color'       => 'rgba(115,115,115,0.15)',
-			'spec_badge_color'          => '#A08154',
-			'sold_badge_color'          => '#FC4E4E',
-			'success_bg_color'          => 'rgba(219,243,160,1)',
-			'success_text_color'        => 'rgba(70,191,19,1)',
-			'notice_bg_color'           => 'rgba(251,197,93,1)',
-			'notice_text_color'         => 'rgba(251,149,19,1)',
-			'error_bg_color'            => 'rgba(255,127,127,1)',
-			'error_text_color'          => 'rgba(209,52,52,1)',
-			'card_bg_color'             => '#ffffff',
-			'card_bg_color_hover'       => '#F1F5F9',
-			'card_title_color'          => '#111827',
-			'card_options_color'        => '#4E5562',
-			'card_btn_color'            => '#1280DF',
-			'card_popup_hover_bg_color' => '#f9f9f9',
+			'accent_color'                => '#A08254',
+			'bg_color'                    => '#0C1315',
+			'bg_shade'                    => '#161A1D',
+			'bg_contrast'                 => '#161A1D',
+			'text_color'                  => '#E9E9E9',
+			'contrast_text_color'         => '#E9E9E9',
+			'filter_inputs_color'         => 'rgba(115,115,115,0.15)',
+			'spec_badge_color'            => '#A08154',
+			'sold_badge_color'            => '#FC4E4E',
+			'success_bg_color'            => 'rgba(219,243,160,1)',
+			'success_text_color'          => 'rgba(70,191,19,1)',
+			'notice_bg_color'             => 'rgba(251,197,93,1)',
+			'notice_text_color'           => 'rgba(251,149,19,1)',
+			'error_bg_color'              => 'rgba(255,127,127,1)',
+			'error_text_color'            => 'rgba(209,52,52,1)',
+			'card_bg_color'               => '#ffffff',
+			'card_bg_color_hover'         => '#F1F5F9',
+			'card_title_color'            => '#111827',
+			'card_options_color'          => '#4E5562',
+			'card_btn_color'              => '#1280DF',
+			'card_popup_hover_bg_color'   => '#f9f9f9',
+			'filter_bg_color'             => '#161A1D',
+			'filter_text_color'           => '#E9E9E9',
+			'filter_text_color_secondary' => '#E9E9E9',
+			'filter_field_bg_color'       => '#161A1D',
+			'filter_field_text_color'     => '#E9E9E9',
+			'filter_field_link_color'     => '#1280DF',
 		),
 	);
 
@@ -82,7 +94,7 @@ class Colors {
 
 	/**
 	 * @param string $id
-	 * @param float $alphachannel
+	 * @param float  $alphachannel
 	 * @return string
 	 */
 	protected function get_value( string $id, float $alphachannel ) {
@@ -136,7 +148,7 @@ class Colors {
 		return static::$instance;
 	}
 
-	//Public methods
+	// Public methods
 
 	/**
 	 * @return string
@@ -154,7 +166,7 @@ class Colors {
 
 	/**
 	 * @param string $id
-	 * @param float $alphachannel
+	 * @param float  $alphachannel
 	 * @param string $default_color
 	 * @return string
 	 */
@@ -231,23 +243,23 @@ class Colors {
 	 */
 	public static function data_for_elementor( $color_id = '' ) {
 		$colors_data = array(
-			'accent_color'        => array(
+			'accent_color'                => array(
 				'name' => __( 'Accent', 'stm_vehicles_listing' ),
 				'id'   => 'accent',
 			),
-			'bg_color'            => array(
+			'bg_color'                    => array(
 				'name' => __( 'Background' ),
 				'id'   => 'bg',
 			),
-			'bg_shade'            => array(
+			'bg_shade'                    => array(
 				'name' => __( 'Secondary Background', 'stm_vehicles_listing' ),
 				'id'   => 'bg_shade',
 			),
-			'bg_contrast'         => array(
+			'bg_contrast'                 => array(
 				'name' => __( 'Accent Background', 'stm_vehicles_listing' ),
 				'id'   => 'bg_contrast',
 			),
-			'text_color'          => array(
+			'text_color'                  => array(
 				'name'     => __( 'Text', 'stm_vehicles_listing' ),
 				'id'       => 'text',
 				'children' => array(
@@ -268,7 +280,7 @@ class Colors {
 					),
 				),
 			),
-			'contrast_text_color' => array(
+			'contrast_text_color'         => array(
 				'name'     => __( 'Accent BG Text', 'stm_vehicles_listing' ),
 				'id'       => 'contrast_text',
 				'children' => array(
@@ -284,17 +296,41 @@ class Colors {
 					),
 				),
 			),
-			'spec_badge_color'    => array(
+			'spec_badge_color'            => array(
 				'name' => __( 'Special Badge', 'stm_vehicles_listing' ),
 				'id'   => 'spec_badge',
 			),
-			'sold_badge_color'    => array(
+			'sold_badge_color'            => array(
 				'name' => __( 'Sold Badge', 'stm_vehicles_listing' ),
 				'id'   => 'sold_badge',
 			),
-			'filter_inputs_color' => array(
+			'filter_inputs_color'         => array(
 				'name' => __( 'Inputs and actions', 'stm_vehicles_listing' ),
 				'id'   => 'inputs_actions',
+			),
+			'filter_bg_color'             => array(
+				'name' => __( 'Filter Background', 'stm_vehicles_listing' ),
+				'id'   => 'filter_bg',
+			),
+			'filter_text_color'           => array(
+				'name' => __( 'Filter Text', 'stm_vehicles_listing' ),
+				'id'   => 'filter_text',
+			),
+			'filter_text_color_secondary' => array(
+				'name' => __( 'Filter Text (0.5)', 'stm_vehicles_listing' ),
+				'id'   => 'filter_text_secondary',
+			),
+			'filter_field_bg_color'       => array(
+				'name' => __( 'Filter Field Background', 'stm_vehicles_listing' ),
+				'id'   => 'filter_field_bg',
+			),
+			'filter_field_text_color'     => array(
+				'name' => __( 'Filter Field Text', 'stm_vehicles_listing' ),
+				'id'   => 'filter_field_text',
+			),
+			'filter_field_link_color'     => array(
+				'name' => __( 'Links/Actions', 'stm_vehicles_listing' ),
+				'id'   => 'filter_field_link',
 			),
 		);
 

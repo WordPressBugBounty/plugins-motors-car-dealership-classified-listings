@@ -20,6 +20,11 @@
 	color: #cc6119 !important;
 }
 
+
+.elementor-panel .elementor-element .icon .mvl-icon-color {
+	color: #cc6119!important;
+}
+
 #elementor-panel-content-wrapper #elementor-panel-category-stylemixthemes .elementor-element:hover .elementor-element-title-wrapper .title,
 #elementor-panel-content-wrapper #elementor-panel-category-stylemixthemes i[class^="stmew-"]:before {
 	color: #4cbeb5 !important;

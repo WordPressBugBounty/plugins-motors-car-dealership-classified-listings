@@ -12,9 +12,16 @@ if ( stm_is_multilisting() && isset( $_GET['post_type'] ) && apply_filters( 'stm
 if ( ! empty( $_categories ) ) {
 	foreach ( $_categories as $_category ) {
 		if ( ! empty( $_category['field_type'] ) && 'color' === $_category['field_type'] ) {
-			if ( wp_script_is( 'wp-color-picker' ) ) {
-				wp_add_inline_script( 'wp-color-picker', 'jQuery(document).ready(function($){$(".colorpicker").wpColorPicker();});' );
-			}
+
+			add_action(
+				'admin_enqueue_scripts',
+				function() {
+					wp_add_inline_script(
+						'wp-color-picker',
+						'jQuery(document).ready(function($){$(".colorpicker").wpColorPicker();});'
+					);
+				}
+			);
 
 			add_action( $_category['slug'] . '_add_form_fields', 'mvl_taxonomy_listing_add_color', 10 );
 			add_action( $_category['slug'] . '_edit_form_fields', 'mvl_taxonomy_listing_edit_color', 10, 2 );

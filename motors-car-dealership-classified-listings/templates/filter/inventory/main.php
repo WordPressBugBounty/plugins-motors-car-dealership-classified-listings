@@ -2,8 +2,8 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-$horizontal_filter = apply_filters( 'motors_vl_get_nuxy_mod', false, 'listing_horizontal_filter' );
-
+$horizontal_filter    = apply_filters( 'motors_vl_get_nuxy_mod', false, 'listing_horizontal_filter' );
+$filter               = apply_filters( 'stm_listings_filter_func', null, true );
 $listing_grid_choices = apply_filters( 'motors_vl_get_nuxy_mod', '9,12,18,27', 'listing_grid_choices' );
 $listing_grid_choices = array_map( 'intval', explode( ',', $listing_grid_choices ) );
 $default_grid_choice  = intval( get_option( 'posts_per_page' ) );
@@ -30,12 +30,17 @@ $sidebar_position = apply_filters( 'motors_vl_get_nuxy_mod', 'left', 'listing_fi
 			</div>
 			<div class="archive-listing-page_content <?php echo $horizontal_filter ? esc_attr( 'horizontal_filter' ) : ''; ?>">
 				<?php
-				if ( ! $horizontal_filter ) {
+				if ( ! $horizontal_filter && ! apply_filters( 'is_mvl_pro', false ) ) {
 					do_action( 'stm_listings_load_template', 'filter/actions' );
+				} else {
+					do_action( 'stm_listings_load_template', 'filter/search-results-actions', $filter );
 				}
 				?>
 				<div id="listings-result">
-					<?php do_action( 'stm_listings_load_results', array( 'posts_per_page' => $posts_per_page ) ); ?>
+					<?php
+					do_action( 'stm_listings_load_results', array( 'posts_per_page' => $posts_per_page ) );
+					wp_reset_query(); //phpcs:ignore
+					?>
 				</div>
 				<?php
 				if ( ! $horizontal_filter ) {

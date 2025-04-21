@@ -57,9 +57,12 @@ function motors_page_options() {
 			'type'        => 'select',
 			'group'       => 'general',
 			'column'      => 2,
-			'choices'     => array(
-				'dropdown' => esc_html__( 'Dropdown select', 'stm_vehicles_listing' ),
-				'numeric'  => esc_html__( 'Number', 'stm_vehicles_listing' ),
+			'choices'     => apply_filters(
+				'mvl_field_type_choices',
+				array(
+					'dropdown' => esc_html__( 'Dropdown', 'stm_vehicles_listing' ),
+					'numeric'  => esc_html__( 'Number', 'stm_vehicles_listing' ),
+				)
 			),
 		),
 		'required_filed'          => array(
@@ -231,6 +234,11 @@ function motors_page_options() {
 			'type'        => 'checkbox',
 			'preview'     => 'admin_table.png',
 			'group'       => 'display',
+			'dependency'  => array(
+				'slug'  => 'field_type',
+				'value' => 'dropdown,numeric',
+				'type'  => 'not_empty',
+			),
 		),
 	);
 
@@ -255,12 +263,29 @@ function motors_page_options() {
 			'value'       => '',
 			'type'        => 'checkbox',
 			'group'       => 'filter',
+			'dependency'  => array(
+				'slug'  => 'field_type',
+				'value' => 'dropdown,numeric',
+				'type'  => 'not_empty',
+			),
 		),
 		'use_on_car_filter'             => array(
 			'label' => esc_html__( 'Show in filters', 'stm_vehicles_listing' ),
 			'value' => '',
 			'type'  => 'checkbox',
 			'group' => 'filter',
+		),
+		'use_count'                     => array(
+			'label'       => esc_html__( 'Show listings count', 'stm_vehicles_listing' ),
+			'value'       => '',
+			'type'        => 'checkbox',
+			'dependency'  => array(
+				'slug'  => 'field_type',
+				'value' => 'dropdown,checkbox,color',
+				'type'  => 'not_empty',
+			),
+			'group'       => 'filter',
+			'description' => esc_html__( 'This option displays the number of listings for each custom field when searching so users see how many listings match their selected filters.', 'stm_vehicles_listing' ),
 		),
 		'use_on_car_filter_links'       => array(
 			'label'       => esc_html__( 'Show as a block with links', 'stm_vehicles_listing' ),
@@ -269,6 +294,11 @@ function motors_page_options() {
 			'preview'     => 'car-filter-as-block-with-links.jpg',
 			'type'        => 'checkbox',
 			'group'       => 'filter',
+			'dependency'  => array(
+				'slug'  => 'field_type',
+				'value' => 'dropdown,numeric',
+				'type'  => 'not_empty',
+			),
 		),
 		'filter_links_default_expanded' => array(
 			'label'       => esc_html__( 'Layout Options', 'stm_vehicles_listing' ),
@@ -305,6 +335,11 @@ function motors_page_options() {
 			'preview'     => 'column.png',
 			'type'        => 'checkbox',
 			'group'       => 'filter',
+			'dependency'  => array(
+				'slug'  => 'field_type',
+				'value' => 'dropdown,numeric',
+				'type'  => 'not_empty',
+			),
 		),
 		'listing_rows_numbers'                  => array(
 			'label'       => esc_html__( 'Layout Options', 'stm_vehicles_listing' ),
@@ -377,19 +412,7 @@ function motors_page_options_groups() {
 	$response = array();
 
 	foreach ( $options as $option_key => $option ) {
-		if ( ! empty( $option['dependency'] ) ) {
-			if ( ! empty( $option['dependency']['slug'] ) ) {
-				$response['dependency'][ $option['dependency']['slug'] ][ $option_key ] = $option;
-			} elseif ( is_array( $option['dependency'] ) ) {
-				foreach ( $option['dependency'] as $dependency ) {
-					if ( ! empty( $dependency['slug'] ) ) {
-						$response['dependency'][ $dependency['slug'] ][ $option_key ] = $option;
-					}
-				}
-			}
-		} else {
-			$response[ $option['group'] ]['items'][ $option_key ] = $option;
-		}
+		$response[ $option['group'] ]['items'][ $option_key ] = $option;
 	}
 
 	$response['general']['label'] = __( 'General', 'stm_vehicles_listing' );

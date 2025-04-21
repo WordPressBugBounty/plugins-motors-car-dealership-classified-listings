@@ -3,6 +3,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+mvl_enqueue_header_scripts_styles( 'listing-search-empty-results' );
+
 $grid_action_buttons = array(
 	'listing_test_drive' => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_test_drive_grid_as_btn' ),
 	'listing_share'      => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_share_grid_as_btn' ),

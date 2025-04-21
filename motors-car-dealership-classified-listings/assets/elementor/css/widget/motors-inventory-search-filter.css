@@ -190,6 +190,7 @@
     height: 10px;
     background-color: var(--motors-filter-inputs-color);
     border-radius: 50%;
+    outline: none;
 }
 
 .classic-filter-row.motors-elementor-widget input[type=text] {

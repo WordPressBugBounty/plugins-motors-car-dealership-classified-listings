@@ -3,11 +3,13 @@
  * @var $name
  * @var $multiple
  * @var $placeholder
+ * @var $theme
 */
 
 $multiple = $multiple ?? false;
 $sel_name = ( ( isset( $maxify ) && $maxify ) ) ? 'max_' . $name : $name;
 $class    = 'filter-select';
+$theme    = empty( $theme ) ? 'default' : $theme;
 if ( isset( $multiple ) && true === boolval( $multiple ) ) {
 	$sel_name         = $sel_name . '[]';
 	$placeholder      = array_shift( $options );

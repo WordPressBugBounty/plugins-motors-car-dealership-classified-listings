@@ -1,8 +1,14 @@
 <?php
-	defined( 'ABSPATH' ) || exit;
+defined( 'ABSPATH' ) || exit;
+
+if ( ! isset( $stm_enable_location ) ) {
+	$stm_enable_location = apply_filters( 'stm_enable_location', false );
+	$enable_distance     = apply_filters( 'motors_vl_get_nuxy_mod', true, 'enable_distance_search' );
+	$radius              = apply_filters( 'motors_vl_get_nuxy_mod', 100, 'distance_search' );
+}
 
 /* Location inputs */
-if ( apply_filters( 'stm_enable_location', false ) ) :
+if ( $stm_enable_location ) :
 	$stm_location = apply_filters( 'stm_listings_input', null, 'ca_location' );
 	if ( $stm_location ) {
 		$stm_location = sanitize_text_field( $stm_location );
@@ -18,9 +24,7 @@ if ( apply_filters( 'stm_enable_location', false ) ) :
 		$stm_lat = sanitize_text_field( $stm_lat );
 	}
 
-	$enable_distance = apply_filters( 'motors_vl_get_nuxy_mod', true, 'enable_distance_search' );
 	if ( $enable_distance ) {
-		$radius = apply_filters( 'motors_vl_get_nuxy_mod', 100, 'distance_search' );
 		$radius = ( ! empty( $radius ) ) ? $radius : 100;
 
 		$radius_array = array();
@@ -58,7 +62,7 @@ if ( apply_filters( 'stm_enable_location', false ) ) :
 	</div>
 	<?php
 
-	if ( $enable_distance && apply_filters( 'stm_enable_location', false ) && apply_filters( 'motors_vl_demo_dependency', true ) ) {
+	if ( $enable_distance && apply_filters( 'motors_vl_demo_dependency', true ) ) {
 		do_action(
 			'stm_listings_load_template',
 			'filter/types/slide',

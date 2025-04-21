@@ -1,5 +1,5 @@
 <?php
-add_filter( 'me_single_listing_template_settings_conf', 'mvl_single_listing_skins_list_conf', 20, 1 );
+// add_filter( 'me_single_listing_template_settings_conf', 'mvl_single_listing_skins_list_conf', 20, 1 );
 
 function mvl_single_listing_skins_list_conf( $conf ) {
 	return array_merge(

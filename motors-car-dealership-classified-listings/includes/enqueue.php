@@ -234,6 +234,8 @@ function stm_listings_enqueue_scripts_styles() {
 			'features_required'                 => __( 'Please choose at least one feature to create a listing', 'stm_vehicles_listing' ),
 			'video_required'                    => __( 'Please share a video URL to create a listing', 'stm_vehicles_listing' ),
 			'car_price_required'                => __( 'Please add item price', 'stm_vehicles_listing' ),
+			'mvl_current_page_url'              => apply_filters( 'stm_listings_current_url', '' ),
+			'mvl_search_placeholder'            => __( 'Search', 'stm_vehicles_listing' ),
 		)
 	);
 
@@ -270,7 +272,10 @@ if ( ! function_exists( 'init_motors_root_colors' ) ) {
 				--mvl-fourth-color: ' . $fourth_color . ';
 				
 				--motors-accent-color: ' . Colors::value( 'accent_color' ) . ';
-				--motors-accent-color-lowalpha: ' . Colors::value( 'accent_color', 0.6 ) . ';
+				--motors-accent-color-alpha: ' . Colors::value( 'accent_color', 0.5 ) . ';
+				--motors-accent-color-highalpha: ' . Colors::value( 'accent_color', 0.7 ) . ';
+				--motors-accent-color-lowalpha: ' . Colors::value( 'accent_color', 0.3 ) . ';
+				--motors-accent-color-super-lowalpha : ' . Colors::value( 'accent_color', 0.1 ) . ';
 				--motors-bg-shade: ' . Colors::value( 'bg_shade' ) . ';
 				--motors-bg-color: ' . Colors::value( 'bg_color' ) . ';
 				--motors-bg-lowalpha-color: ' . Colors::value( 'bg_color', 0.3 ) . ';
@@ -285,6 +290,8 @@ if ( ! function_exists( 'init_motors_root_colors' ) ) {
 				--motors-contrast-text-color: ' . Colors::value( 'contrast_text_color' ) . ';
 				--motors-text-highalpha-color: ' . Colors::value( 'text_color', 0.7 ) . ';
 				--motors-text-alpha-color: ' . Colors::value( 'text_color', 0.5 ) . ';
+				--motors-text-low-alpha-color: ' . Colors::value( 'text_color', 0.3 ) . ';
+				--motors-text-super-low-alpha-color: ' . Colors::value( 'text_color', 0.1 ) . ';
 				--motors-contrast-text-alpha-color: ' . Colors::value( 'contrast_text_color', 0.7 ) . ';
 				--motors-border-color: ' . Colors::value( 'text_color', 0.15 ) . ';
 				--motors-contrast-border-color: ' . Colors::value( 'contrast_text_color', 0.15 ) . ';
@@ -309,6 +316,27 @@ if ( ! function_exists( 'init_motors_root_colors' ) ) {
 				--motors-card-popup-hover-bg-color: ' . Colors::value( 'card_popup_hover_bg_color', -1.0, '#f9f9f9' ) . ';
 				--motors-card-popup-border-color: ' . Colors::value( 'card_title_color', 0.15, '#11182706' ) . ';
 				--motors-card-btn-color-lowalpha: ' . Colors::value( 'card_btn_color', 0.6 ) . ';
+
+				--motors-filter-bg-color: ' . Colors::value( 'filter_bg_color', -1.0, '#ffffff' ) . ';
+				--motors-filter-text-color: ' . Colors::value( 'filter_text_color', -1.0, '#010101' ) . ';
+				--motors-filter-text-color-lowalpha: ' . Colors::value( 'filter_text_color', 0.5 ) . ';
+				--motors-filter-text-color-highalpha: ' . Colors::value( 'filter_text_color', 0.8 ) . ';
+				--motors-filter-text-color-super-lowalpha: ' . Colors::value( 'filter_text_color', 0.2 ) . ';
+				--motors-filter-field-bg-color: ' . Colors::value( 'filter_field_bg_color', -1.0, '#ffffff' ) . ';
+				--motors-filter-field-text-color: ' . Colors::value( 'filter_field_text_color', -1.0, '#010101' ) . ';
+				--motors-filter-field-text-color-lowalpha: ' . Colors::value( 'filter_field_text_color', 0.5 ) . ';
+				--motors-filter-field-text-color-highalpha: ' . Colors::value( 'filter_field_text_color', 0.8 ) . ';
+				--motors-filter-field-text-color-super-lowalpha: ' . Colors::value( 'filter_field_text_color', 0.2 ) . ';
+				--motors-filter-field-text-color-secondary: ' . Colors::value( 'filter_text_color_secondary', -1.0, '#E9E9E9' ) . ';
+				--motors-filter-field-text-color-secondary-lowalpha: ' . Colors::value( 'filter_text_color_secondary', 0.5 ) . ';
+				--motors-filter-field-text-color-secondary-highalpha: ' . Colors::value( 'filter_text_color_secondary', 0.8 ) . ';
+				--motors-filter-field-text-color-secondary-super-lowalpha: ' . Colors::value( 'filter_text_color_secondary', 0.2 ) . ';
+				--motors-filter-field-border-color: ' . Colors::value( 'filter_field_text_color', 0.2 ) . ';
+				--motors-filter-field-border-color-lowalpha: ' . Colors::value( 'filter_field_text_color', 0.1 ) . ';
+				--motors-filter-field-link-color: ' . Colors::value( 'filter_field_link_color', -1.0, '#1280DF' ) . ';
+				--motors-filter-field-link-color-lowalpha: ' . Colors::value( 'filter_field_link_color', 0.5 ) . ';
+				--motors-filter-field-link-color-highalpha: ' . Colors::value( 'filter_field_link_color', 0.8 ) . ';
+				--motors-filter-field-link-color-super-lowalpha: ' . Colors::value( 'filter_field_link_color', 0.2 ) . ';
 			}
 		';
 

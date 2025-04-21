@@ -20,32 +20,68 @@ i {
     -moz-osx-font-smoothing: grayscale;
 }
 
-.motors-icons-people-outline:before {
-    content: "\ea01";
+.motors-icons-mvl-search:before {
+    content: "\ea0d";
 }
 
-.motors-icons-pricetags-outline:before {
-    content: "\ea02";
+.motors-icons-mvl-slider-vertical:before {
+    content: "\ea0e";
 }
 
-.motors-icons-time-outline:before {
-    content: "\ea05";
+.motors-icons-bell-mvl-ico:before {
+    content: "\ea0c";
 }
 
-.motors-icons-call-outline:before {
-    content: "\ea03";
-}
-
-.motors-icons-car-sport-outline:before {
-    content: "\ea04";
-}
-
-.motors-icons-location-outline:before {
+.motors-icons-chevron-down-ico:before {
     content: "\e9ff";
 }
 
-.motors-icons-mail-outline:before {
+.motors-icons-cross-ico:before {
     content: "\ea00";
+}
+
+.motors-icons-grid-view-ico:before {
+    content: "\ea01";
+}
+
+.motors-icons-list-view-ico:before {
+    content: "\ea02";
+}
+
+.motors-icons-scales-ico:before {
+    content: "\ea03";
+}
+
+.motors-icons-switch-vertical-ico:before {
+    content: "\ea04";
+}
+
+.motors-icons-call-outline-ico:before {
+    content: "\ea05";
+}
+
+.motors-icons-car-sport-outline-ico:before {
+    content: "\ea06";
+}
+
+.motors-icons-location-outline-ico:before {
+    content: "\ea07";
+}
+
+.motors-icons-mail-outline-ico:before {
+    content: "\ea08";
+}
+
+.motors-icons-people-outline-ico:before {
+    content: "\ea09";
+}
+
+.motors-icons-pricetags-outline-ico:before {
+    content: "\ea0a";
+}
+
+.motors-icons-time-outline-ico:before {
+    content: "\ea0b";
 }
 
 .motors-icons-flame-skin:before {

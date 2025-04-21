@@ -341,13 +341,13 @@ if ( ! function_exists( 'stm_listings_options_remaining' ) ) {
  * @return array
  */
 if ( ! function_exists( 'stm_listings_filter_config' ) ) {
-	function stm_listings_filter( $source = null, $hide_empty = false ) {
+	function stm_listings_filter( $source = null, $hide_empty = false, $modern_fields = false ) {
 		$query   = stm_listings_query( $source );
 		$total   = $query->found_posts;
 		$filters = \MotorsVehiclesListing\Helper\OptionsHelper::get_all_listing_categories_by_option( array( 'use_on_car_filter' => true ), true );
 
 		$filter_helper = new \MotorsVehiclesListing\Helper\FilterHelper();
-		$options       = $filter_helper->get_all_filter_data_with_options( $hide_empty );
+		$options       = $filter_helper->get_all_filter_data_with_options( $hide_empty, false, $modern_fields );
 
 		$url     = '';
 		$compact = compact( 'options', 'filters', 'total', 'url' );
@@ -399,7 +399,7 @@ if ( ! function_exists( 'stm_listings_filter_config' ) ) {
 		return apply_filters( 'stm_listings_filter', $compact );
 	}
 
-	add_filter( 'stm_listings_filter_func', 'stm_listings_filter', 10, 2 );
+	add_filter( 'stm_listings_filter_func', 'stm_listings_filter', 10, 3 );
 }
 
 if ( ! function_exists( 'add_review_info_to_listing' ) ) {
