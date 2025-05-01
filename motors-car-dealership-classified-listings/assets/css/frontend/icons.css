@@ -6,6 +6,21 @@
     font-display: block;
 }
 
+.fa:before, .fas:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+}
+
+.fa-classic::before, .fa-regular::before, .fa-solid::before, .far::before, .fas::before {
+    font-family: "Font Awesome 6 Free";
+}
+
+.fa-brands::before, .fab::before {
+    font-family: "Font Awesome 5 Brands";
+}
+
+[class^=motors-icons-]::before,
+[class*=" motors-icons-"]::before,
 i {
   /* use !important to prevent issues with browser extensions that change fonts */
     font-family: "motors-icons";
@@ -56,31 +71,39 @@ i {
     content: "\ea04";
 }
 
-.motors-icons-call-outline-ico:before {
+.motors-icons-scales-ico:before {
+    content: "\ea03";
+}
+
+.motors-icons-switch-vertical-ico:before {
+    content: "\ea04";
+}
+
+.motors-icons-call-outline:before {
     content: "\ea05";
 }
 
-.motors-icons-car-sport-outline-ico:before {
+.motors-icons-car-sport-outline:before {
     content: "\ea06";
 }
 
-.motors-icons-location-outline-ico:before {
+.motors-icons-location-outline:before {
     content: "\ea07";
 }
 
-.motors-icons-mail-outline-ico:before {
+.motors-icons-mail-outline:before {
     content: "\ea08";
 }
 
-.motors-icons-people-outline-ico:before {
+.motors-icons-people-outline:before {
     content: "\ea09";
 }
 
-.motors-icons-pricetags-outline-ico:before {
+.motors-icons-pricetags-outline:before {
     content: "\ea0a";
 }
 
-.motors-icons-time-outline-ico:before {
+.motors-icons-time-outline:before {
     content: "\ea0b";
 }
 
@@ -1239,7 +1262,8 @@ i {
   font-display: block;
 }
 
-[class^=stm-service-icon-], [class*=" stm-service-icon-"] {
+[class^=stm-service-icon-]::before,
+[class*=" stm-service-icon-"]::before {
   /* use !important to prevent issues with browser extensions that change fonts */
     font-family: "stm-service-default" !important;
     speak: none;

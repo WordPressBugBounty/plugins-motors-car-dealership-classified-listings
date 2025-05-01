@@ -222,4 +222,41 @@ class Color {
 			)
 		);
 	}
+
+	public static function from_nuxy( $conf_name, $global_color_conf_name = 'accent_color' ) {
+
+		$value = apply_filters( 'motors_vl_get_nuxy_mod', Colors::value( $global_color_conf_name ), $conf_name );
+
+		if ( is_array( $value ) && isset( $value['color'] ) ) {
+			$value = $value['color'];
+		}
+
+		return new static(
+			array(
+				'id'            => $conf_name,
+				'name'          => $conf_name,
+				'value'         => $value,
+				'default_value' => $value,
+				'elementor_id'  => '',
+				'children'      => array(),
+				'css_id'        => $conf_name,
+			)
+		);
+	}
+
+	public static function create( $color_value ) {
+		$color = new static(
+			array(
+				'id'            => '',
+				'name'          => '',
+				'value'         => $color_value,
+				'default_value' => $color_value,
+				'elementor_id'  => '',
+				'children'      => array(),
+				'css_id'        => '',
+			)
+		);
+
+		return $color;
+	}
 }

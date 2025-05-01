@@ -288,22 +288,17 @@ if (typeof (STMListings) == 'undefined') {
             let selectElement = $(this),
                 selectClass   = selectElement.attr( 'class' );
 
-            let closeOnSelect = true;
-            if ( selectElement.hasClass( "stm-multiple-select" ) ) {
-                closeOnSelect = false;
-            }
             let proDropdown = selectElement.hasClass('stm-pro-filter-select');
             let parent = $('body');
             if ( selectElement.hasClass('stm-pro-filter-select') ) {
                 parent = $('#' + selectElement.attr('data-dropdown'));
-                closeOnSelect = false;
             }
             selectElement.select2({
                 width: '100%',
                 dropdownParent: parent,
                 minimumResultsForSearch: 0,
                 containerCssClass: 'filter-select',
-                closeOnSelect: closeOnSelect,
+                closeOnSelect: true,
                 dropdownCssClass: selectClass + ' ' + selectElement.closest('.filter-sidebar').attr('class'),
                 "language": {
                     "noResults": function(){

@@ -1,8 +1,6 @@
 <?php
 use MotorsVehiclesListing\Plugin\MVL_Const;
 use MotorsVehiclesListing\Plugin\PluginOptions;
-use MotorsVehiclesListing\Stilization\Color;
-use MotorsVehiclesListing\Stilization\Colors;
 
 /**
  * Use for get value by option key
@@ -124,6 +122,38 @@ function mvl_get_nuxy_icon( $option_name, $default_icon, $other_classes = '' ) {
 	return $icon_element;
 }
 
+add_filter( 'mvl_get_nuxy_icon_class', 'mvl_get_nuxy_icon_class', 2, 2 );
+if ( ! function_exists( 'mvl_get_nuxy_icon_class' ) ) {
+	function mvl_get_nuxy_icon_class( $default_value, $option_name ) {
+		$icon_array = motors_vl_get_nuxy_mod( array(), $option_name, false );
+		return isset( $icon_array['icon'] ) ? $icon_array['icon'] : $default_value;
+	}
+}
+
+add_filter( 'mvl_get_nuxy_icon_css_vars', 'mvl_get_nuxy_icon_css_vars', 2, 2 );
+if ( ! function_exists( 'mvl_get_nuxy_icon_css_vars' ) ) {
+	function mvl_get_nuxy_icon_css_vars( $default_value, $option_name ) {
+		$icon           = motors_vl_get_nuxy_mod( array(), $option_name, false );
+		$css_vars       = array();
+		$css_properties = array(
+			'size'  => array(
+				'property' => 'font-size',
+				'unit'     => 'px',
+			),
+			'color' => array(),
+		);
+
+		foreach ( $css_properties as $css_property_key => $css_property_data ) {
+			$css_property_name = isset( $css_property_data['property'] ) ? $css_property_data['property'] : $css_property_key;
+			$css_property_unit = isset( $css_property_data['unit'] ) ? $css_property_data['unit'] : '';
+			if ( isset( $icon[ $css_property_key ] ) ) {
+				$css_vars[] = '--' . str_replace( '_', '-', $option_name ) . '-' . $css_property_name . ':' . $icon[ $css_property_key ] . $css_property_unit . ';';
+			}
+		}
+		return $css_vars;
+	}
+}
+
 if ( ! function_exists( 'stm_add_to_any_shortcode' ) ) {
 	function stm_add_to_any_shortcode( $postId ) {
 		return do_shortcode( '[addtoany]' );
@@ -156,9 +186,16 @@ function mvl_nuxy_sidebars() {
 	return $sidebars;
 }
 
-function mvl_nuxy_pages_list() {
-	$post_types[] = __( 'Choose page', 'stm_vehicles_listing' );
-	$query        = get_posts(
+function mvl_nuxy_pages_list( $include_default_value = true, $default_value = '' ) {
+	if ( $include_default_value ) {
+		if ( $default_value ) {
+			$post_types[] = $default_value;
+		} else {
+			$post_types[] = __( 'Choose page', 'stm_vehicles_listing' );
+		}
+	}
+
+	$query = get_posts(
 		array(
 			'post_type'      => 'page',
 			'posts_per_page' => - 1,
@@ -485,6 +522,27 @@ if ( ! function_exists( 'stm_is_motors_theme' ) ) {
 		}
 
 		return wp_get_theme()->get( 'Name' ) === 'Motors' || wp_get_theme()->get( 'Name' ) === 'Motors Child' || wp_get_theme()->get( 'Name' ) === 'Motors - Child Theme';
+	}
+
+	add_filter( 'stm_is_motors_theme', 'stm_is_motors_theme', 1000, 1 );
+}
+
+// check if Motors Starter Theme is active
+if ( ! function_exists( 'mvl_is_motors_starter_theme' ) ) {
+	function mvl_is_motors_starter_theme() {
+		if ( defined( 'MOTORS_STARTER_THEME_DIR' ) ) {
+			return true;
+		}
+
+		$starter_theme_names = array(
+			'Motors Starter Theme'               => true,
+			'Motors Starter Theme Child'         => true,
+			'Motors Starter Theme - Child Theme' => true,
+		);
+
+		$current_theme_name = wp_get_theme()->get( 'Name' );
+
+		return isset( $starter_theme_names[ $current_theme_name ] );
 	}
 
 	add_filter( 'stm_is_motors_theme', 'stm_is_motors_theme', 1000, 1 );

@@ -5,7 +5,7 @@ Donate link: https://www.paypal.me/stylemix
 Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
 Tested up to: 6.8
-Stable tag: 1.4.69
+Stable tag: 1.4.70
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,6 +19,8 @@ Create a fully functional car dealership website in minutes. Manage your vehicle
 ⭐ [Motors  Live Demo](https://motors-plugin.stylemixthemes.com/?utm_source=wporg-motors&utm_medium=description)
 ⭐ [Documentation](https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing)
 ⭐ [Join Facebook Community](https://www.facebook.com/groups/motorstheme)
+
+[youtube https://www.youtube.com/watch?v=gIZS5HMQOVU&ab_channel=StylemixThemes]
 
 ### Who Is This Plugin For?
 
@@ -138,6 +140,17 @@ After that, go to Tools -> Import, and via Wordpress Importer tool install dummy
 You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability](https://patchstack.com/database/vdp/motors-car-dealership-classified-listings). 
 
 == Changelog ==
+
+= 1.4.70 =
+- **Enhancement:** Added the support menu across all tabs with settings.
+- **Enhancement:** Renamed “Filter by listing categories” to “Sort by custom fields”.
+- **Fix:** Fixed visual bugs for Account, Public Profile, Add a Car, Compare, and on Inventory page.
+- **Fix:** Corrected User Data Advanced & WhatsApp Button not showing up in new listings.
+- **Fix:** Resolved the fatal error issue when using MLT plugin with with Motors Pro and Elementor.
+- **Fix:** Fixed an issue when MLT listings were not displayed in the Counter and the Account dashboard.
+- **Fix:** Range filters now work on mobile.
+- **Fix:** Fixed the incorrect size of the Save search button on mobile.
+- **Fix:** Returned the Search Results button to the mobile header.
 
 = 1.4.69 =
 - **New Feature:** Added skins for custom fields to personalize the inventory design. (Pro)

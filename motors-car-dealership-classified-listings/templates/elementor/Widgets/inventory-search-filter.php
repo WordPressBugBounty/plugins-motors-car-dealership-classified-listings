@@ -1,16 +1,16 @@
 <?php
-	/**
-	 * Elementor settings
-	 * @var $filter
-	 * @var $api_data
-	 * @var $isf_mobile_btn_icon_position
-	 * @var $search_options_icon
-	 * @var $isf_title
-	 * @var $show_sold
-	 * @var $isf_icon_position
-	 * @var $reset_btn_label
-	 * @var $isf_pal_icon
-	 * */
+/**
+ * Elementor settings
+ * @var $filter
+ * @var $api_data
+ * @var $isf_mobile_btn_icon_position
+ * @var $search_options_icon
+ * @var $isf_title
+ * @var $show_sold
+ * @var $isf_icon_position
+ * @var $reset_btn_label
+ * @var $isf_pal_icon
+ * */
 
 $price_slug = 'price';
 foreach ( $filter['options'] as $key => $value ) {
@@ -120,18 +120,6 @@ if ( isset( $isf_pal_icon ) && ! empty( $isf_pal_icon ) ) {
 						$parent_list = array();
 					}
 					foreach ( $filter['filters'] as $attribute => $config ) :
-						//if need to use new filter skins
-						/*if ( isset( $config['field_type'] ) && apply_filters( 'mvl_filter_field_template', false, $config['field_type'], $config[ $config['field_type'] . '_skins' ] . '.php' ) ) {
-							do_action(
-								'stm_listings_load_template',
-								'inventory/filter/' . $config['field_type'] . '/' . $config[ $config['field_type'] . '_skins' ] . '.php',
-								array(
-									'taxonomy' => $config,
-									'options'  => $filter['options'][ $attribute ],
-								)
-							);
-							continue;
-						}*/
 
 						if ( ! array_key_exists( 'is_multiple_select', $config ) ) {
 							$config['is_multiple_select'] = false;

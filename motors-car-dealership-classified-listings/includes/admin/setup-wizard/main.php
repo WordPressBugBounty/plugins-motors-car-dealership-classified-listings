@@ -33,15 +33,12 @@ function mvl_plugin_redirect() {
 	if ( get_option( 'mvl_plugin_do_activation_redirect', false ) ) {
 		delete_option( 'mvl_plugin_do_activation_redirect' );
 		if ( ! isset( $_GET['activate-multi'] ) && ! defined( 'MOTORS_THEME' ) ) {
-			wp_redirect( 'admin.php?page=mvl-welcome-setup' );
+			wp_safe_redirect( 'admin.php?page=mvl-welcome-setup' );
 		}
 	}
 }
 register_activation_hook( STM_LISTINGS_FILE, 'mvl_plugin_activation' );
 
-use MotorsVehiclesListing\StarterTheme\Helpers\Themes;
-
 require_once 'includes/actions.php';
 
 require_once 'includes/ajax_actions.php';
-

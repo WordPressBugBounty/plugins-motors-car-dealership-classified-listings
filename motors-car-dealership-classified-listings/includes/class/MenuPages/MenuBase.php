@@ -90,24 +90,23 @@ abstract class MenuBase {
 	 * @return array
 	 */
 	public function mvl_menu_settings( $setup ) {
-		$setup[] = array(
-			'option_name' => $this->nuxy_option_name,
-			'title'       => $this->nuxy_title,
-			'sub_title'   => $this->nuxy_subtitle,
-			'logo'        => $this->motors_logo,
-			'page'        => array(
-				'parent_slug' => 'mvl_plugin_settings',
-				'page_title'  => $this->nuxy_title,
-				'menu_title'  => $this->nuxy_title,
-				'menu_slug'   => $this->nuxy_menu_slug,
-				'icon'        => '',
-				'position'    => 4,
+		$setup[] = array_merge(
+			array(
+				'option_name' => $this->nuxy_option_name,
+				'title'       => $this->nuxy_title,
+				'sub_title'   => $this->nuxy_subtitle,
+				'logo'        => $this->motors_logo,
+				'page'        => array(
+					'parent_slug' => 'mvl_plugin_settings',
+					'page_title'  => $this->nuxy_title,
+					'menu_title'  => $this->nuxy_title,
+					'menu_slug'   => $this->nuxy_menu_slug,
+					'icon'        => '',
+					'position'    => 4,
+				),
+				'fields'      => $this->nuxy_opts,
 			),
-
-			/*
-			* And Our fields to display on a page. We use tabs to separate settings on groups.
-			*/
-			'fields'      => $this->nuxy_opts,
+			apply_filters( 'mvl_get_conf_header_links', array() )
 		);
 
 		add_filter(

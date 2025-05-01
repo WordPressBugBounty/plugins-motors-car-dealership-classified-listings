@@ -68,7 +68,7 @@ class Similar extends WidgetBase {
 
 		if ( function_exists( 'stm_is_multilisting' ) && stm_is_multilisting() ) {
 
-			$listing_types = Helper::stm_ew_multi_listing_types();
+			$listing_types = Helper::stm_ew_get_multilisting_types();
 
 			if ( $listing_types ) {
 				foreach ( $listing_types as $slug => $typename ) {

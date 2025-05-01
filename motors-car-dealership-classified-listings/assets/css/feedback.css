@@ -75,6 +75,7 @@
     height: 32px;
     cursor: pointer;
     background-repeat: no-repeat;
+    background: url(../../includes/class/Plugin/assets/img/star.svg) no-repeat;
 }
 
 .mvl-feedback-modal .feedback-modal-content .feedback-rating-stars ul li.star.selected i {

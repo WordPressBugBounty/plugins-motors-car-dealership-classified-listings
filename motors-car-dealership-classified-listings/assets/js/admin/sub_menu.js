@@ -20,6 +20,14 @@
       $('.toplevel_page_mvl_plugin_settings').addClass('wp-has-current-submenu').removeClass('wp-not-current-submenu');
     }
 
-
+    addClassesToThemeMenuItems();
   });
+
+  function addClassesToThemeMenuItems() {
+      var themeSkinsMenuItem = document.querySelector('li > a > img.motors-theme-icon');
+      if ( themeSkinsMenuItem ) {
+        themeSkinsMenuItem.closest('li').classList.add('mst-skins-importer');
+        themeSkinsMenuItem.closest('li').nextElementSibling.classList.add('mst-theme-options');
+      }
+  }
 })(jQuery);

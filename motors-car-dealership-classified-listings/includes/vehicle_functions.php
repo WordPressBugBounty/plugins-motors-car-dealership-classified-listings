@@ -2186,7 +2186,7 @@ if ( ! function_exists( 'stm_get_add_page_url' ) ) {
 				$listings = STMMultiListing::stm_get_listings();
 				if ( ! empty( $listings ) ) {
 					foreach ( $listings as $key => $listing ) {
-						if ( get_post_type( $post_id ) === $listing['slug'] ) {
+						if ( get_post_type( $post_id ) === $listing['slug'] && isset( $listing['add_page'] ) ) {
 							$page_id = $listing['add_page'];
 						}
 					}
@@ -2814,6 +2814,39 @@ add_action(
 		}
 	}
 );
+
+//Patch to update post meta stm_car_user
+function patch_post_meta_stm_car_user() {
+	if ( get_option( '_patched_stm_car_user', false ) ) {
+		return;
+	}
+
+	$post_types = array(
+		'listings',
+	);
+
+	if ( function_exists( 'stm_is_multilisting' ) && stm_is_multilisting() ) {
+		$post_types = array_merge( $post_types, STMMultiListing::stm_get_listing_type_slugs() );
+	}
+
+	foreach ( $post_types as $post_type ) {
+		$posts = get_posts(
+			array(
+				'post_type'   => $post_type,
+				'numberposts' => -1,
+			)
+		);
+
+		foreach ( $posts as $post ) {
+			$post_author = $post->post_author;
+			update_post_meta( $post->ID, 'stm_car_user', $post_author );
+		}
+	}
+
+	update_option( '_patched_stm_car_user', true );
+}
+
+add_action( 'admin_init', 'patch_post_meta_stm_car_user' );
 
 add_action(
 	'add_meta_boxes',

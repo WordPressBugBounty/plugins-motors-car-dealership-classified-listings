@@ -279,16 +279,13 @@
 
 .stm-vl-plugin-pure .select2-search .add-new-term {
     display: block;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 10px;
+    margin: 0 0 0 5px;
     font-size: 18px;
     cursor: pointer;
 }
 
 .stm-vl-plugin-pure .select2-search.select2-search--dropdown.select2-search--hide {
-    display: block !important;
+    display: flex !important;
 }
 
 .stm-vl-plugin-pure a[href^=tel] {
@@ -811,6 +808,10 @@ input:-webkit-autofill {
 
 .select2-container--default .select2-selection--single .select2-selection__arrow b.stm-preloader {
     animation: rotating 2s infinite linear;
+}
+
+.stm-vl-plugin-pure .select2-search__field {
+    min-width: 170px !important;
 }
 
 .stm-vl-plugin-pure .stm_add_car_form {
@@ -2122,6 +2123,10 @@ input:-webkit-autofill {
     display: inline-block;
 }
 
+.stm-vl-plugin-pure .stm_add_car_form .stm-video-link-unit-wrap ~ .stm-video-link-unit-wrap {
+    margin-top: 15px;
+}
+
 .stm-non-relative {
     position: static;
 }
@@ -2684,6 +2689,11 @@ input:-webkit-autofill {
     letter-spacing: -0.5px;
     color: var(--motors-accent-color);
     font-weight: 700;
+}
+
+.stm-vl-plugin-pure .select2-search--dropdown {
+    display: flex !important;
+    align-items: center;
 }
 
 .motors-desc-slots-wrapper {

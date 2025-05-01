@@ -1448,8 +1448,12 @@ function mvl_admin_bar_item( $admin_bar ) {
 	if ( ! current_user_can( 'manage_options' ) ) {
 		return;
 	}
-
-	$admin_bar_icon = '<span class="ab-icon"><img style="margin-top: 2px; max-height: 22px;" height="22" width="22" src="' . STM_LISTINGS_URL . '/includes/class/Plugin/assets/img/icon.png" alt="" /></span>';
+	if ( is_admin() ) {
+		$icon_margin_top = '1px';
+	} else {
+		$icon_margin_top = '-5px';
+	}
+	$admin_bar_icon = '<span class="ab-icon"><img style="margin-top: ' . $icon_margin_top . '; max-height: 22px;" height="22" width="22" src="' . STM_LISTINGS_URL . '/includes/class/Plugin/assets/img/icon.png" alt="" /></span>';
 
 	if ( apply_filters( 'stm_disable_settings_setup', true ) ) {
 		$admin_bar->add_menu(

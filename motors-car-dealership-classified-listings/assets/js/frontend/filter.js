@@ -404,16 +404,14 @@ if (typeof (STMListings) == 'undefined') {
 								$( 'select', $_form ).select2( 'destroy' );
 								$( 'select', $_form ).each(function() {
 									let dropdownParent = $('body');
-									let closeOnSelect = true;
 									let proDropdown = false;
 									if ($(this).parent().next().hasClass('stm-pro-filter-dropdown-box')) {
 										dropdownParent = $(this).parent().next();
-										closeOnSelect = false;
 										proDropdown = true;
 									}
 									$(this).select2({
 										dropdownParent: dropdownParent,
-										closeOnSelect: closeOnSelect,
+										closeOnSelect: true,
 										width: '100%',
 										minimumResultsForSearch: 0,
 										containerCssClass: 'filter-select',
@@ -581,7 +579,6 @@ if (typeof (STMListings) == 'undefined') {
                 
                 if ($select.parent().next().hasClass('stm-pro-filter-dropdown-box')) {
                     dropdownParent = $select.parent().next();
-                    closeOnSelect = false;
                     proDropdown = true;
                 }
                 

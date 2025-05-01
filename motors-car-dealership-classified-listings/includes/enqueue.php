@@ -143,7 +143,7 @@ function stm_listings_enqueue_scripts_styles() {
 	wp_enqueue_style( 'horizontal-filter', STM_LISTINGS_URL . '/assets/css/frontend/horizontal-filter.css', null, STM_LISTINGS_V );
 	wp_enqueue_style( 'motors-style', STM_LISTINGS_URL . '/assets/css/style.css', null, STM_LISTINGS_V );
 	wp_register_style( 'stmselect2', STM_LISTINGS_URL . '/assets/css/frontend/select2.min.css', null, STM_LISTINGS_V );
-	wp_register_style( 'bootstrap', STM_LISTINGS_URL . '/assets/css/bootstrap/main.css', null, STM_LISTINGS_V );
+	wp_enqueue_style( 'bootstrap', STM_LISTINGS_URL . '/assets/css/bootstrap/main.css', null, STM_LISTINGS_V );
 	wp_register_style( 'swiper', STM_LISTINGS_URL . '/assets/css/swiper-carousel/swiper-bundle.min.css', null, STM_LISTINGS_V );
 	wp_register_style( 'app-select2', STM_LISTINGS_URL . '/assets/css/frontend/app-select2.css', null, STM_LISTINGS_V );
 	wp_register_style( 'items-per-page', STM_LISTINGS_URL . '/assets/css/frontend/items-per-page.css', null, STM_LISTINGS_V );
@@ -189,6 +189,7 @@ function stm_listings_enqueue_scripts_styles() {
 		STM_LISTINGS_V,
 		true
 	);
+	wp_enqueue_script( 'jquery-touch-punch' );
 	wp_enqueue_script( 'mlv-plugin-scripts', STM_LISTINGS_URL . '/assets/js/frontend/plugin.js', array( 'listings-init' ), STM_LISTINGS_V, true );
 	wp_enqueue_script( 'mvl-user-sidebar', STM_LISTINGS_URL . '/assets/js/frontend/app-user-sidebar.js', array( 'jquery' ), STM_LISTINGS_V, true );
 	wp_enqueue_script( 'listings-filter', STM_LISTINGS_URL . '/assets/js/frontend/filter.js', array( 'listings-init', 'stmselect2' ), STM_LISTINGS_V, true );
@@ -286,13 +287,16 @@ if ( ! function_exists( 'init_motors_root_colors' ) ) {
 				--motors-bg-lowalpha-contrast: ' . Colors::value( 'bg_contrast', 0.3 ) . ';
 				--motors-bg-alpha-contrast: ' . Colors::value( 'bg_contrast', 0.5 ) . ';
 				--motors-bg-highalpha-contrast: ' . Colors::value( 'bg_contrast', 0.7 ) . ';
+				--motors-bg-highestalpha-contrast: ' . Colors::value( 'bg_contrast', 0.9 ) . ';
 				--motors-text-color: ' . Colors::value( 'text_color' ) . ';
 				--motors-contrast-text-color: ' . Colors::value( 'contrast_text_color' ) . ';
 				--motors-text-highalpha-color: ' . Colors::value( 'text_color', 0.7 ) . ';
 				--motors-text-alpha-color: ' . Colors::value( 'text_color', 0.5 ) . ';
+				--motors-contrast-text-lowestalpha-color: ' . Colors::value( 'contrast_text_color', 0.1 ) . ';
+				--motors-contrast-text-lowalpha-color: ' . Colors::value( 'contrast_text_color', 0.3 ) . ';
 				--motors-text-low-alpha-color: ' . Colors::value( 'text_color', 0.3 ) . ';
 				--motors-text-super-low-alpha-color: ' . Colors::value( 'text_color', 0.1 ) . ';
-				--motors-contrast-text-alpha-color: ' . Colors::value( 'contrast_text_color', 0.7 ) . ';
+				--motors-contrast-text-alpha-color: ' . Colors::value( 'contrast_text_color', 0.5 ) . ';
 				--motors-border-color: ' . Colors::value( 'text_color', 0.15 ) . ';
 				--motors-contrast-border-color: ' . Colors::value( 'contrast_text_color', 0.15 ) . ';
 				--motors-spec-badge-color: ' . Colors::value( 'spec_badge_color' ) . ';

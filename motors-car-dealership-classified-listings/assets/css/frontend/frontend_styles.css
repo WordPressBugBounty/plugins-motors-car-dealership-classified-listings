@@ -1034,6 +1034,12 @@ ul.list-style-2 li:before {
     padding: 0;
 }
 
+@media (max-width: 1023px) {
+    .stm-slider-filter-type-unit .stm-price-range-unit {
+        margin: 10px 10px 20px 10px;
+    }
+}
+
 .stm-slider-filter-type-unit .stm-price-range-unit .stm-filter-type-slider {
     margin-right: 0;
 }
@@ -1971,7 +1977,7 @@ footer .lOffer-account-dropdown {
 }
 
 .stm-user-public-listing .stm-seller-title {
-    margin-bottom: 21px;
+    margin: 10px 10px 10px 0;
     font-size: 20px;
     font-weight: 700;
     color: var(--motors-text-color);
@@ -1991,6 +1997,12 @@ footer .lOffer-account-dropdown {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 35px;
+    flex-wrap: wrap;
+}
+
+.stm-user-public-listing .stm-user-public-listing-top .stm-user-public-listing-top-left {
+    display: flex;
+    align-items: center;
 }
 
 .stm-user-public-listing .stm-user-public-listing-top .stm-user-public-listing-top-right {
@@ -3837,6 +3849,12 @@ body.stm-vl-plugin-pure.post-type-archive-listings .container {
     border-top: 1px solid var(--motors-border-color);
 }
 
+@media (max-width: 1024px) {
+    .stm-my-profile-settings .stm_change_password input {
+        margin-bottom: 0;
+    }
+}
+
 .stm-my-profile-settings .stm-image-unit {
     margin-bottom: 45px;
 }
@@ -3983,7 +4001,12 @@ body.stm-vl-plugin-pure.post-type-archive-listings .container {
 
 .stm-my-profile-settings .main-info-settings {
     padding-top: 1px;
-    padding-right: 73px;
+}
+
+@media (min-width: 1025px) {
+    .stm-my-profile-settings .main-info-settings {
+        padding-right: 73px;
+    }
 }
 
 .stm-my-profile-settings .form-group {

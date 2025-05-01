@@ -99,7 +99,7 @@ class InventorySearchResults extends WidgetBase {
 				array(
 					'label'   => __( 'Listing Type', 'stm_vehicles_listing' ),
 					'type'    => \Elementor\Controls_Manager::SELECT,
-					'options' => Helper::stm_ew_multi_listing_types(),
+					'options' => Helper::stm_ew_get_multilisting_types(),
 					'default' => 'listings',
 				),
 			);

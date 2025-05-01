@@ -76,7 +76,7 @@ class InventorySortBy extends WidgetBase {
 				'label' => sprintf(
 					'<a href="' . $this->wpcfto_settings . '" target="_blank">%s</a> <p style="display:block;color: #c8c8c8;font-weight: 400;font-size: 12px;margin-top: 10px;font-style: italic;">%s</p>',
 					__( 'Custom Sort Options', 'stm-vehicle-listings' ),
-					__( 'Set custom options for sorting listings in Motors Plugin Settings > Search Filters > Filter by Listing Categories.', 'stm-vehicle-listings' )
+					__( 'Set custom options for sorting listings in Motors Plugin Settings > Search Filters > Sort by custom fields.', 'stm-vehicle-listings' )
 				),
 				'type'  => \Elementor\Controls_Manager::HEADING,
 			)

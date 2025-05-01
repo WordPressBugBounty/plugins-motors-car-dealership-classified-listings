@@ -22,8 +22,8 @@ class MenuBuilder {
 		$matchedItems = array();
 
 		foreach ( $for_sort as $k => $item ) {
-			if ( 'motors_starter_demo_installer' === $item[2] || 'mst-starter-options' === $item[2] ) {
-				$starter = $item;
+			if ( 'motors_starter_demo_installer' === $item[2] || 'mst-starter-options' === $item[2] || 'mst_skin_settings' === $item[2] ) {
+				$starter[] = $item;
 				unset( $for_sort[ $k ] );
 				continue;
 			}
@@ -51,7 +51,9 @@ class MenuBuilder {
 				$finalArray[] = $item;
 
 				if ( 0 !== $k && 'mvl_plugin_settings' === $item[2] && ! empty( $starter ) ) {
-					$finalArray[] = $starter;
+					foreach ( array_reverse( $starter ) as $starterItem ) {
+						$finalArray[] = $starterItem;
+					}
 				}
 			}
 		}

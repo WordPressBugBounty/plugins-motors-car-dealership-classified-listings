@@ -67,7 +67,10 @@ class ListingMetaboxes {
 
 	public function display_author( $post, $metabox ) {
 		$author_id = get_post_meta( $post->ID, 'stm_car_user', true );
-		$authors   = get_users();
+		if ( empty( $author_id ) ) {
+			$author_id = $post->post_author;
+		}
+		$authors = get_users();
 
 		do_action(
 			'stm_listings_load_template',

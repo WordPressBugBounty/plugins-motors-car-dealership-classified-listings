@@ -8,7 +8,7 @@
  * License: GNU General Public License v2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: stm_vehicles_listing
- * Version: 1.4.69
+ * Version: 1.4.70
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -49,7 +49,7 @@ if ( ! defined( 'STM_LISTINGS_PATH' ) ) {
 	define( 'STM_LISTINGS_URL', plugins_url( '', STM_LISTINGS_FILE ) );
 	define( 'STM_LISTINGS', 'stm_vehicles_listing' );
 	define( 'STM_THEME_V_NEED', '5.6.33' );
-	define( 'STM_LISTINGS_V', '1.4.69' );
+	define( 'STM_LISTINGS_V', '1.4.70' );
 	define( 'STM_LISTINGS_DB_VERSION', '1.0.0' );
 	define( 'STM_LISTINGS_IMAGES', STM_LISTINGS_URL . '/includes/admin/butterbean/images/' );
 }
@@ -71,6 +71,7 @@ use MotorsVehiclesListing\MenuPages\ListingDetailsSettings;
 use MotorsVehiclesListing\MenuPages\AddCarFormSettings;
 use MotorsVehiclesListing\MenuPages\SearchResultsSettings;
 use MotorsVehiclesListing\MenuPages\FilterSettings;
+use MotorsVehiclesListing\MenuPages\SkinSettings;
 use MotorsVehiclesListing\Plugin\Settings;
 use MotorsVehiclesListing\Plugin\MVL_Patcher;
 use MotorsVehiclesListing\Elementor\Nuxy\AddListingManager;
@@ -119,8 +120,8 @@ $theme_exists = array(
 	'motors',
 );
 
-if ( ! in_array( $active_theme->get( 'TextDomain' ), $theme_exists, true ) && file_exists( STM_LISTINGS_PATH . '/includes/starter-theme/classes/class-loader.php' ) ) {
-	require_once STM_LISTINGS_PATH . '/includes/starter-theme/classes/class-loader.php';
+if ( ! in_array( $active_theme->get( 'TextDomain' ), $theme_exists, true ) && file_exists( STM_LISTINGS_PATH . '/includes/starter-theme/classes/Loader.php' ) ) {
+	new MotorsStarterTheme\Loader();
 }
 
 require_once STM_LISTINGS_PATH . '/includes/user-extra.php';
@@ -235,6 +236,10 @@ if ( is_admin() ) {
 		new ListingDetailsSettings();
 	}
 
+	if ( class_exists( '\MotorsVehiclesListing\MenuPages\SkinSettings' ) && mvl_is_motors_starter_theme() ) {
+		new SkinSettings();
+	}
+
 	add_action(
 		'wp_loaded',
 		function() {
@@ -245,6 +250,10 @@ if ( is_admin() ) {
 	);
 
 	require_once STM_LISTINGS_PATH . '/includes/class/Addons/settings.php';
+}
+
+if ( mvl_is_motors_starter_theme() ) {
+	require_once STM_LISTINGS_PATH . '/includes/starter-theme/index.php';
 }
 
 if ( file_exists( STM_LISTINGS_PATH . '/elementor/MotorsElementorWidgetsFree.php' ) ) {

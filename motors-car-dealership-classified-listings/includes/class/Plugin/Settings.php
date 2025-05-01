@@ -68,6 +68,12 @@ class Settings {
 			'google-services/recaptcha-settings',
 		);
 
+		if ( class_exists( '\MotorsStarterTheme\Services\SkinOptions' ) ) {
+			$mst_skin_settings_map = \MotorsStarterTheme\Services\SkinOptions::SETTINGS_FILES;
+		} else {
+			$mst_skin_settings_map = array();
+		}
+
 		if ( ! defined( 'STM_MOTORS_EXTENDS_PLUGIN_VERSION' ) || version_compare( STM_MOTORS_EXTENDS_PLUGIN_VERSION, '2.3.7' ) > 0 ) {
 			$config_map = array_merge(
 				$config_map,
@@ -94,7 +100,8 @@ class Settings {
 					'pro/monetization/paypal-options',
 					'pro/monetization/sell-online',
 					'pro/google-services/google-maps',
-				)
+				),
+				$mst_skin_settings_map,
 			);
 		}
 
@@ -136,63 +143,31 @@ class Settings {
 		$motors_favicon = $this->assets_url . 'icon.png';
 		$motors_logo    = $this->assets_url . 'logo.png';
 
-		$setup[] = array(
-			'option_name'     => MVL_Const::MVL_PLUGIN_OPT_NAME,
-			'title'           => esc_html__( 'Motors Plugin', 'stm_vehicles_listing' ),
-			'sub_title'       => esc_html__( 'by StylemixThemes', 'stm_vehicles_listing' ),
-			'logo'            => $motors_logo,
+		$setup[] = array_merge(
+			array(
+				'option_name'     => MVL_Const::MVL_PLUGIN_OPT_NAME,
+				'title'           => esc_html__( 'Motors Plugin', 'stm_vehicles_listing' ),
+				'sub_title'       => esc_html__( 'by StylemixThemes', 'stm_vehicles_listing' ),
+				'logo'            => $motors_logo,
 
-			'additional_link' => array(
-				'text'   => esc_html__( 'Feature Request', 'stm_vehicles_listing' ),
-				'icon'   => 'fa-regular fa-star',
-				'url'    => esc_url( 'https://stylemixthemes.cnflx.io/boards/motors-car-dealer-rental-classifieds' ),
-				'target' => true,
-			),
-
-			'header_menu'     => array(
-				'menu' => array(
-					'text'           => esc_html__( 'Help', 'stm_vehicles_listing' ),
-					'url'            => '',
-					'icon'           => 'fa-regular fa-circle-question',
-					'header_submenu' => array(
-						'documentation'      => array(
-							'text'   => esc_html__( 'Documentation', 'stm_vehicles_listing' ),
-							'url'    => esc_url( 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing' ),
-							'icon'   => 'fa-regular fa-file-lines',
-							'target' => true,
-						),
-						'support'            => array(
-							'text'   => esc_html__( 'Support', 'stm_vehicles_listing' ),
-							'url'    => apply_filters( 'is_mvl_pro', false ) ? esc_url( 'https://support.stylemixthemes.com/tickets/new/support?item_id=43' ) : esc_url( 'https://wordpress.org/support/plugin/motors-car-dealership-classified-listings/' ),
-							'icon'   => 'fa-solid fa-life-ring',
-							'target' => true,
-						),
-						'facebook_community' => array(
-							'text'   => esc_html__( 'Facebook Community', 'stm_vehicles_listing' ),
-							'url'    => esc_url( 'https://www.facebook.com/groups/motorstheme' ),
-							'icon'   => 'fa-brands fa-facebook-f',
-							'target' => true,
-						),
-					),
+				'additional_link' => array(
+					'text'   => esc_html__( 'Feature Request', 'stm_vehicles_listing' ),
+					'icon'   => 'fa-regular fa-star',
+					'url'    => esc_url( 'https://stylemixthemes.cnflx.io/boards/motors-car-dealer-rental-classifieds' ),
+					'target' => true,
 				),
-			),
 
-			/*
-			* Next we add a page to display our awesome settings.
-			* All parameters are required and same as WordPress add_menu_page.
-			*/
-			'page'            => array(
-				'page_title' => 'Motors Plugin',
-				'menu_title' => 'Motors Plugin',
-				'menu_slug'  => 'mvl_plugin_settings',
-				'icon'       => $motors_favicon,
-				'position'   => 4,
-			),
+				'page'            => array(
+					'page_title' => 'Motors Plugin',
+					'menu_title' => 'Motors Plugin',
+					'menu_slug'  => 'mvl_plugin_settings',
+					'icon'       => $motors_favicon,
+					'position'   => 4,
+				),
 
-			/*
-			* And Our fields to display on a page. We use tabs to separate settings on groups.
-			*/
-			'fields'          => $opts,
+				'fields'          => $opts,
+			),
+			apply_filters( 'mvl_get_conf_header_links', array() )
 		);
 
 		return $setup;

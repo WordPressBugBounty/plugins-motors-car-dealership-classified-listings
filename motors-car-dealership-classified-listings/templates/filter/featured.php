@@ -57,7 +57,7 @@ if ( $featured->have_posts() && ! empty( $args['posts_per_page'] ) ) : ?>
 	</div>
 
 	<?php if ( ! apply_filters( 'stm_listings_input', null, 'featured_top' ) ) : ?>
-		<div class="stm-isotope-sorting stm-isotope-sorting-featured-top">
+		<div class="stm-isotope-sorting stm-isotope-sorting-featured-top stm-isotope-sorting-<?php echo esc_attr( $view_type ); ?> <?php echo esc_attr( 'default' !== $skin ? 'mvl-card-skins ' . $skin : '' ); ?>">
 			<?php if ( 'grid' === $view_type ) : ?>
 				<div class="row row-3 car-listing-row car-listing-modern-grid">
 			<?php endif; ?>

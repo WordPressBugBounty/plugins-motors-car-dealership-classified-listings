@@ -98,3 +98,44 @@ function motors_vl_wpcfto_pages_list() {
 }
 
 add_filter( 'motors_vl_wpcfto_pages_list', 'motors_vl_wpcfto_pages_list' );
+
+function mvl_get_conf_header_links() {
+	$links = array(
+		'additional_link' => array(
+			'text'   => esc_html__( 'Feature Request', 'stm_vehicles_listing' ),
+			'icon'   => 'fa-regular fa-star',
+			'url'    => esc_url( 'https://stylemixthemes.cnflx.io/boards/motors-car-dealer-rental-classifieds' ),
+			'target' => true,
+		),
+		'header_menu'     => array(
+			'menu' => array(
+				'text'           => esc_html__( 'Help', 'stm_vehicles_listing' ),
+				'url'            => '',
+				'icon'           => 'fa-regular fa-circle-question',
+				'header_submenu' => array(
+					'documentation'      => array(
+						'text'   => esc_html__( 'Documentation', 'stm_vehicles_listing' ),
+						'url'    => esc_url( 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing' ),
+						'icon'   => 'fa-regular fa-file-lines',
+						'target' => true,
+					),
+					'support'            => array(
+						'text'   => esc_html__( 'Support', 'stm_vehicles_listing' ),
+						'url'    => apply_filters( 'is_mvl_pro', false ) ? esc_url( 'https://support.stylemixthemes.com/tickets/new/support?item_id=43' ) : esc_url( 'https://wordpress.org/support/plugin/motors-car-dealership-classified-listings/' ),
+						'icon'   => 'fa-solid fa-life-ring',
+						'target' => true,
+					),
+					'facebook_community' => array(
+						'text'   => esc_html__( 'Facebook Community', 'stm_vehicles_listing' ),
+						'url'    => esc_url( 'https://www.facebook.com/groups/motorstheme' ),
+						'icon'   => 'fa-brands fa-facebook-f',
+						'target' => true,
+					),
+				),
+			),
+		),
+	);
+	return $links;
+}
+
+add_filter( 'mvl_get_conf_header_links', 'mvl_get_conf_header_links' );
