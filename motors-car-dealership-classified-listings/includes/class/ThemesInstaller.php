@@ -12,7 +12,7 @@ abstract class ThemesInstaller {
 	abstract protected static function get_install_themes_list(): array;
 
 	public static function get_data() {
-		$data = self::get_install_themes_list();
+		$data = static::get_install_themes_list();
 		foreach ( $data as $key => $item ) {
 			$data[ $key ] = array_merge( $item, self::get_item_info( $item['slug'] ) );
 		}
