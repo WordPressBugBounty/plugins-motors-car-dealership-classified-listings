@@ -172,11 +172,23 @@ class RegisterActions {
 	public static function motors_ew_grid_tabs() {
 		check_ajax_referer( 'motors_grid_tabs', 'security' );
 
-		$listing_types = apply_filters( 'stm_listings_post_type', 'listings' );
+		$listing_types  = apply_filters( 'stm_listings_post_type', 'listings' );
+		$tab_type       = sanitize_text_field( $_POST['tab_type'] );
+		$per_page       = intval( $_POST['per_page'] );
 
-		$tab_type = sanitize_text_field( $_POST['tab_type'] );
-		$per_page = intval( $_POST['per_page'] );
-		$template = sanitize_text_field( $_POST['template'] );
+		$allowed_templates = array(
+			'listing-cars/listing-grid-directory-loop-4',
+			'listing-cars/listing-grid-directory-loop-3',
+			'listing-cars/listing-grid-directory-loop',
+		);
+
+		$template = 'listing-cars/' . ( isset( $_POST['template'] ) ? sanitize_file_name( $_POST['template'] ) : '' );
+
+		if ( ! in_array( $template, $allowed_templates, true ) ) {
+			wp_send_json_error( 'Invalid template' );
+			return;
+		}
+
 		$img_size = sanitize_text_field( $_POST['img_size'] );
 
 		$args = array(
@@ -231,11 +243,24 @@ class RegisterActions {
 	public static function motors_ew_ml_grid_tabs() {
 		check_ajax_referer( 'motors_ml_grid_tabs', 'security' );
 
-		$listing_type     = ( isset( $_POST['listing_type'] ) ) ? sanitize_text_field( $_POST['listing_type'] ) : 'listings';
-		$listing_type     = ( isset( $_POST['listing_types'] ) ) ? explode( ',', sanitize_text_field( $_POST['listing_types'] ) ) : $listing_type;
-		$tab_type         = ( isset( $_POST['tab_type'] ) ) ? sanitize_text_field( $_POST['tab_type'] ) : '';
-		$per_page         = ( isset( $_POST['per_page'] ) ) ? intval( $_POST['per_page'] ) : 4;
-		$template         = ( isset( $_POST['template'] ) ) ? sanitize_text_field( $_POST['template'] ) : '';
+		$listing_type = ( isset( $_POST['listing_type'] ) ) ? sanitize_text_field( $_POST['listing_type'] ) : 'listings';
+		$listing_type = ( isset( $_POST['listing_types'] ) ) ? explode( ',', sanitize_text_field( $_POST['listing_types'] ) ) : $listing_type;
+		$tab_type     = ( isset( $_POST['tab_type'] ) ) ? sanitize_text_field( $_POST['tab_type'] ) : '';
+		$per_page     = ( isset( $_POST['per_page'] ) ) ? intval( $_POST['per_page'] ) : 4;
+
+		$allowed_templates = array(
+			'listing-cars/listing-grid-directory-loop-4',
+			'listing-cars/listing-grid-directory-loop-3',
+			'listing-cars/listing-grid-directory-loop',
+		);
+
+		$template = 'listing-cars/' . sanitize_file_name( $_POST['template'] ?? '' );
+
+		if ( ! in_array( $template, $allowed_templates, true ) ) {
+			wp_send_json_error( 'Invalid template' );
+			return;
+		}
+
 		$order_by         = ( isset( $_POST['order_by'] ) ) ? sanitize_text_field( $_POST['order_by'] ) : '';
 		$show_all_link    = ( isset( $_POST['show_all_link'] ) ) ? sanitize_text_field( $_POST['show_all_link'] ) : '';
 		$show_all_text    = ( isset( $_POST['show_all_text'] ) ) ? sanitize_text_field( $_POST['show_all_text'] ) : '';

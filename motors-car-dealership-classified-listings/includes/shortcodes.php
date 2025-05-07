@@ -1,6 +1,9 @@
 <?php
 /*Inventory*/
 function motors_listing_inventory( $atts ) {
+	if ( isset( $atts['__template'] ) ) {
+		unset( $atts['__template'] );
+	}
 	$selected_inventory_skin = apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'inventory_skin' );
 	$card_skin               = apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'grid_card_skin' );
 	$list_card_skin          = apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'list_card_skin' );
@@ -46,6 +49,9 @@ add_shortcode( 'motors_listing_inventory', 'motors_listing_inventory' );
  * [motors_add_listing_form]
  * */
 function motors_add_listing_form( $atts ) {
+	if ( isset( $atts['__template'] ) ) {
+		unset( $atts['__template'] );
+	}
 	if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'addl_show_registered' ) ) {
 		mvl_enqueue_header_scripts_styles( 'motors-datetimepicker' );
 	}
@@ -68,6 +74,9 @@ add_shortcode( 'motors_add_listing_form', 'motors_add_listing_form' );
 
 //Login Register
 function motors_login_page( $atts ) {
+	if ( isset( $atts['__template'] ) ) {
+		unset( $atts['__template'] );
+	}
 
 	$user = wp_get_current_user();
 	if ( ! is_wp_error( $user ) && ! empty( $user->ID ) && is_page() ) {
@@ -85,6 +94,9 @@ add_shortcode( 'motors_login_page', 'motors_login_page' );
 
 //Compare page
 function motors_compare_page( $atts ) {
+	if ( isset( $atts['__template'] ) ) {
+		unset( $atts['__template'] );
+	}
 	mvl_enqueue_header_scripts_styles( 'uniform' );
 	mvl_enqueue_header_scripts_styles( 'uniform-init' );
 	mvl_enqueue_header_scripts_styles( 'jquery-effects-slide' );
@@ -105,6 +117,9 @@ add_shortcode( 'motors_compare_page', 'motors_compare_page' );
  * [motors_listing_search show_amount='yes' filter_fields='make,serie,ca-year']
 */
 function motors_listing_search( $atts ) {
+	if ( isset( $atts['__template'] ) ) {
+		unset( $atts['__template'] );
+	}
 	mvl_enqueue_header_scripts_styles( 'stmselect2' );
 	mvl_enqueue_header_scripts_styles( 'app-select2' );
 	mvl_enqueue_header_scripts_styles( 'stm-cascadingdropdown' );
@@ -129,6 +144,9 @@ add_shortcode( 'motors_listing_search', 'motors_listing_search' );
  * [motors_listing_icon_filter as_carousel='yes' filter_selected='make' title='Browse by Make' columns='6' visible_items='5']
  */
 function motors_listing_icon_filter( $atts ) {
+	if ( isset( $atts['__template'] ) ) {
+		unset( $atts['__template'] );
+	}
 	mvl_enqueue_header_scripts_styles( 'swiper' );
 	mvl_enqueue_header_scripts_styles( 'listing-icon-filter' );
 
@@ -149,6 +167,10 @@ add_shortcode( 'motors_listing_icon_filter', 'motors_listing_icon_filter' );
  * [motors_listings_tabs title='New/Used Cars' columns='3' popular_tab='yes' recent_tab='yes' featured_tab='yes']
 */
 function motors_listings_tabs( $atts ) {
+	if ( isset( $atts['__template'] ) ) {
+		unset( $atts['__template'] );
+	}
+
 	mvl_enqueue_header_scripts_styles( 'bootstrap-tab' );
 	mvl_enqueue_header_scripts_styles( 'bootstrap' );
 	mvl_enqueue_header_scripts_styles( 'listings-tabs' );

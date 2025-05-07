@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Atts
  * $title
@@ -8,7 +12,13 @@
  * $visible_items
  */
 
-if ( ! empty( $filter_selected ) ) :
+$filter_selected = isset( $filter_selected ) ? sanitize_text_field( $filter_selected ) : '';
+$title           = isset( $title ) ? $title : '';
+$columns         = isset( $columns ) ? absint( $columns ) : 4;
+$as_carousel     = isset( $as_carousel ) ? sanitize_text_field( $as_carousel ) : '';
+$visible_items   = isset( $visible_items ) ? absint( $visible_items ) : 5;
+
+if ( ! empty( $filter_selected ) && taxonomy_exists( $filter_selected ) ) :
 	$args = array(
 		'orderby'    => 'name',
 		'order'      => 'ASC',
@@ -33,10 +43,9 @@ if ( ! empty( $filter_selected ) ) :
 
 	$show_all = ( ! empty( $terms_images ) || ! empty( $terms_text ) ) ? esc_html__( 'Show All', 'stm_vehicles_listing' ) : '';
 
-	$visible_items = $visible_items ?? 5;
-	$random_id     = 'motors-' . wp_rand();
-	$non_visible   = 'non-visible';
-	$swiper        = '';
+	$random_id   = 'motors-' . wp_rand();
+	$non_visible = 'non-visible';
+	$swiper      = '';
 	?>
 	<div class="stm_icon_filter_unit motors-alignwide">
 		<div class="clearfix">
@@ -47,7 +56,7 @@ if ( ! empty( $filter_selected ) ) :
 			<?php endif; ?>
 			<?php if ( ! empty( $title ) ) : ?>
 				<div class="stm_icon_filter_title">
-					<?php echo wp_kses_post( $title ); ?>
+					<?php echo esc_html( $title ); ?>
 				</div>
 			<?php endif; ?>
 		</div>
@@ -65,14 +74,18 @@ if ( ! empty( $filter_selected ) ) :
 					<?php
 					$i = 0;
 					foreach ( $terms_images as $stm_term ) {
-						?>
-						<?php
 						$image = get_term_meta( $stm_term->term_id, 'stm_image', true );
+						if ( empty( $image ) ) {
+							continue;
+						}
 
 						// Getting limit for frontend without showing all.
 						if ( $visible_items > $i ) :
-							$image          = wp_get_attachment_image_src( $image, 'stm-img-190-132' );
-							$category_image = $image[0];
+							$image = wp_get_attachment_image_src( $image, 'stm-img-190-132' );
+							if ( ! $image ) {
+								continue;
+							}
+							$category_image = esc_url( $image[0] );
 							?>
 							<a href="<?php echo esc_url( apply_filters( 'stm_filter_listing_link', '', array( $filter_selected => $stm_term->slug ) ) ); ?>"
 							class="stm_listing_icon_filter_single <?php echo esc_attr( $swiper ); ?>"
@@ -82,7 +95,7 @@ if ( ! empty( $filter_selected ) ) :
 										<img src="<?php echo esc_url( $category_image ); ?>"
 											alt="<?php echo esc_attr( $stm_term->name ); ?>"/>
 									</div>
-									<div class="name"><?php echo esc_attr( $stm_term->name ); ?>
+									<div class="name"><?php echo esc_html( $stm_term->name ); ?>
 										<span class="count">(<?php echo esc_html( $stm_term->count ); ?>)</span>
 									</div>
 								</div>
@@ -94,18 +107,17 @@ if ( ! empty( $filter_selected ) ) :
 								<div class="inner">
 									<?php if ( ! empty( $as_carousel ) && 'yes' === $as_carousel ) : ?>
 									<div class="image">
-										<img src="<?php echo esc_url( $category_image ); ?>"
-											 alt="<?php echo esc_attr( $stm_term->name ); ?>"/>
+										<img src="<?php echo esc_url( $category_image ); ?>" alt="<?php echo esc_attr( $stm_term->name ); ?>"/>
 									</div>
 									<?php endif; ?>
 									<div class="name">
-										<?php echo esc_attr( $stm_term->name ); ?>
+										<?php echo esc_html( $stm_term->name ); ?>
 										<span class="count">(<?php echo esc_html( $stm_term->count ); ?>)</span>
 									</div>
 								</div>
 							</a>
 						<?php endif; ?>
-						<?php $i ++; ?>
+						<?php $i++; ?>
 					<?php } ?>
 					<?php foreach ( $terms_text as $stm_term ) : ?>
 						<a href="<?php echo esc_url( apply_filters( 'stm_filter_listing_link', '', array( $filter_selected => $stm_term->slug ) ) ); ?>"
@@ -113,7 +125,7 @@ if ( ! empty( $filter_selected ) ) :
 						title="<?php echo esc_attr( $stm_term->name ); ?>">
 							<div class="inner">
 								<div class="name">
-									<?php echo esc_attr( $stm_term->name ); ?>
+									<?php echo esc_html( $stm_term->name ); ?>
 									<span class="count">(<?php echo esc_html( $stm_term->count ); ?>)</span>
 								</div>
 							</div>
@@ -129,30 +141,27 @@ if ( ! empty( $filter_selected ) ) :
 			</div>
 		<?php endif; ?>
 	</div>
-	<?php if ( ! empty( $as_carousel ) && $as_carousel == 'yes' ) : //phpcs:disable ?>
+	<?php if ( ! empty( $as_carousel ) && 'yes' === $as_carousel ) : ?>
 	<script>
-        (function ($) {
-            $(document).ready(function () {
-                var swiper = new Swiper('#<?php echo esc_js($random_id); ?>', {
-                    slidesPerView: <?php echo esc_js( $visible_items ); ?>,
-                    direction: getDirection(),
-                    navigation: {
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
-                    },
-                    on: {
-                        resize: function () {},
-                    },
-                });
-                function getDirection() {
-                    var direction = window.innerWidth <= 760 ? 'vertical' : 'horizontal';
-
-                    return direction;
-                }
-            });
-        })(jQuery);
+		(function ($) {
+			$(document).ready(function () {
+				var swiper = new Swiper('#<?php echo esc_js( $random_id ); ?>', {
+					slidesPerView: <?php echo esc_js( intval( $visible_items ) ); ?>,
+					direction: getDirection(),
+					navigation: {
+						nextEl: '.swiper-button-next',
+						prevEl: '.swiper-button-prev',
+					},
+					on: {
+						resize: function () {},
+					},
+				});
+				function getDirection() {
+					var direction = window.innerWidth <= 760 ? 'vertical' : 'horizontal';
+					return direction;
+				}
+			});
+		})(jQuery);
 	</script>
-<?php
-//phpcs:enable
-endif;
-endif;
+	<?php endif; ?>
+<?php endif; ?>

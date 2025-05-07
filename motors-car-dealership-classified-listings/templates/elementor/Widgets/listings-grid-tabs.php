@@ -148,7 +148,7 @@ $uniqid = uniqid();
 		<?php
 		$active_category = 0;
 		$per_row         = ( $listings_number_per_row ) ? $listings_number_per_row : 4;
-		$template        = 'listing-cars/listing-grid-directory-loop-' . $per_row;
+		$template        = 'listing-grid-directory-loop-' . $per_row;
 		?>
 		<?php
 		foreach ( $filter_cats as $filter_cat ) :
@@ -186,7 +186,7 @@ $uniqid = uniqid();
 							while ( $listing_cars->have_posts() ) :
 								$listing_cars->the_post();
 								?>
-								<?php do_action( 'stm_listings_load_template', $template, $template_args ); ?>
+								<?php do_action( 'stm_listings_load_template', 'listing-cars/' . $template, $template_args ); ?>
 							<?php endwhile; ?>
 						</div>
 
@@ -315,7 +315,7 @@ $uniqid = uniqid();
 						while ( $featured_query->have_posts() ) :
 							$featured_query->the_post();
 							?>
-							<?php do_action( 'stm_listings_load_template', $template, $template_args ); ?>
+							<?php do_action( 'stm_listings_load_template', 'listing-cars/' . $template, $template_args ); ?>
 						<?php endwhile; ?>
 					</div>
 					<?php if ( ! empty( $show_all_link ) && 'yes' === $show_all_link ) : ?>
