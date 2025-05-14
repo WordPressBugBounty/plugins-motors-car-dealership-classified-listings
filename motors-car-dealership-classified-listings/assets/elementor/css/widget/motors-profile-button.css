@@ -10,6 +10,11 @@ a.motors-profile-button:hover {
     cursor: pointer;
 }
 
+a.motors-profile-button:hover ~ .lOffer-account-dropdown {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 a.motors-profile-button .profile-icon-wrapper {
     font-size: 23px;
     margin-right: 10px;
@@ -28,15 +33,18 @@ a.motors-profile-button span {
 
 .lOffer-account-dropdown {
     position: absolute;
-    top: 110%;
+    top: 100%;
     padding: 21px 15px 0px 30px;
     background-color: var(--motors-bg-color);
     width: 215px;
-    margin: 14px 0 0 -94px;
-    opacity: 0;
+    margin: 5px 0 0;
+    transform: translateY(-50%);
     left: 50%;
-    visibility: hidden;
     box-shadow: -1px 2px 10px var(--motors-bg-lowalpha-contrast);
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: 0.3s;
+    pointer-events: none;
 }
 
 .lOffer-account-dropdown::before {
@@ -51,6 +59,21 @@ a.motors-profile-button span {
     left: 50%;
     margin-left: -5px;
     border-bottom: 5px solid var(--motors-bg-color);
+}
+
+.lOffer-account-dropdown:after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 0;
+    width: 100%;
+    display: block;
+    height: 5px;
+}
+
+.lOffer-account-dropdown:hover {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .lOffer-account-dropdown .settings {

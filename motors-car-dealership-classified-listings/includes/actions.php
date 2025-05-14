@@ -1198,3 +1198,126 @@ function stm_sort_listings_callback() {
 
 add_action( 'wp_ajax_stm_sort_listings', 'stm_sort_listings_callback' );
 add_action( 'wp_ajax_nopriv_stm_sort_listings', 'stm_sort_listings_callback' );
+
+function stm_validate_password() {
+	check_ajax_referer( 'stm_security_nonce', 'security' );
+
+	$password = isset( $_POST['password'] ) ? sanitize_text_field( wp_unslash( $_POST['password'] ) ) : '';
+	$response = array(
+		'valid'   => strlen( $password ) >= 8,
+		'message' => strlen( $password ) >= 8 ? '' : esc_html__( 'Password must be at least 8 characters long', 'stm_vehicles_listing' ),
+	);
+
+	wp_send_json( $response );
+}
+
+add_action( 'wp_ajax_stm_validate_password', 'stm_validate_password' );
+add_action( 'wp_ajax_nopriv_stm_validate_password', 'stm_validate_password' );
+
+/*WP MAIL FUNC*/
+if ( ! function_exists( 'mvl_set_mail_html_content_type' ) ) {
+	function mvl_set_mail_html_content_type() {
+		return 'text/html';
+	}
+
+	add_action( 'mvl_set_html_content_type', 'mvl_set_mail_html_content_type' );
+}
+
+if ( ! function_exists( 'mvl_wp_mail' ) ) {
+	function mvl_wp_mail( $to, $subject, $body, $headers ) {
+		add_filter( 'wp_mail_content_type', 'mvl_set_mail_html_content_type' );
+		wp_mail( $to, $subject, $body, $headers );
+		remove_filter( 'wp_mail_content_type', 'mvl_set_mail_html_content_type' );
+	}
+
+	add_action( 'mvl_wp_mail', 'mvl_wp_mail', 10, 4 );
+}
+
+if ( ! function_exists( 'mvl_restore_password' ) ) {
+	// Ajax filter cars remove unfiltered cars
+	function mvl_restore_password() {
+		check_ajax_referer( 'stm_security_nonce', 'security' );
+
+		$response = array();
+
+		$errors = array();
+
+		if ( empty( $_POST['stm_user_login'] ) ) {
+			$errors['stm_user_login'] = true;
+		} else {
+			$username = sanitize_text_field( $_POST['stm_user_login'] );
+		}
+
+		$stm_link_send_to = '';
+
+		if ( ! empty( $_POST['stm_link_send_to'] ) ) {
+			$stm_link_send_to = sanitize_text_field( $_POST['stm_link_send_to'] );
+		}
+
+		$login_page = apply_filters( 'motors_vl_get_nuxy_mod', 1718, 'login_page' );
+		$page_link  = get_permalink( $login_page );
+		if ( $page_link ) {
+			$stm_link_send_to = $page_link;
+		}
+
+		$demo = apply_filters( 'stm_site_demo_mode', false );
+
+		if ( $demo ) {
+			$errors['demo'] = true;
+		}
+
+		if ( empty( $errors ) ) {
+			if ( filter_var( $username, FILTER_VALIDATE_EMAIL ) ) {
+				$user = get_user_by( 'email', $username );
+			} else {
+				$user = get_user_by( 'login', $username );
+			}
+
+			if ( ! $user ) {
+				$response['message'] = esc_html__( 'User not found', 'motors' );
+			} else {
+
+				$hash    = apply_filters( 'stm_media_random_affix', 20 );
+				$user_id = $user->ID;
+
+				$stm_link_send_to = add_query_arg(
+					array(
+						'user_id'    => $user_id,
+						'hash_check' => $hash,
+					),
+					$stm_link_send_to
+				);
+
+				update_user_meta( $user_id, 'stm_lost_password_hash', $hash );
+
+				/*Sending mail*/
+				$to = $user->data->user_email;
+
+				$args = array(
+					'password_content' => $stm_link_send_to,
+				);
+
+				$subject = apply_filters( 'get_generate_subject_view', '', 'password_recovery', $args );
+				$body    = apply_filters( 'get_generate_template_view', '', 'password_recovery', $args );
+
+				do_action( 'mvl_wp_mail', $to, $subject, $body, '' );
+
+				$response['message'] = esc_html__( 'Instructions send on your email', 'motors' );
+			}
+		} else {
+			if ( $demo ) {
+				$response['message'] = esc_html__( 'Site is on demo mode.', 'motors' );
+			} else {
+				$response['message'] = esc_html__( 'Please fill required fields', 'motors' );
+			}
+		}
+
+		$response['errors'] = $errors;
+
+		wp_send_json( $response );
+		exit;
+	}
+
+	add_action( 'wp_ajax_mvl_restore_password', 'mvl_restore_password' );
+	add_action( 'wp_ajax_nopriv_mvl_restore_password', 'mvl_restore_password' );
+}

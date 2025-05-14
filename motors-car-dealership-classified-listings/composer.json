@@ -6,7 +6,6 @@
 		"psr-4": {
 			"MotorsVehiclesListing\\": "includes/class/",
 			"MotorsNuxy\\": "includes/nuxy/",
-			"MotorsStarterTheme\\": "includes/starter-theme/class/",
 			"Motors_Elementor_Widgets_Free\\": "elementor/inc"
 		}
 	},

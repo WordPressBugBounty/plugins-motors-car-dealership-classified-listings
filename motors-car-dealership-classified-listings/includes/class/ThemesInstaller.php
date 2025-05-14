@@ -14,7 +14,7 @@ abstract class ThemesInstaller {
 	public static function get_data() {
 		$data = static::get_install_themes_list();
 		foreach ( $data as $key => $item ) {
-			$data[ $key ] = array_merge( $item, self::get_item_info( $item['slug'] ) );
+			$data[ $key ] = array_merge( $item, static::get_item_info( $item['slug'] ) );
 		}
 		return $data;
 	}
@@ -41,9 +41,9 @@ abstract class ThemesInstaller {
 	}
 
 	public static function install( $slug ) {
-		self::load_wp();
+		static::load_wp();
 
-		$src       = self::get_source( $slug );
+		$src       = static::get_source( $slug );
 		$skin      = new \Automatic_Upgrader_Skin();
 		$upgrader  = new \Theme_Upgrader( $skin );
 		$installed = $upgrader->install( $src );
@@ -53,7 +53,7 @@ abstract class ThemesInstaller {
 		if ( is_wp_error( $installed ) ) {
 			$result['error'] = $installed->get_error_message();
 		} else {
-			self::activate( $slug );
+			static::activate( $slug );
 			$result['success'] = true;
 		}
 
@@ -67,7 +67,7 @@ abstract class ThemesInstaller {
 	}
 
 	public static function upgrade( $slug ) {
-		self::load_wp();
+		static::load_wp();
 		$upgrader = new \Theme_Upgrader();
 		$upgraded = $upgrader->upgrade( $slug );
 
@@ -84,7 +84,7 @@ abstract class ThemesInstaller {
 	}
 
 	private static function get_source( $slug ) {
-		$install_data = self::get_data();
+		$install_data = static::get_data();
 
 		$key = array_search( $slug, array_column( $install_data, 'slug' ) ); //phpcs:ignore
 		$src = null;

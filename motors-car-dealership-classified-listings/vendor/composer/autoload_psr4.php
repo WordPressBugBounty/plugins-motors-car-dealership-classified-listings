@@ -8,6 +8,5 @@ $baseDir = dirname($vendorDir);
 return array(
     'Motors_Elementor_Widgets_Free\\' => array($baseDir . '/elementor/inc'),
     'MotorsVehiclesListing\\' => array($baseDir . '/includes/class'),
-    'MotorsStarterTheme\\' => array($baseDir . '/includes/starter-theme/class'),
     'MotorsNuxy\\' => array($baseDir . '/includes/nuxy'),
 );

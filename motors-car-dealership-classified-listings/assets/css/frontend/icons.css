@@ -1465,7 +1465,10 @@ i {
 
 [class^=stm-icon-], [class*=" stm-icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-    font-family: "stm-icon" !important;
+}
+
+[class^=stm-icon-]:before, [class*=" stm-icon-"]:before {
+    font-family: "stm-icon";
     speak: none;
     font-style: normal;
     font-weight: normal;

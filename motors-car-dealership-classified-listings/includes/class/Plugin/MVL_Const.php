@@ -9,5 +9,4 @@ class MVL_Const {
 	public const SEARCH_RESULTS_OPT_NAME   = 'mvl_search_results_settings';
 	public const LISTING_TEMPLATE_OPT_NAME = 'mvl_single_listing_template_settings';
 	public const ACTIVE_SKIN_OPT_NAME      = 'motors_starter_demo_name';
-	public const SKIN_SETTINGS_OPT_NAME    = 'mst_skin_settings';
 }

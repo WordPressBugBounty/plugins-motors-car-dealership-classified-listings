@@ -81,7 +81,7 @@ function mvl_setup_wizard_install_starter_theme() {
 		wp_send_json_error( __( 'You do not have permission to install themes', 'stm_vehicles_listing' ) );
 	}
 
-	$install_class = \MotorsStarterTheme\Installer::class;
+	$install_class = MotorsVehiclesListing\StarterTheme\Installer::class;
 
 	if ( null === $install_class ) {
 		wp_send_json_error( array( 'error' => 'Class not exist' ) );

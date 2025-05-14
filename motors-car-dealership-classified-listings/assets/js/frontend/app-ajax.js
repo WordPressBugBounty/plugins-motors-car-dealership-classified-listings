@@ -164,4 +164,39 @@
 		})
 	})
 
+    $(document).on('submit', '#stm_new_password', function() {
+        var password = $(this).val();
+        var messageDiv = $(this).closest('.form-group').find('.stm-validation-message');
+        
+        $.ajax({
+            url: ajaxurl,
+            type: 'POST',
+            data: {
+                action: 'stm_validate_password',
+                password: password,
+                security: stm_security_nonce
+            },
+            success: function(response) {
+                if (!response.valid) {
+                    messageDiv.text(response.message).show();
+                } else {
+                    messageDiv.hide();
+                }
+            }
+        });
+    });
+
+    $(document).on('submit', '.stm_password_recovery', function(e) {
+        var password = $('#stm_new_password').val();
+		var messageDiv = $(this).find('.stm-validation-message');
+        
+        if (password.length < 8) {
+            e.preventDefault();
+            messageDiv.text(stm_i18n.mvl_password_validation).show();
+            return false;
+        }
+        
+        return true;
+    });
+
 })(jQuery)

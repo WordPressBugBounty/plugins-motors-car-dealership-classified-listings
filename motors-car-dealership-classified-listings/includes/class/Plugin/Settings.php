@@ -25,9 +25,13 @@ class Settings {
 			add_action( 'wpcfto_screen_motors_vehicles_listing_plugin_settings_added', array( $this, 'mvl_add_submenu_settings' ), 1000, 1 );
 			add_action( 'wpcfto_screen_motors_vehicles_listing_plugin_settings_added', array( $this, 'mvl_add_submenu_upgrade' ), 1001, 1 );
 			add_action( 'wp_ajax_mvl_ajax_add_feedback', array( $this, 'ajax_add_feedback' ) );
-			if ( ! get_option( 'mvl_feedback_added', false ) ) {
+			if ( isset( $_GET['page'] ) && 'mvl_plugin_settings' === $_GET['page'] && ! get_option( 'mvl_feedback_added', false ) ) {
 				add_action( 'wpcfto_after_tab_nav', array( $this, 'mvl_add_feedback_button' ) );
+				add_action( 'wpcfto_after_tab_nav', array( $this, 'mvl_add_feedback_assets' ) );
 				add_action( 'admin_footer', array( $this, 'render_feedback_popup' ) );
+			}
+			if ( isset( $_GET['page'] ) && 'stm-support-page-motors' === $_GET['page'] ) {
+				add_action( 'admin_footer', array( $this, 'mvl_add_feedback_assets' ) );
 			}
 			add_action( 'wpcfto_after_tab_nav', array( $this, 'mvl_add_version' ) );
 		}
@@ -68,12 +72,6 @@ class Settings {
 			'google-services/recaptcha-settings',
 		);
 
-		if ( class_exists( '\MotorsStarterTheme\Services\SkinOptions' ) ) {
-			$mst_skin_settings_map = \MotorsStarterTheme\Services\SkinOptions::SETTINGS_FILES;
-		} else {
-			$mst_skin_settings_map = array();
-		}
-
 		if ( ! defined( 'STM_MOTORS_EXTENDS_PLUGIN_VERSION' ) || version_compare( STM_MOTORS_EXTENDS_PLUGIN_VERSION, '2.3.7' ) > 0 ) {
 			$config_map = array_merge(
 				$config_map,
@@ -101,7 +99,6 @@ class Settings {
 					'pro/monetization/sell-online',
 					'pro/google-services/google-maps',
 				),
-				$mst_skin_settings_map,
 			);
 		}
 
@@ -265,6 +262,17 @@ class Settings {
 			100
 		);
 
+		add_submenu_page(
+			'mvl_plugin_settings',
+			esc_html__( 'Help center', 'stm_vehicles_listing' ),
+			'<span style="color: #FC7B40; font-weight: 700;">' . esc_html__( 'Help center', 'stm_vehicles_listing' ) . '</span>',
+			'manage_options',
+			'stm-support-page-motors',
+			function () {
+				\STM_Support_Page::render_support_page( 'stm_vehicles_listing' );
+			}
+		);
+
 		/* phpcs:disable */
 		/*add_submenu_page(
 			'mvl_plugin_settings',
@@ -366,9 +374,12 @@ class Settings {
 		echo wp_kses_post( $output );
 	}
 
-	public function mvl_add_feedback_button() {
+	public function mvl_add_feedback_assets() {
 		wp_enqueue_style( 'mvl-feedback', STM_LISTINGS_URL . '/assets/css/feedback.css', array(), STM_LISTINGS_V );
 		wp_enqueue_script( 'mvl-feedback', STM_LISTINGS_URL . '/assets/js/admin/feedback.js', array(), STM_LISTINGS_V, true );
+	}
+
+	public function mvl_add_feedback_button() {
 		echo '<div class="mvl-feedback"><a href="#" class="mvl-feedback-button">' . esc_html__( 'Feedback', 'stm_vehicle_listings' ) . '<img src="' . esc_url( STM_LISTINGS_URL . '/includes/class/Plugin/assets/img/feedback.svg' ) . '" alt="Feedback Icon"></a></div>';
 	}
 

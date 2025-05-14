@@ -194,6 +194,11 @@ function stm_listings_enqueue_scripts_styles() {
 	wp_enqueue_script( 'mvl-user-sidebar', STM_LISTINGS_URL . '/assets/js/frontend/app-user-sidebar.js', array( 'jquery' ), STM_LISTINGS_V, true );
 	wp_enqueue_script( 'listings-filter', STM_LISTINGS_URL . '/assets/js/frontend/filter.js', array( 'listings-init', 'stmselect2' ), STM_LISTINGS_V, true );
 	wp_enqueue_script( 'app-ajax', STM_LISTINGS_URL . '/assets/js/frontend/app-ajax.js', array( 'jquery' ), STM_LISTINGS_V, true );
+
+	if ( ! is_user_logged_in() ) {
+		wp_enqueue_script( 'motors-login-register', STM_LISTINGS_URL . '/assets/js/motors-login-register.js', array( 'jquery' ), STM_LISTINGS_V, true );
+	}
+
 	$inline_script_recaptcha = "var onloadRecaptchaCallback = function() {
         var submitButton = document.querySelector('.stm-login-register-form .stm-register-form form input[type=\"submit\"]');
         if (submitButton) {
@@ -237,6 +242,7 @@ function stm_listings_enqueue_scripts_styles() {
 			'car_price_required'                => __( 'Please add item price', 'stm_vehicles_listing' ),
 			'mvl_current_page_url'              => apply_filters( 'stm_listings_current_url', '' ),
 			'mvl_search_placeholder'            => __( 'Search', 'stm_vehicles_listing' ),
+			'mvl_password_validation'           => __( 'Password must contain at least 8 characters.', 'stm_vehicles_listing' ),
 		)
 	);
 

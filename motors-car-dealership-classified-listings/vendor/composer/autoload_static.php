@@ -11,7 +11,6 @@ class ComposerStaticInit5db859e1dab632b715b93d33219eb1cf
         array (
             'Motors_Elementor_Widgets_Free\\' => 30,
             'MotorsVehiclesListing\\' => 22,
-            'MotorsStarterTheme\\' => 19,
             'MotorsNuxy\\' => 11,
         ),
     );
@@ -25,10 +24,6 @@ class ComposerStaticInit5db859e1dab632b715b93d33219eb1cf
         array (
             0 => __DIR__ . '/../..' . '/includes/class',
         ),
-        'MotorsStarterTheme\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/includes/starter-theme/class',
-        ),
         'MotorsNuxy\\' => 
         array (
             0 => __DIR__ . '/../..' . '/includes/nuxy',
@@ -38,16 +33,6 @@ class ComposerStaticInit5db859e1dab632b715b93d33219eb1cf
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'MotorsNuxy\\MotorsNuxyHelpers' => __DIR__ . '/../..' . '/includes/nuxy/MotorsNuxyHelpers.php',
-        'MotorsStarterTheme\\Installer' => __DIR__ . '/../..' . '/includes/starter-theme/class/Installer.php',
-        'MotorsStarterTheme\\Instance' => __DIR__ . '/../..' . '/includes/starter-theme/class/Instance.php',
-        'MotorsStarterTheme\\Loader' => __DIR__ . '/../..' . '/includes/starter-theme/class/Loader.php',
-        'MotorsStarterTheme\\Services\\GoogleFonts' => __DIR__ . '/../..' . '/includes/starter-theme/class/Services/GoogleFonts.php',
-        'MotorsStarterTheme\\Services\\HeaderLayout' => __DIR__ . '/../..' . '/includes/starter-theme/class/Services/HeaderLayout.php',
-        'MotorsStarterTheme\\Services\\OutputCSS' => __DIR__ . '/../..' . '/includes/starter-theme/class/Services/OutputCSS.php',
-        'MotorsStarterTheme\\Services\\SkinOption' => __DIR__ . '/../..' . '/includes/starter-theme/class/Services/SkinOption.php',
-        'MotorsStarterTheme\\Services\\SkinOptions' => __DIR__ . '/../..' . '/includes/starter-theme/class/Services/SkinOptions.php',
-        'MotorsStarterTheme\\Services\\Socials' => __DIR__ . '/../..' . '/includes/starter-theme/class/Services/Socials.php',
-        'MotorsStarterTheme\\Services\\UnderconstructionMode' => __DIR__ . '/../..' . '/includes/starter-theme/class/Services/UnderconstructionMode.php',
         'MotorsVehiclesListing\\Addons\\Addon' => __DIR__ . '/../..' . '/includes/class/Addons/Addon.php',
         'MotorsVehiclesListing\\Addons\\Addons' => __DIR__ . '/../..' . '/includes/class/Addons/Addons.php',
         'MotorsVehiclesListing\\Addons\\AddonsPage' => __DIR__ . '/../..' . '/includes/class/Addons/AddonsPage.php',
@@ -74,7 +59,6 @@ class ComposerStaticInit5db859e1dab632b715b93d33219eb1cf
         'MotorsVehiclesListing\\MenuPages\\MenuBuilder' => __DIR__ . '/../..' . '/includes/class/MenuPages/MenuBuilder.php',
         'MotorsVehiclesListing\\MenuPages\\SearchResultsSettings' => __DIR__ . '/../..' . '/includes/class/MenuPages/SearchResultsSettings.php',
         'MotorsVehiclesListing\\MenuPages\\SingleListingTemplateSettings' => __DIR__ . '/../..' . '/includes/class/MenuPages/SingleListingTemplateSettings.php',
-        'MotorsVehiclesListing\\MenuPages\\SkinSettings' => __DIR__ . '/../..' . '/includes/class/MenuPages/SkinSettings.php',
         'MotorsVehiclesListing\\Plugin' => __DIR__ . '/../..' . '/includes/class/Plugin.php',
         'MotorsVehiclesListing\\Plugin\\MVL_Const' => __DIR__ . '/../..' . '/includes/class/Plugin/MVL_Const.php',
         'MotorsVehiclesListing\\Plugin\\MVL_Patcher' => __DIR__ . '/../..' . '/includes/class/Plugin/MVL_Patcher.php',
@@ -84,6 +68,8 @@ class ComposerStaticInit5db859e1dab632b715b93d33219eb1cf
         'MotorsVehiclesListing\\Post\\Model\\PostModel' => __DIR__ . '/../..' . '/includes/class/Post/Model/PostModel.php',
         'MotorsVehiclesListing\\Post\\PostController' => __DIR__ . '/../..' . '/includes/class/Post/PostController.php',
         'MotorsVehiclesListing\\SellerNoteMetaBoxes' => __DIR__ . '/../..' . '/includes/class/SellerNoteMetaBoxes.php',
+        'MotorsVehiclesListing\\StarterTheme\\Installer' => __DIR__ . '/../..' . '/includes/class/StarterTheme/Installer.php',
+        'MotorsVehiclesListing\\StarterTheme\\Loader' => __DIR__ . '/../..' . '/includes/class/StarterTheme/Loader.php',
         'MotorsVehiclesListing\\Stilization\\Color' => __DIR__ . '/../..' . '/includes/class/Stilization/Color.php',
         'MotorsVehiclesListing\\Stilization\\Colors' => __DIR__ . '/../..' . '/includes/class/Stilization/Colors.php',
         'MotorsVehiclesListing\\Terms\\Model\\TermsModel' => __DIR__ . '/../..' . '/includes/class/Terms/Model/TermsModel.php',

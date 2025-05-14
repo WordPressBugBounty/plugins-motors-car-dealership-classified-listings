@@ -13,6 +13,11 @@ abstract class MenuBase {
 	private $assets_url = STM_LISTINGS_URL . '/includes/class/Plugin/assets/img/';
 
 	/**
+	 * @var int
+	 */
+	protected $action_position = 10;
+
+	/**
 	 * @var string
 	 */
 	protected $parent_menu_slug = 'mvl_plugin_settings';
@@ -75,7 +80,7 @@ abstract class MenuBase {
 		$this->motors_favicon = $this->assets_url . 'icon.png';
 		$this->motors_logo    = $this->assets_url . 'logo.png';
 
-		add_action( 'init', array( $this, 'mvl_init_page' ) );
+		add_action( 'init', array( $this, 'mvl_init_page' ), $this->action_position );
 
 		if ( apply_filters( 'stm_disable_settings_setup', true ) ) {
 			add_filter( 'wpcfto_options_page_setup', array( $this, 'mvl_menu_settings' ), 20, 1 );

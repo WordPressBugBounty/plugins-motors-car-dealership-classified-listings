@@ -18,72 +18,6 @@ if (typeof (STMListings) == 'undefined') {
         });
     };
 
-    STMListings.stm_ajax_login = function () {
-        $(".stm-login-form form, .stm-login-form-unregistered form").on('submit', function (e) {
-            e.preventDefault();
-
-            $.ajax({
-                type: "POST",
-                url: ajaxurl,
-                dataType: 'json',
-                context: this,
-                data: $(this).serialize() + '&action=stm_custom_login&security=' + stm_custom_login_nonce,
-                beforeSend: function () {
-                    $(this).find('input').removeClass('form-error');
-                    $(this).find('.stm-listing-loader').addClass('visible');
-                    $('.stm-validation-message').empty();
-
-                    if ($(this).parent('.lOffer-account-unit').length > 0) {
-                        $('.stm-login-form-unregistered').addClass('working');
-                    }
-                },
-                success: function (data) {
-                    if ($(this).parent('.lOffer-account-unit').length > 0) {
-                        $('.stm-login-form-unregistered').addClass('working');
-                    }
-                    if (data.user_html) {
-                        var $user_html = $(data.user_html).appendTo('#stm_user_info');
-                        $('.stm-not-disabled, .stm-not-enabled').slideUp('fast', function () {
-                            $('#stm_user_info').slideDown('fast');
-                        });
-
-                        $("html, body").animate({scrollTop: $('.stm-form-checking-user').offset().top}, "slow");
-                        $('.stm-add-a-car-login-overlay,.stm-add-a-car-login').toggleClass('visiblity');
-
-                        $('.stm-form-checking-user button[type="submit"]').removeClass('disabled').addClass('enabled');
-                    }
-
-                    if(data.restricted && data.restricted) {
-                        $('.btn-add-edit').remove();
-                    }
-
-                    // insert plans select
-                    if ( data.plans_select && $('#user_plans_select_wrap').length > 0 ) {
-                        $( '#user_plans_select_wrap' ).html(vdata.plans_selectv);
-                        $( '#user_plans_select_wrap select' ).select2();
-                    }
-
-                    $(this).find('.stm-listing-loader').removeClass('visible');
-                    for (var err in data.errors) {
-                        $(this).find('input[name=' + err + ']').addClass('form-error');
-                    }
-
-                    if (data.message) {
-                        var message = $('<div class="stm-message-ajax-validation heading-font">' + data.message + '</div>').hide();
-
-                        $(this).find('.stm-validation-message').append(message);
-                        message.slideDown('fast');
-                    }
-
-
-                    if (typeof(data.redirect_url) !== 'undefined') {
-                        window.location = data.redirect_url;
-                    }
-                }
-            });
-        });
-    };
-
     STMListings.save_user_settings_success = function (data) {
         $(this).find('.stm-listing-loader').removeClass('visible');
         $('.stm-user-message').text(data.error_msg);
@@ -564,7 +498,6 @@ if (typeof (STMListings) == 'undefined') {
             STMListings.init_select();
         }
 
-        STMListings.stm_ajax_login();
         STMListings.save_user_settings();
         STMListings.stm_logout();
         STMListings.resetFields();
