@@ -71,6 +71,12 @@ a.motors-profile-button span {
     height: 5px;
 }
 
+@media (max-width: 1024px) {
+    .lOffer-account-dropdown {
+        transform: translateX(-52%);
+    }
+}
+
 .lOffer-account-dropdown:hover {
     opacity: 1;
     pointer-events: auto;
@@ -173,8 +179,7 @@ a.motors-profile-button span {
 @media (max-width: 1024px) {
     .lOffer-account-dropdown.stm-login-form-unregistered {
         width: 280px;
-        right: -110px;
-        left: auto;
+        left: 15px;
     }
 }
 

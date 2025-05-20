@@ -10,7 +10,11 @@ add_action(
 		STM_Support_Page::set_api_urls(
 			'stm_vehicles_listing',
 			array(
-				'promo' => 'https://promo-dashboard.stylemixthemes.com/wp-content/dashboard-promo/motors_posts.json',
+				'promo'    => 'https://promo-dashboard.stylemixthemes.com/wp-content/dashboard-promo/motors_posts.json',
+				'freemius' => array(
+					'plugin_slug' => 'motors-car-dealership-classified-listings-pro',
+					'item_id'     => 43,
+				),
 			)
 		);
 		STM_Support_Page::set_data(
@@ -54,20 +58,34 @@ add_action(
 							),
 						),
 					),
+					'customization' => array(
+						'buttons' => array(
+							array(
+								'href' => 'https://stylemix.net/ticket-form/?utm_source=wpadmin&utm_medium=help_center&utm_campaign=motors_get_quotes',
+							),
+						),
+					),
 					'features'      => array(
 						'title'        => __( 'Get Motors and Enjoy PRO Features', 'stm_vehicles_listing' ),
 						'description'  => __( 'Upgrade now and unlock advanced inventory management, custom search filters, and powerful lead capture tools. List vehicles faster, help buyers find exactly what they need, and keep your sales process organized.', 'stm_vehicles_listing' ),
 						'buttons'      => array(
 							array(
-								'href' => 'https://stylemixthemes.com/car-dealer-plugin/pricing/',
+								'href' => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wpadmin&utm_medium=help_center&utm_campaign=motors_promo_banner',
 							),
 							array(
-								'href' => 'https://stylemixthemes.com/car-dealer-plugin/',
+								'href' => 'https://stylemixthemes.com/car-dealer-plugin/?utm_source=wpadmin&utm_medium=help_center&utm_campaign=motors_promo_banner',
 							),
 						),
 						'image'        => STM_LISTINGS_URL . '/includes/lib/support-page/assets/images/feature-bg-motors.jpg',
 						'has-pro'      => '',
 						'has-pro-plus' => defined( 'STM_LISTINGS_PRO_FILE' ) ? true : false,
+					),
+					'expert'        => array(
+						'buttons' => array(
+							array(
+								'href' => 'https://stylemix.net/?utm_source=wpadmin&utm_medium=help_center&utm_campaign=motors_hire_us',
+							),
+						),
 					),
 				),
 				'review'     => array(
