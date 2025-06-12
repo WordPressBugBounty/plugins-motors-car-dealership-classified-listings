@@ -264,8 +264,8 @@ class Settings {
 
 		add_submenu_page(
 			'mvl_plugin_settings',
-			esc_html__( 'Help center', 'stm_vehicles_listing' ),
-			'<span style="color: #FC7B40; font-weight: 700;">' . esc_html__( 'Help center', 'stm_vehicles_listing' ) . '</span>',
+			esc_html__( 'Help Center', 'stm_vehicles_listing' ),
+			'<span style="color: #FC7B40; font-weight: 700;">' . esc_html__( 'Help Center', 'stm_vehicles_listing' ) . '</span>',
 			'manage_options',
 			'stm-support-page-motors',
 			function () {

@@ -5,7 +5,7 @@ Donate link: https://www.paypal.me/stylemix
 Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
 Tested up to: 6.8
-Stable tag: 1.4.74
+Stable tag: 1.4.75
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,12 @@ After that, go to Tools -> Import, and via Wordpress Importer tool install dummy
 You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability](https://patchstack.com/database/vdp/motors-car-dealership-classified-listings). 
 
 == Changelog ==
+
+= 1.4.75 =
+- **Fix:** Active and default colors in pagination on Profile and Inventory pages were swapped
+- **Fix:** Resolved a session error that prevented adding a new listing
+- **Fix:** After filtering, the action modal on the Inventory page now opens as expected
+- **Fix:** The Compare page layout now works correctly on mobile and tablet screens
 
 = 1.4.74 =
 - **Fix:** Minor bug fixes.

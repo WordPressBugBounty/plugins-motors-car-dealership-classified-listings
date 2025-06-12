@@ -3,7 +3,7 @@ if ( file_exists( STM_LISTINGS_PATH . '/includes/lib/stm-mailchimp-integration/s
 	require_once STM_LISTINGS_PATH . '/includes/lib/stm-mailchimp-integration/stm-mailchimp.php';
 	$plugin_pages   = array(
 		'mvl_plugin_settings',
-		'stm-support-page',
+		'stm-support-page-motors',
 	);
 	$post_types     = array(
 		'listings',

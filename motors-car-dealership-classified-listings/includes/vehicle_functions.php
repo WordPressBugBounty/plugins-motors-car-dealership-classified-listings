@@ -1564,7 +1564,7 @@ if ( ! function_exists( 'stm_ajax_add_a_car_images' ) ) {
 		$attachments_ids = ( isset( $_POST['attachments'] ) && ! empty( $attachments_ids ) ) ? array_map( 'sanitize_text_field', array_values( explode( ',', $_POST['attachments'] ) ) ) : array();
 
 		if ( ! empty( $post_id ) ) {
-			if ( intval( get_post_meta( $post_id, 'stm_car_user', true ) ) !== intval( $user_id ) ) {
+			if ( ! empty( get_post_meta( $post_id, 'stm_car_user', true ) ) && intval( get_post_meta( $post_id, 'stm_car_user', true ) ) !== intval( $user_id ) ) {
 				/*User tries to add info to another car*/
 				wp_send_json( array( 'message' => esc_html__( 'You are trying to add car to another car user, or your session has expired, please sign in first', 'stm_vehicles_listing' ) ) );
 				exit;
@@ -1769,10 +1769,12 @@ if ( ! function_exists( 'stm_ajax_add_a_car_media' ) ) {
 		$user_id  = get_current_user_id();
 		$updating = ! empty( $_POST['stm_edit'] ) && 'update' === $_POST['stm_edit'];
 
-		if ( intval( get_post_meta( $post_id, 'stm_car_user', true ) ) !== intval( $user_id ) ) {
-			/*User tries to add info to another car*/
-			wp_send_json( array( 'message' => esc_html__( 'You are trying to add car to another car user, or your session has expired, please sign in first', 'stm_vehicles_listing' ) ) );
-			exit;
+		if ( ! empty( $post_id ) ) {
+			if ( ! empty( get_post_meta( $post_id, 'stm_car_user', true ) ) && intval( get_post_meta( $post_id, 'stm_car_user', true ) ) !== intval( $user_id ) ) {
+				/*User tries to add info to another car*/
+				wp_send_json( array( 'message' => esc_html__( 'You are trying to add car to another car user, or your session has expired, please sign in first', 'stm_vehicles_listing' ) ) );
+				exit;
+			}
 		}
 
 		$attachments_ids = array();

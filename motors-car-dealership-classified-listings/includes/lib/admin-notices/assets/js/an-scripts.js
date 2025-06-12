@@ -108,7 +108,6 @@
         let $notice = $(this).closest('.stm-notice');
         let notice_id = $notice.attr('data-id');
         let status_click = $notice.attr('data-status-click');
-
         $.ajax({
             url: ajaxurl,
             type: 'POST',
@@ -152,11 +151,12 @@
         }
     })
 
-    $(document).on('click','.notice-show-again', function () {
-        let $notice      = $(this).closest('.stm-notice');
-        let notice_id    = $notice.attr('data-id');
-        let status_click = $notice.attr('data-status-click');
+    $(document).on('click','.notice-show-again', function (e) {
+        let $this        = $(this);
+        let notice_id    = $($this).attr('data-id');
+        let status_click = $($this).attr('data-status-click');
 
+        e.preventDefault();
         if (notice_id.length > 0) {
             $.ajax({
                 url: ajaxurl,
@@ -168,7 +168,7 @@
                     nonce: stmNotices.nonce,
                 },
                 success: function (response) {
-                    $notice.fadeOut(10).remove();
+                    $this.closest('.stm-notice').fadeOut(10).remove();
                     $('.popup-dash-promo').removeClass('show');
                     $('body').removeClass('body-scroll-off');
                 }

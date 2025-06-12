@@ -64,14 +64,14 @@ add_filter(
 		$page_list = mvl_generate_pages_list();
 		if ( ! mvl_has_generated_pages( $page_list ) ) {
 			return array_merge(
-				$global_conf,
 				array(
 					'page_generator' => array(
 						'type'    => 'page_generator_field',
 						'options' => $page_list,
 						'label'   => esc_html__( 'Generate Pages', 'stm_vehicles_listing' ),
 					),
-				)
+				),
+				$global_conf
 			);
 		}
 

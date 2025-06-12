@@ -77,6 +77,7 @@ Vue.component('wpcfto_color', {
             this.updatePickerValue(this.default_value);
         },
         updatePickerValue: function(value) {
+            console.log(value);
             if (typeof value === 'string') {
                 if ( value.indexOf('rgb') !== -1 ) {
                     var colors = value.replace('rgba(', '').slice(0, -1).split(',');
@@ -115,19 +116,7 @@ Vue.component('wpcfto_color', {
                 }
                 this.input_value = value;
             }
-        },
-        getValueFormat: function(value) {
-            var format = 'hex';
-            if (typeof value === 'string') {
-                if ( value.indexOf('rgb') !== -1 ) {
-                    format = 'rgba';
-                } else if ( value.indexOf('hsl') !== -1 ) {       
-                    format = 'hsl';
-                } else if ( value.indexOf('#') !== -1 ) {
-                    format = 'hex';
-                }
-            }
-            return format;
+            
         },
         updateInputValue: function(value) {
             this.$set(this, 'input_value', value);
@@ -155,7 +144,7 @@ Vue.component('wpcfto_color', {
                                     break;
                                 case 'h':
                                     var hsla = field.querySelectorAll('.vc-input__input');
-                                    this.current_format = 'hsla';
+                                    this.current_format = 'hsl';
                                     colorValue = 'hsla(' + hsla[0].getAttribute('aria-label') + ',' + hsla[1].getAttribute('aria-label') + ',' + hsla[2].getAttribute('aria-label') + ',' + hsla[3].getAttribute('aria-label') + ')';
                                     break;
                             }
@@ -172,9 +161,6 @@ Vue.component('wpcfto_color', {
             this.$emit('wpcfto-get-value', value);
         },
         value: function (value) {
-            if ( value.rgba && value.rgba.a !== undefined && value.rgba.a < 1 && this.current_format === 'hex' ) {
-                this.current_format = 'rgba';
-            }
             switch ( this.current_format ) {
                 case 'hex':
                     this.updateInputValue(value.hex);

@@ -211,17 +211,19 @@ table > tbody tr td {
     border-bottom: none;
 }
 
-.car-listing-row .compare-col-stm:hover .remove-from-compare {
-    bottom: -13px;
-    opacity: 1;
-}
+@media (min-width: 1024px) {
+    .car-listing-row .compare-col-stm:hover .remove-from-compare {
+        bottom: -13px;
+        opacity: 1;
+    }
 
-.car-listing-row .compare-col-stm:hover .stm-compare-car-img:after {
-    opacity: 1;
-}
+    .car-listing-row .compare-col-stm:hover .stm-compare-car-img:after {
+        opacity: 1;
+    }
 
-.car-listing-row .compare-col-stm:hover .listing-car-item-meta .car-title {
-    color: var(--motors-accent-color);
+    .car-listing-row .compare-col-stm:hover .listing-car-item-meta .car-title {
+        color: var(--motors-accent-color);
+    }
 }
 
 .car-listing-row .compare-col-stm .listing-car-item-meta {
@@ -1101,8 +1103,8 @@ ul.list-style-2 li:before {
     height: 35px;
     margin: 0;
     padding: 0;
-    background-color: var(--motors-filter-inputs-color);
-    color: var(--motors-text-highalpha-color);
+    background-color: var(--motors-accent-color);
+    color: var(--motors-contrast-text-color);
     border-top: none;
     border-radius: 3px;
     line-height: 35px;
@@ -1114,12 +1116,18 @@ ul.list-style-2 li:before {
     height: 35px;
     margin: 0 8px;
     padding: 0;
-    background-color: var(--motors-accent-color);
-    color: var(--motors-contrast-text-color);
+    background-color: var(--motors-filter-inputs-color);
+    color: var(--motors-text-highalpha-color);
     border-top: none;
     border-radius: 3px;
     line-height: 35px;
     text-decoration: none;
+    transition: 0.3s;
+}
+
+.page-numbers li > a:hover {
+    background-color: var(--motors-accent-color);
+    color: var(--motors-contrast-text-color);
 }
 
 .page-numbers li .prev,

@@ -331,6 +331,18 @@
 					}
 				)
 
+				$('.compare-column-stm-' + stm_car_add_to).hide(
+					'slide',
+					{ direction: 'left' },
+					function () {
+						$('.stm-compare-row .compare-column-stm-' + stm_car_add_to).remove()
+							$('.stm-compare-row').append(
+								$('.compare-empty-car-bottom').html()
+							)
+					}
+				)
+
+
 				$('.row-compare-features .compare-col-stm-' + stm_car_add_to).hide(
 					'slide',
 					{ direction: 'left' },
@@ -514,15 +526,15 @@
 		})
 	}
 
-	function stm_test_drive_car_title(id, title) {
-		var $ = jQuery
+	window.stm_test_drive_car_title = function(id, title) {
+		var $ = jQuery;
 
-		$('.test-drive-car-name').text(title)
-		$('input[name=vehicle_id]').val(id)
-		$('input[name=vehicle_name]').val(title)
-		$('.modal-body-fields').removeClass('hidden')
-		$('#request-test-drive-form').find('.alert-modal').remove()
-		$('#request-test-drive-form').find('.form-error').removeClass('form-error')
+		$('.test-drive-car-name').text(title);
+		$('input[name=vehicle_id]').val(id);
+		$('input[name=vehicle_name]').val(title);
+		$('.modal-body-fields').removeClass('hidden');
+		$('#request-test-drive-form').find('.alert-modal').remove();
+		$('#request-test-drive-form').find('.form-error').removeClass('form-error');
 	}
 
 	let shareTimer;

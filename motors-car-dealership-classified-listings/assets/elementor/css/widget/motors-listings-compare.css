@@ -1,3 +1,13 @@
+.stm-car-compare-row {
+    flex-wrap: nowrap;
+}
+
+@media (max-width: 1023px) {
+    .stm-car-compare-row {
+        flex-wrap: wrap;
+    }
+}
+
 @media (max-width: 767px) {
     .stm-car-compare-row .compare-title {
         text-align: left;
@@ -13,14 +23,98 @@
     font-weight: 700;
 }
 
-@media (max-width: 645px) {
-    .elementor-widget-motors-listings-compare {
-        overflow: auto;
+.stm-compare-cars-module .compare-col-stm {
+    width: 100%;
+    display: block;
+    max-width: unset;
+}
+
+@media (max-width: 768px) {
+    .stm-compare-cars-module .mvl-compare-title, .stm-compare-cars-module .col-3.compare-col-stm-empty {
+        max-width: unset;
+        flex: unset;
+        width: 100%;
     }
 }
 
-.stm-compare-cars-module {
-    min-width: 600px;
+@media (max-width: 1024px) {
+    .stm-compare-cars-module .compare-values {
+        padding: 0 15px;
+    }
+}
+
+@media (max-width: 767px) {
+    .stm-compare-cars-module .col-md-3.compare-col-stm-empty {
+        display: none;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1020px) {
+    .stm-compare-cars-module .mvl-compare-meta-table {
+        display: flex;
+        max-width: unset;
+        flex: unset;
+        width: 100%;
+    }
+
+    .stm-compare-cars-module .mvl-compare-item, .stm-compare-cars-module .col-md-3.compare-col-stm-empty, .stm-compare-cars-module .col-3.compare-col-stm-empty {
+        width: 33.33%;
+        flex: unset;
+        max-width: unset;
+    }
+
+    .stm-compare-cars-module .row-compare-features {
+        display: none;
+    }
+}
+
+@media (max-width: 1023px) {
+    .stm-compare-cars-module .compare-desctop-table {
+        display: none;
+    }
+}
+
+@media (min-width: 1023px) {
+    .stm-compare-cars-module .mobile-compare-table {
+        display: none;
+    }
+}
+
+@media (max-width: 1024px) {
+    .stm-compare-cars-module .mvl-compare-item .add-to-compare {
+        opacity: 1;
+    }
+}
+
+@media (min-width: 0px) and (max-width: 767px) {
+    .stm-compare-cars-module .mvl-compare-item .add-to-compare {
+        bottom: 10px;
+    }
+}
+
+@media (min-width: 767px) and (max-width: 1024px) {
+    .stm-compare-cars-module .mvl-compare-item .add-to-compare {
+        bottom: -15px;
+    }
+}
+
+@media (max-width: 767px) {
+    .stm-compare-cars-module .mvl-compare-item .listing-car-item-meta {
+        padding-top: 10px;
+    }
+}
+
+.stm-compare-cars-module .add-compare-mobile .image i {
+    left: 53%;
+}
+
+@media (max-width: 767px) {
+    .stm-compare-cars-module .compare-col-stm-empty {
+        display: block;
+        width: 100%;
+        max-width: unset;
+        margin-bottom: 20px;
+    }
 }
 
 .stm-compare-cars-module .compare-col-stm-empty .image .stm-icon-add-car-wrapper {

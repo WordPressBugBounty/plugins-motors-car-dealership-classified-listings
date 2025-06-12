@@ -26,6 +26,11 @@ class PluginOptions {
 				(array) $listing_template_opts
 			)
 		);
+
+		//Fix/In other options can be key 'featured_listing_price' with incorrect value, only $plugin_opts contains correct value
+		if ( isset( $plugin_opts['featured_listing_price'] ) ) {
+			self::$options_map['featured_listing_price'] = $plugin_opts['featured_listing_price'];
+		}
 	}
 
 	public static function getInstance() {

@@ -126,12 +126,13 @@
     height: 35px;
     margin: 0 8px;
     padding: 0;
-    background-color: var(--motors-accent-color);
-    color: var(--motors-contrast-text-color);
+    background-color: var(--motors-filter-inputs-color);
+    color: var(--motors-text-color);
     border-top: none;
     border-radius: 3px;
     line-height: 35px;
     text-decoration: none;
+    transition: 0.3s;
 }
 
 @media (max-width: 767px) {
@@ -146,6 +147,11 @@
     }
 }
 
+.motors-elementor-inventory-search-results#listings-result ul.page-numbers li > a:hover {
+    background-color: var(--motors-accent-color);
+    color: var(--motors-contrast-text-color);
+}
+
 .motors-elementor-inventory-search-results#listings-result ul.page-numbers li > span {
     display: flex;
     justify-content: center;
@@ -154,8 +160,8 @@
     height: 35px;
     margin: 0 8px;
     padding: 0;
-    background-color: var(--motors-filter-inputs-color);
-    color: var(--motors-text-color);
+    background-color: var(--motors-accent-color);
+    color: var(--motors-contrast-text-color);
     border-top: none;
     border-radius: 3px;
     line-height: 35px;
