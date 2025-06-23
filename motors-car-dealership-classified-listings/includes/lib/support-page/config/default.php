@@ -62,7 +62,7 @@ return array(
 			'buttons'        => array(
 				array(
 					'label' => __( 'Create Ticket', 'support-page' ),
-					'href'  => esc_url( STM_Support_Page::get_freemius_ticket_url( $textdomain ) ),
+					'href'  => 'https://support.stylemixthemes.com/auth/login',
 					'type'  => 'primary',
 				),
 			),
@@ -174,22 +174,22 @@ return array(
 			),
 		),
 		$promo_item,
-		// 'onboarding'    => array(
-		// 	'icon'        => 'support-page-icon-onboarding',
-		// 	'title'       => __( 'Onboarding', 'support-page' ),
-		// 	'description' => __( 'Book a quick call with us. We’ll answer your questions and guide you in the right direction.', 'support-page' ),
-		// 	'buttons'     => array(
-		// 		array(
-		// 			'label' => __( 'Book a Call', 'support-page' ),
-		// 			'href'  => 'https://calendly.com/stylemix-onboarding',
-		// 			'type'  => 'primary',
-		// 		),
-		// 	),
-		// ),
+		'onboarding'    => array(
+			'icon'        => 'support-page-icon-onboarding',
+			'title'       => __( 'Onboarding', 'support-page' ),
+			'description' => __( 'Book a quick call with us. We’ll answer your questions and guide you in the right direction.', 'support-page' ),
+			'buttons'     => array(
+				array(
+					'label' => __( 'Book a Call', 'support-page' ),
+					'href'  => 'https://calendly.com/stylemix-onboarding',
+					'type'  => 'primary',
+				),
+			),
+		),
 	),
 	'review'     => array(
 		'review_form' => array(
-			'class'       => 'help-item-full-width help-item-review',
+			'class'       => 'help-item-wide help-item-review',
 			'title'       => __( 'Leave Review', 'support-page' ),
 			'description' => __( 'We’d love to hear your experience with our tools and services', 'support-page' ),
 			'buttons'     => array(

@@ -35,6 +35,54 @@ i {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.motors-icons-image-plus:before {
+    content: "\ea1a";
+}
+
+.motors-icons-mvl_file_select:before {
+    content: "\ea19";
+}
+
+.motors-icons-mvl-bolt:before {
+    content: "\ea0f";
+}
+
+.motors-icons-mvl-eye:before {
+    content: "\ea10";
+}
+
+.motors-icons-mvl-home:before {
+    content: "\ea11";
+}
+
+.motors-icons-mvl-info:before {
+    content: "\ea12";
+}
+
+.motors-icons-mvl-layers:before {
+    content: "\ea13";
+}
+
+.motors-icons-mvl-media:before {
+    content: "\ea14";
+}
+
+.motors-icons-mvl-pencil:before {
+    content: "\ea15";
+}
+
+.motors-icons-mvl-settings:before {
+    content: "\ea16";
+}
+
+.motors-icons-mvl-trash:before {
+    content: "\ea17";
+}
+
+.motors-icons-mvl-wallet:before {
+    content: "\ea18";
+}
+
 .motors-icons-mvl-search:before {
     content: "\ea0d";
 }

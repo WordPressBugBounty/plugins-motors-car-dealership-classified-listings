@@ -330,6 +330,64 @@ function mvl_wp_kses_allowed_html( $allowed_html ) {
 	return $allowed_html;
 }
 
+function mvl_wp_kses_allowed_html_in_content( $allowed_html ) {
+	$allowed_atts = array(
+		'align'       => array(),
+		'class'       => array(),
+		'type'        => array(),
+		'id'          => array(),
+		'dir'         => array(),
+		'lang'        => array(),
+		'style'       => array(),
+		'xml:lang'    => array(),
+		'src'         => array(),
+		'alt'         => array(),
+		'href'        => array(),
+		'rel'         => array(),
+		'rev'         => array(),
+		'target'      => array(),
+		'novalidate'  => array(),
+		'value'       => array(),
+		'name'        => array(),
+		'tabindex'    => array(),
+		'action'      => array(),
+		'method'      => array(),
+		'for'         => array(),
+		'width'       => array(),
+		'height'      => array(),
+		'data'        => array(),
+		'title'       => array(),
+		'placeholder' => array(),
+		'selected'    => array(),
+	);
+
+	$allowed_html['select']             = $allowed_atts;
+	$allowed_html['input']              = $allowed_atts;
+	$allowed_html['option']             = $allowed_atts;
+	$allowed_html['option']['selected'] = array();
+	$allowed_html['span']               = $allowed_atts;
+	$allowed_html['div']                = $allowed_atts;
+	$allowed_html['p']                  = $allowed_atts;
+	$allowed_html['a']                  = $allowed_atts;
+	$allowed_html['i']                  = $allowed_atts;
+	$allowed_html['iframe']             = $allowed_atts;
+
+	$allowed_html['img'] = array(
+		'src'      => true,
+		'srcset'   => true,
+		'sizes'    => true,
+		'class'    => true,
+		'id'       => true,
+		'width'    => true,
+		'height'   => true,
+		'alt'      => true,
+		'loading'  => true,
+		'decoding' => true,
+	);
+
+	return $allowed_html;
+}
+
 if ( ! function_exists( 'stm_get_sort_options_array' ) ) {
 	function stm_get_sort_options_array() {
 

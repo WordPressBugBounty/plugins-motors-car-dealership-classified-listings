@@ -236,7 +236,7 @@ if ( ! is_user_logged_in() ) {
 						<?php if ( ! empty( $user['logo'] ) ) : ?>
 							<img src="<?php echo esc_url( $user['logo'] ); ?>" class="img-responsive"/>
 						<?php else : ?>
-							<div class="stm-empty-avatar-icon"><i class="stm-service-icon-user"></i></div>
+							<div class="stm-empty-avatar-icon"><i class="motors-icons-user"></i></div>
 						<?php endif; ?>
 					</div>
 					<div class="stm-upload-new-avatar">

@@ -14,13 +14,5 @@
 			</div>
 			<# } #>
 		</div>
-		<# if (data.link ) { #>
-		<div class="butterbean-section-heading-wrapper-inner-two">
-			<a class="button button-secondary" href="{{data.link}}" target="_blank">
-				<i class="fa-solid fa-arrow-up-right-from-square"></i>
-				<?php esc_html_e( 'Manage Features List', 'stm_vehicles_listing' ); ?>
-			</a>
-		</div>
-		<# } #>
 	</div>
 <# } #>

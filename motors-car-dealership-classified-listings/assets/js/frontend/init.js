@@ -331,7 +331,7 @@ if (typeof (STMListings) == 'undefined') {
         if ( $( changed_item ).length && name && name.length > 0 ) {
             let name = changed_item.attr('name').replace(/[\[\]']+/g,'');
 
-            if ( stm_parent_slug_list.split(',').includes( name ) ) {
+            if ( stm_parent_slug_list && stm_parent_slug_list.split(',').includes( name ) ) {
                 var child_select = $('.filter-select option[data-parent="' + name + '"]').parent();
                 child_select.val('');
             }

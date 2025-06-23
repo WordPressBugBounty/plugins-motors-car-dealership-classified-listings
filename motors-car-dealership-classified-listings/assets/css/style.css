@@ -762,8 +762,7 @@ body .container {
 }
 
 table.wp-list-table .column-stm_image {
-    width: 100px;
-    text-align: center;
+    width: 150px;
 }
 
 table.wp-list-table .column-stm_image img {

@@ -1287,6 +1287,12 @@ input::placeholder {
     transition: all 0.2s ease;
 }
 
+.stm_features.butterbean-section.butterbean-section-default .butterbean-control-multiselect .select2-selection.select2-selection--multiple .select2-search--inline,
+.features.butterbean-section.butterbean-section-default .butterbean-control-multiselect .select2-selection.select2-selection--multiple .select2-search--inline,
+.butterbean-section.butterbean-section-default.stm_info .butterbean-control-multiselect .select2-selection.select2-selection--multiple .select2-search--inline {
+    display: none;
+}
+
 .stm_features.butterbean-section.butterbean-section-default .butterbean-control-multiselect .select2-selection.select2-selection--multiple .select2-selection__choice,
 .features.butterbean-section.butterbean-section-default .butterbean-control-multiselect .select2-selection.select2-selection--multiple .select2-selection__choice,
 .butterbean-section.butterbean-section-default.stm_info .butterbean-control-multiselect .select2-selection.select2-selection--multiple .select2-selection__choice {
@@ -1314,6 +1320,7 @@ input::placeholder {
     padding: unset;
     position: unset;
     border-right: unset;
+    border: none;
 }
 
 .stm_features.butterbean-section.butterbean-section-default .butterbean-control-multiselect .select2-selection.select2-selection--multiple .select2-selection__rendered,
@@ -1321,6 +1328,7 @@ input::placeholder {
 .butterbean-section.butterbean-section-default.stm_info .butterbean-control-multiselect .select2-selection.select2-selection--multiple .select2-selection__rendered {
     display: flex;
     align-items: center;
+    padding: 3px 5px;
 }
 
 .stm_features.butterbean-section.butterbean-section-default .butterbean-control-multiselect .select2-selection.select2-selection--multiple .select2-selection__rendered li,

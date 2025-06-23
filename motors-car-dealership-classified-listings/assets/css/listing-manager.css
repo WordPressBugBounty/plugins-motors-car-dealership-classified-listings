@@ -1,0 +1,269 @@
+.mvl-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.mvl-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mvl-modal > div {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.mvl-modal h2 {
+    margin: 0 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 20px;
+}
+
+.mvl-options-settings-tabs {
+    display: flex;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 20px;
+}
+
+.mvl-options-settings-tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.mvl-options-settings-tab:hover {
+    background-color: #f5f5f5;
+}
+
+.mvl-options-settings-tab.active {
+    border-bottom-color: #1a73e8;
+    color: #1a73e8;
+}
+
+.mvl-options-settings-tab-content-item {
+    display: none;
+    padding: 20px 0;
+}
+
+.mvl-options-settings-tab-content-item.active {
+    display: block;
+}
+
+.mvl-options-settings-tab-content-item-field-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.mvl-options-settings-tab-content-item-field {
+    margin-bottom: 15px;
+}
+
+.mvl-options-settings-tab-content-item-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.mvl-listing-manager-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    background-color: #fff;
+    border-radius: 10px;
+    min-width: 610px;
+}
+
+.mvl-listing-manager-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.mvl-listing-manager-modal-header i {
+    font-size: 16px;
+    color: #98A0B3;
+    cursor: pointer;
+}
+
+.mvl-listing-manager-modal-header-title {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.mvl-listing-manager-modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.mvl-listing-manager-modal-btns {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.mvl-listing-manager-modal-btn-container {
+    display: flex;
+    gap: 10px;
+}
+
+.mvl-options-popup-container {
+    padding: 20px;
+}
+
+.mvl-options-settings-tabs {
+    display: flex;
+    padding: 2px;
+    border-radius: 4px;
+    background-color: #F1F5F9;
+}
+
+.mvl-options-settings-tab {
+    padding: 8px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.mvl-options-settings-tab span {
+    font-size: 16px;
+    font-weight: 400;
+    color: #98A0B3;
+}
+
+.mvl-options-settings-tab.active {
+    background-color: #fff;
+    box-shadow: 0px 0px 2px 0px rgba(41, 41, 51, 0.04), 0px 2px 6px 0px rgba(41, 41, 51, 0.10);
+}
+
+.mvl-options-settings-tab.active span {
+    color: #000;
+}
+
+.mvl-options-popup-container-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.mvl-options-settings-tab-content-item {
+    display: none;
+}
+
+.mvl-options-settings-tab-content-item.active {
+    display: block;
+}
+
+.mvl-options-settings-tab-content-item-field-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.mvl-options-settings-tab-content-item-field {
+    width: calc(50% - 20px);
+}
+
+.mvl-options-settings-tab-content-item-field .mvl-listing-manager-field {
+    width: 100%;
+}
+
+.mvl-features-tab {
+    margin-bottom: 30px;
+}
+
+.mvl-features-tab-title {
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #232628;
+}
+
+.mvl-features-tab .terms-list {
+    margin-top: 10px;
+}
+
+.mvl-features-tab .terms-list.two-columns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.mvl-search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.mvl-search-result-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.mvl-search-result-item:hover {
+    background-color: #f5f5f5;
+}
+
+.mvl-search-result-page {
+    color: #666;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.mvl-search-result-separator {
+    color: #999;
+}
+
+.mvl-search-result-label {
+    color: #333;
+    font-weight: 500;
+}
+
+.mvl-field-highlight {
+    animation: highlight-field 2s ease-out;
+}
+
+@keyframes highlight-field {
+    0% {
+        background-color: rgba(255, 255, 0, 0.3);
+    }
+    100% {
+        background-color: transparent;
+    }
+} 

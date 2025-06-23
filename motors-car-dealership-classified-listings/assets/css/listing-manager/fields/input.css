@@ -1,0 +1,15 @@
+.mvl-input-field {
+    padding: 10px 12px;
+    border-radius: 4px;
+    border: 1px solid #DDE3EC;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.mvl-input-field::-moz-placeholder {
+    color: #98A0B3;
+}
+
+.mvl-input-field::placeholder {
+    color: #98A0B3;
+}

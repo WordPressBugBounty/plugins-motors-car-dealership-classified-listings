@@ -34,7 +34,6 @@ function motors_page_options() {
 			'value'       => '',
 			'type'        => 'text',
 			'required'    => true,
-			'readonly'    => true,
 			'group'       => 'general',
 			'column'      => 2,
 			'attributes'  => array(
@@ -259,7 +258,7 @@ function motors_page_options() {
 		),
 		'is_multiple_select'            => array(
 			'label'       => esc_html__( 'Multiple filter select', 'stm_vehicles_listing' ),
-			'description' => esc_html__( 'Enable this setting to allow users to select multiple filter options for a custom field while searching listings.', 'stm_vehicles_listing' ),
+			'description' => esc_html__( 'Allow users to select multiple filter options for this custom field when searching listings.', 'stm_vehicles_listing' ),
 			'value'       => '',
 			'type'        => 'checkbox',
 			'group'       => 'filter',
@@ -285,7 +284,7 @@ function motors_page_options() {
 				'type'  => 'not_empty',
 			),
 			'group'       => 'filter',
-			'description' => esc_html__( 'This option displays the number of listings for each custom field when searching so users see how many listings match their selected filters.', 'stm_vehicles_listing' ),
+			'description' => esc_html__( 'Show the number of listings next to each custom field option during search, so users can see how many results match their filters.', 'stm_vehicles_listing' ),
 		),
 		'use_on_car_filter_links'       => array(
 			'label'       => esc_html__( 'Show as a block with links', 'stm_vehicles_listing' ),
@@ -330,7 +329,7 @@ function motors_page_options() {
 		),
 		'listing_rows_numbers_enable'           => array(
 			'label'       => esc_html__( 'Show as checkboxes in the inventory filter', 'stm_vehicles_listing' ),
-			'description' => esc_html__( 'Use as checkboxes with images 1 or 2 columns', 'stm_vehicles_listing' ),
+			'description' => esc_html__( 'Display as checkboxes with images in 1 or 2 columns', 'stm_vehicles_listing' ),
 			'value'       => '',
 			'preview'     => 'column.png',
 			'type'        => 'checkbox',
@@ -600,17 +599,13 @@ foreach ( $post_types as $_post_type ) {
 
 function stm_listings_display_posts_stickiness( $column, $post_id ) {
 	if ( 'stm_image' === $column ) {
+		$image = get_the_post_thumbnail( $post_id, 'medium' );
+		if ( empty( $image ) ) {
+			$image = '<img src="' . esc_url( STM_LISTINGS_URL . '/assets/images/plchldr255.png' ) . '" width="60" height="60" alt="No Image">';
+		}
 
-		if ( has_post_thumbnail( $post_id ) ) {
-			echo '<div class="attachment">';
-			echo '<div class="attachment-preview">';
-			echo '<div class="thumbnail">';
-			echo '<div class="centered">';
-			echo wp_kses_post( '<a href="' . get_edit_post_link( $post_id ) . '">' . get_the_post_thumbnail( $post_id, 'medium' ) . '</a>' );
-			echo '</div>';
-			echo '</div>';
-			echo '</div>';
-			echo '</div>';
+		if ( ! empty( $image ) && ! empty( $post_id ) ) {
+			echo wp_kses_post( '<a href="' . get_edit_post_link( $post_id ) . '">' . $image . '</a>' );
 		}
 	}
 

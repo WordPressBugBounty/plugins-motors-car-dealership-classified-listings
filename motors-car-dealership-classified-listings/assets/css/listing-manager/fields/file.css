@@ -1,0 +1,164 @@
+.mvl-listing-manager-field-image.has-images .field-image-clear-list-btn {
+    display: flex;
+}
+
+.mvl-listing-manager-field-image.has-images .field-image-drop-zone {
+    display: none;
+}
+
+.mvl-listing-manager-field-image.has-images:not(.multiple) .field-image-upload-btn, .mvl-listing-manager-field-image.has-images.limit-exceeded .field-image-upload-btn {
+    display: none;
+}
+
+.mvl-listing-manager-field-image.has-images .field-image-change-btn {
+    display: flex;
+}
+
+.mvl-listing-manager-field-image.has-images .mvl-listing-manager-field-image-list-actions,
+.mvl-listing-manager-field-image.has-images .mvl-listing-manager-field-image-list {
+    display: flex !important;
+}
+
+.mvl-listing-manager-field-image .field-image-drop-zone ~ .mvl-listing-manager-field-image-list-actions {
+    display: none;
+}
+
+.mvl-listing-manager-field-image-upload {
+    border: 1px dashed #DDE3EC;
+    border-radius: 4px;
+    padding: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    color: #98A0B3;
+    font-size: 14px;
+    font-weight: 400;
+    transition: 0.2s;
+    background-color: #fff;
+}
+
+.mvl-listing-manager-field-image-upload i {
+    font-size: 48px;
+    opacity: 0.6;
+}
+
+.mvl-listing-manager-field-image-upload.dragover {
+    border-color: #007BFF;
+}
+
+.mvl-listing-manager-field-image-upload-text {
+    opacity: 0.6;
+}
+
+.mvl-listing-manager-field-image-list {
+    display: none;
+    flex-wrap: wrap;
+    min-width: 100%;
+    margin: -6px -6px -6px;
+}
+
+.field-image-list-item,
+.mvl-listing-manager-field-image-list-item {
+    min-width: 20%;
+    max-width: 20%;
+    padding: 6.5% 0;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.field-image-list-item.draggable-item,
+.mvl-listing-manager-field-image-list-item.draggable-item {
+    cursor: move;
+}
+
+.field-image-list-item-content,
+.mvl-listing-manager-field-image-list-item-content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+}
+
+.field-image-list-item-image,
+.mvl-listing-manager-field-image-list-item-image {
+    -o-object-fit: cover;
+    object-fit: cover;
+    -o-object-position: center;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+}
+
+.field-image-upload-input,
+.field-image-list-item-input {
+    display: none;
+}
+
+.field-image-list-item-delete,
+.mvl-listing-manager-field-image-list-item-delete {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 20px;
+    height: 20px;
+    background-color: #000;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: rgba(82, 82, 92, 0.5);
+    transition: 0.2s;
+}
+
+.field-image-list-item-delete:hover,
+.mvl-listing-manager-field-image-list-item-delete:hover {
+    background-color: rgba(255, 57, 69, 0.1);
+}
+
+.field-image-list-item-delete:hover:before, .field-image-list-item-delete:hover:after,
+.mvl-listing-manager-field-image-list-item-delete:hover:before,
+.mvl-listing-manager-field-image-list-item-delete:hover:after {
+    background-color: rgb(255, 57, 69);
+}
+
+.field-image-list-item-delete:before, .field-image-list-item-delete:after,
+.mvl-listing-manager-field-image-list-item-delete:before,
+.mvl-listing-manager-field-image-list-item-delete:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: #fff;
+    border-radius: 2px;
+    width: 2px;
+    height: 11px;
+    transition: 0.2s;
+}
+
+.field-image-list-item-delete:before,
+.mvl-listing-manager-field-image-list-item-delete:before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.field-image-list-item-delete:after,
+.mvl-listing-manager-field-image-list-item-delete:after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.field-image-actions {
+    gap: 12px;
+    display: flex;
+    margin: 6px 0 0;
+}
+
+.field-image-change-btn,
+.field-image-clear-list-btn {
+    display: none;
+}

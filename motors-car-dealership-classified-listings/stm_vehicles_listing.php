@@ -8,7 +8,7 @@
  * License: GNU General Public License v2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: stm_vehicles_listing
- * Version: 1.4.75
+ * Version: 1.4.76
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -49,14 +49,14 @@ if ( ! defined( 'STM_LISTINGS_PATH' ) ) {
 	define( 'STM_LISTINGS_URL', plugins_url( '', STM_LISTINGS_FILE ) );
 	define( 'STM_LISTINGS', 'stm_vehicles_listing' );
 	define( 'STM_THEME_V_NEED', '5.6.33' );
-	define( 'STM_LISTINGS_V', '1.4.75' );
+	define( 'STM_LISTINGS_V', '1.4.76' );
 	define( 'STM_LISTINGS_DB_VERSION', '1.0.0' );
 	define( 'STM_LISTINGS_IMAGES', STM_LISTINGS_URL . '/includes/admin/butterbean/images/' );
 }
 
 require_once STM_LISTINGS_PATH . '/vendor/autoload.php';
 
-use MotorsVehiclesListing\Plugin;
+use MotorsVehiclesListing\ListingManager\Bootstrap as ListingManagerBootstrap;
 use MotorsVehiclesListing\Addons\AddonsPage;
 use MotorsNuxy\MotorsNuxyHelpers;
 use MotorsVehiclesListing\User;
@@ -77,6 +77,10 @@ use MotorsVehiclesListing\Elementor\Nuxy\AddListingManager;
 use MotorsVehiclesListing\Elementor\Nuxy\FeaturesSettings;
 use MotorsVehiclesListing\Helper\ListingStats;
 use Motors_Elementor_Widgets_Free\MotorsElementorWidgetsFree;
+
+if ( class_exists( 'MotorsVehiclesListing\ListingManager\Bootstrap' ) ) {
+	ListingManagerBootstrap::load();
+}
 
 add_action(
 	'plugins_loaded',
@@ -127,7 +131,7 @@ require_once STM_LISTINGS_PATH . '/includes/user-extra.php';
 
 /* Features */
 
-if ( apply_filters( 'is_mvl_pro', false ) || in_array( 'stm-motors-extends/stm-motors-extends.php', get_option( 'active_plugins', array() ) ) && stm_is_motors_theme() ) {
+if ( apply_filters( 'is_mvl_pro', false ) || in_array( 'stm-motors-extends/stm-motors-extends.php', get_option( 'active_plugins', array() ), true ) && stm_is_motors_theme() ) {
 	if ( file_exists( STM_LISTINGS_PATH . '/includes/class/Plugin/hooks.php' ) ) {
 		require_once STM_LISTINGS_PATH . '/includes/class/Plugin/hooks.php';
 	}

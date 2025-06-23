@@ -1085,7 +1085,7 @@ if ( ! function_exists( 'stm_filter_media_upload_size' ) ) {
 		return $size;
 	}
 
-	add_filter( 'stm_listing_media_upload_size', 'stm_filter_media_upload_size' );
+	add_filter( 'stm_listing_media_upload_size', 'stm_filter_media_upload_size', 100 );
 }
 
 if ( ! function_exists( 'stm_load_dealers_list' ) ) {
@@ -1321,3 +1321,16 @@ if ( ! function_exists( 'mvl_restore_password' ) ) {
 	add_action( 'wp_ajax_mvl_restore_password', 'mvl_restore_password' );
 	add_action( 'wp_ajax_nopriv_mvl_restore_password', 'mvl_restore_password' );
 }
+
+/**
+ * Flush rewrite rules on plugin update. Delete this after 1.4.75 version.
+ */
+
+function stm_flush_rewrite_rules_on_update() {
+	if ( defined( 'STM_LISTINGS_V' ) && STM_LISTINGS_V === '1.4.76' && ! get_option( 'stm_re_flush_rewrite_rules' ) ) {
+		flush_rewrite_rules();
+		update_option( 'stm_re_flush_rewrite_rules', true );
+	}
+}
+
+add_action( 'init', 'stm_flush_rewrite_rules_on_update' );
