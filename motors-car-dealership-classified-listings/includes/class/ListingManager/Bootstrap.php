@@ -320,6 +320,10 @@ class Bootstrap {
 			if ( 'administrator' === $user_role || 'listing_manager' === $user_role ) {
 				$is_admin = true;
 			}
+
+			if ( ! $is_admin && is_super_admin( $user->ID ) ) {
+				$is_admin = true;
+			}
 		}
 
 		return $is_admin;
