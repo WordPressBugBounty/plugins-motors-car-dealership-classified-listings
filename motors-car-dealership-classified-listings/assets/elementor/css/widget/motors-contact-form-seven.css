@@ -231,6 +231,12 @@
     border-radius: 5px;
 }
 
+.stm-elementor-contact-form-seven.stm_listing_car_form .stm-single-car-contact .wpcf7-spinner {
+    margin-left: 5px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
 .stm-elementor-contact-form-seven.stm_listing_car_form .stm-single-car-contact .wpcf7-response-output {
     margin-top: 25px !important;
     font-size: 13px;

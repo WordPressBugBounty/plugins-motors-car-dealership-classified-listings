@@ -107,8 +107,7 @@ $actions_visibility = ( $show_actions_onhover ) ? ' actions-onhover' : '';
 	<?php // @codingStandardsIgnoreStart ?>
 		<script>
             jQuery(document).ready(function () {
-                jQuery(".fancy-iframe").on('click', function () {
-
+                jQuery(".stm-car-videos-<?php echo esc_attr( $listing_id ); ?>").on('click', function () {
                     jQuery(this).lightGallery({
                         dynamic: true,
                         dynamicEl: [

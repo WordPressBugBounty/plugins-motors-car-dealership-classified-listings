@@ -15,7 +15,7 @@
                 'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
                 'insertdatetime', 'media', 'table', 'help', 'wordcount', 'emoticons',
                 'template', 'codesample', 'visualchars', 'nonbreaking', 'pagebreak',
-                'quickbars', 'save', 'directionality', 'resize'
+                'quickbars', 'save', 'directionality'
             ],
             toolbar: 'undo redo | styles fontfamily | bold italic underline strikethrough | ' +
                 'alignleft aligncenter alignright alignjustify | ' +

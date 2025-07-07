@@ -8,7 +8,7 @@
  * License: GNU General Public License v2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: stm_vehicles_listing
- * Version: 1.4.77
+ * Version: 1.4.78
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -50,7 +50,7 @@ if ( ! defined( 'STM_LISTINGS_PATH' ) ) {
 	define( 'STM_LISTINGS_URL', plugins_url( '', STM_LISTINGS_FILE ) );
 	define( 'STM_LISTINGS', 'stm_vehicles_listing' );
 	define( 'STM_THEME_V_NEED', '5.6.33' );
-	define( 'STM_LISTINGS_V', '1.4.77' );
+	define( 'STM_LISTINGS_V', '1.4.78' );
 	define( 'STM_LISTINGS_DB_VERSION', '1.0.0' );
 	define( 'STM_LISTINGS_IMAGES', STM_LISTINGS_URL . '/includes/admin/butterbean/images/' );
 }
@@ -133,6 +133,7 @@ require_once STM_LISTINGS_PATH . '/includes/user-extra.php';
 /* Features */
 
 if ( apply_filters( 'is_mvl_pro', false ) || in_array( 'stm-motors-extends/stm-motors-extends.php', get_option( 'active_plugins', array() ), true ) && stm_is_motors_theme() ) {
+
 	if ( file_exists( STM_LISTINGS_PATH . '/includes/class/Plugin/hooks.php' ) ) {
 		require_once STM_LISTINGS_PATH . '/includes/class/Plugin/hooks.php';
 	}
@@ -142,12 +143,6 @@ if ( apply_filters( 'is_mvl_pro', false ) || in_array( 'stm-motors-extends/stm-m
 	add_action(
 		'init',
 		function () use ( $active_plugins ) {
-			if ( class_exists( 'WooCommerce' ) && ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'dealer_pay_per_listing' ) ||
-				apply_filters( 'motors_vl_get_nuxy_mod', false, 'dealer_payments_for_featured_listing' ) ||
-				apply_filters( 'motors_vl_get_nuxy_mod', false, 'enable_woo_online' ) ) ) {
-
-				require_once STM_LISTINGS_PATH . '/includes/class/Features/STMListingDataStoreCPT.php';
-			}
 			if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'enable_plans' ) ) {
 				if ( in_array( 'woocommerce/woocommerce.php', $active_plugins, true ) && in_array( 'subscriptio/subscriptio.php', $active_plugins, true ) ) {
 					new MultiplePlan();
@@ -159,6 +154,12 @@ if ( apply_filters( 'is_mvl_pro', false ) || in_array( 'stm-motors-extends/stm-m
 
 	if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'friendly_url' ) ) {
 		FriendlyUrl::init();
+	}
+
+	if ( apply_filters( 'mvl_is_woocommerce_active', false ) && ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'dealer_pay_per_listing' ) ||
+	apply_filters( 'motors_vl_get_nuxy_mod', false, 'dealer_payments_for_featured_listing' ) ||
+	apply_filters( 'motors_vl_get_nuxy_mod', false, 'enable_woo_online' ) ) ) {
+		MotorsVehiclesListing\Features\WooCommerce\ListingCheckoutHooks::load();
 	}
 }
 

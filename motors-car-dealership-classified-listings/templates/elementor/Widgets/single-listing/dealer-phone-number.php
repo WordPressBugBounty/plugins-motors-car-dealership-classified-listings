@@ -4,8 +4,11 @@ global $listing_id;
 $listing_id = ( is_null( $listing_id ) ) ? get_the_ID() : $listing_id;
 
 $user_added_by = get_post_meta( $listing_id, 'stm_car_user', true );
-$user_id       = $user_added_by;
-$user          = apply_filters( 'stm_get_user_custom_fields', $user_id );
+if ( empty( $user_added_by ) ) {
+	$user_added_by = get_post_field( 'post_author', $listing_id );
+}
+$user_id = $user_added_by;
+$user    = apply_filters( 'stm_get_user_custom_fields', $user_id );
 
 ?>
 <div class="stm-dealer-info-unit phone">

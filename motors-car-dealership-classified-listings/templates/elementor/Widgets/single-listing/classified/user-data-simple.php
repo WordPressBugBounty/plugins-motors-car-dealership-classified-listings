@@ -6,6 +6,9 @@ $listing_id = ( is_null( $listing_id ) ) ? get_the_ID() : $listing_id;
 <div>
 	<?php
 	$user_added_by = get_post_meta( $listing_id, 'stm_car_user', true );
+	if ( empty( $user_added_by ) ) {
+		$user_added_by = get_post_field( 'post_author', $listing_id );
+	}
 
 	if ( ! empty( $user_added_by ) ) :
 

@@ -36,7 +36,7 @@ $restrictions = apply_filters(
 	'publish'
 );
 
-if ( $restrictions['posts'] < 1 ) {
+if ( $restrictions['posts'] < 1 && ! apply_filters( 'motors_vl_get_nuxy_mod', false, 'pay_per_listing' ) && ! apply_filters( 'mvl_is_woocommerce_active', false ) ) {
 	$restricted = true;
 }
 

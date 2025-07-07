@@ -706,5 +706,6 @@ class Bootstrap {
 	protected function on_activation(): void {
 		$this->init();
 		flush_rewrite_rules();
+		mvl_clear_woocommerce_cache_safe();
 	}
 }

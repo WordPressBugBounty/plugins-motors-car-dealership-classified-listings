@@ -5,7 +5,7 @@ Donate link: https://www.paypal.me/stylemix
 Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
 Tested up to: 6.8
-Stable tag: 1.4.77
+Stable tag: 1.4.78
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,12 @@ After that, go to Tools -> Import, and via Wordpress Importer tool install dummy
 You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability](https://patchstack.com/database/vdp/motors-car-dealership-classified-listings). 
 
 == Changelog ==
+
+= 1.4.78 =
+- **Fix:** Fixed "Monetize featured listings" feature not functioning properly
+- **Fix:** Fixed Video playback issues in Single Listings
+- **Fix:** Fixed WhatsApp button not displaying in new listings
+- **Fix:** Fixed users being unable to add listings via "Monetization" → "Charge for listing submissions" when "Free listing submission" is disabled
 
 = 1.4.77 =
 - **Fix:** Minor bug fixes.

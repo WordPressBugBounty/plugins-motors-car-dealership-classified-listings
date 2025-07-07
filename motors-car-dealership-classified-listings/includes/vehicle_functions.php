@@ -1162,10 +1162,23 @@ if ( ! function_exists( 'stm_ajax_add_a_car' ) ) {
 			);
 		}
 
-		/*Get if no available posts*/
-		if ( $restrictions['posts'] < 1 && false === $update ) {
-			$response['message'] = esc_html__( 'You do not have available posts', 'stm_vehicles_listing' );
-			$error               = true;
+		if ( isset( $_POST['btn-type'] ) && 'pay' === $_POST['btn-type'] ) {
+			/*Get if Pay Per Listing no available posts*/
+			if ( ( ! apply_filters( 'mvl_is_woocommerce_active', false ) || ! apply_filters( 'is_mvl_pro', false ) ) ) {
+				$response['message'] = esc_html__( 'WooCommerce or Motors Pro is not active', 'stm_vehicles_listing' );
+				$error               = true;
+			}
+		} else {
+			if ( isset( $_POST['btn-type'] ) && 'add' === $_POST['btn-type'] ) {
+				/*Get if no available posts*/
+				if ( $restrictions['posts'] < 1 ) {
+					$response['message'] = esc_html__( 'You do not have available posts', 'stm_vehicles_listing' );
+					$error               = true;
+				}
+			} else {
+				$response['message'] = esc_html__( 'Unknown action', 'stm_vehicles_listing' );
+				$error               = true;
+			}
 		}
 
 		/*Getting second step*/
@@ -1510,6 +1523,8 @@ if ( ! function_exists( 'stm_ajax_add_a_car' ) ) {
 						);
 					}
 				}
+
+				update_post_meta( $post_id, 'stm_car_user', $user['user_id'] );
 
 				if ( apply_filters( 'stm_is_multiple_plans', false ) && 'pay' !== $_POST['btn-type'] ) {
 					$plan_id = filter_var( $_POST['selectedPlan'], FILTER_SANITIZE_NUMBER_INT );
@@ -2284,7 +2299,6 @@ if ( ! function_exists( 'stm_edit_delete_user_car' ) ) {
 					update_post_meta( $_GET['stm_make_featured'], 'car_make_featured_status', 'in_cart' );
 
 					$checkout_url = wc_get_checkout_url() . '?add-to-cart=' . $_GET['stm_make_featured'] . '&make_featured=yes';
-
 					wp_safe_redirect( $checkout_url );
 					die();
 				}

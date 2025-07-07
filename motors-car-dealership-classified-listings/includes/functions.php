@@ -20,10 +20,20 @@ if ( ! function_exists( 'is_mvl_pro' ) ) {
 			return true;
 		}
 
-		return false;
+		$active_plugins = get_option( 'active_plugins', array() );
+		return in_array( 'motors-car-dealership-classified-listings-pro/motors-car-dealership-classified-listings-pro.php', $active_plugins, true );
 	}
 
 	add_filter( 'is_mvl_pro', 'is_mvl_pro' );
+}
+
+if ( ! function_exists( 'mvl_is_woocommerce_active' ) ) {
+	function mvl_is_woocommerce_active() {
+		$active_plugins = get_option( 'active_plugins', array() );
+		return in_array( 'woocommerce/woocommerce.php', $active_plugins, true );
+	}
+
+	add_filter( 'mvl_is_woocommerce_active', 'mvl_is_woocommerce_active' );
 }
 
 if ( ! function_exists( 'is_pro_plus' ) ) {
@@ -1652,3 +1662,42 @@ add_filter(
 		return true;
 	}
 );
+
+if ( ! function_exists( 'mvl_clear_woocommerce_cache_safe' ) ) {
+	function mvl_clear_woocommerce_cache_safe() {
+		if ( ! apply_filters( 'mvl_is_woocommerce_active', false ) ) {
+			return;
+		}
+
+		if ( ! function_exists( 'delete_transient' ) ) {
+			require_once ABSPATH . 'wp-includes/option.php';
+		}
+
+		global $wpdb;
+
+		$wpdb->query( "DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_wc_%'" );
+		$wpdb->query( "DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_timeout_wc_%'" );
+		$wpdb->query( "DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_woocommerce_%'" );
+		$wpdb->query( "DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_timeout_woocommerce_%'" );
+
+		if ( $wpdb->get_var( "SHOW TABLES LIKE '{$wpdb->prefix}woocommerce_sessions'" ) ) {
+			$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}woocommerce_sessions" );
+		}
+
+		wp_cache_flush();
+
+		if ( class_exists( 'WC_Cache_Helper' ) ) {
+			WC_Cache_Helper::get_transient_version( 'product', true );
+			WC_Cache_Helper::get_transient_version( 'shipping', true );
+			WC_Cache_Helper::get_transient_version( 'tax', true );
+		}
+
+		wc_delete_product_transients();
+
+		if ( function_exists( 'wp_clear_scheduled_hook' ) ) {
+			wp_clear_scheduled_hook( 'woocommerce_cleanup_sessions' );
+			wp_clear_scheduled_hook( 'woocommerce_scheduled_sales' );
+			wp_clear_scheduled_hook( 'woocommerce_scheduled_subscriptions' );
+		}
+	}
+}
