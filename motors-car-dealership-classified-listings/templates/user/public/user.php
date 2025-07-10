@@ -128,7 +128,7 @@ $query_popular = stm_user_listings_query( $user_id, 'publish', $posts_per_page, 
 										?>
 										<div class="select-type select-listing-type" style="margin-right: 15px;">
 											<div class="stm-label-type"><?php esc_html_e( 'Listing type', 'stm_vehicles_listing' ); ?></div>
-											<select>
+											<select data-user="<?php echo esc_attr( $user_id ); ?>" data-posts-per-page="<?php echo esc_attr( $posts_per_page ); ?>" data-offset="<?php echo esc_attr( $offset ); ?>">
 												<option value="all"
 														selected><?php esc_html_e( 'All listing types', 'stm_vehicles_listing' ); ?></option>
 												<?php foreach ( $listings as $slug => $label ) : ?>

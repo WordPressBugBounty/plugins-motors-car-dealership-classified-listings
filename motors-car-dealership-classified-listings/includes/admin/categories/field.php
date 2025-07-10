@@ -52,9 +52,11 @@ if ( 2 === $column ) {
 				if ( ! empty( $field['choices'] ) ) :
 					foreach ( $field['choices'] as $choice_key => $choice ) :
 						$selected = ( ! empty( $field['value'] ) ) ? selected( $choice_key, $field['value'], false ) : '';
+						$is_pro   = is_array( $choice ) && isset( $choice['pro_field'] ) && $choice['pro_field'];
+						$label    = is_array( $choice ) ? $choice['label'] : $choice;
 						?>
-						<option <?php echo wp_kses_post( $selected ); ?> value="<?php echo esc_attr( $choice_key ); ?>">
-							<?php echo esc_html( $choice ); ?>
+						<option <?php echo wp_kses_post( $selected ); ?> value="<?php echo esc_attr( $choice_key ); ?>" data-class="<?php echo esc_attr( $is_pro ? 'stm-pro-field' : '' ); ?>">
+							<?php echo esc_html( $label ); ?>
 						</option>
 						<?php
 					endforeach;
@@ -144,7 +146,29 @@ if ( 2 === $column ) {
 			foreach ( $field['choices'] as $choice_value => $choice_args ) :
 				$checked = ( ! empty( $field['value'] ) ) ? checked( $field['value'], $choice_value, false ) : '';
 				?>
-				<div class="stm_custom_fields__radio--inside">
+				<div class="stm_custom_fields__radio--inside <?php echo isset( $choice_args['pro_field'] ) && $choice_args['pro_field'] ? 'stm-pro-field' : ''; ?>">
+				<?php if ( isset( $choice_args['pro_field'] ) && $choice_args['pro_field'] ) : ?>
+					<div class="stm-pro-field-inner">
+						<label for="<?php echo esc_attr( $prefix_id . $field_key . '-' . $choice_value ); ?>">
+							<span class="stm_custom_fields__radio--image">
+								<img src="<?php echo esc_html( $choice_args['url'] ); ?>" />
+							</span>
+						</label>
+						<a href="https://stylemixthemes.com/car-dealer-plugin/pricing/" target="_blank" title="<?php esc_attr_e( 'This feature is only available in PRO version', 'motors-car-dealership-classified-listings' ); ?>">
+							<span class="stm-pro-field-label-wrapper">
+								<div class="icon-wrap">
+									<img src="<?php echo esc_url( STM_LISTINGS_URL . '/assets/images/pro/lock-pro.svg' ); ?>" alt="<?php esc_attr_e( 'This feature is only available in PRO version', 'motors-car-dealership-classified-listings' ); ?>">
+								</div>
+								<span class="stm-pro-field-label-text">
+									<?php echo esc_html( $choice_args['label'] ); ?>
+								</span>
+								<span class="stm-pro-field-label-text-pro">
+									<?php esc_html_e( 'PRO', 'motors-car-dealership-classified-listings' ); ?>
+								</span>
+							</span>
+						</a>
+					</div>
+				<?php else : ?>
 					<input
 						type="radio"
 						id="<?php echo esc_attr( $prefix_id . $field_key . '-' . $choice_value ); ?>"
@@ -162,6 +186,9 @@ if ( 2 === $column ) {
 							<img src="<?php echo esc_html( $choice_args['url'] ); ?>" />
 						</span>
 					</label>
+
+				<?php endif; ?>
+
 				</div>
 			<?php endforeach; ?>
 		</div>

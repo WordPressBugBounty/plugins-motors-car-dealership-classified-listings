@@ -1099,28 +1099,28 @@ ul.list-style-2 li:before {
 
 .page-numbers li > span {
     display: block;
-    width: 34px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     margin: 0;
     padding: 0;
     background-color: var(--motors-accent-color);
     color: var(--motors-contrast-text-color);
     border-top: none;
-    border-radius: 3px;
-    line-height: 35px;
+    border-radius: 8px;
+    line-height: 40px;
 }
 
 .page-numbers li > a {
     display: block;
-    width: 34px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     margin: 0 8px;
     padding: 0;
-    background-color: var(--motors-filter-inputs-color);
-    color: var(--motors-text-highalpha-color);
+    background-color: var(--motors-bg-lowestalpha-contrast);
+    color: var(--motors-text-color);
     border-top: none;
-    border-radius: 3px;
-    line-height: 35px;
+    border-radius: 8px;
+    line-height: 40px;
     text-decoration: none;
     transition: 0.3s;
 }
@@ -1135,10 +1135,10 @@ ul.list-style-2 li:before {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 54px;
-    height: 35px;
-    font-size: 20px;
-    border-radius: 3px;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    border-radius: 8px;
     margin: 0;
 }
 
@@ -4630,7 +4630,7 @@ a.motors-compare-button .compare-icon-wrapper {
     display: flex;
     position: relative;
     font-size: 23px;
-    margin-right: 10px;
+    margin-right: 8px;
     color: var(--motors-text-highalpha-color--motors-text-color);
 }
 
@@ -4649,8 +4649,17 @@ a.motors-compare-button .stm-current-cars-in-compare {
     color: var(--motors-contrast-text-color);
     font-size: 12px;
     border-radius: 50%;
-    margin-left: 5px;
+    margin-left: 6px;
     padding: 0 6px;
+}
+
+.tooltip .tooltip-inner {
+    padding: 5px 8px;
+    background-color: rgba(19, 25, 37, 0.85);
+}
+
+.tooltip .tooltip-arrow {
+    border-top-color: rgba(19, 25, 37, 0.85) !important;
 }
 
 /*Car gurus*/

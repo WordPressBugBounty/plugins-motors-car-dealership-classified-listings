@@ -266,7 +266,6 @@ if (typeof (STMListings) == 'undefined') {
                     if (image) {
                         $wrapper.append($('<img src="' + image + '" class="select2-option-image" />'));
                     }
-
                     $wrapper.append($('<span class="select2-option-text">' + data.text + '</span>'));
 
                     if (count !== undefined) {
@@ -487,6 +486,20 @@ if (typeof (STMListings) == 'undefined') {
         }
     }
 
+    STMListings.initTooltips = function() {
+        $('[data-toggle="tooltip"]').each(function() {
+            var $this = $(this);
+            var placement = $this.data('placement') || 'auto';
+            
+            $this.tooltip({
+                trigger: 'hover',
+                placement: placement,
+                html: true,
+                container: 'body'
+            });
+        });
+    };
+
     $(document).ready(function () {
         if ( typeof elementorFrontend !== "undefined" && typeof elementorFrontend.hooks !== "undefined" ) {
             elementorFrontend.hooks.addAction('frontend/element_ready/widget', function ( $scope ) {
@@ -504,6 +517,7 @@ if (typeof (STMListings) == 'undefined') {
         STMListings.stm_ajax_registration();
         STMListings.ajaxGetCarPrice();
         STMListings.on_submit_filter_form();
+        STMListings.initTooltips();
 
         window.stm_favourites = new Favorites();
 
@@ -524,6 +538,9 @@ if (typeof (STMListings) == 'undefined') {
             $(this).closest('form').trigger('submit');
         });
 
+        $(document).ajaxComplete(function() {
+            STMListings.initTooltips();
+        });
 
         $('.stm_login_me a').on('click',function (e) {
             e.preventDefault();
@@ -603,6 +620,9 @@ if (typeof (STMListings) == 'undefined') {
 					$('.user-listings-wrapper#recent').addClass('active')
 					$('.popular.user-listings-pagination').removeClass('active')
 					$('.recent.user-listings-pagination').addClass('active')
+                    $('.stm-select-sorting').removeClass('mvl-selected');
+                    $('.stm-select-sorting').addClass('mvl-selected');
+                    $('.stm-sort-by-options').find('i').addClass('mvl-selected');
 				}
 			}
 			$('.stm-select-sorting select').on('change', function () {

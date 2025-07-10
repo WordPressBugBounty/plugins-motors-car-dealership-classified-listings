@@ -95,7 +95,7 @@
 .archive-listing-page .filter-sidebar .select2-container--default .select2-selection--single {
     background-color: var(--motors-filter-field-bg-color) !important;
     color: var(--motors-filter-field-text-color) !important;
-    border: 1px solid var(--motors-filter-field-border-color);
+    border: 1px solid var(--motors-filter-border-color);
 }
 
 .archive-listing-page .filter-sidebar .select2-container--default .select2-selection--single .select2-selection__rendered {
@@ -109,7 +109,7 @@
 .archive-listing-page .filter-sidebar .select2-container--default .select2-selection--multiple {
     background-color: var(--motors-filter-field-bg-color) !important;
     color: var(--motors-filter-field-text-color) !important;
-    border: 1px solid var(--motors-filter-field-border-color) !important;
+    border: 1px solid var(--motors-filter-border-color) !important;
 }
 
 .archive-listing-page .filter-sidebar .select2-container--default .select2-selection--multiple .select2-selection__rendered .select2-search--inline .select2-search__field::-moz-placeholder {
@@ -123,7 +123,7 @@
 .archive-listing-page .filter-sidebar .stm-location-search-unit .stm_listing_search_location {
     background-color: var(--motors-filter-field-bg-color) !important;
     color: var(--motors-filter-field-text-color) !important;
-    border: 1px solid var(--motors-filter-field-border-color) !important;
+    border: 1px solid var(--motors-filter-border-color) !important;
 }
 
 .archive-listing-page .filter-sidebar .stm-location-search-unit input.stm_listing_search_location::-moz-placeholder {
@@ -137,7 +137,7 @@
 .archive-listing-page .filter-sidebar .stm-search_keywords #stm_keywords {
     background-color: var(--motors-filter-field-bg-color) !important;
     color: var(--motors-filter-field-text-color) !important;
-    border: 1px solid var(--motors-filter-field-border-color) !important;
+    border: 1px solid var(--motors-filter-border-color) !important;
 }
 
 .archive-listing-page .filter-sidebar .stm-search_keywords #stm_keywords::-moz-placeholder {
@@ -174,7 +174,7 @@
 
 .archive-listing-page .stm-slider-filter-type-unit .ui-slider {
     height: 4px !important;
-    background: unset;
+    background: var(--motors-filter-border-color-lowalpha);
 }
 
 .archive-listing-page .stm-slider-filter-type-unit .ui-slider .ui-widget-header {
@@ -320,12 +320,12 @@
 
 .select2-dropdown.filter-sidebar {
     background-color: var(--motors-filter-bg-color) !important;
-    border: 1px solid var(--motors-filter-field-border-color) !important;
+    border: 1px solid var(--motors-filter-border-color) !important;
 }
 
 .select2-dropdown.filter-sidebar .select2-results__option {
     color: var(--motors-filter-field-text-color) !important;
-    border-color: var(--motors-filter-field-border-color) !important;
+    border-color: var(--motors-filter-border-color) !important;
 }
 
 .select2-dropdown.filter-sidebar .select2-results__option:hover {

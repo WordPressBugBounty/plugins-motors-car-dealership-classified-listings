@@ -842,7 +842,7 @@ input:-webkit-autofill {
     border: 1px solid var(--motors-error-text-color);
 }
 
-.stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .row .stm-form-1-selects input.required_field, .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form1-intro-unit .row .stm-form-1-selects input.required_field {
+.stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit input.required_field, .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form1-intro-unit input.required_field {
     border: 1px solid var(--motors-error-text-color);
 }
 

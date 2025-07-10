@@ -261,6 +261,10 @@ if (typeof (STMListings) == 'undefined') {
 		let _this    = this,
 			loadType = $( 'input[name="btn-type"]' ).val();
 
+		if (this.validateFields()) {
+			return false;
+		}
+
 		_this.$loader = $( '.stm-add-a-car-loader.' + loadType );
 
 		$.ajax(
@@ -770,8 +774,8 @@ if (typeof (STMListings) == 'undefined') {
 	};
 
 	ListingForm.prototype.validateFields = function () {
-		if ( typeof add_form_steps === 'undefined' ) {
-			return false;
+		if ( typeof add_form_steps === 'undefined' || add_form_steps.length === 0 ) {
+			return this.checkSelectFields([]);
 		}
 		this.$message.slideUp()
 		var errors = []
@@ -794,12 +798,28 @@ if (typeof (STMListings) == 'undefined') {
 
 		if (errors.length > 0) {
 			this.$message.html(errors.join('<br>')).slideDown()
+			this.scrollToTopError();
 			return true
 		}
 
 		return false
 	}
 
+	ListingForm.prototype.scrollToTopError = function () {
+		var topError = document.querySelector('.required_field');
+	
+		if (topError) {	
+			const elementPosition = topError.getBoundingClientRect().top;
+			const offsetPosition = elementPosition + window.pageYOffset - 200;
+	
+			window.scrollTo({
+				top: offsetPosition,
+				behavior: 'smooth'
+			});
+	
+			topError.focus?.();
+		}
+	};
 
 	ListingForm.prototype.checkSelectFields = function (errors) {
 		let hasRequired = false
@@ -811,25 +831,45 @@ if (typeof (STMListings) == 'undefined') {
 				const value = $(this).val().trim()
 				$(this).removeClass('required_field')
 
-				if (value === '' && !hasRequired) {
+				if (value === '') {
 					$(this).addClass('required_field')
 					hasRequired = true
 				}
 			})
-
 		this.$form
 			.find('.stm-form-1-end-unit, .stm-form1-intro-unit')
-			.find('select')
+			.find('select[required]')
 			.each(function () {
 				let select2Data = $(this).data('select2')
 
 				if (select2Data) {
 					select2Data.$container.removeClass('required_field')
-					if (
-						$(this).attr('required') &&
-						$(this).find(':selected').val() === ''
-					) {
+					if ($(this).find(':selected').val() === '') {
 						select2Data.$container.addClass('required_field')
+						hasRequired = true
+					}
+				} else {
+					$(this).removeClass('required_field')
+					if ($(this).find(':selected').val() === '') {
+						$(this).addClass('required_field')
+						hasRequired = true
+					}
+				}
+			})
+
+		this.$form
+			.find('.stm-form-1-end-unit, .stm-form1-intro-unit')
+			.find('input, select')
+			.each(function () {
+				const $field = $(this)
+				const $label = $field.closest('.stm-form-1-quarter').find('.stm-label')
+				
+				if ($label.text().includes('*')) {
+					const value = $field.val().trim()
+					$field.removeClass('required_field')
+
+					if (value === '') {
+						$field.addClass('required_field')
 						hasRequired = true
 					}
 				}
@@ -977,6 +1017,23 @@ if (typeof (STMListings) == 'undefined') {
 						$(this)
 							.closest('.stm-video-link-unit')
 							.removeClass('required_field')
+					}
+				})
+
+			listingForm.$form
+				.find('.stm-form-1-end-unit, .stm-form1-intro-unit')
+				.find('input, select')
+				.on('input change', function () {
+					const $field = $(this)
+					const value = $field.val().trim()
+					
+					if (value !== '') {
+						$field.removeClass('required_field')
+						
+						let select2Data = $field.data('select2')
+						if (select2Data) {
+							select2Data.$container.removeClass('required_field')
+						}
 					}
 				})
 

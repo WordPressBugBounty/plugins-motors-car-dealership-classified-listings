@@ -30,6 +30,7 @@ class Colors {
 			'card_btn_color'              => '#1280DF',
 			'card_popup_hover_bg_color'   => '#f9f9f9',
 			'filter_bg_color'             => '#ffffff',
+			'filter_border_color'         => '#CAD0D9',
 			'filter_text_color'           => '#010101',
 			'filter_text_color_secondary' => '#010101',
 			'filter_field_bg_color'       => '#ffffff',
@@ -59,6 +60,7 @@ class Colors {
 			'card_btn_color'              => '#1280DF',
 			'card_popup_hover_bg_color'   => '#f9f9f9',
 			'filter_bg_color'             => '#161A1D',
+			'filter_border_color'         => '#CAD0D9',
 			'filter_text_color'           => '#E9E9E9',
 			'filter_text_color_secondary' => '#E9E9E9',
 			'filter_field_bg_color'       => '#161A1D',
@@ -311,6 +313,10 @@ class Colors {
 			'filter_bg_color'             => array(
 				'name' => __( 'Filter Background', 'stm_vehicles_listing' ),
 				'id'   => 'filter_bg',
+			),
+			'filter_border_color'         => array(
+				'name' => __( 'Filter Border', 'stm_vehicles_listing' ),
+				'id'   => 'filter_border',
 			),
 			'filter_text_color'           => array(
 				'name' => __( 'Filter Text', 'stm_vehicles_listing' ),

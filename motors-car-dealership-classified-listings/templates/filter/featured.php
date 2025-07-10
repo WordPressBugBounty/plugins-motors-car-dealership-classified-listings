@@ -47,14 +47,26 @@ if ( 'default' !== $skin && wp_is_mobile() ) {
 	$view_type = 'grid';
 }
 if ( $featured->have_posts() && ! empty( $args['posts_per_page'] ) ) : ?>
-	<div class="stm-featured-top-cars-title">
-		<div class="heading-font"><?php esc_html_e( 'Featured Listings', 'stm_vehicles_listing' ); ?></div>
-		<?php if ( $inventory_link ) : ?>
+	<?php if ( 'default' !== $skin ) : ?>
+		<div class="mvl-featured-title-container <?php echo esc_attr( $view_type ); ?>">
+			<h3 class="mvl-featured-title">Featured Listings</h3>
+			<?php if ( $inventory_link ) : ?>
+				<a href="<?php echo esc_url( $inventory_link ); ?>">
+					<?php esc_html_e( 'Show all', 'stm_vehicles_listing' ); ?>
+					<i class="fa-solid fa-chevron-right"></i>
+				</a>
+			<?php endif; ?>
+		</div>
+	<?php else : ?>
+		<div class="stm-featured-top-cars-title">
+			<div class="heading-font"><?php esc_html_e( 'Featured Listings', 'stm_vehicles_listing' ); ?></div>
+			<?php if ( $inventory_link ) : ?>
 			<a href="<?php echo esc_url( $inventory_link ); ?>">
 				<?php esc_html_e( 'Show all', 'stm_vehicles_listing' ); ?>
 			</a>
-		<?php endif; ?>
-	</div>
+			<?php endif; ?>
+		</div>
+	<?php endif; ?>
 
 	<?php if ( ! apply_filters( 'stm_listings_input', null, 'featured_top' ) ) : ?>
 		<div class="stm-isotope-sorting stm-isotope-sorting-featured-top stm-isotope-sorting-<?php echo esc_attr( $view_type ); ?> <?php echo esc_attr( 'default' !== $skin ? 'mvl-card-skins ' . $skin : '' ); ?>">

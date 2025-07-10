@@ -591,6 +591,12 @@ function updateGridItemTitles() {
     });
 }
 
+$('[data-toggle="tooltip"]').tooltip({
+	trigger: 'hover',
+	placement: $(this).data('placement'),
+	html: true,
+	container: 'body'
+});
 //Prevent default for show share button
 document.addEventListener('click', e => {
 	var parent = e.target.closest('.stm-share');

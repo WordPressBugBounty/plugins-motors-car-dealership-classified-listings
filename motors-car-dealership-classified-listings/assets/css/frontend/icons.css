@@ -35,6 +35,10 @@ i {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.motors-icons-mvl-compare:before {
+    content: "\ea1b";
+}
+
 .motors-icons-image-plus:before {
     content: "\ea1a";
 }

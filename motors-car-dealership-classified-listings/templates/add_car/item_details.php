@@ -86,6 +86,7 @@ $vars = array(
 								value="<?php echo esc_attr( $value ); ?>"
 								aria-label="<?php echo esc_attr( $placeholder ); ?>"
 								placeholder="<?php echo esc_attr( $placeholder ); ?>"
+								<?php echo esc_attr( $is_required ); ?>
 						/>
 						<?php
 						else :
@@ -101,7 +102,8 @@ $vars = array(
 							?>
 						<select name="stm_s_s_<?php echo esc_attr( $data_unit['slug'] ); ?>"
 								data-selected="<?php echo esc_attr( $selected ); ?>"
-								aria-label="<?php echo esc_attr( $single_name ); ?>">
+								aria-label="<?php echo esc_attr( $single_name ); ?>"
+								<?php echo esc_attr( $is_required ); ?>>
 							<option value="" <?php selected( $selected, '' ); ?>>
 								<?php echo esc_html( $single_name ); ?>
 							</option>
@@ -122,7 +124,12 @@ $vars = array(
 						<?php if ( ! empty( $data_unit['font'] ) ) : ?>
 							<i class="<?php echo esc_attr( $data_unit['font'] ); ?>"></i>
 						<?php endif; ?>
-						<?php echo esc_html( $data_unit['single_name'] ); ?>
+						<?php echo esc_html( apply_filters( 'mvl_get_dynamic_string_translation', $data_unit['single_name'], 'Listing Category ' . $data_unit['single_name'] ) ); ?>
+						<?php
+						if ( isset( $data_unit['required_filed'] ) && $data_unit['required_filed'] ) {
+							echo '*';
+						}
+						?>
 					</div>
 				</div>
 					<?php

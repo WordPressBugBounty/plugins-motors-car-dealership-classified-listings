@@ -27,6 +27,80 @@
         });
     });
 
+	function sortByListingType() {
+		$( 'body' ).on(
+			'change',
+			'.select-listing-type select',
+			function () {
+				let $select       = $( this );
+				let listingType   = $select.val();
+				let viewType      = $( '#stm_user_dealer_view_type' ).val();
+				let listingsView  = $( '#stm-dealer-view-type' ).val();
+				let userId        = $select.data( 'user' );
+				let popular       = listingsView === 'popular' ? 'yes' : 'no';
+				let userPublic    = $select.data( 'user-public' );
+				let userPrivate   = $select.data( 'user-private' );
+				let userFavourite = $select.data( 'user-favourite' );
+				let postsPerPage  = $select.data( 'posts-per-page' );
+				let offset        = $select.data( 'offset' );
+				if ( offset === 0 ) {
+					offset = postsPerPage;
+				}
+
+				$.ajax(
+					{
+						url: ajaxurl,
+						data: {
+							action: 'mvl_ajax_dealer_load_listings_by_type',
+							listing_type: listingType,
+							user_id: userId,
+							popular: popular,
+							view_type: viewType,
+							user_public: userPublic,
+							user_private: userPrivate,
+							user_favourite: userFavourite,
+							posts_per_page: postsPerPage,
+							offset: offset,
+							security: stm_security_nonce
+						},
+						method: 'POST',
+						dataType: 'json',
+						beforeSend: function () {
+							$( '.select-listing-type select' ).prop( "disabled", true );
+						},
+						success: function (data) {
+							$( '.select-listing-type select' ).prop( "disabled", false );
+							if (data) {
+								const $target = userPublic || userPrivate ? $( '.archive-listing-page' ) :
+								userFavourite ? $( '.archive-listing-page .car-listing-row' ) :
+								$( '#' + listingsView ).find( '.car-listing-row' );
+								$target.html( data.html );
+							}
+
+							const $loadMoreButton = $( '#' + listingsView ).find( '.stm-load-more-dealer-cars' );
+							$loadMoreButton.find('a').attr('data-listing-type', listingType);
+							$loadMoreButton.find('a').attr('data-offset', offset);
+
+							if (data.button === 'show') {
+								$loadMoreButton.show();
+							} else {
+								$loadMoreButton.hide();
+							}
+
+							$( 'img.lazy' ).lazyload(
+								{
+									effect: "fadeIn",
+									failure_limit: Math.max( $( 'img' ).length - 1, 0 )
+								}
+							);
+
+						}
+					}
+				);
+			}
+		);
+	}
+
 
     function loadMoreDealerCars() {
 		$('body').on('click', '.stm-load-more-dealer-cars a', function (e) {
@@ -45,9 +119,7 @@
 			var popular = $(this).data('popular')
 			var profile_page = $(this).data('profile');
 			var view_type = $('#stm_user_dealer_view_type').val()
-			if (!view_type) {
-				view_type = 'list';
-			}
+			var listing_type = $(this).attr('data-listing-type');
 
 			$.ajax({
 				url: ajaxurl,
@@ -59,6 +131,7 @@
 					view_type: view_type,
 					profile_page: profile_page,
 					security: stm_security_nonce,
+					listing_type: listing_type,
 				},
 				method: 'POST',
 				dataType: 'json',
@@ -101,6 +174,7 @@
 		})
 	}
 	loadMoreDealerCars();
+	sortByListingType();
     if (window.location.search.includes('add-to-cart')) {
         var newUrl = window.location.origin + window.location.pathname;
         window.history.replaceState({}, document.title, newUrl);

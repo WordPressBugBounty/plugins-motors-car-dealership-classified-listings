@@ -65,9 +65,11 @@ body div.stm_metaboxes_grid__inner .search_settings-inventory_skin .wpcfto_data_
 }
 
 .stm_custom_fields__radio-image-grid .stm_custom_fields__radio--inside label .stm_custom_fields__radio--image {
-    border: 2px solid transparent;
+    border: 2px solid #c7ccd1;
     min-width: 100px;
     min-height: 10px;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .stm_custom_fields__radio-image-grid .stm_custom_fields__radio--inside label .stm_custom_fields__radio--image img {
@@ -88,6 +90,57 @@ body div.stm_metaboxes_grid__inner .search_settings-inventory_skin .wpcfto_data_
 }
 
 .stm_custom_fields__radio-image-grid .stm_custom_fields__radio--inside .stm_custom_fields__radio:checked + label .stm_custom_fields__radio--image {
+    overflow: hidden;
     border: 2px solid #227aff;
     border-radius: 10px;
+}
+
+.stm_custom_fields__radio-image-grid .stm_custom_fields__radio--inside.stm-pro-field .stm-pro-field-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.stm_custom_fields__radio-image-grid .stm_custom_fields__radio--inside.stm-pro-field .stm-pro-field-inner a {
+    outline: none;
+    box-shadow: none;
+}
+
+.stm_custom_fields__radio-image-grid .stm_custom_fields__radio--inside.stm-pro-field label {
+    margin: unset;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.stm_custom_fields__radio-image-grid .stm_custom_fields__radio--inside.stm-pro-field label .stm_custom_fields__radio--image {
+    overflow: hidden;
+    border: 2px solid #c7ccd1;
+    border-radius: 10px;
+}
+
+.stm_custom_fields__radio-image-grid .stm_custom_fields__radio--inside.stm-pro-field .stm-pro-field-label-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.stm_custom_fields__radio-image-grid .stm_custom_fields__radio--inside.stm-pro-field .stm-pro-field-label-wrapper .icon-wrap {
+    margin-top: 2px;
+    margin-right: 10px;
+}
+
+.stm_custom_fields__radio-image-grid .stm_custom_fields__radio--inside.stm-pro-field .stm-pro-field-label-wrapper .stm-pro-field-label-text {
+    color: #000;
+    font-size: 14px;
+}
+
+.stm_custom_fields__radio-image-grid .stm_custom_fields__radio--inside.stm-pro-field .stm-pro-field-label-wrapper .stm-pro-field-label-text-pro {
+    padding: 2px 8px;
+    background: #1280DF;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #fff;
+    margin-left: 10px;
 }

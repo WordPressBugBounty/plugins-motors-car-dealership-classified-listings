@@ -6,7 +6,9 @@ if ( ! empty( $show_favorite ) && $show_favorite ) :
 			class="stm-listing-favorite"
 			data-id="<?php echo esc_attr( get_the_ID() ); ?>"
 			data-toggle="tooltip" data-placement="right"
-			title="<?php esc_attr_e( 'Add to favorites', 'stm_vehicles_listing' ); ?>">
+			title="<?php esc_attr_e( 'Add to favorites', 'stm_vehicles_listing' ); ?>"
+			data-container="body"
+			data-original-title="<?php esc_attr_e( 'Add to favorites', 'stm_vehicles_listing' ); ?>">
 		<i class="fa-regular fa-star"></i>
 	</div>
 <?php endif; ?>

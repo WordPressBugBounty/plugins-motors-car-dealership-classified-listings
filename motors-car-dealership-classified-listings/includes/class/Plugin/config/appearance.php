@@ -247,48 +247,55 @@ add_filter(
 		);
 
 		$filter_colors = array(
-			'filter_colors_title'          => array(
+			'filter_colors_title'         => array(
 				'type'    => 'group_title',
 				'label'   => esc_html__( 'Filter', 'stm_vehicles_listing' ),
 				'submenu' => esc_html__( 'Colors', 'stm_vehicles_listing' ),
 				'group'   => 'started',
 			),
-			'filter_bg_color'              => array(
+			'filter_bg_color'             => array(
 				'label'         => esc_html__( 'Background', 'stm_vehicles_listing' ),
 				'type'          => 'color',
 				'value'         => Colors::value( 'filter_bg_color' ),
 				'submenu'       => esc_html__( 'Colors', 'stm_vehicles_listing' ),
 				'default_value' => '#ffffff',
 			),
-			'filter_text_color'            => array(
+			'filter_border_color'         => array(
+				'label'         => esc_html__( 'Border', 'stm_vehicles_listing' ),
+				'type'          => 'color',
+				'value'         => Colors::value( 'filter_border_color' ),
+				'submenu'       => esc_html__( 'Colors', 'stm_vehicles_listing' ),
+				'default_value' => '#CAD0D9',
+			),
+			'filter_text_color'           => array(
 				'label'         => esc_html__( 'Base Text', 'stm_vehicles_listing' ),
 				'type'          => 'color',
 				'value'         => Colors::value( 'filter_text_color' ),
 				'submenu'       => esc_html__( 'Colors', 'stm_vehicles_listing' ),
 				'default_value' => '#010101',
 			),
-			'filter_text_color_secondary'  => array(
+			'filter_text_color_secondary' => array(
 				'label'         => esc_html__( 'Secondary Text', 'stm_vehicles_listing' ),
 				'type'          => 'color',
 				'value'         => Colors::value( 'filter_text_color_secondary' ),
 				'submenu'       => esc_html__( 'Colors', 'stm_vehicles_listing' ),
 				'default_value' => '#010101',
 			),
-			'filter_field_bg_color'        => array(
+			'filter_field_bg_color'       => array(
 				'label'         => esc_html__( 'Field Background', 'stm_vehicles_listing' ),
 				'type'          => 'color',
 				'value'         => Colors::value( 'filter_field_bg_color' ),
 				'submenu'       => esc_html__( 'Colors', 'stm_vehicles_listing' ),
 				'default_value' => '#ffffff',
 			),
-			'filter_field_text_color'      => array(
+			'filter_field_text_color'     => array(
 				'label'         => esc_html__( 'Field Text', 'stm_vehicles_listing' ),
 				'type'          => 'color',
 				'value'         => Colors::value( 'filter_field_text_color' ),
 				'submenu'       => esc_html__( 'Colors', 'stm_vehicles_listing' ),
 				'default_value' => '#010101',
 			),
-			'filter_field_link_color'      => array(
+			'filter_field_link_color'     => array(
 				'label'         => esc_html__( 'Links/Actions', 'stm_vehicles_listing' ),
 				'type'          => 'color',
 				'value'         => Colors::value( 'filter_field_link_color' ),

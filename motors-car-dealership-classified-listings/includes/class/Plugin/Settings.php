@@ -12,9 +12,7 @@ class Settings {
 
 	public function __construct() {
 
-		self::$disabled_pro_text = esc_html__( 'Please enable Motors Pro Plugin', 'stm_vehicles_listing' );
-		self::$pro_plans_url     = admin_url( 'admin.php?page=mvl-go-pro' );
-
+		add_action( 'init', array( $this, 'init_strings' ) );
 		add_action( 'init', array( $this, 'mvl_plugin_conf_autoload' ) );
 		if ( apply_filters( 'stm_disable_settings_setup', true ) ) {
 			add_action( 'wpcfto_after_settings_saved', array( $this, 'mvl_save_featured_as_term' ), 50, 2 );
@@ -35,6 +33,11 @@ class Settings {
 			}
 			add_action( 'wpcfto_after_tab_nav', array( $this, 'mvl_add_version' ) );
 		}
+	}
+
+	public function init_strings() {
+		self::$disabled_pro_text = esc_html__( 'Please enable Motors Pro Plugin', 'stm_vehicles_listing' );
+		self::$pro_plans_url     = admin_url( 'admin.php?page=mvl-go-pro' );
 	}
 
 	public function icons_set_icon_picker( $icon_set ) {

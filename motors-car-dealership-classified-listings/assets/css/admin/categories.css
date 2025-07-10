@@ -1150,6 +1150,36 @@
     display: block;
 }
 
+.stm_custom_fields__select--wrapper.show .stm_custom_fields__select--list li.stm-pro-field {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.stm_custom_fields__select--wrapper.show .stm_custom_fields__select--list li.stm-pro-field .stm-admin-icon-check {
+    display: none;
+}
+
+.stm_custom_fields__select--wrapper.show .stm_custom_fields__select--list li.stm-pro-field .option-text {
+    opacity: 0.5;
+}
+
+.stm_custom_fields__select--wrapper.show .stm_custom_fields__select--list li.stm-pro-field .stm-pro-field-label {
+    padding: 2px 8px;
+    background: #1280DF;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.stm_custom_fields__select--wrapper.show .stm_custom_fields__select--list li.stm-pro-field .stm-pro-field-label a {
+    color: #fff;
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
 .stm_custom_fields__select--list {
     position: absolute;
     top: 40px;

@@ -18,9 +18,11 @@ class Bootstrap {
 	protected array $listing_options = array();
 
 	protected function __construct() {
-		$this->admin_buttons = array(
-			'add_item'  => __( 'Add with Listing Manager', 'stm_vehicles_listing' ),
-			'edit_item' => __( 'Edit with Listing Manager', 'stm_vehicles_listing' ),
+		add_action(
+			'init',
+			function() {
+				$this->load_strings();
+			}
 		);
 
 		//WP Hooks for initialization of Listing Manager
@@ -64,6 +66,13 @@ class Bootstrap {
 		$this->add_action( 'wp_ajax_listing_manager_get_form' );
 		$this->add_action( 'wp_ajax_listing_manager_save_form' );
 		$this->add_action( 'wp_ajax_listing_manager_delete_form' );
+	}
+
+	protected function load_strings(): void {
+		$this->admin_buttons = array(
+			'add_item'  => esc_html__( 'Add with Listing Manager', 'stm_vehicles_listing' ),
+			'edit_item' => esc_html__( 'Edit with Listing Manager', 'stm_vehicles_listing' ),
+		);
 	}
 
 	protected function enter_title_here( string $title = '' ): string {

@@ -9,7 +9,7 @@ class PluginOptions {
 
 	private function __construct() {
 		$plugin_opts           = get_option( MVL_Const::MVL_PLUGIN_OPT_NAME, array() );
-		$add_car_fomr_opts     = get_option( MVL_Const::ADD_CAR_FORM_OPT_NAME, array() );
+		$add_car_form_opts     = get_option( MVL_Const::ADD_CAR_FORM_OPT_NAME, array() );
 		$filter_opts           = get_option( MVL_Const::FILTER_OPT_NAME, array() );
 		$listing_details_opts  = get_option( MVL_Const::LISTING_DETAILS_OPT_NAME, array() );
 		$search_results_opts   = get_option( MVL_Const::SEARCH_RESULTS_OPT_NAME, array() );
@@ -19,7 +19,7 @@ class PluginOptions {
 			'mvl_options_map',
 			array_merge(
 				(array) $plugin_opts,
-				(array) $add_car_fomr_opts,
+				(array) $add_car_form_opts,
 				(array) $filter_opts,
 				(array) $listing_details_opts,
 				(array) $search_results_opts,

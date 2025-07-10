@@ -130,7 +130,8 @@ if ( ! function_exists( 'stm_listings_attributes' ) ) {
 		);
 
 		$result  = array();
-		$options = ( ! empty( $_POST['custom_listing_type'] ) && 'listings' !== $_POST['custom_listing_type'] ) ? "stm_{$_POST['custom_listing_type']}_options" : 'stm_vehicle_listing_options';
+		$listing_type = get_post_type( get_the_ID() );
+		$options = ( ! empty( $listing_type ) && 'listings' !== $listing_type ) ? "stm_{$listing_type}_options" : 'stm_vehicle_listing_options';
 		$data    = array_filter( (array) get_option( $options ) );
 
 		foreach ( $data as $key => $_data ) {

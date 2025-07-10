@@ -74,8 +74,7 @@ abstract class MenuBase {
 
 	public function __construct() {
 
-		self::$disabled_pro_text = esc_html__( 'Please enable Motors Pro Plugin', 'stm_vehicles_listing' );
-		self::$pro_plans_url     = admin_url( 'admin.php?page=mvl-go-pro' );
+		add_action( 'init', array( $this, 'init_strings' ), 5 );
 
 		$this->motors_favicon = $this->assets_url . 'icon.png';
 		$this->motors_logo    = $this->assets_url . 'logo.png';
@@ -85,6 +84,11 @@ abstract class MenuBase {
 		if ( apply_filters( 'stm_disable_settings_setup', true ) ) {
 			add_filter( 'wpcfto_options_page_setup', array( $this, 'mvl_menu_settings' ), 20, 1 );
 		}
+	}
+
+	public function init_strings() {
+		self::$disabled_pro_text = esc_html__( 'Please enable Motors Pro Plugin', 'stm_vehicles_listing' );
+		self::$pro_plans_url     = admin_url( 'admin.php?page=mvl-go-pro' );
 	}
 
 	public function mvl_init_page() {

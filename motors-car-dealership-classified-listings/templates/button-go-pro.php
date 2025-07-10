@@ -435,7 +435,12 @@ if ( $is_promotion && ! empty( $freemius_info ) ) {
 			__( 'SEO-friendly URLs', 'stm_vehicles_listing' ),
 			__( 'Premium Elementor Widgets', 'stm_vehicles_listing' ),
 			__( 'Listing Templates', 'stm_vehicles_listing' ),
+			__( 'SEO-friendly URLs', 'stm_vehicles_listing' ),
 			__( 'Motors Skins', 'stm_vehicles_listing' ),
+			__( 'VIN Decoder Addon', 'stm_vehicles_listing' ),
+			__( 'Inventory Skins', 'stm_vehicles_listing' ),
+			__( 'Premium Elementor Widgets', 'stm_vehicles_listing' ),
+			__( 'Listing Card Skins', 'stm_vehicles_listing' ),
 			__( 'WhatsApp Integration', 'stm_vehicles_listing' ),
 			__( 'Google Maps', 'stm_vehicles_listing' ),
 		);

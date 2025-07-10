@@ -372,3 +372,37 @@ function stm_save_genuine_price( $post_id ) {
 
 add_action( 'save_post', 'stm_save_genuine_price', 100, 1 );
 // @codingStandardsIgnoreEnd
+
+function mvl_show_pro_fields( $choices ) {
+	$pro_choices = array(
+		'checkbox'  => array(
+			'label'     => esc_html__( 'Checkbox', 'stm_vehicles_listing' ),
+			'pro_field' => true,
+		),
+		'price'     => array(
+			'label'     => esc_html__( 'Price', 'stm_vehicles_listing' ),
+			'pro_field' => true,
+		),
+		'location'  => array(
+			'label'     => esc_html__( 'Location', 'stm_vehicles_listing' ),
+			'pro_field' => true,
+		),
+		'color'     => array(
+			'label'     => esc_html__( 'Color', 'stm_vehicles_listing' ),
+			'pro_field' => true,
+		),
+	);
+
+	return array_merge( $choices, $pro_choices );
+}
+
+function mvl_show_pro_fields_settings( $settings ) {
+	$settings['skins']['label'] = __( 'Skins settings', 'stm_vehicles_listing' );
+
+	return $settings;
+}
+
+if ( ! apply_filters( 'is_mvl_pro', false ) ) {
+	add_filter( 'mvl_field_type_choices', 'mvl_show_pro_fields', 1, 1 );
+	add_filter( 'mvl_custom_fields_settings', 'mvl_show_pro_fields_settings', 10, 1 );
+}

@@ -23,7 +23,7 @@
 	</td>
 	<td class="stm_custom_fields__table--type" data-column="type">
 		<?php
-		if ( ! empty( $option['field_type'] ) ) {
+		if ( ! empty( $option['field_type'] ) && isset( $option['field_type'] ) ) {
 			$choices = apply_filters(
 				'mvl_field_type_choices',
 				array(
@@ -32,7 +32,9 @@
 				)
 			);
 
-			echo esc_html( $choices[ $option['field_type'] ] );
+			$choice = isset( $choices[ $option['field_type'] ] ) ? $choices[ $option['field_type'] ] : array( 'label' => esc_html__( 'Dropdown', 'stm_vehicles_listing' ) );
+			$label  = is_array( $choice ) ? $choice['label'] : $choice;
+			echo esc_html( $label );
 		} else {
 			( ! empty( $option['numeric'] ) && $option['numeric'] ) ? esc_html_e( 'Number', 'stm_vehicles_listing' ) : esc_html_e( 'Dropdown', 'stm_vehicles_listing' );
 		}

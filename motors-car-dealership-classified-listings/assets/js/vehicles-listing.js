@@ -717,7 +717,8 @@
                         $('option', $this).each(
                             function () {
                                 let key = $(this).attr('value'),
-                                    text = $(this).text();
+                                    text = $(this).text(),
+                                    pro_class = $(this).attr('data-class');
 
                                 if (key === $this.val()) {
                                     selected_key = key;
@@ -730,11 +731,30 @@
                                         selected = true;
                                     }
 
-                                    $('.stm_custom_fields__select--list', list).append(
-                                        $('<li/>').attr('data-selected', selected).attr('data-value', key).append(
-                                            text + '<i class="stm-admin-icon-check"></i>'
-                                        )
-                                    );
+                                    let li = $('<li/>')
+                                        .attr('data-selected', selected)
+                                        .attr('data-value', key)
+                                        .attr('title', listing_metaboxes.pro_version_only);
+
+                                    if (pro_class) {
+                                        li.addClass(pro_class + ' disabled');
+                                        let proLink = $('<span class="stm-pro-field-label"><a href="https://stylemixthemes.com/car-dealer-plugin/pricing/" target="_blank">pro</a></span>');
+                                        li.append($('<span class="option-text">').text(text).add(proLink).add('<i class="stm-admin-icon-check"></i>'));
+
+                                        li.on('click', function(e) {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+                                            return false;
+                                        });
+
+                                        proLink.on('click', function(e) {
+                                            e.stopPropagation();
+                                        });
+                                    } else {
+                                        li.append(text + '<i class="stm-admin-icon-check"></i>');
+                                    }
+
+                                    $('.stm_custom_fields__select--list', list).append(li);
                                 }
                             }
                         );

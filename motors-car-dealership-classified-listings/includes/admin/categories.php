@@ -34,6 +34,7 @@ function motors_page_options() {
 			'value'       => '',
 			'type'        => 'text',
 			'required'    => true,
+			'readonly'    => true,
 			'group'       => 'general',
 			'column'      => 2,
 			'attributes'  => array(
@@ -380,6 +381,53 @@ function motors_page_options() {
 			),
 			'group'       => 'filter',
 		),
+		'dropdown_skins' => array(
+			'label'      => esc_html__( 'Select a skin for this field that will be used in the inventory filter.', 'stm_vehicles_listing' ),
+			'type'       => 'radio-image',
+			'dependency' => array(
+				'slug'  => 'field_type',
+				'value' => 'dropdown',
+				'type'  => 'not_empty',
+			),
+			'choices'    => array(
+				'skin_1' => array(
+					'label' => 'Classic',
+					'url'   => STM_LISTINGS_URL . '/assets/images/pro/custom_field_skins/dropdown-1.png',
+				),
+				'skin_2' => array(
+					'label'     => 'Modern',
+					'url'       => STM_LISTINGS_URL . '/assets/images/pro/custom_field_skins/dropdown-2.png',
+					'pro_field' => true,
+				),
+			),
+			'group'      => 'skins',
+		),
+		'numeric_skins' => array(
+			'label'      => esc_html__( 'Select a skin for this field that will be used in the inventory filter.', 'stm_vehicles_listing' ),
+			'type'       => 'radio-image',
+			'dependency' => array(
+				'slug'  => 'field_type',
+				'value' => 'numeric',
+				'type'  => 'not_empty',
+			),
+			'choices'    => array(
+				'skin_1' => array(
+					'label' => 'Classic',
+					'url'   => STM_LISTINGS_URL . '/assets/images/pro/custom_field_skins/numeric-1.png',
+				),
+				'skin_2' => array(
+					'label'     => 'Range with Dropdowns',
+					'url'       => STM_LISTINGS_URL . '/assets/images/pro/custom_field_skins/numeric-2.png',
+					'pro_field' => true,
+				),
+				'skin_3' => array(
+					'label'     => 'Range with Inputs',
+					'url'       => STM_LISTINGS_URL . '/assets/images/pro/custom_field_skins/numeric-3.png',
+					'pro_field' => true,
+				),
+			),
+			'group'      => 'skins',
+		),
 	);
 
 	$group_4 = apply_filters( 'stm_listings_page_options_group_4', $group_4 );
@@ -458,7 +506,6 @@ function stm_add_listing_theme_menu_item() {
 		'mvl_submenu_positions',
 		function ( $positions ) {
 			$positions['listing_categories'] = 15;
-
 			return $positions;
 		}
 	);

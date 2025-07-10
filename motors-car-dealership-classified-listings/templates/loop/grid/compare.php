@@ -18,7 +18,10 @@ if ( ! empty( $show_compare ) && $show_compare ) :
 				title="<?php esc_html_e( 'Remove from compare', 'stm_vehicles_listing' ); ?>"
 				data-id="<?php echo esc_attr( get_the_ID() ); ?>"
 				data-title="<?php echo esc_attr( get_the_title() ); ?>"
-				data-post-type="<?php echo esc_attr( get_post_type( get_the_ID() ) ); ?>">
+				data-post-type="<?php echo esc_attr( get_post_type( get_the_ID() ) ); ?>"
+				data-toggle="tooltip"
+				data-container="body"
+				data-original-title="<?php esc_attr_e( 'Remove from compare', 'stm_vehicles_listing' ); ?>">
 				<i class="motors-icons-added"></i>
 			</span>
 		<?php else : ?>
@@ -30,7 +33,10 @@ if ( ! empty( $show_compare ) && $show_compare ) :
 				title="<?php esc_html_e( 'Add to compare', 'stm_vehicles_listing' ); ?>"
 				data-id="<?php echo esc_attr( get_the_ID() ); ?>"
 				data-title="<?php echo esc_attr( get_the_title() ); ?>"
-				data-post-type="<?php echo esc_attr( get_post_type( get_the_ID() ) ); ?>">
+				data-post-type="<?php echo esc_attr( get_post_type( get_the_ID() ) ); ?>"
+				data-toggle="tooltip"
+				data-container="body"
+				data-original-title="<?php esc_attr_e( 'Add to compare', 'stm_vehicles_listing' ); ?>">
 				<i class="motors-icons-add"></i>
 			</span>
 		<?php endif; ?>

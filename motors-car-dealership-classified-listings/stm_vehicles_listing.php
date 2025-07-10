@@ -8,7 +8,7 @@
  * License: GNU General Public License v2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: stm_vehicles_listing
- * Version: 1.4.78
+ * Version: 1.4.79
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -50,7 +50,7 @@ if ( ! defined( 'STM_LISTINGS_PATH' ) ) {
 	define( 'STM_LISTINGS_URL', plugins_url( '', STM_LISTINGS_FILE ) );
 	define( 'STM_LISTINGS', 'stm_vehicles_listing' );
 	define( 'STM_THEME_V_NEED', '5.6.33' );
-	define( 'STM_LISTINGS_V', '1.4.78' );
+	define( 'STM_LISTINGS_V', '1.4.79' );
 	define( 'STM_LISTINGS_DB_VERSION', '1.0.0' );
 	define( 'STM_LISTINGS_IMAGES', STM_LISTINGS_URL . '/includes/admin/butterbean/images/' );
 }
@@ -79,10 +79,6 @@ use MotorsVehiclesListing\Elementor\Nuxy\FeaturesSettings;
 use MotorsVehiclesListing\Helper\ListingStats;
 use Motors_Elementor_Widgets_Free\MotorsElementorWidgetsFree;
 
-if ( class_exists( 'MotorsVehiclesListing\ListingManager\Bootstrap' ) ) {
-	ListingManagerBootstrap::load();
-}
-
 add_action(
 	'plugins_loaded',
 	function () {
@@ -93,6 +89,9 @@ add_action(
 	1
 );
 
+if ( class_exists( 'MotorsVehiclesListing\ListingManager\Bootstrap' ) ) {
+	ListingManagerBootstrap::load();
+}
 
 if ( ! in_array( 'stm-motors-extends/stm-motors-extends.php', (array) get_option( 'active_plugins', array() ), true ) && defined( 'WPB_VC_VERSION' ) ) {
 	add_action(

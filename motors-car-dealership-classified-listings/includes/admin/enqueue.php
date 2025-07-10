@@ -86,8 +86,9 @@ function stm_listings_admin_enqueue( $hook ) {
 		'listing-metaboxes',
 		'listing_metaboxes',
 		array(
-			'choose_image' => esc_html__( 'Choose Image', 'stm_vehicles_listing' ),
-			'add_image'    => esc_html__( 'Add Image', 'stm_vehicles_listing' ),
+			'choose_image'     => esc_html__( 'Choose Image', 'stm_vehicles_listing' ),
+			'add_image'        => esc_html__( 'Add Image', 'stm_vehicles_listing' ),
+			'pro_version_only' => esc_html__( 'This feature is only available in PRO version', 'stm_vehicles_listing' ),
 		)
 	);
 
