@@ -131,6 +131,9 @@ if ( ! function_exists( 'stm_listings_attributes' ) ) {
 
 		$result  = array();
 		$listing_type = get_post_type( get_the_ID() );
+		if ( 'page' === $listing_type ) {
+			$listing_type = 'listings';
+		}
 		$options = ( ! empty( $listing_type ) && 'listings' !== $listing_type ) ? "stm_{$listing_type}_options" : 'stm_vehicle_listing_options';
 		$data    = array_filter( (array) get_option( $options ) );
 

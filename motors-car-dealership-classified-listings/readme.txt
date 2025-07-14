@@ -5,7 +5,7 @@ Donate link: https://www.paypal.me/stylemix
 Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
 Tested up to: 6.8
-Stable tag: 1.4.79
+Stable tag: 1.4.80
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,10 @@ After that, go to Tools -> Import, and via Wordpress Importer tool install dummy
 You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability](https://patchstack.com/database/vdp/motors-car-dealership-classified-listings). 
 
 == Changelog ==
+
+= 1.4.80 =
+- **Fix:** Fixed Listing Item Details not displaying on the "Add a Car" page on PHP 8.0 and above.
+- **Fix:** Fixed Inventory filter not applying selected filters properly
 
 = 1.4.79 =
 - **Fix:** Restored the “Request Quote” setting in the Equipment and Motorcycles demos.
