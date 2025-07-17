@@ -45,12 +45,13 @@ $jsonMultiPlanImgLimit = ! empty( $limits['multi_plans_images_limit'] ) ? array(
 
 if ( ! empty( $limits['multi_plans_images_limit'] ) ) {
 	foreach ( $limits['multi_plans_images_limit'] as $key => $limit ) {
+		$images_limit                  = $limit['limit'] > $limits['chargeable_listing_images'] ? $limit['limit'] : $limits['chargeable_listing_images'];
 		$jsonMultiPlanImgLimit[ $key ] = array(
 			'limit' => $limit['limit'],
 			'text'  => sprintf(
 			/* translators: %d: images limit */
-				esc_html__( 'Sorry, you can upload only %d images per add', 'stm_vehicles_listing' ),
-				$limit['limit']
+				esc_html__( 'Sorry, you can upload only %d images per listing', 'stm_vehicles_listing' ),
+				$images_limit
 			),
 		);
 	}

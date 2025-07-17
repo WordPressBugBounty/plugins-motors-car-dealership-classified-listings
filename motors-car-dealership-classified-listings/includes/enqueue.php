@@ -70,6 +70,7 @@ function stm_listings_add_car_script() {
 	$crop          = apply_filters( 'motors_vl_get_nuxy_mod', false, 'user_image_crop_checkbox' );
 	$width         = apply_filters( 'motors_vl_get_nuxy_mod', 800, 'user_image_crop_width' );
 	$height        = apply_filters( 'motors_vl_get_nuxy_mod', 600, 'user_image_crop_height' );
+	$images_limit  = $limits['images'] > $limits['chargeable_listing_images'] ? $limits['images'] : $limits['chargeable_listing_images'];
 
 	$_image_upload_script = "
         var stm_image_upload_settings = {
@@ -94,13 +95,19 @@ function stm_listings_add_car_script() {
 				) . "',
                 limit: '" . sprintf(
 					/* translators: %d: images limit */
-					esc_html__( 'Sorry, you can upload only %d images per add', 'stm_vehicles_listing' ),
+					esc_html__( 'Sorry, you can upload only %d images per free listing', 'stm_vehicles_listing' ),
 					$limits['images']
+				) . "',
+				chargeable_limit: '" . sprintf(
+					/* translators: %d: images limit */
+					esc_html__( 'Sorry, you can upload only %d images per chargeable listing', 'stm_vehicles_listing' ),
+					$limits['chargeable_listing_images']
 				) . "'
             },
             size: '" . $max_file_size . "',
             upload_limit: {
                 max: '" . absint( $limits['images'] ) . "',
+				chargeable_max: '" . absint( $limits['chargeable_listing_images'] ) . "'
             },
             cropping: {
                 enable: '" . $crop . "',

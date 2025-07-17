@@ -1134,11 +1134,24 @@ if ( ! function_exists( 'stm_load_dealers_list' ) ) {
 }
 
 function stm_sort_listings_callback() {
+	check_ajax_referer( 'stm_security_nonce', 'security' );
+
+	if ( ! is_user_logged_in() ) {
+		wp_send_json_error( 'Unauthorized access' );
+	}
+
 	if ( ! isset( $_POST['sort_by'] ) || ! isset( $_POST['user_id'] ) ) {
 		wp_send_json_error( 'Invalid request' );
 	}
-	$sort_by        = sanitize_text_field( $_POST['sort_by'] );
-	$user_id        = intval( $_POST['user_id'] );
+
+	$sort_by         = sanitize_text_field( $_POST['sort_by'] );
+	$user_id         = intval( $_POST['user_id'] );
+	$current_user_id = get_current_user_id();
+
+	if ( $user_id !== $current_user_id && ! current_user_can( 'manage_options' ) ) {
+		wp_send_json_error( 'Access denied' );
+	}
+
 	$page           = isset( $_POST['page'] ) ? intval( $_POST['page'] ) : 1;
 	$posts_per_page = isset( $_POST['posts_per_page'] ) ? intval( $_POST['posts_per_page'] ) : 6;
 	$offset         = $posts_per_page * ( $page - 1 );
@@ -1197,7 +1210,6 @@ function stm_sort_listings_callback() {
 }
 
 add_action( 'wp_ajax_stm_sort_listings', 'stm_sort_listings_callback' );
-add_action( 'wp_ajax_nopriv_stm_sort_listings', 'stm_sort_listings_callback' );
 
 function stm_validate_password() {
 	check_ajax_referer( 'stm_security_nonce', 'security' );

@@ -188,6 +188,7 @@
 			action: 'stm_sort_listings',
 			sort_by: sortBy,
 			user_id: user_id,
+			security: stm_security_nonce,
 			page: 1,
 			posts_per_page: posts_per_page,
 		}
@@ -223,6 +224,7 @@
 			user_id: user_id,
 			page: page,
 			posts_per_page: posts_per_page,
+			security: stm_security_nonce,
 		}
 		$.ajax({
 			url: ajaxurl,

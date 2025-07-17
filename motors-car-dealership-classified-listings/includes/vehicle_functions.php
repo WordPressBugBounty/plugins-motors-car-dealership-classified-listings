@@ -296,8 +296,9 @@ if ( ! function_exists( 'stm_get_post_limits' ) ) {
 
 		$user_id = intval( $user_id );
 
-		$user_post_limit = intval( apply_filters( 'motors_vl_get_nuxy_mod', 3, 'user_post_limit' ) );
-		$user_imgs_limit = intval( apply_filters( 'motors_vl_get_nuxy_mod', 5, 'user_post_images_limit' ) );
+		$user_post_limit               = intval( apply_filters( 'motors_vl_get_nuxy_mod', 3, 'user_post_limit' ) );
+		$user_imgs_limit               = intval( apply_filters( 'motors_vl_get_nuxy_mod', 5, 'user_post_images_limit' ) );
+		$chargeable_listing_imgs_limit = intval( apply_filters( 'motors_vl_get_nuxy_mod', 3, 'chargeable_listing_images_limit' ) );
 
 		if ( ! apply_filters( 'motors_vl_get_nuxy_mod', false, 'free_listing_submission' ) ) {
 			$user_post_limit = 0;
@@ -305,11 +306,12 @@ if ( ! function_exists( 'stm_get_post_limits' ) ) {
 		}
 
 		$restrictions = array(
-			'premoderation' => apply_filters( 'motors_vl_get_nuxy_mod', false, 'user_premoderation' ),
-			'posts_allowed' => $user_post_limit,
-			'posts'         => $user_post_limit,
-			'images'        => $user_imgs_limit,
-			'role'          => ( $user_id ) ? 'user' : 'guest',
+			'premoderation'             => apply_filters( 'motors_vl_get_nuxy_mod', false, 'user_premoderation' ),
+			'posts_allowed'             => $user_post_limit,
+			'posts'                     => $user_post_limit,
+			'images'                    => $user_imgs_limit,
+			'role'                      => ( $user_id ) ? 'user' : 'guest',
+			'chargeable_listing_images' => $chargeable_listing_imgs_limit,
 		);
 
 		if ( ! empty( $user_id ) ) {
@@ -1499,7 +1501,7 @@ if ( ! function_exists( 'stm_ajax_add_a_car' ) ) {
 						delete_post_meta( $post_id, $tax );
 					}
 				}
-
+				update_post_meta( $post_id, 'publication_type', $_POST['btn-type'] );
 				update_post_meta( $post_id, 'title', 'hide' );
 				update_post_meta( $post_id, 'breadcrumbs', 'show' );
 				update_post_meta( $post_id, 'car_mark_as_sold', '' );
@@ -1624,17 +1626,28 @@ if ( ! function_exists( 'stm_ajax_add_a_car_images' ) ) {
 				array_unshift( $attachments_ids, $_thumbnail_id );
 			}
 
-			$attachments_ids = array_values( $attachments_ids );
-			$max_file_size   = apply_filters( 'stm_listing_media_upload_size', 1024 * 4000 ); /*4mb is highest media upload here*/
-			$max_uploads     = intval( $limits['images'] );
-			$files           = $_FILES['files'];
-
-			if ( count( $attachments_ids ) > $max_uploads ) {
-				$response['message'] = sprintf(
+			$attachments_ids     = array_values( $attachments_ids );
+			$max_file_size       = apply_filters( 'stm_listing_media_upload_size', 1024 * 4000 ); /*4mb is highest media upload here*/
+			$files               = $_FILES['files'];
+			$max_uploads         = intval( $limits['images'] > $limits['chargeable_listing_images'] ? $limits['images'] : $limits['chargeable_listing_images'] );
+			$max_uploads_message = sprintf(
 				/* translators: %d: images limit */
-					esc_html__( 'Sorry, you can upload only %d images per add', 'stm_vehicles_listing' ),
+				esc_html__( 'Sorry, you can upload only %d images per free listing', 'stm_vehicles_listing' ),
+				$max_uploads
+			);
+			$publication_type = get_post_meta( $post_id, 'publication_type', true );
+
+			if ( 'pay' === $publication_type ) {
+				$max_uploads         = $limits['chargeable_listing_images'];
+				$max_uploads_message = sprintf(
+					/* translators: %d: images limit */
+					esc_html__( 'Sorry, you can upload only %d images per chargeable listing', 'stm_vehicles_listing' ),
 					$max_uploads
 				);
+			}
+
+			if ( count( $attachments_ids ) > $max_uploads ) {
+				$response['message'] = $max_uploads_message;
 			} else {
 				// Check if user is trying to upload more than the allowed number of images for the current post
 				$file_index      = 0;

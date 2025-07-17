@@ -591,9 +591,11 @@ function updateGridItemTitles() {
     });
 }
 
-$('[data-toggle="tooltip"]').tooltip({
+jQuery('[data-toggle="tooltip"]').tooltip({
 	trigger: 'hover',
-	placement: $(this).data('placement'),
+	placement: function() {
+		return jQuery(this).data('placement');
+	},
 	html: true,
 	container: 'body'
 });

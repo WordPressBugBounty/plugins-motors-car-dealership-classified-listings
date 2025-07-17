@@ -63,7 +63,7 @@ class MVL_Patcher {
 		if ( count( $posts ) > 0 ) {
 			foreach ( $posts as $post ) {
 				$seller_note = get_post_meta( $post->ID, 'listing_seller_note', true );
-				if ( ! empty( $seller_note ) ) {
+				if ( ! empty( $seller_note ) && empty( $post->post_content ) ) {
 					$wpdb->update(
 						$wpdb->posts,
 						array(

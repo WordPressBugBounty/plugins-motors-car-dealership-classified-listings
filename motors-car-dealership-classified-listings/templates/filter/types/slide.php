@@ -52,12 +52,12 @@ $style = ( empty( $location ) ) ? 'display: none;' : '';
 
 <div class="col-md-12 col-sm-12">
 	<div class="filter-<?php echo esc_attr( $vars['slug'] ); ?> stm-slider-filter-type-unit" style="<?php echo esc_attr( $style ); ?>">
-		<div class="clearfix">
+		<div class="clearfix filter-slider-label-wrapper">
 			<h5 class="pull-left"><?php echo esc_html( $taxonomy['single_name'] ); ?></h5>
 			<div class="stm-current-slider-labels">
 				<?php echo esc_html( $vars['label'] ); ?>
-				<?php if ( function_exists( 'stm_distance_measure_unit' ) ) : ?>
-					<span class="stm_unit_measurement"><?php echo esc_html( stm_distance_measure_unit() ); ?></span>
+				<?php if ( ! empty( apply_filters( 'stm_distance_measure_unit', '' ) ) ) : ?>
+					<span class="stm_unit_measurement"><?php echo esc_html( apply_filters( 'stm_distance_measure_unit', '' ) ); ?></span>
 				<?php endif; ?>
 			</div>
 		</div>
@@ -109,7 +109,8 @@ $style = ( empty( $location ) ) ? 'display: none;' : '';
 			slide: function (event, ui) {
 				jQuery( max_radius ).val( ui.value );
 
-				jQuery('.filter-' + suffix + ' .stm-current-slider-labels').html( ui.value + '&nbsp;' + affix );
+				let unitMeasurement = jQuery('.filter-' + suffix + ' .stm_unit_measurement').text();
+				jQuery('.filter-' + suffix + ' .stm-current-slider-labels').html( ui.value + '&nbsp;' + affix + ( unitMeasurement ? '<span class="stm_unit_measurement">' + unitMeasurement + '</span>' : '' ) );
 			}
 		};
 
@@ -120,6 +121,7 @@ $style = ( empty( $location ) ) ? 'display: none;' : '';
 				if ( typeof STMListings !== "undefined" && typeof STMListings.stm_disable_rest_filters !== "undefined" ) {
 					STMListings.stm_disable_rest_filters( jQuery( this ), 'listings-binding' );
 				}
+				jQuery(this).closest('form').trigger('submit');
 			}
 		);
 
@@ -131,7 +133,7 @@ $style = ( empty( $location ) ) ? 'display: none;' : '';
 			jQuery( max_radius ).attr('placeholder', loadValue);
 		}
 
-		jQuery( max_radius ).on('keyup focusout', function () {
+		jQuery( max_radius ).on('keyup change', function ( event ) {
 			let $this = jQuery( this );
 
 			if ( $this.val() > stmMaxRadiusValue ) {
@@ -139,6 +141,11 @@ $style = ( empty( $location ) ) ? 'display: none;' : '';
 				$this.val( stmMaxRadiusValue );
 			} else {
 				jQuery( range ).slider( "option", "value", $this.val() );
+			}
+
+			if ( ( event.type === 'keyup' && ( event.key === "Enter" || event.keyCode === 13 ) ) ||
+				 event.type === 'change' ) {
+				jQuery( this ).closest( 'form' ).trigger( 'submit' );
 			}
         });
     }
