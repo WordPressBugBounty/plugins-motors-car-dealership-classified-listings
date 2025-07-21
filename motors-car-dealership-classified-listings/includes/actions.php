@@ -1346,3 +1346,28 @@ function stm_flush_rewrite_rules_on_update() {
 }
 
 add_action( 'init', 'stm_flush_rewrite_rules_on_update' );
+
+function stm_sync_car_user_meta( $post_id ) {
+	$post = get_post( $post_id );
+	if ( ! $post ) {
+		return;
+	}
+
+	$post_types = array( apply_filters( 'stm_listings_post_type', 'listings' ) );
+
+	if ( function_exists( 'stm_is_multilisting' ) && stm_is_multilisting() ) {
+		$post_types = array_merge( $post_types, STMMultiListing::stm_get_listing_type_slugs() );
+	}
+
+	if ( ! in_array( $post->post_type, $post_types, true ) ) {
+		return;
+	}
+
+	$stm_car_user = get_post_meta( $post_id, 'stm_car_user', true );
+
+	if ( empty( $stm_car_user ) || intval( $stm_car_user ) !== intval( $post->post_author ) ) {
+		update_post_meta( $post_id, 'stm_car_user', $post->post_author );
+	}
+}
+
+add_action( 'save_post', 'stm_sync_car_user_meta', 20, 1 );

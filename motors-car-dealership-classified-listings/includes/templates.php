@@ -76,14 +76,26 @@ function stm_listings_template_part( $template, $name = '', $vars = array() ) {
 	}
 }
 
-add_filter( 'archive_template', 'stm_listings_archive_template' );
+add_filter( 'archive_template', 'stm_listings_archive_template', 5 );
 
 function stm_listings_archive_template( $template ) {
 
+	// Check for default listings post type
 	if ( is_post_type_archive( apply_filters( 'stm_listings_post_type', 'listings' ) ) ) {
 		$located = stm_listings_locate_template( 'archive.php' );
 		if ( $located ) {
 			$template = $located;
+		}
+	}
+
+	// Check for motors-listing-types post types
+	if ( function_exists( 'stm_is_multilisting' ) && stm_is_multilisting() ) {
+		$slugs = STMMultiListing::stm_get_listing_type_slugs();
+		if ( ! empty( $slugs ) && is_post_type_archive( $slugs ) ) {
+			$located = stm_listings_locate_template( 'archive.php' );
+			if ( $located ) {
+				$template = $located;
+			}
 		}
 	}
 
@@ -107,7 +119,7 @@ function stm_listings_archive_page_template( $template ) {
 	return $template;
 }
 
-add_filter( 'single_template', 'stm_get_single_listing_template' );
+add_filter( 'single_template', 'stm_get_single_listing_template', 5 );
 
 function stm_get_single_listing_template( $template ) {
 	mvl_enqueue_header_scripts_styles( 'motors-icons' );
@@ -117,8 +129,17 @@ function stm_get_single_listing_template( $template ) {
 
 	$located = stm_listings_locate_template( 'single.php' );
 
+	// Check for default listings post type
 	if ( is_singular( 'listings' ) && $located ) {
 		$template = $located;
+	}
+
+	// Check for motors-listing-types post types
+	if ( function_exists( 'stm_is_multilisting' ) && stm_is_multilisting() ) {
+		$slugs = STMMultiListing::stm_get_listing_type_slugs();
+		if ( ! empty( $slugs ) && is_singular( $slugs ) && $located ) {
+			$template = $located;
+		}
 	}
 
 	return $template;

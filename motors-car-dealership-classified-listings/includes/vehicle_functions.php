@@ -1177,7 +1177,7 @@ if ( ! function_exists( 'stm_ajax_add_a_car' ) ) {
 					$response['message'] = esc_html__( 'You do not have available posts', 'stm_vehicles_listing' );
 					$error               = true;
 				}
-			} else {
+			} elseif ( ! isset( $_POST['btn-type'] ) ) {
 				$response['message'] = esc_html__( 'Unknown action', 'stm_vehicles_listing' );
 				$error               = true;
 			}
@@ -1322,6 +1322,15 @@ if ( ! function_exists( 'stm_ajax_add_a_car' ) ) {
 
 			if ( ! $update ) {
 				$post_id = wp_insert_post( $post_data, true );
+			}
+
+			if ( isset( $post_data['post_content'] ) && $update ) {
+				wp_update_post(
+					array(
+						'ID'           => $post_id,
+						'post_content' => $post_data['post_content'],
+					)
+				);
 			}
 
 			if ( ! is_wp_error( $post_id ) ) {

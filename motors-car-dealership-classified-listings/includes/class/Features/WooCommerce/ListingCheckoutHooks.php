@@ -173,8 +173,8 @@ class ListingCheckoutHooks {
 					'listing_title' => $product->get_title(),
 					'car_id'        => $product->get_id(),
 				);
-				$subject = stm_generate_subject_view( 'pay_per_listing', $args );
-				$body    = stm_generate_template_view( 'pay_per_listing', $args );
+				$subject = stm_generate_subject_view( '', 'pay_per_listing', $args );
+				$body    = stm_generate_template_view( '', 'pay_per_listing', $args );
 
 				add_filter( 'wp_mail_content_type', 'stm_set_html_content_type_mail' );
 

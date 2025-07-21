@@ -72,7 +72,7 @@
 
 				<td class="dealer-cars">
 					<div class="inner">
-						<a href="<?php echo esc_url( apply_filters( 'stm_get_author_link', $dealer_info->ID ) ); ?>#stm_d_inv" target="_blank">
+						<a href="<?php echo esc_url( apply_filters( 'stm_get_author_link', $dealer_info->ID ) ); ?>" target="_blank">
 							<div class="dealer-labels heading-font">
 								<?php echo intval( $dealer_cars_count ); ?>
 								<?php echo esc_html( $dealer_category_labels ); ?>

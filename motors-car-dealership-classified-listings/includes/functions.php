@@ -12,7 +12,7 @@ add_filter(
 
 if ( ! function_exists( 'is_mvl_pro' ) ) {
 	function is_mvl_pro() {
-		if ( defined( 'STM_DEV_MODE' ) && STM_DEV_MODE ) {
+		if ( defined( 'STM_DEV_MODE' ) && STM_DEV_MODE && defined( 'STM_LISTINGS_PRO_PATH' ) ) {
 			return true;
 		}
 

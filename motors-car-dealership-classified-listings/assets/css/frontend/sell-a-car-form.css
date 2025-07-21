@@ -182,6 +182,7 @@
 
 .stm-sell-a-car-form .form-content .contact-details textarea {
     height: 106px;
+    width: 100%;
 }
 
 .stm-sell-a-car-form .form-content .contact-details .form-group {

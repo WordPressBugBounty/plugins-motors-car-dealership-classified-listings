@@ -5,7 +5,7 @@ Donate link: https://www.paypal.me/stylemix
 Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
 Tested up to: 6.8
-Stable tag: 1.4.81
+Stable tag: 1.4.82
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,12 @@ After that, go to Tools -> Import, and via Wordpress Importer tool install dummy
 You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability](https://patchstack.com/database/vdp/motors-car-dealership-classified-listings). 
 
 == Changelog ==
+
+= 1.4.82 =
+- **Improvement:** Added a preloader to the new Listing Manager sections
+- **Improvement:** Terms of custom fields can now be edited via the new Listing Manager
+- **Fix:** Changes made to a listing’s description were not applied after saving 
+- **Fix:** When an admin published a listing after moderation, the listing author was removed, preventing the user from editing or viewing it from their profile 
 
 = 1.4.81 =
 - **Enhancement:** Added new setting “Image limit per chargeable listing” for Charge for listing submissions.

@@ -150,6 +150,46 @@ class Helper {
 		return $listing_types;
 	}
 
+	public static function stm_ew_multi_listing_search_filter_fields( $listing_type = null ) {
+		$stm_filter_options = array();
+
+		if ( defined( 'STM_LISTINGS' ) ) {
+			$listings = \STMMultiListing::stm_get_listings();
+
+			$listings[] = array(
+				'slug'  => 'listings',
+				'label' => __( 'Listings', 'stm_vehicles_listing' ),
+			);
+
+			if ( ! empty( $listings ) ) {
+				foreach ( $listings as $listing ) {
+					if ( empty( $listing['label'] ) || empty( $listing['slug'] ) || ( ! is_null( $listing_type ) && $listing['slug'] !== $listing_type ) ) {
+						continue;
+					}
+
+					$post_types[ $listing['label'] ] = $listing['slug'];
+
+					if ( function_exists( 'stm_get_listings_filter' ) && function_exists( 'stm_get_car_filter' ) ) {
+						if ( 'listings' === $listing['slug'] ) {
+							$filter_options = apply_filters( 'stm_get_car_filter', array() );
+						} else {
+							$filter_options = apply_filters( 'stm_get_listings_filter', array(), $listing['slug'], array( 'where' => array( 'use_on_car_filter' => true ) ), false );
+						}
+					}
+
+					if ( ! empty( $filter_options ) ) {
+						foreach ( $filter_options as $filter_option ) {
+							$key = $filter_option['single_name'] . ' (' . $filter_option['slug'] . ')';
+							$stm_filter_options[ $filter_option['slug'] ] = $key;
+						}
+					}
+				}
+			}
+		}
+
+		return $stm_filter_options;
+	}
+
 	public static function stm_ew_resize_image( $attach_id, $img_url, $width, $height, $crop = true ) {
 		// this is an attachment, so we have the ID.
 		$image_src = array();

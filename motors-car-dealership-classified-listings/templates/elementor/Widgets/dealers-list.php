@@ -24,7 +24,6 @@ if ( ! empty( $_GET['_wpnonce'] ) && wp_verify_nonce( sanitize_text_field( wp_un
 $filters = array(
 	'alphabet' => esc_html__( 'Alphabet', 'stm_vehicles_listing' ),
 	'reviews'  => esc_html__( 'Reviews', 'stm_vehicles_listing' ),
-	'date'     => esc_html__( 'Date', 'stm_vehicles_listing' ),
 	'cars'     => esc_html__( 'Cars number', 'stm_vehicles_listing' ),
 	'watches'  => esc_html__( 'Popularity', 'stm_vehicles_listing' ),
 );

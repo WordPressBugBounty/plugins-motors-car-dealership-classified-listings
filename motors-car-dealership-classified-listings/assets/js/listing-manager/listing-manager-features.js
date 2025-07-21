@@ -14,6 +14,34 @@
         let modalChanged = false;
         let hasFieldChanged = false;
 
+        /**
+         * Shows loading state for wrapper
+         */
+        function showWrapperLoading() {
+            $wrapper.addClass('loading');
+        }
+
+        /**
+         * Hides loading state for wrapper
+         */
+        function hideWrapperLoading() {
+            $wrapper.removeClass('loading');
+        }
+
+        /**
+         * Disables edit button
+         */
+        function disableEditButton() {
+            $editBtn.addClass('disabled').prop('disabled', true);
+        }
+
+        /**
+         * Enables edit button
+         */
+        function enableEditButton() {
+            $editBtn.removeClass('disabled').prop('disabled', false);
+        }
+
         $wrapper.on('change', '.mvl-listing-manager-field-checkbox input[type="checkbox"]', function () {
             hasFieldChanged = true;
         });
@@ -146,6 +174,9 @@
          * Saves new order if changes were made
          */
         function handleCancelClick() {
+            showWrapperLoading();
+            disableEditButton();
+            
             const $items = $wrapper.find('.mvl-listing-manager-field-item');
             const newOrder = [];
             let hasChanges = false;
@@ -186,10 +217,14 @@
                         loadUpdatedHtml();
                     } else {
                         console.error('Failed to save order:', response.data.message);
+                        hideWrapperLoading();
+                        enableEditButton();
                     }
                 },
                 error: function (xhr, status, error) {
                     console.error('AJAX Error:', error);
+                    hideWrapperLoading();
+                    enableEditButton();
                 }
             });
         }
@@ -198,6 +233,9 @@
          * Fetch features from server
          */
         function getFeatures() {
+            showWrapperLoading();
+            disableEditButton();
+            
             const ajaxData = Object.assign({}, getBaseAjaxData(), { template: 'features' });
             $.ajax({
                 url: ajaxurl,
@@ -217,6 +255,10 @@
                 },
                 error: function (xhr, status, error) {
                     console.error('AJAX Error:', error);
+                },
+                complete: function () {
+                    hideWrapperLoading();
+                    enableEditButton();
                 }
             });
         }
@@ -249,6 +291,10 @@
                 },
                 error: function (xhr, status, error) {
                     console.error('AJAX Error:', error);
+                },
+                complete: function () {
+                    hideWrapperLoading();
+                    enableEditButton();
                 }
             });
         }
@@ -271,14 +317,16 @@
          */
         function handleEditClick() {
             isEditMode = true;
-            $editBtn.prop('disabled', true);
+            showWrapperLoading();
+            disableEditButton();
 
             if (hasFieldChanged) {
 
                 let confirmation = initConfirmationPopup($editBtn);
                 confirmation.on({
                     accept: function () {
-                        $editBtn.prop('disabled', false);
+                        hideWrapperLoading();
+                        enableEditButton();
                         isEditMode = false;
                     },
                     cancel: function () {
@@ -330,7 +378,8 @@
                     console.error('AJAX Error:', error);
                 },
                 complete: function () {
-                    $editBtn.prop('disabled', false);
+                    hideWrapperLoading();
+                    enableEditButton();
                 }
             });
         }
@@ -781,6 +830,7 @@
                         }, 300);
 
                         if (isEditMode) {
+                            showWrapperLoading();
                             const ajaxData = Object.assign({}, getBaseAjaxData(), { template: 'edit-features' });
                             $.ajax({
                                 url: ajaxurl,
@@ -812,6 +862,9 @@
                                 },
                                 error: function (xhr, status, error) {
                                     console.error('AJAX Error:', error);
+                                },
+                                complete: function () {
+                                    hideWrapperLoading();
                                 }
                             });
                         } else {
@@ -893,6 +946,9 @@
         });
 
         function deleteFeatureGroup(optionId) {
+            showWrapperLoading();
+            disableEditButton();
+            
             $.ajax({
                 url: ajaxurl,
                 type: 'POST',
@@ -944,12 +1000,21 @@
                             },
                             error: function (xhr, status, error) {
                                 console.error('AJAX Error:', error);
+                            },
+                            complete: function () {
+                                hideWrapperLoading();
+                                enableEditButton();
                             }
                         });
+                    } else {
+                        hideWrapperLoading();
+                        enableEditButton();
                     }
                 },
                 error: function (xhr, status, error) {
                     console.error('AJAX Error:', error);
+                    hideWrapperLoading();
+                    enableEditButton();
                 }
             });
         }

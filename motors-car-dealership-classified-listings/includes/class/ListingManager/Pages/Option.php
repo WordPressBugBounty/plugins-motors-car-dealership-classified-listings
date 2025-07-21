@@ -421,6 +421,8 @@ class Option extends Page {
 		);
 	}
 
+
+
 	public function add_terms_to_option( $terms, $taxonomy ) {
 		if ( empty( $terms ) || ! is_array( $terms ) ) {
 			return false;
@@ -450,6 +452,106 @@ class Option extends Page {
 				}
 
 				$results[] = $result;
+			}
+		}
+
+		return ! empty( $results );
+	}
+
+	public function update_terms_changes( $terms_changes ) {
+		if ( empty( $terms_changes ) || ! is_array( $terms_changes ) ) {
+			return false;
+		}
+
+		$results = array();
+
+		foreach ( $terms_changes as $term_id => $changes ) {
+			$term_id = intval( $term_id );
+
+			$term = get_term( $term_id );
+			if ( ! $term || is_wp_error( $term ) ) {
+				continue;
+			}
+
+			$update_data = array();
+
+			if ( isset( $changes['name'] ) && ! empty( $changes['name'] ) ) {
+				$update_data['name'] = sanitize_text_field( $changes['name'] );
+			}
+
+			if ( ! empty( $update_data ) ) {
+				$result = wp_update_term( $term_id, $term->taxonomy, $update_data );
+				if ( is_wp_error( $result ) ) {
+					continue;
+				}
+			}
+
+			if ( isset( $changes['image_id'] ) ) {
+				$image_id = intval( $changes['image_id'] );
+				if ( $image_id > 0 ) {
+					$attachment = get_post( $image_id );
+					if ( $attachment && 'attachment' === $attachment->post_type ) {
+						update_term_meta( $term_id, 'stm_image', $image_id );
+					}
+				} else {
+					delete_term_meta( $term_id, 'stm_image' );
+				}
+			}
+
+			if ( isset( $changes['term_meta'] ) ) {
+				$term_meta = sanitize_text_field( $changes['term_meta'] );
+				if ( ! empty( $term_meta ) ) {
+					update_term_meta( $term_id, '_category_color', $term_meta );
+				} else {
+					delete_term_meta( $term_id, '_category_color' );
+				}
+			}
+
+			$results[] = $term_id;
+		}
+
+		return ! empty( $results );
+	}
+
+	public function delete_terms_batch( $term_ids ) {
+		if ( empty( $term_ids ) || ! is_array( $term_ids ) ) {
+			return false;
+		}
+
+		if ( count( $term_ids ) > 100 ) {
+			return false;
+		}
+
+		$results          = array();
+		$current_taxonomy = '';
+
+		if ( isset( $_POST['slug'] ) ) {
+			$current_taxonomy = sanitize_text_field( $_POST['slug'] );
+		}
+
+		foreach ( $term_ids as $term_id ) {
+			$term_id = intval( $term_id );
+
+			if ( $term_id <= 0 ) {
+				continue;
+			}
+
+			$term = get_term( $term_id );
+			if ( ! $term || is_wp_error( $term ) ) {
+				continue;
+			}
+
+			if ( ! empty( $current_taxonomy ) && $term->taxonomy !== $current_taxonomy ) {
+				continue;
+			}
+
+			if ( ! current_user_can( 'manage_categories' ) ) {
+				continue;
+			}
+
+			$result = wp_delete_term( $term_id, $term->taxonomy );
+			if ( ! is_wp_error( $result ) && $result ) {
+				$results[] = $term_id;
 			}
 		}
 
@@ -490,6 +592,20 @@ class Option extends Page {
 					'hierarchical' => true,
 				)
 			);
+		}
+
+		if ( ! empty( $data['terms_changes'] ) ) {
+			$terms_changes = json_decode( stripslashes( $data['terms_changes'] ), true );
+			if ( is_array( $terms_changes ) ) {
+				$this->update_terms_changes( $terms_changes );
+			}
+		}
+
+		if ( ! empty( $data['deleted_terms'] ) ) {
+			$deleted_terms = json_decode( stripslashes( $data['deleted_terms'] ), true );
+			if ( is_array( $deleted_terms ) ) {
+				$this->delete_terms_batch( $deleted_terms );
+			}
 		}
 
 		if ( ! empty( $data['new_terms'] ) ) {

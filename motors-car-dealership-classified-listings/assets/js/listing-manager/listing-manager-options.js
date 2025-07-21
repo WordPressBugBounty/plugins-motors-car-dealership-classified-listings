@@ -12,6 +12,35 @@
     let termsCache = {};       // Cache for terms
     let modalChanged = false;  // Flag to track if the modal has been changed
     let hasFieldChanged = false;  // Flag to track if the field has been changed
+    let isTermEditMode = false;  // Flag to track if the term is in edit mode
+
+    /**
+     * Shows loading state for wrapper
+     */
+    function showWrapperLoading() {
+        $wrapper.addClass('loading');
+    }
+
+    /**
+     * Hides loading state for wrapper
+     */
+    function hideWrapperLoading() {
+        $wrapper.removeClass('loading');
+    }
+
+    /**
+     * Disables edit button
+     */
+    function disableEditButton() {
+        $editBtn.addClass('disabled').prop('disabled', true);
+    }
+
+    /**
+     * Enables edit button
+     */
+    function enableEditButton() {
+        $editBtn.removeClass('disabled').prop('disabled', false);
+    }
 
     function debounce(func, wait) {
         return function executedFunction(...args) {
@@ -123,6 +152,10 @@
                 },
                 error: function (xhr, status, error) {
                     reject({ error: error, xhr: xhr });
+                },
+                complete: function () {
+                    hideWrapperLoading();
+                    enableEditButton();
                 }
             });
         });
@@ -265,6 +298,9 @@
      * Loads options data from server
      */
     function getOptions() {
+        showWrapperLoading();
+        disableEditButton();
+        
         const cacheKey = 'listing_options';
         performAjaxRequest(ajaxurl, Object.assign({}, getBaseAjaxData(), { template: 'options' }), cacheKey)
             .then(response => {
@@ -277,6 +313,10 @@
             })
             .catch(error => {
                 console.error('Failed to get options:', error);
+            })
+            .finally(() => {
+                hideWrapperLoading();
+                enableEditButton();
             });
     }
 
@@ -506,6 +546,9 @@
     }
 
     function handleCancelClick() {
+        showWrapperLoading();
+        disableEditButton();
+
         const $items = $wrapper.find('.mvl-listing-manager-field-item');
         const newOrder = [];
         let hasChanges = false;
@@ -542,10 +585,14 @@
                     loadUpdatedHtml();
                 } else {
                     console.error('Failed to save order:', response.data.message);
+                    hideWrapperLoading();
+                    enableEditButton();
                 }
             },
             error: function (xhr, status, error) {
                 console.error('AJAX Error:', error);
+                hideWrapperLoading();
+                enableEditButton();
             }
         });
     }
@@ -566,6 +613,10 @@
             },
             error: function (xhr, status, error) {
                 console.error('AJAX Error:', error);
+            },
+            complete: function () {
+                hideWrapperLoading();
+                enableEditButton();
             }
         });
     }
@@ -582,13 +633,15 @@
 
     function handleEditClick() {
         isEditMode = true;
-        $editBtn.prop('disabled', true);
+        showWrapperLoading();
+        disableEditButton();
 
         if (hasFieldChanged) {
             let confirmation = initConfirmationPopup($('.mvl-lm-edit-options-btn'));
             confirmation.on({
                 accept: function () {
-                    $editBtn.prop('disabled', false);
+                    hideWrapperLoading();
+                    enableEditButton();
                     isEditMode = false;
                 },
                 cancel: function () {
@@ -626,10 +679,19 @@
                 console.error('AJAX Error:', error);
             },
             complete: function () {
-                $editBtn.prop('disabled', false);
+                hideWrapperLoading();
+                enableEditButton();
             }
         });
     }
+
+    $(document).on('click', '.mvl-listing-manager-field-term-item', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        
+        isTermEditMode = true;
+    });
 
     function loadOptionPopup(optionId, formAction = 'edit-field') {
         const cacheKey = optionId ? `option_popup_${optionId}` : 'new_option_popup';
@@ -694,6 +756,8 @@
 
                     initTabs();
                     updateDependentFields($('.mvl-options-popup-container'));
+
+                    initializeOriginalTermValues();
                 }
             })
             .catch(error => {
@@ -745,13 +809,25 @@
             const $checkboxesWrapper = $field.closest('.mvl-options-settings-tab-content').find('.mvl-listing-manager-terms-list-inner');
             if ($checkboxesWrapper.length) {
                 const fieldType = $field.closest('.mvl-options-settings-tab-content').find('select[name="field_type"]').val();
-                let contentHtml = '';
+
+                let termItemHtml = `
+                    <div class="mvl-listing-manager-field mvl-listing-manager-field-term-item" data-term-id="${tempId}">
+                        <div class="mvl-listing-manager-term-item">
+                `;
 
                 if (fieldType === 'color') {
                     const colorValue = $field.find('input[name="_category_color"]').val() || '#000000';
-                    contentHtml = `
+                    termItemHtml += `
                         <div class="mvl-listing-manager-term-item-color" data-depends-on="field_type" data-depend-values="color" data-depend-action="show">
                             <span class="term-item-color" style="background: ${colorValue}!important;"></span>
+                        </div>
+                        <div class="mvl-listing-manager-term-item-edit-color" data-depends-on="field_type" data-depend-values="color" data-depend-action="show">
+                            <div class="mvl-listing-manager-field mvl-listing-manager-field-color">
+                                <div class="mvl-listing-manager-field-color-input-wrapper">
+                                    <div type="color" class="mvl-listing-manager-field-color-input"></div>
+                                    <input type="text" name="${tempId}_category_color" id="term_color_${tempId}" class="mvl-listing-manager-field-input mvl-input-field" value="${colorValue}" />
+                                </div>
+                            </div>
                         </div>
                     `;
                 } else {
@@ -759,33 +835,53 @@
                     if (imageId) {
                         const imageUrl = wp.media.attachment(imageId).get('url');
                         imageHtml = `
-                            <div class="mvl-listing-manager-term-item-image" data-depends-on="field_type" data-depend-values="dropdown,checkbox,numeric,price" data-depend-action="show">
+                            <div class="mvl-listing-manager-term-item-image" data-depends-on="field_type" data-depend-values="dropdown,checkbox,numeric,price" data-depend-action="show" data-image-id="${imageId}">
                                 <img src="${imageUrl}" alt="${term}">
+                                <div class="mvl-listing-manager-term-item-image-edit">
+                                    <i class="motors-icons-image-plus"></i>
+                                </div>
                             </div>
                         `;
                     } else {
                         imageHtml = `
-                            <div class="mvl-listing-manager-term-item-image" data-depends-on="field_type" data-depend-values="dropdown,checkbox,numeric,price" data-depend-action="show">
+                            <div class="mvl-listing-manager-term-item-image" data-depends-on="field_type" data-depend-values="dropdown,checkbox,numeric,price" data-depend-action="show" data-image-id="">
                                 <div class="mvl-listing-manager-term-item-image-placeholder">
+                                    <i class="motors-icons-image-plus"></i>
+                                </div>
+                                <div class="mvl-listing-manager-term-item-image-edit">
                                     <i class="motors-icons-image-plus"></i>
                                 </div>
                             </div>
                         `;
                     }
-                    contentHtml = imageHtml;
+                    termItemHtml += imageHtml;
                 }
 
-                const $termItem = $(`
-                    <div class="mvl-listing-manager-field mvl-listing-manager-field-term-item" data-term-id="${tempId}">
-                        <div class="mvl-listing-manager-term-item">
-                            ${contentHtml}
+                termItemHtml += `
                             <div class="mvl-listing-manager-term-item-name">
                                 <input type="text" class="mvl-listing-manager-term-item-name-input" value="${term}" readonly>
+                                <div class="mvl-listing-manager-term-item-actions">
+                                    <button id="mvl-lm-edit-term-btn" class="mvl-secondary-btn mvl-lm-edit-option-btn mvl-short-btn">
+                                        <i class="motors-icons-mvl-pencil"></i>
+                                    </button>
+                                    <button id="mvl-lm-delete-term-btn" class="mvl-delete-btn mvl-lm-delete-option-btn mvl-short-btn">
+                                        <i class="motors-icons-mvl-trash"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                `);
+                `;
+
+                const $termItem = $(termItemHtml);
                 $checkboxesWrapper.append($termItem);
+                
+                if (fieldType === 'color') {
+                    const $colorInput = $termItem.find('.mvl-listing-manager-field-input');
+                    if ($colorInput.length && typeof mvlListingManagerColorPicker === 'function') {
+                        mvlListingManagerColorPicker();
+                    }
+                }
             }
 
             $input.val('');
@@ -902,6 +998,33 @@
                 return;
             }
             modalChanged = true;
+            
+            const $input = $(this);
+            if ($input.hasClass('mvl-listing-manager-field-input') && $input.attr('name') && $input.attr('name').includes('_category_color')) {
+                const $termItem = $input.closest('.mvl-listing-manager-field-term-item');
+                const termId = $termItem.data('term-id');
+                const isNewTerm = termId && termId.toString().startsWith('temp_');
+                
+                if (isNewTerm) {
+                    const $nameInput = $termItem.find('.mvl-listing-manager-term-item-name-input');
+                    const $imageContainer = $termItem.find('.mvl-listing-manager-term-item-image');
+                    const currentName = $nameInput.val();
+                    const imageId = $imageContainer.attr('data-image-id');
+                    const termMeta = $input.val();
+                    
+                    updateNewTermsData($termItem, currentName, imageId, termMeta);
+                    updateColor($termItem, termMeta);
+                } else {
+                    // Для существующих терминов помечаем как измененный
+                    const originalColor = $termItem.data('original-color') || '';
+                    const currentColor = $input.val();
+                    
+                    if (originalColor !== currentColor) {
+                        markTermAsChanged($termItem, 'term_meta', currentColor);
+                        updateColor($termItem, currentColor);
+                    }
+                }
+            }
         });
     }
 
@@ -971,6 +1094,16 @@
             formData.option_id = optionId;
         }
 
+        const termsChanges = getTermsChanges();
+        if (hasTermsChanges()) {
+            formData.terms_changes = JSON.stringify(termsChanges);
+        }
+        
+        const deletedTerms = getDeletedTerms();
+        if (hasDeletedTerms()) {
+            formData.deleted_terms = JSON.stringify(deletedTerms);
+        }
+
         $formFields.each(function () {
             var $field = $(this);
             var name = $field.attr('name');
@@ -1018,7 +1151,7 @@
             success: function (response) {
                 if (response.success) {
                     clearAjaxCache();
-
+                    clearTermsChanges();
                     $modal.removeClass('active');
                     $body.removeClass('active');
 
@@ -1077,71 +1210,484 @@
         });
     });
 
-    $(document).on('click', '.mvl-listing-manager-term-item-edit', function (e) {
+    //Exit all term edit modes
+    function exitAllTermEditModes() {
+        const $activeTermItems = $('.mvl-listing-manager-field-term-item.active');
+        $activeTermItems.each(function() {
+            const $termItem = $(this);
+            const $nameInput = $termItem.find('.mvl-listing-manager-term-item-name-input');
+            const $editBtn = $termItem.find('#mvl-lm-edit-term-btn');
+            const $actions = $termItem.find('.mvl-listing-manager-term-item-actions');
+            saveTermChanges($termItem, $nameInput);
+            exitTermEditMode($termItem, $nameInput, $editBtn, $actions);
+        });
+    }
+
+    //Edit term click handler
+    $(document).on('click', '#mvl-lm-edit-term-btn', function (e) {
         e.preventDefault();
+        e.stopPropagation();
+        
+        const $termItem = $(this).closest('.mvl-listing-manager-field-term-item');
+        const $nameInput = $termItem.find('.mvl-listing-manager-term-item-name-input');
+        const $editBtn = $(this);
+        const $actions = $termItem.find('.mvl-listing-manager-term-item-actions');
+        
+        if ($editBtn.hasClass('active')) {
+            saveTermChanges($termItem, $nameInput);
+            exitTermEditMode($termItem, $nameInput, $editBtn, $actions);
+        } else {
+            exitAllTermEditModes();
+            
+            $nameInput.prop('readonly', false);
+            $editBtn.addClass('active');
+            $editBtn.find('i').removeClass('motors-icons-mvl-pencil').addClass('motors-icons-mvl-check');
+            
+            $actions.addClass('hidden-actions');
+            
+            $termItem.find('.mvl-listing-manager-term-item-image-edit').addClass('active');
+            $termItem.find('.mvl-listing-manager-term-item-edit-color').addClass('active');
+
+            $termItem.addClass('active');
+            
+            setTimeout(() => {
+                $nameInput.focus();
+                const length = $nameInput.val().length;
+                $nameInput[0].setSelectionRange(length, length);
+            }, 0);
+        }
+    });
+
+
+    function isExcludedFromEditMode($element) {
+        const excludedSelectors = [
+            '.mvl-listing-manager-field-color-input',
+            '.mvl-listing-manager-term-item-image-edit',
+            '.mvl-listing-manager-term-item-edit-color',
+            '.mvl-listing-manager-term-item-name',
+            '.mvl-listing-manager-field-color-popup',
+            '.mvl-listing-manager-field-term-item.active',
+        ];
+        
+        return excludedSelectors.some(selector => $element.closest(selector).length > 0);
+    }
+
+    
+    //Click outside term edit area to exit edit mode
+    $(document).on('click', function (e) {
+        const $activeTermItem = $('.mvl-listing-manager-field-term-item.active');
+        if (!$activeTermItem.length) {
+            return;
+        }
+        
+        const $clickedElement = $(e.target);
+        const isClickInsideTerm = $clickedElement.closest('.mvl-listing-manager-field-term-item.active').length > 0;
+        
+        if (!isClickInsideTerm && !isExcludedFromEditMode($clickedElement)) {
+            exitAllTermEditModes();
+        }
+    });
+
+    
+    //Image edit click handler
+    $(document).on('click', '.mvl-listing-manager-term-item-image-edit', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        
         const $termItem = $(this).closest('.mvl-listing-manager-field-term-item');
         const termId = $termItem.data('term-id');
-        const $nameInput = $termItem.find('.mvl-listing-manager-term-item-name-input');
-
-        if ($nameInput.prop('readonly')) {
-            $nameInput.prop('readonly', false).focus();
-            $(this).find('i').removeClass('fa-pencil').addClass('fa-save');
-        } else {
-            const newName = $nameInput.val().trim();
-            if (newName) {
-                $.ajax({
-                    url: ajaxurl,
-                    type: 'POST',
-                    data: {
-                        action: 'listing_manager_update_term',
-                        nonce: nonce,
-                        term_id: termId,
-                        name: newName
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            $nameInput.prop('readonly', true);
-                            $(this).find('i').removeClass('fa-save').addClass('fa-pencil');
-                        } else {
-                            alert(response.data.message || 'Error updating term');
-                        }
-                    }.bind(this),
-                    error: function () {
-                        alert('Server error occurred');
+        const $imageContainer = $termItem.find('.mvl-listing-manager-term-item-image');
+        const $image = $imageContainer.find('img');
+        const $placeholder = $imageContainer.find('.mvl-listing-manager-term-item-image-placeholder');
+        const $editBtn = $termItem.find('#mvl-lm-edit-term-btn');
+        
+        if (!termId) {
+            console.error('Term ID not found');
+            return;
+        }
+        
+        if (typeof wp === 'undefined' || !wp.media) {
+            console.error('WordPress Media Library is not available');
+            return;
+        }
+        
+        const frame = wp.media({
+            title: stm_vehicles_listing.select_image,
+            button: {
+                text: stm_vehicles_listing.use_this_image
+            },
+            multiple: false
+        });
+        
+        frame.on('select', function () {
+            const attachment = frame.state().get('selection').first().toJSON();
+            
+            if (attachment && attachment.id) {
+                if ($image.length) {
+                    $image.attr('src', attachment.url).attr('alt', attachment.title || '');
+                } else {
+                    $placeholder.hide();
+                    $imageContainer.prepend(`<img src="${attachment.url}" alt="${attachment.title || ''}">`);
+                }
+                
+                $imageContainer.attr('data-image-id', attachment.id);
+                
+                const isNewTerm = termId && termId.toString().startsWith('temp_');
+                if (isNewTerm) {
+                    const $nameInput = $termItem.find('.mvl-listing-manager-term-item-name-input');
+                    const currentName = $nameInput.val();
+                    const termMeta = $termItem.find('.mvl-listing-manager-term-item-edit-color').find('.mvl-listing-manager-field-input').val();
+                    updateNewTermsData($termItem, currentName, attachment.id, termMeta);
+                } else {
+                    markTermAsChanged($termItem, 'image_id', attachment.id);
+                }
+                
+                setTimeout(function() {
+                    const $nameInput = $termItem.find('.mvl-listing-manager-term-item-name-input');
+                    if ($nameInput.length) {
+                        $nameInput.focus();
                     }
-                });
+                }, 200);
+            }
+        });
+        
+        frame.open();
+    });
+    
+    //Enter keydown handler
+    $(document).on('keydown', '.mvl-listing-manager-term-item-name-input', function (e) {
+        const $input = $(this);
+        const $termItem = $input.closest('.mvl-listing-manager-field-term-item');
+        const $editBtn = $termItem.find('#mvl-lm-edit-term-btn');
+        const $actions = $termItem.find('.mvl-listing-manager-term-item-actions');
+        
+        if (!$editBtn.hasClass('active')) {
+            return;
+        }
+
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            saveTermChanges($termItem, $input);
+            exitTermEditMode($termItem, $input, $editBtn, $actions);
+        }
+        
+        if (e.keyCode === 27) {
+            e.preventDefault();
+            saveTermChanges($termItem, $input);
+            exitTermEditMode($termItem, $input, $editBtn, $actions);
+        }
+    });
+
+    //Blur handler for term name input
+    $(document).on('blur', '.mvl-listing-manager-term-item-name-input', function (e) {
+        const $input = $(this);
+        const $termItem = $input.closest('.mvl-listing-manager-field-term-item');
+        const $editBtn = $termItem.find('#mvl-lm-edit-term-btn');
+        const $actions = $termItem.find('.mvl-listing-manager-term-item-actions');
+        
+        if (!$editBtn.hasClass('active')) {
+            return;
+        }
+
+        const $relatedTarget = $(e.relatedTarget);
+        if (isExcludedFromEditMode($relatedTarget)) {
+            return;
+        }
+
+        setTimeout(() => {
+            if ($editBtn.hasClass('active')) {
+                // Сохраняем изменения и выходим из режима редактирования
+                saveTermChanges($termItem, $input);
+                exitTermEditMode($termItem, $input, $editBtn, $actions);
+            }
+        }, 100);
+    });
+    
+    //Save term changes
+    function saveTermChanges($termItem, $input) {
+        const newName = $input.val().trim();
+        const termId = $termItem.data('term-id');
+        const $imageContainer = $termItem.find('.mvl-listing-manager-term-item-image');
+        const currentImageId = $imageContainer.attr('data-image-id');
+        const termMeta = $termItem.find('.mvl-listing-manager-term-item-edit-color').find('.mvl-listing-manager-field-input').val();
+        
+        if (!newName) {
+            return;
+        }
+        
+        const isNewTerm = termId && termId.toString().startsWith('temp_');
+        
+        if (isNewTerm) {
+            $input.val(newName);
+            
+            if (currentImageId) {
+                const $image = $imageContainer.find('img');
+                const $placeholder = $imageContainer.find('.mvl-listing-manager-term-item-image-placeholder');
+                
+                if ($image.length) {
+                    const attachment = wp.media.attachment(currentImageId);
+                    if (attachment && attachment.get('url')) {
+                        $image.attr('src', attachment.get('url'));
+                    }
+                } else {
+                    const attachment = wp.media.attachment(currentImageId);
+                    if (attachment && attachment.get('url')) {
+                        $placeholder.hide();
+                        $imageContainer.prepend(`<img src="${attachment.get('url')}" alt="${newName}">`);
+                    }
+                }
+            }
+            
+            if (termMeta) {
+                updateColor($termItem, termMeta);
+            }
+
+            updateNewTermsData($termItem, newName, currentImageId, termMeta);
+        } else {
+            const originalName = $termItem.data('original-name') || '';
+            const originalImageId = $imageContainer.data('original-image-id') || '';
+            const originalColor = $termItem.data('original-color') || '';
+            
+            const hasNameChanged = newName !== originalName;
+            const hasImageChanged = currentImageId !== originalImageId;
+            const hasColorChanged = termMeta !== originalColor;
+            
+            if (hasNameChanged) {
+                markTermAsChanged($termItem, 'name', newName);
+            }
+            if (hasImageChanged) {
+                markTermAsChanged($termItem, 'image_id', currentImageId);
+            }
+            if (hasColorChanged) {
+                markTermAsChanged($termItem, 'term_meta', termMeta);
+            }
+            
+            if (termMeta) {
+                updateColor($termItem, termMeta);
+            }
+        }
+    }
+    
+    //Exit term edit mode
+    function exitTermEditMode($termItem, $input, $editBtn, $actions) {
+        $input.prop('readonly', true);
+        $editBtn.removeClass('active');
+        $editBtn.find('i').removeClass('motors-icons-mvl-check').addClass('motors-icons-mvl-pencil');
+        
+        $actions.removeClass('hidden-actions');
+        
+        $termItem.find('.mvl-listing-manager-term-item-image-edit').removeClass('active');
+        $termItem.find('.mvl-listing-manager-term-item-edit-color').removeClass('active');
+        $termItem.removeClass('active');
+    }
+
+    //Mark term as changed
+    function markTermAsChanged($termItem, field, value) {
+        const termId = $termItem.data('term-id');
+        if (!termId) return;
+        
+        if (!$termItem.data('changes')) {
+            $termItem.data('changes', {});
+        }
+        
+        const changes = $termItem.data('changes');
+        changes[field] = value;
+        $termItem.data('changes', changes);
+        
+        modalChanged = true;
+    }
+    
+    //Mark term as deleted
+    function markTermAsDeleted(termId) {
+        if (!termId) return;
+        
+        if (!$('.mvl-options-popup-container').data('deleted-terms')) {
+            $('.mvl-options-popup-container').data('deleted-terms', []);
+        }
+        
+        const deletedTerms = $('.mvl-options-popup-container').data('deleted-terms');
+        if (!deletedTerms.includes(termId)) {
+            deletedTerms.push(termId);
+            $('.mvl-options-popup-container').data('deleted-terms', deletedTerms);
+        }
+        
+        modalChanged = true;
+    }
+    
+    //Get terms changes
+    function getTermsChanges() {
+        const changes = {};
+        const deletedTerms = getDeletedTerms();
+        
+        $('.mvl-listing-manager-field-term-item').each(function() {
+            const $termItem = $(this);
+            const termId = $termItem.data('term-id');
+            const termChanges = $termItem.data('changes');
+            
+            if (deletedTerms.includes(termId)) {
+                return;
+            }
+            
+            if (termId && termChanges && Object.keys(termChanges).length > 0) {
+                changes[termId] = termChanges;
+            }
+        });
+        return changes;
+    }
+    
+    //Get deleted terms
+    function getDeletedTerms() {
+        return $('.mvl-options-popup-container').data('deleted-terms') || [];
+    }
+    
+    //Has terms changes
+    function hasTermsChanges() {
+        const changes = getTermsChanges();
+        return Object.keys(changes).length > 0;
+    }
+    
+    //Has deleted terms
+    function hasDeletedTerms() {
+        return getDeletedTerms().length > 0;
+    }
+    
+    //Clear terms changes
+    function clearTermsChanges() {
+        $('.mvl-listing-manager-field-term-item').each(function() {
+            const $termItem = $(this);
+            $termItem.removeData('changes');
+        });
+        
+        $('.mvl-options-popup-container').removeData('deleted-terms');
+    }
+    
+    //Initialize original term values
+    function initializeOriginalTermValues() {
+        $('.mvl-listing-manager-field-term-item').each(function() {
+            const $termItem = $(this);
+            const termId = $termItem.data('term-id');
+            
+            if (termId && termId.toString().startsWith('temp_')) {
+                return;
+            }
+            
+            const deletedTerms = getDeletedTerms();
+            if (deletedTerms.includes(termId)) {
+                return;
+            }
+            
+            const $nameInput = $termItem.find('.mvl-listing-manager-term-item-name-input');
+            $termItem.data('original-name', $nameInput.val());
+            
+            const $imageContainer = $termItem.find('.mvl-listing-manager-term-item-image');
+            const originalImageId = $imageContainer.attr('data-image-id');
+            $imageContainer.data('original-image-id', originalImageId);
+            
+            const $colorInput = $termItem.find('.mvl-listing-manager-field-input');
+            if ($colorInput.length) {
+                $termItem.data('original-color', $colorInput.val());
+            }
+        });
+    }
+    
+
+
+    //Delete term click handler
+    $(document).on('click', '#mvl-lm-delete-term-btn', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const $termItem = $(this).closest('.mvl-listing-manager-field-term-item');
+        const termId = $termItem.data('term-id');
+
+        const isNewTerm = termId && termId.toString().startsWith('temp_');
+        
+        if (isNewTerm) {
+            removeFromNewTermsData($termItem);
+            
+            $termItem.fadeOut(300, function () {
+                $(this).remove();
+            });
+            
+            const $select = $termItem.closest('.mvl-options-settings-tab-content').find('select');
+            if ($select.length) {
+                $select.find(`option[value="${termId}"]`).remove();
+            }
+        } else {
+            markTermAsDeleted(termId);
+            
+            $termItem.fadeOut(300, function () {
+                $(this).remove();
+            });
+            
+            const $select = $termItem.closest('.mvl-options-settings-tab-content').find('select');
+            if ($select.length) {
+                $select.find(`option[value="${termId}"]`).remove();
             }
         }
     });
 
-    $(document).on('click', '.mvl-listing-manager-term-item-delete', function (e) {
-        e.preventDefault();
-        const $termItem = $(this).closest('.mvl-listing-manager-field-term-item');
-        const termId = $termItem.data('term-id');
+    //Update color
+    function updateColor($termItem, termMeta) {
+        $termItem.find('.term-item-color').css('background', termMeta);
+    }
 
-        if (confirm(stm_vehicles_listing.confirm_delete_term)) {
-            $.ajax({
-                url: ajaxurl,
-                type: 'POST',
-                data: {
-                    action: 'listing_manager_delete_term',
-                    nonce: nonce,
-                    term_id: termId
-                },
-                success: function (response) {
-                    if (response.success) {
-                        $termItem.fadeOut(300, function () {
-                            $(this).remove();
-                        });
-                    } else {
-                        alert(response.data.message || 'Error deleting term');
-                    }
-                },
-                error: function () {
-                    alert('Server error occurred');
-                }
-            });
+    //Update new terms data
+    function updateNewTermsData($termItem, newName, imageId, termMeta) {
+        const termId = $termItem.data('term-id');
+        const $termsContainer = $termItem.closest('.mvl-options-settings-tab-content');
+        let $newTermsInput = $termsContainer.find('input[name="new_terms"]');
+
+        if (!$newTermsInput.length) {
+            $newTermsInput = $('<input type="hidden" name="new_terms" value="">');
+            $termsContainer.append($newTermsInput);
         }
-    });
+
+        const currentTerms = $newTermsInput.val() ? JSON.parse($newTermsInput.val()) : [];
+        
+        let existingTermIndex = -1;
+        for (let i = 0; i < currentTerms.length; i++) {
+            if (currentTerms[i].temp_id === termId) {
+                existingTermIndex = i;
+                break;
+            }
+        }
+
+        if (existingTermIndex !== -1) {
+            currentTerms[existingTermIndex].name = newName;
+            currentTerms[existingTermIndex].image_id = imageId || '';
+            currentTerms[existingTermIndex].term_meta = termMeta || '';
+        } else {
+            const taxonomy = $termsContainer.data('slug');
+            const newTerm = {
+                name: newName,
+                taxonomy: taxonomy,
+                term_meta: termMeta || '',
+                meta_key: '',
+                image_id: imageId || '',
+                temp_id: termId
+            };
+            currentTerms.push(newTerm);
+        }
+
+        $newTermsInput.val(JSON.stringify(currentTerms));
+    }
+
+    function removeFromNewTermsData($termItem) {
+        const termId = $termItem.data('term-id');
+        const $termsContainer = $termItem.closest('.mvl-options-settings-tab-content');
+        const $newTermsInput = $termsContainer.find('input[name="new_terms"]');
+
+        if (!$newTermsInput.length) {
+            return;
+        }
+
+        const currentTerms = $newTermsInput.val() ? JSON.parse($newTermsInput.val()) : [];
+        
+        const filteredTerms = currentTerms.filter(term => term.temp_id !== termId);
+        
+        $newTermsInput.val(JSON.stringify(filteredTerms));
+    }
 
 })(jQuery); 

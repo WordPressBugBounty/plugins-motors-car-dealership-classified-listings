@@ -6,21 +6,21 @@ $selected_options = array();
 
 if ( ! isset( $option ) ) {
 	$option = array(
-		'slug'                        => '',
-		'single_name'                 => '',
-		'plural_name'                 => '',
-		'listing_taxonomy_parent'     => '',
-		'field_type'                  => '',
-		'required_field'              => '',
-		'number_field_affix'          => '',
-		'use_delimiter'               => '',
-		'slider_in_tabs'              => '',
-		'slider'                      => '',
-		'font'                        => '',
-		'use_on_car_listing_page'     => '',
+		'slug'                            => '',
+		'single_name'                     => '',
+		'plural_name'                     => '',
+		'listing_taxonomy_parent'         => '',
+		'field_type'                      => '',
+		'required_field'                  => '',
+		'number_field_affix'              => '',
+		'use_delimiter'                   => '',
+		'slider_in_tabs'                  => '',
+		'slider'                          => '',
+		'font'                            => '',
+		'use_on_car_listing_page'         => '',
 		'use_on_car_archive_listing_page' => '',
-		'use_on_single_car_page'      => '',
-		'show_in_admin_column'        => '',
+		'use_on_single_car_page'          => '',
+		'show_in_admin_column'            => '',
 	);
 }
 
@@ -588,6 +588,7 @@ if ( ! empty( $taxonomies ) && is_array( $taxonomies ) ) {
 													'term_id' => $term->term_id,
 													'name' => $term->name,
 													'image_url' => $image_url,
+													'image_id' => $image_id,
 													'color' => $color,
 												),
 											)

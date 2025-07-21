@@ -1512,6 +1512,63 @@ body.mvl-popup-confirmation-opened::before {
     order: -1;
 }
 
+@keyframes mvl-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page-option-wrapper,
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page-features-wrapper {
+    position: relative;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page-option-wrapper.loading,
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page-features-wrapper.loading {
+    pointer-events: none;
+    height: 100%;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page-option-wrapper.loading::before,
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page-features-wrapper.loading::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    z-index: 10;
+    border-radius: 4px;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page-option-wrapper.loading::after,
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page-features-wrapper.loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 32px;
+    height: 32px;
+    margin: -16px 0 0 -16px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3783E1;
+    border-radius: 50%;
+    animation: mvl-spin 1s linear infinite;
+    z-index: 11;
+}
+
+.mvl-listing-manager-body .mvl-lm-edit-options-btn.disabled,
+.mvl-listing-manager-body .mvl-lm-edit-features-btn.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
 .mvl-listing-manager-body .xdsoft_datetimepicker .xdsoft_datepicker {
     margin: 0;
 }
@@ -2781,6 +2838,41 @@ body.mvl-popup-confirmation-opened::before {
     gap: 10px;
 }
 
+.mvl-listing-manager-body .mvl-listing-manager-term-item:hover {
+    cursor: pointer;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-term-item:hover .mvl-listing-manager-term-item-actions {
+    display: flex;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-field-term-item.active {
+    border: 1px solid #DDE3EC;
+    border-radius: 4px;
+    padding-right: 6px;
+    margin: -1px;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-field-term-item.active .mvl-listing-manager-term-item-color {
+    display: none;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-field-term-item.active .mvl-listing-manager-term-item-name-input:hover {
+    cursor: text;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-term-item-name {
+    width: 100%;
+    display: flex;
+    position: relative;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-term-item-name {
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+
 .mvl-listing-manager-body .mvl-listing-manager-term-item-name-input {
     background-color: unset;
     border: none;
@@ -2791,6 +2883,8 @@ body.mvl-popup-confirmation-opened::before {
     font-size: 14px;
     color: #000;
     font-weight: 400;
+    flex: 1;
+    width: 170px;
 }
 
 .mvl-listing-manager-body .mvl-listing-manager-term-item-name-input:focus {
@@ -2803,7 +2897,51 @@ body.mvl-popup-confirmation-opened::before {
     cursor: pointer;
 }
 
+.mvl-listing-manager-body .mvl-listing-manager-term-item-actions {
+    display: none;
+    gap: 8px;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-term-item-actions button {
+    width: 32px;
+    height: 32px;
+    min-height: 32px;
+    padding: 8px;
+    font-size: 16px;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-term-item-actions.hidden-actions {
+    display: none !important;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-term-item-image-edit {
+    position: absolute;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(51, 58, 72, 0.7);
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-term-item-image-edit.active {
+    display: flex;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-term-item-image-edit:hover {
+    background-color: rgba(51, 58, 72, 0.9);
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-term-item-image-edit i {
+    font-size: 18px;
+    color: #fff;
+}
+
 .mvl-listing-manager-body .mvl-listing-manager-term-item-image {
+    position: relative;
     width: 40px;
     height: 40px;
     border-radius: 4px;
@@ -2811,13 +2949,33 @@ body.mvl-popup-confirmation-opened::before {
     display: flex;
     align-items: center;
     justify-content: center;
+    min-width: 40px;
+    min-height: 40px;
 }
 
 .mvl-listing-manager-body .mvl-listing-manager-term-item-image img {
     max-width: 100%;
     -o-object-fit: contain;
     object-fit: contain;
-    max-height: 100%;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-term-item-edit-color.active .mvl-listing-manager-field-color {
+    display: flex;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-term-item-edit-color .mvl-listing-manager-field-color {
+    display: none;
+    gap: unset;
+    width: unset;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-term-item-edit-color .mvl-listing-manager-field-color .mvl-listing-manager-field-color-input-wrapper input {
+    display: none;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-term-item-edit-color .mvl-listing-manager-field-color .mvl-listing-manager-field-color-input-wrapper .pickr {
+    border: none;
+    border-right: 1px solid #DDE3EC !important;
 }
 
 .mvl-listing-manager-body .mvl-listing-manager-term-item-image-placeholder {
@@ -2836,8 +2994,8 @@ body.mvl-popup-confirmation-opened::before {
 
 .mvl-listing-manager-body .term-item-color {
     display: block;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 4px;
     overflow: hidden;
     border: 1px solid #EFF4FB;
@@ -3152,6 +3310,7 @@ body.mvl-popup-confirmation-opened::before {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+    padding: 5px;
 }
 
 .mvl-listing-manager-body .mvl-listing-manager-terms-list-inner .mvl-listing-manager-field-term-item {
