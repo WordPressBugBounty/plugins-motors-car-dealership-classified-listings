@@ -427,7 +427,6 @@ class Option extends Page {
 		if ( empty( $terms ) || ! is_array( $terms ) ) {
 			return false;
 		}
-
 		$results = array();
 
 		foreach ( $terms as $term ) {
@@ -576,7 +575,11 @@ class Option extends Page {
 			$data['numeric'] = true;
 		}
 
-		$slug = ( isset( $data['slug'] ) && $data['slug'] ) ? sanitize_title( urldecode( $data['slug'] ) ) : sanitize_title( urldecode( $single_name ) );
+		$slug = ( isset( $data['slug'] ) && $data['slug'] ) ? sanitize_title( urldecode( $data['slug'] ) ) : sanitize_title( urldecode( $data['option_id'] ) );
+
+		if ( empty( $slug ) ) {
+			$slug = sanitize_title( urldecode( $data['single_name'] ) );
+		}
 
 		$options   = $this->get_listing_options();
 		$found     = false;

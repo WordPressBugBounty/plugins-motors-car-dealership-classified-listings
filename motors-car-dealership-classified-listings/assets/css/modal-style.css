@@ -399,7 +399,7 @@
 
 @media (max-width: 920px) {
     #trade-in .modal-dialog {
-        width: inherit !important;
+        width: auto;
     }
 }
 

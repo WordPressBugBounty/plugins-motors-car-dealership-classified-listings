@@ -1371,3 +1371,20 @@ function stm_sync_car_user_meta( $post_id ) {
 }
 
 add_action( 'save_post', 'stm_sync_car_user_meta', 20, 1 );
+
+
+add_filter(
+	'motors_vl_get_nuxy_mod',
+	function ( $value, $key ) {
+		if ( 'listing_directory_title_frontend' === $key && is_array( $value ) ) {
+			$result = array();
+			foreach ( $value as $item ) {
+				$result[] = '{' . $item['value'] . '}';
+			}
+			$value = implode( ' ', $result );
+		}
+		return $value;
+	},
+	100,
+	2
+);

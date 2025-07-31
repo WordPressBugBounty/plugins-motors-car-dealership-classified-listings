@@ -64,7 +64,7 @@
 				<div class="mvl-lm-notice set-google-api-key">
 					<div class="mvl-lm-notice-message">
 						<p class="mvl-lm-notice-message-title">
-							<?php echo esc_html__( 'Please set google api key in', 'stm_vehicles_listing' ); ?> <strong><?php echo esc_html__( 'Nuxy', 'stm_vehicles_listing' ); ?></strong> <?php echo esc_html__( 'settings', 'stm_vehicles_listing' ); ?>
+							<?php echo esc_html__( 'Please set Google Maps API key in the', 'stm_vehicles_listing' ); ?> <strong><?php echo esc_html__( 'Motors Plugin', 'stm_vehicles_listing' ); ?></strong> <?php echo esc_html__( 'settings', 'stm_vehicles_listing' ); ?>
 						</p>
 						<p class="mvl-lm-notice-message-description">
 							<?php echo esc_html__( 'This feature requires a Google Maps API key to work properly.', 'stm_vehicles_listing' ); ?>

@@ -27,9 +27,23 @@ class PluginOptions {
 			)
 		);
 
-		//Fix/In other options can be key 'featured_listing_price' with incorrect value, only $plugin_opts contains correct value
-		if ( isset( $plugin_opts['featured_listing_price'] ) ) {
-			self::$options_map['featured_listing_price'] = $plugin_opts['featured_listing_price'];
+		$plugin_opts_keys = array(
+			'featured_listing_price',
+			'free_listing_submission',
+			'dealer_free_listing_submission',
+			'user_post_limit',
+			'dealer_post_limit',
+			'new_user_registration',
+			'allow_user_register_as_dealer',
+			'dealer_pay_per_listing',
+			'dealer_payments_for_featured_listing',
+			'chargeable_listing_images_limit',
+		);
+
+		foreach ( $plugin_opts_keys as $key ) {
+			if ( isset( $plugin_opts[ $key ] ) ) {
+				self::$options_map[ $key ] = $plugin_opts[ $key ];
+			}
 		}
 	}
 

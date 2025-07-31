@@ -2,6 +2,18 @@
 add_filter(
 	'listing_settings_conf',
 	function ( $conf_for_merge ) {
+		$filter_opt      = apply_filters( 'stm_get_single_car_listings', array() );
+		$single_car_data = array();
+
+		foreach ( $filter_opt as $option ) {
+			if ( isset( $option['slug'] ) && $option['slug'] ) {
+				$single_car_data[] = array(
+					'label' => $option['single_name'],
+					'value' => $option['slug'],
+				);
+			}
+		}
+
 		$grid_title_dependency = apply_filters(
 			'grid_title_dependency',
 			array(
@@ -16,11 +28,25 @@ add_filter(
 			'listing_directory_title_frontend' =>
 				array(
 					'label'       => esc_html__( 'Auto-Generate Listing Title', 'stm_vehicles_listing' ),
-					'type'        => 'text',
-					'value'       => '{make} {serie} {ca-year}',
+					'type'        => 'multiselect',
 					'description' => esc_html__( 'Automatically create listing titles based on custom fields. Use curly brackets to pull data, e.g., {make} {model} {year}. Leave blank to enter titles manually.', 'stm_vehicles_listing' ),
 					'submenu'     => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
 					'preview'     => STM_LISTINGS_URL . '/assets/images/previews/list-title.png',
+					'options'     => $single_car_data,
+					'value'       => array(
+						array(
+							'value' => 'make',
+							'label' => 'Make',
+						),
+						array(
+							'value' => 'model',
+							'label' => 'Model',
+						),
+						array(
+							'value' => 'ca-year',
+							'label' => 'Year',
+						),
+					),
 				),
 			'listing_view_type'                => array(
 				'label'       => esc_html__( 'Default Desktop Layout for Listings', 'stm_vehicles_listing' ),
@@ -84,8 +110,8 @@ add_filter(
 				),
 				'show_listing_stock'                   =>
 				array(
-					'label'      => esc_html__( 'Listing ID', 'stm_vehicles_listing' ),
-					'type'       => 'checkbox',
+					'label'        => esc_html__( 'Listing ID', 'stm_vehicles_listing' ),
+					'type'         => 'checkbox',
 					'dependency'   => array(
 						array(
 							'key'   => 'listing_view_type',
@@ -97,8 +123,8 @@ add_filter(
 						),
 					),
 					'dependencies' => '&&',
-					'submenu'    => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
-					'preview'    => STM_LISTINGS_URL . '/assets/images/previews/listing-id-srp.png',
+					'submenu'      => esc_html__( 'Listing info card', 'stm_vehicles_listing' ),
+					'preview'      => STM_LISTINGS_URL . '/assets/images/previews/listing-id-srp.png',
 				),
 			)
 		);
@@ -183,5 +209,40 @@ add_filter(
 		return array_merge( $conf_for_merge, $conf );
 	},
 	40,
+	1
+);
+
+add_filter(
+	'filter_settings_data_values',
+	function ( $settings_data ) {
+
+		if ( ! isset( $settings_data['listing_directory_title_frontend'] ) ) {
+			$settings_data['listing_directory_title_frontend'] = '{make} {serie} {ca-year}';
+		}
+
+		if ( isset( $settings_data['listing_directory_title_frontend'] ) && is_string( $settings_data['listing_directory_title_frontend'] ) ) {
+			$filter_opt       = apply_filters( 'stm_get_single_car_listings', array() );
+			$filter_opt_slugs = array_column( $filter_opt, 'slug' );
+
+			if ( preg_match_all( '/\{([^}]+)\}/', $settings_data['listing_directory_title_frontend'], $matches ) ) {
+				$settings_data['listing_directory_title_frontend'] = array();
+
+				foreach ( $matches[1] as $match ) {
+					$slug     = trim( $match );
+					$slug_key = array_search( $slug, $filter_opt_slugs, true );
+
+					if ( in_array( $slug, $filter_opt_slugs, true ) ) {
+						$settings_data['listing_directory_title_frontend'][] = array(
+							'value' => $slug,
+							'label' => $filter_opt[ $slug_key ]['single_name'],
+						);
+					}
+				}
+			}
+		}
+
+		return $settings_data;
+	},
+	100,
 	1
 );

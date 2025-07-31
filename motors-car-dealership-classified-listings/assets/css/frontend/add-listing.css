@@ -2665,12 +2665,16 @@ input:-webkit-autofill {
 .stm-vl-plugin-pure .motors-desc-slots-wrapper h3 {
     letter-spacing: -1px;
     word-spacing: -1px;
-    color: var(--motors-contrast-text-color);
+    color: var(--motors-text-color);
     font-size: 26px;
     line-height: 32px;
     font-weight: 700;
     font-style: normal;
     margin-bottom: 0.5rem;
+}
+
+.stm-vl-plugin-pure .motors-desc-slots-wrapper.luxury h3 {
+    color: var(--motors-contrast-text-color);
 }
 
 .stm-vl-plugin-pure .motors-desc-slots-wrapper p {
