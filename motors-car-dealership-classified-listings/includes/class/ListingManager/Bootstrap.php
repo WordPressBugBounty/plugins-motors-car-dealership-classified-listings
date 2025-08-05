@@ -483,8 +483,11 @@ class Bootstrap {
 					'post_type'   => isset( $_POST['general'] ) && isset( $_POST['general']['title'] ) ? sanitize_text_field( $_POST['general']['title'] ) : esc_html__( 'Untitled Listing', 'stm_vehicles_listing' ),
 					'post_status' => $post_status,
 					'post_name'   => isset( $_POST['general'] ) && isset( $_POST['general']['title'] ) ? sanitize_title( $_POST['general']['title'] ) : 'untitled',
+					'post_author' => get_current_user_id(),
 				)
 			);
+
+			update_post_meta( $item_id, 'stm_car_user', get_current_user_id() );
 		}
 
 		$response = array(

@@ -19,7 +19,7 @@ class SingleListingTemplateSettings extends MenuBase {
 
 	public function init_strings() {
 		$this->nuxy_title    = esc_html__( 'Listing Templates', 'stm_vehicles_listing' );
-		$this->nuxy_subtitle = esc_html__( 'Listing Templates', 'stm_vehicles_listing' );
+		$this->nuxy_subtitle = '';
 	}
 
 	public function mvl_init_page() {

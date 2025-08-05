@@ -1,3 +1,24 @@
+@font-face {
+    font-family: "Roboto";
+    src: url("../../fonts/admin/roboto-regular.ttf?s655d") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Roboto";
+  src: url("../../fonts/admin/roboto-medium.ttf?s655d") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+    font-family: "Roboto";
+  src: url("../../fonts/admin/roboto-bold.ttf?s655d") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
 body div.stm_metaboxes_grid__inner .listing_settings_listing-info-card .wpcfto_data_select label.wpcfto_data_select__label {
     width: 33.33%;
 }
@@ -44,6 +65,86 @@ body div.stm_metaboxes_grid__inner .search_settings-inventory_skin .wpcfto_data_
     width: 100% !important;
     height: 430px !important;
     transform: translateZ(0);
+}
+
+body div.stm_metaboxes_grid__inner .single_listing_template-listing_motors_template .wpcfto_data_select .wpcfto_data_select__label {
+    min-width: 33.333333%;
+    max-width: 33.333333%;
+}
+
+body div.stm_metaboxes_grid__inner .single_listing_template-listing_motors_template .wpcfto_data_select .wpcfto_data_select__label .wpcfto_data_select__img {
+    border: 1px solid #808C98;
+}
+
+body div.stm_metaboxes_grid__inner .single_listing_template-listing_motors_template .wpcfto_data_select .wpcfto_data_select__label .wpcfto_data_select__img.wpcfto_data_select__img_active {
+    border: 1px solid #227aff;
+}
+
+body div.stm_metaboxes_grid__inner .single_listing_template-listing_motors_template .wpcfto_data_select .wpcfto_data_select__label .wpcfto_data_select__img img {
+    height: 192px;
+    -o-object-position: top;
+    object-position: top;
+}
+
+body div.stm_metaboxes_grid__inner .single_listing_template-listing_motors_template .wpcfto_data_select .wpcfto_data_select__label .wpcfto_data_select__img a {
+    min-height: 40px;
+    max-height: 40px;
+    bottom: auto;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: #DDE3EC;
+    background-color: #DDE3EC;
+    font-size: 14px;
+    color: #56637A;
+    text-transform: none;
+    padding: 0 32px;
+    font-weight: 500;
+}
+
+body div.stm_metaboxes_grid__inner .single_listing_template-listing_motors_template .wpcfto_data_select .wpcfto_data_select__label .wpcfto_data_select__img a:before {
+    content: "\ea10";
+    font-family: "motors-icons";
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    margin: 0 5px 0 0;
+}
+
+body div.stm_metaboxes_grid__inner .single_listing_template-listing_motors_template .wpcfto_data_select .wpcfto_data_select__label .wpcfto_data_select__pricing a {
+    min-height: 40px;
+    max-height: 40px;
+    text-transform: none;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+body div.stm_metaboxes_grid__inner .single_listing_template-listing_motors_template .wpcfto_data_select .wpcfto_data_select__label input[type=radio] {
+    border: 1px solid #DDE3EC;
+    position: relative;
+}
+
+body div.stm_metaboxes_grid__inner .single_listing_template-listing_motors_template .wpcfto_data_select .wpcfto_data_select__label input[type=radio]:checked {
+    border: 1px solid #227aff;
+}
+
+body div.stm_metaboxes_grid__inner .single_listing_template-listing_motors_template .wpcfto_data_select .wpcfto_data_select__label input[type=radio]:checked:before {
+    background-color: #fff;
+    border: 5px solid #227aff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+}
+
+body div.stm_metaboxes_grid__inner .single_listing_template-listing_motors_template .wpcfto_data_select .wpcfto_data_select__label .wpcfto_data_select__alt-wrapper .wpcfto_data_select__alt {
+    font-weight: 500;
+    font-size: 18px;
+    color: #808C98;
 }
 
 .stm_custom_fields__radio-image-grid {

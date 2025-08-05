@@ -6,16 +6,22 @@
     font-display: block;
 }
 
-.fa:before, .fas:before {
+.fa:before,
+.fas:before {
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
 }
 
-.fa-classic::before, .fa-regular::before, .fa-solid::before, .far::before, .fas::before {
+.fa-classic::before,
+.fa-regular::before,
+.fa-solid::before,
+.far::before,
+.fas::before {
     font-family: "Font Awesome 6 Free";
 }
 
-.fa-brands::before, .fab::before {
+.fa-brands::before,
+.fab::before {
     font-family: "Font Awesome 5 Brands";
 }
 
@@ -33,6 +39,42 @@ i {
   /* Better Font Rendering =========== */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.motors-icons-palette:before {
+    content: "\ea1c";
+}
+
+.motors-icons-sport-car:before {
+    content: "\ea1d";
+}
+
+.motors-icons-stat-outline:before {
+    content: "\ea1e";
+}
+
+.motors-icons-swatchbook:before {
+    content: "\ea1f";
+}
+
+.motors-icons-circle-check:before {
+    content: "\ea20";
+}
+
+.motors-icons-gear-rotation:before {
+    content: "\ea21";
+}
+
+.motors-icons-mini-track:before {
+    content: "\ea22";
+}
+
+.motors-icons-oultine-engine:before {
+    content: "\ea23";
+}
+
+.motors-icons-outline-brochure:before {
+    content: "\ea24";
 }
 
 .motors-icons-mvl-compare:before {
@@ -1515,11 +1557,13 @@ i {
   font-display: block;
 }
 
-[class^=stm-icon-], [class*=" stm-icon-"] {
+[class^=stm-icon-],
+[class*=" stm-icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
 }
 
-[class^=stm-icon-]:before, [class*=" stm-icon-"]:before {
+[class^=stm-icon-]:before,
+[class*=" stm-icon-"]:before {
     font-family: "stm-icon";
     speak: none;
     font-style: normal;

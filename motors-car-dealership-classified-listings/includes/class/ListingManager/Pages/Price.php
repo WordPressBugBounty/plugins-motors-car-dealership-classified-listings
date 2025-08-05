@@ -22,7 +22,7 @@ class Price extends Page {
 			'update_text_meta'    => array(
 				'regular_price_label',
 				'regular_price_description',
-				'sale_price_label',
+				'special_price_label',
 				'instant_savings_label',
 				'car_price_form_label',
 			),

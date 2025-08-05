@@ -185,6 +185,8 @@ function stm_listings_enqueue_scripts_styles() {
 	wp_enqueue_script( 'chart-js', STM_LISTINGS_URL . '/assets/js/frontend/chart.min.js', array( 'jquery' ), STM_LISTINGS_V, true );
 	wp_register_script( 'uniform', STM_LISTINGS_URL . '/assets/js/frontend/jquery.uniform.min.js', array( 'jquery' ), STM_LISTINGS_V, true );
 	wp_register_script( 'motors-datetimepicker', STM_LISTINGS_URL . '/assets/js/motors-datetimepicker.js', array( 'jquery' ), STM_LISTINGS_V, true );
+	wp_register_script( 'mvl-lightgallery-init', STM_LISTINGS_URL . '/assets/js/frontend/lightgallery-init.js', null, STM_LISTINGS_V, true );
+	wp_register_script( 'mvl-swiper-init', STM_LISTINGS_URL . '/assets/js/frontend/swiper-init.js', null, STM_LISTINGS_V, true );
 
 	wp_enqueue_script(
 		'listings-init',
@@ -234,6 +236,7 @@ function stm_listings_enqueue_scripts_styles() {
 			'stm_label_remove'                  => __( 'Remove from compare', 'stm_vehicles_listing' ),
 			'stm_label_remove_list'             => __( 'Remove from list', 'stm_vehicles_listing' ),
 			'stm_label_in_compare'              => __( 'In compare list', 'stm_vehicles_listing' ),
+			'add_to_compare'                    => __( 'Add to compare', 'stm_vehicles_listing' ),
 			'remove_from_compare'               => __( 'Remove from compare', 'stm_vehicles_listing' ),
 			'stm_already_added_to_compare_text' => __( 'You have already added 3 cars', 'stm_vehicles_listing' ),
 			'remove_from_favorites'             => __( 'Remove from favorites', 'stm_vehicles_listing' ),
@@ -304,11 +307,14 @@ if ( ! function_exists( 'init_motors_root_colors' ) ) {
 				--motors-text-color: ' . Colors::value( 'text_color' ) . ';
 				--motors-contrast-text-color: ' . Colors::value( 'contrast_text_color' ) . ';
 				--motors-text-highalpha-color: ' . Colors::value( 'text_color', 0.7 ) . ';
+				--motors-text-highestalpha-color: ' . Colors::value( 'text_color', 0.8 ) . ';
 				--motors-text-alpha-color: ' . Colors::value( 'text_color', 0.5 ) . ';
 				--motors-contrast-text-lowestalpha-color: ' . Colors::value( 'contrast_text_color', 0.1 ) . ';
 				--motors-contrast-text-lowalpha-color: ' . Colors::value( 'contrast_text_color', 0.3 ) . ';
-				--motors-text-low-alpha-color: ' . Colors::value( 'text_color', 0.3 ) . ';
-				--motors-text-super-low-alpha-color: ' . Colors::value( 'text_color', 0.1 ) . ';
+				--motors-contrast-text-highalpha-color: ' . Colors::value( 'contrast_text_color', 0.7 ) . ';
+				--motors-contrast-text-highestalpha-color: ' . Colors::value( 'contrast_text_color', 0.8 ) . ';
+				--motors-text-lowalpha-color: ' . Colors::value( 'text_color', 0.3 ) . ';
+				--motors-text-lowestalpha-color: ' . Colors::value( 'text_color', 0.1 ) . ';
 				--motors-contrast-text-alpha-color: ' . Colors::value( 'contrast_text_color', 0.5 ) . ';
 				--motors-border-color: ' . Colors::value( 'text_color', 0.15 ) . ';
 				--motors-contrast-border-color: ' . Colors::value( 'contrast_text_color', 0.15 ) . ';
@@ -419,3 +425,16 @@ if ( ! function_exists( 'mvl_tinymce_custom_colors' ) ) {
 
 add_filter( 'teeny_mce_before_init', 'mvl_tinymce_custom_colors' );
 add_filter( 'tiny_mce_before_init', 'mvl_tinymce_custom_colors' );
+
+if ( ! function_exists( 'mvl_add_listing_page_container_width' ) ) {
+	function mvl_add_listing_page_container_width() {
+		$container_width = apply_filters( 'motors_vl_get_nuxy_mod', 1160, 'listing_motors_template_container_width' );
+		$template_type   = apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'listing_template_type' );
+
+		if ( $container_width && 'motors' === $template_type ) {
+			echo '<style>body .single-listing-container { max-width: ' . esc_attr( $container_width ) . 'px; } </style>';
+		}
+	}
+
+	add_action( 'wp_head', 'mvl_add_listing_page_container_width' );
+}

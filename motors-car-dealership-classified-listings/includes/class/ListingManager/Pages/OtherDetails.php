@@ -38,24 +38,6 @@ class OtherDetails extends Page {
 	}
 
 	public function get_certificates( $post_id ): array {
-		$certificates = array(
-			array(
-				'name'  => get_post_meta( $post_id, 'history', true ),
-				'link'  => get_post_meta( $post_id, 'history_link', true ),
-				'image' => get_post_meta( $post_id, 'certified_logo_1', true ),
-			),
-		);
-
-		$certificate_2 = array(
-			'name'  => get_post_meta( $post_id, 'history_2', true ),
-			'link'  => get_post_meta( $post_id, 'certified_logo_2_link', true ),
-			'image' => get_post_meta( $post_id, 'certified_logo_2', true ),
-		);
-
-		if ( $certificate_2['name'] || $certificate_2['link'] || $certificate_2['image'] ) {
-			$certificates[] = $certificate_2;
-		}
-
-		return $certificates;
+		return apply_filters( 'mvl_get_listing_certificates', array(), $post_id );
 	}
 }

@@ -2,8 +2,8 @@ if (typeof (STMListings) == 'undefined') {
     var STMListings = {};
 
     STMListings.$extend = function (object, methods) {
-        methods.prototype = jQuery.extend( {}, object.prototype );
-        object.prototype  = methods;
+        methods.prototype = jQuery.extend({}, object.prototype);
+        object.prototype = methods;
     };
 }
 
@@ -11,8 +11,8 @@ if (typeof (STMListings) == 'undefined') {
     "use strict";
     var timer;
 
-    STMListings.resetFields = function() {
-        $(document).on('reset', 'select', function(e){
+    STMListings.resetFields = function () {
+        $(document).on('reset', 'select', function (e) {
             $(this).val('');
             $(this).find('option').prop('disabled', false);
         });
@@ -91,7 +91,7 @@ if (typeof (STMListings) == 'undefined') {
                         $('#stm_user_info').slideUp('fast', function () {
                             $(this).empty();
                             $('.stm-not-enabled, .stm-not-disabled').slideDown('fast');
-                            $("html, body").animate({scrollTop: $('.stm-form-checking-user').offset().top}, "slow");
+                            $("html, body").animate({ scrollTop: $('.stm-form-checking-user').offset().top }, "slow");
                         });
 
                         $('.stm-form-checking-user button[type="submit"]').removeClass('enabled').addClass('disabled');
@@ -104,7 +104,7 @@ if (typeof (STMListings) == 'undefined') {
     };
 
     STMListings.stm_ajax_registration = function () {
-        if ( 0 === $( ".stm-register-form form" ).length ) {
+        if (0 === $(".stm-register-form form").length) {
             return;
         }
         $(".stm-register-form form").on('submit', function (e) {
@@ -127,18 +127,18 @@ if (typeof (STMListings) == 'undefined') {
                         $('.stm-not-disabled, .stm-not-enabled').slideUp('fast', function () {
                             $('#stm_user_info').slideDown('fast');
                         });
-                        $("html, body").animate({scrollTop: $('.stm-form-checking-user').offset().top}, "slow");
+                        $("html, body").animate({ scrollTop: $('.stm-form-checking-user').offset().top }, "slow");
 
                         $('.stm-form-checking-user button[type="submit"]').removeClass('disabled').addClass('enabled');
 
                         // insert plans select
-                        if ( data.plans_select && $('#user_plans_select_wrap').length > 0 ) {
+                        if (data.plans_select && $('#user_plans_select_wrap').length > 0) {
                             $('#user_plans_select_wrap').html(data.plans_select);
-                            $( '#user_plans_select_wrap select' ).select2();
+                            $('#user_plans_select_wrap select').select2();
                         }
                     }
 
-                    if(data.restricted && data.restricted) {
+                    if (data.restricted && data.restricted) {
                         $('.btn-add-edit').remove();
                     }
 
@@ -174,24 +174,24 @@ if (typeof (STMListings) == 'undefined') {
      * @param currentForm
      * @returns array - from form elements
      */
-    STMListings.prepare_filter_params = function ( currentForm ) {
+    STMListings.prepare_filter_params = function (currentForm) {
         let search_radius;
-        let range = $( ".stm-search_radius-range" );
+        let range = $(".stm-search_radius-range");
 
-        if ( range.length && range.slider( "instance" ) !== undefined ) {
+        if (range.length && range.slider("instance") !== undefined) {
             search_radius = range.slider("option", "max");
         }
 
         let data = currentForm.serializeArray();
 
-        data = data.filter(function ( field ) {
-            let value = parseInt( field.value );
+        data = data.filter(function (field) {
+            let value = parseInt(field.value);
 
-            if ( 'max_search_radius' === field.name && ( value > parseInt( search_radius ) || isNaN( value ) ) ) {
+            if ('max_search_radius' === field.name && (value > parseInt(search_radius) || isNaN(value))) {
                 return
             }
 
-            if ( ( ['stm_lat', 'stm_lng'].includes( field.name ) && 0 === value ) ) {
+            if ((['stm_lat', 'stm_lng'].includes(field.name) && 0 === value)) {
                 return
             }
 
@@ -206,25 +206,25 @@ if (typeof (STMListings) == 'undefined') {
         $('form.search-filter-form.v8-inventory-form').on('submit', function (e) {
             e.preventDefault();
             var form = $(this);
-            var formActiveFields = STMListings.prepare_filter_params( form );
-            var formActiveFieldNames = formActiveFields.map( function(value) { return value.name; });
-            $.each( $(this).serializeArray(), function( k, field ) {
-                if ( false === formActiveFieldNames.includes(field.name) ) {
-                    form.find('[name="'+field.name+'"]').val('');
+            var formActiveFields = STMListings.prepare_filter_params(form);
+            var formActiveFieldNames = formActiveFields.map(function (value) { return value.name; });
+            $.each($(this).serializeArray(), function (k, field) {
+                if (false === formActiveFieldNames.includes(field.name)) {
+                    form.find('[name="' + field.name + '"]').val('');
                 }
             });
         })
     }
 
     /** init Select2 for filter select , on other select2 inits was added exception for .filter-select **/
-    STMListings.init_select = function() {
-        $("select.filter-select").each(function() {
+    STMListings.init_select = function () {
+        $("select.filter-select").each(function () {
             let selectElement = $(this),
-                selectClass   = selectElement.attr( 'class' );
+                selectClass = selectElement.attr('class');
 
             let proDropdown = selectElement.hasClass('stm-pro-filter-select');
             let parent = $('body');
-            if ( selectElement.hasClass('stm-pro-filter-select') ) {
+            if (selectElement.hasClass('stm-pro-filter-select')) {
                 parent = $('#' + selectElement.attr('data-dropdown'));
             }
             selectElement.select2({
@@ -235,11 +235,11 @@ if (typeof (STMListings) == 'undefined') {
                 closeOnSelect: true,
                 dropdownCssClass: selectClass + ' ' + selectElement.closest('.filter-sidebar').attr('class'),
                 "language": {
-                    "noResults": function(){
+                    "noResults": function () {
                         return noFoundSelect2;
                     }
                 },
-                matcher: function(params, data) {
+                matcher: function (params, data) {
                     if (data.element && data.element.index === 0 && proDropdown === true) {
                         return null;
                     }
@@ -249,10 +249,10 @@ if (typeof (STMListings) == 'undefined') {
                     if (data.text.toLowerCase().indexOf(params.term.toLowerCase()) > -1) {
                         return data;
                     }
-                    
+
                     return null;
                 },
-                templateResult: function(data) {
+                templateResult: function (data) {
                     if (!data.id) {
                         return data.text;
                     }
@@ -260,7 +260,7 @@ if (typeof (STMListings) == 'undefined') {
                     let $option = $(data.element);
                     let count = $option.data('option-count');
                     let image = $option.data('option-image');
-                    
+
                     let $wrapper = $('<span class="stm-filter-pro-item-content"></span>');
 
                     if (image) {
@@ -269,7 +269,7 @@ if (typeof (STMListings) == 'undefined') {
                     $wrapper.append($('<span class="select2-option-text">' + data.text + '</span>'));
 
                     if (count !== undefined) {
-                        if(count == 0) {
+                        if (count == 0) {
                             $wrapper.addClass('disabled');
                         }
                         $wrapper.append($('<span class="option-count">(' + count + ')</span>'));
@@ -277,7 +277,7 @@ if (typeof (STMListings) == 'undefined') {
 
                     return $wrapper;
                 },
-                templateSelection: function(data) {
+                templateSelection: function (data) {
                     if (!data.id) {
                         return data.text;
                     }
@@ -285,7 +285,7 @@ if (typeof (STMListings) == 'undefined') {
                     let $option = $(data.element);
                     let count = $option.data('option-count');
                     let image = $option.data('option-image');
-                    
+
                     let $wrapper = $('<span class="stm-filter-pro-item-content"></span>');
 
                     if (image) {
@@ -299,15 +299,15 @@ if (typeof (STMListings) == 'undefined') {
 
                     return $wrapper;
                 }
-            }).on('select2:open', function() {
-                if(proDropdown) {
+            }).on('select2:open', function () {
+                if (proDropdown) {
                     $('.select2-search__field').attr('placeholder', 'Search');
                 }
             });
 
-            selectElement.find('option').each(function() {
+            selectElement.find('option').each(function () {
                 let count = $(this).data('option-count');
-                if(count !== undefined && count == 0) {
+                if (count !== undefined && count == 0) {
                     $(this).prop('disabled', true);
                 }
             });
@@ -320,17 +320,17 @@ if (typeof (STMListings) == 'undefined') {
     }
 
     /** Will remove earlier choosen child value if parent was changed **/
-    STMListings.clean_select_child_if_parent_changed = function( changed_item ) {
+    STMListings.clean_select_child_if_parent_changed = function (changed_item) {
         let list = $('#stm_parent_slug_list');
-        if ( 0 === list.length ) {
+        if (0 === list.length) {
             return;
         }
         let stm_parent_slug_list = list.attr('data-value');
-        let name                 = changed_item.attr('name');
-        if ( $( changed_item ).length && name && name.length > 0 ) {
-            let name = changed_item.attr('name').replace(/[\[\]']+/g,'');
+        let name = changed_item.attr('name');
+        if ($(changed_item).length && name && name.length > 0) {
+            let name = changed_item.attr('name').replace(/[\[\]']+/g, '');
 
-            if ( stm_parent_slug_list && stm_parent_slug_list.split(',').includes( name ) ) {
+            if (stm_parent_slug_list && stm_parent_slug_list.split(',').includes(name)) {
                 var child_select = $('.filter-select option[data-parent="' + name + '"]').parent();
                 child_select.val('');
             }
@@ -338,23 +338,23 @@ if (typeof (STMListings) == 'undefined') {
     }
 
     STMListings.ajaxGetCarPrice = function () {
-        $('#get-car-price form').on("submit", function(event){
+        $('#get-car-price form').on("submit", function (event) {
             event.preventDefault();
             $.ajax({
                 url: ajaxurl,
                 type: "POST",
                 dataType: 'json',
                 context: this,
-                data: $( this ).serialize() + '&action=stm_ajax_get_car_price&security=' + stm_car_price_nonce,
-                beforeSend: function(){
+                data: $(this).serialize() + '&action=stm_ajax_get_car_price&security=' + stm_car_price_nonce,
+                beforeSend: function () {
                     $('.alert-modal').remove();
                     $(this).closest('form').find('input').removeClass('form-error');
                     $(this).closest('form').find('.stm-ajax-loader').addClass('loading');
                 },
                 success: function (data) {
                     $(this).closest('form').find('.stm-ajax-loader').removeClass('loading');
-                    $(this).closest('form').find('.modal-body').append('<div class="alert-modal alert alert-'+ data.status +' text-left">' + data.response + '</div>')
-                    for(var key in data.errors) {
+                    $(this).closest('form').find('.modal-body').append('<div class="alert-modal alert alert-' + data.status + ' text-left">' + data.response + '</div>')
+                    for (var key in data.errors) {
                         $('#get-car-price input[name="' + key + '"]').addClass('form-error');
                     }
                 }
@@ -379,7 +379,7 @@ if (typeof (STMListings) == 'undefined') {
 
         var _this = this;
         if ($('body').hasClass('logged-in')) {
-            $.getJSON(ajaxurl, {action: 'stm_ajax_get_favourites', security: stm_security_nonce}, function (data) {
+            $.getJSON(ajaxurl, { action: 'stm_ajax_get_favourites', security: stm_security_nonce }, function (data) {
                 _this.ids = data;
                 _this.activateLinks();
             });
@@ -443,10 +443,10 @@ if (typeof (STMListings) == 'undefined') {
             }
 
             stm_car_favourites = stm_car_favourites.join(',');
-            $.cookie('stm_car_favourites', stm_car_favourites, {expires: 7, path: '/'});
+            $.cookie('stm_car_favourites', stm_car_favourites, { expires: 7, path: '/' });
 
         } else {
-            $.cookie('stm_car_favourites', stm_car_add_to.toString(), {expires: 7, path: '/'});
+            $.cookie('stm_car_favourites', stm_car_add_to.toString(), { expires: 7, path: '/' });
         }
 
         updateTooltip($button);
@@ -463,7 +463,7 @@ if (typeof (STMListings) == 'undefined') {
                 .addClass('active')
                 .tooltip('hide')
                 .attr('title', stm_i18n.remove_from_favorites)
-                .tooltip({placement: 'auto'});
+                .tooltip({ placement: 'auto' });
 
             $('.stm-listing-favorite.active')
                 .tooltip('destroy')
@@ -472,7 +472,7 @@ if (typeof (STMListings) == 'undefined') {
             $('.stm-user-private-main').find('.stm-listing-favorite.active')
                 .tooltip('destroy')
                 .tooltip()
-                .tooltip({placement: 'auto'});
+                .tooltip({ placement: 'auto' });
         });
     };
 
@@ -486,11 +486,11 @@ if (typeof (STMListings) == 'undefined') {
         }
     }
 
-    STMListings.initTooltips = function() {
-        $('[data-toggle="tooltip"]').each(function() {
+    STMListings.initTooltips = function () {
+        $('[data-toggle="tooltip"]').each(function () {
             var $this = $(this);
             var placement = $this.data('placement') || 'auto';
-            
+
             $this.tooltip({
                 trigger: 'hover',
                 placement: placement,
@@ -501,9 +501,9 @@ if (typeof (STMListings) == 'undefined') {
     };
 
     $(document).ready(function () {
-        if ( typeof elementorFrontend !== "undefined" && typeof elementorFrontend.hooks !== "undefined" ) {
-            elementorFrontend.hooks.addAction('frontend/element_ready/widget', function ( $scope ) {
-                if ( $scope.find( 'select.filter-select' ).length ) {
+        if (typeof elementorFrontend !== "undefined" && typeof elementorFrontend.hooks !== "undefined") {
+            elementorFrontend.hooks.addAction('frontend/element_ready/widget', function ($scope) {
+                if ($scope.find('select.filter-select').length) {
                     STMListings.init_select();
                 }
             });
@@ -531,29 +531,38 @@ if (typeof (STMListings) == 'undefined') {
 
         $(document).on('change', '.ajax-filter select, .stm-sort-by-options select, .stm-slider-filter-type-unit, .stm-filter-pro-options-list input[type="checkbox"]', function () {
             STMListings.clean_select_child_if_parent_changed($(this));
-            $(this).closest('form').trigger('submit');
+            if ($(this).closest('form').length) {
+                $(this).closest('form').trigger('submit');
+            } else {
+                if (this.closest('.stm-select-sorting')) {
+                    $('[data-action="listings-result"][data-trigger="filter"] [name="sort_order"]').val(this.value);
+                    requestAnimationFrame(function () {
+                        $('[data-action="listings-result"][data-trigger="filter"]').trigger('submit');
+                    });
+                }
+            }
         });
 
         $(document).on('slidestop', '.ajax-filter .stm-filter-type-slider', function (event, ui) {
             $(this).closest('form').trigger('submit');
         });
 
-        $(document).ajaxComplete(function() {
+        $(document).ajaxComplete(function () {
             STMListings.initTooltips();
         });
 
-        $('.stm_login_me a').on('click',function (e) {
+        $('.stm_login_me a').on('click', function (e) {
             e.preventDefault();
             $('.stm-add-a-car-login-overlay,.stm-add-a-car-login').toggleClass('visiblity');
         });
 
-        $('.stm-add-a-car-login-overlay').on('click',function (e) {
+        $('.stm-add-a-car-login-overlay').on('click', function (e) {
             $('.stm-add-a-car-login-overlay,.stm-add-a-car-login').toggleClass('visiblity');
         });
 
         $('.stm-big-car-gallery').lightGallery({
             selector: '.stm_light_gallery',
-            mode : 'lg-fade'
+            mode: 'lg-fade'
         });
 
         STMListings.initVideoIFrame();
@@ -595,6 +604,51 @@ if (typeof (STMListings) == 'undefined') {
             $(this).removeClass('fa-eye-slash');
         });
 
+        $('body').on('click', '.stm-show-number, .single-listing-phone-show', function () {
+			var parent = $(this).parent()
+			var phone_owner_id = $(this).attr('data-id')
+			var listing_id = $(this).attr('data-listing-id')
+
+			if (typeof listing_id === 'undefined' || listing_id === false) {
+				listing_id = '0'
+			}
+
+			parent.find('.stm-show-number').text('').addClass('load_number')
+			$.ajax({
+				url: ajaxurl,
+				type: 'GET',
+				dataType: 'json',
+				context: this,
+				data:
+					'phone_owner_id=' +
+					phone_owner_id +
+					'&listing_id=' +
+					listing_id +
+					'&action=stm_ajax_get_seller_phone&security=' +
+					stm_security_nonce,
+				success: function (data) {
+					parent.find('.stm-show-number').hide()
+					parent
+						.find('.phone')
+						.html('')
+						.append(
+							$('<a>')
+								.attr('href', 'tel:' + data)
+								.text(data)
+						)
+						.html('')
+						.append(
+							$('<a>')
+								.attr('href', 'tel:' + data)
+								.text(data)
+						)
+                        parent.find('.single-listing-phone-number').show();
+                        parent.find('.single-listing-hidden-phone-number').hide();
+                        parent.find('.single-listing-phone-show').hide();
+				},
+			})
+		})
+
     });
 
     $('body').on(
@@ -608,30 +662,30 @@ if (typeof (STMListings) == 'undefined') {
     )
 
     $(document).ready(function () {
-			function updateCarListing() {
-				var selectedOption = $('.stm-select-sorting select').val()
-				if (selectedOption === 'popular') {
-					$('.user-listings-wrapper#popular').addClass('active')
-					$('.user-listings-wrapper#recent').removeClass('active')
-					$('.popular.user-listings-pagination').addClass('active')
-					$('.recent.user-listings-pagination').removeClass('active')
-				} else {
-					$('.user-listings-wrapper#popular').removeClass('active')
-					$('.user-listings-wrapper#recent').addClass('active')
-					$('.popular.user-listings-pagination').removeClass('active')
-					$('.recent.user-listings-pagination').addClass('active')
-                    $('.stm-select-sorting').removeClass('mvl-selected');
-                    $('.stm-select-sorting').addClass('mvl-selected');
-                    $('.stm-sort-by-options').find('i').addClass('mvl-selected');
-				}
-			}
-			$('.stm-select-sorting select').on('change', function () {
-				updateCarListing()
-			})
-		})
+        function updateCarListing() {
+            var selectedOption = $('.stm-select-sorting select').val()
+            if (selectedOption === 'popular') {
+                $('.user-listings-wrapper#popular').addClass('active')
+                $('.user-listings-wrapper#recent').removeClass('active')
+                $('.popular.user-listings-pagination').addClass('active')
+                $('.recent.user-listings-pagination').removeClass('active')
+            } else {
+                $('.user-listings-wrapper#popular').removeClass('active')
+                $('.user-listings-wrapper#recent').addClass('active')
+                $('.popular.user-listings-pagination').removeClass('active')
+                $('.recent.user-listings-pagination').addClass('active')
+                $('.stm-select-sorting').removeClass('mvl-selected');
+                $('.stm-select-sorting').addClass('mvl-selected');
+                $('.stm-sort-by-options').find('i').addClass('mvl-selected');
+            }
+        }
+        $('.stm-select-sorting select').on('change', function () {
+            updateCarListing()
+        })
+    })
 
 })(jQuery);
 
 function stm_get_price_view(price, currency, currencyPos, priceDel) {
-	return price;
+    return price;
 }

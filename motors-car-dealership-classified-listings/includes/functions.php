@@ -1414,7 +1414,7 @@ function add_footer_template() {
 		stm_listings_load_template( 'modals/trade-in' );
 	}
 
-	if ( class_exists( 'Elementor\Plugin' ) && $wp_query->get( 'show_calculator' ) ) {
+	if ( class_exists( 'Elementor\Plugin' ) && $wp_query->get( 'show_calculator' ) || is_singular( 'listings' ) ) {
 		do_action( 'stm_listings_load_template', 'modals/car-calculator' );
 	}
 
@@ -1523,7 +1523,7 @@ function mvl_admin_bar_item( $admin_bar ) {
 			),
 		);
 
-		if ( defined( 'ELEMENTOR_VERSION' ) ) {
+		if ( defined( 'ELEMENTOR_VERSION' ) || is_mvl_pro() ) {
 			$listing_template_menu = array(
 				'id'    => 'mvl-plugin-listing-templates',
 				'title' => esc_html__( 'Listing Templates', 'stm_vehicles_listing' ),

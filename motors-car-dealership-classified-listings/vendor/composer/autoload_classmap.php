@@ -33,6 +33,7 @@ return array(
     'MotorsVehiclesListing\\Libs\\Traits\\ProtectedActivationHook' => $baseDir . '/includes/class/Libs/Traits/ProtectedActivationHook.php',
     'MotorsVehiclesListing\\Libs\\Traits\\ProtectedHooks' => $baseDir . '/includes/class/Libs/Traits/ProtectedHooks.php',
     'MotorsVehiclesListing\\Libs\\Traits\\SnakeCaseClassName' => $baseDir . '/includes/class/Libs/Traits/SnakeCaseClassName.php',
+    'MotorsVehiclesListing\\Libs\\Validator' => $baseDir . '/includes/class/Libs/Validator.php',
     'MotorsVehiclesListing\\ListingManager\\Abstracts\\Page' => $baseDir . '/includes/class/ListingManager/Abstracts/Page.php',
     'MotorsVehiclesListing\\ListingManager\\Bootstrap' => $baseDir . '/includes/class/ListingManager/Bootstrap.php',
     'MotorsVehiclesListing\\ListingManager\\Pages\\Features' => $baseDir . '/includes/class/ListingManager/Pages/Features.php',

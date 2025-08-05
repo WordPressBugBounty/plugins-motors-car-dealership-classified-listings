@@ -102,13 +102,117 @@ class TemplateManager {
 	}
 
 	public function motors_car_settings_conf( $conf ) {
-		$conf_tm[ $this->setting_name ] = array(
-			'label'       => esc_html__( 'Listing templates', 'stm_vehicles_listing' ),
-			'type'        => 'mew-repeater-radio',
-			'description' => __( 'Select the listing page template', 'stm_vehicles_listing' ),
-			'fields'      => $this->data_for_select,
-			'value'       => array_key_first( $this->data_for_select ),
+		$is_mvl_pro             = is_mvl_pro();
+		$listing_template_type  = 'default';
+		$listing_template_types = array(
+			'default' => esc_html__( 'Default', 'stm_vehicles_listing' ),
+			'motors'  => esc_html__( 'Built-in', 'stm_vehicles_listing' ),
 		);
+
+		if ( class_exists( 'Elementor\Plugin' ) ) {
+			$listing_template_type               = 'elementor';
+			$listing_template_types['elementor'] = esc_html__( 'Elementor', 'stm_vehicles_listing' );
+		}
+
+		$conf_tm['listing_template_type'] = array(
+			'label'       => esc_html__( 'Template Source', 'stm_vehicles_listing' ),
+			'type'        => 'select',
+			'description' => __( 'Choose how your listing posts will look on the site. Use ready-made built-in templates or design your own with Elementor.', 'stm_vehicles_listing' ),
+			'options'     => $listing_template_types,
+			'value'       => $listing_template_type,
+		);
+
+		$conf_tm['listing_motors_template'] = array(
+			'type'        => 'nuxy-radio',
+			'label'       => esc_html__( 'Template Layout', 'stm_vehicles_listing' ),
+			'description' => __( 'Select the layout you want to use for your listing posts.', 'stm_vehicles_listing' ),
+			'value'       => 'classic',
+			'options'     => array(
+				array(
+					'value'         => 'classic',
+					'alt'           => 'Classic',
+					'img'           => STM_LISTINGS_URL . '/assets/images/pro/listing-templates/classic.png',
+					'disabled'      => ! $is_mvl_pro,
+					'preview_url'   => 'https://motors-plugin.stylemixthemes.com/listings/ferrari-f40/',
+					'preview_label' => esc_html__( 'Preview', 'stm_vehicles_listing' ),
+					'pricing_url'   => admin_url( 'admin.php?page=mvl-go-pro' ),
+					'pricing_label' => esc_html__( 'Upgrade to PRO', 'stm_vehicles_listing' ),
+					'lock_icon'     => esc_url( STM_LISTINGS_URL . '/assets/images/pro/lock-pro.svg' ),
+				),
+				array(
+					'value'         => 'modern',
+					'alt'           => 'Modern',
+					'img'           => STM_LISTINGS_URL . '/assets/images/pro/listing-templates/modern.png',
+					'disabled'      => ! $is_mvl_pro,
+					'preview_url'   => 'https://motors-plugin.stylemixthemes.com/listings/mercedes-benz-e63/?mvl=pro',
+					'preview_label' => esc_html__( 'Preview', 'stm_vehicles_listing' ),
+					'pricing_url'   => admin_url( 'admin.php?page=mvl-go-pro' ),
+					'pricing_label' => esc_html__( 'Upgrade to PRO', 'stm_vehicles_listing' ),
+					'lock_icon'     => esc_url( STM_LISTINGS_URL . '/assets/images/pro/lock-pro.svg' ),
+				),
+				array(
+					'value'         => 'mosaic',
+					'alt'           => 'Mosaic Gallery',
+					'img'           => STM_LISTINGS_URL . '/assets/images/pro/listing-templates/mosaic.png',
+					'disabled'      => ! $is_mvl_pro,
+					'preview_url'   => 'https://motors-plugin.stylemixthemes.com/listings/nissan-gtr-r34/?mvl=pro',
+					'preview_label' => esc_html__( 'Preview', 'stm_vehicles_listing' ),
+					'pricing_url'   => admin_url( 'admin.php?page=mvl-go-pro' ),
+					'pricing_label' => esc_html__( 'Upgrade to PRO', 'stm_vehicles_listing' ),
+					'lock_icon'     => esc_url( STM_LISTINGS_URL . '/assets/images/pro/lock-pro.svg' ),
+				),
+				array(
+					'value'         => 'carousel',
+					'alt'           => 'Carousel Gallery',
+					'img'           => STM_LISTINGS_URL . '/assets/images/pro/listing-templates/carousel.png',
+					'disabled'      => ! $is_mvl_pro,
+					'preview_url'   => 'https://motors-plugin.stylemixthemes.com/listings/bmw-m5-f90/?mvl=pro',
+					'preview_label' => esc_html__( 'Preview', 'stm_vehicles_listing' ),
+					'pricing_url'   => admin_url( 'admin.php?page=mvl-go-pro' ),
+					'pricing_label' => esc_html__( 'Upgrade to PRO', 'stm_vehicles_listing' ),
+					'lock_icon'     => esc_url( STM_LISTINGS_URL . '/assets/images/pro/lock-pro.svg' ),
+				),
+			),
+		);
+
+		$conf_tm['listing_motors_template_container_width'] = array(
+			'label'       => esc_html__( 'Container Width', 'stm_vehicles_listing' ),
+			'type'        => 'number',
+			'description' => __( 'Set how wide the template should be. Enter a value in pixels (ex. 1200).', 'stm_vehicles_listing' ),
+			'value'       => 1160,
+			'min'         => 900,
+			'max'         => 1450,
+			'step'        => 1,
+			'unit'        => 'px',
+		);
+
+		if ( isset( $conf_tm['listing_template_type'] ) ) {
+			$conf_tm['listing_motors_template']['dependency']                 = array(
+				'key'   => 'listing_template_type',
+				'value' => 'motors',
+			);
+			$conf_tm['listing_motors_template_container_width']['dependency'] = array(
+				'key'   => 'listing_template_type',
+				'value' => 'motors',
+			);
+		}
+
+		if ( class_exists( 'Elementor\Plugin' ) ) {
+			$conf_tm[ $this->setting_name ] = array(
+				'label'       => esc_html__( 'Template Layout', 'stm_vehicles_listing' ),
+				'description' => __( 'Select the template you want to use for your listing posts.', 'stm_vehicles_listing' ),
+				'type'        => 'mew-repeater-radio',
+				'fields'      => $this->data_for_select,
+				'value'       => array_key_first( $this->data_for_select ),
+			);
+		}
+
+		if ( isset( $conf_tm[ $this->setting_name ] ) ) {
+			$conf_tm[ $this->setting_name ]['dependency'] = array(
+				'key'   => 'listing_template_type',
+				'value' => 'elementor',
+			);
+		}
 
 		return array_merge( $conf, $conf_tm );
 	}
@@ -217,7 +321,7 @@ class TemplateManager {
 
 	public function motors_single_template_library_sync() {
 
-		if ( ! is_admin() || wp_doing_ajax() ) {
+		if ( ! is_admin() || wp_doing_ajax() || ! class_exists( 'Elementor\Plugin' ) ) {
 			return;
 		}
 
@@ -287,7 +391,7 @@ class TemplateManager {
 	}
 
 	public function motors_single_pro_template_library_sync() {
-		if ( ! is_admin() || wp_doing_ajax() ) {
+		if ( ! is_admin() || wp_doing_ajax() || ! class_exists( 'Elementor\Plugin' ) ) {
 			return;
 		}
 		$existing_templates = array();
@@ -341,6 +445,10 @@ class TemplateManager {
 	}
 
 	public static function motors_display_template() {
+		if ( ! class_exists( 'Elementor\Plugin' ) || apply_filters( 'motors_vl_get_nuxy_mod', 'elementor', 'listing_template_type' ) !== 'elementor' ) {
+			return;
+		}
+
 		global $post;
 		$special_listing_template = get_post_meta( $post->ID, 'special_listing_template', true );
 		$template_listing_id      = ( $special_listing_template ) ? $special_listing_template : self::$selected_template_id;

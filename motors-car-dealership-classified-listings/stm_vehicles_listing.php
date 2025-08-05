@@ -8,7 +8,7 @@
  * License: GNU General Public License v2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: stm_vehicles_listing
- * Version: 1.4.83
+ * Version: 1.4.84
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -50,7 +50,7 @@ if ( ! defined( 'STM_LISTINGS_PATH' ) ) {
 	define( 'STM_LISTINGS_URL', plugins_url( '', STM_LISTINGS_FILE ) );
 	define( 'STM_LISTINGS', 'stm_vehicles_listing' );
 	define( 'STM_THEME_V_NEED', '5.6.33' );
-	define( 'STM_LISTINGS_V', '1.4.83' );
+	define( 'STM_LISTINGS_V', '1.4.84' );
 	define( 'STM_LISTINGS_DB_VERSION', '1.0.0' );
 	define( 'STM_LISTINGS_IMAGES', STM_LISTINGS_URL . '/includes/admin/butterbean/images/' );
 }
@@ -163,11 +163,7 @@ if ( apply_filters( 'is_mvl_pro', false ) || in_array( 'stm-motors-extends/stm-m
 }
 
 /* Features */
-
-if ( class_exists( 'Elementor\Plugin' ) && class_exists( '\MotorsVehiclesListing\Features\Elementor\Nuxy\TemplateManager' ) ) {
-	new TemplateManager();
-}
-
+new TemplateManager();
 new ListingStats();
 
 if ( ! defined( 'WPB_VC_VERSION' ) ) {
@@ -227,7 +223,7 @@ if ( is_admin() ) {
 	require_once STM_LISTINGS_PATH . '/includes/admin/setup-wizard/main.php';
 	new Settings();
 
-	if ( class_exists( 'Elementor\Plugin' ) && class_exists( '\MotorsVehiclesListing\MenuPages\SingleListingTemplateSettings' ) ) {
+	if ( class_exists( '\MotorsVehiclesListing\MenuPages\SingleListingTemplateSettings' ) ) {
 		new SingleListingTemplateSettings();
 	}
 

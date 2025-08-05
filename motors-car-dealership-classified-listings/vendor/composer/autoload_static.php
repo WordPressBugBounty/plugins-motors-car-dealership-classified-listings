@@ -58,6 +58,7 @@ class ComposerStaticInit5db859e1dab632b715b93d33219eb1cf
         'MotorsVehiclesListing\\Libs\\Traits\\ProtectedActivationHook' => __DIR__ . '/../..' . '/includes/class/Libs/Traits/ProtectedActivationHook.php',
         'MotorsVehiclesListing\\Libs\\Traits\\ProtectedHooks' => __DIR__ . '/../..' . '/includes/class/Libs/Traits/ProtectedHooks.php',
         'MotorsVehiclesListing\\Libs\\Traits\\SnakeCaseClassName' => __DIR__ . '/../..' . '/includes/class/Libs/Traits/SnakeCaseClassName.php',
+        'MotorsVehiclesListing\\Libs\\Validator' => __DIR__ . '/../..' . '/includes/class/Libs/Validator.php',
         'MotorsVehiclesListing\\ListingManager\\Abstracts\\Page' => __DIR__ . '/../..' . '/includes/class/ListingManager/Abstracts/Page.php',
         'MotorsVehiclesListing\\ListingManager\\Bootstrap' => __DIR__ . '/../..' . '/includes/class/ListingManager/Bootstrap.php',
         'MotorsVehiclesListing\\ListingManager\\Pages\\Features' => __DIR__ . '/../..' . '/includes/class/ListingManager/Pages/Features.php',

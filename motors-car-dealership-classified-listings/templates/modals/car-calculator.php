@@ -12,10 +12,6 @@
 					<div class="test-drive-car-name">
 						<?php echo wp_kses_post( apply_filters( 'stm_generate_title_from_slugs', get_the_title( get_queried_object_id() ), get_queried_object_id() ) ); ?>
 					</div>
-
-					<div class="mobile-close-modal" data-dismiss="modal" aria-label="Close">
-						<i class="fas fa-times" aria-hidden="true"></i>
-					</div>
 				</div>
 				<div class="modal-body">
 

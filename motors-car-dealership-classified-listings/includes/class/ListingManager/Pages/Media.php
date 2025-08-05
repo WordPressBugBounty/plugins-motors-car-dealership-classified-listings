@@ -14,28 +14,11 @@ class Media extends Page {
 	}
 
 	public function get_videos(): array {
-		$videos_urls = $this->get_listing_id() ? get_post_meta( $this->get_listing_id(), 'gallery_videos', true ) : array();
-		$posters_ids = $this->get_listing_id() ? get_post_meta( $this->get_listing_id(), 'gallery_videos_posters', true ) : array();
-
-		$result = array();
-
-		if ( ! is_array( $videos_urls ) ) {
-			$videos_urls = array();
+		$videos = array();
+		if ( $this->get_listing_id() ) {
+			$videos = apply_filters( 'mvl_get_listing_videos', array(), $this->get_listing_id() );
 		}
-
-		if ( ! is_array( $posters_ids ) ) {
-			$posters_ids = array();
-		}
-
-		foreach ( $videos_urls as $key => $video_url ) {
-			$result[ $key ] = array(
-				'url'        => $video_url,
-				'poster_id'  => is_array( $posters_ids ) && isset( $posters_ids[ $key ] ) ? $posters_ids[ $key ] : '',
-				'poster_url' => is_array( $posters_ids ) && isset( $posters_ids[ $key ] ) ? wp_get_attachment_image_url( $posters_ids[ $key ], 'full' ) : '',
-			);
-		}
-
-		return $result;
+		return $videos;
 	}
 
 	public function has_preview(): bool {

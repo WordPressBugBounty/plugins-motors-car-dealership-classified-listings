@@ -28,6 +28,12 @@ class General extends Page {
 
 		wp_update_post( $post_data );
 
+		$post_author = get_post_field( 'post_author', $data['post_id'] );
+
+		if ( $post_author ) {
+			update_post_meta( $data['post_id'], 'stm_car_user', $post_author );
+		}
+
 		$valdation_methods = array(
 			'update_text_meta'    => array(
 				'badge_text',

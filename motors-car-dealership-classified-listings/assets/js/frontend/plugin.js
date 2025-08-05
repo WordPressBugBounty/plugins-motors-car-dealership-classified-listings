@@ -1,5 +1,5 @@
-(function($) {
-	;('use strict')
+(function ($) {
+	; ('use strict')
 
 	$(document).ready(function () {
 		stm_ajax_add_test_drive()
@@ -15,48 +15,6 @@
 				closeOnDateSelect: false,
 			})
 		}
-
-		$('body').on('click', '.stm-show-number', function () {
-			var parent = $(this).parent()
-			var phone_owner_id = $(this).attr('data-id')
-			var listing_id = $(this).attr('data-listing-id')
-
-			if (typeof listing_id === 'undefined' || listing_id === false) {
-				listing_id = '0'
-			}
-
-			parent.find('.stm-show-number').text('').addClass('load_number')
-			$.ajax({
-				url: ajaxurl,
-				type: 'GET',
-				dataType: 'json',
-				context: this,
-				data:
-					'phone_owner_id=' +
-					phone_owner_id +
-					'&listing_id=' +
-					listing_id +
-					'&action=stm_ajax_get_seller_phone&security=' +
-					stm_security_nonce,
-				success: function (data) {
-					parent.find('.stm-show-number').hide()
-					parent
-						.find('.phone')
-						.html('')
-						.append(
-							$('<a>')
-								.attr('href', 'tel:' + data)
-								.text(data)
-						)
-						.html('')
-						.append(
-							$('<a>')
-								.attr('href', 'tel:' + data)
-								.text(data)
-						)
-				},
-			})
-		})
 	})
 
 	$(document).ready(function () {
@@ -81,12 +39,12 @@
 				$this.addClass('stm-added')
 
 				let compareHtml =
-					'<i class="motors-icons-added stm-unhover"></i>\n' +
+					'<i class="' + getAddedIcon($this) + ' stm-unhover"></i>\n' +
 					'<span class="stm-unhover">' +
 					stm_i18n.stm_label_in_compare +
 					'</span>\n' +
 					'<div class="stm-show-on-hover">\n' +
-					'<i class="motors-icons-remove"></i>\n' +
+					'<i class="' + getRemoveIcon($this) + '"></i>\n' +
 					stm_i18n.stm_label_remove_list +
 					'</div>'
 
@@ -98,14 +56,39 @@
 					$this.attr('title', stm_i18n.stm_label_remove)
 				}
 				if ($this.data('view') === 'grid') {
+
 					$this
 						.find('i')
-						.removeClass('motors-icons-remove, motors-icons-add')
-						.addClass('motors-icons-added')
+						.removeClass(getRemoveIcon($this) + ', ' + getCompareIcon($this))
+						.addClass(getAddedIcon($this))
 				}
 			}
 		})
 	})
+
+	function getAddedIcon(node) {
+		let addedIcon = 'motors-icons-added';
+		if (node.attr('data-added-icon')) {
+			addedIcon = node.attr('data-added-icon');
+		}
+		return addedIcon;
+	}
+
+	function getRemoveIcon(node) {
+		let removeIcon = 'motors-icons-remove';
+		if (node.attr('data-remove-icon')) {
+			removeIcon = node.attr('data-remove-icon');
+		}
+		return removeIcon;
+	}
+
+	function getCompareIcon(node) {
+		let compareIcon = 'motors-icons-add';
+		if (node.attr('data-compare-icon')) {
+			compareIcon = node.attr('data-compare-icon');
+		}
+		return compareIcon;
+	}
 
 	$('.stm-gallery-action-unit.compare').each(function () {
 		let $this = $(this),
@@ -165,12 +148,12 @@
 					$compareButton.addClass('stm-added')
 
 					let compareHtml =
-						'<i class="motors-icons-added stm-unhover"></i>\n' +
+						'<i class="' + getAddedIcon($this) + ' stm-unhover"></i>\n' +
 						'<span class="stm-unhover">' +
 						stm_i18n.stm_label_in_compare +
 						'</span>\n' +
 						'<div class="stm-show-on-hover">\n' +
-						'<i class="motors-icons-remove"></i>\n' +
+						'<i class="' + getRemoveIcon($this) + '"></i>\n' +
 						stm_i18n.stm_label_remove_list +
 						'</div>'
 
@@ -217,149 +200,156 @@
 		'click',
 		'.add-to-compare, .mvl-skins-add-to-compare',
 		function (e) {
-		e.preventDefault()
-		let $this = $(this),
-			stm_cookies = $.cookie(),
-			stm_car_compare = [],
-			stm_car_add_to = $this.data('id'),
-			post_type = $this.data('post-type'),
-			car_title = $this.data('title'),
-			view = $this.data('view')
+			e.preventDefault()
+			let $this = $(this),
+				stm_cookies = $.cookie(),
+				stm_car_compare = [],
+				stm_car_add_to = $this.data('id'),
+				post_type = $this.data('post-type'),
+				car_title = $this.data('title'),
+				view = $this.data('view')
 
-		for (var key in stm_cookies) {
-			if (stm_cookies.hasOwnProperty(key)) {
-				if (key.indexOf(cc_prefix + post_type) > -1) {
-					stm_car_compare.push(stm_cookies[key])
+			for (var key in stm_cookies) {
+				if (stm_cookies.hasOwnProperty(key)) {
+					if (key.indexOf(cc_prefix + post_type) > -1) {
+						stm_car_compare.push(stm_cookies[key])
+					}
 				}
 			}
-		}
-		let stm_compare_cars_counter = stm_car_compare.length
-		$.cookie.raw = true
-		if ($.inArray(stm_car_add_to.toString(), stm_car_compare) === -1) {
-			if (stm_car_compare.length < 3) {
-				$.cookie(
-					cc_prefix + post_type + '[' + stm_car_add_to + ']',
-					stm_car_add_to,
-					{ expires: 7, path: '/' }
-				)
-				stm_compare_cars_counter++
+			let stm_compare_cars_counter = stm_car_compare.length
+			$.cookie.raw = true
+			if ($.inArray(stm_car_add_to.toString(), stm_car_compare) === -1) {
+				if (stm_car_compare.length < 3) {
+					$.cookie(
+						cc_prefix + post_type + '[' + stm_car_add_to + ']',
+						stm_car_add_to,
+						{ expires: 7, path: '/' }
+					)
+					stm_compare_cars_counter++
 
-				$('.stm-gallery-action-unit.compare').addClass('active')
+					$('.stm-gallery-action-unit.compare').addClass('active')
 					$this.addClass('active stm-added')
-
+					$this.attr('data-action', 'remove')
+					if ( $this.data('view') !== 'grid' ) {
+						$this.html('<i class="motors-icons-scales-ico"></i> ' + stm_i18n.remove_from_compare)
+					}
 					$this.attr('title', stm_i18n.stm_label_remove)
 
-					if (!$this.hasClass('mvl-skins-add-to-compare')) {
-				let compareHtml =
-					'<i class="motors-icons-added stm-unhover"></i>\n' +
-					'<span class="stm-unhover">' +
-					stm_i18n.stm_label_in_compare +
-					'</span>\n' +
-					'<div class="stm-show-on-hover">\n' +
-					'<i class="motors-icons-remove"></i>\n' +
-					stm_i18n.stm_label_remove_list +
-					'</div>'
+					if (!$this.hasClass('mvl-skins-add-to-compare') && !$this.hasClass('single-listing-action')) {
+						let compareHtml =
+							'<i class="motors-icons-added stm-unhover"></i>\n' +
+							'<span class="stm-unhover">' +
+							stm_i18n.stm_label_in_compare +
+							'</span>\n' +
+							'<div class="stm-show-on-hover">\n' +
+							'<i class="' + getRemoveIcon($this.find('i')) + '"></i>\n' +
+							stm_i18n.stm_label_remove_list +
+							'</div>'
 
-				if (
-					typeof stm_i18n.stm_label_remove !== 'undefined' &&
-					'grid' !== view
-				) {
-					$this.html(compareHtml)
-				}
-				if ('grid' === view) {
-					$this
-						.find('i')
-								.removeClass('motors-icons-remove motors-icons-add')
-						.addClass('motors-icons-added')
-				}
+						if (
+							typeof stm_i18n.stm_label_remove !== 'undefined' &&
+							'grid' !== view
+						) {
+							$this.html(compareHtml)
+						}
+						if ('grid' === view) {
+							$this
+								.find('i')
+								.removeClass(getRemoveIcon($this) + ' ' + getCompareIcon($this))
+								.addClass(getAddedIcon($this))
+						}
 					}
 
-				showCompareNotification('added', car_title)
+					showCompareNotification('added', car_title)
+				} else {
+					showCompareNotification('filled', '', post_type)
+				}
 			} else {
-				showCompareNotification('filled', '', post_type)
-			}
-		} else {
-			$.removeCookie(cc_prefix + post_type + '[' + stm_car_add_to + ']', {
-				path: '/',
-			})
+				$.removeCookie(cc_prefix + post_type + '[' + stm_car_add_to + ']', {
+					path: '/',
+				})
 				$this.removeClass('active stm-added')
 
 				$this.attr('title', stm_i18n.stm_label_add)
+				$this.attr('data-action', 'add')
+				if ( $this.data('view') !== 'grid' ) {
+					$this.html('<i class="motors-icons-scales-ico"></i> ' + stm_i18n.add_to_compare)
+				}
 
 				if (!$this.hasClass('mvl-skins-add-to-compare')) {
-			$this.find('.stm-show-on-hover').remove()
-			if (typeof stm_i18n.stm_label_add !== 'undefined') {
-				$this
-					.find('i')
-							.removeClass('motors-icons-remove motors-icons-added')
-					.addClass('motors-icons-add')
-				$this
-					.find('span')
-					.removeClass('stm-unhover')
-					.html(stm_i18n.stm_label_add)
+					$this.find('.stm-show-on-hover').remove()
+					if (typeof stm_i18n.stm_label_add !== 'undefined') {
+						$this
+							.find('i')
+							.removeClass(getRemoveIcon($this) + ' ' + getAddedIcon($this))
+							.addClass(getCompareIcon($this))
+						$this
+							.find('span')
+							.removeClass('stm-unhover')
+							.html(stm_i18n.stm_label_add)
 					}
 				}
 
 				if ($('.add-to-compare.active').length === 0) {
 					$('.stm-gallery-action-unit.compare').removeClass('active')
-			}
+				}
 
-			stm_compare_cars_counter--
+				stm_compare_cars_counter--
 
-			if ($this.hasClass('stm_remove_after')) {
-				window.location.reload()
-			}
+				if ($this.hasClass('stm_remove_after')) {
+					window.location.reload()
+				}
 
-			if ($this.hasClass('remove-from-compare')) {
-				$('.car-listing-row .compare-col-stm-' + stm_car_add_to).hide(
-					'slide',
-					{ direction: 'left' },
-					function () {
-						$('.car-listing-row .compare-col-stm-' + stm_car_add_to).remove()
-						$('.car-listing-row').append($('.compare-empty-car-top').html())
-					}
-				)
-
-				$('.stm-compare-row .compare-col-stm-' + stm_car_add_to).hide(
-					'slide',
-					{ direction: 'left' },
-					function () {
-						$('.stm-compare-row .compare-col-stm-' + stm_car_add_to).remove()
-							$('.stm-compare-row').append(
-								$('.compare-empty-car-bottom').html()
-							)
-					}
-				)
-
-				$('.compare-column-stm-' + stm_car_add_to).hide(
-					'slide',
-					{ direction: 'left' },
-					function () {
-						$('.stm-compare-row .compare-column-stm-' + stm_car_add_to).remove()
-							$('.stm-compare-row').append(
-								$('.compare-empty-car-bottom').html()
-							)
-					}
-				)
-
-
-				$('.row-compare-features .compare-col-stm-' + stm_car_add_to).hide(
-					'slide',
-					{ direction: 'left' },
-					function () {
-						$(
-							'.row-compare-features .compare-col-stm-' + stm_car_add_to
-						).remove()
-						if ($('.row-compare-features .col-md-3').length < 2) {
-							$('.row-compare-features').slideUp()
+				if ($this.hasClass('remove-from-compare')) {
+					$('.car-listing-row .compare-col-stm-' + stm_car_add_to).hide(
+						'slide',
+						{ direction: 'left' },
+						function () {
+							$('.car-listing-row .compare-col-stm-' + stm_car_add_to).remove()
+							$('.car-listing-row').append($('.compare-empty-car-top').html())
 						}
-					}
-				)
-			} else {
-				showCompareNotification('removed', car_title)
+					)
+
+					$('.stm-compare-row .compare-col-stm-' + stm_car_add_to).hide(
+						'slide',
+						{ direction: 'left' },
+						function () {
+							$('.stm-compare-row .compare-col-stm-' + stm_car_add_to).remove()
+							$('.stm-compare-row').append(
+								$('.compare-empty-car-bottom').html()
+							)
+						}
+					)
+
+					$('.compare-column-stm-' + stm_car_add_to).hide(
+						'slide',
+						{ direction: 'left' },
+						function () {
+							$('.stm-compare-row .compare-column-stm-' + stm_car_add_to).remove()
+							$('.stm-compare-row').append(
+								$('.compare-empty-car-bottom').html()
+							)
+						}
+					)
+
+
+					$('.row-compare-features .compare-col-stm-' + stm_car_add_to).hide(
+						'slide',
+						{ direction: 'left' },
+						function () {
+							$(
+								'.row-compare-features .compare-col-stm-' + stm_car_add_to
+							).remove()
+							if ($('.row-compare-features .col-md-3').length < 2) {
+								$('.row-compare-features').slideUp()
+							}
+						}
+					)
+				} else {
+					showCompareNotification('removed', car_title)
+				}
 			}
-		}
-		totalCompareCars(stm_compare_cars_counter);
+			totalCompareCars(stm_compare_cars_counter);
 		}
 	)
 
@@ -384,10 +374,10 @@
 			$('.compare-remove-all').remove()
 			$('.single-add-to-compare .compare-fixed-link').before(
 				'<a href="#" style="margin-left: 15px;" data-post-type=' +
-					$post_type +
-					' class="compare-fixed-link compare-remove-all pull-right heading-font">' +
-					reset_all_txt +
-					'</a>'
+				$post_type +
+				' class="compare-fixed-link compare-remove-all pull-right heading-font">' +
+				reset_all_txt +
+				'</a>'
 			)
 		}
 		if ('added' === $status) {
@@ -457,10 +447,10 @@
 						.find('.modal-body-message')
 						.append(
 							'<div class="alert-modal alert alert-' +
-								data.status +
-								'">' +
-								data.response +
-								'</div>'
+							data.status +
+							'">' +
+							data.response +
+							'</div>'
 						)
 					for (var key in data.errors) {
 						$('#request-test-drive-form input[name="' + key + '"]').addClass(
@@ -505,10 +495,10 @@
 						.find('.modal-body')
 						.append(
 							'<div class="alert-modal alert alert-' +
-								data.status +
-								'">' +
-								data.response +
-								'</div>'
+							data.status +
+							'">' +
+							data.response +
+							'</div>'
 						)
 					for (var key in data.errors) {
 						$('#request-trade-offer-form input[name="' + key + '"]').addClass(
@@ -526,7 +516,7 @@
 		})
 	}
 
-	window.stm_test_drive_car_title = function(id, title) {
+	window.stm_test_drive_car_title = function (id, title) {
 		var $ = jQuery;
 
 		$('.test-drive-car-name').text(title);
@@ -562,33 +552,33 @@
 })(jQuery)
 
 function updateGridItemTitles() {
-    var $ = jQuery;
+	var $ = jQuery;
 
-    $('.car-title').each(function () {
-        var $title = $(this);
-        var maxChar = parseInt($title.attr('data-max-char'));
-        var $labels = $title.find('.labels');
+	$('.car-title').each(function () {
+		var $title = $(this);
+		var maxChar = parseInt($title.attr('data-max-char'));
+		var $labels = $title.find('.labels');
 
-        if ($labels.length > 0 && ($(this).text().length > maxChar)) {
-            var originalLabels = $labels.clone();
-            $labels.remove();
-            var originalText = $title.contents().filter(function () {
-                return this.nodeType === 3;
-            }).text().trim();
+		if ($labels.length > 0 && ($(this).text().length > maxChar)) {
+			var originalLabels = $labels.clone();
+			$labels.remove();
+			var originalText = $title.contents().filter(function () {
+				return this.nodeType === 3;
+			}).text().trim();
 
-            if (originalText.length > maxChar) {
-                var truncatedText = originalText.substr(0, maxChar) + '...';
+			if (originalText.length > maxChar) {
+				var truncatedText = originalText.substr(0, maxChar) + '...';
 
-                $title.html('').append(originalLabels).append(truncatedText);
-            } else {
-                $title.html(originalText).prepend($labels)
-            }
-        } else {
-            if ($(this).attr('data-max-char') != 'undefined' && $(this).text().length > $(this).attr('data-max-char')) {
-                $(this).text($(this).text().trim().substr(0, $(this).attr('data-max-char')) + '...');
-            }
-        }
-    });
+				$title.html('').append(originalLabels).append(truncatedText);
+			} else {
+				$title.html(originalText).prepend($labels)
+			}
+		} else {
+			if ($(this).attr('data-max-char') != 'undefined' && $(this).text().length > $(this).attr('data-max-char')) {
+				$(this).text($(this).text().trim().substr(0, $(this).attr('data-max-char')) + '...');
+			}
+		}
+	});
 }
 
 jQuery('[data-toggle="tooltip"]').tooltip({

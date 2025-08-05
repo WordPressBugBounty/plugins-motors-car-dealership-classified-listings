@@ -27,6 +27,7 @@ if ( ! function_exists( 'email_template_view' ) ) {
 
 if ( ! function_exists( 'get_default_subject' ) ) {
 	function get_default_subject( $template_name ) {
+		$message_to_dealer       = apply_filters( 'stm_get_message_to_dealer_subject', '' );
 		$test_drive              = esc_html__(
 			'Request Tes.stm-sell-a-car-form {
 	.form-navigation {
@@ -289,7 +290,8 @@ if ( ! function_exists( 'get_default_subject' ) ) {
 
 if ( ! function_exists( 'getDefaultTemplate' ) ) {
 	function getDefaultTemplate( $template_name ) {
-		$test_drive = '<table>
+		$message_to_dealer = apply_filters( 'stm_get_message_to_dealer_template', '' );
+		$test_drive        = '<table>
         <tr>
             <td>Name - </td>
             <td>[name]</td>
@@ -666,6 +668,16 @@ if ( ! function_exists( 'getTemplateShortcodes' ) ) {
 			'site_name'         => '[site_name]',
 		);
 
+		$messageToDealer = array(
+			'name'          => '[name]',
+			'email'         => '[email]',
+			'phone'         => '[phone]',
+			'message'       => '[message]',
+			'listing_id'    => '[listing_id]',
+			'listing_title' => '[listing_title]',
+			'listing_url'   => '[listing_url]',
+		);
+
 		return ${'' . $template_name};
 	}
 }
@@ -690,6 +702,7 @@ if ( ! function_exists( 'updateTemplates' ) ) {
 			'pay_per_listing_',
 			'value_my_car_',
 			'user_email_confirmation_',
+			'message_to_dealer_',
 		);
 
 		if ( is_mvl_addon_enabled( 'saved_search' ) ) {
@@ -715,7 +728,7 @@ if ( isset( $_POST['update_email_templates'] ) ) {
 
 if ( ! function_exists( 'stm_generate_subject_view' ) ) {
 	function stm_generate_subject_view( $default, $subject_name, $args ) {
-		$template = stripslashes( get_option( $subject_name . '_subject', get_default_subject( $subject_name ) ) );
+		$template = apply_filters( 'stm_get_' . $subject_name . '_subject', stripslashes( get_option( $subject_name . '_subject', get_default_subject( $subject_name ) ) ) );
 
 		if ( '' !== $template ) {
 			foreach ( $args as $k => $val ) {
@@ -732,7 +745,7 @@ if ( ! function_exists( 'stm_generate_subject_view' ) ) {
 }
 
 function stm_generate_template_view( $default, $template_name, $args ) {
-	$template = stripslashes( get_option( $template_name . '_template', getDefaultTemplate( $template_name ) ) );
+	$template = apply_filters( 'stm_get_' . $template_name . '_template', stripslashes( get_option( $template_name . '_template', getDefaultTemplate( $template_name ) ) ) );
 
 	if ( ! empty( $template ) ) {
 		foreach ( $args as $k => $val ) {
@@ -752,3 +765,49 @@ function stm_generate_template_view( $default, $template_name, $args ) {
 }
 
 add_filter( 'get_generate_template_view', 'stm_generate_template_view', 20, 3 );
+
+if ( ! function_exists( 'stm_get_message_to_dealer_template' ) ) {
+	function stm_get_message_to_dealer_template() {
+		return ( '' !== get_option( 'message_to_dealer_template', '' ) ) ? stripslashes( get_option( 'message_to_dealer_template', '' ) ) :
+		'<table>
+		<tr>
+			<td>Listing ID: </td>
+			<td>[listing_id]</td>
+		</tr>
+		<tr>
+			<td>Listing Title: </td>
+			<td>[listing_title]</td>
+		</tr>
+        <tr>
+            <td>Name: </td>
+            <td>[name]</td>
+        </tr>
+        <tr>
+            <td>Email: </td>
+            <td>[email]</td>
+        </tr>
+        <tr>
+            <td>Phone: </td>
+            <td>[phone]</td>
+        </tr>
+		<tr>
+            <td>Message: </td>
+            <td>[message]</td>
+        </tr>
+		<tr>
+            <td>Listing URL: </td>
+            <td>[listing_url]</td>
+        </tr>
+    </table>';
+	}
+
+	add_filter( 'stm_get_message_to_dealer_template', 'stm_get_message_to_dealer_template', 20, 1 );
+}
+
+if ( ! function_exists( 'stm_get_message_to_dealer_subject' ) ) {
+	function stm_get_message_to_dealer_subject() {
+		return get_option( 'message_to_dealer_subject', esc_html__( '[name] is interested in [listing_title]', 'motors-car-dealership-classified-listings' ) );
+	}
+
+	add_filter( 'stm_get_message_to_dealer_subject', 'stm_get_message_to_dealer_subject', 20, 1 );
+}

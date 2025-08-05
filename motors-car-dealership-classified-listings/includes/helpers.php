@@ -1696,3 +1696,75 @@ if ( ! function_exists( 'stm_get_filter_badge_url' ) ) {
 		return apply_filters( 'stm_get_filter_badge_url', remove_query_arg( $remove_args ), $badge_info, $remove_args );
 	}
 }
+
+if ( ! function_exists( 'mvl_get_listing_certificates' ) ) {
+	function mvl_get_listing_certificates( $certificates, $post_id ) {
+		$certificates = array(
+			array(
+				'name'  => get_post_meta( $post_id, 'history', true ),
+				'link'  => get_post_meta( $post_id, 'history_link', true ),
+				'image' => get_post_meta( $post_id, 'certified_logo_1', true ),
+			),
+		);
+
+		$certificate_2 = array(
+			'name'  => get_post_meta( $post_id, 'history_2', true ),
+			'link'  => get_post_meta( $post_id, 'certified_logo_2_link', true ),
+			'image' => get_post_meta( $post_id, 'certified_logo_2', true ),
+		);
+
+		if ( $certificate_2['name'] || $certificate_2['link'] || $certificate_2['image'] ) {
+			$certificates[] = $certificate_2;
+		}
+
+		return $certificates;
+	}
+
+	add_filter( 'mvl_get_listing_certificates', 'mvl_get_listing_certificates', 10, 2 );
+}
+
+if ( ! function_exists( 'mvl_get_listing_videos' ) ) {
+	function mvl_get_listing_videos( $videos, $post_id, $check_poster_exists = false ) {
+		$videos_urls = get_post_meta( $post_id, 'gallery_videos', true );
+		$posters_ids = get_post_meta( $post_id, 'gallery_videos_posters', true );
+
+		$result = array();
+
+		if ( ! is_array( $videos_urls ) ) {
+			$videos_urls = array();
+		}
+
+		if ( ! is_array( $posters_ids ) ) {
+			$posters_ids = array();
+		}
+
+		foreach ( $videos_urls as $key => $video_url ) {
+			if ( ! isset( $posters_ids[ $key ] ) ) {
+				continue;
+			}
+
+			$poster_url = wp_get_attachment_image_url( $posters_ids[ $key ], 'full' );
+
+			if ( ! $poster_url ) {
+				continue;
+			}
+
+			$relative_path = str_replace( wp_get_upload_dir()['baseurl'], '', $poster_url );
+			$absolute_path = wp_get_upload_dir()['basedir'] . $relative_path;
+
+			if ( $check_poster_exists && ( ! file_exists( $absolute_path ) || ! $relative_path ) ) {
+				continue;
+			}
+
+			$result[ $key ] = array(
+				'url'        => $video_url,
+				'poster_id'  => is_array( $posters_ids ) && isset( $posters_ids[ $key ] ) ? $posters_ids[ $key ] : '',
+				'poster_url' => is_array( $posters_ids ) && isset( $posters_ids[ $key ] ) ? $poster_url : '',
+			);
+		}
+
+		return $result;
+	}
+
+	add_filter( 'mvl_get_listing_videos', 'mvl_get_listing_videos', 10, 2 );
+}
