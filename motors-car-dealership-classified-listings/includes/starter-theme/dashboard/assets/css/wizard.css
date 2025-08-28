@@ -1,0 +1,1652 @@
+@charset "UTF-8";
+
+body #toplevel_page_mst-starter-options .wp-submenu li.wp-first-item {
+    display: none;
+}
+
+body .mst-starter-wizard {
+    display: flex;
+    width: 100%;
+    max-width: 1238px;
+    flex-direction: column;
+    position: relative;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.07);
+    font-family: "Noto Sans";
+    margin: 0 auto 20px;
+    padding: 0;
+    color: #0D1216;
+}
+
+body .mst-starter-wizard-inner {
+    margin-top: 100px;
+}
+
+body .mst-starter-wizard img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+body .mst-starter-wizard__title {
+    color: #0D1216;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 32px;
+    margin-bottom: 8px;
+}
+
+body .mst-starter-wizard__description {
+    font-size: 14px;
+    color: rgba(53, 71, 90, 0.8);
+    margin-bottom: 44px;
+}
+
+body .mst-starter-wizard__button-box {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 39px 0 15px;
+}
+
+body .mst-starter-wizard__button-box .mst-starter-wizard__button {
+    padding: 11px 15px;
+    border-radius: 10px;
+    margin: 0 0 0 8px;
+}
+
+body .mst-starter-wizard__button-box .mst-starter-wizard__button-next {
+    display: none;
+}
+
+body .mst-starter-wizard__button-box .mst-starter-wizard__button-message {
+    display: none;
+    align-items: center;
+    color: #FF3945;
+    margin: 0 auto 0 0;
+    background-color: rgba(255, 57, 69, 0.1);
+    border-radius: 4px;
+    padding: 10px 15px;
+    font-size: 14px;
+}
+
+body .mst-starter-wizard__button-box__hide .mst-starter-wizard__button-next {
+    color: transparent;
+    background: rgba(18, 128, 223, 0.4);
+}
+
+body .mst-starter-wizard__button-box__hide .mst-starter-wizard__button-next:before {
+    content: "";
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.1254901961);
+    animation: spin 1s linear infinite;
+    border-top-color: #FFFFFF;
+    position: absolute;
+    top: 14px;
+    left: 41px;
+    margin: 0;
+}
+
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+body .mst-starter-wizard__button-box.hide-install .mst-starter-wizard__button-next {
+    display: block;
+    margin-left: auto;
+}
+
+body .mst-starter-wizard__button-box.hide-install .mst-starter-wizard__button-install, body .mst-starter-wizard__button-box.hide-install .mst-starter-wizard__button-skip, body .mst-starter-wizard__button-box.hide-install .mst-starter-wizard__button-install-child, body .mst-starter-wizard__button-box.hide-install .mst-starter-wizard__button-install-demo {
+    display: none;
+}
+
+body .mst-starter-wizard__button-box.has-demo-error {
+  /*.mst-starter-wizard__button {
+      &-install-demo {
+          display: block;
+      }
+
+      &-message {
+          display: flex;
+      }
+
+      &-next,
+      &-skip {
+          display: none;
+      }
+  }*/
+}
+
+body .mst-starter-wizard__button {
+    display: block;
+    position: relative;
+    padding: 13px 20px;
+    border-radius: 4px;
+    background-color: #1280DF;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+body .mst-starter-wizard__button-skip {
+    background-color: #EEF1F7;
+    color: rgba(13, 18, 22, 0.7);
+}
+
+body .mst-starter-wizard__button-close {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    position: relative;
+    background-color: #EEF1F7;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+body .mst-starter-wizard__button-close::before, body .mst-starter-wizard__button-close::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 1px;
+    background-color: #0D1216;
+    transform-origin: center;
+    transform: translate(-50%, -50%) rotate(45deg);
+    transition: all 0.3s;
+}
+
+body .mst-starter-wizard__button-close::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+body .mst-starter-wizard__button-close:hover::before, body .mst-starter-wizard__button-close:hover::after {
+    background-color: rgba(13, 18, 22, 0.5);
+}
+
+body .mst-starter-wizard__button:active, body .mst-starter-wizard__button:focus {
+    border: 0;
+    box-shadow: none;
+}
+
+body .mst-starter-wizard__button-reset {
+    background-color: #FF3945;
+}
+
+body .mst-starter-wizard__button-reset.disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+body .mst-starter-wizard__navigation {
+    display: flex;
+    align-items: center;
+    min-height: 50px;
+    border-bottom: 1px solid #E1E4E7;
+    position: relative;
+}
+
+body .mst-starter-wizard__navigation-back-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    outline: none;
+    box-shadow: none;
+    overflow: hidden;
+    border-right: 1px solid #E1E4E7;
+    text-decoration: none;
+    position: relative;
+    color: #808c98;
+    cursor: pointer;
+}
+
+body .mst-starter-wizard__navigation-back-button .mst-icon-arrow-left::before {
+    transition: all 0.3s;
+}
+
+body .mst-starter-wizard__navigation-back-button .mst-icon-arrow-left::after {
+    content: "\e90c";
+    font-family: "mst-icon" !important;
+    position: absolute;
+    top: 19px;
+    right: -100px;
+    transition: all 0.3s;
+}
+
+body .mst-starter-wizard__navigation-back-button:hover {
+    color: #000000;
+}
+
+body .mst-starter-wizard__navigation-back-button:hover .mst-icon-arrow-left::before {
+    margin-right: 70px;
+    opacity: 0;
+}
+
+body .mst-starter-wizard__navigation-back-button:hover .mst-icon-arrow-left::after {
+    right: 15px;
+}
+
+body .mst-starter-wizard__navigation-progress-bar {
+    margin: 0;
+    padding: 0 70px;
+    width: 100%;
+    box-sizing: border-box;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body .mst-starter-wizard__navigation-progress-bar li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+    position: relative;
+    min-height: 50px;
+    margin: 0 18px;
+    padding: 16px 0;
+    box-sizing: border-box;
+    line-height: 19px;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(13, 18, 22, 0.7);
+}
+
+body .mst-starter-wizard__navigation-progress-bar li span {
+    display: inline-block;
+    vertical-align: top;
+    width: 28px;
+    height: 28px;
+    margin: -1px 5px 0 0;
+    text-align: center;
+    border-radius: 50px;
+    background: rgba(13, 18, 22, 0.5);
+    font-size: 16px;
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 28px;
+}
+
+body .mst-starter-wizard__navigation-progress-bar li span em {
+    font-style: normal;
+}
+
+body .mst-starter-wizard__navigation-progress-bar li span i {
+    font-style: normal;
+    display: none;
+}
+
+body .mst-starter-wizard__navigation-progress-bar li.progress-step-done span {
+    background: rgba(18, 128, 223, 0.1);
+}
+
+body .mst-starter-wizard__navigation-progress-bar li.progress-step-done span em {
+    display: none;
+}
+
+body .mst-starter-wizard__navigation-progress-bar li.progress-step-done span i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 10px;
+    color: #1280DF;
+}
+
+body .mst-starter-wizard__navigation-progress-bar li.active {
+    color: #1280DF;
+}
+
+body .mst-starter-wizard__navigation-progress-bar li.active span {
+    background: #1280DF;
+}
+
+body .mst-starter-wizard__navigation-progress-bar li.active::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    height: 2px;
+    background-color: #1280DF;
+}
+
+@media (max-width: 1023px) {
+    body .mst-starter-wizard__navigation-back-button {
+        display: none;
+    }
+
+    body .mst-starter-wizard__navigation-progress-bar {
+        padding: 0 20px;
+    }
+}
+
+body .mst-starter-wizard__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    box-sizing: border-box;
+    min-height: 560px;
+    padding: 43px 19px 40px 32px;
+}
+
+body .mst-starter-wizard__wrapper-header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+body .mst-starter-wizard__wrapper-header__title {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+body .mst-starter-wizard__wrapper-header__price {
+    padding: 9px 20px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #ffffff;
+    background: url("../images/price-label.png") no-repeat;
+    background-size: cover;
+    cursor: pointer;
+}
+
+body .mst-starter-wizard__wrapper-header__builders span {
+    display: inline-block;
+    vertical-align: top;
+    padding: 5px 14px;
+    border-radius: 40px;
+    background-color: transparent;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(53, 71, 90, 0.8);
+    cursor: pointer;
+}
+
+body .mst-starter-wizard__wrapper-header__builders span.active {
+    background-color: rgba(18, 128, 223, 0.1);
+    color: #1280DF;
+}
+
+body .mst-starter-wizard__wrapper-content {
+    display: block;
+    position: relative;
+    width: 100%;
+}
+
+body .mst-starter-wizard__wrapper-content.disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+body .mst-starter-wizard__wrapper-content.disabled .mst-starter-wizard__templates {
+    pointer-events: none;
+}
+
+body .mst-starter-wizard__wrapper-content-preloader {
+    color: #1280df;
+    font-size: 10px;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -0.5em 0 0 -0.5em;
+    text-indent: -9999em;
+    animation: mulShdSpin 1.3s infinite linear;
+    transform: translateZ(0);
+}
+
+body .mst-starter-wizard__wrapper-content-preloader.disabled {
+    display: none;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates {
+    min-height: 410px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 35px;
+}
+
+@media (max-width: 1440px) {
+    body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates {
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates {
+        gap: 30px;
+        justify-content: center;
+    }
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li {
+    width: 25%;
+    max-width: 268px;
+    position: relative;
+    transition: all 0.3s;
+    margin: 0;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__template.installed .mst-starter-wizard__template-image {
+    border-color: #1280DF;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__template-image {
+    position: relative;
+    margin-bottom: 15px;
+    border: 1px solid #E1E4E7;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__template-image .mst-starter-wizard__template-installed {
+    background: #1280DF;
+    bottom: 0;
+    padding: 14px 0;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__template-image .pro-text-wrap {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    padding: 33px 27px 0 28px;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__template-image .pro-text-wrap img {
+    position: relative;
+    transform: translateZ(0);
+    width: 100%;
+    height: auto;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__template-image .pro-text-wrap a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 27px;
+    margin-top: 10px;
+    max-width: 100px;
+    font-size: 14px;
+    text-transform: capitalize;
+    border-radius: 10px;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__template-image .pro-text-wrap a i {
+    font-size: 20px;
+    margin-left: 7px;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__template-image.get-pro-wrap a {
+    position: relative;
+    top: 20px;
+    left: 0;
+    visibility: visible;
+    opacity: 1;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__template-title {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    color: #0D1216;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__template-title .mst-starter-wizard__template-status {
+    display: block;
+    color: #ffffff;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 400;
+    text-transform: uppercase;
+    border-radius: 4px;
+    padding: 0 3px;
+    background: rgba(53, 71, 90, 0.8);
+    margin-left: 3px;
+    height: 16px;
+    line-height: 16px;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__template-title .mst-starter-wizard__template-status.premium {
+    background-color: #1280DF;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__template .mst-status-btns-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    position: absolute;
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #ffffff;
+    padding: 12px 25px 9px;
+    margin: 0 0 0px;
+    border-radius: 0 0 2px 2px;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__template .mst-status-btns-container .mst-starter-wizard__button {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+    margin: 0;
+    position: relative;
+    top: unset;
+    left: unset;
+    bottom: unset;
+    right: unset;
+    font-weight: 600;
+    text-transform: capitalize;
+    border-radius: 5px;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__template .mst-status-btns-container .mst-starter-wizard__button-continue {
+    width: 114px;
+    padding: 11px 15px;
+    margin: 0 5px 0 0;
+    text-wrap: nowrap;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__template .mst-status-btns-container .mst-starter-wizard__button-preview {
+    width: 95px;
+    background: transparent;
+    color: rgba(53, 71, 90, 0.8);
+    padding: 10px 10px;
+    border: 1px solid #E1E4E7;
+    margin: 0 0 0 5px;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__template-commig-soon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__template-commig-soon span {
+    color: #0D1216;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__template-message {
+    position: relative;
+    top: -10px;
+    color: rgba(13, 18, 22, 0.5);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    transition: all 0.3s;
+    visibility: hidden;
+    opacity: 0;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__template-installed {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: absolute;
+    right: 0;
+    bottom: 20px;
+    left: 0;
+    line-height: 21px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__template-installed span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background-color: #1280DF;
+    font-size: 10px;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__template.installed .mst-starter-wizard__template-installed {
+    display: flex;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__template.installed .mst-starter-wizard__template-image::before {
+    display: block;
+    background: linear-gradient(180deg, rgba(0, 25, 49, 0) 0%, rgba(0, 25, 49, 0.7) 100%);
+    visibility: visible;
+    opacity: 1;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__template.installed .mst-starter-wizard__template-message {
+    display: none;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__template:hover .mst-starter-wizard__template-image {
+    cursor: pointer;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__template:hover .mst-status-btns-container {
+    visibility: visible;
+    opacity: 1;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__template.pending .mst-starter-wizard__template-image::before {
+    border-color: transparent;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__template.pending:hover .mst-starter-wizard__template-image {
+    cursor: default;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__button {
+    top: -10px;
+    visibility: hidden;
+    opacity: 0;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__button-preview {
+    position: absolute;
+    top: auto;
+    right: 10px;
+    bottom: 10px;
+    left: 10px;
+    margin: 0 0 -60px 0;
+    background-color: rgba(53, 71, 90, 0.8);
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li .mst-starter-wizard__button-preview:hover {
+    background-color: rgba(18, 128, 223, 0.9);
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li.mst-starter-wizard__show-buttons .mst-starter-wizard__template-message {
+    position: relative;
+    top: 0;
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0.1s;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li.mst-starter-wizard__show-buttons .mst-starter-wizard__button-preview, body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li.mst-starter-wizard__show-buttons .mst-starter-wizard__button {
+    position: relative;
+    top: 0;
+    visibility: visible;
+    opacity: 1;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li.mst-starter-wizard__show-buttons .mst-starter-wizard__button-preview-preview, body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li.mst-starter-wizard__show-buttons .mst-starter-wizard__button-preview {
+    position: absolute;
+    top: auto;
+    margin-bottom: 0;
+}
+
+body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li:hover .mst-starter-wizard__button-preview {
+    position: absolute;
+    top: auto;
+    margin-bottom: 0;
+    visibility: visible;
+    opacity: 1;
+}
+
+@media (max-width: 1440px) {
+    body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li {
+        width: 23%;
+    }
+}
+
+@media (max-width: 991px) {
+    body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li {
+        width: 31%;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li {
+        width: 48%;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    body .mst-starter-wizard__wrapper-content .mst-starter-wizard__templates li {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+body .mst-starter-wizard__template-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 9999;
+}
+
+body .mst-starter-wizard__template-popup.reinstallation {
+    display: flex !important;
+}
+
+body .mst-starter-wizard__template-popup__content {
+    background-color: #ffffff;
+    max-width: 445px;
+    margin: 0 auto;
+    padding: 32px 10px 30px 85px;
+    border-radius: 10px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.25);
+}
+
+body .mst-starter-wizard__template-popup__content:before {
+    content: "\e91b";
+    font-family: "mst-icon";
+    font-size: 38px;
+    color: #FA0C21;
+    position: absolute;
+    top: 42px;
+    left: 25px;
+}
+
+body .mst-starter-wizard__template-popup__content h2 {
+    margin: 0 0 14px;
+    padding: 0 30px 0 0;
+    line-height: 28px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+body .mst-starter-wizard__template-popup__content p {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 0 3px;
+}
+
+body .mst-starter-wizard__template-popup__content .mst-starter-wizard__demo-checkbox {
+    margin-top: 24px;
+}
+
+body .mst-starter-wizard__template-popup__content .mst-starter-wizard__demo-checkbox span {
+    width: 18px;
+    height: 18px;
+}
+
+body .mst-starter-wizard__template-popup__content .mst-starter-wizard__demo-checkbox label {
+    font-size: 14px;
+}
+
+body .mst-starter-wizard__template-popup__content .mst-starter-wizard__button-box {
+    padding: 34px 14px 0 0;
+    justify-content: flex-end;
+}
+
+body .mst-starter-wizard__template-popup__content .mst-starter-wizard__button-box .mst-starter-wizard__button {
+    padding: 10px 15px;
+}
+
+body .mst-starter-wizard__template-popup__content .mst-starter-wizard__button-reset {
+    border: 1px solid rgba(53, 71, 90, 0.2);
+    background: none;
+    color: #35475A;
+}
+
+body .mst-starter-wizard__template-popup__content .mst-starter-wizard__button-reset:hover {
+    color: #FA0C21;
+}
+
+body .mst-starter-wizard__template-popup__content .mst-starter-wizard__button-skip {
+    display: block !important;
+    margin-left: 10px;
+    background-color: #1280DF;
+    color: #ffffff;
+}
+
+body .mst-starter-wizard__template-popup__content .mst-starter-wizard__button-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+body .mst-starter-wizard__progress-wrap {
+    width: 100%;
+    height: 6px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 20px;
+    display: none;
+}
+
+body .mst-starter-wizard__progress-bar {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+body .mst-starter-wizard__progress-bar-fill {
+    width: 0;
+    height: 100%;
+    background-color: #1280DF;
+    transition: width 2s ease;
+}
+
+body .mst-starter-wizard__plugins, body .mst-starter-wizard__demos, body .mst-starter-wizard__child-theme {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    max-width: 640px;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+body .mst-starter-wizard__plugins ul, body .mst-starter-wizard__demos ul, body .mst-starter-wizard__child-theme ul {
+    width: 100%;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    gap: 0;
+}
+
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__plugin,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__demo,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__child-theme__icon-box, body .mst-starter-wizard__demos ul .mst-starter-wizard__plugin,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__child-theme__icon-box, body .mst-starter-wizard__child-theme ul .mst-starter-wizard__plugin,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__demo,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+    margin: 0;
+    padding: 15px 0;
+    border-bottom: 1px solid #E1E4E7;
+}
+
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__plugin-image,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__demo-image,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__child-theme__icon-box-image, body .mst-starter-wizard__demos ul .mst-starter-wizard__plugin-image,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo-image,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__child-theme__icon-box-image, body .mst-starter-wizard__child-theme ul .mst-starter-wizard__plugin-image,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__demo-image,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box-image {
+    display: block;
+    max-width: 40px;
+    max-height: 40px;
+    margin-right: 15px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__plugin-info,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__demo-info,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__child-theme__icon-box-info, body .mst-starter-wizard__demos ul .mst-starter-wizard__plugin-info,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo-info,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__child-theme__icon-box-info, body .mst-starter-wizard__child-theme ul .mst-starter-wizard__plugin-info,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__demo-info,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__plugin-info__title,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__demo-info__title,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__child-theme__icon-box-info__title, body .mst-starter-wizard__demos ul .mst-starter-wizard__plugin-info__title,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo-info__title,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__child-theme__icon-box-info__title, body .mst-starter-wizard__child-theme ul .mst-starter-wizard__plugin-info__title,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__demo-info__title,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box-info__title {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__plugin-info__description,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__demo-info__description,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__child-theme__icon-box-info__description, body .mst-starter-wizard__demos ul .mst-starter-wizard__plugin-info__description,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo-info__description,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__child-theme__icon-box-info__description, body .mst-starter-wizard__child-theme ul .mst-starter-wizard__plugin-info__description,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__demo-info__description,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box-info__description {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(13, 18, 22, 0.7);
+}
+
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__plugin-indicator,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__demo-indicator,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__child-theme__icon-box-indicator, body .mst-starter-wizard__demos ul .mst-starter-wizard__plugin-indicator,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo-indicator,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__child-theme__icon-box-indicator, body .mst-starter-wizard__child-theme ul .mst-starter-wizard__plugin-indicator,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__demo-indicator,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box-indicator {
+    display: block;
+    position: relative;
+    margin: 7px 0 0 auto;
+    background-color: transparent;
+}
+
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__plugin-indicator .installing,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__demo-indicator .installing,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__child-theme__icon-box-indicator .installing, body .mst-starter-wizard__demos ul .mst-starter-wizard__plugin-indicator .installing,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo-indicator .installing,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__child-theme__icon-box-indicator .installing, body .mst-starter-wizard__child-theme ul .mst-starter-wizard__plugin-indicator .installing,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__demo-indicator .installing,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box-indicator .installing {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    color: rgba(53, 71, 90, 0.6);
+    transition: all 0.3s ease;
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    padding: 5px 0;
+}
+
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__plugin-indicator .installing span,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__demo-indicator .installing span,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__child-theme__icon-box-indicator .installing span, body .mst-starter-wizard__demos ul .mst-starter-wizard__plugin-indicator .installing span,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo-indicator .installing span,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__child-theme__icon-box-indicator .installing span, body .mst-starter-wizard__child-theme ul .mst-starter-wizard__plugin-indicator .installing span,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__demo-indicator .installing span,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box-indicator .installing span {
+    width: 12px;
+    height: 12px;
+    margin-left: 10px;
+    border-radius: 50%;
+    border: 2px solid rgba(53, 71, 90, 0.1254901961);
+    animation: spin 1s linear infinite;
+    border-top-color: #35475A;
+}
+
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__plugin-indicator .not-installed,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__demo-indicator .not-installed,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__child-theme__icon-box-indicator .not-installed, body .mst-starter-wizard__demos ul .mst-starter-wizard__plugin-indicator .not-installed,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo-indicator .not-installed,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__child-theme__icon-box-indicator .not-installed, body .mst-starter-wizard__child-theme ul .mst-starter-wizard__plugin-indicator .not-installed,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__demo-indicator .not-installed,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box-indicator .not-installed {
+    display: block;
+    position: absolute;
+    right: 0;
+    color: #35475A;
+    background: rgba(53, 71, 90, 0.0509803922);
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-wrap: nowrap;
+}
+
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__plugin-indicator .active,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__demo-indicator .active,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__child-theme__icon-box-indicator .active, body .mst-starter-wizard__demos ul .mst-starter-wizard__plugin-indicator .active,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo-indicator .active,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__child-theme__icon-box-indicator .active, body .mst-starter-wizard__child-theme ul .mst-starter-wizard__plugin-indicator .active,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__demo-indicator .active,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box-indicator .active {
+    display: block;
+    position: absolute;
+    right: 0;
+    background: #eefdf2;
+    color: #50A054;
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    visibility: hidden;
+    opacity: 0;
+}
+
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__plugin-load .mst-starter-wizard__plugin-indicator .not-installed,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__plugin-load .mst-starter-wizard__demo-indicator .not-installed,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__demo-load .mst-starter-wizard__plugin-indicator .not-installed,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__demo-load .mst-starter-wizard__demo-indicator .not-installed,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__child-theme__icon-box-load .mst-starter-wizard__plugin-indicator .not-installed,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__child-theme__icon-box-load .mst-starter-wizard__demo-indicator .not-installed, body .mst-starter-wizard__demos ul .mst-starter-wizard__plugin-load .mst-starter-wizard__plugin-indicator .not-installed,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__plugin-load .mst-starter-wizard__demo-indicator .not-installed,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo-load .mst-starter-wizard__plugin-indicator .not-installed,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo-load .mst-starter-wizard__demo-indicator .not-installed,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__child-theme__icon-box-load .mst-starter-wizard__plugin-indicator .not-installed,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__child-theme__icon-box-load .mst-starter-wizard__demo-indicator .not-installed, body .mst-starter-wizard__child-theme ul .mst-starter-wizard__plugin-load .mst-starter-wizard__plugin-indicator .not-installed,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__plugin-load .mst-starter-wizard__demo-indicator .not-installed,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__demo-load .mst-starter-wizard__plugin-indicator .not-installed,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__demo-load .mst-starter-wizard__demo-indicator .not-installed,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box-load .mst-starter-wizard__plugin-indicator .not-installed,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box-load .mst-starter-wizard__demo-indicator .not-installed {
+    visibility: hidden;
+    opacity: 0;
+}
+
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__plugin-load .mst-starter-wizard__plugin-indicator .installing,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__plugin-load .mst-starter-wizard__demo-indicator .installing,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__demo-load .mst-starter-wizard__plugin-indicator .installing,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__demo-load .mst-starter-wizard__demo-indicator .installing,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__child-theme__icon-box-load .mst-starter-wizard__plugin-indicator .installing,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__child-theme__icon-box-load .mst-starter-wizard__demo-indicator .installing, body .mst-starter-wizard__demos ul .mst-starter-wizard__plugin-load .mst-starter-wizard__plugin-indicator .installing,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__plugin-load .mst-starter-wizard__demo-indicator .installing,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo-load .mst-starter-wizard__plugin-indicator .installing,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo-load .mst-starter-wizard__demo-indicator .installing,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__child-theme__icon-box-load .mst-starter-wizard__plugin-indicator .installing,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__child-theme__icon-box-load .mst-starter-wizard__demo-indicator .installing, body .mst-starter-wizard__child-theme ul .mst-starter-wizard__plugin-load .mst-starter-wizard__plugin-indicator .installing,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__plugin-load .mst-starter-wizard__demo-indicator .installing,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__demo-load .mst-starter-wizard__plugin-indicator .installing,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__demo-load .mst-starter-wizard__demo-indicator .installing,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box-load .mst-starter-wizard__plugin-indicator .installing,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box-load .mst-starter-wizard__demo-indicator .installing {
+    visibility: visible;
+    opacity: 1;
+}
+
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__plugin-loaded .mst-starter-wizard__plugin-indicator .not-installed,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__plugin-loaded .mst-starter-wizard__demo-indicator .not-installed,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__demo-loaded .mst-starter-wizard__plugin-indicator .not-installed,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__demo-loaded .mst-starter-wizard__demo-indicator .not-installed,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__child-theme__icon-box-loaded .mst-starter-wizard__plugin-indicator .not-installed,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__child-theme__icon-box-loaded .mst-starter-wizard__demo-indicator .not-installed, body .mst-starter-wizard__demos ul .mst-starter-wizard__plugin-loaded .mst-starter-wizard__plugin-indicator .not-installed,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__plugin-loaded .mst-starter-wizard__demo-indicator .not-installed,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo-loaded .mst-starter-wizard__plugin-indicator .not-installed,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo-loaded .mst-starter-wizard__demo-indicator .not-installed,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__child-theme__icon-box-loaded .mst-starter-wizard__plugin-indicator .not-installed,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__child-theme__icon-box-loaded .mst-starter-wizard__demo-indicator .not-installed, body .mst-starter-wizard__child-theme ul .mst-starter-wizard__plugin-loaded .mst-starter-wizard__plugin-indicator .not-installed,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__plugin-loaded .mst-starter-wizard__demo-indicator .not-installed,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__demo-loaded .mst-starter-wizard__plugin-indicator .not-installed,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__demo-loaded .mst-starter-wizard__demo-indicator .not-installed,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box-loaded .mst-starter-wizard__plugin-indicator .not-installed,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box-loaded .mst-starter-wizard__demo-indicator .not-installed {
+    visibility: hidden;
+    opacity: 0;
+}
+
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__plugin-loaded .mst-starter-wizard__plugin-indicator .active,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__plugin-loaded .mst-starter-wizard__demo-indicator .active,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__demo-loaded .mst-starter-wizard__plugin-indicator .active,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__demo-loaded .mst-starter-wizard__demo-indicator .active,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__child-theme__icon-box-loaded .mst-starter-wizard__plugin-indicator .active,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__child-theme__icon-box-loaded .mst-starter-wizard__demo-indicator .active, body .mst-starter-wizard__demos ul .mst-starter-wizard__plugin-loaded .mst-starter-wizard__plugin-indicator .active,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__plugin-loaded .mst-starter-wizard__demo-indicator .active,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo-loaded .mst-starter-wizard__plugin-indicator .active,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo-loaded .mst-starter-wizard__demo-indicator .active,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__child-theme__icon-box-loaded .mst-starter-wizard__plugin-indicator .active,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__child-theme__icon-box-loaded .mst-starter-wizard__demo-indicator .active, body .mst-starter-wizard__child-theme ul .mst-starter-wizard__plugin-loaded .mst-starter-wizard__plugin-indicator .active,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__plugin-loaded .mst-starter-wizard__demo-indicator .active,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__demo-loaded .mst-starter-wizard__plugin-indicator .active,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__demo-loaded .mst-starter-wizard__demo-indicator .active,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box-loaded .mst-starter-wizard__plugin-indicator .active,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box-loaded .mst-starter-wizard__demo-indicator .active {
+    visibility: visible;
+    opacity: 1;
+}
+
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__plugin-error .mst-starter-wizard__plugin-indicator,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__plugin-error .mst-starter-wizard__demo-indicator,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__demo-error .mst-starter-wizard__plugin-indicator,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__demo-error .mst-starter-wizard__demo-indicator,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__plugin-indicator,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__demo-indicator, body .mst-starter-wizard__demos ul .mst-starter-wizard__plugin-error .mst-starter-wizard__plugin-indicator,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__plugin-error .mst-starter-wizard__demo-indicator,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo-error .mst-starter-wizard__plugin-indicator,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo-error .mst-starter-wizard__demo-indicator,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__plugin-indicator,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__demo-indicator, body .mst-starter-wizard__child-theme ul .mst-starter-wizard__plugin-error .mst-starter-wizard__plugin-indicator,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__plugin-error .mst-starter-wizard__demo-indicator,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__demo-error .mst-starter-wizard__plugin-indicator,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__demo-error .mst-starter-wizard__demo-indicator,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__plugin-indicator,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__demo-indicator {
+    color: #FF3945;
+    background-color: rgba(255, 57, 69, 0.1);
+    border: 0;
+    animation: none;
+    visibility: visible;
+    opacity: 1;
+}
+
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__plugin-error .mst-starter-wizard__plugin-indicator span,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__plugin-error .mst-starter-wizard__demo-indicator span,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__demo-error .mst-starter-wizard__plugin-indicator span,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__demo-error .mst-starter-wizard__demo-indicator span,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__plugin-indicator span,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__demo-indicator span, body .mst-starter-wizard__demos ul .mst-starter-wizard__plugin-error .mst-starter-wizard__plugin-indicator span,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__plugin-error .mst-starter-wizard__demo-indicator span,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo-error .mst-starter-wizard__plugin-indicator span,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo-error .mst-starter-wizard__demo-indicator span,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__plugin-indicator span,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__demo-indicator span, body .mst-starter-wizard__child-theme ul .mst-starter-wizard__plugin-error .mst-starter-wizard__plugin-indicator span,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__plugin-error .mst-starter-wizard__demo-indicator span,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__demo-error .mst-starter-wizard__plugin-indicator span,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__demo-error .mst-starter-wizard__demo-indicator span,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__plugin-indicator span,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__demo-indicator span {
+    display: block;
+}
+
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__plugin-error .mst-starter-wizard__plugin-indicator span::before, body .mst-starter-wizard__plugins ul .mst-starter-wizard__plugin-error .mst-starter-wizard__plugin-indicator span::after,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__plugin-error .mst-starter-wizard__demo-indicator span::before,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__plugin-error .mst-starter-wizard__demo-indicator span::after,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__demo-error .mst-starter-wizard__plugin-indicator span::before,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__demo-error .mst-starter-wizard__plugin-indicator span::after,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__demo-error .mst-starter-wizard__demo-indicator span::before,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__demo-error .mst-starter-wizard__demo-indicator span::after,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__plugin-indicator span::before,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__plugin-indicator span::after,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__demo-indicator span::before,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__demo-indicator span::after, body .mst-starter-wizard__demos ul .mst-starter-wizard__plugin-error .mst-starter-wizard__plugin-indicator span::before, body .mst-starter-wizard__demos ul .mst-starter-wizard__plugin-error .mst-starter-wizard__plugin-indicator span::after,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__plugin-error .mst-starter-wizard__demo-indicator span::before,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__plugin-error .mst-starter-wizard__demo-indicator span::after,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo-error .mst-starter-wizard__plugin-indicator span::before,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo-error .mst-starter-wizard__plugin-indicator span::after,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo-error .mst-starter-wizard__demo-indicator span::before,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo-error .mst-starter-wizard__demo-indicator span::after,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__plugin-indicator span::before,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__plugin-indicator span::after,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__demo-indicator span::before,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__demo-indicator span::after, body .mst-starter-wizard__child-theme ul .mst-starter-wizard__plugin-error .mst-starter-wizard__plugin-indicator span::before, body .mst-starter-wizard__child-theme ul .mst-starter-wizard__plugin-error .mst-starter-wizard__plugin-indicator span::after,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__plugin-error .mst-starter-wizard__demo-indicator span::before,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__plugin-error .mst-starter-wizard__demo-indicator span::after,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__demo-error .mst-starter-wizard__plugin-indicator span::before,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__demo-error .mst-starter-wizard__plugin-indicator span::after,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__demo-error .mst-starter-wizard__demo-indicator span::before,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__demo-error .mst-starter-wizard__demo-indicator span::after,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__plugin-indicator span::before,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__plugin-indicator span::after,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__demo-indicator span::before,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__demo-indicator span::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 2px;
+    background-color: #FF3945;
+    transform-origin: center;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__plugin-error .mst-starter-wizard__plugin-indicator span::after,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__plugin-error .mst-starter-wizard__demo-indicator span::after,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__demo-error .mst-starter-wizard__plugin-indicator span::after,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__demo-error .mst-starter-wizard__demo-indicator span::after,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__plugin-indicator span::after,
+body .mst-starter-wizard__plugins ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__demo-indicator span::after, body .mst-starter-wizard__demos ul .mst-starter-wizard__plugin-error .mst-starter-wizard__plugin-indicator span::after,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__plugin-error .mst-starter-wizard__demo-indicator span::after,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo-error .mst-starter-wizard__plugin-indicator span::after,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo-error .mst-starter-wizard__demo-indicator span::after,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__plugin-indicator span::after,
+body .mst-starter-wizard__demos ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__demo-indicator span::after, body .mst-starter-wizard__child-theme ul .mst-starter-wizard__plugin-error .mst-starter-wizard__plugin-indicator span::after,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__plugin-error .mst-starter-wizard__demo-indicator span::after,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__demo-error .mst-starter-wizard__plugin-indicator span::after,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__demo-error .mst-starter-wizard__demo-indicator span::after,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__plugin-indicator span::after,
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box-error .mst-starter-wizard__demo-indicator span::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo .mst-starter-wizard__demo-indicator {
+    margin-top: 0;
+}
+
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo.disable-check .mst-starter-wizard__demo-checkbox label {
+    cursor: default;
+}
+
+body .mst-starter-wizard__demos ul .mst-starter-wizard__demo.disable-check .mst-starter-wizard__demo-checkbox span {
+    opacity: 0.5;
+}
+
+body .mst-starter-wizard__demos .mst-starter-wizard__button-box {
+    justify-content: flex-end;
+}
+
+body .mst-starter-wizard__activations, body .mst-starter-wizard__plans {
+    max-width: 550px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+body .mst-starter-wizard__activations .mst-starter-wizard__title, body .mst-starter-wizard__plans .mst-starter-wizard__title {
+    margin-bottom: 15px;
+}
+
+body .mst-starter-wizard__activations .mst-starter-wizard__description, body .mst-starter-wizard__plans .mst-starter-wizard__description {
+    color: #808c98;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 40px;
+}
+
+body .mst-starter-wizard__activations .mst-starter-wizard__button-box, body .mst-starter-wizard__plans .mst-starter-wizard__button-box {
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 300px;
+}
+
+body .mst-starter-wizard__activations .mst-starter-wizard__button:last-child, body .mst-starter-wizard__plans .mst-starter-wizard__button:last-child {
+    margin-top: 10px;
+}
+
+body .mst-starter-wizard__activations .mst-starter-wizard__button:hover, body .mst-starter-wizard__plans .mst-starter-wizard__button:hover {
+    opacity: 0.8;
+}
+
+body .mst-starter-wizard__plans .mst-starter-wizard__title {
+    margin-bottom: 40px;
+}
+
+body .mst-starter-wizard__plans .mst-starter-wizard__price-box {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+body .mst-starter-wizard__plans .mst-starter-wizard__price-box .mst-starter-wizard__button {
+    margin-top: 20px;
+}
+
+body .mst-starter-wizard__plans .mst-starter-wizard__price-button {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #E1E4E7;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.07);
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+body .mst-starter-wizard__plans .mst-starter-wizard__price-button small {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    margin: 0 5px 0 0;
+    border: 2px solid #E1E4E7;
+    background-color: #ffffff;
+    border-radius: 50%;
+}
+
+body .mst-starter-wizard__plans .mst-starter-wizard__price-button span {
+    margin: 0 0 0 auto;
+    color: #808c98;
+}
+
+body .mst-starter-wizard__plans .mst-starter-wizard__price-button.selected-price {
+    border-color: #1280DF;
+    background-color: rgba(18, 128, 223, 0.1);
+}
+
+body .mst-starter-wizard__plans .mst-starter-wizard__price-button.selected-price small {
+    border-color: #1280DF;
+}
+
+body .mst-starter-wizard__plans .mst-starter-wizard__price-button.selected-price small::before {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: #1280DF;
+    border-radius: 50%;
+}
+
+body .mst-starter-wizard__demo-checkbox {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+body .mst-starter-wizard__demo-checkbox label {
+    display: flex;
+    align-items: center;
+    line-height: 22px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    text-wrap: nowrap;
+    min-width: 215px;
+}
+
+body .mst-starter-wizard__demo-checkbox .demo-checkbox {
+    display: inline-block;
+    vertical-align: top;
+    box-sizing: border-box;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    margin-right: 10px;
+    border-radius: 4px;
+    text-align: center;
+    border: 2px solid #1280DF;
+    background-color: #1280DF;
+    font-size: 12px;
+    color: #ffffff;
+}
+
+body .mst-starter-wizard__demo-checkbox .demo-checkbox span {
+    line-height: 16px;
+}
+
+body .mst-starter-wizard__demo-checkbox .demo-checkbox[data-checked=false] {
+    background-color: transparent;
+    border-color: #E1E4E7;
+}
+
+body .mst-starter-wizard__demo-checkbox-content {
+    display: block;
+    padding: 0;
+    font-style: normal;
+    color: rgba(53, 71, 90, 0.8);
+    font-size: 14px;
+    font-weight: 400;
+    text-align: left;
+    max-width: 350px;
+    line-height: 24px;
+}
+
+body .mst-starter-wizard__demo-checkbox-content ul {
+    margin-top: 4px;
+    padding-left: 20px;
+}
+
+body .mst-starter-wizard__demo-checkbox-content ul li {
+    margin: 0;
+}
+
+body .mst-starter-wizard__demo-checkbox-content ul li:before {
+    content: "•";
+    color: rgba(53, 71, 90, 0.8);
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+body .mst-starter-wizard__demo-checkbox.disable-check label {
+    cursor: default;
+}
+
+body .mst-starter-wizard__demo-checkbox.disable-check span {
+    opacity: 0.5;
+}
+
+body .mst-starter-wizard__child-theme .mst-starter-wizard__title {
+    text-transform: capitalize;
+    font-size: 24px;
+}
+
+body .mst-starter-wizard__child-theme .mst-starter-wizard__description {
+    margin-bottom: 43px;
+}
+
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box {
+    display: flex;
+    flex-wrap: nowrap;
+    max-width: 100%;
+    padding: 15px 0 18px;
+    border: 0;
+}
+
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box__icon {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    margin-right: 12px;
+    background: rgba(18, 128, 223, 0.1);
+    font-size: 22px;
+    color: #1280DF;
+}
+
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box__info {
+    text-align: left;
+}
+
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box__info-title {
+    color: #0D1216;
+    font-size: 14px;
+    font-weight: 500;
+    padding-top: 3px;
+}
+
+body .mst-starter-wizard__child-theme ul .mst-starter-wizard__child-theme__icon-box__info-description {
+    color: rgba(13, 18, 22, 0.7);
+    font-size: 14px;
+    font-weight: 400;
+    padding-top: 3px;
+}
+
+body .mst-starter-wizard__child-theme .mst-starter-wizard__button-box {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 27px;
+    width: 100%;
+}
+
+body .mst-starter-wizard__child-theme .mst-starter-wizard__button-box .mst-starter-wizard__button {
+    margin: 0 4px;
+    padding: 11px 15px;
+    border-radius: 10px;
+}
+
+body .mst-starter-wizard__child-theme .mst-starter-wizard__button-box .mst-starter-wizard__button-skip {
+    background-color: #ffffff;
+    color: #0D1216;
+    border: 1px solid #E1E4E7;
+}
+
+body .mst-starter-wizard__finish {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 550px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+body .mst-starter-wizard__finish .mst-starter-wizard__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background-color: #50A054;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+body .mst-starter-wizard__finish .mst-starter-wizard__icon::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: -25px 0 0 -25px;
+    background-color: rgba(18, 128, 223, 0.1);
+}
+
+body .mst-starter-wizard__finish .mst-starter-wizard__title {
+    color: #0D1216;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 24px;
+    margin: 20px 0 16px;
+}
+
+body .mst-starter-wizard__finish .mst-starter-wizard__description {
+    color: rgba(53, 71, 90, 0.8);
+    text-align: center;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 24px;
+    padding: 0 71px;
+    margin-bottom: 0;
+}
+
+body .mst-starter-wizard__finish .mst-starter-wizard__button-box {
+    justify-content: center;
+    align-items: center;
+}
+
+body .mst-starter-wizard__finish .mst-starter-wizard__button-box .mst-starter-wizard__button {
+    color: #ffffff;
+}
+
+body .mst-starter-wizard__finish .mst-starter-wizard__button-box .mst-starter-wizard__button:hover {
+    text-decoration: none;
+}
+
+body .mst-starter-wizard__finish .mst-starter-wizard__button-box a {
+    margin: 0 5px;
+    display: inline;
+    color: rgba(53, 71, 90, 0.8);
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 11px 14px;
+    border: 1px solid #E1E4E7;
+}
+
+body .mst-starter-wizard__finish .mst-starter-wizard__button-box a:hover {
+    text-decoration: underline;
+}
+
+@keyframes mulShdSpin {
+    0%, 100% {
+        box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;
+    }
+
+    12.5% {
+        box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+    }
+
+    25% {
+        box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+    }
+
+    37.5% {
+        box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;
+    }
+
+    50% {
+        box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;
+    }
+
+    62.5% {
+        box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;
+    }
+
+    75% {
+        box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;
+    }
+
+    87.5% {
+        box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
+    }
+}

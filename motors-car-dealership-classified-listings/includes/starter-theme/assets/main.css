@@ -1,4 +1,3 @@
-
 /* ended css styles for Nuxy Empty Field*/
 
 .buttonload i {
@@ -14,7 +13,11 @@
     margin-top: 20px;
 }
 
-html body.motors-starter-theme-setup #adminmenumain, html body.motors-starter-theme-setup #wpadminbar, html body.motors-starter-theme-setup #wpcontent #wpbody-content .notice, html body.motors-starter-theme-setup #wpcontent #wpbody-content .stm-plugin-admin-notice, html body.motors-starter-theme-setup #wpfooter {
+html body.motors-starter-theme-setup #adminmenumain,
+html body.motors-starter-theme-setup #wpadminbar,
+html body.motors-starter-theme-setup #wpcontent #wpbody-content .notice,
+html body.motors-starter-theme-setup #wpcontent #wpbody-content .stm-plugin-admin-notice,
+html body.motors-starter-theme-setup #wpfooter {
     display: none
 }
 
@@ -363,6 +366,7 @@ html body.motors-starter-theme-setup #wpcontent #wpbody-content .motors-starter-
         -webkit-transform: rotate(0);
         transform: rotate(0)
     }
+
     100% {
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg)
@@ -374,6 +378,7 @@ html body.motors-starter-theme-setup #wpcontent #wpbody-content .motors-starter-
         -webkit-transform: rotate(0);
         transform: rotate(0)
     }
+
     100% {
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg)
@@ -407,7 +412,8 @@ html body.motors-starter-theme-setup #wpcontent #wpbody-content .motors-starter-
     font-weight: 700
 }
 
-html body.motors-starter-theme-setup #wpcontent #wpbody-content .motors-starter-theme-setup-wrapper .motors-starter-theme-content .motors-actions .motors-button:focus, html body.motors-starter-theme-setup #wpcontent #wpbody-content .motors-starter-theme-setup-wrapper .motors-starter-theme-content .motors-actions .motors-button:hover {
+html body.motors-starter-theme-setup #wpcontent #wpbody-content .motors-starter-theme-setup-wrapper .motors-starter-theme-content .motors-actions .motors-button:focus,
+html body.motors-starter-theme-setup #wpcontent #wpbody-content .motors-starter-theme-setup-wrapper .motors-starter-theme-content .motors-actions .motors-button:hover {
     font-size: 15px;
     outline: 0;
     box-shadow: none;
@@ -422,4 +428,53 @@ html body.motors-starter-theme-setup #wpcontent #wpbody-content .motors-starter-
 html body.motors-starter-theme-setup #wpcontent #wpbody-content .motors-starter-theme-setup-wrapper .motors-starter-theme-content .motors-actions .motors-button.main-btn {
     background-color: #195ec8;
     color: #fff
+}
+
+li#toplevel_page_mvl_plugin_settings .wp-submenu li.mvl-settings-menu {
+    padding: 10px 0 0;
+    border-top: 1px solid rgba(255, 255, 255, .1);
+}
+
+li#toplevel_page_mvl_plugin_settings .wp-submenu li.mvl-pro-addons-menu img {
+    vertical-align: middle;
+    margin: 0 5px 0 0;
+}
+
+.mst-menu-item-badge {
+    text-transform: uppercase;
+    font-size: 8px;
+    color: #fff;
+    border-radius: 4px;
+    background-color: #2985f7;
+    padding: 2px 4px 3px 4px;
+    margin: 2px 0 0 3px;
+    display: inline-block;
+    position: absolute;
+    white-space: pre;
+    transition: 0.2s;
+    line-height: 10px;
+}
+
+li#toplevel_page_mvl_plugin_settings .wp-submenu li.mst-skins-importer a {
+    padding-left: 10px !important;
+}
+
+.mvl-pro-addons-menu.current .mst-menu-item-badge,
+.mvl-pro-addons-menu a:hover .mst-menu-item-badge {
+    background-color: #1280df;
+}
+
+#toplevel_page_mvl_plugin_settings>.wp-submenu-wrap {
+    display: flex;
+    flex-direction: column;
+}
+
+.mst-skins-importer {
+    order: 10;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding-top: 10px !important;
+}
+
+.mst-theme-options {
+    order: 11;
 }

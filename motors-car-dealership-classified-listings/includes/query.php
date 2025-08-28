@@ -397,8 +397,13 @@ function _stm_listings_build_query_args( $args = null, $source = null ) {
 				break;
 			default:
 				$args['meta_key'] = $custom_meta_key;
-				$args['orderby']  = 'meta_value_num';
-				$args['order']    = $custom_sort_order;
+				if ( apply_filters( 'mvl_is_numeric_listing_field_sort_type', false, $custom_meta_key ) ) {
+					$args['orderby'] = 'meta_value_num';
+				} else {
+					$args['orderby'] = 'meta_value';
+				}
+
+				$args['order'] = $custom_sort_order;
 		}
 	}
 
@@ -782,4 +787,3 @@ function mvl_listing_pre_get_vehicles( $query_vars ) {
 }
 
 add_filter( 'stm_listings_build_query_args', 'mvl_listing_pre_get_vehicles', 20 );
-

@@ -34,37 +34,78 @@ if ( ! empty( $attr_data['use_count'] ) ) {
 	$show_count = true;
 }
 
-if ( ! empty( $attr_data['numeric'] ) && ! $attr_data['numeric'] ) {
-
-	$sort = $attr_data['terms_filters_sort_by'] ?? 'name_asc';
-
-	switch ( $sort ) {
-		case 'name_desc':
-			krsort( $options );
-			break;
-		case 'count_asc':
+$sort       = $attr_data['terms_filters_sort_by'] ?? 'name_asc';
+$is_numeric = apply_filters( 'mvl_is_numeric_listing_field_sort_type', false, $sel_name );
+switch ( $sort ) {
+	case 'name_desc':
+		if ( $is_numeric ) {
 			uasort(
 				$options,
 				function ( $a, $b ) {
-					return abs( $a['count'] ) <=> abs( $b['count'] );
+					return abs( (int) $b['label'] ) <=> (int) abs( $a['label'] );
 				}
 			);
-			break;
-		case 'count_desc':
+		} else {
+			usort(
+				$options,
+				function ( $a, $b ) {
+					return strcmp( $b['label'], $a['label'] );
+				}
+			);
+		}
+		break;
+	case 'count_asc':
+		uasort(
+			$options,
+			function ( $a, $b ) {
+				$a['count'] = isset( $a['count'] ) ? $a['count'] : 0;
+				$b['count'] = isset( $b['count'] ) ? $b['count'] : 0;
+
+				return abs( (int) $a['count'] ) <=> abs( (int) $b['count'] );
+			}
+		);
+		break;
+	case 'count_desc':
+		uasort(
+			$options,
+			function ( $a, $b ) {
+				$a['count'] = isset( $a['count'] ) ? $a['count'] : 0;
+				$b['count'] = isset( $b['count'] ) ? $b['count'] : 0;
+
+				return abs( (int) $b['count'] ) <=> abs( (int) $a['count'] );
+			}
+		);
+		break;
+	default:
+		if ( $is_numeric ) {
 			uasort(
 				$options,
 				function ( $a, $b ) {
-					return abs( $b['count'] ) <=> abs( $a['count'] );
+					return abs( (int) $a['label'] ) <=> abs( (int) $b['label'] );
 				}
 			);
-			break;
-		default:
-			ksort( $options );
-			break;
+		} else {
+			usort(
+				$options,
+				function ( $a, $b ) {
+					return strcmp( $a['label'], $b['label'] );
+				}
+			);
+		}
+		break;
+}
+$empty_options = array();
+
+foreach ( $options as $k => $option ) {
+	if ( ! isset( $option['count'] ) || $option['count'] < 1 ) {
+		$empty_options[ $k ]['count'] = 0;
+		$empty_options[ $k ]          = $option;
+
+		unset( $options[ $k ] );
 	}
 }
 
-$options = array_merge( array( '' => $first_option ), $options );
+$options = array_merge( array( '' => $first_option ), $options, $empty_options );
 
 $aria_label = sprintf(
 	/* translators: %s label */

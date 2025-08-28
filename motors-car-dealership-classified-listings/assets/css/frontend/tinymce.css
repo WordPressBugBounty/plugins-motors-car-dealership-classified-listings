@@ -115,7 +115,3 @@ body #wp-link .submitbox {
     background-color: var(--motors-bg-color);
     border-color: var(--motors-border-color);
 }
-
-body #wp-stm_seller_notes-editor-container #stm_seller_notes_ifr {
-    width: unset !important;
-}

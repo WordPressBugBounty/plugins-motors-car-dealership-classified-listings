@@ -32,7 +32,7 @@ if ( ! empty( $taxonomies ) ) :
 
 				if ( ! empty( $id ) ) {
 					$post_terms = wp_get_post_terms( $id, $_taxonomy );
-					if ( ! empty( $post_terms[0] ) ) {
+					if ( is_array( $post_terms ) && isset( $post_terms[0] ) && ! empty( $post_terms[0] ) ) {
 						$has_selected = $post_terms[0]->slug;
 					} elseif ( ! empty( $tax_info['slug'] ) ) {
 						$has_selected = get_post_meta( $id, $tax_info['slug'], true );
@@ -44,6 +44,9 @@ if ( ! empty( $taxonomies ) ) :
 
 				if ( $number_as_input && ! empty( $tax_info['numeric'] ) && $tax_info['numeric'] ) {
 					$number_field = true;
+				}
+				if ( ! isset( $tax_info['slug'] ) ) {
+					continue;
 				}
 				?>
 					<div class="col-md-3 col-sm-3 stm-form-1-selects">

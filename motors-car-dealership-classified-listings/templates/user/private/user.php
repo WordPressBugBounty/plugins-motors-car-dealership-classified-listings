@@ -15,7 +15,7 @@ $tpl = apply_filters( 'stm_account_current_page', '' );
 	<div class="container">
 		<div class="row">
 
-			<div class="col-md-3 col-sm-12 hidden-sm hidden-xs stm-sticky-user-sidebar">
+			<div class="col-md-3 col-sm-12 stm-sticky-user-sidebar">
 				<?php
 				do_action(
 					'stm_listings_load_template',

@@ -227,7 +227,7 @@ table > tbody tr td {
 }
 
 .car-listing-row .compare-col-stm .listing-car-item-meta {
-    padding-top: 35px;
+    padding-top: 20px;
 }
 
 .car-listing-row .compare-col-stm .listing-car-item-meta .car-title {
@@ -1069,7 +1069,8 @@ ul.list-style-2 li:before {
     }
 }
 
-.mvl-card-skin-pagination ul.page-numbers .next, .mvl-card-skin-pagination ul.page-numbers .prev {
+.mvl-card-skin-pagination ul.page-numbers .next,
+.mvl-card-skin-pagination ul.page-numbers .prev {
     top: 30px;
 }
 
@@ -1092,7 +1093,8 @@ ul.list-style-2 li:before {
         margin-top: 10px;
     }
 
-    .page-numbers li a.next, .page-numbers li a.prev {
+    .page-numbers li a.next,
+  .page-numbers li a.prev {
         margin-top: 10px;
     }
 }
@@ -1116,8 +1118,8 @@ ul.list-style-2 li:before {
     height: 40px;
     margin: 0 8px;
     padding: 0;
-    background-color: var(--motors-bg-lowestalpha-contrast);
-    color: var(--motors-text-color);
+    background-color: var(--motors-filter-inputs-color);
+    color: var(--motors-text-highalpha-color);
     border-top: none;
     border-radius: 8px;
     line-height: 40px;
@@ -1664,23 +1666,59 @@ span.video-preview {
     border-top-color: var(--motors-border-color);
 }
 
-.stm-login-register-form .stm-register-form input[type=text], .stm-login-register-form .stm-register-form input[type=number], .stm-login-register-form .stm-register-form input[type=tel], .stm-login-register-form .stm-register-form input[type=email], .stm-login-register-form .stm-register-form input[type=search], .stm-login-register-form .stm-register-form input[type=password] {
+.stm-login-register-form .stm-register-form input[type=text],
+.stm-login-register-form .stm-register-form input[type=number],
+.stm-login-register-form .stm-register-form input[type=tel],
+.stm-login-register-form .stm-register-form input[type=email],
+.stm-login-register-form .stm-register-form input[type=search],
+.stm-login-register-form .stm-register-form input[type=password] {
     background-color: var(--motors-filter-inputs-color);
     border-radius: 4px;
     border: 1px solid var(--motors-border-color);
     outline: none;
 }
 
-.stm-login-register-form .stm-register-form input[type=text]:focus, .stm-login-register-form .stm-register-form input[type=number]:focus, .stm-login-register-form .stm-register-form input[type=tel]:focus, .stm-login-register-form .stm-register-form input[type=email]:focus, .stm-login-register-form .stm-register-form input[type=search]:focus, .stm-login-register-form .stm-register-form input[type=password]:focus {
+.stm-login-register-form .stm-register-form input[type=text]:focus, .stm-login-register-form .stm-register-form input[type=text]:active,
+.stm-login-register-form .stm-register-form input[type=number]:focus,
+.stm-login-register-form .stm-register-form input[type=number]:active,
+.stm-login-register-form .stm-register-form input[type=tel]:focus,
+.stm-login-register-form .stm-register-form input[type=tel]:active,
+.stm-login-register-form .stm-register-form input[type=email]:focus,
+.stm-login-register-form .stm-register-form input[type=email]:active,
+.stm-login-register-form .stm-register-form input[type=search]:focus,
+.stm-login-register-form .stm-register-form input[type=search]:active,
+.stm-login-register-form .stm-register-form input[type=password]:focus,
+.stm-login-register-form .stm-register-form input[type=password]:active {
     border: 1px solid var(--motors-accent-color);
+    background-color: var(--motors-filter-inputs-color);
 }
 
-.stm-login-register-form .stm-register-form input[type=text]:active, .stm-login-register-form .stm-register-form input[type=number]:active, .stm-login-register-form .stm-register-form input[type=tel]:active, .stm-login-register-form .stm-register-form input[type=email]:active, .stm-login-register-form .stm-register-form input[type=search]:active, .stm-login-register-form .stm-register-form input[type=password]:active {
-    border: 1px solid var(--motors-accent-color);
-}
-
-.stm-login-register-form .stm-register-form input[type=text]:focus-visible, .stm-login-register-form .stm-register-form input[type=number]:focus-visible, .stm-login-register-form .stm-register-form input[type=tel]:focus-visible, .stm-login-register-form .stm-register-form input[type=email]:focus-visible, .stm-login-register-form .stm-register-form input[type=search]:focus-visible, .stm-login-register-form .stm-register-form input[type=password]:focus-visible {
-    border: 1px solid var(--motors-accent-color);
+.stm-login-register-form .stm-register-form input[type=text]:-webkit-autofill, .stm-login-register-form .stm-register-form input[type=text]:-webkit-autofill:hover, .stm-login-register-form .stm-register-form input[type=text]:-webkit-autofill:focus, .stm-login-register-form .stm-register-form input[type=text]:-webkit-autofill:active,
+.stm-login-register-form .stm-register-form input[type=number]:-webkit-autofill,
+.stm-login-register-form .stm-register-form input[type=number]:-webkit-autofill:hover,
+.stm-login-register-form .stm-register-form input[type=number]:-webkit-autofill:focus,
+.stm-login-register-form .stm-register-form input[type=number]:-webkit-autofill:active,
+.stm-login-register-form .stm-register-form input[type=tel]:-webkit-autofill,
+.stm-login-register-form .stm-register-form input[type=tel]:-webkit-autofill:hover,
+.stm-login-register-form .stm-register-form input[type=tel]:-webkit-autofill:focus,
+.stm-login-register-form .stm-register-form input[type=tel]:-webkit-autofill:active,
+.stm-login-register-form .stm-register-form input[type=email]:-webkit-autofill,
+.stm-login-register-form .stm-register-form input[type=email]:-webkit-autofill:hover,
+.stm-login-register-form .stm-register-form input[type=email]:-webkit-autofill:focus,
+.stm-login-register-form .stm-register-form input[type=email]:-webkit-autofill:active,
+.stm-login-register-form .stm-register-form input[type=search]:-webkit-autofill,
+.stm-login-register-form .stm-register-form input[type=search]:-webkit-autofill:hover,
+.stm-login-register-form .stm-register-form input[type=search]:-webkit-autofill:focus,
+.stm-login-register-form .stm-register-form input[type=search]:-webkit-autofill:active,
+.stm-login-register-form .stm-register-form input[type=password]:-webkit-autofill,
+.stm-login-register-form .stm-register-form input[type=password]:-webkit-autofill:hover,
+.stm-login-register-form .stm-register-form input[type=password]:-webkit-autofill:focus,
+.stm-login-register-form .stm-register-form input[type=password]:-webkit-autofill:active {
+    -webkit-transition: background-color 5000s ease-in-out 0s !important;
+    transition: background-color 5000s ease-in-out 0s !important;
+    -webkit-text-fill-color: var(--motors-text-color) !important;
+    font-family: inherit !important;
+    font-size: inherit !important;
 }
 
 .stm-login-register-form .stm-register-form .form-group h4 {
@@ -1766,7 +1804,9 @@ footer .lOffer-account-dropdown {
 }
 
 .stm-user-public-profile.container {
-    margin: 50px auto 91px;
+    margin: 35px auto 91px;
+    padding: 0 15px;
+    max-width: 1134px;
 }
 
 .stm-user-public-profile .stm-user-public-profile-top {
@@ -2073,9 +2113,17 @@ footer .lOffer-account-dropdown {
     font-size: 12px;
 }
 
+.stm-user-public-listing .stm-user-public-listing-top .stm-view-by .view-type {
+    transition: 0.2s;
+}
+
 .stm-user-public-listing .stm-user-public-listing-top .stm-view-by .view-type.active {
-    background-color: #f0f2f5;
-    color: #8f8f8f;
+    background-color: var(--motors-filter-inputs-color);
+    color: var(--motors-accent-color);
+}
+
+.stm-user-public-listing .stm-user-public-listing-top .stm-view-by .view-type:hover {
+    color: var(--motors-accent-color);
 }
 
 .stm-user-public-listing .archive-listing-page .user-listings-wrapper {
@@ -2130,6 +2178,20 @@ footer .lOffer-account-dropdown {
     padding-bottom: 0;
 }
 
+.stm-user-private .container {
+    max-width: 1134px;
+}
+
+.stm-user-private > .container > .row {
+    margin: 0;
+    padding: 0;
+}
+
+.stm-user-private .archive-listing-page {
+    margin-left: 0;
+    margin-right: 0;
+}
+
 .stm-user-private .stm-car-listing-sort-units {
     margin-bottom: 0 !important;
     padding-bottom: 35px !important;
@@ -2161,9 +2223,10 @@ footer .lOffer-account-dropdown {
     background-color: var(--motors-bg-contrast);
 }
 
-@media (max-width: 820px) {
+@media (max-width: 767px) {
     .stm-user-private .stm-user-private-sidebar {
         padding: 20px;
+        min-height: auto !important;
     }
 }
 
@@ -2633,7 +2696,8 @@ footer .lOffer-account-dropdown {
     margin-right: 4px;
 }
 
-.stm-car-views, .stm-phone-reveals {
+.stm-car-views,
+.stm-phone-reveals {
     background: var(--motors-bg-alpha-contrast);
     color: var(--motors-contrast-text-color);
     font-size: 13px;
@@ -2643,19 +2707,23 @@ footer .lOffer-account-dropdown {
     transition: 0.2s;
 }
 
-.stm-car-views i, .stm-phone-reveals i {
+.stm-car-views i,
+.stm-phone-reveals i {
     margin-right: 2px;
 }
 
-.stm-car-views i.fa-phone, .stm-phone-reveals i.fa-phone {
+.stm-car-views i.fa-phone,
+.stm-phone-reveals i.fa-phone {
     font-size: 12px;
 }
 
-.stm-car-views i.fa-eye, .stm-phone-reveals i.fa-eye {
+.stm-car-views i.fa-eye,
+.stm-phone-reveals i.fa-eye {
     font-size: 13px;
 }
 
-.stm-car-views:hover, .stm-phone-reveals:hover {
+.stm-car-views:hover,
+.stm-phone-reveals:hover {
     background: var(--motors-bg-contrast);
 }
 
@@ -4340,7 +4408,12 @@ body .select2-container--default .select2-search--dropdown .select2-search__fiel
     font-weight: 400;
 }
 
-.stm_auto_loan_calculator > .title h1, .stm_auto_loan_calculator > .title h2, .stm_auto_loan_calculator > .title h3, .stm_auto_loan_calculator > .title h4, .stm_auto_loan_calculator > .title h5, .stm_auto_loan_calculator > .title h6 {
+.stm_auto_loan_calculator > .title h1,
+.stm_auto_loan_calculator > .title h2,
+.stm_auto_loan_calculator > .title h3,
+.stm_auto_loan_calculator > .title h4,
+.stm_auto_loan_calculator > .title h5,
+.stm_auto_loan_calculator > .title h6 {
     margin-left: 15px;
     margin-bottom: unset;
 }
@@ -4827,18 +4900,4 @@ body .hfe-flyout-close {
 
 #statistics-modal-wrap .modal-body ul.statistics-type li.off .fa-circle {
     color: var(--motors-text-alpha-color);
-}
-
-@media (max-width: 768px) {
-    .stm-user-private .row {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .stm-user-private .row .col-sm-3,
-  .stm-user-private .row .col-sm-9,
-  .stm-user-private .row .col-sm-12 {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
 }

@@ -2,6 +2,13 @@
     flex-wrap: nowrap;
 }
 
+@media (min-width: 768px) {
+    .stm-car-compare-row > * {
+        width: 33.333333%;
+        flex: 1;
+    }
+}
+
 @media (max-width: 1023px) {
     .stm-car-compare-row {
         flex-wrap: wrap;
@@ -30,7 +37,8 @@
 }
 
 @media (max-width: 768px) {
-    .stm-compare-cars-module .mvl-compare-title, .stm-compare-cars-module .col-3.compare-col-stm-empty {
+    .stm-compare-cars-module .mvl-compare-title,
+  .stm-compare-cars-module .col-3.compare-col-stm-empty {
         max-width: unset;
         flex: unset;
         width: 100%;
@@ -57,7 +65,9 @@
         width: 100%;
     }
 
-    .stm-compare-cars-module .mvl-compare-item, .stm-compare-cars-module .col-md-3.compare-col-stm-empty, .stm-compare-cars-module .col-3.compare-col-stm-empty {
+    .stm-compare-cars-module .mvl-compare-item,
+  .stm-compare-cars-module .col-md-3.compare-col-stm-empty,
+  .stm-compare-cars-module .col-3.compare-col-stm-empty {
         width: 33.33%;
         flex: unset;
         max-width: unset;

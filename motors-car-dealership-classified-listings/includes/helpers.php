@@ -227,9 +227,6 @@ function mvl_nuxy_sort_options() {
 		$numeric_filters = array_keys(
 			stm_listings_attributes(
 				array(
-					'where'  => array(
-						'numeric' => true,
-					),
 					'key_by' => 'slug',
 				)
 			)

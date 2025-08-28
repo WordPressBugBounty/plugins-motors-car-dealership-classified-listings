@@ -2,8 +2,8 @@ Vue.component('wpcfto_data_select', {
     props: ['fields', 'field_label', 'field_name', 'field_id', 'field_value'],
     data: function () {
         return {
-            value : '',
-            style : '',
+            value: '',
+            style: '',
         }
     },
     template: `
@@ -20,7 +20,7 @@ Vue.component('wpcfto_data_select', {
                         <div class="wpcfto_data_select__wrapper" v-bind:class="{'wpcfto_data_select__wrapper_disabled': option.disabled}">
                             <span class="wpcfto_data_select__img" v-bind:class="{'wpcfto_data_select__img_active': value == option.value}">
                                 <img v-bind:src="option.img" v-bind:alt="option.alt" v-bind:style="style">
-                                <a v-if="option.disabled && option.preview_url" :href="option.preview_url" target="_blank" class="wpcfto_data_select__img-preview">
+                                <a v-if="option.disabled && option.preview_url || option.preview_url && option.unlocked_preview" :href="option.preview_url" target="_blank" class="wpcfto_data_select__img-preview">
                                     {{ option.preview_label }}
                                 </a>
                             </span>
@@ -57,10 +57,10 @@ Vue.component('wpcfto_data_select', {
     `,
     mounted: function () {
         this.value = this.field_value;
-        if ( this.fields['width'] ) {
+        if (this.fields['width']) {
             this.style += 'width: ' + this.fields['width'] + 'px;';
         }
-        if ( this.fields['height'] ) {
+        if (this.fields['height']) {
             this.style += 'height: ' + this.fields['height'] + 'px;';
         }
     },

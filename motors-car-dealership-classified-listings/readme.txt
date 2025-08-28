@@ -5,7 +5,7 @@ Donate link: https://www.paypal.me/stylemix
 Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
 Tested up to: 6.8
-Stable tag: 1.4.84
+Stable tag: 1.4.85
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -135,11 +135,55 @@ After that, go to Tools -> Import, and via Wordpress Importer tool install dummy
 
 == Frequently Asked Questions ==
 
+= Is the Motors plugin free? =
+
+Yes! The free version includes all the essentials for managing vehicle listings. You can upgrade to Pro for advanced features like saved searches, VIN decoder, and others. [Learn more](https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/getting-started/free-version-and-pro-version) 
+
+= Can I use the plugin with any WordPress theme? =
+
+Yes, Motors works with any modern WordPress theme and is built to integrate seamlessly into your existing design. 
+
+= Can I create and manage listings? =
+
+Yes! Use ready-made templates to quickly set up and customize your listings or start from scratch. All management is done through the built-in Listing Manager. [Learn more](https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/listing-management/listing-manager) 
+
+= How can I add vehicle information? =
+
+Use the Custom Fields feature to add specific details like make, model, year, fuel type, transmission, and others. You can create options for each of your custom fields. [Learn more](https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/search-filter/custom-fields) 
+
+= Can I allow users or dealers to submit listings? =
+
+Yes! The plugin includes a frontend submission form. Users can register, add their listings, and dealers can sign up for a fee to post special listings. [Learn more](https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/single-listing/add-listing-form) 
+
+= Can I add a finance or loan calculator? =
+
+Yes. The Premium version includes a finance calculator that can be added to any listing page. [Learn more](https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/single-listing/listing-page-details/loan-calculator-pro-feature) 
+
+= Does it support location-based searches? =
+
+Yes. In the Motors Pro, users can search for vehicles based on location and distance.
+
+= What types of vehicles can I list with the plugin? =
+
+Any kind — cars, motorcycles, boats, trucks, and more. You can also create custom fields and filters for specific types. 
+
+= Can I customize the listing layout? =
+
+Yes. In the Pro version, you can use the built-in listing templates with 4 styles or choose from ready layouts customizable with Elementor. [Learn more](https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/single-listing/listing-templates) 
+
+= Can I translate the plugin into my language? =
+
+Definitely. Motors is translation-ready and works with popular multilingual plugins like Loco Translate. [Learn more](https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/translating-plugin-into-a-different-language/translation-basics)
+
 = How can I report security bugs? =
 
 You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability](https://patchstack.com/database/vdp/motors-car-dealership-classified-listings). 
 
 == Changelog ==
+
+= 1.4.85 =
+- **Fix:** Non-numeric fields can now be added to the "Sort By" list, and sorting values in Inventory filter fields has been corrected.
+- **Fix:** Typography updated to match the Luxury style on non-Elementor pages
 
 = 1.4.84 =
 - **Fix:** Number fields were not considered in the SORT BY filtering on the Inventory page

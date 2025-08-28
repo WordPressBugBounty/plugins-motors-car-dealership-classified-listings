@@ -30,6 +30,7 @@
 
 .stm-listing-single-price-title .price.discounted-price .value {
     display: inline-block;
+    white-space: nowrap;
 }
 
 .stm-listing-single-price-title .price.discounted-price .regular-price {
@@ -89,6 +90,12 @@
     color: var(--motors-contrast-text-color);
     font-weight: 700;
     background-color: var(--motors-accent-color);
+}
+
+@media (max-width: 1024px) {
+    .stm-listing-single-price-title .price {
+        font-size: 18px;
+    }
 }
 
 @media (max-width: 420px) {

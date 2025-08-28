@@ -8,7 +8,7 @@ add_filter(
 					'label'   => esc_html__( 'Sort by custom fields', 'stm_vehicles_listing' ),
 					'type'    => 'multi_checkbox',
 					'options' => mvl_nuxy_sort_options(),
-					'preview'     => STM_LISTINGS_URL . '/assets/images/previews/filter-by-sf.png',
+					'preview' => STM_LISTINGS_URL . '/assets/images/previews/filter-order-by-sf.png',
 				),
 		);
 

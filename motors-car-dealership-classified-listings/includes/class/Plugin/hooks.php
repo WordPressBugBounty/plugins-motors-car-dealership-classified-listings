@@ -66,10 +66,17 @@ if ( ! function_exists( 'mvl_nuxy_sortby_pro' ) ) {
 		$options = mvl_nuxy_sort_options();
 		if ( ! empty( $options ) ) {
 			foreach ( $options as $slug => $name ) {
-				/* translators: option name */
-				$sorts[ $slug . '_high' ] = sprintf( esc_html__( '%s: highest first', 'stm_vehicles_listing' ), $name );
-				/* translators: option name */
-				$sorts[ $slug . '_low' ] = sprintf( esc_html__( '%s: lowest first', 'stm_vehicles_listing' ), $name );
+				if ( apply_filters( 'mvl_is_numeric_listing_field_sort_type', false, $slug ) ) {
+					/* translators: option name */
+					$sorts[ $slug . '_high' ] = sprintf( esc_html__( '%s: highest first', 'stm_vehicles_listing' ), $name );
+					/* translators: option name */
+					$sorts[ $slug . '_low' ] = sprintf( esc_html__( '%s: lowest first', 'stm_vehicles_listing' ), $name );
+				} else {
+					/* translators: option name */
+					$sorts[ $slug . '_low' ] = sprintf( esc_html__( '%s: From A to Z', 'stm_vehicles_listing' ), $name );
+					/* translators: option name */
+					$sorts[ $slug . '_high' ] = sprintf( esc_html__( '%s: From Z to A', 'stm_vehicles_listing' ), $name );
+				}
 			}
 		}
 

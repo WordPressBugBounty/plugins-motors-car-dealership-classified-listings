@@ -76,7 +76,12 @@ function mvl_setup_wizard_update_settings( $settings_to_update ) {
 
 function mvl_setup_wizard_install_starter_theme() {
 	check_ajax_referer( 'stm_mvl_setup_wizard_nonce', 'security' );
+	mvl_ajax_install_starter_theme();
+}
 
+add_action( 'wp_ajax_mvl_setup_wizard_install_starter_theme', 'mvl_setup_wizard_install_starter_theme' );
+
+function mvl_ajax_install_starter_theme() {
 	if ( ! current_user_can( 'install_themes' ) ) {
 		wp_send_json_error( __( 'You do not have permission to install themes', 'stm_vehicles_listing' ) );
 	}
@@ -104,7 +109,6 @@ function mvl_setup_wizard_install_starter_theme() {
 	wp_send_json_success( $final_data );
 	exit;
 }
-add_action( 'wp_ajax_mvl_setup_wizard_install_starter_theme', 'mvl_setup_wizard_install_starter_theme' );
 
 function mvl_setup_wizard_install_plugin() {
 	check_ajax_referer( 'stm_mvl_setup_wizard_nonce', 'security' );

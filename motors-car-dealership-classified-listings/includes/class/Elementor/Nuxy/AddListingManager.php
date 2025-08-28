@@ -22,7 +22,7 @@ class AddListingManager {
 		return $conf;
 	}
 
-	private function motors_create_config() {
+	public function motors_create_config() {
 
 		$conf = array_merge(
 			$this->desc_slots_conf(),
@@ -399,7 +399,7 @@ class AddListingManager {
 				'label'       => esc_html__( 'Sale price label', 'stm_vehicles_listing' ),
 				'description' => esc_html__( 'Add a sale price label', 'stm_vehicles_listing' ),
 				'submenu'     => esc_html__( 'Listing creation form', 'stm_vehicles_listing' ),
-				'preview' => STM_LISTINGS_URL . '/assets/images/previews/sale-price-addl.png',
+				'preview'     => STM_LISTINGS_URL . '/assets/images/previews/sale-price-addl.png',
 				'dependency'  => array(
 					'key'   => 'addl_sale_price',
 					'value' => 'not_empty',

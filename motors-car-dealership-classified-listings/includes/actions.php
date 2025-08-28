@@ -1388,3 +1388,36 @@ add_filter(
 	100,
 	2
 );
+
+if ( ! function_exists( 'mvl_is_numeric_listing_field_sort_type' ) ) {
+	function mvl_is_numeric_listing_field_sort_type( $value, $key ) {
+		$value = mvl_get_taxonomy_type( $key ) === 'numeric';
+
+		return $value;
+	}
+
+	add_filter( 'mvl_is_numeric_listing_field_sort_type', 'mvl_is_numeric_listing_field_sort_type', 10, 4 );
+}
+
+if ( ! function_exists( 'mvl_get_taxonomy_type' ) ) {
+	function mvl_get_taxonomy_type( $taxonomy ) {
+		global $wpdb;
+
+		return $wpdb->get_var(
+			$wpdb->prepare(
+				"
+        SELECT
+            CASE WHEN EXISTS (
+                SELECT 1
+                FROM {$wpdb->terms} t2
+                JOIN {$wpdb->term_taxonomy} tt2 ON t2.term_id = tt2.term_id
+                WHERE tt2.taxonomy = %s
+                  AND t2.name NOT REGEXP '^-?[0-9]+(\\.[0-9]+)?$'
+                LIMIT 1
+            ) THEN 'string' ELSE 'numeric' END AS taxonomy_type
+    ",
+				$taxonomy
+			)
+		);
+	}
+}
