@@ -1034,15 +1034,22 @@ function stm_save_metaboxes( $post_id ) {
 		foreach ( $fields as $field => $data ) {
 			$old = get_post_meta( $post_id, $field, true );
 			if ( isset( $_POST[ $field ] ) ) {
-				$new = sanitize_text_field( $_POST[ $field ] );
-				if ( $new && $new !== $old ) {
-					if ( 'listing_select' === $data['type'] ) {
-						update_post_meta( $post_id, $field, implode( ',', $new ) );
-					} else {
-						update_post_meta( $post_id, $field, $new );
+				if ( 'listing_select' === $data['type'] ) {
+					$new_array    = (array) $_POST[ $field ];
+					$new_array    = array_map( 'sanitize_text_field', $new_array );
+					$new_imploded = implode( ',', $new_array );
+					if ( '' !== $new_imploded && $new_imploded !== $old ) {
+						update_post_meta( $post_id, $field, $new_imploded );
+					} elseif ( '' === $new_imploded && $old ) {
+						delete_post_meta( $post_id, $field, $old );
 					}
-				} elseif ( '' === $new && $old ) {
-					delete_post_meta( $post_id, $field, $old );
+				} else {
+					$new = sanitize_text_field( $_POST[ $field ] );
+					if ( $new && $new !== $old ) {
+						update_post_meta( $post_id, $field, $new );
+					} elseif ( '' === $new && $old ) {
+						delete_post_meta( $post_id, $field, $old );
+					}
 				}
 			} else {
 				delete_post_meta( $post_id, $field, $old );
@@ -1136,10 +1143,18 @@ if ( ! function_exists( 'stm_generate_title_from_slugs' ) ) {
 
 if ( ! function_exists( 'stm_replace_curly_brackets' ) ) {
 	function stm_replace_curly_brackets( $string ) {
+		if ( is_array( $string ) ) {
+			return array_values( array_filter( array_map( 'strval', $string ) ) );
+		}
+
+		if ( ! is_string( $string ) ) {
+			$string = (string) $string;
+		}
+
 		$matches = array();
 		preg_match_all( '/{(.*?)}/', $string, $matches );
 
-		return $matches[1];
+		return isset( $matches[1] ) ? $matches[1] : array();
 	}
 
 	add_filter( 'stm_replace_curly_brackets', 'stm_replace_curly_brackets', 10, 1 );

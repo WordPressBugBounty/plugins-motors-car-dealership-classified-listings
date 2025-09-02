@@ -41,7 +41,9 @@ function mvl_motors_starter_show_nav_item() {
 	);
 }
 
-add_action( 'wpcfto_screen_motors_vehicles_listing_plugin_settings_added', 'mvl_motors_starter_show_nav_item', 12, 1 );
+if ( ! apply_filters( 'stm_is_motors_theme', false ) ) {
+	add_action( 'wpcfto_screen_motors_vehicles_listing_plugin_settings_added', 'mvl_motors_starter_show_nav_item', 12, 1 );
+}
 
 function mvl_motors_starter_admin_page_content() {
 	?>

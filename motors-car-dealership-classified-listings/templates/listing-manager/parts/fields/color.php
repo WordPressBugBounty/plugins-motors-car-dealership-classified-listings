@@ -7,11 +7,18 @@ if ( ! isset( $placeholder ) ) {
 		$placeholder = $label;
 	}
 }
+
+// Устанавливаем значение по умолчанию для $label если не задано
+if ( ! isset( $label ) ) {
+	$label = '';
+}
 ?>
 <div class="mvl-listing-manager-field mvl-listing-manager-field-color">
+	<?php if ( ! empty( $label ) ) : ?>
 	<div class="mvl-listing-manager-field-title">
 		<?php echo esc_html( $label ); ?>
 	</div>
+	<?php endif; ?>
 	<div class="mvl-listing-manager-field-color-input-wrapper">
 		<div
 			type="color"

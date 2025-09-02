@@ -24,6 +24,10 @@ body.mvl-popup-overlay::after {
     display: none;
 }
 
+.mvl-full-width-field {
+    width: 100%;
+}
+
 body.mvl-popup-confirmation-opened::before {
     content: "";
     position: fixed;
@@ -494,6 +498,74 @@ body.mvl-popup-confirmation-opened::before {
     white-space: nowrap;
 }
 
+.mvl-listing-manager-body .mvl-button-loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.mvl-listing-manager-body .mvl-button-loading .mvl-btn-text {
+    opacity: 0;
+}
+
+.mvl-listing-manager-body .mvl-button-loading i {
+    opacity: 0;
+}
+
+.mvl-listing-manager-body .mvl-button-loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    margin: -8px 0 0 -8px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: mvl-spin 1s linear infinite;
+}
+
+@keyframes mvl-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.mvl-listing-manager-body .mvl-link-button {
+    font-size: 14px;
+    color: #3783E1;
+    text-decoration: none;
+    background-color: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.mvl-listing-manager-body .mvl-link-button i {
+    margin-right: 4px;
+    font-size: 14px;
+}
+
+@keyframes mvl-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 .mvl-listing-manager-body .mvl-listing-manager-content {
     background-color: #F1F5F9;
     padding-bottom: 19px;
@@ -644,6 +716,38 @@ body.mvl-popup-confirmation-opened::before {
     min-height: 100%;
     max-height: 100%;
     overflow: auto;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-inner.loading {
+    pointer-events: none;
+    height: 100%;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-inner.loading::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    z-index: 10;
+    border-radius: 4px;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-inner.loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 32px;
+    height: 32px;
+    margin: -16px 0 0 -16px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3783E1;
+    border-radius: 50%;
+    animation: mvl-spin 1s linear infinite;
+    z-index: 11;
 }
 
 .mvl-listing-manager-body .mvl-listing-manager-content-body-page-option-wrapper,
@@ -1512,29 +1616,22 @@ body.mvl-popup-confirmation-opened::before {
     order: -1;
 }
 
-@keyframes mvl-spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
 .mvl-listing-manager-body .mvl-listing-manager-content-body-page-option-wrapper,
-.mvl-listing-manager-body .mvl-listing-manager-content-body-page-features-wrapper {
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page-features-wrapper,
+.mvl-listing-manager-body .mvl-listing-manager-content-body {
     position: relative;
 }
 
 .mvl-listing-manager-body .mvl-listing-manager-content-body-page-option-wrapper.loading,
-.mvl-listing-manager-body .mvl-listing-manager-content-body-page-features-wrapper.loading {
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page-features-wrapper.loading,
+.mvl-listing-manager-body .mvl-listing-manager-content-body.loading {
     pointer-events: none;
     height: 100%;
 }
 
 .mvl-listing-manager-body .mvl-listing-manager-content-body-page-option-wrapper.loading::before,
-.mvl-listing-manager-body .mvl-listing-manager-content-body-page-features-wrapper.loading::before {
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page-features-wrapper.loading::before,
+.mvl-listing-manager-body .mvl-listing-manager-content-body.loading::before {
     content: "";
     position: absolute;
     top: 0;
@@ -1547,7 +1644,8 @@ body.mvl-popup-confirmation-opened::before {
 }
 
 .mvl-listing-manager-body .mvl-listing-manager-content-body-page-option-wrapper.loading::after,
-.mvl-listing-manager-body .mvl-listing-manager-content-body-page-features-wrapper.loading::after {
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page-features-wrapper.loading::after,
+.mvl-listing-manager-body .mvl-listing-manager-content-body.loading::after {
     content: "";
     position: absolute;
     top: 50%;
@@ -1694,6 +1792,19 @@ body.mvl-popup-confirmation-opened::before {
 
 .mvl-listing-manager-body .mvl-textarea-field:focus {
     border-color: #3783E1;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-select-field.disabled {
+    cursor: not-allowed;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-select-field.disabled .select2-selection {
+    pointer-events: none;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-select-field.disabled .select2-container .selection .select2-selection {
+    border: 1px dashed #DDE3EC;
+    background-color: #EFF4FB;
 }
 
 .mvl-listing-manager-body .mvl-listing-manager-select-field .select2-container .selection .select2-selection {
@@ -3110,6 +3221,10 @@ body.mvl-popup-confirmation-opened::before {
     background-color: #F1F5F9;
 }
 
+.mvl-listing-manager-body .mvl-options-settings-tabs.tabs-two-columns .mvl-options-settings-tab {
+    width: 100%;
+}
+
 .mvl-listing-manager-body .mvl-options-settings-tab {
     padding: 8px 24px;
     display: flex;
@@ -3163,6 +3278,39 @@ body.mvl-popup-confirmation-opened::before {
     display: flex;
 }
 
+.mvl-listing-manager-body .mvl-options-settings-tab-content-item-wrapper.loading {
+    position: relative;
+    pointer-events: none;
+    height: 100%;
+}
+
+.mvl-listing-manager-body .mvl-options-settings-tab-content-item-wrapper.loading::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    z-index: 10;
+    border-radius: 4px;
+}
+
+.mvl-listing-manager-body .mvl-options-settings-tab-content-item-wrapper.loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 32px;
+    height: 32px;
+    margin: -16px 0 0 -16px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3783E1;
+    border-radius: 50%;
+    animation: mvl-spin 1s linear infinite;
+    z-index: 11;
+}
+
 .mvl-listing-manager-body .mvl-options-popup-container-inner {
     display: flex;
     flex-direction: column;
@@ -3189,6 +3337,15 @@ body.mvl-popup-confirmation-opened::before {
 
 .mvl-listing-manager-body .mvl-options-settings-tab-content-item-field-group.column .mvl-options-settings-tab-content-item-field {
     width: 100%;
+}
+
+.mvl-listing-manager-body .mvl-options-settings-tab-content-item-field-group.mvl-fields-group-three-columns {
+    justify-content: space-between;
+    gap: unset;
+}
+
+.mvl-listing-manager-body .mvl-options-settings-tab-content-item-field-group.mvl-fields-group-three-columns .mvl-listing-manager-field {
+    width: calc(33.33% - 10px);
 }
 
 .mvl-listing-manager-body .mvl-options-settings-tab-content-item-field-group-wrapper {

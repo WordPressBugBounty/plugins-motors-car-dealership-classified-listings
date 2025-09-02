@@ -13,6 +13,10 @@ if ( ! isset( $class ) ) {
 	$class = '';
 }
 
+if ( ! isset( $tooltip_position ) ) {
+	$tooltip_position = 'top';
+}
+
 $value = isset( $value ) ? $value : '';
 
 ?>
@@ -25,7 +29,7 @@ $value = isset( $value ) ? $value : '';
 			<?php endif; ?>
 		</div>
 		<?php if ( isset( $description ) && ! empty( $description ) ) : ?>
-			<div class="mvl-listing-manager-field-info-icon" mvl-tooltip-text="<?php echo esc_attr( $description ); ?>" mvl-tooltip-position="top" mvl-tooltip-toggle="mvl-listing-manager-field-description">
+			<div class="mvl-listing-manager-field-info-icon" mvl-tooltip-text="<?php echo esc_attr( $description ); ?>" mvl-tooltip-position="<?php echo esc_attr( $tooltip_position ); ?>" mvl-tooltip-toggle="mvl-listing-manager-field-description">
 				<i class="motors-icons-mvl-info"></i>
 			</div>
 		<?php endif; ?>
@@ -43,6 +47,11 @@ $value = isset( $value ) ? $value : '';
 			<?php endif; ?>
 			<?php echo isset( $required ) && $required ? 'required' : ''; ?>
 			<?php echo isset( $autocomplete ) && $autocomplete ? 'autocomplete="' . esc_attr( $autocomplete ) . '"' : ''; ?>
+			<?php if ( isset( $attributes ) && is_array( $attributes ) ) : ?>
+				<?php foreach ( $attributes as $attribute => $value ) : ?>
+					<?php echo esc_attr( $attribute ); ?>="<?php echo esc_attr( $value ); ?>"
+				<?php endforeach; ?>
+			<?php endif; ?>
 		/>
 		<?php if ( isset( $hidden_field ) && $hidden_field ) : ?>
 			<input type="hidden" name="<?php echo esc_attr( $hidden_field ); ?>" value="<?php echo esc_attr( $hidden_field_value ); ?>">

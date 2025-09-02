@@ -42,7 +42,7 @@ function mvl_taxonomy_listing_add_color( $taxonomy ) {
 
 function mvl_taxonomy_listing_edit_color( $term ) {
 	$color = get_term_meta( $term->term_id, '_category_color', true );
-	$color = ( ! empty( $color ) ) ? "{$color}" : '#ffffff';
+	$color = ( ! empty( $color ) ) ? "#{$color}" : '#ffffff';
 	?>
 	<tr class="form-field term-colorpicker-wrap">
 		<th scope="row">

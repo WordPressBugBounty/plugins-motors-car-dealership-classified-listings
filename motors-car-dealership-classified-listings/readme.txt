@@ -5,7 +5,7 @@ Donate link: https://www.paypal.me/stylemix
 Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
 Tested up to: 6.8
-Stable tag: 1.4.85
+Stable tag: 1.4.86
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -180,6 +180,9 @@ Definitely. Motors is translation-ready and works with popular multilingual plug
 You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability](https://patchstack.com/database/vdp/motors-car-dealership-classified-listings). 
 
 == Changelog ==
+
+= 1.4.86 =
+- **New:** Added New Premium  "Car Info Autocomplete" add-on with VIN and trim lookup via CarApi, OpenDataSoft, NHTSA, Vindecoder, and Marketcheck. [PRO]
 
 = 1.4.85 =
 - **Fix:** Non-numeric fields can now be added to the "Sort By" list, and sorting values in Inventory filter fields has been corrected.

@@ -1,15 +1,14 @@
 <?php
-/**
- * {link} - ссылка куда вести пользователя Admin -> в Listings, User -> в User Account
- * {listing name} - название листинга Post Title
- * {listing id} - ID листинга
- * {page_id} - ID страницы (ХЗ нужно будет или нет)
- * {Menu Item Title} - название пункта меню
- */
-$listing_id = apply_filters( 'mvl_listing_manager_item_id', 0 );
-$is_admin   = apply_filters( 'mvl_listing_manager_is_admin', false );
-$css_files  = apply_filters( 'mvl_listing_manager_css', array() );
-$js_files   = apply_filters( 'mvl_listing_manager_js', array() );
+$listing_id                     = apply_filters( 'mvl_listing_manager_item_id', 0 );
+$is_admin                       = apply_filters( 'mvl_listing_manager_is_admin', false );
+$css_files                      = apply_filters( 'mvl_listing_manager_css', array() );
+$js_files                       = apply_filters( 'mvl_listing_manager_js', array() );
+$ymmt                           = apply_filters( 'motors_vl_get_nuxy_mod', '', 'make_model_auto_complete_enabled' );
+$vin                            = apply_filters( 'motors_vl_get_nuxy_mod', '', 'vin_search_auto_complete_enabled' );
+$car_info_auto_complete_enabled = false;
+if ( $ymmt || $vin ) {
+	$car_info_auto_complete_enabled = true;
+}
 ?>
 <!DOCTYPE html>
 	<html <?php language_attributes(); ?>>
@@ -75,6 +74,12 @@ $js_files   = apply_filters( 'mvl_listing_manager_js', array() );
 									<input type="text" class="mvl-lm-search-field-input mvl-input-field" placeholder="<?php esc_html_e( 'Search', 'stm_vehicles_listing' ); ?>">
 								</div>
 								<div class="mvl-listing-manager-content-header-actions">
+									<?php if ( apply_filters( 'is_mvl_pro', false ) && apply_filters( 'mvl_is_addon_enabled', false, 'car_info_auto_complete' ) && $car_info_auto_complete_enabled ) : ?>
+									<a href="#" id="mvl-car-info-auto-complete-btn" class="mvl-primary-btn mvl-listing-manager-content-header-action-btn">
+										<i class="motors-icons-add_car1"></i>
+										<?php esc_html_e( 'Import Car Details', 'stm_vehicles_listing' ); ?>
+									</a>
+									<?php endif; ?>
 									<a class="mvl-listing-manager-content-header-action-btn mvl-thirdary-btn mvl-plus-icon" href="<?php echo esc_url( apply_filters( 'mvl_listing_manager_url', '' ) ); ?>">
 										<?php esc_html_e( 'Create Another', 'stm_vehicles_listing' ); ?>
 									</a>
@@ -207,6 +212,7 @@ $js_files   = apply_filters( 'mvl_listing_manager_js', array() );
 				clear_all: '<?php esc_html_e( 'Clear All', 'stm_vehicles_listing' ); ?>',
 				done: '<?php esc_html_e( 'Done', 'stm_vehicles_listing' ); ?>',
 				select_feature: '<?php esc_html_e( 'Select feature', 'stm_vehicles_listing' ); ?>',
+				listing_id: '<?php echo esc_js( $listing_id ); ?>',
 			};
 			var stm_vehicles_listing_errors = {
 				no_allowed_type: '<?php esc_html_e( 'No allowed type', 'stm_vehicles_listing' ); ?>',
@@ -215,6 +221,16 @@ $js_files   = apply_filters( 'mvl_listing_manager_js', array() );
 				files_limit: '<?php esc_html_e( 'Max files ', 'stm_vehicles_listing' ); ?>',
 				same_file: '<?php esc_html_e( 'Same file already exists', 'stm_vehicles_listing' ); ?>',
 			};
+			<?php if ( apply_filters( 'mvl_is_addon_enabled', false, 'car_info_auto_complete' ) ) : ?>
+			var car_info_auto_complete_vars = {
+				ajaxurl: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
+				nonce: '<?php echo esc_html( wp_create_nonce( 'mvl_listing_manager' ) ); ?>',
+				select_colors: '<?php esc_html_e( 'Select Colors', 'stm_vehicles_listing' ); ?>',
+				back_to_trims: '<?php esc_html_e( 'Back to Trims', 'stm_vehicles_listing' ); ?>',
+				exterior_color: '<?php esc_html_e( 'Exterior Color', 'stm_vehicles_listing' ); ?>',
+				interior_color: '<?php esc_html_e( 'Interior Color', 'stm_vehicles_listing' ); ?>',
+			};
+			<?php endif; ?>
 		</script>
 		<?php // phpcs:disable
 			do_action( 'custom_print_media_scripts' );

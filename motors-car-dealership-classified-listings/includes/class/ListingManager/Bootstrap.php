@@ -477,16 +477,22 @@ class Bootstrap {
 		}
 
 		if ( ! $item_id ) {
+			$post_title = ( isset( $_POST['general'] ) && isset( $_POST['general']['title'] ) && $_POST['general']['title'] )
+				? sanitize_text_field( $_POST['general']['title'] )
+				: esc_html__( 'Untitled Listing', 'stm_vehicles_listing' );
+
+			$post_name = ( isset( $_POST['general'] ) && isset( $_POST['general']['title'] ) && $_POST['general']['title'] )
+				? sanitize_title( $_POST['general']['title'] )
+				: 'untitled';
+
 			$item_id = wp_insert_post(
 				array(
-					'post_title'  => __( 'Untitled Listing', 'stm_vehicles_listing' ),
-					'post_type'   => isset( $_POST['general'] ) && isset( $_POST['general']['title'] ) ? sanitize_text_field( $_POST['general']['title'] ) : esc_html__( 'Untitled Listing', 'stm_vehicles_listing' ),
+					'post_title'  => $post_title,
+					'post_type'   => 'listings',
 					'post_status' => $post_status,
-					'post_name'   => isset( $_POST['general'] ) && isset( $_POST['general']['title'] ) ? sanitize_title( $_POST['general']['title'] ) : 'untitled',
-					'post_author' => get_current_user_id(),
+					'post_name'   => $post_name,
 				)
 			);
-
 			update_post_meta( $item_id, 'stm_car_user', get_current_user_id() );
 		}
 
@@ -590,6 +596,10 @@ class Bootstrap {
 			$scripts['google-maps']              = 'https://maps.googleapis.com/maps/api/js?key=' . apply_filters( 'motors_vl_get_nuxy_mod', '', 'google_api_key' ) . '&language=' . get_locale() . '&libraries=places&callback=initMap';
 		}
 
+		if ( apply_filters( 'mvl_is_addon_enabled', false, 'car_info_auto_complete' ) ) {
+			$scripts['car-info-auto-complete'] = CAR_INFO_AUTO_COMPLETE_URL . 'assets/js/car-info-auto-complete.js';
+		}
+
 		if ( $this->mvl_listing_manager_is_admin() ) {
 			$scripts['listing-manager-image-button'] = STM_LISTINGS_URL . '/assets/js/listing-manager/fields/image-button.js';
 		}
@@ -609,7 +619,7 @@ class Bootstrap {
 	}
 
 	protected function mvl_listing_manager_css(): array {
-		return array(
+		$css = array(
 			'font-awesome'    => 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css',
 			'motors-icons'    => STM_LISTINGS_URL . '/assets/css/frontend/icons.css',
 			'google-fonts'    => 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap',
@@ -618,6 +628,10 @@ class Bootstrap {
 			'listing-manager' => STM_LISTINGS_URL . '/assets/css/listing-manager/listing-manager.css',
 			'mvl-tinymce'     => STM_LISTINGS_URL . '/assets/libs/tinymce/css/tinymce.css',
 		);
+		if ( apply_filters( 'mvl_is_addon_enabled', false, 'car_info_auto_complete' ) && defined( 'CAR_INFO_AUTO_COMPLETE_URL' ) ) {
+			$css['car-info-auto-complete'] = CAR_INFO_AUTO_COMPLETE_URL . 'assets/css/car-info-auto-complete.css';
+		}
+		return $css;
 	}
 
 	protected function mvl_listing_manager_pages(): array {

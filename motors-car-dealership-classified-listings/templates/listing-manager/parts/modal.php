@@ -59,7 +59,9 @@
 						<?php if ( ! empty( $delete_button['icon'] ) ) : ?>
 							<i class="<?php echo esc_attr( $delete_button['icon'] ); ?>"></i>
 						<?php endif; ?>
-						<?php echo esc_html( $delete_button['text'] ); ?>
+						<span class="mvl-btn-text">
+							<?php echo esc_html( $delete_button['text'] ); ?>
+						</span>
 					</button>
 				</div>
 			<?php endif; ?>
@@ -88,7 +90,9 @@
 						<?php if ( ! empty( $button['icon'] ) ) : ?>
 							<i class="<?php echo esc_attr( $button['icon'] ); ?>"></i>
 						<?php endif; ?>
-						<?php echo esc_html( $button['text'] ); ?>
+						<span class="mvl-btn-text">
+							<?php echo esc_html( $button['text'] ); ?>
+						</span>
 					</button>
 				<?php endforeach; ?>
 			</div>

@@ -372,7 +372,7 @@
      */
     function initEventHandlers() {
 
-        $document
+        $wrapper
             .on('input change', '.mvl-listing-manager-field-input', debounce(function (e) {
                 const $input = $(e.target);
                 const value = $input.val();
@@ -405,6 +405,7 @@
                     hasFieldChanged = true;
                 }
             })
+        $document
             .on('input', '.mvl-search-terms input', function () {
                 const searchText = $(this).val().toLowerCase().trim();
                 const $tabContent = $(this).closest('.mvl-options-settings-tab-content');

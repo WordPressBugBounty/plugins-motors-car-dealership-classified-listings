@@ -6,7 +6,7 @@ if ( ! isset( $input_name ) ) {
 	$input_name = $id;
 }
 ?>
-<div class="mvl-listing-manager-field mvl-listing-manager-select-field" data-field-id="<?php echo esc_attr( $id ); ?>" data-label="<?php echo esc_attr( $label ); ?>">
+<div class="mvl-listing-manager-field mvl-listing-manager-select-field <?php echo ( isset( $disabled ) && $disabled ) ? ' disabled' : ''; ?>" data-field-id="<?php echo esc_attr( $id ); ?>" data-label="<?php echo esc_attr( $label ); ?>">
 	<div class="mvl-listing-manager-field-info">
 		<div class="mvl-listing-manager-field-title">
 			<?php echo esc_html( $label ); ?>
@@ -22,6 +22,7 @@ if ( ! isset( $input_name ) ) {
 	</div>
 	<select
 		name="<?php echo esc_attr( $input_name ); ?>"
+		id="<?php echo esc_attr( $id ); ?>"
 		class="mvl-listing-manager-field-select mvl-select-field<?php echo ( isset( $dropdown ) && 'checkboxes' === $dropdown ) ? ' mvl-select-field-checkboxes' : ''; ?>"
 		<?php if ( isset( $multiple ) && $multiple ) : ?>
 			data-multiple="true"

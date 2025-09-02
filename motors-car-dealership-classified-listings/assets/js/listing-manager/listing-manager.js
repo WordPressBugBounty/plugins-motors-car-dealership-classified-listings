@@ -80,7 +80,7 @@ let MVL_Listing_Manager = {
             this.openPrevPage();
         }
 
-        if (headerActionButton) {
+        if (headerActionButton && headerActionButton.dataset && headerActionButton.dataset.status) {
             this.post_status = headerActionButton.dataset.status;
         } else if (previewCardActionButton) {
             this.post_status = previewCardActionButton.dataset.status;
@@ -261,7 +261,7 @@ let MVL_Listing_Manager = {
     },
 
     showPublishButtons: function () {
-        let publishButtons = this.nodes.form.querySelectorAll('.mvl-listing-preview-card-actions .mvl-primary-btn, .mvl-primary-btn.mvl-listing-manager-content-header-action-btn');
+        let publishButtons = this.nodes.form.querySelectorAll('[data-status="publish"]');
         for (let button of publishButtons) {
             if (button.classList.contains('disabled')) {
                 button.classList.remove('disabled');
@@ -270,7 +270,7 @@ let MVL_Listing_Manager = {
     },
 
     hidePublishButtons: function () {
-        let publishButtons = this.nodes.form.querySelectorAll('.mvl-listing-preview-card-actions .mvl-primary-btn, .mvl-primary-btn.mvl-listing-manager-content-header-action-btn');
+        let publishButtons = this.nodes.form.querySelectorAll('[data-status="publish"]');
         for (let button of publishButtons) {
             if (!button.classList.contains('disabled')) {
                 button.classList.add('disabled');
@@ -279,7 +279,7 @@ let MVL_Listing_Manager = {
     },
 
     showDraftButtons: function () {
-        let draftButtons = this.nodes.form.querySelectorAll('.mvl-listing-preview-card-actions .mvl-thirdary-btn');
+        let draftButtons = this.nodes.form.querySelectorAll('[data-status="draft"]');
         for (let button of draftButtons) {
             if (button.classList.contains('disabled')) {
                 button.classList.remove('disabled');
@@ -288,7 +288,7 @@ let MVL_Listing_Manager = {
     },
 
     hideDraftButtons: function () {
-        let draftButtons = this.nodes.form.querySelectorAll('.mvl-listing-preview-card-actions .mvl-thirdary-btn');
+        let draftButtons = this.nodes.form.querySelectorAll('[data-status="draft"]');
         for (let button of draftButtons) {
             if (!button.classList.contains('disabled')) {
                 button.classList.add('disabled');
@@ -406,8 +406,8 @@ let MVL_Listing_Manager = {
         this.post_status = data.post_status;
 
         let deleteButtons = this.nodes.form.querySelectorAll('.mvl-listing-preview-card-actions .mvl-delete-btn');
-        let publishButtons = this.nodes.form.querySelectorAll('.mvl-listing-preview-card-actions .mvl-primary-btn, .mvl-primary-btn.mvl-listing-manager-content-header-action-btn');
-        let draftButtons = this.nodes.form.querySelectorAll('.mvl-listing-preview-card-actions .mvl-thirdary-btn');
+        let publishButtons = this.nodes.form.querySelectorAll('[data-status="publish"]');
+        let draftButtons = this.nodes.form.querySelectorAll('[data-status="draft"]');
         let backLink = document.querySelector('.mvl-listing-manager-sidebar-back-link');
         let previewButtons = this.getPreviewButtons();
         let previewLink = data.preview_url;

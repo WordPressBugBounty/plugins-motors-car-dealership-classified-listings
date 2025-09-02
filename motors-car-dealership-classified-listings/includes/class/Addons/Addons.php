@@ -3,30 +3,33 @@
 namespace MotorsVehiclesListing\Addons;
 
 class Addons {
-	private const OPTION_NAME = 'motors_vl_addons';
 
-	public const VIN_DECODER  = 'vin_decoder';
-	public const SOCIAL_LOGIN = 'social_login';
-	public const SAVED_SEARCH = 'saved_search';
+	const OPTION_NAME = 'motors_vl_addons';
 
-	public static function all(): array {
+	public const VIN_DECODER             = 'vin_decoder';
+	public const SOCIAL_LOGIN            = 'social_login';
+	public const SAVED_SEARCH            = 'saved_search';
+	public const CAR_INFO_AUTO_COMPLETE  = 'car_info_auto_complete';
+
+	public static function all() : array {
 		return array(
 			self::VIN_DECODER,
 			self::SOCIAL_LOGIN,
 			self::SAVED_SEARCH,
+			self::CAR_INFO_AUTO_COMPLETE,
 		);
 	}
 
-	public static function enabled_addons(): array {
+	public static function enabled_addons() : array {
 		return array_map(
-			function ( $value ) {
+			static function ( $value ) {
 				return (bool) $value;
 			},
 			get_option( self::OPTION_NAME, array() )
 		);
 	}
 
-	public static function list(): array {
+	public static function list() : array {
 		return array(
 			self::VIN_DECODER  => array(
 				'name'          => esc_html__( 'VIN Decoder', 'stm_vehicles_listing' ),
@@ -37,7 +40,6 @@ class Addons {
 				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/motors-pro-addons/vin-decoder',
 				'img_url'       => 'vin-decoder',
 			),
-
 			self::SAVED_SEARCH => array(
 				'name'          => esc_html__( 'Saved Searches', 'stm_vehicles_listing' ),
 				'url'           => esc_url( STM_LISTINGS_URL . '/assets/addons/img/SavedSearch.png' ),
@@ -47,7 +49,6 @@ class Addons {
 				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/motors-pro-addons/saved-searches',
 				'img_url'       => 'saved-search',
 			),
-
 			self::SOCIAL_LOGIN => array(
 				'name'          => esc_html__( 'Social Login', 'stm_vehicles_listing' ),
 				'url'           => esc_url( STM_LISTINGS_URL . '/assets/addons/img/SocialLogin.png' ),
@@ -57,7 +58,15 @@ class Addons {
 				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/motors-pro-addons/social-login',
 				'img_url'       => 'social-login',
 			),
-
+			self::CAR_INFO_AUTO_COMPLETE => array(
+				'name'          => esc_html__( 'Car Info Autocomplete', 'stm_vehicles_listing' ),
+				'url'           => esc_url( STM_LISTINGS_URL . '/assets/addons/img/CarInfoAutoComplete.png' ),
+				'settings'      => admin_url( 'admin.php?page=car_info_auto_complete_settings' ),
+				'description'   => esc_html__( 'Automatically fill in vehicle details by selecting a make, model, year, or VIN. Speeds up listing creation and ensures accurate data.', 'stm_vehicles_listing' ),
+				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/motors-pro-addons/car-info-autocomplete',
+				'img_url'       => 'car-info-auto-complete',
+				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=motorswpadmin&utm_campaign=motors-plugin&licenses=1&billing_cycle=annual',
+			),
 		);
 	}
 }
