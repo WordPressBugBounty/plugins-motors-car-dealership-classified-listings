@@ -76,6 +76,7 @@ function mvl_motors_starter_demo_options() {
 
 	if ( ! empty( $demo ) ) {
 		update_option( 'mvl_motors_starter_demo_name', $demo );
+		update_option( MotorsVehiclesListing\Plugin\MVL_Const::ACTIVE_SKIN_OPT_NAME, $demo );
 	}
 
 	update_option( 'mst-starter-theme-builder', 'elementor' );
