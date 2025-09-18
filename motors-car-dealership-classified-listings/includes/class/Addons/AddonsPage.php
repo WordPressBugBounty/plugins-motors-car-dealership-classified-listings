@@ -4,6 +4,7 @@
 namespace MotorsVehiclesListing\Addons;
 
 use MotorsVehiclesListing\Addons\Addons;
+use MotorsVehiclesListing\Addons\ProFeatures;
 
 class AddonsPage {
 	public function __construct() {
@@ -17,7 +18,7 @@ class AddonsPage {
 		add_submenu_page(
 			'mvl_plugin_settings',
 			__( 'Pro Addons', 'stm_vehicles_listing' ),
-			'<span class="mvl-addons-menu ' . $is_locked . '"><span class="mvl-addons-pro">PRO</span> <span class="mvl-addons-text">' . __( 'Addons', 'stm_vehicles_listing' ) . '</span></span>',
+			'<span class="mvl-addons-menu ' . $is_locked . '"><span class="mvl-addons-pro">PRO</span> <span class="mvl-addons-text">' . __( 'Features', 'stm_vehicles_listing' ) . '</span></span>',
 			'manage_options',
 			'mvl-addons',
 			array( $this, 'addons_page' ),
@@ -35,6 +36,8 @@ class AddonsPage {
 
 	public function addons_page() {
 		$addons           = Addons::list();
+		$pro_features     = ProFeatures::list();
+		$all_features     = array_merge( $addons, $pro_features );
 		$enabled_addons   = get_option( 'motors_vl_addons', array() );
 		$mvl_addons_nonce = wp_create_nonce( 'mvl_addons_nonce' );
 
@@ -49,6 +52,6 @@ class AddonsPage {
 			)
 		);
 
-		stm_listings_load_template( 'addons/main', compact( 'addons', 'enabled_addons' ) );
+		stm_listings_load_template( 'addons/main', compact( 'all_features', 'enabled_addons' ) );
 	}
 }

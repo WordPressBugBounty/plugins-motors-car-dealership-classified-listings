@@ -8,7 +8,7 @@
  * License: GNU General Public License v2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: stm_vehicles_listing
- * Version: 1.4.87
+ * Version: 1.4.88
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -50,7 +50,7 @@ if ( ! defined( 'STM_LISTINGS_PATH' ) ) {
 	define( 'STM_LISTINGS_URL', plugins_url( '', STM_LISTINGS_FILE ) );
 	define( 'STM_LISTINGS', 'stm_vehicles_listing' );
 	define( 'STM_THEME_V_NEED', '5.6.33' );
-	define( 'STM_LISTINGS_V', '1.4.87' );
+	define( 'STM_LISTINGS_V', '1.4.88' );
 	define( 'STM_LISTINGS_DB_VERSION', '1.0.0' );
 	define( 'STM_LISTINGS_IMAGES', STM_LISTINGS_URL . '/includes/admin/butterbean/images/' );
 }
@@ -63,6 +63,7 @@ require_once STM_LISTINGS_PATH . '/vendor/autoload.php';
 
 use MotorsVehiclesListing\ListingManager\Bootstrap as ListingManagerBootstrap;
 use MotorsVehiclesListing\Addons\AddonsPage;
+use MotorsVehiclesListing\Addons\ProFeatures;
 use MotorsNuxy\MotorsNuxyHelpers;
 use MotorsVehiclesListing\User;
 use MotorsVehiclesListing\Features\Elementor\Nuxy\TemplateManager;
@@ -192,8 +193,9 @@ if ( is_admin() ) {
 		new MVL_Patcher();
 	}
 
-	if ( defined( 'STM_LISTINGS_PRO_PATH' ) ) {
+	if ( ! apply_filters( 'stm_is_motors_theme', false ) ) {
 		new AddonsPage();
+		new ProFeatures();
 	}
 
 	require_once STM_LISTINGS_PATH . '/includes/admin/categories.php';

@@ -36,6 +36,7 @@ class ComposerStaticInit5db859e1dab632b715b93d33219eb1cf
         'MotorsVehiclesListing\\Addons\\Addon' => __DIR__ . '/../..' . '/includes/class/Addons/Addon.php',
         'MotorsVehiclesListing\\Addons\\Addons' => __DIR__ . '/../..' . '/includes/class/Addons/Addons.php',
         'MotorsVehiclesListing\\Addons\\AddonsPage' => __DIR__ . '/../..' . '/includes/class/Addons/AddonsPage.php',
+        'MotorsVehiclesListing\\Addons\\ProFeatures' => __DIR__ . '/../..' . '/includes/class/Addons/ProFeatures.php',
         'MotorsVehiclesListing\\Api\\ApiPosts' => __DIR__ . '/../..' . '/includes/class/Api/ApiPosts.php',
         'MotorsVehiclesListing\\Core\\CoreApi' => __DIR__ . '/../..' . '/includes/class/Core/CoreApi.php',
         'MotorsVehiclesListing\\Core\\CoreController' => __DIR__ . '/../..' . '/includes/class/Core/CoreController.php',

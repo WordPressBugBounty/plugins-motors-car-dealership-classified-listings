@@ -215,7 +215,9 @@ add_filter(
 add_filter(
 	'filter_settings_data_values',
 	function ( $settings_data ) {
-
+		if ( ! is_array( $settings_data ) ) {
+			$settings_data = array();
+		}
 		if ( ! isset( $settings_data['listing_directory_title_frontend'] ) ) {
 			$settings_data['listing_directory_title_frontend'] = '{make} {serie} {ca-year}';
 		}

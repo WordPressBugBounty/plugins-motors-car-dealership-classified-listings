@@ -39,6 +39,7 @@ class Addons {
 				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=motorswpadmin&utm_campaign=motors-plugin&licenses=1&billing_cycle=annual',
 				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/motors-pro-addons/vin-decoder',
 				'img_url'       => 'vin-decoder',
+				'toggle'        => true,
 			),
 			self::SAVED_SEARCH => array(
 				'name'          => esc_html__( 'Saved Searches', 'stm_vehicles_listing' ),
@@ -48,6 +49,7 @@ class Addons {
 				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=motorswpadmin&utm_campaign=motors-plugin&licenses=1&billing_cycle=annual',
 				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/motors-pro-addons/saved-searches',
 				'img_url'       => 'saved-search',
+				'toggle'        => true,
 			),
 			self::SOCIAL_LOGIN => array(
 				'name'          => esc_html__( 'Social Login', 'stm_vehicles_listing' ),
@@ -57,6 +59,7 @@ class Addons {
 				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=motorswpadmin&utm_campaign=motors-plugin&licenses=1&billing_cycle=annual',
 				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/motors-pro-addons/social-login',
 				'img_url'       => 'social-login',
+				'toggle'        => true,
 			),
 			self::CAR_INFO_AUTO_COMPLETE => array(
 				'name'          => esc_html__( 'Car Info Autocomplete', 'stm_vehicles_listing' ),
@@ -66,6 +69,7 @@ class Addons {
 				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/motors-pro-addons/car-info-autocomplete',
 				'img_url'       => 'car-info-auto-complete',
 				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=motorswpadmin&utm_campaign=motors-plugin&licenses=1&billing_cycle=annual',
+				'toggle'        => true,
 			),
 		);
 	}

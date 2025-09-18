@@ -11,6 +11,7 @@ return array(
     'MotorsVehiclesListing\\Addons\\Addon' => $baseDir . '/includes/class/Addons/Addon.php',
     'MotorsVehiclesListing\\Addons\\Addons' => $baseDir . '/includes/class/Addons/Addons.php',
     'MotorsVehiclesListing\\Addons\\AddonsPage' => $baseDir . '/includes/class/Addons/AddonsPage.php',
+    'MotorsVehiclesListing\\Addons\\ProFeatures' => $baseDir . '/includes/class/Addons/ProFeatures.php',
     'MotorsVehiclesListing\\Api\\ApiPosts' => $baseDir . '/includes/class/Api/ApiPosts.php',
     'MotorsVehiclesListing\\Core\\CoreApi' => $baseDir . '/includes/class/Core/CoreApi.php',
     'MotorsVehiclesListing\\Core\\CoreController' => $baseDir . '/includes/class/Core/CoreController.php',
