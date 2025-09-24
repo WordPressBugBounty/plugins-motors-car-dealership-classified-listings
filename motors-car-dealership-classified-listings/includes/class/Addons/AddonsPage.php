@@ -17,7 +17,7 @@ class AddonsPage {
 
 		add_submenu_page(
 			'mvl_plugin_settings',
-			__( 'Pro Addons', 'stm_vehicles_listing' ),
+			__( 'Pro Features', 'stm_vehicles_listing' ),
 			'<span class="mvl-addons-menu ' . $is_locked . '"><span class="mvl-addons-pro">PRO</span> <span class="mvl-addons-text">' . __( 'Features', 'stm_vehicles_listing' ) . '</span></span>',
 			'manage_options',
 			'mvl-addons',

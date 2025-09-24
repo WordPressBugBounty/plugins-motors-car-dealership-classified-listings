@@ -8,7 +8,7 @@
  * License: GNU General Public License v2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: stm_vehicles_listing
- * Version: 1.4.88
+ * Version: 1.4.89
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -193,7 +193,7 @@ if ( is_admin() ) {
 		new MVL_Patcher();
 	}
 
-	if ( ! apply_filters( 'stm_is_motors_theme', false ) ) {
+	if ( apply_filters( 'is_mvl_pro', false ) || ! apply_filters( 'stm_is_motors_theme', false ) ) {
 		new AddonsPage();
 		new ProFeatures();
 	}
