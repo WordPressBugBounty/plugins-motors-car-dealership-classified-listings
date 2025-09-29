@@ -77,7 +77,7 @@ $show_sold = apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_sold_listings
 					}*/
 
 					if ( ! empty( $filter['options'][ $attribute ] ) ) :
-						if ( ! empty( $config['slider'] ) && ! empty( $config['numeric'] ) ) :
+						if ( ( ! empty( $config['slider'] ) && ! empty( $config['numeric'] ) ) || ( isset( $config['field_type'] ) && 'price' === $config['field_type'] ) ) :
 							do_action(
 								'stm_listings_load_template',
 								'filter/types/slider',
@@ -167,7 +167,7 @@ $show_sold = apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_sold_listings
 		<div class="sidebar-action-units">
 			<input id="stm-classic-filter-submit" class="hidden" type="submit" value="<?php esc_attr_e( 'Show cars', 'stm_vehicles_listing' ); ?>"/>
 
-			<a href="<?php echo esc_url( apply_filters( 'stm_filter_listing_link', '' ) ); ?>" class="button">
+			<a href="<?php echo esc_url( apply_filters( 'stm_listings_current_url', '' ), ); ?>" class="button">
 				<i aria-hidden="true" class="motors-icons-reset"></i>
 				<span><?php esc_html_e( 'Reset all', 'stm_vehicles_listing' ); ?></span>
 			</a>

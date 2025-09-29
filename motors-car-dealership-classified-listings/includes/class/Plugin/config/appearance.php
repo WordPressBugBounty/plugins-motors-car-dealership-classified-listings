@@ -213,7 +213,7 @@ add_filter(
 				'type'          => 'color',
 				'value'         => Colors::value( 'card_bg_color_hover' ),
 				'submenu'       => esc_html__( 'Colors', 'stm_vehicles_listing' ),
-				'default_value' => '#F1F5F9',
+				'default_value' => '#FFFFFF',
 			),
 			'card_title_color'          => array(
 				'label'         => esc_html__( 'Title & Price', 'stm_vehicles_listing' ),

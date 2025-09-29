@@ -422,6 +422,8 @@ function stm_listings_ajax_save_user_data() {
 		if ( empty( $_FILES['stm-avatar']['name'] ) ) {
 			if ( ! empty( $_POST['stm_remove_img'] ) && 'delete' === $_POST['stm_remove_img'] ) {
 				$user_old_avatar = get_the_author_meta( 'stm_user_avatar_path', $user_id );
+				$upload_dir      = wp_upload_dir();
+				$upload_path     = $upload_dir['basedir'];
 				/*Check if prev avatar exists in another users except current user*/
 				$args     = array(
 					'meta_key'     => 'stm_user_avatar_path',
@@ -430,8 +432,17 @@ function stm_listings_ajax_save_user_data() {
 					'exclude'      => array( $user_id ),
 				);
 				$users_db = get_users( $args );
-				if ( empty( $users_db ) ) {
-					unlink( $user_old_avatar );
+				if ( empty( $users_db ) && $user_old_avatar && file_exists( $user_old_avatar ) ) {
+					$real_upload_path   = realpath( $upload_path );
+					$real_file_path     = realpath( $user_old_avatar );
+					$is_within_uploads  = ( $real_file_path && $real_upload_path && strpos( $real_file_path, $real_upload_path ) === 0 );
+					$allowed_extensions = array( 'jpg', 'jpeg', 'png', 'gif', 'avif', 'svg' );
+					$file_extension     = strtolower( pathinfo( $user_old_avatar, PATHINFO_EXTENSION ) );
+					$is_valid_image     = in_array( $file_extension, $allowed_extensions, true );
+
+					if ( $is_within_uploads && $is_valid_image ) {
+						unlink( $user_old_avatar );
+					}
 				}
 				update_user_meta( $user_id, 'stm_user_avatar', '' );
 				update_user_meta( $user_id, 'stm_user_avatar_path', '' );
