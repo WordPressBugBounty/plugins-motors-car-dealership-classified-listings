@@ -738,7 +738,7 @@
 
                                     if (pro_class) {
                                         li.addClass(pro_class + ' disabled');
-                                        let proLink = $('<span class="stm-pro-field-label"><a href="https://stylemixthemes.com/car-dealer-plugin/pricing/" target="_blank">pro</a></span>');
+                                        let proLink = $('<span class="stm-pro-field-label"><a href="https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro" target="_blank">pro</a></span>');
                                         li.append($('<span class="option-text">').text(text).add(proLink).add('<i class="stm-admin-icon-check"></i>'));
 
                                         li.on('click', function(e) {

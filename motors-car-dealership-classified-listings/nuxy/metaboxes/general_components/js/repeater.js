@@ -40,7 +40,7 @@ Vue.component('wpcfto_repeater', {
           if (typeof jQuery !== 'undefined') {
             var $ = jQuery;
             $([document.documentElement, document.body]).animate({
-              scrollTop: $('.' + el).offset().top - 120
+              scrollTop: $('.' + el).offset().top - 40
             }, 400);
           }
         });
@@ -53,7 +53,6 @@ Vue.component('wpcfto_repeater', {
     removeArea: function removeArea(areaIndex) {
       if (confirm('Do your really want to delete this field?')) {
         this.repeater.splice(areaIndex, 1);
-        this.repeater_values.splice(areaIndex, 1);
       }
     },
     getFieldValue: function getFieldValue(key, field, field_name) {

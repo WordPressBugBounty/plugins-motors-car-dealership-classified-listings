@@ -37,7 +37,7 @@ class Settings {
 
 	public function init_strings() {
 		self::$disabled_pro_text = esc_html__( 'Please enable Motors Pro Plugin', 'stm_vehicles_listing' );
-		self::$pro_plans_url     = admin_url( 'admin.php?page=mvl-go-pro' );
+		self::$pro_plans_url     = 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro';
 	}
 
 	public function icons_set_icon_picker( $icon_set ) {

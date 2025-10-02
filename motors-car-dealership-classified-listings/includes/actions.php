@@ -1400,6 +1400,21 @@ add_filter(
 	2
 );
 
+if ( ! function_exists( 'mvl_add_car_page_redirect' ) ) {
+	function mvl_add_car_page_redirect() {
+		if ( ! is_user_logged_in() && is_page() ) {
+			$is_add_car_page = apply_filters( 'mvl_is_add_car_page', intval( get_the_ID() ) === intval( apply_filters( 'motors_vl_get_nuxy_mod', 0, 'user_add_car_page' ) ) );
+
+			if ( $is_add_car_page ) {
+				wp_redirect( get_the_permalink( apply_filters( 'motors_vl_get_nuxy_mod', '', 'login_page' ) ) );
+				exit;
+			}
+		}
+	}
+
+	add_action( 'template_redirect', 'mvl_add_car_page_redirect' );
+}
+
 if ( ! function_exists( 'mvl_is_numeric_listing_field_sort_type' ) ) {
 	function mvl_is_numeric_listing_field_sort_type( $value, $key ) {
 		$value = mvl_get_taxonomy_type( $key ) === 'numeric';

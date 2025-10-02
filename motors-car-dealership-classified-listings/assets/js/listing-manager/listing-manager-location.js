@@ -4,8 +4,19 @@ function initMap() {
     const ny = { lat: 40.712776, lng: -74.005974 };
     let initialLocation = ny;
     let locationInput = document.getElementById("stm_car_location");
+    const latField = document.querySelector('input[name="location[stm_lat_car_admin]"]');
+    const lngField = document.querySelector('input[name="location[stm_lng_car_admin]"]');
+    
+    if (latField && lngField && latField.value && lngField.value) {
+        initialLocation = {
+            lat: parseFloat(latField.value),
+            lng: parseFloat(lngField.value)
+        };
+        initMapWithLocation(initialLocation);
+        return;
+    }
+    
     if (locationInput && locationInput.value) {
-
         geocoder = new google.maps.Geocoder();
         geocoder.geocode({ address: locationInput.value }, function (results, status) {
             if (status === "OK" && results[0]) {
@@ -16,12 +27,10 @@ function initMap() {
 
                 initMapWithLocation(initialLocation);
             } else {
-
                 initMapWithLocation(ny);
             }
         });
     } else {
-
         initMapWithLocation(ny);
     }
 }
@@ -170,6 +179,28 @@ function initMapWithLocation(location) {
         }
         marker.setPosition(place.geometry.location);
         marker.setVisible(true);
+
+        updateCoordinateFields(place.geometry.location.lat(), place.geometry.location.lng());
+    });
+
+    input.addEventListener('input', function() {
+        clearTimeout(lastTimeout);
+        lastTimeout = setTimeout(function() {
+            const address = input.value.trim();
+            if (address.length > 3) {
+                geocoder.geocode({ address: address }, function (results, status) {
+                    if (status === "OK" && results[0]) {
+                        const lat = results[0].geometry.location.lat();
+                        const lng = results[0].geometry.location.lng();
+                        const latlng = { lat: lat, lng: lng };
+                        map.setCenter(latlng);
+                        marker.setPosition(latlng);
+                        marker.setVisible(true);
+                        updateCoordinateFields(lat, lng);
+                    }
+                });
+            }
+        }, 1000);
     });
 
     document.querySelector(".mvl-listing-manager-map-zoom-in").onclick = function () {
@@ -184,9 +215,28 @@ function initMapWithLocation(location) {
             if (status === "OK" && results[0]) {
                 marker.setPosition(latlng);
                 document.getElementById("stm_car_location").value = results[0].formatted_address;
+                updateCoordinateFields(latlng.lat, latlng.lng);
             } else {
                 document.getElementById("stm_car_location").value = "";
+                updateCoordinateFields("", "");
             }
         });
     }
+}
+
+function updateCoordinateFields(lat, lng) {
+    const latField = document.querySelector('input[name="location[stm_lat_car_admin]"]');
+    const lngField = document.querySelector('input[name="location[stm_lng_car_admin]"]');
+    
+    if (latField) {
+        latField.value = lat;
+    }
+    if (lngField) {
+        lngField.value = lng;
+    }
+    
+    const publishButtons = document.querySelectorAll('button[data-status="publish"]');
+    publishButtons.forEach(function(button) {
+        button.classList.remove('disabled');
+    });
 }

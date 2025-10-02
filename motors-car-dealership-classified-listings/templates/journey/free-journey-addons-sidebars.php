@@ -23,7 +23,7 @@ $banner = Addons::list()[ $addon ];
 			</h2>
 			<p><?php echo esc_html( ( $banner['description'] ?? 'default' ) ); ?> </p>
 			<div class="unlock-addons-buttons">
-				<a href="<?php echo esc_url( admin_url( "admin.php?page=mvl-go-pro&source={$banner['img_url']}" ) ); ?>" target="_blank" class="primary button btn">
+				<a href="<?php echo esc_url( 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro' ); ?>" target="_blank" class="primary button btn">
 					<?php echo esc_html__( 'Upgrade to PRO', 'stm_vehicles_listing' ); ?>
 				</a>
 				<a href="<?php echo esc_url( $banner['documentation'] ); ?>" target="_blank" class="secondary button btn">

@@ -5,7 +5,7 @@ $is_pro = apply_filters( 'is_mvl_pro', false );
 	<?php
 	if ( ! $is_pro ) {
 		?>
-	<a href="<?php echo esc_url( admin_url( 'admin.php?page=mvl-go-pro&source=get-now-button-addons-banner' ) ); ?>" target="_blank" class="mvl-addon-banner">
+	<a href="<?php echo esc_url( 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro' ); ?>" target="_blank" class="mvl-addon-banner">
 	</a>
 		<?php
 	}

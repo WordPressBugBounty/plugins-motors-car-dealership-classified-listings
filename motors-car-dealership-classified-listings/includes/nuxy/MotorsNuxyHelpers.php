@@ -88,20 +88,7 @@ class MotorsNuxyHelpers {
 	public function start_field( $classes, $field_name, $field, $is_pro, $pro_url, $disable ) {
 		$is_addon    = $this->is_addon( $classes, $field_name, $field );
 		$addon_state = $this->addon_state( $field_name );
-
-		if ( isset( $field['label'] ) && ! empty( $field['label'] ) ) {
-			$converted_label = preg_replace( '/[^\p{L}\p{N}_]+/u', '_', $field['label'] );
-		} else {
-			$converted_label = '';
-		}
-
-		$field_label = rtrim( strtolower( $converted_label ), '_' );
-
-		if ( empty( $pro_url ) ) {
-			$pro_url = admin_url( 'admin.php?page=mvl-go-pro' );
-		} else {
-			$pro_url = admin_url( 'admin.php?page=mvl-go-pro&source=' . $field_label );
-		}
+		$pro_url     = 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro';
 
 		if ( 'is_pro' === $is_pro ) { ?>
 			<div class="field_overlay"></div>

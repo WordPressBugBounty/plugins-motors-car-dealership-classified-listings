@@ -3,7 +3,7 @@
     $(document).ready(function () {
         var currentSelect;
 
-        $("select:not(.hide, .filter-select)").each(function () {
+        $("select:not(.hide, .filter-select):not(.wc-blocks-components-select select)").each(function () {
             var selectClass = $(this).attr('class');
             var selectElement = $(this);
 
@@ -33,7 +33,7 @@
             }
         });
 
-        $("select:not(.hide)").on("select2:open", function() {
+        $("select:not(.hide):not(.wc-blocks-components-select select)").on("select2:open", function() {
             var stmClass = $(this).data('class');
             stmClass = (typeof stmClass == 'undefined') ? $(this).attr('name') : stmClass;
 
@@ -53,7 +53,7 @@
             window.scrollTo(0, $(window).scrollTop() - 1);
         });
 
-        $("select:not(.hide)").on("select2:closing", function() {
+        $("select:not(.hide):not(.wc-blocks-components-select select)").on("select2:closing", function() {
             $('.select2-search--dropdown').removeClass('plus-added-emeht-mts');
             $('.add-new-term').remove();
 

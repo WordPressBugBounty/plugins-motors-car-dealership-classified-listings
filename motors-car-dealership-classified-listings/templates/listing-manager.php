@@ -120,7 +120,7 @@ $preview = true;
 								<div class="mvl-listing-manager-sidebar-upgrade-pro-text">
 									<?php esc_html_e( 'Advanced features, seamless integrations, and premium support.', 'stm_vehicles_listing' ); ?>
 								</div>
-								<a href="<?php echo esc_url( admin_url( 'admin.php?page=mvl-go-pro' ) ); ?>" class="mvl-primary-btn mvl-listing-manager-sidebar-upgrade-pro-btn">
+								<a href="<?php echo esc_url( 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro' ); ?>" class="mvl-primary-btn mvl-listing-manager-sidebar-upgrade-pro-btn">
 									<?php esc_html_e( 'Upgrate to PRO', 'stm_vehicles_listing' ); ?>
 								</a>
 							</div>

@@ -540,6 +540,8 @@ class Bootstrap {
 		$response['preview_url'] = 'publish' === $response['post_status'] ? get_the_permalink( $item_id ) : get_preview_post_link( $item_id );
 		$response['back_link']   = esc_url( admin_url( 'edit.php?post_type=listings' ) );
 
+		update_post_meta( $item_id, '_wpb_vc_js_status', 'true' );
+
 		if ( $has_errors ) {
 			wp_send_json_error( $response );
 		} else {

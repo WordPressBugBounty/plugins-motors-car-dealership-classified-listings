@@ -25,25 +25,33 @@ class Option extends Page {
 			'slug'
 		);
 
-		foreach ( $data['terms'] as $key => $value ) {
-			if ( in_array( $key, $options, true ) ) {
-				delete_post_meta( $listing_id, $key );
+		if ( isset( $data['terms'] ) && is_array( $data['terms'] ) ) {
+			foreach ( $data['terms'] as $key => $value ) {
+				if ( in_array( $key, $options, true ) ) {
 
-				if ( $value ) {
-					$term = get_term_by( 'slug', $value, $key );
+					wp_delete_object_term_relationships( $listing_id, $key );
 
-					if ( $term && ! is_wp_error( $term ) ) {
-						update_post_meta( $listing_id, $key, $value );
+					if ( $value ) {
+						$term = get_term_by( 'slug', $value, $key );
+
+						if ( $term && ! is_wp_error( $term ) ) {
+							wp_set_object_terms( $listing_id, $term->term_id, $key, false );
+							update_post_meta( $listing_id, $key, $value );
+						}
+					} else {
+						delete_post_meta( $listing_id, $key );
 					}
 				}
 			}
 		}
 
-		foreach ( $data['numeric'] as $key => $value ) {
-			if ( in_array( $key, $options, true ) ) {
-				if ( is_numeric( $value ) || empty( $value ) ) {
-					delete_post_meta( $listing_id, $key );
-					update_post_meta( $listing_id, $key, $value );
+		if ( isset( $data['numeric'] ) && is_array( $data['numeric'] ) ) {
+			foreach ( $data['numeric'] as $key => $value ) {
+				if ( in_array( $key, $options, true ) ) {
+					if ( is_numeric( $value ) || empty( $value ) ) {
+						delete_post_meta( $listing_id, $key );
+						update_post_meta( $listing_id, $key, $value );
+					}
 				}
 			}
 		}

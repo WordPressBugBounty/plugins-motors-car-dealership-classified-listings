@@ -117,7 +117,7 @@ Vue.component('wpcfto_repeater', {
 						var $ = jQuery
 						$([document.documentElement, document.body]).animate(
 							{
-								scrollTop: $('.' + el).offset().top - 120,
+								scrollTop: $('.' + el).offset().top - 40,
 							},
 							400
 						)
@@ -134,7 +134,6 @@ Vue.component('wpcfto_repeater', {
 		removeArea: function (areaIndex) {
 			if (confirm('Do your really want to delete this field?')) {
 				this.repeater.splice(areaIndex, 1)
-				this.repeater_values.splice(areaIndex, 1)
 			}
 		},
 		getFieldValue(key, field, field_name) {

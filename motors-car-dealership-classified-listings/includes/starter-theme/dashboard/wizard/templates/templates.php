@@ -66,7 +66,7 @@
 						<img src="<?php echo esc_url( STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/images/get-pro.jpg' ); ?>" width="" height=""/>
 						<div class="pro-text-wrap">
 							<img src="<?php echo esc_url( STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/images/pro-banner-text.svg' ); ?>" width="" height=""/>
-							<a href="<?php echo esc_url( 'admin.php?page=mvl-go-pro' ); ?>" class="mst-starter-wizard__button"
+							<a href="<?php echo esc_url( 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro' ); ?>" class="mst-starter-wizard__button"
 								target="_blank"><?php echo esc_html__( 'Get Now', 'motors-starter-theme' ); ?><i class="mst-icon-arrow-right1"></i> </a>
 						</div>
 					</div>

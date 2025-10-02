@@ -30,6 +30,8 @@
 		);
 
 		?>
+		<input type="hidden" name="location[stm_lat_car_admin]" value="<?php echo esc_attr( $listing_manager_page->get_listing_id() ? get_post_meta( $listing_manager_page->get_listing_id(), 'stm_lat_car_admin', true ) : '' ); ?>">
+		<input type="hidden" name="location[stm_lng_car_admin]" value="<?php echo esc_attr( $listing_manager_page->get_listing_id() ? get_post_meta( $listing_manager_page->get_listing_id(), 'stm_lng_car_admin', true ) : '' ); ?>">
 		<?php if ( apply_filters( 'is_mvl_pro', false ) && apply_filters( 'motors_vl_get_nuxy_mod', '', 'google_api_key' ) ) : ?>
 		<div class="mvl-listing-manager-field">
 			<div id="mvl-listing-manager-map" class="mvl-listing-manager-map"></div>
@@ -55,7 +57,7 @@
 						</p>
 					</div>
 					<div class="mvl-lm-notice-actions">
-						<a href="<?php echo esc_url( admin_url( 'admin.php?page=mvl-go-pro' ) ); ?>" class="mvl-primary-btn">
+						<a href="<?php echo esc_url( 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro' ); ?>" class="mvl-primary-btn">
 							<?php echo esc_html__( 'Upgrade to PRO', 'stm_vehicles_listing' ); ?>
 						</a>
 					</div>

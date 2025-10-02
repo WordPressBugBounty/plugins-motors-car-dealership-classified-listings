@@ -154,7 +154,7 @@ if ( 2 === $column ) {
 								<img src="<?php echo esc_html( $choice_args['url'] ); ?>" />
 							</span>
 						</label>
-						<a href="https://stylemixthemes.com/car-dealer-plugin/pricing/" target="_blank" title="<?php esc_attr_e( 'This feature is only available in PRO version', 'motors-car-dealership-classified-listings' ); ?>">
+						<a href="https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro" target="_blank" title="<?php esc_attr_e( 'This feature is only available in PRO version', 'motors-car-dealership-classified-listings' ); ?>">
 							<span class="stm-pro-field-label-wrapper">
 								<div class="icon-wrap">
 									<img src="<?php echo esc_url( STM_LISTINGS_URL . '/assets/images/pro/lock-pro.svg' ); ?>" alt="<?php esc_attr_e( 'This feature is only available in PRO version', 'motors-car-dealership-classified-listings' ); ?>">

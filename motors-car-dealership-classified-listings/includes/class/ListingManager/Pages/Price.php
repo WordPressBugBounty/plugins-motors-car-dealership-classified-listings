@@ -37,6 +37,19 @@ class Price extends Page {
 			}
 		}
 
+		$post_id       = $data['post_id'];
+		$genuine_price = '';
+
+		if ( isset( $data['sale_price'] ) && ! empty( $data['sale_price'] ) ) {
+			$genuine_price = $data['sale_price'];
+		} elseif ( isset( $data['price'] ) && ! empty( $data['price'] ) ) {
+			$genuine_price = $data['price'];
+		}
+
+		if ( ! empty( $genuine_price ) ) {
+			update_post_meta( $post_id, 'stm_genuine_price', $genuine_price );
+		}
+
 		return array();
 	}
 

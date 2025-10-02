@@ -3,8 +3,6 @@ Vue.component('wpcfto_checkbox', {
     data: function () {
         return {
             value : '',
-            alwaysOn: false,
-            parentObserver: null,
         }
     },
     template: `
@@ -21,7 +19,6 @@ Vue.component('wpcfto_checkbox', {
                         <input type="checkbox"
                                :name="field_name"
                                v-bind:id="field_id"
-                               :disabled="alwaysOn"
                                v-model="value"/>
                     </div>
                 </label>
@@ -33,59 +30,13 @@ Vue.component('wpcfto_checkbox', {
         </div>
     `,
     mounted: function () {
-        this.detectAlwaysOn();
+        this.value = this.field_value;
 
-        if (this.alwaysOn) {
-            this.value = true;
-            this.$emit('wpcfto-get-value', true);
-        } else {
-            this.value = this.field_value;
-        }
-
-        this.observeParentClass();
     },
-    methods: {
-        detectAlwaysOn() {
-            const parent = this.$el.parentElement;
-            this.alwaysOn = !!(parent && parent.classList.contains('wpcfto-always-on'));
-        },
-        observeParentClass() {
-            const parent = this.$el.parentElement;
-            if (!parent) return;
-
-            this.parentObserver = new MutationObserver(() => {
-                const wasAlwaysOn = this.alwaysOn;
-                this.detectAlwaysOn();
-
-                if (this.alwaysOn && this.value !== true) {
-                    this.value = true;
-                    this.$emit('wpcfto-get-value', true);
-                }
-
-                if (!this.alwaysOn && wasAlwaysOn) {
-                    this.value = this.field_value;
-                    this.$emit('wpcfto-get-value', this.value);
-                }
-            });
-
-            this.parentObserver.observe(parent, {
-                attributes: true,
-                attributeFilter: ['class'],
-            });
-        }
-    },
-    beforeDestroy() {
-        if (this.parentObserver) {
-            this.parentObserver.disconnect();
-        }
-    },
+    methods: {},
     watch: {
-        value(val) {
-            if (this.alwaysOn && val !== true) {
-                this.value = true;
-            } else {
-                this.$emit('wpcfto-get-value', val);
-            }
+        value: function (value) {
+            this.$emit('wpcfto-get-value', value);
         }
     }
 });

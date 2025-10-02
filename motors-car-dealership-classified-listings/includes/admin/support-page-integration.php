@@ -70,7 +70,7 @@ add_action(
 						'description'  => __( 'Upgrade now and unlock advanced inventory management, custom search filters, and powerful lead capture tools. List vehicles faster, help buyers find exactly what they need, and keep your sales process organized.', 'stm_vehicles_listing' ),
 						'buttons'      => array(
 							array(
-								'href' => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wpadmin&utm_medium=help_center&utm_campaign=motors_promo_banner',
+								'href' => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro',
 							),
 							array(
 								'href' => 'https://stylemixthemes.com/car-dealer-plugin/?utm_source=wpadmin&utm_medium=help_center&utm_campaign=motors_promo_banner',

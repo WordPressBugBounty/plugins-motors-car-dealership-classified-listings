@@ -20,7 +20,7 @@ $description     = $field_data['desc'] ?? '';
 $search_addon    = $field_data['search'] ?? '';
 $utm_url         = $field_data['utm_url'] ?? '';
 $slug            = str_replace( ' ', '-', mb_strtolower( $label ) );
-$redirect_link   = admin_url( 'admin.php?page=' . ( $is_pro && $is_enable ? "mvl-addons&search={$search_addon}" : "mvl-go-pro&source=button-{$slug}-settings" ) );
+$redirect_link   = 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro';
 $redirect_link   = ! $is_enable && $utm_url && $is_pro ? $utm_url : $redirect_link;
 $link_text       = $is_pro && $is_enable ? esc_html__( 'Enable addon', 'stm_vehicles_listing' ) : esc_html__( 'Upgrade to PRO', 'stm_vehicles_listing' );
 $second_btn_text = $field_data['second_btn_text'] ?? '';

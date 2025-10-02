@@ -1579,7 +1579,7 @@ function mvl_admin_bar_item( $admin_bar ) {
 					'id'     => 'mvl-plugin-unlock-pro',
 					'parent' => 'mvl-plugin-settings',
 					'title'  => '<span>' . esc_html__( 'Unlock PRO', 'stm_vehicles_listing' ) . '</span>',
-					'href'   => admin_url( 'admin.php?page=mvl-go-pro' ),
+					'href'   => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro',
 					'meta'   => array(
 						'title' => esc_html__( 'Unlock PRO', 'stm_vehicles_listing' ),
 					),
