@@ -3,6 +3,7 @@
  * @var $lst_taxonomies
  * @var $lst_amount
  * @var $lst_show_all_text
+ * @var $lst_show_label
  * @var $lst_show_tabs
  * @var $lst_show_tabs_buttons
  * @var $lst_condition_tabs
@@ -17,9 +18,11 @@
  * @var $tab_prefix
  * @var $tab_suffix
  * @var $lst_show_all_tab
+ * @var $lst_show_label
+ * @var $lst_btn_icon
  **/
 
-use Motors_Elementor_Widgets_Free\Helpers\Helper;
+use MotorsElementorWidgetsFree\Helpers\Helper;
 
 $args = array(
 	'post_type'              => apply_filters( 'stm_listings_post_type', 'listings' ),
@@ -55,6 +58,8 @@ $tab_activity_class      = 'active';
 $tab_pane_activity_class = 'in active';
 
 $nonce_field = apply_filters( 'stm_listings_filter_nonce', false );
+
+$show_label = ( isset( $lst_show_label ) && 'yes' === $lst_show_label ) ? true : false;
 ?>
 <div
 	class="stm_dynamic_listing_filter filter-listing stm-vc-ajax-filter animated fadeIn"
@@ -125,7 +130,7 @@ $nonce_field = apply_filters( 'stm_listings_filter_nonce', false );
 				<form action="<?php echo esc_url( apply_filters( 'stm_filter_listing_link', '' ) ); ?>" method="GET">
 					<?php echo wp_kses_post( $nonce_field ); ?>
 					<div class="stm-filter-tab-selects filter stm-vc-ajax-filter<?php echo esc_attr( $selects_advanced_class ); ?>">
-						<?php Helper::stm_ew_listing_filter_get_selects( $lst_taxonomies, 'stm_all_listing_tab', $lst_amount ); ?>
+						<?php Helper::stm_ew_listing_filter_get_selects( $lst_taxonomies, 'stm_all_listing_tab', $lst_amount, $show_label ); ?>
 						<?php if ( $lst_advanced_search && Helper::stm_ew_has_overflown_fields( $lst_taxonomies ) ) : ?>
 							<div class="stm-show-more">
 								<span class="show-extra-fields" data-tab-id="<?php echo esc_attr( sprintf( 'stm_all_listing_tab-%s', $uniq_id ) ); ?>">
@@ -135,7 +140,9 @@ $nonce_field = apply_filters( 'stm_listings_filter_nonce', false );
 							</div>
 						<?php endif; ?>
 						<button type="submit" class="search-submit heading-font">
-							<i class="fas fa-search"></i>			
+							<?php if ( ! empty( $lst_btn_icon ) ) : ?>
+								<?php \Elementor\Icons_Manager::render_icon( $lst_btn_icon ); ?>
+							<?php endif; ?>
 							<?php
 							$all              = new WP_Query( $args );
 							$lst_btn_text     = str_replace( '{postfix}', esc_html( $lst_btn_postfix ), $lst_btn_text );
@@ -169,7 +176,7 @@ $nonce_field = apply_filters( 'stm_listings_filter_nonce', false );
 					<form action="<?php echo esc_url( apply_filters( 'stm_filter_listing_link', '' ) ); ?>" method="GET">
 						<?php echo wp_kses_post( $nonce_field ); ?>
 						<div class="stm-filter-tab-selects filter stm-vc-ajax-filter<?php echo esc_attr( $selects_advanced_class ); ?>">
-							<?php Helper::stm_ew_listing_filter_get_selects( $lst_taxonomies, $_term, $lst_amount ); ?>
+							<?php Helper::stm_ew_listing_filter_get_selects( $lst_taxonomies, $_term, $lst_amount, $show_label ); ?>
 							<?php if ( $lst_advanced_search && Helper::stm_ew_has_overflown_fields( $lst_taxonomies ) ) : ?>
 								<div class="stm-show-more">
 									<span class="show-extra-fields" data-tab-id="<?php echo esc_attr( $_term ); ?>-<?php echo esc_attr( $uniq_id ); ?>">
@@ -184,7 +191,9 @@ $nonce_field = apply_filters( 'stm_listings_filter_nonce', false );
 									data-val="<?php echo esc_attr( $_term ); ?>"
 									value="<?php echo esc_attr( $_term ); ?>" class="no-cascading hidden_tax"/>
 							<button type="submit" class="search-submit heading-font">
-								<i class="fas fa-search"></i>
+								<?php if ( ! empty( $lst_btn_icon ) ) : ?>
+									<?php \Elementor\Icons_Manager::render_icon( $lst_btn_icon ); ?>
+								<?php endif; ?>
 								<?php
 								$lst_btn_text     = str_replace( '{postfix}', esc_html( $lst_btn_postfix ), $lst_btn_text );
 								$explode_by_count = explode( '{count}', $lst_btn_text );
@@ -211,7 +220,7 @@ $nonce_field = apply_filters( 'stm_listings_filter_nonce', false );
 					<?php echo wp_kses_post( $nonce_field ); ?>
 					<div class="stm-filter-tab-selects stm-filter-tab-selects-second filter stm-vc-ajax-filter<?php echo esc_attr( $selects_advanced_class ); ?>">
 						<?php
-						Helper::stm_ew_listing_filter_get_selects( $lst_reviews_taxonomies, 'reviews' );
+						Helper::stm_ew_listing_filter_get_selects( $lst_reviews_taxonomies, 'reviews', false, $show_label );
 
 						if ( $lst_advanced_search && Helper::stm_ew_has_overflown_fields( $lst_reviews_taxonomies ) ) :
 							?>

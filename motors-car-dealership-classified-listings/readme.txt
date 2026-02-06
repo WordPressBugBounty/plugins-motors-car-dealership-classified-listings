@@ -4,8 +4,8 @@ Contributors: Stylemix
 Donate link: https://www.paypal.me/stylemix
 Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
-Tested up to: 6.8
-Stable tag: 1.4.91
+Tested up to: 6.9
+Stable tag: 1.4.103
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -124,14 +124,16 @@ After that, go to Tools -> Import, and via Wordpress Importer tool install dummy
 
 == Screenshots ==
 
-1. Unlimited fields and advanced filters
-2. Listing details page
-3. Profile page
-4. Starter theme included
-5. Side-by-side vehicle comparison
-6. Email templates manager
-7. Flexible monetization options
-8. Additional features
+1. All in one listing management
+2. Unlimited fields & advanced filters
+3. Listing card skins
+4. Ready-made listing templates
+5. Prebuilt website skins included
+6. Email templates
+7. Profile page
+8. Side-by-side vehicle comparison
+9. Flexible monetization options
+10. Additional features
 
 == Frequently Asked Questions ==
 
@@ -180,6 +182,53 @@ Definitely. Motors is translation-ready and works with popular multilingual plug
 You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability](https://patchstack.com/database/vdp/motors-car-dealership-classified-listings). 
 
 == Changelog ==
+
+= 1.4.103
+- **Fix:** Fixed display of Custom Field child categories with assigned parent categories.
+
+= 1.4.102
+- **Fix:** Fixed issue allowing registration of new users with New User Registration disabled.
+
+= 1.4.101
+- **Fix:** Fixed compatibility issue with Elementor 3.34.0 causing incorrect display of Add Car form.
+
+= 1.4.100
+- **Enhancement:** New design for Listing Search Tabs and Image Categories Elementor widgets.
+- **Update:** Motors Skins updated to version 1.1.5.
+- **Fix:** Added the ability to translate the Privacy Policy checkbox text via Loco Translate.
+- **Fix:** Fixed visual issues with the Carousel in the Image Categories Elementor widget.
+- **Fix:** Fixed Search Filter on the inventory page for listing types.
+
+= 1.4.99
+- **Fix:** Minor bug fixes.
+
+= 1.4.98
+- **Update:** Compatibility with WordPress 6.9
+- **Fix:** Fixed the issue with searching by listing status when SEO-Friendly URL mode was enabled.
+- **Fix:** Fixed the incorrect display of WPForms Dropdown fields.
+
+= 1.4.97
+- **Fix:** Minor bug fixes.
+
+= 1.4.96
+- **Fix:** Options for the fields Author, Sold, Special Offer Label & Color were not imported correctly
+- **Fix:** When a dealer updated a listing, the system triggered the "New Listing Added" email instead of "Listing Updated"
+- **Enhancement:** Mobile view toggle added in the Email Manager add-on when editing email templates (Pro)
+- **Enhancement:** Added a setting to disable specific email templates to prevent sending based on triggers (Pro)
+- **Enhancement:** Dealers can now import vehicle data during listing creation using the Car Info Autocomplete add-on (Pro)
+- **Enhancement:** ReCaptcha added to the "Get Car Price" form
+
+= 1.4.95
+- **Fix:** Minor bug fixes.
+
+= 1.4.94
+- **Update:** Email Manager interface redesigned (Pro).
+
+= 1.4.93
+- **Fix:** Minor bug fixes.
+
+= 1.4.92
+- **Fix:** Minor bug fixes.
 
 = 1.4.91
 - **Fix:** Guest users are now restricted from accessing the listing creation page

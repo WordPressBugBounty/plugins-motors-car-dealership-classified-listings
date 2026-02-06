@@ -1,0 +1,129 @@
+{
+    "terms_label": "I accept the terms of the",
+    "link_text": "service",
+    "terms_page": "3",
+    "sign_up_text_color": "#131925",
+    "sign_in_text_color": "#FFFFFF",
+    "title_typography_font_family": "Inter",
+    "title_typography_font_weight": "700",
+    "label_typography_typography": "custom",
+    "label_typography_font_family": "Inter",
+    "label_typography_font_size": {
+        "unit": "px",
+        "size": 14,
+        "sizes": []
+    },
+    "label_typography_font_weight": "400",
+    "title_typography_typography": "custom",
+    "title_typography_font_size": {
+        "unit": "px",
+        "size": 24,
+        "sizes": []
+    },
+    "label_margin": {
+        "unit": "px",
+        "top": "0",
+        "right": "0",
+        "bottom": "10",
+        "left": "0",
+        "isLinked": false
+    },
+    "buttons_typography_typography": "custom",
+    "buttons_typography_font_family": "Inter",
+    "buttons_typography_font_size": {
+        "unit": "px",
+        "size": 16,
+        "sizes": []
+    },
+    "buttons_typography_font_weight": "500",
+    "buttons_typography_text_transform": "capitalize",
+    "buttons_typography_line_height": {
+        "unit": "px",
+        "size": 8,
+        "sizes": []
+    },
+    "buttons_margin": {
+        "unit": "px",
+        "top": "0",
+        "right": "0",
+        "bottom": "0",
+        "left": "0",
+        "isLinked": false
+    },
+    "background_color_hover": "#2478DF",
+    "sign_in_background_color": "#131925",
+    "borders_color": "#131925",
+    "input_padding": {
+        "unit": "px",
+        "top": "0",
+        "right": "10",
+        "bottom": "0",
+        "left": "10",
+        "isLinked": false
+    },
+    "form_border_radius": {
+        "unit": "px",
+        "top": "8",
+        "right": "8",
+        "bottom": "8",
+        "left": "8",
+        "isLinked": true
+    },
+    "input_border_radius": {
+        "unit": "px",
+        "top": "8",
+        "right": "8",
+        "bottom": "8",
+        "left": "8",
+        "isLinked": true
+    },
+    "button_border_radius": {
+        "unit": "px",
+        "top": "8",
+        "right": "8",
+        "bottom": "8",
+        "left": "8",
+        "isLinked": true
+    },
+    "inputs_typography_typography": "custom",
+    "inputs_typography_font_family": "Inter",
+    "sign_in_input_border_color": "#DDE3EC",
+    "sign_up_input_border_color": "#DDE3EC",
+    "sign_up_input_background_color": "#FFFFFF",
+    "sign_in_input_background_color": "#FFFFFF",
+    "buttons_padding": {
+        "unit": "px",
+        "top": "0",
+        "right": "10",
+        "bottom": "0",
+        "left": "10",
+        "isLinked": false
+    },
+    "sign_up_form_padding": {
+        "unit": "px",
+        "top": "35",
+        "right": "30",
+        "bottom": "10",
+        "left": "30",
+        "isLinked": false
+    },
+    "sign_up_secondary_checkbox_typography_typography": "custom",
+    "sign_up_secondary_checkbox_typography_font_family": "Inter",
+    "sign_up_secondary_checkbox_typography_font_size": {
+        "unit": "px",
+        "size": 14,
+        "sizes": []
+    },
+    "sign_up_secondary_checkbox_typography_line_height": {
+        "unit": "px",
+        "size": 15,
+        "sizes": []
+    },
+    "sign_up_background_color": "#FFFFFF",
+    "sign_up_input_text_color": "#131925",
+    "sign_in_input_text_color": "#131925",
+    "sign_up_input_placeholder_color": "#9CA3AF",
+    "sign_in_input_placeholder_color": "#9CA3AF",
+    "sign_up_links_color": "#3783E1",
+    "button_background_color": "#3783E1"
+}

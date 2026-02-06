@@ -9,16 +9,17 @@ class ComposerStaticInit5db859e1dab632b715b93d33219eb1cf
     public static $prefixLengthsPsr4 = array (
         'M' => 
         array (
-            'Motors_Elementor_Widgets_Free\\' => 30,
+            'MotorsVehiclesListing\\MagicKit\\' => 31,
             'MotorsVehiclesListing\\' => 22,
             'MotorsNuxy\\' => 11,
+            'MotorsElementorWidgetsFree\\' => 27,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Motors_Elementor_Widgets_Free\\' => 
+        'MotorsVehiclesListing\\MagicKit\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/elementor/inc',
+            0 => __DIR__ . '/../..' . '/magic-kit',
         ),
         'MotorsVehiclesListing\\' => 
         array (
@@ -28,10 +29,47 @@ class ComposerStaticInit5db859e1dab632b715b93d33219eb1cf
         array (
             0 => __DIR__ . '/../..' . '/includes/nuxy',
         ),
+        'MotorsElementorWidgetsFree\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/elementor/inc',
+        ),
     );
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'MotorsElementorWidgetsFree\\Helpers\\Helper' => __DIR__ . '/../..' . '/elementor/inc/Helpers/Helper.php',
+        'MotorsElementorWidgetsFree\\Helpers\\ListingsSkinsSupportAPI' => __DIR__ . '/../..' . '/elementor/inc/Helpers/ListingsSkinsSupportAPI.php',
+        'MotorsElementorWidgetsFree\\Helpers\\RegisterActions' => __DIR__ . '/../..' . '/elementor/inc/Helpers/RegisterActions.php',
+        'MotorsElementorWidgetsFree\\Widgets\\AddListing' => __DIR__ . '/../..' . '/elementor/inc/Widgets/AddListing.php',
+        'MotorsElementorWidgetsFree\\Widgets\\ContactFormSeven' => __DIR__ . '/../..' . '/elementor/inc/Widgets/ContactFormSeven.php',
+        'MotorsElementorWidgetsFree\\Widgets\\DealersList' => __DIR__ . '/../..' . '/elementor/inc/Widgets/DealersList.php',
+        'MotorsElementorWidgetsFree\\Widgets\\HeaderFooter\\AddCarButton' => __DIR__ . '/../..' . '/elementor/inc/Widgets/HeaderFooter/AddCarButton.php',
+        'MotorsElementorWidgetsFree\\Widgets\\HeaderFooter\\CompareButton' => __DIR__ . '/../..' . '/elementor/inc/Widgets/HeaderFooter/CompareButton.php',
+        'MotorsElementorWidgetsFree\\Widgets\\HeaderFooter\\ProfileButton' => __DIR__ . '/../..' . '/elementor/inc/Widgets/HeaderFooter/ProfileButton.php',
+        'MotorsElementorWidgetsFree\\Widgets\\ImageCategories' => __DIR__ . '/../..' . '/elementor/inc/Widgets/ImageCategories.php',
+        'MotorsElementorWidgetsFree\\Widgets\\InventorySearchFilter' => __DIR__ . '/../..' . '/elementor/inc/Widgets/InventorySearchFilter.php',
+        'MotorsElementorWidgetsFree\\Widgets\\InventorySearchResults' => __DIR__ . '/../..' . '/elementor/inc/Widgets/InventorySearchResults.php',
+        'MotorsElementorWidgetsFree\\Widgets\\InventorySortBy' => __DIR__ . '/../..' . '/elementor/inc/Widgets/InventorySortBy.php',
+        'MotorsElementorWidgetsFree\\Widgets\\InventoryViewType' => __DIR__ . '/../..' . '/elementor/inc/Widgets/InventoryViewType.php',
+        'MotorsElementorWidgetsFree\\Widgets\\ListingSearchTabs' => __DIR__ . '/../..' . '/elementor/inc/Widgets/ListingSearchTabs.php',
+        'MotorsElementorWidgetsFree\\Widgets\\ListingsCompare' => __DIR__ . '/../..' . '/elementor/inc/Widgets/ListingsCompare.php',
+        'MotorsElementorWidgetsFree\\Widgets\\ListingsGridTabs' => __DIR__ . '/../..' . '/elementor/inc/Widgets/ListingsGridTabs.php',
+        'MotorsElementorWidgetsFree\\Widgets\\LoginRegister' => __DIR__ . '/../..' . '/elementor/inc/Widgets/LoginRegister.php',
+        'MotorsElementorWidgetsFree\\Widgets\\PricingPlan' => __DIR__ . '/../..' . '/elementor/inc/Widgets/PricingPlan.php',
+        'MotorsElementorWidgetsFree\\Widgets\\SingleListing\\Classified\\ListingData' => __DIR__ . '/../..' . '/elementor/inc/Widgets/SingleListing/Classified/ListingData.php',
+        'MotorsElementorWidgetsFree\\Widgets\\SingleListing\\Classified\\Price' => __DIR__ . '/../..' . '/elementor/inc/Widgets/SingleListing/Classified/Price.php',
+        'MotorsElementorWidgetsFree\\Widgets\\SingleListing\\Classified\\Title' => __DIR__ . '/../..' . '/elementor/inc/Widgets/SingleListing/Classified/Title.php',
+        'MotorsElementorWidgetsFree\\Widgets\\SingleListing\\Classified\\UserDataSimple' => __DIR__ . '/../..' . '/elementor/inc/Widgets/SingleListing/Classified/UserDataSimple.php',
+        'MotorsElementorWidgetsFree\\Widgets\\SingleListing\\DealerEmail' => __DIR__ . '/../..' . '/elementor/inc/Widgets/SingleListing/DealerEmail.php',
+        'MotorsElementorWidgetsFree\\Widgets\\SingleListing\\DealerPhoneNumber' => __DIR__ . '/../..' . '/elementor/inc/Widgets/SingleListing/DealerPhoneNumber.php',
+        'MotorsElementorWidgetsFree\\Widgets\\SingleListing\\Features' => __DIR__ . '/../..' . '/elementor/inc/Widgets/SingleListing/Features.php',
+        'MotorsElementorWidgetsFree\\Widgets\\SingleListing\\Gallery' => __DIR__ . '/../..' . '/elementor/inc/Widgets/SingleListing/Gallery.php',
+        'MotorsElementorWidgetsFree\\Widgets\\SingleListing\\ListingDescription' => __DIR__ . '/../..' . '/elementor/inc/Widgets/SingleListing/ListingDescription.php',
+        'MotorsElementorWidgetsFree\\Widgets\\SingleListing\\OfferPriceButton' => __DIR__ . '/../..' . '/elementor/inc/Widgets/SingleListing/OfferPriceButton.php',
+        'MotorsElementorWidgetsFree\\Widgets\\SingleListing\\Similar' => __DIR__ . '/../..' . '/elementor/inc/Widgets/SingleListing/Similar.php',
+        'MotorsElementorWidgetsFree\\Widgets\\SingleListing\\Title' => __DIR__ . '/../..' . '/elementor/inc/Widgets/SingleListing/Title.php',
+        'MotorsElementorWidgetsFree\\Widgets\\WidgetBase' => __DIR__ . '/../..' . '/elementor/inc/Widgets/WidgetBase.php',
+        'MotorsElementorWidgetsFree\\Widgets\\WidgetManager\\MotorsWidgetsManagerFree' => __DIR__ . '/../..' . '/elementor/inc/Widgets/WidgetManager/MotorsWidgetsManagerFree.php',
         'MotorsNuxy\\MotorsNuxyHelpers' => __DIR__ . '/../..' . '/includes/nuxy/MotorsNuxyHelpers.php',
         'MotorsVehiclesListing\\Addons\\Addon' => __DIR__ . '/../..' . '/includes/class/Addons/Addon.php',
         'MotorsVehiclesListing\\Addons\\Addons' => __DIR__ . '/../..' . '/includes/class/Addons/Addons.php',
@@ -44,6 +82,7 @@ class ComposerStaticInit5db859e1dab632b715b93d33219eb1cf
         'MotorsVehiclesListing\\Elementor\\Nuxy\\AddListingManager' => __DIR__ . '/../..' . '/includes/class/Elementor/Nuxy/AddListingManager.php',
         'MotorsVehiclesListing\\Elementor\\Nuxy\\FeaturesSettings' => __DIR__ . '/../..' . '/includes/class/Elementor/Nuxy/FeaturesSettings.php',
         'MotorsVehiclesListing\\Features\\Elementor\\Nuxy\\TemplateManager' => __DIR__ . '/../..' . '/includes/class/Features/Elementor/Nuxy/TemplateManager.php',
+        'MotorsVehiclesListing\\Features\\EmailManagerCompatibility' => __DIR__ . '/../..' . '/includes/class/Features/EmailManagerCompatibility.php',
         'MotorsVehiclesListing\\Features\\FriendlyUrl' => __DIR__ . '/../..' . '/includes/class/Features/FriendlyUrl.php',
         'MotorsVehiclesListing\\Features\\MultiplePlan' => __DIR__ . '/../..' . '/includes/class/Features/MultiplePlan.php',
         'MotorsVehiclesListing\\Features\\WooCommerce\\ListingCheckoutHooks' => __DIR__ . '/../..' . '/includes/class/Features/WooCommerce/ListingCheckoutHooks.php',
@@ -54,6 +93,8 @@ class ComposerStaticInit5db859e1dab632b715b93d33219eb1cf
         'MotorsVehiclesListing\\Helper\\FilterHelper' => __DIR__ . '/../..' . '/includes/class/Helper/FilterHelper.php',
         'MotorsVehiclesListing\\Helper\\ListingStats' => __DIR__ . '/../..' . '/includes/class/Helper/ListingStats.php',
         'MotorsVehiclesListing\\Helper\\OptionsHelper' => __DIR__ . '/../..' . '/includes/class/Helper/OptionsHelper.php',
+        'MotorsVehiclesListing\\Libs\\NuxyGoogleFont' => __DIR__ . '/../..' . '/includes/class/Libs/NuxyGoogleFont.php',
+        'MotorsVehiclesListing\\Libs\\Str' => __DIR__ . '/../..' . '/includes/class/Libs/Str.php',
         'MotorsVehiclesListing\\Libs\\Traits\\ArgsSetter' => __DIR__ . '/../..' . '/includes/class/Libs/Traits/ArgsSetter.php',
         'MotorsVehiclesListing\\Libs\\Traits\\Instance' => __DIR__ . '/../..' . '/includes/class/Libs/Traits/Instance.php',
         'MotorsVehiclesListing\\Libs\\Traits\\ProtectedActivationHook' => __DIR__ . '/../..' . '/includes/class/Libs/Traits/ProtectedActivationHook.php',
@@ -71,6 +112,7 @@ class ComposerStaticInit5db859e1dab632b715b93d33219eb1cf
         'MotorsVehiclesListing\\ListingManager\\Pages\\Price' => __DIR__ . '/../..' . '/includes/class/ListingManager/Pages/Price.php',
         'MotorsVehiclesListing\\ListingMetaboxes' => __DIR__ . '/../..' . '/includes/class/ListingMetaboxes.php',
         'MotorsVehiclesListing\\Loader' => __DIR__ . '/../..' . '/includes/class/Loader.php',
+        'MotorsVehiclesListing\\MagicKit\\MagicKit' => __DIR__ . '/../..' . '/magic-kit/MagicKit.php',
         'MotorsVehiclesListing\\MenuPages\\AddCarFormSettings' => __DIR__ . '/../..' . '/includes/class/MenuPages/AddCarFormSettings.php',
         'MotorsVehiclesListing\\MenuPages\\FilterSettings' => __DIR__ . '/../..' . '/includes/class/MenuPages/FilterSettings.php',
         'MotorsVehiclesListing\\MenuPages\\ListingDetailsSettings' => __DIR__ . '/../..' . '/includes/class/MenuPages/ListingDetailsSettings.php',
@@ -103,38 +145,6 @@ class ComposerStaticInit5db859e1dab632b715b93d33219eb1cf
         'MotorsVehiclesListing\\User\\UserMetaController' => __DIR__ . '/../..' . '/includes/class/User/UserMetaController.php',
         'MotorsVehiclesListing\\User\\UserReviewsController' => __DIR__ . '/../..' . '/includes/class/User/UserReviewsController.php',
         'MotorsVehiclesListing\\User\\UserRoles' => __DIR__ . '/../..' . '/includes/class/User/UserRoles.php',
-        'Motors_Elementor_Widgets_Free\\Helpers\\Helper' => __DIR__ . '/../..' . '/elementor/inc/Helpers/Helper.php',
-        'Motors_Elementor_Widgets_Free\\Helpers\\RegisterActions' => __DIR__ . '/../..' . '/elementor/inc/Helpers/RegisterActions.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\AddListing' => __DIR__ . '/../..' . '/elementor/inc/Widgets/AddListing.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\ContactFormSeven' => __DIR__ . '/../..' . '/elementor/inc/Widgets/ContactFormSeven.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\DealersList' => __DIR__ . '/../..' . '/elementor/inc/Widgets/DealersList.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\HeaderFooter\\AddCarButton' => __DIR__ . '/../..' . '/elementor/inc/Widgets/HeaderFooter/AddCarButton.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\HeaderFooter\\CompareButton' => __DIR__ . '/../..' . '/elementor/inc/Widgets/HeaderFooter/CompareButton.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\HeaderFooter\\ProfileButton' => __DIR__ . '/../..' . '/elementor/inc/Widgets/HeaderFooter/ProfileButton.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\ImageCategories' => __DIR__ . '/../..' . '/elementor/inc/Widgets/ImageCategories.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\InventorySearchFilter' => __DIR__ . '/../..' . '/elementor/inc/Widgets/InventorySearchFilter.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\InventorySearchResults' => __DIR__ . '/../..' . '/elementor/inc/Widgets/InventorySearchResults.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\InventorySortBy' => __DIR__ . '/../..' . '/elementor/inc/Widgets/InventorySortBy.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\InventoryViewType' => __DIR__ . '/../..' . '/elementor/inc/Widgets/InventoryViewType.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\ListingSearchTabs' => __DIR__ . '/../..' . '/elementor/inc/Widgets/ListingSearchTabs.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\ListingsCompare' => __DIR__ . '/../..' . '/elementor/inc/Widgets/ListingsCompare.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\ListingsGridTabs' => __DIR__ . '/../..' . '/elementor/inc/Widgets/ListingsGridTabs.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\LoginRegister' => __DIR__ . '/../..' . '/elementor/inc/Widgets/LoginRegister.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\PricingPlan' => __DIR__ . '/../..' . '/elementor/inc/Widgets/PricingPlan.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\SingleListing\\Classified\\ListingData' => __DIR__ . '/../..' . '/elementor/inc/Widgets/SingleListing/Classified/ListingData.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\SingleListing\\Classified\\Price' => __DIR__ . '/../..' . '/elementor/inc/Widgets/SingleListing/Classified/Price.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\SingleListing\\Classified\\Title' => __DIR__ . '/../..' . '/elementor/inc/Widgets/SingleListing/Classified/Title.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\SingleListing\\Classified\\UserDataSimple' => __DIR__ . '/../..' . '/elementor/inc/Widgets/SingleListing/Classified/UserDataSimple.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\SingleListing\\DealerEmail' => __DIR__ . '/../..' . '/elementor/inc/Widgets/SingleListing/DealerEmail.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\SingleListing\\DealerPhoneNumber' => __DIR__ . '/../..' . '/elementor/inc/Widgets/SingleListing/DealerPhoneNumber.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\SingleListing\\Features' => __DIR__ . '/../..' . '/elementor/inc/Widgets/SingleListing/Features.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\SingleListing\\Gallery' => __DIR__ . '/../..' . '/elementor/inc/Widgets/SingleListing/Gallery.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\SingleListing\\ListingDescription' => __DIR__ . '/../..' . '/elementor/inc/Widgets/SingleListing/ListingDescription.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\SingleListing\\OfferPriceButton' => __DIR__ . '/../..' . '/elementor/inc/Widgets/SingleListing/OfferPriceButton.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\SingleListing\\Similar' => __DIR__ . '/../..' . '/elementor/inc/Widgets/SingleListing/Similar.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\SingleListing\\Title' => __DIR__ . '/../..' . '/elementor/inc/Widgets/SingleListing/Title.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\WidgetBase' => __DIR__ . '/../..' . '/elementor/inc/Widgets/WidgetBase.php',
-        'Motors_Elementor_Widgets_Free\\Widgets\\WidgetManager\\MotorsWidgetsManagerFree' => __DIR__ . '/../..' . '/elementor/inc/Widgets/WidgetManager/MotorsWidgetsManagerFree.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

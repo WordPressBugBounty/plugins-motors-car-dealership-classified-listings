@@ -6,6 +6,8 @@
  * @subpackage Importer
  */
 
+use WPML\Collect\Support\Arr;
+
 /**
  * WordPress importer class.
  */

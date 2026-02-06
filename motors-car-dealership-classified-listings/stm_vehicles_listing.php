@@ -8,7 +8,7 @@
  * License: GNU General Public License v2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: stm_vehicles_listing
- * Version: 1.4.91
+ * Version: 1.4.103
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -50,7 +50,7 @@ if ( ! defined( 'STM_LISTINGS_PATH' ) ) {
 	define( 'STM_LISTINGS_URL', plugins_url( '', STM_LISTINGS_FILE ) );
 	define( 'STM_LISTINGS', 'stm_vehicles_listing' );
 	define( 'STM_THEME_V_NEED', '5.6.33' );
-	define( 'STM_LISTINGS_V', '1.4.91' );
+	define( 'STM_LISTINGS_V', '1.4.103' );
 	define( 'STM_LISTINGS_DB_VERSION', '1.0.0' );
 	define( 'STM_LISTINGS_IMAGES', STM_LISTINGS_URL . '/includes/admin/butterbean/images/' );
 }
@@ -61,7 +61,6 @@ if ( ! defined( 'MICRO_SERVICE_URL' ) ) {
 
 require_once STM_LISTINGS_PATH . '/vendor/autoload.php';
 
-use MotorsVehiclesListing\ListingManager\Bootstrap as ListingManagerBootstrap;
 use MotorsVehiclesListing\Addons\AddonsPage;
 use MotorsVehiclesListing\Addons\ProFeatures;
 use MotorsNuxy\MotorsNuxyHelpers;
@@ -82,7 +81,7 @@ use MotorsVehiclesListing\Plugin\MVL_Patcher;
 use MotorsVehiclesListing\Elementor\Nuxy\AddListingManager;
 use MotorsVehiclesListing\Elementor\Nuxy\FeaturesSettings;
 use MotorsVehiclesListing\Helper\ListingStats;
-use Motors_Elementor_Widgets_Free\MotorsElementorWidgetsFree;
+use MotorsElementorWidgetsFree\MotorsElementorWidgetsFree;
 
 add_action(
 	'plugins_loaded',
@@ -95,7 +94,7 @@ add_action(
 );
 
 if ( class_exists( 'MotorsVehiclesListing\ListingManager\Bootstrap' ) ) {
-	ListingManagerBootstrap::load();
+	MotorsVehiclesListing\ListingManager\Bootstrap::load();
 }
 
 if ( ! in_array( 'stm-motors-extends/stm-motors-extends.php', (array) get_option( 'active_plugins', array() ), true ) && defined( 'WPB_VC_VERSION' ) ) {
@@ -111,7 +110,7 @@ if ( class_exists( 'MotorsVehiclesListing\ListingMetaboxes' ) ) {
 	add_action(
 		'admin_init',
 		function () {
-			new ListingMetaboxes();
+			MotorsVehiclesListing\ListingMetaboxes::load();
 		}
 	);
 }
@@ -284,10 +283,12 @@ if ( file_exists( STM_LISTINGS_PATH . '/includes/notices.php' ) ) {
 add_action(
 	'plugins_loaded',
 	function () {
-		if ( apply_filters( 'is_mvl_pro', false ) && file_exists( STM_LISTINGS_PATH . '/includes/class/Features/email_template_manager/email_template_manager.php' ) ) {
-			require_once STM_LISTINGS_PATH . '/includes/class/Features/email_template_manager/email_template_manager.php';
-		} else {
-			require_once STM_LISTINGS_PATH . '/includes/email_templates/email_templates.php';
+		if ( stm_is_motors_theme() && ! is_mvl_pro() ) {
+			if ( apply_filters( 'is_mvl_pro', false ) && file_exists( STM_LISTINGS_PATH . '/includes/class/Features/email_template_manager/email_template_manager.php' ) ) {
+				require_once STM_LISTINGS_PATH . '/includes/class/Features/email_template_manager/email_template_manager.php';
+			} else {
+				require_once STM_LISTINGS_PATH . '/includes/email_templates/email_templates.php';
+			}
 		}
 	},
 	10

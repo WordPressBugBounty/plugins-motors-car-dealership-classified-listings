@@ -1,10 +1,10 @@
 <?php
 
-namespace Motors_Elementor_Widgets_Free\Widgets\SingleListing;
+namespace MotorsElementorWidgetsFree\Widgets\SingleListing;
 
-use Motors_Elementor_Widgets_Free\MotorsElementorWidgetsFree;
-use Motors_Elementor_Widgets_Free\Helpers\Helper;
-use Motors_Elementor_Widgets_Free\Widgets\WidgetBase;
+use MotorsElementorWidgetsFree\MotorsElementorWidgetsFree;
+use MotorsElementorWidgetsFree\Helpers\Helper;
+use MotorsElementorWidgetsFree\Widgets\WidgetBase;
 
 class DealerPhoneNumber extends WidgetBase {
 
@@ -134,6 +134,17 @@ class DealerPhoneNumber extends WidgetBase {
 		);
 
 		$this->add_control(
+			'dpn_show_number_text_color',
+			array(
+				'label'     => __( 'Show Number Text Color', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .stm-dealer-info-unit.phone .inner .stm-show-number' => 'color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_control(
 			'dpn_icon_color',
 			array(
 				'label'     => __( 'Icon Color', 'stm_vehicles_listing' ),
@@ -227,6 +238,17 @@ class DealerPhoneNumber extends WidgetBase {
 		);
 
 		$this->add_control(
+			'dpn_show_number_text_color_hover',
+			array(
+				'label'     => __( 'Show Number Text Color', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .stm-dealer-info-unit.phone .inner .stm-show-number:hover' => 'color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_control(
 			'dpn_icon_color_hover',
 			array(
 				'label'     => __( 'Icon Color', 'stm_vehicles_listing' ),
@@ -293,7 +315,6 @@ class DealerPhoneNumber extends WidgetBase {
 				'label'          => __( 'Label Typography', 'stm_vehicles_listing' ),
 				'separator'      => 'before',
 				'exclude'        => array(
-					'font_family',
 					'font_style',
 					'text_decoration',
 					'letter_spacing',
@@ -330,7 +351,6 @@ class DealerPhoneNumber extends WidgetBase {
 				'label'          => __( 'Number Typography', 'stm_vehicles_listing' ),
 				'separator'      => 'before',
 				'exclude'        => array(
-					'font_family',
 					'font_style',
 					'text_decoration',
 					'letter_spacing',
@@ -364,10 +384,9 @@ class DealerPhoneNumber extends WidgetBase {
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
 				'name'           => 'dpn_typography_show_number',
-				'label'          => __( 'Number Typography', 'stm_vehicles_listing' ),
+				'label'          => __( 'Show Number Typography', 'stm_vehicles_listing' ),
 				'separator'      => 'before',
 				'exclude'        => array(
-					'font_family',
 					'font_style',
 					'text_decoration',
 					'letter_spacing',

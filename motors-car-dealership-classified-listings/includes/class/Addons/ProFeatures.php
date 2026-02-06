@@ -5,7 +5,7 @@ namespace MotorsVehiclesListing\Addons;
 class ProFeatures {
 	public static function list() {
 		return array(
-			'inventory_skins'         => array(
+			'inventory_skins'        => array(
 				'name'          => esc_html__( 'Inventory Skins', 'stm_vehicles_listing' ),
 				'url'           => esc_url( STM_LISTINGS_URL . '/assets/pro-features/img/InventorySkins.png' ),
 				'settings'      => admin_url( 'admin.php?page=mvl_search_and_filter_settings' ),
@@ -13,9 +13,10 @@ class ProFeatures {
 				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro',
 				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/search-filter/search-filters#inventory-page-skins',
 				'img_url'       => 'inventory-skins',
-				'toggle'        => false,
+				'toggle'        => is_mvl_pro() ? false : true,
+				'tooltip'       => esc_html__( 'This feature is available in Pro version', 'stm_vehicles_listing' ),
 			),
-			'keyword-search'          => array(
+			'keyword-search'         => array(
 				'name'          => esc_html__( 'Keyword Search', 'stm_vehicles_listing' ),
 				'url'           => esc_url( STM_LISTINGS_URL . '/assets/pro-features/img/KeywordSearch.png' ),
 				'settings'      => admin_url( 'admin.php?page=mvl_search_and_filter_settings' ),
@@ -23,9 +24,10 @@ class ProFeatures {
 				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro',
 				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/search-filter/search-filters#search-by-keywords-pro-feature',
 				'img_url'       => 'keyword-search',
-				'toggle'        => false,
+				'toggle'        => is_mvl_pro() ? false : true,
+				'tooltip'       => esc_html__( 'This feature is available in Pro version', 'stm_vehicles_listing' ),
 			),
-			'filter-by-location'      => array(
+			'filter-by-location'     => array(
 				'name'          => esc_html__( 'Filter by Location', 'stm_vehicles_listing' ),
 				'url'           => esc_url( STM_LISTINGS_URL . '/assets/pro-features/img/FilterByLocation.png' ),
 				'settings'      => admin_url( 'admin.php?page=mvl_search_and_filter_settings' ),
@@ -33,9 +35,10 @@ class ProFeatures {
 				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro',
 				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/search-filter/search-filters#filter-by-location-pro-feature',
 				'img_url'       => 'filter-by-location',
-				'toggle'        => false,
+				'toggle'        => is_mvl_pro() ? false : true,
+				'tooltip'       => esc_html__( 'This feature is available in Pro version', 'stm_vehicles_listing' ),
 			),
-			'custom-fields-types'     => array(
+			'custom-fields-types'    => array(
 				'name'          => esc_html__( 'Custom Fields Types', 'stm_vehicles_listing' ),
 				'url'           => esc_url( STM_LISTINGS_URL . '/assets/pro-features/img/CustomFieldsTypes.png' ),
 				'settings'      => admin_url( 'admin.php?page=listing_categories' ),
@@ -43,9 +46,10 @@ class ProFeatures {
 				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro',
 				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/search-filter/custom-fields',
 				'img_url'       => 'custom-fields-types',
-				'toggle'        => false,
+				'toggle'        => is_mvl_pro() ? false : true,
+				'tooltip'       => esc_html__( 'This feature is available in Pro version', 'stm_vehicles_listing' ),
 			),
-			'listing-card-skins'      => array(
+			'listing-card-skins'     => array(
 				'name'          => esc_html__( 'Listing Card Skins', 'stm_vehicles_listing' ),
 				'url'           => esc_url( STM_LISTINGS_URL . '/assets/pro-features/img/ListingCardSkins.png' ),
 				'settings'      => admin_url( 'admin.php?page=mvl_search_results_settings&submenu=listing-info-card#listing_settings' ),
@@ -53,9 +57,10 @@ class ProFeatures {
 				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro',
 				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/search-filter/search-results-page/listing-info-card#info-card-skins',
 				'img_url'       => 'listing-card-skins',
-				'toggle'        => false,
+				'toggle'        => is_mvl_pro() ? false : true,
+				'tooltip'       => esc_html__( 'This feature is available in Pro version', 'stm_vehicles_listing' ),
 			),
-			'listing-templates'       => array(
+			'listing-templates'      => array(
 				'name'          => esc_html__( 'Listing Templates', 'stm_vehicles_listing' ),
 				'url'           => esc_url( STM_LISTINGS_URL . '/assets/pro-features/img/ListingTemplates.png' ),
 				'settings'      => admin_url( 'admin.php?page=mvl_single_listing_template_settings' ),
@@ -63,9 +68,10 @@ class ProFeatures {
 				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro',
 				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/single-listing/listing-templates',
 				'img_url'       => 'listing-templates',
-				'toggle'        => false,
+				'toggle'        => is_mvl_pro() ? false : true,
+				'tooltip'       => esc_html__( 'This feature is available in Pro version', 'stm_vehicles_listing' ),
 			),
-			'whatsapp-integration'    => array(
+			'whatsapp-integration'   => array(
 				'name'          => esc_html__( 'WhatsApp Integration', 'stm_vehicles_listing' ),
 				'url'           => esc_url( STM_LISTINGS_URL . '/assets/pro-features/img/WhatsappIntegration.png' ),
 				'settings'      => admin_url( 'admin.php?page=mvl_listing_details_settings&submenu=page-layout#single_listing' ),
@@ -73,9 +79,10 @@ class ProFeatures {
 				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro',
 				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/single-listing/listing-page-details/page-layout#whatsapp-contact-button-pro-feature',
 				'img_url'       => 'whatsapp-integration',
-				'toggle'        => false,
+				'toggle'        => is_mvl_pro() ? false : true,
+				'tooltip'       => esc_html__( 'This feature is available in Pro version', 'stm_vehicles_listing' ),
 			),
-			'loan-calculator'         => array(
+			'loan-calculator'        => array(
 				'name'          => esc_html__( 'Loan Calculator', 'stm_vehicles_listing' ),
 				'url'           => esc_url( STM_LISTINGS_URL . '/assets/pro-features/img/LoanCalculator.png' ),
 				'settings'      => admin_url( 'admin.php?page=mvl_listing_details_settings&submenu=page-layout#single_listing' ),
@@ -83,9 +90,10 @@ class ProFeatures {
 				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro',
 				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/single-listing/listing-page-details/loan-calculator-pro-feature',
 				'img_url'       => 'loan-calculator',
-				'toggle'        => false,
+				'toggle'        => is_mvl_pro() ? false : true,
+				'tooltip'       => esc_html__( 'This feature is available in Pro version', 'stm_vehicles_listing' ),
 			),
-			'seo-friendly-url'        => array(
+			'seo-friendly-url'       => array(
 				'name'          => esc_html__( 'SEO Friendly URL', 'stm_vehicles_listing' ),
 				'url'           => esc_url( STM_LISTINGS_URL . '/assets/pro-features/img/SeoFriendly.png' ),
 				'settings'      => admin_url( 'admin.php?page=mvl_search_results_settings' ),
@@ -93,9 +101,10 @@ class ProFeatures {
 				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro',
 				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/search-filter/search-results-page/general#seo-friendly-url-pro-feature',
 				'img_url'       => 'seo-friendly-url',
-				'toggle'        => false,
+				'toggle'        => is_mvl_pro() ? false : true,
+				'tooltip'       => esc_html__( 'This feature is available in Pro version', 'stm_vehicles_listing' ),
 			),
-			'image-sliding-on-hover'  => array(
+			'image-sliding-on-hover' => array(
 				'name'          => esc_html__( 'Image Sliding on Hover', 'stm_vehicles_listing' ),
 				'url'           => esc_url( STM_LISTINGS_URL . '/assets/pro-features/img/ImageSlidingOnHover.png' ),
 				'settings'      => admin_url( 'admin.php?page=mvl_search_results_settings' ),
@@ -103,9 +112,10 @@ class ProFeatures {
 				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro',
 				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/search-filter/search-results-page/general#image-sliding-on-hover-pro-feature',
 				'img_url'       => 'image-sliding-on-hover',
-				'toggle'        => false,
+				'toggle'        => is_mvl_pro() ? false : true,
+				'tooltip'       => esc_html__( 'This feature is available in Pro version', 'stm_vehicles_listing' ),
 			),
-			'sold-status'             => array(
+			'sold-status'            => array(
 				'name'          => esc_html__( 'Sold Status For Listings', 'stm_vehicles_listing' ),
 				'url'           => esc_url( STM_LISTINGS_URL . '/assets/pro-features/img/SoldStatus.png' ),
 				'settings'      => admin_url( 'admin.php?page=mvl_search_results_settings' ),
@@ -113,9 +123,10 @@ class ProFeatures {
 				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro',
 				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/search-filter/search-results-page/general#sold-status-for-vehicles-pro-feature',
 				'img_url'       => 'sold-status',
-				'toggle'        => false,
+				'toggle'        => is_mvl_pro() ? false : true,
+				'tooltip'       => esc_html__( 'This feature is available in Pro version', 'stm_vehicles_listing' ),
 			),
-			'multiple-currencies'     => array(
+			'multiple-currencies'    => array(
 				'name'          => esc_html__( 'Multiple Currencies', 'stm_vehicles_listing' ),
 				'url'           => esc_url( STM_LISTINGS_URL . '/assets/pro-features/img/MultipleCurrencies.png' ),
 				'settings'      => admin_url( 'admin.php?page=mvl_search_results_settings&submenu=currency#listing_settings' ),
@@ -123,9 +134,10 @@ class ProFeatures {
 				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro',
 				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/search-filter/search-results-page/currency',
 				'img_url'       => 'multiple-currencies',
-				'toggle'        => false,
+				'toggle'        => is_mvl_pro() ? false : true,
+				'tooltip'       => esc_html__( 'This feature is available in Pro version', 'stm_vehicles_listing' ),
 			),
-			'dealer-role'             => array(
+			'dealer-role'            => array(
 				'name'          => esc_html__( 'Dealer Role', 'stm_vehicles_listing' ),
 				'url'           => esc_url( STM_LISTINGS_URL . '/assets/pro-features/img/DealerRole.png' ),
 				'settings'      => admin_url( 'admin.php?page=mvl_plugin_settings&submenu=dealer#profile' ),
@@ -133,9 +145,10 @@ class ProFeatures {
 				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro',
 				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/motors-plugin-settings/profile/dealer-pro-feature',
 				'img_url'       => 'dealer-role',
-				'toggle'        => false,
+				'toggle'        => is_mvl_pro() ? false : true,
+				'tooltip'       => esc_html__( 'This feature is available in Pro version', 'stm_vehicles_listing' ),
 			),
-			'google-maps'             => array(
+			'google-maps'            => array(
 				'name'          => esc_html__( 'Google Maps', 'stm_vehicles_listing' ),
 				'url'           => esc_url( STM_LISTINGS_URL . '/assets/pro-features/img/GoogleMaps.png' ),
 				'settings'      => admin_url( 'admin.php?page=mvl_plugin_settings&submenu=google-maps#google_services_tab' ),
@@ -143,9 +156,10 @@ class ProFeatures {
 				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro',
 				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/motors-plugin-settings/google-services/google-maps-pro-feature',
 				'img_url'       => 'google-maps',
-				'toggle'        => false,
+				'toggle'        => is_mvl_pro() ? false : true,
+				'tooltip'       => esc_html__( 'This feature is available in Pro version', 'stm_vehicles_listing' ),
 			),
-			'paid-featured-listings'  => array(
+			'paid-featured-listings' => array(
 				'name'          => esc_html__( 'Paid Featured Listings', 'stm_vehicles_listing' ),
 				'url'           => esc_url( STM_LISTINGS_URL . '/assets/pro-features/img/PaidFeaturedListings.png' ),
 				'settings'      => admin_url( 'admin.php?page=mvl_plugin_settings&submenu=monetization#monetization' ),
@@ -153,9 +167,10 @@ class ProFeatures {
 				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro',
 				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/motors-plugin-settings/monetization-pro-feature',
 				'img_url'       => 'paid-featured-listings',
-				'toggle'        => false,
+				'toggle'        => is_mvl_pro() ? false : true,
+				'tooltip'       => esc_html__( 'This feature is available in Pro version', 'stm_vehicles_listing' ),
 			),
-			'pay-per-submit'          => array(
+			'pay-per-submit'         => array(
 				'name'          => esc_html__( 'Pay Per Submit', 'stm_vehicles_listing' ),
 				'url'           => esc_url( STM_LISTINGS_URL . '/assets/pro-features/img/PayPerSubmit.png' ),
 				'settings'      => admin_url( 'admin.php?page=mvl_plugin_settings&submenu=monetization#monetization' ),
@@ -163,9 +178,10 @@ class ProFeatures {
 				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro',
 				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/motors-plugin-settings/monetization-pro-feature',
 				'img_url'       => 'pay-per-submit',
-				'toggle'        => false,
+				'toggle'        => is_mvl_pro() ? false : true,
+				'tooltip'       => esc_html__( 'This feature is available in Pro version', 'stm_vehicles_listing' ),
 			),
-			'sell-a-listing-online'   => array(
+			'sell-a-listing-online'  => array(
 				'name'          => esc_html__( 'Sell A Listing Online', 'stm_vehicles_listing' ),
 				'url'           => esc_url( STM_LISTINGS_URL . '/assets/pro-features/img/SellListingOnline.png' ),
 				'settings'      => admin_url( 'admin.php?page=mvl_plugin_settings&submenu=monetization#monetization' ),
@@ -173,17 +189,8 @@ class ProFeatures {
 				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro',
 				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/motors-plugin-settings/monetization-pro-feature',
 				'img_url'       => 'sell-a-listing-online',
-				'toggle'        => false,
-			),
-			'email-templates-manager' => array(
-				'name'          => esc_html__( 'Email Templates Manager', 'stm_vehicles_listing' ),
-				'url'           => esc_url( STM_LISTINGS_URL . '/assets/pro-features/img/EmailTemplatesManager.png' ),
-				'settings'      => admin_url( 'admin.php?page=email-template-manager' ),
-				'description'   => esc_html__( 'Customize all your email notifications with a drag-and-drop email template builder.', 'stm_vehicles_listing' ),
-				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro',
-				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/additional-features/email-template-manager',
-				'img_url'       => 'email-templates-manager',
-				'toggle'        => false,
+				'toggle'        => is_mvl_pro() ? false : true,
+				'tooltip'       => esc_html__( 'This feature is available in Pro version', 'stm_vehicles_listing' ),
 			),
 		);
 	}

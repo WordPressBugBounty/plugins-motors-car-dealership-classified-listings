@@ -76,7 +76,7 @@
 		<?php endif; ?>
 		<?php
 		foreach ( $templates as $template ) :
-			$activated_demo = get_option( 'mvl_motors_starter_demo_activated' );
+			$activated_demo = motors_get_skin_name();
 			$active_builder = get_option( 'mst-starter-theme-builder' );
 
 			$is_installed = ( $activated_demo === $template['slug'] ) || ( empty( $activated_demo ) && 'Starter' === $template['title'] && $active_builder === $template['old_builder'] );
@@ -99,7 +99,7 @@
 						<?php endif; ?>
 						<?php if ( ( 'Pro' === $template['status'] && apply_filters( 'is_mvl_pro', false ) && 'pending' !== $template['demo_status'] ) || 'Free' === $template['status'] ) : ?>
 							<div class="mst-status-btns-container">
-								<div class="mst-starter-wizard__button mst-starter-wizard__button-continue <?php echo ( ! empty( get_option( 'mvl_motors_starter_demo_activated' ) ) ) ? 'demo-activated' : ''; ?>"
+								<div class="mst-starter-wizard__button mst-starter-wizard__button-continue <?php echo ( $activated_demo ) ? 'demo-activated' : ''; ?>"
 									data-template="<?php echo esc_attr( 'plugins' ); ?>"
 									data-builder="<?php echo esc_attr( $template['builder'] ); ?>"
 									data-demo="<?php echo esc_attr( $template['slug'] ); ?>">

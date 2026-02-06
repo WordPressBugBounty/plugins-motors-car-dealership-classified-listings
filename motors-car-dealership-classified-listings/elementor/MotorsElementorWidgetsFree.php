@@ -1,11 +1,9 @@
 <?php
+namespace MotorsElementorWidgetsFree;
 
-namespace Motors_Elementor_Widgets_Free;
-
-use \Elementor\Plugin;
-use Motors_Elementor_Widgets_Free\Helpers\RegisterActions;
-
-use Motors_Elementor_Widgets_Free\Widgets\WidgetManager\MotorsWidgetsManagerFree;
+use Elementor\Plugin;
+use MotorsElementorWidgetsFree\Helpers\RegisterActions;
+use MotorsElementorWidgetsFree\Widgets\WidgetManager\MotorsWidgetsManagerFree;
 
 
 class MotorsElementorWidgetsFree {
@@ -18,8 +16,7 @@ class MotorsElementorWidgetsFree {
 	const WIDGET_CATEGORY_HEADER_FOOTER       = 'motors_header_footer';
 	const WIDGET_CATEGORY_TITLE_HEADER_FOOTER = 'Motors Header Footer';
 	const STM_PREFIX                          = 'motors';
-
-	private static $widgets = array();
+	private static $widgets                   = array();
 
 	private $modal;
 
@@ -63,7 +60,7 @@ class MotorsElementorWidgetsFree {
 				'displayPrefix' => 'motors-icons',
 				'labelIcon'     => 'motors-icons-star',
 				'ver'           => '1.0',
-				'fetchJson'     => STM_LISTINGS_URL . '/assets/fonts/motors/selection-fetch.json',
+				'fetchJson'     => STM_LISTINGS_URL . '/assets/fonts/motors/elementor-fetch.json',
 				'native'        => true,
 			);
 		}

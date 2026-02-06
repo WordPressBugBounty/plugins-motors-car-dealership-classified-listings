@@ -54,7 +54,11 @@ if ( ! empty( $user_added_by ) ) :
 
 				// replace privacy policy consent label
 				if(jQuery('#<?php echo esc_js( $unique_id ); ?> .consent .wpcf7-list-item-label').length > 0) {
-					var consent_link = 'I accept the <a href="<?php echo ( get_privacy_policy_url() ) ? esc_url( get_privacy_policy_url() ) : '#'; ?>" target="_blank">privacy policy</a>';
+					<?php
+					$text   = esc_html__( 'I accept the', 'stm_vehicles_listing' );
+					$policy = esc_html__( 'privacy policy', 'stm_vehicles_listing' );
+					?>
+					var consent_link = '<?php echo esc_html( $text ); ?> <a href="<?php echo ( get_privacy_policy_url() ) ? esc_url( get_privacy_policy_url() ) : '#'; ?>" target="_blank"><?php echo esc_html( $policy ); ?></a>';
 					jQuery('#<?php echo esc_js( $unique_id ); ?> .consent .wpcf7-list-item-label').html(consent_link);
 				}
 			});

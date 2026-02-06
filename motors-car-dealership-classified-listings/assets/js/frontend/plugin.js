@@ -230,7 +230,7 @@
 					$('.stm-gallery-action-unit.compare').addClass('active')
 					$this.addClass('active stm-added')
 					$this.attr('data-action', 'remove')
-					if ( $this.data('view') !== 'grid' ) {
+					if ($this.data('view') !== 'grid') {
 						$this.html('<i class="motors-icons-scales-ico"></i> ' + stm_i18n.remove_from_compare)
 					}
 					$this.attr('title', stm_i18n.stm_label_remove)
@@ -272,7 +272,7 @@
 
 				$this.attr('title', stm_i18n.stm_label_add)
 				$this.attr('data-action', 'add')
-				if ( $this.data('view') !== 'grid' ) {
+				if ($this.data('view') !== 'grid') {
 					$this.html('<i class="motors-icons-scales-ico"></i> ' + stm_i18n.add_to_compare)
 				}
 
@@ -516,17 +516,6 @@
 		})
 	}
 
-	window.stm_test_drive_car_title = function (id, title) {
-		var $ = jQuery;
-
-		$('.test-drive-car-name').text(title);
-		$('input[name=vehicle_id]').val(id);
-		$('input[name=vehicle_name]').val(title);
-		$('.modal-body-fields').removeClass('hidden');
-		$('#request-test-drive-form').find('.alert-modal').remove();
-		$('#request-test-drive-form').find('.form-error').removeClass('form-error');
-	}
-
 	let shareTimer;
 
 	$('.stm-a2a-popup').closest('.stm-gallery-action-unit').on({
@@ -583,7 +572,7 @@ function updateGridItemTitles() {
 
 jQuery('[data-toggle="tooltip"]').tooltip({
 	trigger: 'hover',
-	placement: function() {
+	placement: function () {
 		return jQuery(this).data('placement');
 	},
 	html: true,

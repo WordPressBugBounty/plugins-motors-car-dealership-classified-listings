@@ -1,10 +1,10 @@
 <?php
 
-namespace Motors_Elementor_Widgets_Free\Widgets\SingleListing\Classified;
+namespace MotorsElementorWidgetsFree\Widgets\SingleListing\Classified;
 
-use Motors_Elementor_Widgets_Free\MotorsElementorWidgetsFree;
-use Motors_Elementor_Widgets_Free\Helpers\Helper;
-use Motors_Elementor_Widgets_Free\Widgets\WidgetBase;
+use MotorsElementorWidgetsFree\MotorsElementorWidgetsFree;
+use MotorsElementorWidgetsFree\Helpers\Helper;
+use MotorsElementorWidgetsFree\Widgets\WidgetBase;
 
 class UserDataSimple extends WidgetBase {
 
@@ -145,6 +145,74 @@ class UserDataSimple extends WidgetBase {
 				'default'     => '#888888',
 				'selectors'   => array(
 					'{{WRAPPER}} .stm-listing-car-dealer-info-simple .dealer-rating .stm-rate-sum' => 'color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'ud_user_role_margin',
+			array(
+				'label'     => __( 'User Role Margin', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors' => array(
+					'{{WRAPPER}} .stm-listing-car-dealer-info-simple.stm-common-user .stm-user-main-info-c a .stm-label' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'uds_user_avatar_size',
+			array(
+				'label'     => esc_html__( 'User Avatar Size', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::SLIDER,
+				'units'     => array(
+					'px',
+				),
+				'range'     => array(
+					'px' => array(
+						'min'  => 1,
+						'max'  => 70,
+						'step' => 1,
+					),
+				),
+				'selectors' => array(
+					'
+					{{WRAPPER}} .stm-listing-car-dealer-info-simple.stm-common-user .stm-user-main-info-c .image .no-avatar,
+					{{WRAPPER}} .stm-listing-car-dealer-info-simple.stm-common-user .stm-user-main-info-c .image
+					' => 'width: {{SIZE}}px; height: {{SIZE}}px;',
+					'{{WRAPPER}} .stm-listing-car-dealer-info-simple.stm-common-user .stm-user-main-info-c .image .no-avatar' => 'display: flex; align-items: center; justify-content: center;',
+				),
+			)
+		);
+
+		$this->add_control(
+			'uds_user_avatar_icon_size',
+			array(
+				'label'     => esc_html__( 'User No Avatar Icon Size', 'motors-car-dealership-classified-listings-pro' ),
+				'type'      => \Elementor\Controls_Manager::SLIDER,
+				'units'     => array(
+					'px',
+				),
+				'range'     => array(
+					'px' => array(
+						'min'  => 1,
+						'max'  => 70,
+						'step' => 1,
+					),
+				),
+				'selectors' => array(
+					'{{WRAPPER}} .stm-listing-car-dealer-info.stm-common-user .stm-user-main-info-c .image .no-avatar i' => 'font-size: {{SIZE}}px;',
+				),
+			)
+		);
+
+		$this->add_control(
+			'uds_user_block_padding',
+			array(
+				'label'     => __( 'Block Padding', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors' => array(
+					'{{WRAPPER}} .stm-listing-car-dealer-info-simple' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);

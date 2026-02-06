@@ -6,7 +6,8 @@
 		"psr-4": {
 			"MotorsVehiclesListing\\": "includes/class/",
 			"MotorsNuxy\\": "includes/nuxy/",
-			"Motors_Elementor_Widgets_Free\\": "elementor/inc"
+			"MotorsElementorWidgetsFree\\": "elementor/inc",
+			"MotorsVehiclesListing\\MagicKit\\": "magic-kit"
 		}
 	},
 	"config": {

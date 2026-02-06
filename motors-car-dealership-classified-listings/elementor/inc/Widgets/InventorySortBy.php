@@ -1,11 +1,11 @@
 <?php
 
-namespace Motors_Elementor_Widgets_Free\Widgets;
+namespace MotorsElementorWidgetsFree\Widgets;
 
-use Motors_Elementor_Widgets_Free\MotorsElementorWidgetsFree;
-use Motors_Elementor_Widgets_Free\Helpers\Helper;
-use Motors_Elementor_Widgets_Free\Widgets\Controls\ContentControls\HeadingControl;
-use Motors_Elementor_Widgets_Free\Widgets\WidgetBase;
+use MotorsElementorWidgetsFree\MotorsElementorWidgetsFree;
+use MotorsElementorWidgetsFree\Helpers\Helper;
+use MotorsElementorWidgetsFree\Widgets\Controls\ContentControls\HeadingControl;
+use MotorsElementorWidgetsFree\Widgets\WidgetBase;
 use MotorsVehiclesListing\Plugin\MVL_Const;
 
 class InventorySortBy extends WidgetBase {

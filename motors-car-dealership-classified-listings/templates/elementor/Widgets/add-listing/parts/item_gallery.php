@@ -88,7 +88,7 @@ if ( ! empty( $jsonMultiPlanImgLimit ) ) {
 		<div class="stm-media-car-gallery clearfix">
 			<?php
 			if ( empty( $item_id ) ) :
-				Motors_Elementor_Widgets_Free\Helpers\Helper::stm_ew_load_template(
+				MotorsElementorWidgetsFree\Helpers\Helper::stm_ew_load_template(
 					'elementor/Widgets/add-listing/parts/image-gallery',
 					STM_LISTINGS_PATH
 				);
@@ -117,7 +117,7 @@ if ( ! empty( $jsonMultiPlanImgLimit ) ) {
 
 						$images_js[] = intval( $gallery_id );
 
-						Motors_Elementor_Widgets_Free\Helpers\Helper::stm_ew_load_template(
+						MotorsElementorWidgetsFree\Helpers\Helper::stm_ew_load_template(
 							'elementor/Widgets/add-listing/parts/image-gallery',
 							STM_LISTINGS_PATH,
 							array(
@@ -130,7 +130,7 @@ if ( ! empty( $jsonMultiPlanImgLimit ) ) {
 					endforeach;
 				endif;
 
-				Motors_Elementor_Widgets_Free\Helpers\Helper::stm_ew_load_template(
+				MotorsElementorWidgetsFree\Helpers\Helper::stm_ew_load_template(
 					'elementor/Widgets/add-listing/parts/image-gallery',
 					STM_LISTINGS_PATH
 				);

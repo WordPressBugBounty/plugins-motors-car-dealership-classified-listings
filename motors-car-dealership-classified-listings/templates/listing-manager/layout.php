@@ -103,7 +103,9 @@ if ( $ymmt || $vin ) {
 						</div>
 						<div class="mvl-listing-manager-content-body">
 							<div class="mvl-listing-manager-content-body-inner">
-								<?php foreach ( apply_filters( 'mvl_listing_manager_pages', array() ) as $listing_manager_page ) : ?>
+								<?php
+								foreach ( apply_filters( 'mvl_listing_manager_pages', array() ) as $listing_manager_page ) :
+									?>
 									<div class="mvl-listing-manager-content-body-page <?php echo $listing_manager_page->is_active() ? 'active ' : ''; ?><?php echo esc_attr( $listing_manager_page->get_id() ); ?>"  data-pageid="<?php echo esc_attr( $listing_manager_page->get_id() ); ?>">
 										<?php $listing_manager_page->render(); ?>
 									</div>

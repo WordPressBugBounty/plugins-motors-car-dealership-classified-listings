@@ -29,50 +29,50 @@ if (typeof (STMListings) == 'undefined') {
             badgeWrapper.hide()
             $('.search-results-actions-result').hide()
         }
-        
+
     };
 
-	Filter.prototype.getFormParams = function () {
-		let url = new URL( $( this.form ).attr( 'action' ) );
-		let currentUrl = new URL(window.location.href);
-		let viewType = currentUrl.searchParams.get('view_type');
-		
-		if (viewType) {
-			url.searchParams.delete('view_type');
-		}
+    Filter.prototype.getFormParams = function () {
+        let url = new URL($(this.form).attr('action'));
+        let currentUrl = new URL(window.location.href);
+        let viewType = currentUrl.searchParams.get('view_type');
 
-		$.each(
-			$( this.form ).serializeArray(),
-			function (i, field) {
-				if ( field.value !== '' ) {
-					if ( ['stm_lat', 'stm_lng'].includes( field.name ) ) {
-						if ( field.value !== 0 ) {
-							url.searchParams.append( field.name, field.value );
-						}
-					} else {
-						url.searchParams.append( field.name, field.value );
-					}
-				}
-			}
-		);
+        if (viewType) {
+            url.searchParams.delete('view_type');
+        }
 
-		if (viewType) {
-			url.searchParams.append('view_type', viewType);
-		}
+        $.each(
+            $(this.form).serializeArray(),
+            function (i, field) {
+                if (field.value !== '') {
+                    if (['stm_lat', 'stm_lng'].includes(field.name)) {
+                        if (field.value !== 0) {
+                            url.searchParams.append(field.name, field.value);
+                        }
+                    } else {
+                        url.searchParams.append(field.name, field.value);
+                    }
+                }
+            }
+        );
 
-		return url;
-	};
+        if (viewType) {
+            url.searchParams.append('view_type', viewType);
+        }
+
+        return url;
+    };
 
     Filter.prototype.submit = function (event) {
-		event.preventDefault();
-		if ( typeof stm_elementor_editor_mode === "undefined" ) {
-			this.performAjax( this.getFormParams() );
-		}
-	};
+        event.preventDefault();
+        if (typeof stm_elementor_editor_mode === "undefined") {
+            this.performAjax(this.getFormParams());
+        }
+    };
 
     Filter.prototype.paginationClick = function (event) {
         event.preventDefault();
-        let url = new URL( $(event.target).closest('a').attr('href') );
+        let url = new URL($(event.target).closest('a').attr('href'));
 
         url.searchParams.set('security', stm_security_nonce);
         this.performAjax(url.toString());
@@ -86,28 +86,32 @@ if (typeof (STMListings) == 'undefined') {
     };
 
     Filter.prototype.performAjax = function (url) {
-			var custom_img_size = $('#listings-result').data('custom-img-size')
-			$.ajax({
-				url: url,
-				dataType: 'json',
-				context: this,
-				type: 'POST',
-				data: {
-					ajax_action: this.ajax_action,
-					custom_img_size: custom_img_size,
-				},
-				beforeSend: this.ajaxBefore,
-				success: this.ajaxSuccess,
-				complete: this.ajaxComplete,
-			})
-		}
+        var custom_img_size = $('#listings-result').data('custom-img-size')
+        var listings_grid_view_skin = $('#listings-result').data('listings-grid-view-skin')
+        var listings_list_view_skin = $('#listings-result').data('listings-list-view-skin')
+        $.ajax({
+            url: url,
+            dataType: 'json',
+            context: this,
+            type: 'POST',
+            data: {
+                ajax_action: this.ajax_action,
+                custom_img_size: custom_img_size,
+                listings_grid_view_skin: listings_grid_view_skin,
+                listings_list_view_skin: listings_list_view_skin,
+            },
+            beforeSend: this.ajaxBefore,
+            success: this.ajaxSuccess,
+            complete: this.ajaxComplete,
+        })
+    }
 
     Filter.prototype.ajaxBefore = function () {
         this.getTarget().addClass('stm-loading');
     };
 
     Filter.prototype.ajaxSuccess = function (res) {
-        if( res.total == 0 || ( typeof items_per_page != 'undefined' && res.total <= items_per_page ) ) {
+        if (res.total == 0 || (typeof items_per_page != 'undefined' && res.total <= items_per_page)) {
             $('.stm-inventory-items-per-page-wrap').hide();
         } else {
             $('.stm-inventory-items-per-page-wrap').show();
@@ -129,9 +133,9 @@ if (typeof (STMListings) == 'undefined') {
         this.getTarget().removeClass('stm-loading');
 
         $('.car-title').each(function () {
-			let $title  = $( this ),
-				maxChar = parseInt( $title.attr( 'data-max-char' ) ),
-				$labels = $title.find( '.labels' );
+            let $title = $(this),
+                maxChar = parseInt($title.attr('data-max-char')),
+                $labels = $title.find('.labels');
 
             if ($labels.length > 0 && ($(this).text().length > maxChar)) {
                 let originalLabels = $labels.clone();
@@ -161,13 +165,28 @@ if (typeof (STMListings) == 'undefined') {
     Filter.prototype.disableOptions = function (res) {
         if (typeof res.options != 'undefined') {
             $.each(res.options, function (key, options) {
-                $('select[name=' + key + '] > option', this.form).each(function () {
+                var selector = 'select[name=' + key + ']';
+
+                if (typeof res.filters !== 'undefined' && typeof res.filters[key] === "object" && res.filters[key].is_multiple_select) {
+                    selector = 'select[name="' + key + '[]"]';
+                }
+
+                $(selector + ' > option', this.form).each(function () {
                     var slug = $(this).val();
                     if (options.hasOwnProperty(slug)) {
                         $(this).prop('disabled', options[slug].disabled);
+                        $(this).data('base-disabled', options[slug].disabled ? 1 : 0);
+                    } else {
+                        // When backend doesn't return a slug, reset to enabled.
+                        $(this).prop('disabled', false);
+                        $(this).data('base-disabled', 0);
                     }
                 });
             });
+        }
+
+        if (typeof STMListings.applyParentDependencies === 'function') {
+            STMListings.applyParentDependencies(this.form);
         }
     };
 
@@ -250,291 +269,348 @@ if (typeof (STMListings) == 'undefined') {
         });
     });
 
-	// swipe events using vanilla js
-	var  SwipeEvent  = (function () {
-		function  SwipeEvent(element) {
-			this.xDown  =  null;
-			this.yDown  =  null;
-			this.element  =  typeof (element) === 'string' ? document.querySelector(element) : element;
-			this.element.addEventListener('touchstart', function (evt) {
-				this.xDown  =  evt.touches[0].clientX;
-				this.yDown  =  evt.touches[0].clientY;
-			}.bind(this), false);
-		}
+    // swipe events using vanilla js
+    var SwipeEvent = (function () {
+        function SwipeEvent(element) {
+            this.xDown = null;
+            this.yDown = null;
+            this.element = typeof (element) === 'string' ? document.querySelector(element) : element;
+            this.element.addEventListener('touchstart', function (evt) {
+                this.xDown = evt.touches[0].clientX;
+                this.yDown = evt.touches[0].clientY;
+            }.bind(this), false);
+        }
 
-		SwipeEvent.prototype.onLeft  =  function (callback) {
-			this.onLeft  =  callback;
-			return this;
-		};
-		SwipeEvent.prototype.onRight  =  function (callback) {
-			this.onRight  =  callback;
-			return this;
-		};
-		SwipeEvent.prototype.onUp  =  function (callback) {
-			this.onUp  =  callback;
-			return this;
-		};
-		SwipeEvent.prototype.onDown  =  function (callback) {
-			this.onDown  =  callback;
-			return this;
-		};
+        SwipeEvent.prototype.onLeft = function (callback) {
+            this.onLeft = callback;
+            return this;
+        };
+        SwipeEvent.prototype.onRight = function (callback) {
+            this.onRight = callback;
+            return this;
+        };
+        SwipeEvent.prototype.onUp = function (callback) {
+            this.onUp = callback;
+            return this;
+        };
+        SwipeEvent.prototype.onDown = function (callback) {
+            this.onDown = callback;
+            return this;
+        };
 
-		SwipeEvent.prototype.handleTouchMove  =  function (evt) {
-			if (!this.xDown  ||  !this.yDown) {
-				return;
-			}
-			var  xUp  =  evt.touches[0].clientX;
-			var  yUp  =  evt.touches[0].clientY;
-			this.xDiff  = this.xDown  -  xUp;
-			this.yDiff  = this.yDown  -  yUp;
+        SwipeEvent.prototype.handleTouchMove = function (evt) {
+            if (!this.xDown || !this.yDown) {
+                return;
+            }
+            var xUp = evt.touches[0].clientX;
+            var yUp = evt.touches[0].clientY;
+            this.xDiff = this.xDown - xUp;
+            this.yDiff = this.yDown - yUp;
 
-			if (Math.abs(this.xDiff) !==  0) {
-				if (this.xDiff  >  2) {
-					typeof (this.onLeft) ===  "function"  && this.onLeft();
-				} else  if (this.xDiff  <  -2) {
-					typeof (this.onRight) ===  "function"  && this.onRight();
-				}
-			}
+            if (Math.abs(this.xDiff) !== 0) {
+                if (this.xDiff > 2) {
+                    typeof (this.onLeft) === "function" && this.onLeft();
+                } else if (this.xDiff < -2) {
+                    typeof (this.onRight) === "function" && this.onRight();
+                }
+            }
 
-			if (Math.abs(this.yDiff) !==  0) {
-				if (this.yDiff  >  2) {
-					typeof (this.onUp) ===  "function"  && this.onUp();
-				} else  if (this.yDiff  <  -2) {
-					typeof (this.onDown) ===  "function"  && this.onDown();
-				}
-			}
-			// Reset values.
-			this.xDown  =  null;
-			this.yDown  =  null;
-		};
+            if (Math.abs(this.yDiff) !== 0) {
+                if (this.yDiff > 2) {
+                    typeof (this.onUp) === "function" && this.onUp();
+                } else if (this.yDiff < -2) {
+                    typeof (this.onDown) === "function" && this.onDown();
+                }
+            }
+            // Reset values.
+            this.xDown = null;
+            this.yDown = null;
+        };
 
-		SwipeEvent.prototype.run  =  function () {
-			this.element.addEventListener('touchmove', function (evt) {
-				this.handleTouchMove(evt);
-			}.bind(this), false);
-		};
+        SwipeEvent.prototype.run = function () {
+            this.element.addEventListener('touchmove', function (evt) {
+                this.handleTouchMove(evt);
+            }.bind(this), false);
+        };
 
-		return  SwipeEvent;
-	}());
+        return SwipeEvent;
+    }());
 
-	STMListings.clean_select_child_if_parent_changed = function( changed_item ) {
-		let list = $('#stm_parent_slug_list');
-		if ( 0 === list.length ) {
-			return;
-		}
-		let stm_parent_slug_list = list.attr('data-value');
-		let name                 = changed_item.attr('name');
-		if ( $( changed_item ).length && name && name.length > 0 ) {
-			let name = changed_item.attr('name').replace(/[\[\]']+/g,'');
+    STMListings.clean_select_child_if_parent_changed = function (changed_item) {
+        let list = $('#stm_parent_slug_list');
+        if (0 === list.length) {
+            return;
+        }
+        let stm_parent_slug_list = list.attr('data-value');
+        let name = changed_item.attr('name');
+        if ($(changed_item).length && name && name.length > 0) {
+            let name = changed_item.attr('name').replace(/[\[\]']+/g, '');
 
-			if ( stm_parent_slug_list && stm_parent_slug_list.split(',').includes( name ) ) {
-				var child_select = $('.filter-select option[data-parent="' + name + '"]').parent();
-				child_select.val('');
-			}
-		}
-	}
+            if (stm_parent_slug_list && stm_parent_slug_list.split(',').includes(name)) {
+                var child_select = $('.filter-select option[data-parent="' + name + '"]').parent();
+                child_select.each(function () {
+                    var $select = $(this);
+                    if ($select.prop('multiple')) {
+                        $select.val(null);
+                    } else {
+                        $select.val('');
+                    }
+                    $select.trigger('change');
+                });
+            }
+        }
+    }
 
-	STMListings.stm_disable_rest_filters = function ($_this, action, tabs_filter) {
-		var $_form = $_this.closest( 'form' );
+    STMListings.applyParentDependencies = function (form) {
+        var $forms = form ? $(form) : $('form[data-trigger=filter]');
+        $forms.each(function () {
+            var $form = $(this);
+            $form.find('select').each(function () {
+                var $select = $(this);
+                var $firstOption = $select.find('option[data-parent]').first();
+                var parentSlug = $firstOption.data('parent');
 
-		var data = [],
-				url  = $_form.attr( 'action' ),
-				sign = url.indexOf( '?' ) < 0 ? '?' : '&';
+                if (!parentSlug) {
+                    return;
+                }
 
-		$.each(
-				$_form.serializeArray(),
-				function (i, field) {
-					if (field.value != '') {
-						data.push( field.name + '=' + field.value )
-					}
-				}
-		);
+                var $parent = $form.find('select[name="' + parentSlug + '"], select[name="' + parentSlug + '[]"]');
+                if (!$parent.length) {
+                    return;
+                }
 
-		url = url + sign + data.join( '&' );
+                var parentValues = $parent.val();
+                if (parentValues && !Array.isArray(parentValues)) {
+                    parentValues = [parentValues];
+                }
+                parentValues = parentValues ? parentValues.filter(Boolean) : [];
 
-		$.ajax(
-				{
-					url: url,
-					dataType: 'json',
-					context: this,
-					data: '&ajax_action=' + action + '&security=' + stm_security_nonce,
-					beforeSend: function () {
-						if (action == 'listings-items') {
-							$( '.stm-ajax-row' ).addClass( 'stm-loading' );
-						} else {
-							$( '.classic-filter-row .filter-sidebar .select2-container--default .select2-selection--single .select2-selection__arrow b' ).addClass( 'stm-preloader' );
-							$( '.mobile-search-filter .filter-sidebar .select2-container--default .select2-selection--single .select2-selection__arrow b' ).addClass( 'stm-preloader' );
-							$( '.mobile-search-filter .filter-sidebar .select2-container--default .selection' ).addClass( 'stm-overlay' );
-							$( '.search-filter-form .filter-sidebar .select2-container--default .selection' ).addClass( 'stm-overlay' );
-							$( '.stm-listing-directory-total-matches' ).hide();
-						}
-					},
-					success: function (res) {
-						if (action == 'listings-items') {
-							$( '.stm-ajax-row' ).removeClass( 'stm-loading' );
-							$( '#listings-result' ).html( res.html );
-							if( res.total == 0 || ( typeof items_per_page != 'undefined' && res.total <= items_per_page ) ) {
-							    $('.stm-inventory-items-per-page-wrap').hide();
-                            }
-							$( "img.lazy" ).lazyload();
-							$( '.stm-tooltip-link, div[data-toggle="tooltip"]' ).tooltip();
-							window.history.pushState( '', '', decodeURI( url ) );
-						} else {
-							/*Remove select preloaders*/
-							$( '.classic-filter-row .filter-sidebar .select2-container--default .select2-selection--single .select2-selection__arrow b' ).removeClass( 'stm-preloader' );
-							$( '.classic-filter-row .filter-sidebar select' ).prop( "disabled", false );
-							/*Disable options*/
-							if (typeof res.options != 'undefined') {
-								$.each(
-										res.options,
-										function (key, options) {
-											$( 'select[name=' + key + '] > option', $_form ).each(
-													function () {
-														var slug = $( this ).val();
-														if (options.hasOwnProperty( slug )) {
-															$( this ).prop( 'disabled', options[slug].disabled );
-														}
-													}
-											);
-										}
-								);
-							}
+                $select.find('option').each(function () {
+                    var $option = $(this);
+                    var baseDisabled = $option.data('base-disabled');
+                    if (typeof baseDisabled === 'undefined') {
+                        baseDisabled = $option.prop('disabled');
+                        $option.data('base-disabled', baseDisabled ? 1 : 0);
+                    } else {
+                        baseDisabled = Boolean(baseDisabled);
+                    }
 
-							if( !tabs_filter ) {
-								$( 'select', $_form ).select2( 'destroy' );
-								$( 'select', $_form ).each(function() {
-									let dropdownParent = $('body');
-									let proDropdown = false;
-									if ($(this).parent().next().hasClass('stm-pro-filter-dropdown-box')) {
-										dropdownParent = $(this).parent().next();
-										proDropdown = true;
-									}
-									$(this).select2({
-										dropdownParent: dropdownParent,
-										closeOnSelect: true,
-										width: '100%',
-										minimumResultsForSearch: 0,
-										containerCssClass: 'filter-select',
-										dropdownCssClass: $(this).attr('class'),
-										"language": {
-											"noResults": function() {
-												return noFoundSelect2;
-											}
-										},
-										matcher: function(params, data) {
-											if (data.element && data.element.index === 0 && proDropdown === true) {
-												return null;
-											}
-											if (!params.term) {
-												return data;
-											}
-											if (data.text.toLowerCase().indexOf(params.term.toLowerCase()) > -1) {
-												return data;
-											}
-											
-											return null;
-										},
-										templateResult: function(data) {
-											if (!data.id) {
-												return data.text;
-											}
+                    var deps = ($option.data('deps') || '').toString().split(',').filter(Boolean);
+                    var shouldDisable = baseDisabled;
 
-											let $option = $(data.element);
-											let count = $option.data('option-count');
-											let image = $option.data('option-image');
-											
-											let $wrapper = $('<span class="stm-filter-pro-item-content"></span>');
-											
-											if (image) {
-												$wrapper.append($('<img src="' + image + '" class="select2-option-image" />'));
-											}
-											
-											$wrapper.append($('<span class="select2-option-text">' + data.text + '</span>'));
-											
-											if (count !== undefined) {
-												if(count == 0 && proDropdown) {
-													$wrapper.addClass('disabled');
-												}
-												$wrapper.append($('<span class="option-count">(' + count + ')</span>'));
-											}
+                    if (parentValues.length && deps.length > 0) {
+                        shouldDisable = baseDisabled || !deps.some(function (dep) {
+                            return parentValues.indexOf(dep) !== -1;
+                        });
+                    }
 
-											return $wrapper;
-										},
-										templateSelection: function(data) {
-											if (!data.id) {
-												return data.text;
-											}
+                    $option.prop('disabled', shouldDisable);
+                });
+            });
+        });
+    };
 
-											let $option = $(data.element);
-											let count = $option.data('option-count');
-											let image = $option.data('option-image');
-											
-											let $wrapper = $('<span class="stm-filter-pro-item-content"></span>');
-											
-											if (image) {
-												$wrapper.append($('<img src="' + image + '" class="select2-option-image" />'));
-											}
-											
-											$wrapper.append($('<span class="select2-option-text">' + data.text + '</span>'));
-											
-											if (count !== undefined && count != 0) {
-												$wrapper.append($('<span class="option-count">(' + count + ')</span>'));
-											}
+    STMListings.stm_disable_rest_filters = function ($_this, action, tabs_filter) {
+        var $_form = $_this.closest('form');
 
-											return $wrapper;
-										}
-									}).on('select2:open', function() {
-										$('.select2-search__field').attr('placeholder', stm_i18n.mvl_search_placeholder);
-									});
-								});
-							}
+        var data = [],
+            url = $_form.attr('action'),
+            sign = url.indexOf('?') < 0 ? '?' : '&';
 
-							/*Change total*/
-							$( '.stm-horizontal-filter-sidebar #stm-classic-filter-submit span' ).text( res.total );
-							$( '.search-filter-form #show-car-btn-mobile span' ).text( res.total );
-							$( '.mobile-search-filter #show-car-btn-mobile span' ).text( res.total );
-							$( '.filter-listing.motors_dynamic_listing_filter .stm-filter-tab-selects .search-submit span' ).text( res.total );
-							$( '.filter-listing.stm_dynamic_listing_filter .stm-filter-tab-selects .search-submit span' ).text( res.total );
-							$( '.stm-inventory-pro-total-found' ).text( res.total );
+        $.each(
+            $_form.serializeArray(),
+            function (i, field) {
+                if (field.value != '') {
+                    data.push(field.name + '=' + field.value)
+                }
+            }
+        );
 
-							$( '.stm-listing-directory-total-matches' ).show();
-						}
-					}
-				}
-		);
-	};
+        url = url + sign + data.join('&');
 
-	$( document ).on(
-			'change',
-			'.archive-listing-page form input, .archive-listing-page form select, .stm-inventory-pro-filter form input, .stm-inventory-pro-filter form select',
-			function () {
-				if ( typeof STMListings.clean_select_child_if_parent_changed === "function" ) {
-					STMListings.clean_select_child_if_parent_changed( $( this ) );
-				}
-				STMListings.stm_disable_rest_filters( $( this ), 'listings-binding' );
-			}
-	);
+        $.ajax(
+            {
+                url: url,
+                dataType: 'json',
+                context: this,
+                data: '&ajax_action=' + action + '&security=' + stm_security_nonce,
+                beforeSend: function () {
+                    if (action == 'listings-items') {
+                        $('.stm-ajax-row').addClass('stm-loading');
+                    } else {
+                        $('.classic-filter-row .filter-sidebar .select2-container--default .select2-selection--single .select2-selection__arrow b').addClass('stm-preloader');
+                        $('.mobile-search-filter .filter-sidebar .select2-container--default .select2-selection--single .select2-selection__arrow b').addClass('stm-preloader');
+                        $('.mobile-search-filter .filter-sidebar .select2-container--default .selection').addClass('stm-overlay');
+                        $('.search-filter-form .filter-sidebar .select2-container--default .selection').addClass('stm-overlay');
+                        $('.stm-listing-directory-total-matches').hide();
+                    }
+                },
+                success: function (res) {
+                    if (action == 'listings-items') {
+                        $('.stm-ajax-row').removeClass('stm-loading');
+                        $('#listings-result').html(res.html);
+                        if (res.total == 0 || (typeof items_per_page != 'undefined' && res.total <= items_per_page)) {
+                            $('.stm-inventory-items-per-page-wrap').hide();
+                        }
+                        $("img.lazy").lazyload();
+                        $('.stm-tooltip-link, div[data-toggle="tooltip"]').tooltip();
+                        window.history.pushState('', '', decodeURI(url));
+                    } else {
+                        /*Remove select preloaders*/
+                        $('.classic-filter-row .filter-sidebar .select2-container--default .select2-selection--single .select2-selection__arrow b').removeClass('stm-preloader');
+                        $('.classic-filter-row .filter-sidebar select').prop("disabled", false);
+                        /*Disable options*/
+                        if (typeof res.options != 'undefined') {
+                            $.each(
+                                res.options,
+                                function (key, options) {
+                                    $('select[name=' + key + '] > option', $_form).each(
+                                        function () {
+                                            var slug = $(this).val();
+                                            if (options.hasOwnProperty(slug)) {
+                                                $(this).prop('disabled', options[slug].disabled);
+                                            }
+                                        }
+                                    );
+                                }
+                            );
+                        }
 
-	$( '.filter-listing select:not(.hide)' ).select2().on(
-		'select2:select',
-		function ( event ) {
-			STMListings.stm_disable_rest_filters( $( this ), 'listings-binding', true );
-		}
-	);
+                        if (!tabs_filter) {
+                            $('select', $_form).select2('destroy');
+                            $('select', $_form).each(function () {
+                                let dropdownParent = $('body');
+                                let proDropdown = false;
+                                if ($(this).parent().next().hasClass('stm-pro-filter-dropdown-box')) {
+                                    dropdownParent = $(this).parent().next();
+                                    proDropdown = true;
+                                }
+                                $(this).select2({
+                                    dropdownParent: dropdownParent,
+                                    closeOnSelect: true,
+                                    width: '100%',
+                                    minimumResultsForSearch: 0,
+                                    containerCssClass: 'filter-select',
+                                    dropdownCssClass: $(this).attr('class'),
+                                    "language": {
+                                        "noResults": function () {
+                                            return noFoundSelect2;
+                                        }
+                                    },
+                                    matcher: function (params, data) {
+                                        if (data.element && data.element.index === 0 && proDropdown === true) {
+                                            return null;
+                                        }
+                                        if (!params.term) {
+                                            return data;
+                                        }
+                                        if (data.text.toLowerCase().indexOf(params.term.toLowerCase()) > -1) {
+                                            return data;
+                                        }
 
-	$( document ).on(
-			'click',
-			'.stm-ajax-checkbox-button .button, .stm-ajax-checkbox-instant .stm-option-label input',
-			function (e) {
+                                        return null;
+                                    },
+                                    templateResult: function (data) {
+                                        if (!data.id) {
+                                            return data.text;
+                                        }
 
-				if ($( this )[0].className == 'button') {
-					e.preventDefault();
-				}
+                                        let $option = $(data.element);
+                                        let count = $option.data('option-count');
+                                        let image = $option.data('option-image');
 
-				$( this ).closest( 'form' ).trigger( 'submit' );
+                                        let $wrapper = $('<span class="stm-filter-pro-item-content"></span>');
 
-			}
-	);
+                                        if (image) {
+                                            $wrapper.append($('<img src="' + image + '" class="select2-option-image" />'));
+                                        }
+
+                                        $wrapper.append($('<span class="select2-option-text">' + data.text + '</span>'));
+
+                                        if (count !== undefined) {
+                                            if (count == 0 && proDropdown) {
+                                                $wrapper.addClass('disabled');
+                                            }
+                                            $wrapper.append($('<span class="option-count">(' + count + ')</span>'));
+                                        }
+
+                                        return $wrapper;
+                                    },
+                                    templateSelection: function (data) {
+                                        if (!data.id) {
+                                            return data.text;
+                                        }
+
+                                        let $option = $(data.element);
+                                        let count = $option.data('option-count');
+                                        let image = $option.data('option-image');
+
+                                        let $wrapper = $('<span class="stm-filter-pro-item-content"></span>');
+
+                                        if (image) {
+                                            $wrapper.append($('<img src="' + image + '" class="select2-option-image" />'));
+                                        }
+
+                                        $wrapper.append($('<span class="select2-option-text">' + data.text + '</span>'));
+
+                                        if (count !== undefined && count != 0) {
+                                            $wrapper.append($('<span class="option-count">(' + count + ')</span>'));
+                                        }
+
+                                        return $wrapper;
+                                    }
+                                }).on('select2:open', function () {
+                                    $('.select2-search__field').attr('placeholder', stm_i18n.mvl_search_placeholder);
+                                });
+                            });
+                        }
+
+                        /*Change total*/
+                        $('.stm-horizontal-filter-sidebar #stm-classic-filter-submit span').text(res.total);
+                        $('.search-filter-form #show-car-btn-mobile span').text(res.total);
+                        $('.mobile-search-filter #show-car-btn-mobile span').text(res.total);
+                        $('.filter-listing.motors_dynamic_listing_filter .stm-filter-tab-selects .search-submit span').text(res.total);
+                        $('.filter-listing.stm_dynamic_listing_filter .stm-filter-tab-selects .search-submit span').text(res.total);
+                        $('.stm-inventory-pro-total-found').text(res.total);
+
+                        $('.stm-listing-directory-total-matches').show();
+                    }
+                }
+            }
+        );
+    };
+
+    $(document).on(
+        'change',
+        '.archive-listing-page form input, .archive-listing-page form select, .stm-inventory-pro-filter form input, .stm-inventory-pro-filter form select',
+        function () {
+            if (typeof STMListings.clean_select_child_if_parent_changed === "function") {
+                STMListings.clean_select_child_if_parent_changed($(this));
+            }
+            STMListings.stm_disable_rest_filters($(this), 'listings-binding');
+        }
+    );
+
+    $('.filter-listing select:not(.hide)').select2().on(
+        'select2:select',
+        function (event) {
+            STMListings.stm_disable_rest_filters($(this), 'listings-binding', true);
+        }
+    );
+
+    $(document).on(
+        'click',
+        '.stm-ajax-checkbox-button .button, .stm-ajax-checkbox-instant .stm-option-label input',
+        function (e) {
+
+            if ($(this)[0].className == 'button') {
+                e.preventDefault();
+            }
+
+            $(this).closest('form').trigger('submit');
+
+        }
+    );
 
     $(document).on('click', '.action-reset', function () {
         let _box = $(this).closest('.stm-filter-pro-item-heading').parent()
@@ -564,24 +640,24 @@ if (typeof (STMListings) == 'undefined') {
                 let heading = $input.closest('.stm-filter-item').find('.stm-filter-pro-item-heading')
                 heading.removeClass('selected').find('.results-count').html('0')
             })
-			
+
             if (stmType == 'select') {
                 $('select[name="' + stmSlug + '[]"]').val(null);
                 $('select[name="' + stmSlug + '[]"]').trigger('change');
                 $('select[name="' + stmSlug + '"]').val('');
                 let $select = $('select[name="' + stmSlug + '"]');
                 $select.find('option').prop('disabled', false);
-                
+
                 $select.select2('destroy');
                 let dropdownParent = $('body');
                 let closeOnSelect = true;
                 let proDropdown = false;
-                
+
                 if ($select.parent().next().hasClass('stm-pro-filter-dropdown-box')) {
                     dropdownParent = $select.parent().next();
                     proDropdown = true;
                 }
-                
+
                 $select.select2({
                     dropdownParent: dropdownParent,
                     closeOnSelect: closeOnSelect,
@@ -590,11 +666,11 @@ if (typeof (STMListings) == 'undefined') {
                     containerCssClass: 'filter-select',
                     dropdownCssClass: $select.attr('class'),
                     "language": {
-                        "noResults": function() {
+                        "noResults": function () {
                             return noFoundSelect2;
                         }
                     },
-                    matcher: function(params, data) {
+                    matcher: function (params, data) {
                         if (data.element && data.element.index === 0 && proDropdown === true) {
                             return null;
                         }
@@ -606,61 +682,61 @@ if (typeof (STMListings) == 'undefined') {
                         }
                         return null;
                     },
-                    templateResult: function(data) {
+                    templateResult: function (data) {
                         if (!data.id) {
                             return data.text;
                         }
                         let $option = $(data.element);
                         let count = $option.data('option-count');
                         let image = $option.data('option-image');
-                        
+
                         let $wrapper = $('<span class="stm-filter-pro-item-content"></span>');
-                        
+
                         if (image) {
                             $wrapper.append($('<img src="' + image + '" class="select2-option-image" />'));
                         }
-                        
+
                         $wrapper.append($('<span class="select2-option-text">' + data.text + '</span>'));
-                        
+
                         if (count !== undefined) {
-                            if(count == 0 && proDropdown) {
+                            if (count == 0 && proDropdown) {
                                 $wrapper.addClass('disabled');
                             }
                             $wrapper.append($('<span class="option-count">(' + count + ')</span>'));
                         }
                         return $wrapper;
                     },
-                    templateSelection: function(data) {
+                    templateSelection: function (data) {
                         if (!data.id) {
                             return data.text;
                         }
                         let $option = $(data.element);
                         let count = $option.data('option-count');
                         let image = $option.data('option-image');
-                        
+
                         let $wrapper = $('<span class="stm-filter-pro-item-content"></span>');
-                        
+
                         if (image) {
                             $wrapper.append($('<img src="' + image + '" class="select2-option-image" />'));
                         }
-                        
+
                         $wrapper.append($('<span class="select2-option-text">' + data.text + '</span>'));
-                        
+
                         if (count !== undefined && count != 0) {
                             $wrapper.append($('<span class="option-count">(' + count + ')</span>'));
                         }
                         return $wrapper;
                     }
-                }).on('select2:open', function() {
+                }).on('select2:open', function () {
                     $('.select2-search__field').attr('placeholder', stm_i18n.mvl_search_placeholder);
                 });
-                
+
                 let heading = $select.closest('.stm-filter-item').find('.stm-filter-pro-item-heading');
                 heading.removeClass('selected').find('.results-count').html('0');
             }
 
-			if ( stmType == 'number') {
-				$('select[name="' + stmSlug + '[]"]').val(null)
+            if (stmType == 'number') {
+                $('select[name="' + stmSlug + '[]"]').val(null)
                 $('select[name="' + stmSlug + '[]"]').trigger('change')
                 $('select[name="' + stmSlug + '"]').val('')
                 let $select = $('select[name="' + stmSlug + '"]')
@@ -672,18 +748,18 @@ if (typeof (STMListings) == 'undefined') {
                     .select2()
                     .select2('val', '')
 
-				$('input[name="min_' + stmSlug + '"]')
-					.val('')
-				$('input[name="max_' + stmSlug + '"]')
-					.val('')
-				
-				$('select[name="min_' + stmSlug + '"]').find('option').prop('disabled', false)
-				$('select[name="min_' + stmSlug + '"]').select2('destroy').select2().select2('val', '')
-                
+                $('input[name="min_' + stmSlug + '"]')
+                    .val('')
+                $('input[name="max_' + stmSlug + '"]')
+                    .val('')
+
+                $('select[name="min_' + stmSlug + '"]').find('option').prop('disabled', false)
+                $('select[name="min_' + stmSlug + '"]').select2('destroy').select2().select2('val', '')
+
                 let heading = $select.closest('.stm-filter-item').find('.stm-filter-pro-item-heading')
                 heading.removeClass('selected').find('.results-count').html('0')
 
-			}
+            }
 
             if (stmType == 'slider') {
                 let sliderObj = $('.stm-' + stmSlug + '-range').slider('instance')
@@ -731,7 +807,7 @@ if (typeof (STMListings) == 'undefined') {
         badgeContainer.empty()
 
         if (filterBadges && Object.keys(filterBadges).length > 0) {
-			
+
             $.each(filterBadges, function (slug, badge_info) {
                 let badge = $(`
                 <li>
@@ -739,9 +815,8 @@ if (typeof (STMListings) == 'undefined') {
                     <i data-url="${badge_info.url}"
                        data-type="${badge_info.type}"
                        data-slug="${badge_info.slug}"
-                       data-multiple="${
-													badge_info.multiple ? badge_info.multiple : ''
-												}"
+                       data-multiple="${badge_info.multiple ? badge_info.multiple : ''
+                    }"
                        class="motors-icons-cross-ico stm-clear-listing-one-unit stm-clear-listing-one-unit-classic"></i>
                 </li>
             `)
@@ -772,22 +847,22 @@ if (typeof (STMListings) == 'undefined') {
             if (params.has('posttype')) {
                 url.searchParams.set('posttype', params.get('posttype'));
             }
-            
+
             window.location = url.toString();
         }
     })
 
-    $(document).ready(function() {
-        $('.stm-inventory-pro-filter-mobile-apparent .stm-filter-item-search-input input').on('input', function() {
+    $(document).ready(function () {
+        $('.stm-inventory-pro-filter-mobile-apparent .stm-filter-item-search-input input').on('input', function () {
             let searchValue = $(this).val();
             $('form.search-filter-form input[name="stm_keywords"]').val(searchValue).trigger('change');
         });
 
-        $('.stm-inventory-pro-filter-mobile-apparent .stm-filter-item-search-input .motors-icons-mvl-search').on('click', function() {
+        $('.stm-inventory-pro-filter-mobile-apparent .stm-filter-item-search-input .motors-icons-mvl-search').on('click', function () {
             $(this).closest('form').trigger('submit');
         });
 
-        $('.stm-inventory-pro-filter-mobile-apparent .stm-filter-item-search-input input').on('keypress', function(e) {
+        $('.stm-inventory-pro-filter-mobile-apparent .stm-filter-item-search-input input').on('keypress', function (e) {
             if (e.which == 13) {
                 e.preventDefault();
                 $('form.search-filter-form').trigger('submit');

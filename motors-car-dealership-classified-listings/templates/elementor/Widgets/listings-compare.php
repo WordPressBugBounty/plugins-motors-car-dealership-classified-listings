@@ -14,7 +14,7 @@ $widget_title = $compare_title;
 $add_to_text  = $add_item_label;
 $add_icon     = $add_item_icon;
 
-if ( ! empty( $slugs ) ) {
+if ( ! empty( $slugs ) && is_string( $add_item_icon ) ) {
 	foreach ( $slugs as $slug ) {
 		if ( ! empty( $slug ) ) {
 			$add_icon = $add_item_icon . '_' . $slug;

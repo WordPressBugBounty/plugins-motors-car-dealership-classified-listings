@@ -1,4 +1,5 @@
 <?php
+
 function motors_vl_get_default_subject( $template_name ) {
 	$test_drive              = esc_html__( 'Request Test Drive [car]', 'stm_vehicles_listing' );
 	$request_price           = esc_html__( 'Request car price [car]', 'stm_vehicles_listing' );
@@ -15,6 +16,7 @@ function motors_vl_get_default_subject( $template_name ) {
 	$user_listing_wait       = esc_html__( 'Add a car', 'stm_vehicles_listing' );
 	$user_listing_approved   = esc_html__( 'Car Approved', 'stm_vehicles_listing' );
 	$user_email_confirmation = esc_html__( 'User Email Confirm', 'stm_vehicles_listing' );
+	$message_to_dealer       = esc_html__( 'Message to Dealer', 'stm_vehicles_listing' );
 
 	return ${'' . $template_name};
 }

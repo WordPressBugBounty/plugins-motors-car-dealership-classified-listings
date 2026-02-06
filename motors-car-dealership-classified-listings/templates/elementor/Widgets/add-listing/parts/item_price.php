@@ -41,12 +41,12 @@ $vars = array(
 	</div>
 	<div class="row stm-relative">
 		<?php
-		Motors_Elementor_Widgets_Free\Helpers\Helper::stm_ew_load_template( 'elementor/Widgets/add-listing/parts/item_price_templates/price', STM_LISTINGS_PATH, $vars );
+		MotorsElementorWidgetsFree\Helpers\Helper::stm_ew_load_template( 'elementor/Widgets/add-listing/parts/item_price_templates/price', STM_LISTINGS_PATH, $vars );
 		if ( ! empty( $show_sale_price_label ) ) {
-			Motors_Elementor_Widgets_Free\Helpers\Helper::stm_ew_load_template( 'elementor/Widgets/add-listing/parts/item_price_templates/sale_price', STM_LISTINGS_PATH, $vars );
+			MotorsElementorWidgetsFree\Helpers\Helper::stm_ew_load_template( 'elementor/Widgets/add-listing/parts/item_price_templates/sale_price', STM_LISTINGS_PATH, $vars );
 		}
 		if ( ! empty( $show_custom_label ) ) {
-			Motors_Elementor_Widgets_Free\Helpers\Helper::stm_ew_load_template( 'elementor/Widgets/add-listing/parts/item_price_templates/custom_label', STM_LISTINGS_PATH, $vars );
+			MotorsElementorWidgetsFree\Helpers\Helper::stm_ew_load_template( 'elementor/Widgets/add-listing/parts/item_price_templates/custom_label', STM_LISTINGS_PATH, $vars );
 		}
 		?>
 	</div>

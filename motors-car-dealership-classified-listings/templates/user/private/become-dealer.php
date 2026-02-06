@@ -188,21 +188,18 @@ if ( ! is_user_logged_in() ) {
 					}
 				}
 
-				// Sending Mail to admin.
-
-				$to             = get_bloginfo( 'admin_email' );
-				$stm_user_login = $user_current->data->user_login;
-				$args           = array(
-					'user_login' => $stm_user_login,
+				//Sending Mail to admin.
+				do_action(
+					'mvl_send_email',
+					array(
+						'config'          => 'become_dealer_request',
+						'to'              => get_bloginfo( 'admin_email' ),
+						'smart_tags_args' => array(
+							'user_id'    => $user_current->data->ID,
+							'user_login' => $user_current->data->user_login,
+						),
+					)
 				);
-
-				$subject = apply_filters( 'get_generate_subject_view', '', 'request_for_a_dealer', $args );
-				$body    = apply_filters( 'get_generate_template_view', '', 'request_for_a_dealer', $args );
-
-				add_filter( 'wp_mail_content_type', 'stm_set_html_content_type_mail' );
-				wp_mail( $to, $subject, $body );
-				remove_filter( 'wp_mail_content_type', 'stm_set_html_content_type_mail' );
-
 			}
 			?>
 			<div class="alert alert-success" style="margin:bottom:30px;">

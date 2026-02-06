@@ -1,3 +1,19 @@
+.wpforms-field-select select {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.wpforms-field-select .select2-selection--single {
+    position: relative;
+}
+
+div.wpforms-container-full select {
+    -webkit-appearance: auto;
+    -moz-appearance: auto;
+    appearance: auto;
+    background: none;
+}
+
 /*admin style for logo motors*/
 .menu-top.toplevel_page_mvl_plugin_settings img {
     position: relative;
@@ -7,6 +23,10 @@
 }
 
 /*admin style for logo motors*/
+.stm_listing_edit_car .mvl-custom-skin-actions {
+    margin-top: 15px;
+}
+
 #tagsdiv-stm_additional_features {
     display: none;
 }
@@ -366,7 +386,8 @@ body .container {
     width: auto;
 }
 
-.form-table.stm td, .form-table.stm th {
+.form-table.stm td,
+.form-table.stm th {
     vertical-align: middle;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -376,7 +397,9 @@ body .container {
     margin-bottom: 0;
 }
 
-.stm_metabox_image .stm_upload_image, .stm_metabox_image .stm_remove_image, .stm_metabox_image .custom_preview_image {
+.stm_metabox_image .stm_upload_image,
+.stm_metabox_image .stm_remove_image,
+.stm_metabox_image .custom_preview_image {
     display: inline-block;
     vertical-align: middle;
     margin: 0 10px 0 0;
@@ -459,6 +482,15 @@ body .container {
 /*New styles*/
 .select2-container--default .select2-search--dropdown .select2-search__field {
     height: 32px;
+}
+
+.select2-container.select2-container--open {
+    width: unset;
+}
+
+.select2-container--open.select2-container .select2-dropdown {
+    border-radius: 4px;
+    border-color: var(--motors-filter-inputs-color);
 }
 
 .stm_vehicles_listing_icons {
@@ -548,7 +580,8 @@ body .container {
     display: none;
 }
 
-.stm_vehicles_listing_icons .inner td.stm-listings-pick-icon i, .stm_vehicles_listing_icons .inner td.stm-listings-pick-icon span {
+.stm_vehicles_listing_icons .inner td.stm-listings-pick-icon i,
+.stm_vehicles_listing_icons .inner td.stm-listings-pick-icon span {
     display: block;
     width: 27px;
     height: 27px;
@@ -560,7 +593,10 @@ body .container {
     border-radius: 3px;
 }
 
-.stm_vehicles_listing_icons .inner td.stm-listings-pick-icon i.big_icon, .stm_vehicles_listing_icons .inner td.stm-listings-pick-icon i[class^=motors-icons-].big_icon, .stm_vehicles_listing_icons .inner td.stm-listings-pick-icon i[class*=" motors-icons-"].big_icon, .stm_vehicles_listing_icons .inner td.stm-listings-pick-icon span.big_icon, .stm_vehicles_listing_icons .inner td.stm-listings-pick-icon span[class^=motors-icons-].big_icon, .stm_vehicles_listing_icons .inner td.stm-listings-pick-icon span[class*=" motors-icons-"].big_icon {
+.stm_vehicles_listing_icons .inner td.stm-listings-pick-icon i.big_icon, .stm_vehicles_listing_icons .inner td.stm-listings-pick-icon i[class^=motors-icons-].big_icon, .stm_vehicles_listing_icons .inner td.stm-listings-pick-icon i[class*=" motors-icons-"].big_icon,
+.stm_vehicles_listing_icons .inner td.stm-listings-pick-icon span.big_icon,
+.stm_vehicles_listing_icons .inner td.stm-listings-pick-icon span[class^=motors-icons-].big_icon,
+.stm_vehicles_listing_icons .inner td.stm-listings-pick-icon span[class*=" motors-icons-"].big_icon {
     position: absolute;
     top: -5px;
     left: 5px;
@@ -578,7 +614,10 @@ body .container {
     transition: all 0.2s ease;
 }
 
-.stm_vehicles_listing_icons .inner td.stm-listings-pick-icon:hover i .big_icon, .stm_vehicles_listing_icons .inner td.stm-listings-pick-icon:hover i[class^=motors-icons-].big_icon, .stm_vehicles_listing_icons .inner td.stm-listings-pick-icon:hover i[class*=" motors-icons-"].big_icon, .stm_vehicles_listing_icons .inner td.stm-listings-pick-icon:hover span .big_icon, .stm_vehicles_listing_icons .inner td.stm-listings-pick-icon:hover span[class^=motors-icons-].big_icon, .stm_vehicles_listing_icons .inner td.stm-listings-pick-icon:hover span[class*=" motors-icons-"].big_icon {
+.stm_vehicles_listing_icons .inner td.stm-listings-pick-icon:hover i .big_icon, .stm_vehicles_listing_icons .inner td.stm-listings-pick-icon:hover i[class^=motors-icons-].big_icon, .stm_vehicles_listing_icons .inner td.stm-listings-pick-icon:hover i[class*=" motors-icons-"].big_icon,
+.stm_vehicles_listing_icons .inner td.stm-listings-pick-icon:hover span .big_icon,
+.stm_vehicles_listing_icons .inner td.stm-listings-pick-icon:hover span[class^=motors-icons-].big_icon,
+.stm_vehicles_listing_icons .inner td.stm-listings-pick-icon:hover span[class*=" motors-icons-"].big_icon {
     visibility: visible;
     opacity: 1;
     transform: scale(1);
@@ -836,20 +875,24 @@ table.wp-list-table .column-stm_image .attachment {
         display: block;
     }
 
-    table.wp-list-table.listing_categories tbody tr td, table.wp-list-table.listing_categories tbody tr th {
+    table.wp-list-table.listing_categories tbody tr td,
+  table.wp-list-table.listing_categories tbody tr th {
         display: block !important;
         width: 100% !important;
     }
 
-    table.wp-list-table.listing_categories tbody tr td:not(:first-child), table.wp-list-table.listing_categories tbody tr th:not(:first-child) {
+    table.wp-list-table.listing_categories tbody tr td:not(:first-child),
+  table.wp-list-table.listing_categories tbody tr th:not(:first-child) {
         display: none !important;
     }
 
-    table.wp-list-table.listing_categories tbody tr td.manage, table.wp-list-table.listing_categories tbody tr th.manage {
+    table.wp-list-table.listing_categories tbody tr td.manage,
+  table.wp-list-table.listing_categories tbody tr th.manage {
         display: block !important;
     }
 
-    table.wp-list-table.listing_categories tbody tr td.manage i, table.wp-list-table.listing_categories tbody tr th.manage i {
+    table.wp-list-table.listing_categories tbody tr td.manage i,
+  table.wp-list-table.listing_categories tbody tr th.manage i {
         margin-left: 0 !important;
     }
 
@@ -874,7 +917,8 @@ table.wp-list-table .column-stm_image .attachment {
     visibility: hidden;
 }
 
-.ms-container .ms-selectable, .ms-container .ms-selection {
+.ms-container .ms-selectable,
+.ms-container .ms-selection {
     background: #fff;
     color: #555555;
     float: left;
@@ -1295,7 +1339,8 @@ table > tbody > tr td {
     left: 0;
 }
 
-.special-label, .special-label.h5 {
+.special-label,
+.special-label.h5 {
     position: absolute;
     top: 27px;
     left: -81px;
@@ -1314,14 +1359,16 @@ table > tbody > tr td {
     z-index: 10;
 }
 
-.special-label-small, .special-label-small.h6 {
+.special-label-small,
+.special-label-small.h6 {
     top: 20px;
     left: -91px;
     height: 32px;
     line-height: 32px;
 }
 
-.stm-badge-directory, .stm-badge-directory.heading-font {
+.stm-badge-directory,
+.stm-badge-directory.heading-font {
     position: absolute;
     right: -65px;
     left: unset;
@@ -1539,6 +1586,18 @@ table > tbody > tr td {
 
 .wpcfto-box-group_title .wpcfto_generic_field .wpcfto-group-title-wrapper {
     width: 100%;
+}
+
+.stm-listing-favourite-loop .mvl-card-skins,
+.stm-listing-fav-loop .mvl-card-skins {
+    margin-bottom: 20px !important;
+}
+
+.user-listings-wrapper .mvl-card-skins .stm-listing-favorite,
+.stm-listing-favourite-loop .mvl-card-skins .stm-listing-favorite,
+.stm-listing-fav-loop .mvl-card-skins .stm-listing-favorite,
+.stm_listing_edit_car .mvl-card-skins .stm-listing-favorite {
+    z-index: 201 !important;
 }
 
 .stm-accordion-single-unit {

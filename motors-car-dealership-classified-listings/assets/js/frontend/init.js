@@ -7,6 +7,16 @@ if (typeof (STMListings) == 'undefined') {
     };
 }
 
+function stm_test_drive_car_title(id, title) {
+    var $ = jQuery;
+
+    $('.test-drive-car-name').text(title);
+    $('input[name=vehicle_id]').val(id);
+    $('input[name=vehicle_name]').val(title);
+    $('.modal-body-fields').removeClass('hidden');
+    $('#request-test-drive-form').find('.alert-modal').remove();
+    $('#request-test-drive-form').find('.form-error').removeClass('form-error');
+}
 (function ($) {
     "use strict";
     var timer;
@@ -605,49 +615,49 @@ if (typeof (STMListings) == 'undefined') {
         });
 
         $('body').on('click', '.stm-show-number, .single-listing-phone-show', function () {
-			var parent = $(this).parent()
-			var phone_owner_id = $(this).attr('data-id')
-			var listing_id = $(this).attr('data-listing-id')
+            var parent = $(this).parent()
+            var phone_owner_id = $(this).attr('data-id')
+            var listing_id = $(this).attr('data-listing-id')
 
-			if (typeof listing_id === 'undefined' || listing_id === false) {
-				listing_id = '0'
-			}
+            if (typeof listing_id === 'undefined' || listing_id === false) {
+                listing_id = '0'
+            }
 
-			parent.find('.stm-show-number').text('').addClass('load_number')
-			$.ajax({
-				url: ajaxurl,
-				type: 'GET',
-				dataType: 'json',
-				context: this,
-				data:
-					'phone_owner_id=' +
-					phone_owner_id +
-					'&listing_id=' +
-					listing_id +
-					'&action=stm_ajax_get_seller_phone&security=' +
-					stm_security_nonce,
-				success: function (data) {
-					parent.find('.stm-show-number').hide()
-					parent
-						.find('.phone')
-						.html('')
-						.append(
-							$('<a>')
-								.attr('href', 'tel:' + data)
-								.text(data)
-						)
-						.html('')
-						.append(
-							$('<a>')
-								.attr('href', 'tel:' + data)
-								.text(data)
-						)
-                        parent.find('.single-listing-phone-number').show();
-                        parent.find('.single-listing-hidden-phone-number').hide();
-                        parent.find('.single-listing-phone-show').hide();
-				},
-			})
-		})
+            parent.find('.stm-show-number').text('').addClass('load_number')
+            $.ajax({
+                url: ajaxurl,
+                type: 'GET',
+                dataType: 'json',
+                context: this,
+                data:
+                    'phone_owner_id=' +
+                    phone_owner_id +
+                    '&listing_id=' +
+                    listing_id +
+                    '&action=stm_ajax_get_seller_phone&security=' +
+                    stm_security_nonce,
+                success: function (data) {
+                    parent.find('.stm-show-number').hide()
+                    parent
+                        .find('.phone')
+                        .html('')
+                        .append(
+                            $('<a>')
+                                .attr('href', 'tel:' + data)
+                                .text(data)
+                        )
+                        .html('')
+                        .append(
+                            $('<a>')
+                                .attr('href', 'tel:' + data)
+                                .text(data)
+                        )
+                    parent.find('.single-listing-phone-number').show();
+                    parent.find('.single-listing-hidden-phone-number').hide();
+                    parent.find('.single-listing-phone-show').hide();
+                },
+            })
+        })
 
     });
 
@@ -682,6 +692,7 @@ if (typeof (STMListings) == 'undefined') {
         $('.stm-select-sorting select').on('change', function () {
             updateCarListing()
         })
+
     })
 
 })(jQuery);
@@ -689,3 +700,11 @@ if (typeof (STMListings) == 'undefined') {
 function stm_get_price_view(price, currency, currencyPos, priceDel) {
     return price;
 }
+
+function stmMotorsCaptcha() {
+    jQuery('.g-recaptcha').each(function (index, el) {
+        var $ = jQuery;
+        grecaptcha.render(el, { 'sitekey': $(el).data('sitekey') });
+    });
+};
+

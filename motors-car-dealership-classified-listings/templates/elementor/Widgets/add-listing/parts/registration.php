@@ -25,6 +25,9 @@ $_link          = apply_filters( 'motors_vl_get_nuxy_mod', '', 'addl_reg_log_lin
 			<div class="stm-register-form">
 				<form id="add-car-register-form" class="add-car-register-form" method="post">
 					<input type="hidden" name="redirect" value="disable">
+					<?php if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'new_user_registration' ) ) : ?>
+						<input type="hidden" name="stm_custom_register_nonce" value="<?php echo esc_attr( wp_create_nonce( 'stm_custom_register' ) ); ?>">
+					<?php endif; ?>
 					<div class="form-group">
 						<h4><?php esc_html_e( 'First Name', 'stm_vehicles_listing' ); ?></h4>
 						<input class="user_validated_field" type="text" name="stm_user_first_name" autocomplete="given-name" placeholder="<?php esc_attr_e( 'Enter First name', 'stm_vehicles_listing' ); ?>"/>

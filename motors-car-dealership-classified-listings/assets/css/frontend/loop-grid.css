@@ -254,7 +254,8 @@
     z-index: 20;
 }
 
-.archive-listing-page .video-preview .fa, .archive-listing-page .video-preview .fas,
+.archive-listing-page .video-preview .fa,
+.archive-listing-page .video-preview .fas,
 .car-listing-modern-grid .video-preview .fa,
 .car-listing-modern-grid .video-preview .fas {
     position: absolute;

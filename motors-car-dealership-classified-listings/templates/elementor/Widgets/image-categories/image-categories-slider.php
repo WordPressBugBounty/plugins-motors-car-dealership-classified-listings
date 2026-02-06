@@ -109,6 +109,8 @@ if ( ! empty( $taxonomy ) ) :
 					data-per_row_responsive="<?php echo esc_attr( $per_row_responsive ); ?>"
 					data-options="<?php echo esc_attr( wp_json_encode( $slider_options ) ); ?>"
 					data-widget_id="<?php echo esc_attr( 'image-categories_' . $unique_id ); ?>"
+					data-desktop-cols="<?php echo esc_attr( json_decode( $per_row_responsive, true )['desktop'] ); ?>"
+					data-mobile-cols="<?php echo esc_attr( json_decode( $per_row_responsive, true )['mobile'] ); ?>"
 			>
 				<div class="swiper-container">
 					<div class="swiper-wrapper">

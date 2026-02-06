@@ -1,35 +1,35 @@
 <?php
 
-namespace Motors_Elementor_Widgets_Free\Widgets\WidgetManager;
+namespace MotorsElementorWidgetsFree\Widgets\WidgetManager;
 
-use Motors_Elementor_Widgets_Free\Widgets\ListingSearchTabs;
-use Motors_Elementor_Widgets_Free\Widgets\ImageCategories;
-use Motors_Elementor_Widgets_Free\Widgets\InventorySearchFilter;
-use Motors_Elementor_Widgets_Free\Widgets\InventorySortBy;
-use Motors_Elementor_Widgets_Free\Widgets\InventoryViewType;
-use Motors_Elementor_Widgets_Free\Widgets\InventorySearchResults;
-use Motors_Elementor_Widgets_Free\Widgets\SingleListing\Title;
-use Motors_Elementor_Widgets_Free\Widgets\SingleListing\Gallery;
-use Motors_Elementor_Widgets_Free\Widgets\SingleListing\Features;
-use Motors_Elementor_Widgets_Free\Widgets\SingleListing\DealerEmail;
-use Motors_Elementor_Widgets_Free\Widgets\SingleListing\DealerPhoneNumber;
-use Motors_Elementor_Widgets_Free\Widgets\SingleListing\OfferPriceButton;
-use Motors_Elementor_Widgets_Free\Widgets\SingleListing\Similar;
-use Motors_Elementor_Widgets_Free\Widgets\SingleListing\ListingDescription;
-use Motors_Elementor_Widgets_Free\Widgets\ContactFormSeven;
-use Motors_Elementor_Widgets_Free\Widgets\SingleListing\Classified\UserDataSimple;
-use Motors_Elementor_Widgets_Free\Widgets\HeaderFooter\AddCarButton;
-use Motors_Elementor_Widgets_Free\Widgets\HeaderFooter\CompareButton;
-use Motors_Elementor_Widgets_Free\Widgets\HeaderFooter\ProfileButton;
-use Motors_Elementor_Widgets_Free\Widgets\ListingsCompare;
-use Motors_Elementor_Widgets_Free\Widgets\AddListing;
-use Motors_Elementor_Widgets_Free\Widgets\DealersList;
-use Motors_Elementor_Widgets_Free\Widgets\PricingPlan;
-use Motors_Elementor_Widgets_Free\Widgets\ListingsGridTabs;
-use Motors_Elementor_Widgets_Free\Widgets\LoginRegister;
-use Motors_Elementor_Widgets_Free\Widgets\SingleListing\Classified\Title as TitleClassified;
-use Motors_Elementor_Widgets_Free\Widgets\SingleListing\Classified\Price as PriceClassified;
-use Motors_Elementor_Widgets_Free\Widgets\SingleListing\Classified\ListingData as ListingDataClassified;
+use MotorsElementorWidgetsFree\Widgets\ListingSearchTabs;
+use MotorsElementorWidgetsFree\Widgets\ImageCategories;
+use MotorsElementorWidgetsFree\Widgets\InventorySearchFilter;
+use MotorsElementorWidgetsFree\Widgets\InventorySortBy;
+use MotorsElementorWidgetsFree\Widgets\InventoryViewType;
+use MotorsElementorWidgetsFree\Widgets\InventorySearchResults;
+use MotorsElementorWidgetsFree\Widgets\SingleListing\Title;
+use MotorsElementorWidgetsFree\Widgets\SingleListing\Gallery;
+use MotorsElementorWidgetsFree\Widgets\SingleListing\Features;
+use MotorsElementorWidgetsFree\Widgets\SingleListing\DealerEmail;
+use MotorsElementorWidgetsFree\Widgets\SingleListing\DealerPhoneNumber;
+use MotorsElementorWidgetsFree\Widgets\SingleListing\OfferPriceButton;
+use MotorsElementorWidgetsFree\Widgets\SingleListing\Similar;
+use MotorsElementorWidgetsFree\Widgets\SingleListing\ListingDescription;
+use MotorsElementorWidgetsFree\Widgets\ContactFormSeven;
+use MotorsElementorWidgetsFree\Widgets\SingleListing\Classified\UserDataSimple;
+use MotorsElementorWidgetsFree\Widgets\HeaderFooter\AddCarButton;
+use MotorsElementorWidgetsFree\Widgets\HeaderFooter\CompareButton;
+use MotorsElementorWidgetsFree\Widgets\HeaderFooter\ProfileButton;
+use MotorsElementorWidgetsFree\Widgets\ListingsCompare;
+use MotorsElementorWidgetsFree\Widgets\AddListing;
+use MotorsElementorWidgetsFree\Widgets\DealersList;
+use MotorsElementorWidgetsFree\Widgets\PricingPlan;
+use MotorsElementorWidgetsFree\Widgets\ListingsGridTabs;
+use MotorsElementorWidgetsFree\Widgets\LoginRegister;
+use MotorsElementorWidgetsFree\Widgets\SingleListing\Classified\Title as TitleClassified;
+use MotorsElementorWidgetsFree\Widgets\SingleListing\Classified\Price as PriceClassified;
+use MotorsElementorWidgetsFree\Widgets\SingleListing\Classified\ListingData as ListingDataClassified;
 
 class MotorsWidgetsManagerFree {
 

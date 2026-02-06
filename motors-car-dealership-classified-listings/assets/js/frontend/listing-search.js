@@ -3,28 +3,28 @@
         let self = this;
 
         self.relations = relations;
-        self.ctx       = container;
-        self.options   = {
+        self.ctx = container;
+        self.options = {
             selectBoxes: []
         };
 
-        if ( self.relations && Object.keys( self.relations ).length ) {
+        if (self.relations && Object.keys(self.relations).length) {
             let selectBoxes = [];
 
             $.each(self.relations, function (slug, options) {
                 let selectBox = self.selectbox(slug, options);
 
-                if ( selectBox && typeof selectBox === 'object' ) {
-                    selectBoxes.push( selectBox );
+                if (selectBox && typeof selectBox === 'object') {
+                    selectBoxes.push(selectBox);
                 }
             });
 
-            if ( selectBoxes.length ) {
-                self.options.selectBoxes = self.options.selectBoxes.concat( selectBoxes );
+            if (selectBoxes.length) {
+                self.options.selectBoxes = self.options.selectBoxes.concat(selectBoxes);
             }
         }
 
-        $(container).cascadingDropdown( self.options );
+        $(container).cascadingDropdown(self.options);
     };
 
     STMCascadingSelect.prototype.selectbox = function (slug, config) {

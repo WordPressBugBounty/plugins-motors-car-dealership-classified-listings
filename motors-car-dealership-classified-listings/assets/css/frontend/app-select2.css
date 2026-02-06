@@ -43,14 +43,17 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     left: -3px;
-    margin-left: 0;
-    color: var(--motors-text-alpha-color);
+    color: var(--motors-text-highalpha-color);
     width: 15px;
     height: 15px;
     border: none;
     text-align: center;
     line-height: 16px;
-    margin: 0;
+    margin: 1px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
 }
 
 .select2-container--default .select2-selection--single .select2-selection__arrow b:before {

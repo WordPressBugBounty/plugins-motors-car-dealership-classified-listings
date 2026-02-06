@@ -1,10 +1,11 @@
 <?php
-function grid_listing_card_controls( $widget, $widget_name ) {
+function grid_listing_card_controls( $widget, $widget_name, $condition = array(), $section_label = '' ) {
 	$widget->start_controls_section(
 		'isr_grid_card_settings_title_' . $widget_name,
 		array(
-			'label' => esc_html__( 'Card Layout Settings', 'stm_vehicle_listings' ),
-			'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+			'label'     => $section_label ? $section_label : esc_html__( 'Card Layout Settings', 'stm_vehicle_listings' ),
+			'tab'       => \Elementor\Controls_Manager::TAB_STYLE,
+			'condition' => $condition,
 		)
 	);
 
@@ -519,14 +520,15 @@ function grid_listing_card_controls( $widget, $widget_name ) {
 	$widget->end_controls_section();
 }
 
-add_filter( 'grid_listing_card_controls', 'grid_listing_card_controls', 10, 2 );
+add_filter( 'grid_listing_card_controls', 'grid_listing_card_controls', 10, 4 );
 
-function list_listing_card_controls( $widget, $widget_name ) {
+function list_listing_card_controls( $widget, $widget_name, $condition = array(), $section_label = '' ) {
 	$widget->start_controls_section(
 		'isr_list_card_settings_title_' . $widget_name,
 		array(
-			'label' => esc_html__( 'List Layout Settings', 'stm_vehicle_listings' ),
-			'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+			'label'     => $section_label ? $section_label : esc_html__( 'List Layout Settings', 'stm_vehicle_listings' ),
+			'tab'       => \Elementor\Controls_Manager::TAB_STYLE,
+			'condition' => $condition,
 		)
 	);
 
@@ -1741,4 +1743,4 @@ function list_listing_card_controls( $widget, $widget_name ) {
 	$widget->end_controls_section();
 }
 
-add_filter( 'list_listing_card_controls', 'list_listing_card_controls', 10, 2 );
+add_filter( 'list_listing_card_controls', 'list_listing_card_controls', 10, 4 );

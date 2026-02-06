@@ -78,6 +78,7 @@
     height: 3px;
     display: flex;
     justify-content: space-between;
+    z-index: 10;
 }
 
 .stm-hoverable-interactive-galleries .interactive-hoverable .hoverable-indicators .indicator {

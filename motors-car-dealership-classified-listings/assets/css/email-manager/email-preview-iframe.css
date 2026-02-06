@@ -1,0 +1,40 @@
+html,
+body {
+    height: 100%;
+}
+
+html {
+    display: block !important;
+}
+
+body {
+    overflow: hidden;
+}
+
+body > table {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    top: 50%;
+    width: 600px !important;
+}
+
+body.default .header-modern {
+    display: none;
+}
+
+body.modern .header-default {
+    display: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol {
+    margin: 12px 0;
+}

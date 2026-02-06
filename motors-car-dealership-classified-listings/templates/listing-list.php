@@ -60,17 +60,11 @@ $data = array(
 	'listing_options_grid'   => isset( $listing_options_grid ) ? $listing_options_grid : array(),
 );
 
-if ( ! isset( $data['skin'] ) ) {
-	$data['skin'] = apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'list_card_skin' );
-}
 
-if ( 'default' !== $data['skin'] && apply_filters( 'is_mvl_pro', false ) && defined( 'STM_LISTINGS_PRO_PATH' ) ) {
+
+if ( ! in_array( $data['skin'], array( 'default', 'classic' ), true ) && is_mvl_pro() ) {
 	$data['show_logo'] = apply_filters( 'motors_vl_get_nuxy_mod', '', 'list_skin_show_logo' );
-
-	if ( function_exists( 'mvl_pro_enqueue_header_scripts_styles' ) ) {
-		mvl_pro_enqueue_header_scripts_styles( $data['skin'], 'listing-card/list' );
-	}
-
+	wp_enqueue_style( 'motors-listing-list-' . $data['skin'] );
 	do_action( 'stm_listings_load_template', '/listing-cars/list/' . esc_attr( $data['skin'] ) . '.php', $data );
 } else {
 	?>

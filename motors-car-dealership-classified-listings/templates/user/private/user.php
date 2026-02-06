@@ -43,7 +43,6 @@ $tpl = apply_filters( 'stm_account_current_page', '' );
 					?>
 				</div>
 			</div>
-
 		</div>
 	</div>
 </div>

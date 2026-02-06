@@ -221,15 +221,8 @@ class STM_Metaboxes {
 				foreach ( $section['fields'] as $field_name => $field ) {
 					$default_value = ( ! empty( $field['value'] ) ) ? $field['value'] : '';
 					$value         = ( isset( $meta[ $field_name ] ) ) ? $meta[ $field_name ] : $default_value;
-					if ( ! empty( $value ) ) {
-						switch ( $field['type'] ) {
-							case 'dates':
-								$value = explode( ',', $value );
-								break;
-							case 'answers':
-								$value = unserialize( $value ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.serialize_unserialize
-								break;
-						}
+					if ( ! empty( $value ) && 'dates' === $field['type'] ) {
+						$value = explode( ',', $value );
 					}
 					$metabox['args'][ $metabox_name ][ $section_name ]['fields'][ $field_name ]['value'] = $value;
 				}
@@ -634,6 +627,10 @@ function wpcfto_metaboxes_deps( $field, $section_name ) {
 		$dependency = "v-bind:class=\"{'wpcfto-disabled-field' : {$dependencies}}\"";
 	}
 
+	if ( ! empty( $field['dependency_mode'] ) && 'always_on' === $field['dependency_mode'] ) {
+		$dependency = "v-bind:class=\"{'wpcfto-always-on' : {$dependencies}}\"";
+	}
+
 	return $dependency;
 }
 
@@ -667,8 +664,9 @@ function wpcfto_metaboxes_generate_deps( $section_name, $dep ) {
 
 function wpcfto_metaboxes_display_single_field( $section, $section_name, $field, $field_name, $metabox_id = null ) {
 	$dependency  = wpcfto_metaboxes_deps( $field, $section_name );
-	$width       = 'column-1';
+	$width       = 'column-' . ( isset( $field['column'] ) ? $field['column'] : 1 );
 	$is_pro      = ( ! empty( $field['pro'] ) ) ? 'is_pro' : 'not_pro';
+	$vars        = ( ! empty( $field['vars'] ) ) ? $field['vars'] : '';
 	$disable     = ( ! empty( $field['disable'] ) ) ? 'is_disabled' : '';
 	$pro_url     = ( ! empty( $field['pro'] ) && ! empty( $field['pro_url'] ) ) ? $field['pro_url'] : '';
 	$is_child    = ( isset( $field['is_group_item'] ) && ! empty( $field['is_group_item'] ) ) ? true : false;
@@ -708,8 +706,10 @@ function wpcfto_metaboxes_display_single_field( $section, $section_name, $field,
 	<transition name="slide-fade">
 		<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>"
 			<?php echo wp_kses( $dependency, array() ); ?>
-			data-field="<?php echo esc_attr( "wpcfto_addon_option_{$field_name}" ); ?>">
-
+			data-field="<?php echo esc_attr( "wpcfto_addon_option_{$field_name}" ); ?>"
+			<?php if ( ! empty( $vars ) ) : ?>
+				data-vars="<?php echo esc_attr( json_encode( $vars ) ); ?>"
+			<?php endif; ?>>
 			<?php
 			do_action( 'stm_wpcfto_single_field_before_start', $classes, $field_name, $field, $is_pro, $pro_url, $disable );
 
@@ -740,6 +740,7 @@ function wpcfto_metaboxes_display_single_field( $section, $section_name, $field,
 			$field_readonly = isset( $field_data['readonly'] ) ? 'true' : 'false';
 			$option_id      = $metabox_id;
 			$default_value  = isset( $field_data['default_value'] ) ? $field_data['default_value'] : '';
+			$format         = isset( $field_data['format'] ) ? $field_data['format'] : '';
 
 			$file = apply_filters( "wpcfto_field_{$field_type}", STM_WPCFTO_PATH . '/metaboxes/fields/' . $field_type . '.php' );
 
@@ -755,6 +756,7 @@ function wpcfto_metaboxes_display_single_field( $section, $section_name, $field,
 
 function wpcfto_metaboxes_display_group_field( $section, $section_name, $field, $field_name ) {
 	if ( 'started' === $field['group'] ) :
+		$column = isset( $field['column'] ) ? $field['column'] : 1;
 
 		$group_data = '';
 
@@ -762,7 +764,7 @@ function wpcfto_metaboxes_display_group_field( $section, $section_name, $field, 
 			$group_data = 'data-dependency=' . json_encode( $field['dependency'] );
 		}
 
-		$group_classes = array( 'wpcfto-box wpcfto_group_started column-1' );
+		$group_classes = array( 'wpcfto-box wpcfto_group_started column-' . $column );
 		if ( ! empty( $field['submenu'] ) ) {
 			$group_classes[] = sanitize_title( "{$section_name}_{$field['submenu']}" );
 		}

@@ -166,7 +166,7 @@ class AddListingManager {
 
 	private function listing_details() {
 
-		return array(
+		$conf = array(
 			'addl_group_details_title'      => array(
 				'type'             => 'group_title',
 				'label'            => esc_html__( 'Details', 'stm_vehicles_listing' ),
@@ -240,6 +240,26 @@ class AddListingManager {
 				'group'   => 'ended',
 			),
 		);
+
+		if ( apply_filters( 'is_mvl_pro', false ) && apply_filters( 'mvl_is_addon_enabled', false, 'car_info_auto_complete' ) ) {
+			$auto_complete_config = array(
+				'allow_car_info_auto_complete' => array(
+					'label'   => esc_html__( 'Allow Car Info Auto Complete', 'stm_vehicles_listing' ),
+					'type'    => 'checkbox',
+					'value'   => false,
+					'submenu' => esc_html__( 'Listing creation form', 'stm_vehicles_listing' ),
+					'description' => esc_html__( 'Allow users to auto-complete vehicle information using VIN or Make, Model, Year.', 'stm_vehicles_listing' ),
+				),
+			);
+
+			$conf = array_merge(
+				array_slice( $conf, 0, 2, true ),
+				$auto_complete_config,
+				array_slice( $conf, 2, null, true )
+			);
+		}
+
+		return $conf;
 	}
 
 	private function listing_features() {

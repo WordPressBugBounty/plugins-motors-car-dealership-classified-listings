@@ -1,10 +1,10 @@
 <?php
 
-namespace Motors_Elementor_Widgets_Free\Widgets\SingleListing\Classified;
+namespace MotorsElementorWidgetsFree\Widgets\SingleListing\Classified;
 
-use Motors_Elementor_Widgets_Free\MotorsElementorWidgetsFree;
-use Motors_Elementor_Widgets_Free\Helpers\Helper;
-use Motors_Elementor_Widgets_Free\Widgets\WidgetBase;
+use MotorsElementorWidgetsFree\MotorsElementorWidgetsFree;
+use MotorsElementorWidgetsFree\Helpers\Helper;
+use MotorsElementorWidgetsFree\Widgets\WidgetBase;
 
 class Title extends WidgetBase {
 	public function __construct( array $data = array(), array $args = null ) {

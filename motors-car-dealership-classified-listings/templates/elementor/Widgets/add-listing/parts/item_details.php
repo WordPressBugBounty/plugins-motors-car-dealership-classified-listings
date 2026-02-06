@@ -18,10 +18,15 @@ if ( $custom_listing_type && $listing_types_options ) {
 
 $_taxonomy = ( ! $_taxonomy ) ? array() : $_taxonomy;
 
+$is_car_info_auto_complete = apply_filters( 'motors_vl_get_nuxy_mod', false, 'allow_car_info_auto_complete' );
+
 ?>
 <div class="stm_add_car_form_1">
 	<div class="stm-car-listing-data-single stm-border-top-unit ">
 		<div class="title heading-font"><?php esc_html_e( 'Listing Item Details', 'stm_vehicles_listing' ); ?></div>
+		<?php if ( $is_car_info_auto_complete && apply_filters( 'is_mvl_pro', false ) ) : ?>
+			<?php do_action( 'stm_listings_load_template', 'addons/CarInfoAutoComplite/car-autocomplete-button', array() ); ?>
+		<?php endif; ?>
 	</div>
 
 	<?php if ( ! empty( $_taxonomy ) ) : ?>
@@ -242,7 +247,7 @@ $_taxonomy = ( ! $_taxonomy ) ? array() : $_taxonomy;
 			</style>
 
 			<?php
-			Motors_Elementor_Widgets_Free\Helpers\Helper::stm_ew_load_template(
+			MotorsElementorWidgetsFree\Helpers\Helper::stm_ew_load_template(
 				'elementor/Widgets/add-listing/parts/additional_fields',
 				STM_LISTINGS_PATH,
 				array(

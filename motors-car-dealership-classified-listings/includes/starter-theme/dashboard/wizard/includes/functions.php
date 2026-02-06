@@ -1,4 +1,5 @@
 <?php
+use MotorsVehiclesListing\Plugin\MVL_Const;
 
 //Required plugins
 add_filter(
@@ -146,8 +147,11 @@ function mvl_motors_starter_plugins_install() {
 			wp_send_json_error( $result->get_error_message() );
 		}
 	}
+	$activated = activate_plugin( $plugin_file, '', false, true );
 
-	activate_plugin( $plugin_file );
+	if ( is_wp_error( $activated ) ) {
+		wp_send_json_error( $activated->get_error_message() );
+	}
 
 	wp_send_json_success( esc_html__( 'Plugin installed and activated successfully.', 'motors-starter-theme' ) );
 }
@@ -259,8 +263,6 @@ function mvl_motors_starter_demo_install() {
 
 			unlink( $temp_file_path );
 
-			update_option( 'mvl_motors_starter_demo_activated', $demo );
-
 			wp_send_json_success( __( 'Demo content imported successfully.', 'motors-starter-theme' ) );
 
 			break;
@@ -316,7 +318,7 @@ function mvl_motors_starter_demo_install() {
 			$response = apply_filters( 'motors_get_demo_data', 'mvl_settings.json' );
 
 			if ( is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) !== 200 ) {
-				wp_send_json_error( __( 'LMS options JSON file not found or failed to retrieve.', 'motors-starter-theme' ) );
+				wp_send_json_error( __( 'Motors options JSON file not found or failed to retrieve.', 'motors-starter-theme' ) );
 				break;
 			}
 
@@ -337,7 +339,17 @@ function mvl_motors_starter_demo_install() {
 				remove_filter( 'motors_vl_get_nuxy_mod', 'mvl_setup_wizard_replace_elementor_colors_filter', 100, 2 );
 			}
 
-			wp_send_json_success( __( 'LMS options imported and settings updated successfully.', 'motors-starter-theme' ) );
+			if ( is_mvl_pro() ) {
+				$search_results_settings                   = get_option( MVL_Const::SEARCH_RESULTS_OPT_NAME, array() );
+				$search_results_settings['grid_card_skin'] = 'skin_3';
+				$search_results_settings['list_card_skin'] = 'skin_3';
+
+				update_option( MVL_Const::SEARCH_RESULTS_OPT_NAME, $search_results_settings );
+			}
+
+			update_option( '_motors_widgets_default_settings_updated', array() );
+
+			wp_send_json_success( __( 'Motors options imported and settings updated successfully.', 'motors-starter-theme' ) );
 
 			break;
 		case 'generate_pages':
@@ -388,8 +400,10 @@ function mvl_motors_starter_demo_install() {
 			$response['updated'] = update_option( $id, $settings );
 			do_action( 'wpcfto_after_settings_saved', $id, $settings );
 
+			do_action( 'mvl_reset_elementor_cache' );
+
 			wp_send_json_success( __( 'Motors Skins Pages imported.', 'motors-starter-theme' ) );
-			mst_reset_elementor_cache();
+
 			break;
 		default:
 			wp_send_json_error( __( 'Unknown import type.', 'motors-starter-theme' ) );

@@ -41,6 +41,38 @@ i {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.motors-icons-angle-right:before {
+    content: "\ea2c";
+}
+
+.motors-icons-mobile:before {
+    content: "\ea2a";
+}
+
+.motors-icons-desktop:before {
+    content: "\ea2b";
+}
+
+.motors-icons-chevron-up:before {
+    content: "\ea25";
+}
+
+.motors-icons-info-filled:before {
+    content: "\ea26";
+}
+
+.motors-icons-upload-2:before {
+    content: "\ea27";
+}
+
+.motors-icons-chat-2:before {
+    content: "\ea28";
+}
+
+.motors-icons-user-stroked:before {
+    content: "\ea29";
+}
+
 .motors-icons-palette:before {
     content: "\ea1c";
 }

@@ -47,7 +47,7 @@ $is_pro = apply_filters( 'is_mvl_pro', false );
 							<div class="addon-checkbox__locked">
 								<img src="<?php echo esc_url( STM_LISTINGS_URL . '/assets/addons/img/locked-icon.svg' ); ?>" class="addon-checkbox__locked-img">
 								<div class="addon-checkbox__locked-dropdown">
-									<?php esc_html_e( 'This addon available in Pro version', 'stm_vehicles_listing' ); ?>
+									<?php echo isset( $feature['tooltip'] ) ? esc_html( $feature['tooltip'] ) : esc_html_e( 'This addon available in Pro version', 'stm_vehicles_listing' ); ?>
 								</div>
 							</div>
 							<?php
@@ -67,4 +67,3 @@ $is_pro = apply_filters( 'is_mvl_pro', false );
 		</div>
 	<?php } ?>
 </div>
-

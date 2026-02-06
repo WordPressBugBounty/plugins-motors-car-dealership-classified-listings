@@ -102,9 +102,8 @@ if ( ! empty( $user->ID ) ) {
 				<?php
 				while ( $fav->have_posts() ) :
 					$fav->the_post();
-					?>
-					<?php
 					$exist_adds[] = get_the_id();
+
 					if ( 'active' === $list ) {
 						do_action( 'stm_listings_load_template', 'listing-list-fav' );
 					} else {

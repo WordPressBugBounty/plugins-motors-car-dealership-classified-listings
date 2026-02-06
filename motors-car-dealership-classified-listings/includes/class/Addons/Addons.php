@@ -2,20 +2,24 @@
 
 namespace MotorsVehiclesListing\Addons;
 
+use MotorsVehiclesListing\Pro\Addons\EmailManager\Page as EmailManagerPage;
+
 class Addons {
 
 	const OPTION_NAME = 'motors_vl_addons';
 
-	public const VIN_DECODER             = 'vin_decoder';
-	public const SOCIAL_LOGIN            = 'social_login';
-	public const SAVED_SEARCH            = 'saved_search';
-	public const CAR_INFO_AUTO_COMPLETE  = 'car_info_auto_complete';
+	public const VIN_DECODER            = 'vin_decoder';
+	public const SOCIAL_LOGIN           = 'social_login';
+	public const SAVED_SEARCH           = 'saved_search';
+	public const EMAIL_MANAGER          = 'email_manager';
+	public const CAR_INFO_AUTO_COMPLETE = 'car_info_auto_complete';
 
 	public static function all() : array {
 		return array(
 			self::VIN_DECODER,
 			self::SOCIAL_LOGIN,
 			self::SAVED_SEARCH,
+			self::EMAIL_MANAGER,
 			self::CAR_INFO_AUTO_COMPLETE,
 		);
 	}
@@ -31,7 +35,7 @@ class Addons {
 
 	public static function list() : array {
 		return array(
-			self::VIN_DECODER  => array(
+			self::VIN_DECODER            => array(
 				'name'          => esc_html__( 'VIN Decoder', 'stm_vehicles_listing' ),
 				'url'           => esc_url( STM_LISTINGS_URL . '/assets/addons/img/VinDecoder.png' ),
 				'settings'      => admin_url( 'admin.php?page=vin_decoders_settings' ),
@@ -41,7 +45,7 @@ class Addons {
 				'img_url'       => 'vin-decoder',
 				'toggle'        => true,
 			),
-			self::SAVED_SEARCH => array(
+			self::SAVED_SEARCH           => array(
 				'name'          => esc_html__( 'Saved Searches', 'stm_vehicles_listing' ),
 				'url'           => esc_url( STM_LISTINGS_URL . '/assets/addons/img/SavedSearch.png' ),
 				'settings'      => admin_url( 'admin.php?page=mvl_search_and_filter_settings#saved_search' ),
@@ -51,7 +55,7 @@ class Addons {
 				'img_url'       => 'saved-search',
 				'toggle'        => true,
 			),
-			self::SOCIAL_LOGIN => array(
+			self::SOCIAL_LOGIN           => array(
 				'name'          => esc_html__( 'Social Login', 'stm_vehicles_listing' ),
 				'url'           => esc_url( STM_LISTINGS_URL . '/assets/addons/img/SocialLogin.png' ),
 				'settings'      => admin_url( 'admin.php?page=mvl_plugin_settings#social_login' ),
@@ -69,6 +73,26 @@ class Addons {
 				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/motors-pro-addons/car-info-autocomplete',
 				'img_url'       => 'car-info-auto-complete',
 				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro',
+				'toggle'        => true,
+			),
+			self::EMAIL_MANAGER          => array(
+				'name'          => esc_html__( 'Email Template Manager', 'stm_vehicles_listing' ),
+				'url'           => esc_url( STM_LISTINGS_URL . '/assets/addons/img/EmailManager.png' ),
+				'settings'      => apply_filters( 'mvl_email_manager_url', '' ),
+				'description'   => esc_html__( 'Manage your email templates and send them to your users.', 'stm_vehicles_listing' ),
+				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=motorswpadmin&utm_campaign=motors-plugin&licenses=1&billing_cycle=annual',
+				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/motors-pro-addons/email-manager',
+				'img_url'       => 'email-manager',
+				'toggle'        => true,
+			),
+			self::EMAIL_MANAGER          => array(
+				'name'          => esc_html__( 'Email Template Manager', 'stm_vehicles_listing' ),
+				'url'           => esc_url( STM_LISTINGS_URL . '/assets/addons/img/EmailManager.png' ),
+				'settings'      => apply_filters( 'mvl_email_manager_url', '' ),
+				'description'   => esc_html__( 'Manage your email templates and send them to your users.', 'stm_vehicles_listing' ),
+				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=motorswpadmin&utm_campaign=motors-plugin&licenses=1&billing_cycle=annual',
+				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/motors-pro-addons/email-manager',
+				'img_url'       => 'email-manager',
 				'toggle'        => true,
 			),
 		);

@@ -87,6 +87,9 @@ $can_register = apply_filters( 'motors_vl_get_nuxy_mod', false, 'new_user_regist
 			<h3><?php esc_html_e( 'Sign Up', 'stm_vehicles_listing' ); ?></h3>
 			<div class="stm-register-form">
 				<form id="page-register-form" method="post">
+					<?php if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'new_user_registration' ) ) : ?>
+						<input type="hidden" name="stm_custom_register_nonce" value="<?php echo esc_attr( wp_create_nonce( 'stm_custom_register' ) ); ?>">
+					<?php endif; ?>
 					<?php do_action( 'stm_before_signup_form' ); ?>
 					<div class="row form-group">
 						<div class="col-md-6">

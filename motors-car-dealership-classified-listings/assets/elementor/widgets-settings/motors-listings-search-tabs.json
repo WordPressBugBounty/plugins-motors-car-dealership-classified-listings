@@ -1,0 +1,189 @@
+{
+    "lst_taxonomies": [],
+    "lst_advanced_search_label": "Advanced Search",
+    "lst_show_all_text": "All",
+    "lst_btn_postfix": "Cars",
+    "tab_border_color": "",
+    "tab_typography_typography": "custom",
+    "tab_typography_font_family": "Inter",
+    "tab_typography_font_size": {
+        "unit": "px",
+        "size": 15,
+        "sizes": []
+    },
+    "tab_typography_font_weight": "400",
+    "lst_fields_border_radius": {
+        "unit": "px",
+        "top": "8",
+        "right": "8",
+        "bottom": "8",
+        "left": "8",
+        "isLinked": true
+    },
+    "lst_fields_border_radius_tablet": {
+        "unit": "px",
+        "top": "5",
+        "right": "5",
+        "bottom": "5",
+        "left": "5",
+        "isLinked": true
+    },
+    "lst_fields_border_radius_mobile": {
+        "unit": "px",
+        "top": "4",
+        "right": "4",
+        "bottom": "4",
+        "left": "4",
+        "isLinked": true
+    },
+    "tab_border_width": {
+        "unit": "px",
+        "top": "0",
+        "right": "3",
+        "bottom": "0",
+        "left": "0",
+        "isLinked": false
+    },
+    "lst_advanced_search_label_color": "",
+    "lst_btn_text": "{count} {postfix}",
+    "tab_border_radius": {
+        "unit": "px",
+        "top": "8",
+        "right": "8",
+        "bottom": "0",
+        "left": "0",
+        "isLinked": false
+    },
+    "_offset_x_end": {
+        "size": 0,
+        "unit": "px"
+    },
+    "tab_padding": {
+        "unit": "px",
+        "top": "14",
+        "right": "20",
+        "bottom": "14",
+        "left": "20",
+        "isLinked": false
+    },
+    "_border_radius": {
+        "unit": "px",
+        "top": "32",
+        "right": "32",
+        "bottom": "32",
+        "left": "32",
+        "isLinked": true
+    },
+    "border_radius": {
+        "unit": "px",
+        "top": "8",
+        "right": "8",
+        "bottom": "8",
+        "left": "8",
+        "isLinked": true
+    },
+    "lst_fields_border_width": {
+        "unit": "px",
+        "top": "1",
+        "right": "1",
+        "bottom": "1",
+        "left": "1",
+        "isLinked": true
+    },
+    "lst_advanced_search": "",
+    "lst_show_label": "yes",
+    "tab_border_border": "",
+    "fields_label_typography_typography": "custom",
+    "fields_label_typography_font_family": "Inter",
+    "fields_label_typography_font_size": {
+        "unit": "px",
+        "size": 14,
+        "sizes": []
+    },
+    "fields_label_typography_font_weight": "500",
+    "fields_label_margin": {
+        "unit": "px",
+        "top": "0",
+        "right": "0",
+        "bottom": "8",
+        "left": "0",
+        "isLinked": false
+    },
+    "content_padding": {
+        "unit": "px",
+        "top": "32",
+        "right": "32",
+        "bottom": "32",
+        "left": "32",
+        "isLinked": true
+    },
+    "lst_fields_border_border": "solid",
+    "fields_typography_typography": "custom",
+    "fields_typography_font_family": "Inter",
+    "fields_typography_font_size": {
+        "unit": "px",
+        "size": 16,
+        "sizes": []
+    },
+    "fields_typography_font_weight": "400",
+    "fields_typography_line_height": {
+        "unit": "px",
+        "size": 44,
+        "sizes": []
+    },
+    "lst_fields_border_color": "rgba(51, 61, 76,0.15)",
+    "fields_padding": {
+        "unit": "px",
+        "top": "0",
+        "right": "12",
+        "bottom": "0",
+        "left": "12",
+        "isLinked": false
+    },
+    "lst_button_border_radius": {
+        "unit": "px",
+        "top": "8",
+        "right": "8",
+        "bottom": "8",
+        "left": "8",
+        "isLinked": true
+    },
+    "button_typography_typography": "custom",
+    "button_typography_font_family": "Inter",
+    "button_typography_font_size": {
+        "unit": "px",
+        "size": 16,
+        "sizes": []
+    },
+    "button_typography_font_weight": "500",
+    "button_typography_text_transform": "none",
+    "button_padding": {
+        "unit": "px",
+        "top": "15",
+        "right": "40",
+        "bottom": "15",
+        "left": "40",
+        "isLinked": false
+    },
+    "_padding": {
+        "unit": "px",
+        "top": "0",
+        "right": "20",
+        "bottom": "0",
+        "left": "20",
+        "isLinked": false
+    },
+    "_element_width": "inherit",
+    "lst_btn_icon": {
+        "value": "motors-icons motors-icons-mvl-search",
+        "library": "motors-icons"
+    },
+    "tab_background_color": "#35475A",
+    "tab_background_color_active": "#FFFFFF",
+    "tab_text_color_active": "#333D4C",
+    "tab_text_color": "#FFFFFF",
+    "background_color": "#FFFFFF",
+    "fields_text_color": "#9CA3AF",
+    "tabs_contanier_background_color": "#35475A",
+    "fields_background_color": "#FFFFFF"
+}

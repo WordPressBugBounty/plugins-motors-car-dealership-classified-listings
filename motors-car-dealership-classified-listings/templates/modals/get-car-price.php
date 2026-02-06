@@ -1,3 +1,12 @@
+<?php
+$recaptcha_enabled    = apply_filters( 'motors_vl_get_nuxy_mod', false, 'enable_recaptcha' );
+$recaptcha_public_key = apply_filters( 'motors_vl_get_nuxy_mod', false, 'recaptcha_public_key' );
+$recaptcha_secret_key = apply_filters( 'motors_vl_get_nuxy_mod', false, 'recaptcha_secret_key' );
+
+if ( ! empty( $recaptcha_enabled ) && $recaptcha_enabled && ! empty( $recaptcha_public_key ) && ! empty( $recaptcha_secret_key ) ) {
+	wp_enqueue_script( 'stm_grecaptcha' );
+}
+?>
 <div class="modal" id="get-car-price" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<form id="get-car-price-form" action="<?php echo esc_url( home_url( '/' ) ); ?>" method="post">
 		<div class="modal-dialog" role="document">
@@ -34,10 +43,17 @@
 						</div>
 					</div>
 					<div class="row button-row">
-						<div class="col-md-8 col-sm-8"></div>
-						<div class="col-md-4 col-sm-4">
-							<button type="submit"
-									class="stm-request-test-drive"><?php esc_html_e( 'Request', 'stm_vehicles_listing' ); ?></button>
+						<div class="col-md-12 col-sm-12 get-car-price-form-actions">
+							<?php if ( ! empty( $recaptcha_enabled ) && $recaptcha_enabled && ! empty( $recaptcha_public_key ) && ! empty( $recaptcha_secret_key ) ) : ?>
+								<button type="submit" class="stm-request-test-drive g-recaptcha" data-sitekey="<?php echo esc_attr( $recaptcha_public_key ); ?>" data-callback='onSubmitGetCarPrice'><?php esc_html_e( 'Request', 'stm_vehicles_listing' ); ?></button>
+								<script>
+									function onSubmitGetCarPrice(token) {
+										jQuery("form#get-car-price-form").trigger('submit');
+									}
+								</script>
+							<?php else : ?>
+							<button type="submit" class="stm-request-test-drive"><?php esc_html_e( 'Request', 'stm_vehicles_listing' ); ?></button>
+							<?php endif; ?>
 							<div class="stm-ajax-loader" style="margin-top:10px;">
 								<i class="fa fa-spinner"></i>
 							</div>

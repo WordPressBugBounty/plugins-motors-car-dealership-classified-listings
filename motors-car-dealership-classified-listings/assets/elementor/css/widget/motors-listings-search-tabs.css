@@ -1,3 +1,7 @@
+.filter-listing.stm_dynamic_listing_filter {
+    overflow: hidden;
+}
+
 .filter-listing.stm_dynamic_listing_filter .tab-content {
     background-color: var(--motors-bg-color);
 }

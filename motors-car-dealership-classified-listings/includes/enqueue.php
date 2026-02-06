@@ -165,6 +165,7 @@ function stm_listings_enqueue_scripts_styles() {
 	wp_register_style( 'motors-single-listing', STM_LISTINGS_URL . '/assets/css/frontend/single-listing.css', null, STM_LISTINGS_V );
 	wp_register_style( 'inventory', STM_LISTINGS_URL . '/assets/css/frontend/inventory.css', null, STM_LISTINGS_V );
 	wp_register_style( 'motors-tinymce', STM_LISTINGS_URL . '/assets/css/frontend/tinymce.css', null, STM_LISTINGS_V );
+	wp_register_script( 'stm_grecaptcha', 'https://www.google.com/recaptcha/api.js?onload=stmMotorsCaptcha&render=explicit', array( 'jquery' ), STM_LISTINGS_V, true );
 
 	wp_enqueue_script( 'jquery', false, array(), STM_LISTINGS_V, false );
 	wp_enqueue_script( 'jquery-migrate', false, array(), STM_LISTINGS_V, false );

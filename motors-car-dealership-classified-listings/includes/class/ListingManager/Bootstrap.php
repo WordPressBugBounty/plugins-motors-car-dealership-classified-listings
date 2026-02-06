@@ -629,6 +629,7 @@ class Bootstrap {
 			'color-picker'    => 'https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css',
 			'listing-manager' => STM_LISTINGS_URL . '/assets/css/listing-manager/listing-manager.css',
 			'mvl-tinymce'     => STM_LISTINGS_URL . '/assets/libs/tinymce/css/tinymce.css',
+			'mvl-tooltip'     => STM_LISTINGS_URL . '/assets/css/tooltip.css',
 		);
 		if ( apply_filters( 'mvl_is_addon_enabled', false, 'car_info_auto_complete' ) && defined( 'CAR_INFO_AUTO_COMPLETE_URL' ) ) {
 			$css['car-info-auto-complete'] = CAR_INFO_AUTO_COMPLETE_URL . 'assets/css/car-info-auto-complete.css';

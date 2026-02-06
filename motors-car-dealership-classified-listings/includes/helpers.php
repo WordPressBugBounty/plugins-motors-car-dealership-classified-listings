@@ -365,9 +365,9 @@ function mvl_wp_kses_allowed_html_in_content( $allowed_html ) {
 	$allowed_html['span']               = $allowed_atts;
 	$allowed_html['div']                = $allowed_atts;
 	$allowed_html['p']                  = $allowed_atts;
-	$allowed_html['a']                  = $allowed_atts;
-	$allowed_html['i']                  = $allowed_atts;
-	$allowed_html['iframe']             = $allowed_atts;
+
+	$allowed_html['i']      = $allowed_atts;
+	$allowed_html['iframe'] = $allowed_atts;
 
 	$allowed_html['img'] = array(
 		'src'      => true,
@@ -380,6 +380,16 @@ function mvl_wp_kses_allowed_html_in_content( $allowed_html ) {
 		'alt'      => true,
 		'loading'  => true,
 		'decoding' => true,
+	);
+
+	$allowed_html['a'] = array(
+		'href'       => true,
+		'target'     => true,
+		'rel'        => true,
+		'class'      => true,
+		'style'      => true,
+		'data-id'    => true,
+		'aria-label' => true,
 	);
 
 	return $allowed_html;
@@ -1417,19 +1427,19 @@ if ( ! function_exists( 'mvl_check_payment' ) ) {
 			curl_close( $ch ); // phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_close
 
 			if ( 0 === strcmp( $res, 'VERIFIED' ) ) {
-
 				update_user_meta( intval( $invoice ), 'stm_payment_status', 'completed' );
 
-				$member_admin_email_subject = esc_html__( 'New Payment received', 'stm_vehicles_listing' );
-				$member_admin_email_message = esc_html__( 'User paid for submission. User ID:', 'stm_vehicles_listing' ) . ' ' . $invoice;
-
-				do_action( 'stm_set_html_content_type' );
-
-				$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
-				$wp_email = 'wordpress@' . preg_replace( '#^www\.#', '', strtolower( apply_filters( 'stm_get_global_server_val', 'SERVER_NAME' ) ) );
-				$headers  = 'From: ' . $blogname . ' <' . $wp_email . '>' . "\r\n";
-
-				do_action( 'stm_wp_mail_files', get_bloginfo( 'admin_email' ), $member_admin_email_subject, nl2br( $member_admin_email_message ), $headers );
+				do_action(
+					'mvl_send_email',
+					array(
+						'config'          => 'dealer_membership_paid',
+						'to'              => get_bloginfo( 'admin_email' ),
+						'smart_tags_args' => array(
+							'user_id'    => $invoice,
+							'user_login' => get_user_by( 'id', $invoice )->data->user_login,
+						),
+					)
+				);
 			}
 		}
 	}
@@ -1765,3 +1775,32 @@ if ( ! function_exists( 'mvl_get_listing_videos' ) ) {
 
 	add_filter( 'mvl_get_listing_videos', 'mvl_get_listing_videos', 10, 2 );
 }
+
+//SVG support
+add_filter(
+	'upload_mimes',
+	function( $mimes ) {
+		$mimes['svg']  = 'image/svg';
+		$mimes['svgz'] = 'image/svg';
+		return $mimes;
+	}
+);
+
+add_filter(
+	'wp_get_attachment_image_src',
+	function( $image, $attachment_id, $size, $icon ) {
+		if ( $image ) {
+			return $image;
+		}
+
+		$file = get_attached_file( $attachment_id );
+		if ( $file && 'svg' === pathinfo( $file, PATHINFO_EXTENSION ) ) {
+			$url = wp_get_attachment_url( $attachment_id );
+			return array( $url, 512, 512, false );
+		}
+
+		return $image;
+	},
+	10,
+	4
+);

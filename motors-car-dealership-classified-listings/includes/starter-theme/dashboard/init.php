@@ -14,6 +14,13 @@ function mvl_motors_starter_admin_script_styles() {
 				'mvl_motors_starter_plugins_nonce' => wp_create_nonce( 'mvl_motors_starter_wizard_nonce' ),
 			)
 		);
+		wp_localize_script(
+			'admin_mvl_motors_starter_script',
+			'starter_theme_nonces',
+			array(
+				'mvl_stm_update_starter_theme' => wp_create_nonce( 'mvl_stm_update_starter_theme' ),
+			)
+		);
 		wp_enqueue_style( 'admin_mvl_motors_starter_style', STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/css/admin_styles.css', '', STM_LISTINGS_V );
 		wp_enqueue_style( 'starter-icons', STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/fonts/ms/style.css', array(), STM_LISTINGS_V );
 	}

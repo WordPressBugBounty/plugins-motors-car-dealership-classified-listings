@@ -27,7 +27,9 @@
 				<div class="stm-register-form">
 					<form method="post">
 						<input type="hidden" name="redirect" value="disable">
-
+						<?php if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'new_user_registration' ) ) : ?>
+							<input type="hidden" name="stm_custom_register_nonce" value="<?php echo esc_attr( wp_create_nonce( 'stm_custom_register' ) ); ?>">
+						<?php endif; ?>
 						<div class="row form-group">
 							<div class="col-md-6">
 								<h4><?php esc_html_e( 'First Name', 'stm_vehicles_listing' ); ?></h4>

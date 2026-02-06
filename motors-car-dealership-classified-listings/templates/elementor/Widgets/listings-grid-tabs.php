@@ -56,7 +56,17 @@ if ( ! empty( $grid_thumb_img_size ) && has_image_size( $grid_thumb_img_size ) )
 }
 
 $uniqid = uniqid();
+$skin   = isset( $listings_grid_view_skin ) ? $listings_grid_view_skin : 'default';
 
+$image_sizes = $skins[ $skin ] ?? array(
+	'width'  => 580,
+	'height' => 460,
+);
+
+$template_args['image_sizes'] = $image_sizes;
+$template_args['skin']        = $skin;
+$template_args['per_row']     = isset( $listings_number_per_row ) ? intval( $listings_number_per_row ) : 4;
+$template_args                = apply_filters( 'mvl_add_grid_settings_to_array', $template_args );
 ?>
 
 <div class="stm_elementor_listings_grid_tabs_wrap stm_listing_tabs_style_2">
@@ -186,7 +196,12 @@ $uniqid = uniqid();
 							while ( $listing_cars->have_posts() ) :
 								$listing_cars->the_post();
 								?>
-								<?php do_action( 'stm_listings_load_template', 'listing-cars/' . $template, $template_args ); ?>
+								<?php
+
+								$template_path = ! is_mvl_pro() || 'default' === $skin ? 'listing-cars/' . $template : 'listing-grid';
+
+								do_action( 'stm_listings_load_template', $template_path, $template_args );
+								?>
 							<?php endwhile; ?>
 						</div>
 
@@ -222,7 +237,7 @@ $uniqid = uniqid();
 									url: ajaxurl,
 									dataType: 'json',
 									async: true,
-									data: 'action=grid_tabs_widget&tab_type=popular&per_page=<?php echo esc_js( $listings_number ); ?>&template=<?php echo esc_js( $template ); ?>&img_size=<?php echo esc_js( $img_ajax_args ); ?>&security=' + mew_nonces.motors_grid_tabs,
+									data: 'action=grid_tabs_widget&tab_type=popular&per_page=<?php echo esc_js( $listings_number ); ?>&template=<?php echo esc_js( $template ); ?>&img_size=<?php echo esc_js( $img_ajax_args ); ?>&security=' + mew_nonces.motors_grid_tabs + '&skin=<?php echo esc_js( $skin ); ?>',
 									success: function(data) {
 										if( data.hasOwnProperty('html') ) $('#popular-tab-content').html(data.html);
 										updateGridItemTitles();
@@ -260,7 +275,7 @@ $uniqid = uniqid();
 									url: ajaxurl,
 									dataType: 'json',
 									async: true,
-									data: 'action=grid_tabs_widget&tab_type=recent&per_page=<?php echo esc_js( $listings_number ); ?>&template=<?php echo esc_js( $template ); ?>&img_size=<?php echo esc_js( $img_ajax_args ); ?>&security=' + mew_nonces.motors_grid_tabs,
+									data: 'action=grid_tabs_widget&tab_type=recent&per_page=<?php echo esc_js( $listings_number ); ?>&template=<?php echo esc_js( $template ); ?>&img_size=<?php echo esc_js( $img_ajax_args ); ?>&security=' + mew_nonces.motors_grid_tabs + '&skin=<?php echo esc_js( $skin ); ?>',
 									success: function(data) {
 										if( data.hasOwnProperty('html') ) $('#recent-tab-content').html(data.html);
 										updateGridItemTitles();
@@ -314,8 +329,9 @@ $uniqid = uniqid();
 						<?php
 						while ( $featured_query->have_posts() ) :
 							$featured_query->the_post();
+							$template_path = ! is_mvl_pro() || 'default' === $skin ? 'listing-cars/' . $template : 'listing-grid';
+							do_action( 'stm_listings_load_template', $template_path, $template_args );
 							?>
-							<?php do_action( 'stm_listings_load_template', 'listing-cars/' . $template, $template_args ); ?>
 						<?php endwhile; ?>
 					</div>
 					<?php if ( ! empty( $show_all_link ) && 'yes' === $show_all_link ) : ?>

@@ -129,11 +129,20 @@ if ( ! function_exists( 'stm_listings_attributes' ) ) {
 			)
 		);
 
-		$result       = array();
-		$listing_type = get_post_type( get_the_ID() );
-		if ( 'page' === $listing_type ) {
+		$result        = array();
+		$listing_type  = get_post_type( get_the_ID() );
+		$listing_types = array(
+			apply_filters( 'stm_listings_post_type', 'listings' ),
+		);
+
+		if ( class_exists( 'STMMultiListing' ) ) {
+			$listing_types = array_merge( $listing_types, STMMultiListing::stm_get_listing_type_slugs() );
+		}
+
+		if ( ! in_array( $listing_type, $listing_types, true ) ) {
 			$listing_type = 'listings';
 		}
+
 		$options = ( ! empty( $listing_type ) && 'listings' !== $listing_type ) ? "stm_{$listing_type}_options" : 'stm_vehicle_listing_options';
 		$data    = array_filter( (array) get_option( $options ) );
 
@@ -1739,4 +1748,233 @@ function mvl_get_page_id_by_title( $title ) {
 	);
 	wp_reset_postdata();
 	return ! empty( $query->posts[0] ) ? $query->posts[0] : null;
+}
+
+add_action(
+	'after_setup_theme',
+	function() {
+		if ( ! function_exists( 'stm_motors_check_recaptcha' ) ) {
+			function stm_motors_check_recaptcha( $secret, $token ) {
+				$url_google_api = 'https://www.google.com/recaptcha/api/siteverify';
+
+				$remote_address = '';
+
+				if ( ! empty( $_SERVER['REMOTE_ADDR'] ) ) {
+					$remote_address = sanitize_text_field( $_SERVER['REMOTE_ADDR'] );
+				}
+
+				$query = $url_google_api . '?secret=' . $secret . '&response=' . $token . '&remoteip=' . $remote_address;
+
+				$http = wp_remote_get( $query );
+
+				$body = wp_remote_retrieve_body( $http );
+
+				$data = json_decode( $body, true );
+
+				$score = ( ! empty( $data['score'] ) ) ? $data['score'] : null;
+
+				if ( $score < 0.4 ) {
+					return false;
+				}
+
+				return true;
+			}
+		}
+		if ( ! function_exists( 'stm_get_user_role' ) ) {
+			function stm_get_user_role( $default, $user_id = null ) {
+				$user_data = get_userdata( $user_id ? $user_id : get_current_user_id() );
+				return ! empty( $user_data ) && in_array( 'stm_dealer', $user_data->roles, true );
+			}
+
+			add_filter( 'stm_get_user_role', 'stm_get_user_role', 10, 2 );
+		}
+
+		// Add car helpers.
+		if ( ! function_exists( 'stm_get_dealer_marks' ) ) {
+			function stm_get_dealer_marks( $dealer_id = '' ) {
+				if ( ! empty( $dealer_id ) ) {
+					$args = array(
+						'post_type'      => 'dealer_review',
+						'posts_per_page' => - 1,
+						'post_status'    => 'publish',
+						'meta_query'     => array(
+							array(
+								'key'     => 'stm_review_added_on',
+								'value'   => intval( $dealer_id ),
+								'compare' => '=',
+							),
+						),
+					);
+
+					$query = new WP_Query( $args );
+
+					$ratings = array(
+						'average'     => 0,
+						'rate1'       => 0,
+						'rate1_label' => apply_filters( 'motors_vl_get_nuxy_mod', esc_html__( 'Customer Service', 'motors' ), 'dealer_rate_1' ),
+						'rate2'       => 0,
+						'rate2_label' => apply_filters( 'motors_vl_get_nuxy_mod', esc_html__( 'Buying Process', 'motors' ), 'dealer_rate_2' ),
+						'rate3'       => 0,
+						'rate3_label' => apply_filters( 'motors_vl_get_nuxy_mod', esc_html__( 'Overall Experience', 'motors' ), 'dealer_rate_3' ),
+						'likes'       => 0,
+						'dislikes'    => 0,
+						'count'       => 0,
+					);
+
+					if ( $query->have_posts() ) {
+						while ( $query->have_posts() ) {
+							$query->the_post();
+							$rate1           = get_post_meta( get_the_id(), 'stm_rate_1', true );
+							$rate2           = get_post_meta( get_the_id(), 'stm_rate_2', true );
+							$rate3           = get_post_meta( get_the_id(), 'stm_rate_3', true );
+							$stm_recommended = get_post_meta( get_the_id(), 'stm_recommended', true );
+
+							if ( ! empty( $rate1 ) ) {
+								$ratings['rate1'] = intval( $ratings['rate1'] ) + intval( $rate1 );
+							}
+							if ( ! empty( $rate2 ) ) {
+								$ratings['rate2'] = intval( $ratings['rate2'] ) + intval( $rate2 );
+							}
+							if ( ! empty( $rate1 ) ) {
+								$ratings['rate3'] = intval( $ratings['rate3'] ) + intval( $rate3 );
+							}
+
+							if ( 'yes' === $stm_recommended ) {
+								$ratings['likes'] ++;
+							}
+
+							if ( 'no' === $stm_recommended ) {
+								$ratings['dislikes'] ++;
+							}
+						}
+						$total            = $query->found_posts;
+						$ratings['count'] = $total;
+
+						$average_num = 0;
+
+						if ( empty( $ratings['rate1_label'] ) ) {
+							$ratings['rate1'] = 0;
+						} else {
+							$ratings['rate1'] = round( $ratings['rate1'] / $ratings['count'], 1 );
+
+							$ratings['rate1_width'] = ( ( $ratings['rate1'] * 100 ) / 5 ) . '%';
+
+							$ratings['average'] = $ratings['average'] + $ratings['rate1'];
+
+							$average_num ++;
+						}
+
+						if ( empty( $ratings['rate2_label'] ) ) {
+							$ratings['rate2'] = 0;
+						} else {
+							$ratings['rate2'] = round( $ratings['rate2'] / $ratings['count'], 1 );
+
+							$ratings['rate2_width'] = ( ( $ratings['rate2'] * 100 ) / 5 ) . '%';
+
+							$ratings['average'] = $ratings['average'] + $ratings['rate2'];
+
+							$average_num ++;
+						}
+
+						if ( empty( $ratings['rate3_label'] ) ) {
+							$ratings['rate3'] = 0;
+						} else {
+							$ratings['rate3'] = round( $ratings['rate3'] / $ratings['count'], 1 );
+
+							$ratings['rate3_width'] = ( ( $ratings['rate3'] * 100 ) / 5 ) . '%';
+
+							$ratings['average'] = $ratings['average'] + $ratings['rate3'];
+
+							$average_num ++;
+						}
+
+						$ratings['average']       = number_format( round( $ratings['average'] / $average_num, 1 ), '1', '.', '' );
+						$ratings['average_width'] = ( ( $ratings['average'] * 100 ) / 5 ) . '%';
+
+						if ( empty( $ratings['rate1_label'] ) && empty( $ratings['rate2_label'] ) && empty( $ratings['rate3_label'] ) ) {
+							$ratings['average'] = 0;
+						}
+
+						wp_reset_postdata();
+					}
+
+					return $ratings;
+				}
+			}
+		}
+
+		if ( ! function_exists( 'stm_get_dealer_logo_placeholder' ) ) {
+			function stm_get_dealer_logo_placeholder() {
+				echo esc_url( get_stylesheet_directory_uri() . '/assets/images/empty_dealer_logo.png' );
+			}
+		}
+	}
+);
+
+if ( ! function_exists( 'mvl_reset_elementor_cache' ) ) {
+	//Reset elementor cache
+	function mvl_reset_elementor_cache() {
+
+		if ( class_exists( 'Elementor\\Plugin' ) ) {
+
+			Elementor\Plugin::instance()->files_manager->clear_cache();
+
+			$cache_key = Elementor\Api::TRANSIENT_KEY_PREFIX . ELEMENTOR_VERSION;
+
+			$info_data = get_transient( $cache_key );
+
+			$timeout = 25;
+
+			$body_request = array(
+				// Which API version is used.
+				'api_version' => ELEMENTOR_VERSION,
+				// Which language to return.
+				'site_lang'   => get_bloginfo( 'language' ),
+			);
+
+			$site_key = Elementor\Api::get_site_key();
+
+			if ( ! empty( $site_key ) ) {
+				$body_request['site_key'] = $site_key;
+			}
+
+			$response = wp_remote_get(
+				Elementor\Api::$api_info_url,
+				array(
+					'timeout' => $timeout,
+					'body'    => $body_request,
+				)
+			);
+
+			if ( is_wp_error( $response ) || 200 !== (int) wp_remote_retrieve_response_code( $response ) ) {
+				set_transient( $cache_key, array(), 2 * HOUR_IN_SECONDS );
+
+				return false;
+			}
+
+			$info_data = json_decode( wp_remote_retrieve_body( $response ), true );
+
+			if ( empty( $info_data ) || ! is_array( $info_data ) ) {
+				set_transient( $cache_key, array(), 2 * HOUR_IN_SECONDS );
+
+				return false;
+			}
+
+			if ( isset( $info_data['library'] ) ) {
+				update_option( Elementor\Api::LIBRARY_OPTION_KEY, $info_data['library'], 'no' );
+
+				unset( $info_data['library'] );
+			}
+
+			if ( isset( $info_data['feed'] ) ) {
+				update_option( Elementor\Api::FEED_OPTION_KEY, $info_data['feed'], 'no' );
+
+				unset( $info_data['feed'] );
+			}
+
+			set_transient( $cache_key, $info_data, 12 * HOUR_IN_SECONDS );
+		}
+	}
+
+	add_action( 'mvl_reset_elementor_cache', 'mvl_reset_elementor_cache' );
 }

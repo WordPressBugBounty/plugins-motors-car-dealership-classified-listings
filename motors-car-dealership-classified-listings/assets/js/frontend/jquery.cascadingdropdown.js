@@ -19,7 +19,7 @@
 
     // Methods
     Dropdown.prototype = {
-        _create: function() {
+        _create: function () {
             var self = this;
 
             self.pending = 0;
@@ -29,27 +29,27 @@
             self.originalDropdownItems = self.el.children('option');
 
             // Init event handlers
-            if(typeof self.options.onChange === 'function') {
-                self.el.on('change', function(event) {
+            if (typeof self.options.onChange === 'function') {
+                self.el.on('change', function (event) {
                     var requirementsMet = self._requirementsMet() && self.el[0].value;
                     self.options.onChange.call(self, event, self.el.val(), self.getRequiredValues(), requirementsMet);
                 });
             }
 
-            if(typeof self.options.onEnable === 'function') {
-                self.el.on('enabled', function(event) {
+            if (typeof self.options.onEnable === 'function') {
+                self.el.on('enabled', function (event) {
                     self.options.onEnable.call(self, event, self.el.val());
                 });
             }
 
-            if(typeof self.options.onDisable === 'function') {
-                self.el.on('disabled', function(event) {
+            if (typeof self.options.onDisable === 'function') {
+                self.el.on('disabled', function (event) {
                     self.options.onDisable.call(self, event, self.el.val());
                 });
             }
 
-            if(self.requiredDropdowns) {
-                self.requiredDropdowns.on('change', function(event) {
+            if (self.requiredDropdowns) {
+                self.requiredDropdowns.on('change', function (event) {
                     self.update();
                 });
             }
@@ -60,14 +60,14 @@
             // Call update
             self.update();
         },
-        
+
         // Destroys the instance and reverts everything back to initial state
-        _destroy: function() {
+        _destroy: function () {
             this.el.replaceWith(this.initialState).removeData('plugin_cascadingDropdown');
         },
 
         // Enables the dropdown
-        enable: function() {
+        enable: function () {
             /*
             *
             *
@@ -81,7 +81,7 @@
         },
 
         // Disables the dropdown
-        disable: function() {
+        disable: function () {
             /*
             *
             *
@@ -95,31 +95,31 @@
         },
 
         // Checks if required dropdowns have value
-        _requirementsMet: function() {
+        _requirementsMet: function () {
             var self = this;
 
-            if(!self.requiredDropdowns) {
+            if (!self.requiredDropdowns) {
                 return true;
             }
 
-            if(self.options.requireAll) { // If requireAll is true, return true if all dropdowns have values
-                return (self.requiredDropdowns.filter(function() {
+            if (self.options.requireAll) { // If requireAll is true, return true if all dropdowns have values
+                return (self.requiredDropdowns.filter(function () {
                     return !!$(this).val();
                 }).length == self.options.requires.length);
             } else { // Otherwise, return true if any one of the required dropdowns has value
-                return (self.requiredDropdowns.filter(function() {
+                return (self.requiredDropdowns.filter(function () {
                     return !!$(this).val();
                 }).length > 0);
             }
         },
 
         // Defines dropdown item list source - inspired by jQuery UI Autocomplete
-        _initSource: function() {
+        _initSource: function () {
             var self = this;
 
-            if(Array.isArray(self.options.source)) {
-                this.source = function(request, response) {
-                    response($.map(self.options.source, function(item) {
+            if (Array.isArray(self.options.source)) {
+                this.source = function (request, response) {
+                    response($.map(self.options.source, function (item) {
                         return {
                             label: item.label || item.value || item,
                             value: item.value || item.label || item,
@@ -127,11 +127,11 @@
                         };
                     }));
                 };
-            } else if ( typeof self.options.source === 'string' ) {
+            } else if (typeof self.options.source === 'string') {
                 var url = self.options.source;
 
-                this.source = function(request, response) {
-                    if ( self.xhr ) {
+                this.source = function (request, response) {
+                    if (self.xhr) {
                         self.xhr.abort();
                     }
                     self.xhr = $.ajax({
@@ -140,10 +140,10 @@
                         dataType: self.options.useJson ? 'json' : undefined,
                         type: self.options.usePost ? 'post' : 'get',
                         contentType: 'application/json; charset=utf-8',
-                        success: function(data) {
+                        success: function (data) {
                             response(data);
                         },
-                        error: function() {
+                        error: function () {
                             response([]);
                         }
                     });
@@ -153,12 +153,12 @@
             }
         },
 
-        getRequiredValues: function() {
+        getRequiredValues: function () {
             var data = {};
-            if(this.requiredDropdowns) {
-                $.each(this.requiredDropdowns, function() {
+            if (this.requiredDropdowns) {
+                $.each(this.requiredDropdowns, function () {
                     var instance = $(this).data('plugin_cascadingDropdown');
-                    if(instance.name) {
+                    if (instance.name) {
                         data[instance.name] = instance.el.val();
                     }
                 });
@@ -168,21 +168,21 @@
         },
 
         // Update the dropdown
-        update: function() {
+        update: function () {
             var self = this;
 
             // Disable it first
             self.disable();
 
             // If required dropdowns have no value, return
-            if(!self._requirementsMet() && !self.options.allowAll) {
+            if (!self._requirementsMet() && !self.options.allowAll) {
                 self.setSelected(0);
                 self._triggerReady();
                 return self.el;
             }
 
             // If source isn't defined, it's most likely a static dropdown, so just enable it
-            if(!self.source) {
+            if (!self.source) {
                 self.enable();
                 self._triggerReady();
                 return self.el;
@@ -202,30 +202,30 @@
             return self.el;
         },
 
-        _response: function(items) {
+        _response: function (items) {
             var self = this;
 
-            return function(items) {
+            return function (items) {
                 self._renderItems(items);
 
                 self.pending--;
-                if(!self.pending) {
+                if (!self.pending) {
                     self.el.removeClass(self.isLoadingClassName);
                 }
             }
         },
 
         // Render the dropdown items
-        _renderItems: function(items) {
+        _renderItems: function (items) {
             var self = this;
 
             // Remove all dropdown items and restore to initial state
-			var val = self.el.val();
+            var val = self.el.val();
             self.el.find('option, optgroup').remove();
             self.el.append(self.originalDropdownItems);
             self.el.val(val);
 
-            if(!items) {
+            if (!items) {
                 self._triggerReady();
                 return;
             }
@@ -233,34 +233,34 @@
             var selected = [];
 
             // Add all items as dropdown item
-            var getOption = function(item) {
-              var selectedAttr = '', classes = '';
-              if(item.selected) {
-                selected.push(item.value.toString());
-              }
+            var getOption = function (item) {
+                var selectedAttr = '', classes = '';
+                if (item.selected) {
+                    selected.push(item.value.toString());
+                }
 
-              if(item.classes && item.classes.length) {
-                classes = ' class="' + item.classes.join(' ') + '"';
-              }
+                if (item.classes && item.classes.length) {
+                    classes = ' class="' + item.classes.join(' ') + '"';
+                }
 
-              return '<option' + classes + ' value="' + item.value + '"' + selectedAttr + '>' + item.label + '</option>';
+                return '<option' + classes + ' value="' + item.value + '"' + selectedAttr + '>' + item.label + '</option>';
             };
 
             if (Array.isArray(items)) {
-              $.each(items, function(index, item) {
-                self.el.append(getOption(item));
-              });
+                $.each(items, function (index, item) {
+                    self.el.append(getOption(item));
+                });
             } else {
-              $.each(items, function(key, value) {
-                var itemData = [];
-                itemData.push('<optgroup label="' + key + '">');
-                for (var i = 0; i < value.length; i++) {
-                  var item = value[i];
-                  itemData.push(getOption(item));
-                }
-                itemData.push('</optgroup>');
-                self.el.append(itemData.join(''));
-              });
+                $.each(items, function (key, value) {
+                    var itemData = [];
+                    itemData.push('<optgroup label="' + key + '">');
+                    for (var i = 0; i < value.length; i++) {
+                        var item = value[i];
+                        itemData.push(getOption(item));
+                    }
+                    itemData.push('</optgroup>');
+                    self.el.append(itemData.join(''));
+                });
             }
 
             // Enable the dropdown
@@ -273,8 +273,8 @@
         },
 
         // Trigger the ready event when instance is initialised for the first time
-        _triggerReady: function() {
-            if(this.initialised) return;
+        _triggerReady: function () {
+            if (this.initialised) return;
 
             // Set selected dropdown item if defined
             this.options.selected && this.setSelected(this.options.selected);
@@ -284,34 +284,34 @@
         },
 
         // Sets the selected dropdown item
-        setSelected: function(indexOrValue, triggerChange) {
+        setSelected: function (indexOrValue, triggerChange) {
             var self = this,
                 dropdownItems = self.el.find('option');
 
             // Trigger change event by default
-            if(typeof triggerChange === 'undefined') {
+            if (typeof triggerChange === 'undefined') {
                 triggerChange = true;
             }
-            
+
             var selectedItems = [];
-            
+
             // check if indexOrValue is an array
-            if(Array.isArray(indexOrValue)) {
+            if (Array.isArray(indexOrValue)) {
                 selectedItems = indexOrValue;
             } else {
                 selectedItems = selectedItems.concat(indexOrValue);
             }
 
             var selectedValue;
-            if(self.el.is('[multiple]')) {
-                selectedValue = selectedItems.map(function(item) {
-                    if(typeof item === 'number'
-                        && (item !== undefined 
-                        && item > -1 
-                        && item < dropdownItems.length)) {
+            if (self.el.is('[multiple]')) {
+                selectedValue = selectedItems.map(function (item) {
+                    if (typeof item === 'number'
+                        && (item !== undefined
+                            && item > -1
+                            && item < dropdownItems.length)) {
                         return dropdownItems[item].value
                     }
-                    
+
                     return item;
                 });
 
@@ -319,19 +319,19 @@
                 selectedValue = selectedItems[0];
 
                 // if selected item is a number, get the value for the item at that index
-                if(typeof selectedItems[0] === 'number' 
-                    && (selectedItems[0] !== undefined 
-                    && selectedItems[0] > -1 
-                    && selectedItems[0] < dropdownItems.length)) {
+                if (typeof selectedItems[0] === 'number'
+                    && (selectedItems[0] !== undefined
+                        && selectedItems[0] > -1
+                        && selectedItems[0] < dropdownItems.length)) {
                     selectedValue = dropdownItems[selectedItems[0]].value;
                 }
             }
-            
+
             // Set the dropdown item
             self.el.val(selectedValue);
 
             // Trigger change event
-            if(triggerChange) {
+            if (triggerChange) {
                 self.el.trigger('change');
             }
 
@@ -346,22 +346,22 @@
     }
 
     CascadingDropdown.prototype = {
-        _init: function() {
+        _init: function () {
             var self = this;
 
             self.pending = 0;
 
             // Instance array
             self.dropdowns = [];
-            
-            var dropdowns = $($.map(self.options.selectBoxes, function(item) {
+
+            var dropdowns = $($.map(self.options.selectBoxes, function (item) {
                 return item.selector;
             }).join(','), self.el);
 
             // Init event handlers
             var counter = 0;
             function readyEventHandler(event) {
-                if(++counter == dropdowns.length) { // Once all dropdowns are ready, unbind the event handler, and execute onReady
+                if (++counter == dropdowns.length) { // Once all dropdowns are ready, unbind the event handler, and execute onReady
                     dropdowns.unbind('ready', readyEventHandler);
                     self.options.onReady.call(self, event, self.getValues());
                 }
@@ -370,17 +370,17 @@
             function changeEventHandler(event) {
                 self.options.onChange.call(self, event, self.getValues());
             }
-            
-            if(typeof self.options.onReady === 'function') {
+
+            if (typeof self.options.onReady === 'function') {
                 dropdowns.bind('ready', readyEventHandler);
             }
 
-            if(typeof self.options.onChange === 'function') {
+            if (typeof self.options.onChange === 'function') {
                 dropdowns.bind('change', changeEventHandler);
             }
 
             // Init dropdowns
-            $.each(self.options.selectBoxes, function(index, item) {
+            $.each(self.options.selectBoxes, function (index, item) {
                 // Create the instance
                 var instance = new Dropdown(this, self);
 
@@ -391,24 +391,24 @@
                 instance._create();
             });
         },
-        
+
         // Destroys the instance and reverts everything back to its initial state 
-        destroy: function() {
-            $.each(this.dropdowns, function(index, item){
+        destroy: function () {
+            $.each(this.dropdowns, function (index, item) {
                 item._destroy();
             });
             this.el.removeData('plugin_cascadingDropdown');
-            
+
             return this.el;
         },
 
         // Fetches the values from all dropdowns in this group
-        getValues: function() {
+        getValues: function () {
             var values = {};
 
             // Build the object and insert values from instances with name
-            $.each(this.dropdowns, function(index, instance) {
-                if(instance.name) {
+            $.each(this.dropdowns, function (index, instance) {
+                if (instance.name) {
                     values[instance.name] = instance.el.val();
                 }
             });
@@ -418,17 +418,17 @@
     }
 
     // jQuery plugin declaration
-    $.fn.cascadingDropdown = function(methodOrOptions) {
+    $.fn.cascadingDropdown = function (methodOrOptions) {
         var $this = $(this),
             args = arguments,
             instance = $this.data('plugin_cascadingDropdown');
 
-        if(typeof methodOrOptions === 'object' || !methodOrOptions) {
+        if (typeof methodOrOptions === 'object' || !methodOrOptions) {
             return !instance && $this.data('plugin_cascadingDropdown', new CascadingDropdown(this, methodOrOptions));
-        } else if(typeof methodOrOptions === 'string') {
-            if(!instance) {
+        } else if (typeof methodOrOptions === 'string') {
+            if (!instance) {
                 $.error('Cannot call method ' + methodOrOptions + ' before init.');
-            } else if(instance[methodOrOptions]) {
+            } else if (instance[methodOrOptions]) {
                 return instance[methodOrOptions].apply(instance, Array.prototype.slice.call(args, 1))
             }
         } else {

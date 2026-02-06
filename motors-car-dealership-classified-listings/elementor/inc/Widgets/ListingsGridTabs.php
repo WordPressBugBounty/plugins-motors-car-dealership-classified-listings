@@ -1,10 +1,10 @@
 <?php
 
-namespace Motors_Elementor_Widgets_Free\Widgets;
+namespace MotorsElementorWidgetsFree\Widgets;
 
-use Motors_Elementor_Widgets_Free\MotorsElementorWidgetsFree;
-use Motors_Elementor_Widgets_Free\Helpers\Helper;
-use Motors_Elementor_Widgets_Free\Widgets\WidgetBase;
+use MotorsElementorWidgetsFree\MotorsElementorWidgetsFree;
+use MotorsElementorWidgetsFree\Helpers\Helper;
+use MotorsElementorWidgetsFree\Widgets\WidgetBase;
 
 class ListingsGridTabs extends WidgetBase {
 
@@ -12,7 +12,6 @@ class ListingsGridTabs extends WidgetBase {
 		parent::__construct( $data, $args );
 
 		$this->stm_ew_enqueue( $this->get_name() );
-
 	}
 
 	public function get_style_depends(): array {
@@ -62,6 +61,8 @@ class ListingsGridTabs extends WidgetBase {
 				'options'  => Helper::stm_ew_get_multilisting_types( true ),
 			)
 		);
+
+		do_action( 'mvl_add_listings_grid_skins_elementor_control', $this );
 
 		$this->add_control(
 			'listings_number',
@@ -203,7 +204,16 @@ class ListingsGridTabs extends WidgetBase {
 
 		$this->stm_end_control_section();
 
-		$this->stm_start_style_controls_section( 'section_title', esc_html__( 'Section Title', 'stm_vehicles_listing' ) );
+		$this->start_controls_section(
+			'section_title',
+			array(
+				'label'     => esc_html__( 'Section Title', 'stm_vehicles_listing' ),
+				'tab'       => \Elementor\Controls_Manager::TAB_STYLE,
+				'condition' => array(
+					'listings_grid_view_skin' => 'default',
+				),
+			)
+		);
 
 		$this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
@@ -403,7 +413,16 @@ class ListingsGridTabs extends WidgetBase {
 
 		$this->stm_end_control_section();
 
-		$this->stm_start_style_controls_section( 'section_listing_item', esc_html__( 'Listing Item', 'stm_vehicles_listing' ) );
+		$this->start_controls_section(
+			'section_listing_item',
+			array(
+				'label'     => esc_html__( 'Listing Card Styles', 'stm_vehicles_listing' ),
+				'tab'       => \Elementor\Controls_Manager::TAB_STYLE,
+				'condition' => array(
+					'listings_grid_view_skin' => 'default',
+				),
+			)
+		);
 
 		$this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
@@ -445,13 +464,16 @@ class ListingsGridTabs extends WidgetBase {
 		$this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
-				'name'     => 'grid_sale_price_typography',
-				'label'    => esc_html__( 'Sale Price Typography', 'stm_vehicles_listing' ),
-				'exclude'  => array(
+				'name'      => 'grid_sale_price_typography',
+				'label'     => esc_html__( 'Sale Price Typography', 'stm_vehicles_listing' ),
+				'exclude'   => array(
 					'font_style',
 					'word_spacing',
 				),
-				'selector' => '{{WRAPPER}} .stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .price.discounted-price .sale-price',
+				'condition' => array(
+					'skin' => 'classic',
+				),
+				'selector'  => '{{WRAPPER}} .stm_elementor_listings_grid_tabs_wrap .tab-pane .row .stm-directory-grid-loop .listing-car-item-meta .car-meta-top .price.discounted-price .sale-price',
 			)
 		);
 
@@ -592,12 +614,13 @@ class ListingsGridTabs extends WidgetBase {
 
 		$this->stm_end_control_section();
 
+		do_action( 'mvl_add_listings_grid_styles_elementor_section', $this );
+
 	}
 
 	protected function render() {
 		$settings = $this->get_settings_for_display();
-
-		Helper::stm_ew_load_template( 'elementor/Widgets/listings-grid-tabs', STM_LISTINGS_PATH, $settings );
+		Helper::stm_ew_load_template( 'elementor/Widgets/listings-grid-tabs', STM_LISTINGS_PATH, apply_filters( 'mvl_add_listings_skins_to_elementor_display_settings', $settings, 'grid' ) );
 	}
 
 }

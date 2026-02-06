@@ -1,10 +1,10 @@
 <?php
 
-namespace Motors_Elementor_Widgets_Free\Widgets\HeaderFooter;
+namespace MotorsElementorWidgetsFree\Widgets\HeaderFooter;
 
-use Motors_Elementor_Widgets_Free\MotorsElementorWidgetsFree;
-use Motors_Elementor_Widgets_Free\Helpers\Helper;
-use Motors_Elementor_Widgets_Free\Widgets\WidgetBase;
+use MotorsElementorWidgetsFree\MotorsElementorWidgetsFree;
+use MotorsElementorWidgetsFree\Helpers\Helper;
+use MotorsElementorWidgetsFree\Widgets\WidgetBase;
 
 class CompareButton extends WidgetBase {
 

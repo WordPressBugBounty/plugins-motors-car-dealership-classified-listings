@@ -2,7 +2,7 @@
 add_filter(
 	'mvl_monetization_subscription_settings',
 	function ( $global_conf ) {
-		if ( ! is_mvl_pro() ) {
+		if ( ! apply_filters( 'is_mvl_pro', false ) || apply_filters( 'disable_monetization_subscription', false ) ) {
 			return $global_conf;
 		}
 

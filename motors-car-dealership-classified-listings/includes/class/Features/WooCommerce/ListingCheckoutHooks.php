@@ -10,7 +10,6 @@ class ListingCheckoutHooks {
 
 	public function __construct() {
 		$this->add_action( 'woocommerce_checkout_create_order_line_item', 20, 3 );
-		$this->add_action( 'woocommerce_payment_complete', 20, 1 );
 		$this->add_action( 'woocommerce_order_status_completed', 20, 1 );
 		$this->add_action( 'woocommerce_order_status_failed', 20, 1 );
 		$this->add_action( 'woocommerce_order_status_refunded', 20, 1 );
@@ -163,24 +162,22 @@ class ListingCheckoutHooks {
 					continue;
 				}
 
-				$to      = get_bloginfo( 'admin_email' );
-				$args    = array(
-					'first_name'    => $order->get_billing_first_name(),
-					'last_name'     => $order->get_billing_last_name(),
-					'email'         => $order->get_billing_email(),
-					'order_id'      => $order->get_id(),
-					'order_status'  => $order_status,
-					'listing_title' => $product->get_title(),
-					'car_id'        => $product->get_id(),
+				do_action(
+					'mvl_send_email',
+					array(
+						'config'          => 'pay_per_listing',
+						'to'              => get_bloginfo( 'admin_email' ),
+						'smart_tags_args' => array(
+							'first_name'   => $order->get_billing_first_name(),
+							'last_name'    => $order->get_billing_last_name(),
+							'email'        => $order->get_billing_email(),
+							'order_id'     => $order->get_id(),
+							'order_status' => $order_status,
+							'listing_id'   => $product->get_id(),
+							'user_id'      => $order->get_user_id(),
+						),
+					)
 				);
-				$subject = stm_generate_subject_view( '', 'pay_per_listing', $args );
-				$body    = stm_generate_template_view( '', 'pay_per_listing', $args );
-
-				add_filter( 'wp_mail_content_type', 'stm_set_html_content_type_mail' );
-
-				wp_mail( $to, $subject, $body );
-
-				remove_filter( 'wp_mail_content_type', 'stm_set_html_content_type_mail' );
 			}
 		}
 	}
@@ -208,6 +205,8 @@ class ListingCheckoutHooks {
 		if ( ! $order ) {
 			return;
 		}
+
+		$this->woocommerce_payment_complete( $order_id );
 
 		// Get order items
 		$order_items = $order->get_items( apply_filters( 'woocommerce_purchase_order_item_types', 'line_item' ) );

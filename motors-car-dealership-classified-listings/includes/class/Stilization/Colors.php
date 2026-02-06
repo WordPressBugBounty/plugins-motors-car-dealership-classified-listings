@@ -270,6 +270,11 @@ class Colors {
 						'id'           => 'border',
 						'alphachannel' => 0.15,
 					),
+					'text_lowalpha_color'  => array(
+						'name'         => __( 'Text (0.3)', 'stm_vehicles_listing' ),
+						'id'           => 'lowalpha_text',
+						'alphachannel' => 0.30,
+					),
 					'text_alpha_color'     => array(
 						'name'         => __( 'Text (0.5)', 'stm_vehicles_listing' ),
 						'id'           => 'alpha_text',

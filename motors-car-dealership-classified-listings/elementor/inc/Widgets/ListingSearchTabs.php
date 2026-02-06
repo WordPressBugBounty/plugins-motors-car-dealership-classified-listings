@@ -1,10 +1,10 @@
 <?php
 
-namespace Motors_Elementor_Widgets_Free\Widgets;
+namespace MotorsElementorWidgetsFree\Widgets;
 
-use Motors_Elementor_Widgets_Free\MotorsElementorWidgetsFree;
-use Motors_Elementor_Widgets_Free\Helpers\Helper;
-use Motors_Elementor_Widgets_Free\Widgets\WidgetBase;
+use MotorsElementorWidgetsFree\MotorsElementorWidgetsFree;
+use MotorsElementorWidgetsFree\Helpers\Helper;
+use MotorsElementorWidgetsFree\Widgets\WidgetBase;
 
 class ListingSearchTabs extends WidgetBase {
 
@@ -71,6 +71,15 @@ class ListingSearchTabs extends WidgetBase {
 			array(
 				'label' => esc_html__( 'Listings Amount of Category', 'stm_vehicles_listing' ),
 				'type'  => \Elementor\Controls_Manager::SWITCHER,
+			)
+		);
+
+		$this->add_control(
+			'lst_show_label',
+			array(
+				'label'   => esc_html__( 'Show Category Label', 'stm_vehicles_listing' ),
+				'default' => false,
+				'type'    => \Elementor\Controls_Manager::SWITCHER,
 			)
 		);
 
@@ -422,6 +431,17 @@ class ListingSearchTabs extends WidgetBase {
 		$this->stm_start_style_controls_section( 'section_style_general', esc_html__( 'General', 'stm_vehicles_listing' ) );
 
 		$this->add_control(
+			'content_padding',
+			array(
+				'label'     => __( 'Content Padding', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors' => array(
+					'{{WRAPPER}} .filter-listing .tab-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;',
+				),
+			)
+		);
+
+		$this->add_control(
 			'background_color',
 			array(
 				'label'     => esc_html__( 'Background Color', 'stm_vehicles_listing' ),
@@ -430,6 +450,187 @@ class ListingSearchTabs extends WidgetBase {
 					'{{WRAPPER}} .filter-listing .tab-content' => 'background: {{VALUE}};',
 				),
 				'separator' => 'after',
+			)
+		);
+
+		$this->add_responsive_control(
+			'border_radius',
+			array(
+				'label'      => esc_html__( 'Section Border Radius', 'stm_vehicles_listing' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .filter-listing.stm_dynamic_listing_filter' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;',
+				),
+			)
+		);
+
+		$this->add_control(
+			'fields_style_heading',
+			array(
+				'label' => esc_html__( 'Fields Style', 'stm_vehicles_listing' ),
+				'type'  => \Elementor\Controls_Manager::HEADING,
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			array(
+				'name'           => 'fields_label_typography',
+				'label'          => esc_html__( 'Fields Label Typography', 'stm_vehicles_listing' ),
+				'exclude'        => array(
+					'font_style',
+					'text_decoration',
+					'word_spacing',
+				),
+				'fields_options' => array(),
+				'selector'       => '{{WRAPPER}} .filter-listing .tab-content .stm-select-label-text',
+			)
+		);
+
+		$this->add_control(
+			'fields_label_margin',
+			array(
+				'label'     => __( 'Fields Label Margin', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors' => array(
+					'{{WRAPPER}} .filter-listing .tab-content .stm-select-label-text' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;display: inline-block;',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			array(
+				'name'           => 'fields_typography',
+				'label'          => esc_html__( 'Fields Typography', 'stm_vehicles_listing' ),
+				'exclude'        => array(
+					'font_style',
+					'text_decoration',
+					'word_spacing',
+				),
+				'fields_options' => array(),
+				'selector'       => '{{WRAPPER}} .select2-container--default .select2-selection--single .select2-selection__rendered',
+			)
+		);
+
+		$this->add_control(
+			'fields_padding',
+			array(
+				'label'     => __( 'Fields Padding', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors' => array(
+					'{{WRAPPER}} .select2-container--default .select2-selection--single .select2-selection__rendered' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;display: inline-block;',
+				),
+			)
+		);
+
+		$this->add_control(
+			'fields_text_color',
+			array(
+				'label'     => esc_html__( 'Fields Text Color', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .select2-container--default .select2-selection--single .select2-selection__rendered' => 'color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'fields_background_color',
+			array(
+				'label'     => esc_html__( 'Fields Background Color', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .select2-container--default .select2-selection--single' => 'background-color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			array(
+				'name'     => 'lst_fields_border',
+				'label'    => esc_html__( 'Fields Border', 'stm_vehicles_listing' ),
+				'selector' => '{{WRAPPER}} .filter-listing .tab-content .stm-filter-tab-selects .stm-select-col input, {{WRAPPER}} .filter-listing .tab-content .stm-filter-tab-selects .stm-select-col select, {{WRAPPER}} .stm_dynamic_listing_filter .select2-container--default .select2-selection--single',
+			)
+		);
+
+		$this->add_responsive_control(
+			'lst_fields_border_radius',
+			array(
+				'label'      => esc_html__( 'Fields Border Radius', 'stm_vehicles_listing' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .filter-listing .tab-content .stm-filter-tab-selects .stm-select-col input'         => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;',
+					'{{WRAPPER}} .filter-listing .tab-content .stm-filter-tab-selects .stm-select-col select'        => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;',
+					'{{WRAPPER}} .stm_dynamic_listing_filter .select2-container--default .select2-selection--single' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;',
+				),
+			)
+		);
+
+		$this->add_control(
+			'lst_border_divider',
+			array(
+				'type' => \Elementor\Controls_Manager::DIVIDER,
+			)
+		);
+
+		$this->add_control(
+			'tabs_style_heading',
+			array(
+				'label' => esc_html__( 'Tabs Style', 'stm_vehicles_listing' ),
+				'type'  => \Elementor\Controls_Manager::HEADING,
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			array(
+				'name'           => 'tab_typography',
+				'label'          => esc_html__( 'Tab Typography', 'stm_vehicles_listing' ),
+				'exclude'        => array(
+					'font_style',
+					'text_decoration',
+					'word_spacing',
+				),
+				'fields_options' => array(),
+				'selector'       => '{{WRAPPER}} .stm_dynamic_listing_filter_nav li a',
+			)
+		);
+
+		$this->add_control(
+			'tabs_contanier_background_color',
+			array(
+				'label'     => esc_html__( 'Tabs Container Background Color', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .stm_dynamic_listing_filter_nav' => 'background-color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'tab_border_radius',
+			array(
+				'label'      => esc_html__( 'Tab Border Radius', 'stm_vehicles_listing' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .filter-listing.stm_dynamic_listing_filter .stm_dynamic_listing_filter_nav li' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;',
+				),
+			)
+		);
+
+		$this->add_control(
+			'tab_padding',
+			array(
+				'label'     => __( 'Tab Padding', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors' => array(
+					'{{WRAPPER}} .filter-listing.stm_dynamic_listing_filter .stm_dynamic_listing_filter_nav li a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;',
+				),
 			)
 		);
 
@@ -456,60 +657,6 @@ class ListingSearchTabs extends WidgetBase {
 					),
 				),
 				'selector'       => '{{WRAPPER}} .stm_dynamic_listing_filter .stm_dynamic_listing_filter_nav li',
-			)
-		);
-
-		$this->add_control(
-			'fields_style_heading',
-			array(
-				'label' => esc_html__( 'Fields Style', 'stm_vehicles_listing' ),
-				'type'  => \Elementor\Controls_Manager::HEADING,
-			)
-		);
-
-		$this->add_group_control(
-			\Elementor\Group_Control_Border::get_type(),
-			array(
-				'name'     => 'lst_fields_border',
-				'label'    => esc_html__( 'Fields Border', 'stm_vehicles_listing' ),
-				'selector' => '{{WRAPPER}} .filter-listing .tab-content .stm-filter-tab-selects .stm-select-col input, {{WRAPPER}} .filter-listing .tab-content .stm-filter-tab-selects .stm-select-col select, {{WRAPPER}} .filter-listing .tab-content .stm-filter-tab-selects .stm-select-col .select2-selection__rendered',
-			)
-		);
-
-		$this->add_responsive_control(
-			'lst_fields_border_radius',
-			array(
-				'label'      => esc_html__( 'Fields Border Radius', 'stm_vehicles_listing' ),
-				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .filter-listing .tab-content .stm-filter-tab-selects .stm-select-col .select2-selection__rendered' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;',
-					'{{WRAPPER}} .filter-listing .tab-content .stm-filter-tab-selects .stm-select-col input'         => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;',
-					'{{WRAPPER}} .filter-listing .tab-content .stm-filter-tab-selects .stm-select-col select'        => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;',
-					'{{WRAPPER}} .stm_dynamic_listing_filter .select2-container--default .select2-selection--single' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;',
-				),
-			)
-		);
-
-		$this->add_control(
-			'lst_border_divider',
-			array(
-				'type' => \Elementor\Controls_Manager::DIVIDER,
-			)
-		);
-
-		$this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
-			array(
-				'name'           => 'tab_typography',
-				'label'          => esc_html__( 'Tab Typography', 'stm_vehicles_listing' ),
-				'exclude'        => array(
-					'font_style',
-					'text_decoration',
-					'word_spacing',
-				),
-				'fields_options' => array(),
-				'selector'       => '{{WRAPPER}} .stm_dynamic_listing_filter_nav li a',
 			)
 		);
 
@@ -578,6 +725,14 @@ class ListingSearchTabs extends WidgetBase {
 		$this->stm_end_ctrl_tab();
 
 		$this->stm_end_ctrl_tabs();
+
+		$this->add_control(
+			'button_style_heading',
+			array(
+				'label' => esc_html__( 'Button Style', 'stm_vehicles_listing' ),
+				'type'  => \Elementor\Controls_Manager::HEADING,
+			)
+		);
 
 		$this->add_control(
 			'lst_advanced_search_label_font_size',
@@ -768,6 +923,17 @@ class ListingSearchTabs extends WidgetBase {
 				'selectors' => array(
 					'{{WRAPPER}} form button[type=submit] i'   => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					'{{WRAPPER}} form button[type=submit] svg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'button_padding',
+			array(
+				'label'     => __( 'Button Padding', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors' => array(
+					'{{WRAPPER}} form button[type=submit]' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};width: auto !important;',
 				),
 			)
 		);

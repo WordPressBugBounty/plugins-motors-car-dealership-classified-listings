@@ -57,14 +57,19 @@ trait ProtectedHooks {
 	/**
 	 * Add filter hook with ability to use method name as hook name
 	 *
-	 * @param string $hook          Hook name
-	 * @param int    $priority      Priority
-	 * @param int    $accepted_args Number of arguments
+	 * @param string $hook                Hook name
+	 * @param int    $priority            Priority
+	 * @param int    $accepted_args       Number of arguments
+	 * @param bool   $unset_default_value Unset Default Value from $args
 	 * @return self
 	 */
-	protected function add_filter( string $hook, int $priority = 10, int $accepted_args = 3 ): self {
+	protected function add_filter( string $hook, int $priority = 10, int $accepted_args = 3, bool $unset_default_value = false ): self {
 		// Create callback and store it in the class property
-		$this->hook_callbacks[ $hook ][ $priority ] = function( ...$args ) use ( $hook ) {
+		$this->hook_callbacks[ $hook ][ $priority ] = function( ...$args ) use ( $hook, $unset_default_value ) {
+			if ( $unset_default_value ) {
+				unset( $args[ array_key_first( $args ) ] );
+			}
+
 			$method = strtr( $hook, array( '-' => '_' ) );
 			return $this->$method( ...$args );
 		};

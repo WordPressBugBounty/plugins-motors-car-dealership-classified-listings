@@ -47,7 +47,7 @@ if ( 'default' !== $skin && wp_is_mobile() ) {
 	$view_type = 'grid';
 }
 if ( $featured->have_posts() && ! empty( $args['posts_per_page'] ) ) : ?>
-	<?php if ( 'default' !== $skin ) : ?>
+	<?php if ( ! in_array( $skin, array( 'default', 'classic' ), true ) ) : ?>
 		<div class="mvl-featured-title-container <?php echo esc_attr( $view_type ); ?>">
 			<h3 class="mvl-featured-title">Featured Listings</h3>
 			<?php if ( $inventory_link ) : ?>

@@ -22,7 +22,7 @@
 
 
 .elementor-panel .elementor-element .icon .mvl-icon-color {
-	color: #cc6119!important;
+	color: #cc6119 !important;
 }
 
 #elementor-panel-content-wrapper #elementor-panel-category-stylemixthemes .elementor-element:hover .elementor-element-title-wrapper .title,
@@ -30,6 +30,40 @@
 	color: #4cbeb5 !important;
 }
 
-.elementor-control-lat input[type="number"], .elementor-control-lng input[type="number"] {
+.elementor-control-lat input[type="number"],
+.elementor-control-lng input[type="number"] {
 	width: 100% !important;
+}
+
+[id*="__option_disabled"] {
+	cursor: not-allowed !important;
+	pointer-events: none !important;
+	display: flex;
+	padding: 3px 0 0 0;
+
+	&:before {
+		content: 'PRO' !important;
+		display: inline-block;
+		padding: 4px;
+		font-size: 9px;
+		line-height: 9px;
+		letter-spacing: .3px;
+		color: #fff !important;
+		background-color: #195ec7;
+		border-radius: 3px;
+		-webkit-transform: skewX(-13deg);
+		transform: skewX(-13deg);
+		margin: -3px 5px 0 0;
+	}
+
+	&:after {
+		content: '';
+		display: inline-block;
+		width: 15px;
+		height: 15px;
+		background-image: url('../../images/lock-black.svg');
+		background-size: contain;
+		background-repeat: no-repeat;
+		margin: -3px 0 0 auto;
+	}
 }

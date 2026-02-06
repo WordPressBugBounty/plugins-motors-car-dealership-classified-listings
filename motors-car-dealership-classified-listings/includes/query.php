@@ -421,6 +421,17 @@ function _stm_listings_build_query_args( $args = null, $source = null ) {
 		);
 	}
 
+	if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'friendly_url' ) && get_the_ID() === intval( apply_filters( 'stm_listings_user_defined_filter_page', '' ) ) ) {
+		$request_uri = $_SERVER['REQUEST_URI'];
+		$exploded    = explode( '/', $request_uri );
+
+		if ( in_array( 'sold', $exploded, true ) ) {
+			$source['listing_status'] = 'sold';
+		} elseif ( in_array( 'active', $exploded, true ) ) {
+			$source['listing_status'] = 'active';
+		}
+	}
+
 	if ( apply_filters( 'stm_sold_status_enabled', false ) && ! $review_query ) {
 		$_sold_meta_key   = 'car_mark_as_sold';
 		$_sold_meta_query = array(

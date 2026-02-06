@@ -5,6 +5,7 @@
  * @var $per_row
  * @var $show_as_carousel
  * @var $limit
+ * @var $show_all_icon
  */
 
 if ( ! empty( $taxonomy ) ) :
@@ -55,6 +56,11 @@ if ( ! empty( $taxonomy ) ) :
 			<?php if ( ! empty( $show_all_text ) && 'yes' !== $show_as_carousel ) : ?>
 				<div class="stm_icon_filter_label">
 					<?php echo esc_attr( $show_all_text ); ?>
+					<?php if ( ! empty( $show_all_icon ) ) : ?>
+						<span class="stm-icon-filter-show-all-icon">
+							<?php \Elementor\Icons_Manager::render_icon( $show_all_icon ); ?>
+						</span>
+					<?php endif; ?>
 				</div>
 			<?php endif; ?>
 			<?php if ( ! empty( $title ) ) : ?>

@@ -58,12 +58,9 @@ foreach ( $taxonomies as $val ) {
 	}
 }
 
-if ( 'default' !== $data['skin'] && apply_filters( 'is_mvl_pro', false ) && defined( 'STM_LISTINGS_PRO_PATH' ) ) {
-	if ( function_exists( 'mvl_pro_enqueue_header_scripts_styles' ) ) {
-		mvl_pro_enqueue_header_scripts_styles( $data['skin'], 'listing-card/grid' );
-	}
+if ( ! in_array( $data['skin'], array( 'default', 'classic' ), true ) && is_mvl_pro() ) {
+	wp_enqueue_style( 'motors-listing-grid-' . $data['skin'] );
 	$data['show_logo'] = apply_filters( 'motors_vl_get_nuxy_mod', '', 'grid_skin_show_logo' );
-
 	do_action( 'stm_listings_load_template', '/listing-cars/grid/' . $data['skin'] . '.php', $data );
 } else {
 	?>

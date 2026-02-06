@@ -63,7 +63,7 @@ $templatePart = 'inc/email_template_manager/templates';
 				<a class="nav-link" id="v-pills-saved_search-tab" data-toggle="pill" href="#v-pills-saved_search"
 					role="tab" aria-controls="v-pills-saved_search" aria-selected="false">Saved Search</a>
 					<?php endif; ?>
-					<?php if ( is_mvl_pro() ) : ?>
+					<?php if ( apply_filters( 'is_mvl_pro', false ) ) : ?>
 				<a class="nav-link" id="v-pills-message_to_dealer-tab" data-toggle="pill" href="#v-pills-message_to_dealer"
 					role="tab" aria-controls="v-pills-message_to_dealer" aria-selected="false">Message to Dealer</a>	
 					<?php endif; ?>
@@ -141,7 +141,7 @@ $templatePart = 'inc/email_template_manager/templates';
 					<?php do_action( 'etm_load_template', 'saved_search' ); ?>
 				</div>
 				<?php endif; ?>
-				<?php if ( is_mvl_pro() ) : ?>
+				<?php if ( apply_filters( 'is_mvl_pro', false ) ) : ?>
 				<div class="tab-pane fade" id="v-pills-message_to_dealer" role="tabpanel"
 					aria-labelledby="v-pills-settings-tab">
 					<?php do_action( 'etm_load_template', 'message_to_dealer' ); ?>

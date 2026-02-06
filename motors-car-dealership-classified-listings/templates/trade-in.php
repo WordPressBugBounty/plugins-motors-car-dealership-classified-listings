@@ -39,7 +39,7 @@ $listing_title  = apply_filters( 'stm_generate_title_from_slugs', get_the_title(
 			<div class="form-content-unit active" id="step-one">
 				<input type="hidden" name="trade_in_wpnonce" value="<?php echo esc_attr( $trade_in_nonce ); ?>"/>
 				<input type="hidden" name="sell_a_car" value="filled"/>
-				<input type="hidden" name="car" value="<?php echo esc_attr( $listing_title ); ?>"/>
+				<input type="hidden" name="car" value="<?php echo esc_attr( get_queried_object_id() ); ?>"/>
 				<?php
 				$post_make_value = '';
 				if ( ! empty( $_POST['make'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing

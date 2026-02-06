@@ -1,6 +1,6 @@
 <?php
 
-namespace Motors_Elementor_Widgets_Free\Helpers;
+namespace MotorsElementorWidgetsFree\Helpers;
 
 use Elementor\Plugin;
 
@@ -326,7 +326,7 @@ class Helper {
 		return $values;
 	}
 
-	public static function stm_ew_listing_filter_get_selects( $fields, $tab_name = '', $show_amount = false ) {
+	public static function stm_ew_listing_filter_get_selects( $fields, $tab_name = '', $show_amount = false, $show_label = false ) {
 		if ( ! empty( $fields ) ) {
 			$output = '';
 
@@ -352,6 +352,10 @@ class Helper {
 				$taxonomy_info = stm_get_taxonomies_with_type( $selected_taxonomy );
 
 				$output .= '<div class="stm-select-col elementor-repeater-item-' . esc_html( $field['_id'] ) . $overflown_class . '">';
+
+				if ( $show_label && isset( $field['lst_label'] ) && $field['lst_label'] ) {
+					$output .= '<span class="stm-select-label-text">' . esc_html( $field['lst_label'] ) . '</span>';
+				}
 
 				$numbers        = array();
 				$sel_tax_name   = '';

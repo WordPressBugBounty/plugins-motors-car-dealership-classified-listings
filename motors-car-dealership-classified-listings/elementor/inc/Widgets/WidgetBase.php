@@ -1,12 +1,17 @@
 <?php
 
-namespace Motors_Elementor_Widgets_Free\Widgets;
+namespace MotorsElementorWidgetsFree\Widgets;
 
 use \Elementor\Controls_Manager;
 use \Elementor\Widget_Base;
-use Motors_Elementor_Widgets_Free\MotorsElementorWidgetsFree;
+use MotorsElementorWidgetsFree\MotorsElementorWidgetsFree;
 
 abstract class WidgetBase extends Widget_Base {
+
+	public function __construct( array $data = array(), array $args = null ) {
+		parent::__construct( $data, $args );
+		do_action( 'mvl_update_default_widget_settings', $this->get_name() );
+	}
 
 	public function get_categories() {
 		return array( MotorsElementorWidgetsFree::WIDGET_CATEGORY );

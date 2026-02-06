@@ -1,10 +1,11 @@
 <?php
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-
-use \MotorsVehiclesListing\Plugin;
-/** @var \MotorsVehiclesListing\Plugin $plugin */
+use MotorsVehiclesListing\Features\EmailManagerCompatibility;
+use MotorsVehiclesListing\Plugin;
+/** @var MotorsVehiclesListing\Plugin $plugin */
 
 $plugin = new Plugin();
 
@@ -25,8 +26,10 @@ function stm_listings_template_actions() {
 		define( 'DOING_AJAX', true );
 		switch ( $action ) {
 			case 'listings-result':
-				$nav_type = ( ! empty( $_POST['navigation_type'] ) ) ? sanitize_text_field( $_POST['navigation_type'] ) : null;
-				$source   = ( ! empty( $_POST['posts_per_page'] ) ) ? array( 'posts_per_page' => sanitize_text_field( $_POST['posts_per_page'] ) ) : null;
+				$listings_grid_view_skin = ( ! empty( $_POST['listings_grid_view_skin'] ) ) ? sanitize_text_field( $_POST['listings_grid_view_skin'] ) : 'default';
+				$listings_list_view_skin = ( ! empty( $_POST['listings_list_view_skin'] ) ) ? sanitize_text_field( $_POST['listings_list_view_skin'] ) : 'default';
+				$nav_type                = ( ! empty( $_POST['navigation_type'] ) ) ? sanitize_text_field( $_POST['navigation_type'] ) : null;
+				$source                  = ( ! empty( $_POST['posts_per_page'] ) ) ? array( 'posts_per_page' => sanitize_text_field( $_POST['posts_per_page'] ) ) : null;
 
 				if ( ! empty( $_POST['custom_img_size'] ) ) {
 					$source['custom_img_size'] = sanitize_text_field( $_POST['custom_img_size'] );
@@ -36,6 +39,8 @@ function stm_listings_template_actions() {
 					set_query_var( 'listings_type', $_GET['posttype'] );
 					HooksMultiListing::stm_listings_attributes_filter( array( 'slug' => $_GET['posttype'] ) );
 				}
+				$source['listings_grid_view_skin'] = $listings_grid_view_skin;
+				$source['listings_list_view_skin'] = $listings_list_view_skin;
 				stm_listings_ajax_results( $source, null, $nav_type );
 				break;
 			case 'listings-result-load':
@@ -566,38 +571,38 @@ if ( ! function_exists( 'mvl_get_user_role' ) ) {
 
 add_action( 'pending_to_publish', 'stm_on_publish_pending_post', 10, 1 );
 function stm_on_publish_pending_post( $post ) {
-	add_filter( 'wp_mail_content_type', 'stm_set_html_content_type_mail' );
-	$user_data = get_userdata( $post->post_author );
+	$listing_user_id = get_post_meta( $post->ID, 'stm_car_user', true );
+	$user_data       = get_userdata( $listing_user_id );
+	do_action(
+		'mvl_send_email',
+		array(
+			'config'          => 'listing_approved',
+			'to	'             => $user_data->user_email,
+			'smart_tags_args' => array(
+				'listing_id' => $post->ID,
+				'user_id'    => $user_data->ID,
 
-	if ( apply_filters( 'mvl_get_user_role', false, $post->post_author ) ) {
-		$email_to = apply_filters( 'motors_vl_get_nuxy_mod', false, 'send_email_to_dealer' );
-	} else {
-		$email_to = apply_filters( 'motors_vl_get_nuxy_mod', false, 'send_email_to_user' );
-	}
-
-	if ( $email_to && in_array( $post->post_type, apply_filters( 'stm_listings_multi_type', array( 'listings' ) ), true ) ) {
-		$to         = $user_data->user_email;
-		$listing_id = $post->ID;
-
-		$args = array(
-			'car_id'    => $listing_id,
-			'car_title' => get_the_title( $listing_id ),
-		);
-
-		$subject = apply_filters( 'get_generate_subject_view', '', 'user_listing_approved', $args );
-		$body    = apply_filters( 'get_generate_template_view', '', 'user_listing_approved', $args );
-
-		wp_mail( $to, $subject, $body );
-	}
-
-	remove_filter( 'wp_mail_content_type', 'stm_set_html_content_type_mail' );
+			),
+		)
+	);
 }
 
 if ( ! function_exists( 'stm_ajax_get_car_price' ) ) {
 	//Ajax request test drive
 	function stm_ajax_get_car_price() {
 		check_ajax_referer( 'stm_car_price_nonce', 'security', false );
-		$response['errors'] = array();
+
+		$recaptcha_enabled    = apply_filters( 'motors_vl_get_nuxy_mod', false, 'enable_recaptcha' );
+		$recaptcha_public_key = apply_filters( 'motors_vl_get_nuxy_mod', false, 'recaptcha_public_key' );
+		$recaptcha_secret_key = apply_filters( 'motors_vl_get_nuxy_mod', false, 'recaptcha_secret_key' );
+		$response['errors']   = array();
+
+		if ( $recaptcha_enabled && $recaptcha_public_key && $recaptcha_secret_key ) {
+			if ( ! isset( $_POST['g-recaptcha-response'] ) || ! stm_motors_check_recaptcha( $recaptcha_secret_key, sanitize_text_field( $_POST['g-recaptcha-response'] ) ) ) {
+				$response['errors']['recaptcha'] = true;
+				$response['response']            = esc_html__( 'Please prove you\'re not a robot', 'stm_vehicles_listing' );
+			}
+		}
 
 		if ( ! filter_var( $_POST['name'], FILTER_SANITIZE_STRING ) ) {
 			$response['errors']['name'] = true;
@@ -614,21 +619,9 @@ if ( ! function_exists( 'stm_ajax_get_car_price' ) ) {
 		if ( empty( $response['errors'] ) && ! empty( $_POST['vehicle_id'] ) ) {
 			$response['response'] = esc_html__( 'Your request was sent', 'stm_vehicles_listing' );
 			$response['status']   = 'success';
-
-			//Sending Mail to admin
-			add_filter( 'wp_mail_content_type', 'stm_set_html_content_type_mail' );
-
-			$to = get_bloginfo( 'admin_email' );
-
-			$args = array(
-				'car'   => get_the_title( filter_var( $_POST['vehicle_id'], FILTER_SANITIZE_NUMBER_INT ) ),
-				'name'  => sanitize_text_field( $_POST['name'] ),
-				'email' => sanitize_email( $_POST['email'] ),
-				'phone' => sanitize_text_field( $_POST['phone'] ),
+			$send_to              = array(
+				get_bloginfo( 'admin_email' ),
 			);
-
-			$subject = apply_filters( 'get_generate_subject_view', '', 'request_price', $args );
-			$body    = apply_filters( 'get_generate_template_view', '', 'request_price', $args );
 
 			if ( 'classified' === apply_filters( 'motors_vl_get_nuxy_mod', 'dealer', 'directory_type' ) ) {
 				$car_owner = get_post_meta( filter_var( $_POST['vehicle_id'], FILTER_SANITIZE_NUMBER_INT ), 'stm_car_user', true );
@@ -636,14 +629,28 @@ if ( ! function_exists( 'stm_ajax_get_car_price' ) ) {
 				if ( ! empty( $car_owner ) ) {
 					$user_fields = apply_filters( 'stm_get_user_custom_fields', $car_owner );
 					if ( ! empty( $user_fields ) && ! empty( $user_fields['email'] ) ) {
-						wp_mail( $to, $subject, $body );
+						$send_to[] = $user_fields['email'];
 					}
 				}
-			} else {
-				wp_mail( $to, $subject, $body, '' );
 			}
 
-			remove_filter( 'wp_mail_content_type', 'stm_set_html_content_type_mail' );
+			$user_id = get_post_meta( filter_var( $_POST['vehicle_id'], FILTER_SANITIZE_NUMBER_INT ), 'stm_car_user', true );
+
+			do_action(
+				'mvl_send_email',
+				array(
+					'config'          => 'request_price',
+					'to'              => get_userdata( $user_id )->user_email,
+					'smart_tags_args' => array(
+						'listing_id' => intval( $_POST['vehicle_id'] ),
+						'name'       => sanitize_text_field( $_POST['name'] ),
+						'email'      => sanitize_email( $_POST['email'] ),
+						'phone'      => sanitize_text_field( $_POST['phone'] ),
+						'user_id'    => $user_id,
+						'car'        => get_the_title( intval( $_POST['vehicle_id'] ) ),
+					),
+				)
+			);
 		} else {
 			$response['response'] = esc_html__( 'Please fill all fields', 'stm_vehicles_listing' );
 			$response['status']   = 'danger';
@@ -928,7 +935,7 @@ if ( ! function_exists( 'handle_stm_trade_in_form' ) ) {
 						if ( file_exists( $file_path ) ) {
 							$files[]       = $file_path;
 							$url           = wp_get_attachment_url( $attachment_id );
-							$stm_urls     .= esc_url( $url ) . '<br/>';
+							$stm_urls     .= '<a href="' . esc_url( $url ) . '">' . basename( $file['name'] ) . '</a><br/>';
 							$images_name[] = basename( $file['name'] );
 						}
 					}
@@ -941,7 +948,6 @@ if ( ! function_exists( 'handle_stm_trade_in_form' ) ) {
 			'last_name',
 			'email',
 			'phone',
-			'car',
 			'make',
 			'model',
 			'stm_year',
@@ -956,10 +962,11 @@ if ( ! function_exists( 'handle_stm_trade_in_form' ) ) {
 			'accident',
 			'comments',
 			'video_url',
-			'image_urls' => implode( ', ', $images_name ),
+			'image_urls' => $stm_urls,
 		);
 
 		$args = array();
+
 		foreach ( $fields as $field => $value ) {
 			if ( 'image_urls' === $field ) {
 				$args[ $field ] = $value;
@@ -968,38 +975,33 @@ if ( ! function_exists( 'handle_stm_trade_in_form' ) ) {
 			}
 		}
 
-		$body = apply_filters( 'get_generate_template_view', '', 'trade_in', $args );
+		$args['listing_id'] = isset( $_POST['car'] ) ? $_POST['car'] : 0;
+		$args['car']        = get_the_title( $args['listing_id'] );
+		$args['year']       = isset( $_POST['stm_year'] ) && $_POST['stm_year'] ? intval( $_POST['stm_year'] ) : 0;
+		$user_id            = get_post_meta( $args['listing_id'], 'stm_car_user', true );
 
-		if ( ! empty( $body ) ) {
-			$to = get_bloginfo( 'admin_email' );
-
-			$subject_type = is_singular( apply_filters( 'stm_listings_post_type', 'listings' ) ) ? 'trade_in' : 'sell_a_car';
-			$subject      = apply_filters( 'get_generate_subject_view', '', $subject_type, $args );
-
-			$stm_blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
-			$wp_email     = 'wordpress@' . preg_replace( '#^www\.#', '', strtolower( $_SERVER['SERVER_NAME'] ) );
-
-			$headers = array(
-				'From: ' . $stm_blogname . ' <' . $wp_email . '>',
-				'Content-Type: text/html; charset=UTF-8',
+		if ( ! $user_id ) {
+			$user_id = get_post_field( 'post_author', $args['listing_id'] );
+		}
+		if ( ! empty( $args ) && $user_id ) {
+			do_action(
+				'mvl_send_email',
+				array(
+					'config'          => 'trade_in',
+					'files'           => $files,
+					'to'              => get_userdata( $user_id )->user_email,
+					'smart_tags_args' => $args,
+				)
 			);
 
-			$mail_sent = wp_mail( $to, $subject, $body, $headers, $files );
+			$response = array(
+				'success' => true,
+				'message' => __( 'Form submitted successfully!', 'stm_vehicles_listing' ),
+				'data'    => $_POST,
+			);
 
-			if ( $mail_sent ) {
-				$response = array(
-					'success' => true,
-					'message' => __( 'Form submitted successfully!', 'stm_vehicles_listing' ),
-					'data'    => $_POST,
-				);
-				foreach ( $files_to_delete as $file ) {
-					wp_delete_attachment( $file, true );
-				}
-			} else {
-				$response = array(
-					'success' => false,
-					'message' => __( 'Failed to send email', 'stm_vehicles_listing' ),
-				);
+			foreach ( $files_to_delete as $file ) {
+				wp_delete_attachment( $file, true );
 			}
 		} else {
 			$response = array(
@@ -1021,7 +1023,7 @@ if ( ! function_exists( 'stm_ajax_add_test_drive' ) ) {
 		check_ajax_referer( 'stm_add_test_drive_nonce', 'security', false );
 		$response['errors'] = array();
 
-		if ( ! filter_var( $_POST['name'], FILTER_SANITIZE_STRING ) ) {
+		if ( ! isset( $_POST['name'] ) || ! $_POST['name'] ) {
 			$response['response']       = esc_html__( 'Please fill all fields', 'stm_vehicles_listing' );
 			$response['errors']['name'] = true;
 		}
@@ -1055,28 +1057,32 @@ if ( ! function_exists( 'stm_ajax_add_test_drive' ) ) {
 			$response['response'] = esc_html__( 'Your request was sent', 'stm_vehicles_listing' );
 			$response['status']   = 'success';
 
-			//Sending Mail to admin
-			add_filter( 'wp_mail_content_type', 'stm_set_html_content_type_mail' );
-
-			$to      = get_bloginfo( 'admin_email' );
-			$subject = esc_html__( 'Request for a test drive', 'stm_vehicles_listing' ) . ' ' . get_the_title( $vehicle_id );
-			$body    = esc_html__( 'Name - ', 'stm_vehicles_listing' ) . esc_html( $_POST['name'] ) . '<br/>';
-			$body   .= esc_html__( 'Email - ', 'stm_vehicles_listing' ) . esc_html( $_POST['email'] ) . '<br/>';
-			$body   .= esc_html__( 'Phone - ', 'stm_vehicles_listing' ) . esc_html( $_POST['phone'] ) . '<br/>';
-			$body   .= esc_html__( 'Date - ', 'stm_vehicles_listing' ) . esc_html( $_POST['date'] ) . '<br/>';
-
-			wp_mail( $to, $subject, $body );
-
 			$car_owner = get_post_meta( $vehicle_id, 'stm_car_user', true );
+			$car_owner = $car_owner ? $car_owner : get_post_field( 'post_author', $vehicle_id );
+
 			if ( ! empty( $car_owner ) ) {
+
 				$user_fields = stm_get_user_custom_fields( $car_owner );
 				if ( ! empty( $user_fields ) && ! empty( $user_fields['email'] ) ) {
-					wp_mail( $user_fields['email'], $subject, $body );
+					$send_to = $user_fields['email'];
 				}
+
+				do_action(
+					'mvl_send_email',
+					array(
+						'config'          => 'test_drive',
+						'to'              => $send_to,
+						'smart_tags_args' => array(
+							'name'       => sanitize_text_field( $_POST['name'] ),
+							'email'      => sanitize_email( $_POST['email'] ),
+							'phone'      => sanitize_text_field( $_POST['phone'] ),
+							'date'       => sanitize_text_field( $_POST['date'] ),
+							'listing_id' => intval( $vehicle_id ),
+							'car'        => get_the_title( $vehicle_id ),
+						),
+					)
+				);
 			}
-
-			remove_filter( 'wp_mail_content_type', 'stm_set_html_content_type_mail' );
-
 		} else {
 			$response['status'] = 'danger';
 		}
@@ -1316,14 +1322,18 @@ if ( ! function_exists( 'mvl_restore_password' ) ) {
 				/*Sending mail*/
 				$to = $user->data->user_email;
 
-				$args = array(
-					'password_content' => $stm_link_send_to,
+				do_action(
+					'mvl_send_email',
+					array(
+						'config'          => 'password_recovery',
+						'to'              => $to,
+						'smart_tags_args' => array(
+							'password_reset_link' => $stm_link_send_to,
+							'user_id'             => $user_id,
+							'user_login'          => $user->data->user_login,
+						),
+					)
 				);
-
-				$subject = apply_filters( 'get_generate_subject_view', '', 'password_recovery', $args );
-				$body    = apply_filters( 'get_generate_template_view', '', 'password_recovery', $args );
-
-				do_action( 'mvl_wp_mail', $to, $subject, $body, '' );
 
 				$response['message'] = esc_html__( 'Instructions send on your email', 'motors' );
 			}
@@ -1406,7 +1416,7 @@ if ( ! function_exists( 'mvl_add_car_page_redirect' ) ) {
 			$is_add_car_page = apply_filters( 'mvl_is_add_car_page', intval( get_the_ID() ) === intval( apply_filters( 'motors_vl_get_nuxy_mod', 0, 'user_add_car_page' ) ) );
 
 			if ( $is_add_car_page ) {
-				wp_redirect( get_the_permalink( apply_filters( 'motors_vl_get_nuxy_mod', '', 'login_page' ) ) );
+				wp_safe_redirect( get_the_permalink( apply_filters( 'motors_vl_get_nuxy_mod', '', 'login_page' ) ) );
 				exit;
 			}
 		}
@@ -1446,4 +1456,35 @@ if ( ! function_exists( 'mvl_get_taxonomy_type' ) ) {
 			)
 		);
 	}
+}
+
+add_action( 'mvl_send_email', 'mvl_send_email' );
+
+function mvl_send_email( $args ) {
+	$config_name = EmailManagerCompatibility::instance()->get_free_config_name( $args['config'] );
+	$smart_tags  = EmailManagerCompatibility::instance()->get_free_smart_tags( $args['smart_tags_args'] );
+
+	if ( isset( $smart_tags['listing_id'] ) ) {
+		$smart_tags['car']           = get_the_title( $smart_tags['listing_id'] );
+		$smart_tags['listing_title'] = $smart_tags['car'];
+		$smart_tags['car_title']     = $smart_tags['car'];
+		$smart_tags['car_id']        = $smart_tags['listing_id'];
+		$smart_tags['revision_link'] = getRevisionLink( $smart_tags['listing_id'] );
+		$smart_tags['listing_url']   = get_the_permalink( $smart_tags['listing_id'] );
+
+		if ( ! isset( $smart_tags['user_id'] ) || ! $smart_tags['user_id'] ) {
+			$smart_tags['user_id'] = get_post_meta( $smart_tags['listing_id'], 'stm_car_user', true );
+
+			if ( ! $smart_tags['user_id'] ) {
+				$smart_tags['user_id'] = get_post_field( 'post_author', $smart_tags['listing_id'] );
+			}
+		}
+	}
+
+	$subject = apply_filters( 'get_generate_subject_view', '', $config_name, $smart_tags );
+	$body    = apply_filters( 'get_generate_template_view', '', $config_name, $smart_tags );
+
+	add_filter( 'wp_mail_content_type', 'stm_set_html_content_type_mail' );
+	wp_mail( $args['to'], $subject, $body );
+	remove_filter( 'wp_mail_content_type', 'stm_set_html_content_type_mail' );
 }

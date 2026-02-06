@@ -1,14 +1,17 @@
 <?php
 
-namespace Motors_Elementor_Widgets_Free\Helpers;
+namespace MotorsElementorWidgetsFree\Helpers;
 
 use WP_Query;
+use Elementor\Plugin;
 
 class RegisterActions {
 	public static function init() {
-		add_action( 'init', array( self::class, 'motors_remove_post_type_supports' ) );
+		add_action( 'init', array( self::class, 'wp_init' ) );
 		add_action( 'wp_loaded', array( self::class, 'motors_create_nonce' ) );
 		add_action( 'elementor/editor/after_save', array( self::class, 'motors_elementor_after_save' ), 100, 2 );
+
+		add_action( 'mvl_update_default_widget_settings', array( self::class, 'mvl_update_default_widget_settings' ) );
 
 		add_filter( 'motors_merge_wpcfto_config', array( self::class, 'motors_remove_inventory_settings_conf' ) );
 		add_filter( 'search_settings_conf', array( self::class, 'motors_remove_search_settings_conf' ), 55, 1 );
@@ -39,6 +42,32 @@ class RegisterActions {
 		add_action( 'wp_ajax_nopriv_car_listing_tabs_widget', array( self::class, 'motors_ew_car_listing_tabs' ) );
 	}
 
+	public static function wp_init() {
+		ListingsSkinsSupportAPI::load();
+	}
+
+	public static function mvl_update_default_widget_settings( string $widget ) {
+		$default_settings_file = STM_LISTINGS_PATH . '/assets/elementor/widgets-settings/' . $widget . '.json';
+
+		if ( file_exists( $default_settings_file ) ) {
+			$default_settings_updated = get_option( '_motors_widgets_default_settings_updated', array() );
+
+			if ( ! isset( $default_settings_updated[ $widget ] ) ) {
+				$kit      = Plugin::instance()->kits_manager->get_active_kit();
+				$kit_data = $kit->get_json_meta( '_elementor_elements_default_values' );
+				$settings = file_get_contents( $default_settings_file ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+
+				$data = json_decode( $settings, true );
+
+				$kit_data[ $widget ] = $data;
+
+				$kit->update_json_meta( '_elementor_elements_default_values', $kit_data );
+				$default_settings_updated[ $widget ] = true;
+				update_option( '_motors_widgets_default_settings_updated', $default_settings_updated );
+			}
+		}
+	}
+
 	public static function motors_create_nonce() {
 		$tm_nonce            = wp_create_nonce( 'motors_create_template' );
 		$tm_delete_nonce     = wp_create_nonce( 'motors_delete_template' );
@@ -62,7 +91,25 @@ class RegisterActions {
 		);
 	}
 
-	public static function motors_remove_post_type_supports() {
+
+	public static function motors_update_default_widget_settings( $widget_name ) {
+		$default_settings_file = STM_LISTINGS_PATH . '/assets/elementor/widgets-settings/' . $widget_name . '.json';
+
+		if ( file_exists( $default_settings_file ) ) {
+			$default_settings_updated = get_option( $widget_name . '_default_settings_updated' );
+			if ( ! $default_settings_updated ) {
+				$json_url = STM_LISTINGS_URL . '/assets/elementor/widgets-settings/' . $widget_name . '.json';
+				$kit      = Plugin::instance()->kits_manager->get_active_kit();
+				$kit_data = $kit->get_json_meta( '_elementor_elements_default_values' );
+				$response = wp_remote_get( $json_url );
+				$data     = json_decode( $response['body'], true );
+
+				$kit_data[ $widget_name ] = $data;
+
+				$kit->update_json_meta( '_elementor_elements_default_values', $kit_data );
+				update_option( $widget_name . '_default_settings_updated', true );
+			}
+		}
 	}
 
 	public static function motors_remove_inventory_settings_conf( $settings ) {
@@ -172,9 +219,10 @@ class RegisterActions {
 	public static function motors_ew_grid_tabs() {
 		check_ajax_referer( 'motors_grid_tabs', 'security' );
 
-		$listing_types  = apply_filters( 'stm_listings_post_type', 'listings' );
-		$tab_type       = sanitize_text_field( $_POST['tab_type'] );
-		$per_page       = intval( $_POST['per_page'] );
+		$listing_types = apply_filters( 'stm_listings_post_type', 'listings' );
+		$tab_type      = sanitize_text_field( $_POST['tab_type'] );
+		$per_page      = intval( $_POST['per_page'] );
+		$per_row       = isset( $_POST['per_row'] ) ? intval( $_POST['per_row'] ) : 4;
 
 		$allowed_templates = array(
 			'listing-cars/listing-grid-directory-loop-4',
@@ -182,11 +230,24 @@ class RegisterActions {
 			'listing-cars/listing-grid-directory-loop',
 		);
 
-		$template = 'listing-cars/' . ( isset( $_POST['template'] ) ? sanitize_file_name( $_POST['template'] ) : '' );
+		$allowed_skins = array(
+			'default',
+			'skin_1',
+			'skin_2',
+			'skin_3',
+			'skin_4',
+		);
 
-		if ( ! in_array( $template, $allowed_templates, true ) ) {
+		$template = 'listing-cars/' . ( isset( $_POST['template'] ) ? sanitize_file_name( $_POST['template'] ) : '' );
+		$skin     = isset( $_POST['skin'] ) ? sanitize_text_field( $_POST['skin'] ) : 'default';
+
+		if ( ! in_array( $template, $allowed_templates, true ) || ! in_array( $skin, $allowed_skins, true ) ) {
 			wp_send_json_error( 'Invalid template' );
 			return;
+		}
+
+		if ( 'default' !== $skin && is_mvl_pro() ) {
+			$template = 'listing-grid';
 		}
 
 		$img_size = sanitize_text_field( $_POST['img_size'] );
@@ -221,7 +282,18 @@ class RegisterActions {
 			);
 		}
 
+		$image_sizes = $skins[ $skin ] ?? array(
+			'width'  => 580,
+			'height' => 460,
+		);
+
+		$template_args['image_sizes'] = $image_sizes;
+		$template_args['skin']        = $skin;
+		$template_args['per_row']     = $per_row;
+
 		$listings_query = new WP_Query( $args );
+
+		$template_args = apply_filters( 'mvl_add_grid_settings_to_array', $template_args );
 
 		if ( $listings_query->have_posts() ) {
 			$output = '';
@@ -381,6 +453,14 @@ class RegisterActions {
 			);
 		}
 
+		if ( isset( $_POST['skin'] ) ) {
+			$template_args['skin'] = sanitize_text_field( $_POST['skin'] );
+		} else {
+			$template_args['skin'] = 'default';
+		}
+
+		$template_args = apply_filters( 'mvl_add_grid_settings_to_array', $template_args );
+
 		$listing_cars = new WP_Query( $args );
 		$friendly_url = apply_filters( 'motors_vl_get_nuxy_mod', false, 'friendly_url' );
 		$atts         = ( $friendly_url ) ? esc_attr( $terms ) : '?' . esc_attr( $taxonomy ) . '=' . esc_attr( $terms );
@@ -408,9 +488,13 @@ class RegisterActions {
 					<?php
 					while ( $listing_cars->have_posts() ) :
 						$listing_cars->the_post();
-						?>
-						<?php do_action( 'stm_listings_load_template', 'car-filter-loop', $template_args ); ?>
-					<?php endwhile; ?>
+						if ( 'default' !== $template_args['skin'] ) {
+							do_action( 'stm_listings_load_template', 'listing-grid', $template_args );
+						} else {
+							do_action( 'stm_listings_load_template', 'car-filter-loop', $template_args );
+						}
+					endwhile;
+					?>
 				</div>
 
 				<?php if ( ! empty( $enable_ajax_loading ) && $enable_ajax_loading ) : ?>

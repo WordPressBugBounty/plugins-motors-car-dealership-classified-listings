@@ -24,6 +24,6 @@ $img_attrs                 = array(
 
 <?php else : ?>
 
-	<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/' . $placeholder_path ); ?>" alt="<?php esc_attr_e( 'Placeholder', 'stm_vehicles_listing' ); ?>" class="img-responsive" loading="lazy"/>
+	<img src="<?php echo esc_url( $placeholder_path ); ?>" alt="<?php esc_attr_e( 'Placeholder', 'stm_vehicles_listing' ); ?>" class="img-responsive" loading="lazy"/>
 
 <?php endif; ?>

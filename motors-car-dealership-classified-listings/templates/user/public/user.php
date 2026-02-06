@@ -44,7 +44,6 @@ if ( 'default' !== $skin ) {
 
 $query         = stm_user_listings_query( $user_id, 'publish', $posts_per_page, false, $offset );
 $query_popular = stm_user_listings_query( $user_id, 'publish', $posts_per_page, true, $offset_popular );
-
 ?>
 
 <div class="container stm-user-public-profile">
@@ -168,8 +167,13 @@ $query_popular = stm_user_listings_query( $user_id, 'publish', $posts_per_page, 
 									<?php
 									while ( $query->have_posts() ) :
 										$query->the_post();
+										$__vars = array( 'columns' => 3 );
+										if ( 'default' !== $skin && is_mvl_pro() && 'list' === $active ) {
+											$__vars['list_action_buttons']    = apply_filters( 'mvl_list_action_buttons', array() );
+											$__vars['list_action_popup_btns'] = apply_filters( 'mvl_list_action_popup_buttons', array() );
+										}
 										?>
-										<?php do_action( 'stm_listings_load_template', 'listing-' . $active, array( 'columns' => 3 ) ); ?>
+										<?php do_action( 'stm_listings_load_template', 'listing-' . $active, $__vars ); ?>
 									<?php endwhile; ?>
 								</div>
 								<?php if ( $query->found_posts > $posts_per_page && $show_more_button ) : ?>

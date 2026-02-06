@@ -127,7 +127,13 @@ $aria_label = sprintf(
 			$parent_attr = ( ! empty( $option['parent'] ) ) ? $option['parent'] : '';
 			$value_attr  = ( ! empty( $option['option'] ) ) ? $option['option'] : '';
 			?>
-			<option class="mvl-inventory-select" data-parent="<?php echo esc_attr( $parent_attr ); ?>" value="<?php echo esc_attr( $value_attr ); ?>" <?php selected( $option['selected'] ); ?> <?php disabled( $option['disabled'] ); ?>>
+			<?php
+			$deps_attr = '';
+			if ( ! empty( $option['deps'] ) && is_array( $option['deps'] ) ) {
+				$deps_attr = implode( ',', array_map( 'sanitize_key', $option['deps'] ) );
+			}
+			?>
+			<option class="mvl-inventory-select" data-parent="<?php echo esc_attr( $parent_attr ); ?>" data-deps="<?php echo esc_attr( $deps_attr ); ?>" value="<?php echo esc_attr( $value_attr ); ?>" <?php selected( $option['selected'] ); ?> <?php disabled( $option['disabled'] ); ?>>
 				<?php
 				if ( apply_filters( 'stm_is_listing_price_field', false, $name ) ) {
 					if ( ! empty( $option['option'] ) ) {

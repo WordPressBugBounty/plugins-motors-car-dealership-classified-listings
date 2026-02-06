@@ -51,7 +51,7 @@ $can_register = apply_filters( 'motors_vl_get_nuxy_mod', false, 'new_user_regist
 			?>
 			<div id="stm_user_info">
 				<?php
-				Motors_Elementor_Widgets_Free\Helpers\Helper::stm_ew_load_template(
+				MotorsElementorWidgetsFree\Helpers\Helper::stm_ew_load_template(
 					'elementor/Widgets/add-listing/parts/user_info',
 					STM_LISTINGS_PATH,
 					array(
@@ -78,7 +78,7 @@ $can_register = apply_filters( 'motors_vl_get_nuxy_mod', false, 'new_user_regist
 		<div class="stm-not-<?php echo esc_attr( $disabled ); ?>">
 			<?php
 			if ( $can_register ) :
-				Motors_Elementor_Widgets_Free\Helpers\Helper::stm_ew_load_template( 'elementor/Widgets/add-listing/parts/registration', STM_LISTINGS_PATH );
+				MotorsElementorWidgetsFree\Helpers\Helper::stm_ew_load_template( 'elementor/Widgets/add-listing/parts/registration', STM_LISTINGS_PATH );
 				?>
 				<div class="stm-add-a-car-login-overlay"></div>
 			<?php else : ?>

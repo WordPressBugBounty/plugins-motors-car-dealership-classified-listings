@@ -15,7 +15,7 @@ jQuery(document).ready(function ($) {
         widget_id = data.widget_id
 
         let slider_options = {
-            spaceBetween: 10,
+            spaceBetween: 0,
             navigation: {
                 nextEl: "#" + widget_id + " .swiper-button-next",
                 prevEl: "#" + widget_id + " .swiper-button-prev",

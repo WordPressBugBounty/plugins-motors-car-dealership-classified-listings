@@ -19,10 +19,10 @@
                 context: this,
                 method: 'POST',
                 data: {
-                    action: 'stm_update_starter_theme',
-                    slug: 'mst-starter-theme',
-                    type: 'theme',
-                    nonce: starter_theme_nonces['stm_update_starter_theme'],
+                  action: 'mvl_stm_update_starter_theme',
+                  slug: 'motors-starter-theme',
+                  type: 'theme',
+                  nonce: starter_theme_nonces['mvl_stm_update_starter_theme'],
                 },
                 complete: function (data) {
                     $('#loader .installing').css('display','none');

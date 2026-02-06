@@ -150,10 +150,12 @@ function stm_listings_load_results( $source = null, $type = null, $navigation_ty
 	stm_listings_load_template(
 		'filter/results',
 		array(
-			'type'            => $type,
-			'navigation_type' => $navigation_type,
-			'custom_img_size' => ( ! empty( $source['custom_img_size'] ) ) ? $source['custom_img_size'] : null,
-			'posts_per_page'  => ( ! empty( $source['posts_per_page'] ) ) ? $source['posts_per_page'] : null,
+			'type'                    => $type,
+			'navigation_type'         => $navigation_type,
+			'custom_img_size'         => ( ! empty( $source['custom_img_size'] ) ) ? $source['custom_img_size'] : null,
+			'posts_per_page'          => ( ! empty( $source['posts_per_page'] ) ) ? $source['posts_per_page'] : null,
+			'listings_grid_view_skin' => isset( $source['listings_grid_view_skin'] ) ? $source['listings_grid_view_skin'] : apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'grid_card_skin' ),
+			'listings_list_view_skin' => isset( $source['listings_list_view_skin'] ) ? $source['listings_list_view_skin'] : apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'list_card_skin' ),
 		)
 	);
 }

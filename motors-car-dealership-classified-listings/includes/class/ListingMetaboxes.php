@@ -3,23 +3,28 @@
 namespace MotorsVehiclesListing;
 
 use STMMultiListing;
+use MotorsVehiclesListing\Libs\Traits\Instance;
+use MotorsVehiclesListing\Libs\Traits\ProtectedHooks;
 
 class ListingMetaboxes {
+	use Instance;
+	use ProtectedHooks;
 
-
-	public function __construct() {
-		add_action( 'save_post', array( $this, 'save_metaboxes' ), 10, 2 );
-		add_action( 'add_meta_boxes', array( $this, 'add_metaboxes' ) );
+	protected function __construct() {
+		$this->add_action( 'save_post', 10, 2 );
+		$this->add_action( 'add_meta_boxes' );
 	}
 
-	public function add_metaboxes() {
+	protected function add_meta_boxes() {
 		$custom_post_types = ( class_exists( 'STMMultiListing' ) ) ? STMMultiListing::stm_get_listing_type_slugs() : array();
 		$post_types        = array_merge( array( 'listings' ), $custom_post_types );
 
 		add_meta_box(
 			'car_phone_views',
 			esc_html__( 'Views & Clicks Activity', 'stm_vehicles_listing' ),
-			array( $this, 'display_car_phone_views' ),
+			function( $post, $metabox ) {
+				$this->display_car_phone_views( $post, $metabox );
+			},
 			$post_types,
 			'side',
 			'default',
@@ -28,7 +33,9 @@ class ListingMetaboxes {
 		add_meta_box(
 			'listing_author',
 			esc_html__( 'Author', 'stm_vehicles_listing' ),
-			array( $this, 'display_author' ),
+			function( $post, $metabox ) {
+				$this->display_author( $post, $metabox );
+			},
 			$post_types,
 			'side',
 			'default',
@@ -37,7 +44,9 @@ class ListingMetaboxes {
 		add_meta_box(
 			'listing_badges',
 			esc_html__( 'Featured Listing', 'stm_vehicles_listing' ),
-			array( $this, 'display_car_options' ),
+			function( $post, $metabox ) {
+				$this->display_car_options( $post, $metabox );
+			},
 			$post_types,
 			'side',
 			'default',
@@ -46,7 +55,9 @@ class ListingMetaboxes {
 			add_meta_box(
 				'sell_car_online',
 				esc_html__( 'Listing Sale Actions', 'stm_vehicles_listing' ),
-				array( $this, 'display_sell_car_online' ),
+				function( $post, $metabox ) {
+					$this->display_sell_car_online( $post, $metabox );
+				},
 				$post_types,
 				'side',
 				'default'
@@ -54,7 +65,7 @@ class ListingMetaboxes {
 		}
 	}
 
-	public function display_car_phone_views( $post, $metabox ) {
+	protected function display_car_phone_views( $post, $metabox ) {
 		do_action(
 			'stm_listings_load_template',
 			'admin-metaboxes/views-clicks',
@@ -65,7 +76,7 @@ class ListingMetaboxes {
 		);
 	}
 
-	public function display_author( $post, $metabox ) {
+	protected function display_author( $post, $metabox ) {
 		$author_id = get_post_meta( $post->ID, 'stm_car_user', true );
 		if ( empty( $author_id ) ) {
 			$author_id = $post->post_author;
@@ -84,7 +95,7 @@ class ListingMetaboxes {
 		);
 	}
 
-	public function display_car_options( $post, $metabox ) {
+	protected function display_car_options( $post, $metabox ) {
 		do_action(
 			'stm_listings_load_template',
 			'admin-metaboxes/listing-badges',
@@ -95,7 +106,7 @@ class ListingMetaboxes {
 		);
 	}
 
-	public function display_sell_car_online( $post, $metabox ) {
+	protected function display_sell_car_online( $post, $metabox ) {
 		do_action(
 			'stm_listings_load_template',
 			'admin-metaboxes/sell-car-online',
@@ -106,7 +117,7 @@ class ListingMetaboxes {
 		);
 	}
 
-	public function save_metaboxes( $post_id ) {
+	protected function save_post( $post_id ) {
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return $post_id;
 		}

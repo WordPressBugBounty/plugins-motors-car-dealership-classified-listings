@@ -658,7 +658,7 @@ input:-webkit-autofill {
 .stm-login-register-form .stm-login-form form input[type=submit] {
     display: inline-block;
     margin-right: 10px;
-    font-size: 12px !important;
+    font-size: 12px;
     padding: 16px 46px 12px;
     font-weight: 700;
 }
@@ -836,13 +836,18 @@ input:-webkit-autofill {
 
 .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-car-listing-data-single {
     margin-bottom: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .select2.select2-container.required_field .selection .select2-selection--single .select2-selection__rendered, .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form1-intro-unit .select2.select2-container.required_field .selection .select2-selection--single .select2-selection__rendered {
+.stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit .select2.select2-container.required_field .selection .select2-selection--single .select2-selection__rendered,
+.stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form1-intro-unit .select2.select2-container.required_field .selection .select2-selection--single .select2-selection__rendered {
     border: 1px solid var(--motors-error-text-color);
 }
 
-.stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit input.required_field, .stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form1-intro-unit input.required_field {
+.stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form-1-end-unit input.required_field,
+.stm-vl-plugin-pure .stm_add_car_form .stm_add_car_form_1 .stm-form1-intro-unit input.required_field {
     border: 1px solid var(--motors-error-text-color);
 }
 
@@ -1325,7 +1330,8 @@ input:-webkit-autofill {
     opacity: 0;
 }
 
-.stm-vl-plugin-pure .stm_add_car_form .stm-form-3-photos .stm-add-media-car .stm-media-car-gallery .stm-placeholder .inner.active .stm-image-preview:before, .stm-vl-plugin-pure .stm_add_car_form .stm-form-3-photos .stm-add-media-car .stm-media-car-gallery .stm-placeholder .inner.active .stm-image-preview .fas {
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-3-photos .stm-add-media-car .stm-media-car-gallery .stm-placeholder .inner.active .stm-image-preview:before,
+.stm-vl-plugin-pure .stm_add_car_form .stm-form-3-photos .stm-add-media-car .stm-media-car-gallery .stm-placeholder .inner.active .stm-image-preview .fas {
     opacity: 1;
 }
 
@@ -2314,13 +2320,23 @@ input:-webkit-autofill {
     background-color: var(--motors-bg-contrast);
 }
 
-.stm-add-a-car-login .stm-login-form form input[type=text], .stm-add-a-car-login .stm-login-form form input[type=number], .stm-add-a-car-login .stm-login-form form input[type=tel], .stm-add-a-car-login .stm-login-form form input[type=email], .stm-add-a-car-login .stm-login-form form input[type=search], .stm-add-a-car-login .stm-login-form form input[type=password] {
+.stm-add-a-car-login .stm-login-form form input[type=text],
+.stm-add-a-car-login .stm-login-form form input[type=number],
+.stm-add-a-car-login .stm-login-form form input[type=tel],
+.stm-add-a-car-login .stm-login-form form input[type=email],
+.stm-add-a-car-login .stm-login-form form input[type=search],
+.stm-add-a-car-login .stm-login-form form input[type=password] {
     background-color: var(--motors-filter-inputs-color);
     border-color: var(--motors-filter-inputs-color);
     border-radius: 4px;
 }
 
-.stm-add-a-car-login .stm-login-form form input[type=text]:focus, .stm-add-a-car-login .stm-login-form form input[type=number]:focus, .stm-add-a-car-login .stm-login-form form input[type=tel]:focus, .stm-add-a-car-login .stm-login-form form input[type=email]:focus, .stm-add-a-car-login .stm-login-form form input[type=search]:focus, .stm-add-a-car-login .stm-login-form form input[type=password]:focus {
+.stm-add-a-car-login .stm-login-form form input[type=text]:focus,
+.stm-add-a-car-login .stm-login-form form input[type=number]:focus,
+.stm-add-a-car-login .stm-login-form form input[type=tel]:focus,
+.stm-add-a-car-login .stm-login-form form input[type=email]:focus,
+.stm-add-a-car-login .stm-login-form form input[type=search]:focus,
+.stm-add-a-car-login .stm-login-form form input[type=password]:focus {
     border-color: var(--motors-accent-color);
 }
 
@@ -2560,7 +2576,8 @@ input:-webkit-autofill {
     margin-bottom: 25px;
 }
 
-.stm-no-available-adds h3, .stm-no-available-adds p,
+.stm-no-available-adds h3,
+.stm-no-available-adds p,
 .stm-no-available-adds .clearfix {
     text-align: center;
 }
@@ -2659,7 +2676,7 @@ input:-webkit-autofill {
 .stm-login-register-form .stm-login-form form.stm_forgot_password_send input[type=submit] {
     padding: 15px 20px 13px;
     margin-top: 15px;
-    font-size: 12px !important;
+    font-size: 12px;
 }
 
 .stm-vl-plugin-pure .motors-desc-slots-wrapper h3 {

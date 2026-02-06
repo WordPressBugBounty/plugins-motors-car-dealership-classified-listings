@@ -1,10 +1,10 @@
 <?php
 
-namespace Motors_Elementor_Widgets_Free\Widgets\SingleListing;
+namespace MotorsElementorWidgetsFree\Widgets\SingleListing;
 
-use Motors_Elementor_Widgets_Free\MotorsElementorWidgetsFree;
-use Motors_Elementor_Widgets_Free\Helpers\Helper;
-use Motors_Elementor_Widgets_Free\Widgets\WidgetBase;
+use MotorsElementorWidgetsFree\MotorsElementorWidgetsFree;
+use MotorsElementorWidgetsFree\Helpers\Helper;
+use MotorsElementorWidgetsFree\Widgets\WidgetBase;
 
 class DealerEmail extends WidgetBase {
 
@@ -252,7 +252,6 @@ class DealerEmail extends WidgetBase {
 				'label'          => __( 'Typography', 'stm_vehicles_listing' ),
 				'separator'      => 'before',
 				'exclude'        => array(
-					'font_family',
 					'font_style',
 					'text_decoration',
 					'letter_spacing',
@@ -423,4 +422,5 @@ class DealerEmail extends WidgetBase {
 
 	protected function content_template() {
 	}
+
 }

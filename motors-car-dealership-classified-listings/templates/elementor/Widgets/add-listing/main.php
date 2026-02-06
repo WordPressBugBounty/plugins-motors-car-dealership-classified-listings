@@ -36,8 +36,8 @@ $lt_args = array(
 	'listing_types_options' => $lt_options,
 );
 
-Motors_Elementor_Widgets_Free\Helpers\Helper::stm_ew_load_template( 'elementor/Widgets/add-listing/parts/restricted-popup', STM_LISTINGS_PATH, array() );
-Motors_Elementor_Widgets_Free\Helpers\Helper::stm_ew_load_template( 'elementor/Widgets/add-listing/parts/binding', STM_LISTINGS_PATH, array() );
+MotorsElementorWidgetsFree\Helpers\Helper::stm_ew_load_template( 'elementor/Widgets/add-listing/parts/restricted-popup', STM_LISTINGS_PATH, array() );
+MotorsElementorWidgetsFree\Helpers\Helper::stm_ew_load_template( 'elementor/Widgets/add-listing/parts/binding', STM_LISTINGS_PATH, array() );
 ?>
 
 <div class="stm_add_car_form <?php echo esc_attr( $stm_edit_car_form ); ?>">
@@ -81,8 +81,8 @@ Motors_Elementor_Widgets_Free\Helpers\Helper::stm_ew_load_template( 'elementor/W
 
 		<?php
 
-		Motors_Elementor_Widgets_Free\Helpers\Helper::stm_ew_load_template( 'elementor/Widgets/add-listing/parts/desc_slots', STM_LISTINGS_PATH, $lt_args );
-		Motors_Elementor_Widgets_Free\Helpers\Helper::stm_ew_load_template( 'elementor/Widgets/add-listing/parts/title', STM_LISTINGS_PATH, $lt_args );
+		MotorsElementorWidgetsFree\Helpers\Helper::stm_ew_load_template( 'elementor/Widgets/add-listing/parts/desc_slots', STM_LISTINGS_PATH, $lt_args );
+		MotorsElementorWidgetsFree\Helpers\Helper::stm_ew_load_template( 'elementor/Widgets/add-listing/parts/title', STM_LISTINGS_PATH, $lt_args );
 
 		$steps = apply_filters( 'motors_vl_get_nuxy_mod', '', 'sorted_steps' );
 
@@ -94,7 +94,7 @@ Motors_Elementor_Widgets_Free\Helpers\Helper::stm_ew_load_template( 'elementor/W
 					$template = 'item_grouped_features';
 				}
 
-				Motors_Elementor_Widgets_Free\Helpers\Helper::stm_ew_load_template( 'elementor/Widgets/add-listing/parts/' . $template, STM_LISTINGS_PATH, $lt_args );
+				MotorsElementorWidgetsFree\Helpers\Helper::stm_ew_load_template( 'elementor/Widgets/add-listing/parts/' . $template, STM_LISTINGS_PATH, $lt_args );
 			}
 		}
 		?>
@@ -104,7 +104,7 @@ Motors_Elementor_Widgets_Free\Helpers\Helper::stm_ew_load_template( 'elementor/W
 		<?php foreach ( $steps as $step ) : ?>
 			<?php if ( isset( $step['options'] ) && 'enable_layouts' === $step['id'] ) : ?>
 				<?php foreach ( $step['options'] as $option ) : ?>
-					add_form_steps.push( <?php echo json_encode( $option['id'] ); ?> );
+					add_form_steps.push( <?php echo wp_json_encode( $option['id'] ); ?> );
 				<?php endforeach; ?>
 			<?php endif; ?>
 		<?php endforeach; ?>
@@ -113,6 +113,6 @@ Motors_Elementor_Widgets_Free\Helpers\Helper::stm_ew_load_template( 'elementor/W
 	<?php do_action( 'stm_listings_load_template', 'add_car/progress-bar', array() ); ?>
 
 	<?php
-	Motors_Elementor_Widgets_Free\Helpers\Helper::stm_ew_load_template( 'elementor/Widgets/add-listing/parts/check_user', STM_LISTINGS_PATH, $lt_args );
+	MotorsElementorWidgetsFree\Helpers\Helper::stm_ew_load_template( 'elementor/Widgets/add-listing/parts/check_user', STM_LISTINGS_PATH, $lt_args );
 	?>
 </div>

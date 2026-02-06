@@ -1,14 +1,15 @@
 <?php
 
-namespace Motors_Elementor_Widgets_Free\Widgets;
+namespace MotorsElementorWidgetsFree\Widgets;
 
-use Motors_Elementor_Widgets_Free\MotorsElementorWidgetsFree;
-use Motors_Elementor_Widgets_Free\Helpers\Helper;
-use Motors_Elementor_Widgets_Free\Widgets\WidgetBase;
+use MotorsElementorWidgetsFree\MotorsElementorWidgetsFree;
+use MotorsElementorWidgetsFree\Helpers\Helper;
+use MotorsElementorWidgetsFree\Widgets\WidgetBase;
 
 class ImageCategories extends WidgetBase {
 
 	public function __construct( $data = array(), $args = null ) {
+
 		parent::__construct( $data, $args );
 
 		$this->stm_ew_enqueue(
@@ -163,6 +164,48 @@ class ImageCategories extends WidgetBase {
 		);
 
 		$this->add_control(
+			'label_margin',
+			array(
+				'label'     => __( '"Show all" Margin', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors' => array(
+					'{{WRAPPER}} .stm_icon_filter_label' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'items_gap',
+			array(
+				'label'      => esc_html__( 'Items Gap', 'stm_vehicles_listing' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => array( 'px', '%' ),
+				'range'      => array(
+					'px' => array(
+						'min'  => 0,
+						'max'  => 50,
+						'step' => 0.5,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .stm_listing_icon_filter' => 'margin: -{{SIZE}}{{UNIT}};min-width: 100% !important;',
+					'{{WRAPPER}} .stm_listing_icon_filter .stm_listing_icon_filter_single' => 'padding: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'items_padding',
+			array(
+				'label'     => __( 'Items Padding', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors' => array(
+					'{{WRAPPER}} .stm_listing_icon_filter .stm_listing_icon_filter_single .inner' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;',
+				),
+			)
+		);
+
+		$this->add_control(
 			'items_margin_bottom',
 			array(
 				'label'          => esc_html__( 'Items Margin Bottom', 'stm_vehicles_listing' ),
@@ -192,6 +235,28 @@ class ImageCategories extends WidgetBase {
 				),
 				'condition'      => array(
 					'show_as_carousel' => '',
+				),
+			)
+		);
+
+		$this->add_control(
+			'item_padding',
+			array(
+				'label'     => __( 'Item Padding', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors' => array(
+					'{{WRAPPER}} .stm_listing_icon_filter .stm_listing_icon_filter_single .inner' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;',
+				),
+			)
+		);
+
+		$this->add_control(
+			'item_name_margin',
+			array(
+				'label'     => __( 'Item Name Margin', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::DIMENSIONS,
+				'selectors' => array(
+					'{{WRAPPER}} .stm_listing_icon_filter .stm_listing_icon_filter_single .inner .name' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;',
 				),
 			)
 		);
@@ -231,6 +296,41 @@ class ImageCategories extends WidgetBase {
 			)
 		);
 
+		$this->add_responsive_control(
+			'item_image_size',
+			array(
+				'label'      => esc_html__( 'Item Image Size', 'stm_vehicles_listing' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => array( '%' ),
+				'range'      => array(
+					'%' => array(
+						'min'  => 0,
+						'max'  => 50,
+						'step' => 0.5,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .stm_listing_icon_filter .stm_listing_icon_filter_single .inner .image' => 'padding: {{SIZE}}%;',
+				),
+			)
+		);
+
+		$this->add_control(
+			'item_image_width',
+			array(
+				'label'     => esc_html__( 'Item Image Width', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::SELECT,
+				'options'   => array(
+					'auto' => esc_html__( 'Auto', 'stm_vehicles_listing' ),
+					'100%' => esc_html__( '100%', 'stm_vehicles_listing' ),
+				),
+				'default'   => 'auto',
+				'selectors' => array(
+					'{{WRAPPER}} .stm_listing_icon_filter .stm_listing_icon_filter_single .inner .image img' => 'width: {{VALUE}};',
+				),
+			)
+		);
+
 		$this->add_control(
 			'title',
 			array(
@@ -253,6 +353,44 @@ class ImageCategories extends WidgetBase {
 				'condition'   => array(
 					'show_as_carousel' => '',
 				),
+			)
+		);
+
+		$this->add_control(
+			'show_all_icon',
+			array(
+				'label'            => esc_html__( 'Show All Icon', 'stm_vehicles_listing' ),
+				'type'             => \Elementor\Controls_Manager::ICONS,
+				'skin'             => 'inline',
+				'fa4compatibility' => 'icon',
+			)
+		);
+
+		$this->add_control(
+			'show_all_icon_size',
+			array(
+				'label'      => esc_html__( 'Show All Icon Size', 'stm_vehicles_listing' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => array( 'px' ),
+				'range'      => array(
+					'px' => array(
+						'min'  => 0,
+						'max'  => 50,
+						'step' => 1,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .stm-icon-filter-show-all-icon' => 'font-size: {{SIZE}}{{UNIT}}',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			array(
+				'name'     => 'show_all_border',
+				'label'    => esc_html__( 'Show All Border', 'stm_vehicles_listing' ),
+				'selector' => '{{WRAPPER}} .stm_icon_filter_label',
 			)
 		);
 
@@ -585,9 +723,30 @@ class ImageCategories extends WidgetBase {
 				'label'    => esc_html__( 'Item Typography', 'stm_vehicles_listing' ),
 				'selector' => '{{WRAPPER}} .stm_listing_icon_filter_single .name',
 				'exclude'  => array(
-					'font_family',
 					'font_style',
 					'word_spacing',
+				),
+			)
+		);
+
+		$this->add_control(
+			'item_background_color',
+			array(
+				'label'     => esc_html__( 'Item Background Color', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .stm_listing_icon_filter .stm_listing_icon_filter_single .inner' => 'background-color: {{VALUE}} !important;',
+				),
+			)
+		);
+
+		$this->add_control(
+			'item_background_color_hover',
+			array(
+				'label'     => esc_html__( 'Item Background Color On Hover', 'stm_vehicles_listing' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .stm_listing_icon_filter_single:hover .inner' => 'background-color: {{VALUE}}',
 				),
 			)
 		);
@@ -616,6 +775,18 @@ class ImageCategories extends WidgetBase {
 			)
 		);
 
+		$this->add_responsive_control(
+			'item_border_radius',
+			array(
+				'label'      => esc_html__( 'Item Border Radius', 'stm_vehicles_listing' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .stm_listing_icon_filter .stm_listing_icon_filter_single .inner' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}!important;',
+				),
+			)
+		);
+
 		$this->add_control(
 			'navigation_background_color',
 			array(
@@ -627,7 +798,7 @@ class ImageCategories extends WidgetBase {
 					'{{WRAPPER}} .swiper-button-next' => 'background: {{VALUE}}',
 				),
 				'condition' => array(
-					'navigation' => 'yes',
+					'carousel' => 'yes',
 				),
 			)
 		);
@@ -643,7 +814,7 @@ class ImageCategories extends WidgetBase {
 					'{{WRAPPER}} .swiper-button-next:hover' => 'background: {{VALUE}}',
 				),
 				'condition' => array(
-					'navigation' => 'yes',
+					'carousel' => 'yes',
 				),
 			)
 		);
@@ -659,7 +830,7 @@ class ImageCategories extends WidgetBase {
 					'{{WRAPPER}} .swiper-button-next > i' => 'color: {{VALUE}}',
 				),
 				'condition' => array(
-					'navigation' => 'yes',
+					'carousel' => 'yes',
 				),
 			)
 		);
@@ -675,7 +846,7 @@ class ImageCategories extends WidgetBase {
 					'{{WRAPPER}} .swiper-button-next:hover > i' => 'color: {{VALUE}}',
 				),
 				'condition' => array(
-					'navigation' => 'yes',
+					'carousel' => 'yes',
 				),
 			)
 		);
@@ -707,5 +878,4 @@ class ImageCategories extends WidgetBase {
 		}
 		Helper::stm_ew_load_template( 'elementor/Widgets/image-categories/image-categories', STM_LISTINGS_PATH, $settings );
 	}
-
 }

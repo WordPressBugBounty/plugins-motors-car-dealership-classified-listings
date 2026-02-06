@@ -16,6 +16,10 @@ if ( ! defined( 'STM_LISTINGS_PRO_PATH' ) ) {
 			$position = 110;
 
 			foreach ( $addons as $key => $addon ) {
+				if ( Addons::EMAIL_MANAGER === $key && stm_is_motors_theme() && ! is_mvl_pro() ) {
+					continue;
+				}
+
 				add_submenu_page(
 					'mvl_plugin_settings',
 					$addon['name'],

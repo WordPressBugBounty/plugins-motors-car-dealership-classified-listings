@@ -188,8 +188,8 @@ function get_freemius_info() {
 }
 
 $freemius_info = get_freemius_info();
-$start_date    = new DateTime( '2025-06-23 00:00:00' );
-$deadline      = new DateTime( '2025-07-01 23:59:00' );
+$start_date    = new DateTime( '2025-12-22 00:00:00' );
+$deadline      = new DateTime( '2026-01-08 23:59:00' );
 $current_time  = time();
 $is_promotion  = $current_time >= $start_date->format('U') && $current_time < $deadline->format('U'); //phpcs:ignore
 $only_annual   = true;
@@ -229,7 +229,7 @@ if ( $is_promotion && ! empty( $freemius_info ) ) {
 					<?php endif; ?>
 				</p>
 				<?php if ( $is_promotion ) : ?>
-					<div class="stm-discount"><a href="<?php echo esc_url( 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wpadmin&utm_medium=push&utm_campaign=motors&utm_content=gopro&utm_term=midsummersale2025' ); ?>" target="_blank"></a></div>
+					<div class="stm-discount"><a href="<?php echo esc_url( 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wpadmin&utm_medium=push&utm_campaign=motors&utm_content=gopro&utm_term=bfcm2025&plugin_coupon=XMAS2025' ); ?>" target="_blank"></a></div>
 				<?php endif; ?>
 			</div>
 			<?php if ( isset( $freemius_info['plan'] ) ) : ?>
@@ -254,13 +254,15 @@ if ( $is_promotion && ! empty( $freemius_info ) ) {
 								<div class="stm_price">
 									<?php
 									if ( $is_promotion ) :
+										$price_annual   = number_format( $plan->annual_price * 0.70, 2, '.', '' );
+										$price_lifetime = number_format( $plan->lifetime_price * 0.70, 2, '.', '' );
 										?>
 										<sup>$</sup>
 										<span class="stm_price__value"
-											data-price-annual="<?php echo esc_attr( number_format( $plan->annual_price * 0.70, 0, '.', '' ) ); ?>"
-											data-price-lifetime="<?php echo esc_attr( number_format( $plan->lifetime_price * 0.70, 0, '.', '' ) ); ?>"
-											data-price-old-annual="<?php echo esc_attr( number_format( $plan->annual_price, 2, '.', '' ) ); ?>">
-											<?php echo esc_html( number_format( $plan->annual_price * 0.70, 0, '.', '' ) ); ?>
+											data-price-annual="<?php echo esc_attr( $price_annual ); ?>"
+											data-price-lifetime="<?php echo esc_attr( $price_lifetime ); ?>"
+											data-price-old-annual="<?php echo esc_attr( $price_annual ); ?>">
+											<?php echo esc_html( $price_annual ); ?>
 										</span>
 										<div class="discount">
 											<sup>$</sup>
@@ -327,7 +329,10 @@ if ( $is_promotion && ! empty( $freemius_info ) ) {
 									$utm_medium   = isset( $_GET['source'] ) ? esc_attr( htmlspecialchars( $_GET['source'] ) ) : 'unlock-pro-button';
 									$annual_url   = $base_url . '&utm_medium=' . $utm_medium . '&billing_cycle=annual';
 									$lifetime_url = $base_url . '&utm_medium=' . $utm_medium . '&billing_cycle=lifetime';
-									$coupon       = $is_promotion ? '&plugin_coupon=MIDSUMMER25' : '';
+									$coupon       = '';
+									if ( $is_promotion ) {
+										$coupon .= '&plugin_coupon=XMAS2025';
+									}
 									$annual_url  .= $coupon;
 									?>
 									<a href="<?php echo esc_url( $annual_url ); ?>" class="stm_plan__btn stm_plan__btn--buy" data-checkout-url-annual="<?php echo esc_url( $annual_url ); ?>" data-checkout-url-lifetime="<?php echo esc_url( $lifetime_url ); ?>" target="_blank">

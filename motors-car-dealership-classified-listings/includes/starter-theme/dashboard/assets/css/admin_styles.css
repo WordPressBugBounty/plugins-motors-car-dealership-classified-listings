@@ -557,10 +557,10 @@ div.fs-notice.success[data-slug=test-template] {
 }
 
 .inner-wrapper img {
-    width: 40px;
+    width: auto;
     height: 40px;
-    -o-object-fit: cover;
-    object-fit: cover;
+    -o-object-fit: contain !important;
+    object-fit: contain !important;
     margin-right: 20px;
 }
 

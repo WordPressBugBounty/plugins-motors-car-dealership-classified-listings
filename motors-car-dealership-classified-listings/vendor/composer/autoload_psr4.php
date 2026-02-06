@@ -6,7 +6,8 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Motors_Elementor_Widgets_Free\\' => array($baseDir . '/elementor/inc'),
+    'MotorsVehiclesListing\\MagicKit\\' => array($baseDir . '/magic-kit'),
     'MotorsVehiclesListing\\' => array($baseDir . '/includes/class'),
     'MotorsNuxy\\' => array($baseDir . '/includes/nuxy'),
+    'MotorsElementorWidgetsFree\\' => array($baseDir . '/elementor/inc'),
 );

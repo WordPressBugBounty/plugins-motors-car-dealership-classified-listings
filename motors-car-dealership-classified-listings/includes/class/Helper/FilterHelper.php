@@ -148,8 +148,22 @@ class FilterHelper {
 
 		$enabled_ids_by_parent = false;
 		/** if have parent enable just connected childs */
-		if ( $parent && array_key_exists( $parent, $this->request_options ) ) {
-			$enabled_ids_by_parent = $this->get_option_childs_by_parent( $parent, $taxonomy );
+		if ( $parent ) {
+			$parent_values = null;
+			if ( array_key_exists( $parent, $this->request_options ) ) {
+				$parent_values = $this->request_options[ $parent ];
+			} else {
+				$parent_values = apply_filters( 'stm_listings_input', null, $parent );
+			}
+
+			if ( ! is_null( $parent_values ) ) {
+				$parent_values = is_array( $parent_values ) ? $parent_values : array( $parent_values );
+				$parent_values = array_values( array_filter( $parent_values ) );
+				if ( ! empty( $parent_values ) ) {
+					$term_model            = new TermsModel();
+					$enabled_ids_by_parent = $term_model->get_child_term_ids_by_parent( $taxonomy, $parent_values );
+				}
+			}
 		}
 
 		foreach ( $this->filter_terms as $term ) {
@@ -174,6 +188,7 @@ class FilterHelper {
 				'disabled' => $disabled,
 				'count'    => $term->count,
 				'parent'   => $parent,
+				'deps'     => array_values( array_filter( (array) get_term_meta( $term->term_id, 'stm_parent' ) ) ),
 				'option'   => $term->slug,
 			);
 		}
