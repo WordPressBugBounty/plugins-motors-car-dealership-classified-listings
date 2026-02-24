@@ -667,6 +667,22 @@ if ( ! function_exists( 'stm_custom_login' ) ) {
 	add_action( 'wp_ajax_nopriv_stm_custom_login', 'stm_custom_login' );
 }
 
+if ( ! function_exists( 'stm_process_form_editor_fields_on_register' ) ) {
+	/**
+	 * Process form editor fields from sign_up form and save to user meta
+	 *
+	 * Wrapper function for backward compatibility.
+	 * Uses UserRegistrationHandler from FormsEditor addon.
+	 *
+	 * @param int $user_id User ID
+	 */
+	function stm_process_form_editor_fields_on_register( $user_id ) {
+		if ( class_exists( '\MotorsVehiclesListing\Pro\Addons\FormsEditor\Helpers\UserRegistrationHandler' ) ) {
+			\MotorsVehiclesListing\Pro\Addons\FormsEditor\Helpers\UserRegistrationHandler::save_fields_to_user_meta( $user_id );
+		}
+	}
+}
+
 if ( ! function_exists( 'stm_custom_register' ) ) {
 	// registration from header dropdown or add listing page bottom
 	function stm_custom_register() {
@@ -743,6 +759,10 @@ if ( ! function_exists( 'stm_custom_register' ) ) {
 		}
 
 		if ( empty( $errors ) ) {
+			// Disable WordPress default new user notification to prevent duplicate emails
+			add_filter( 'wp_send_new_user_notification_to_admin', '__return_false', 999 );
+			add_filter( 'wp_send_new_user_notification_to_user', '__return_false', 999 );
+
 			$user_data = array(
 				'user_login' => $user_login,
 				'user_pass'  => $user_pass,
@@ -757,9 +777,16 @@ if ( ! function_exists( 'stm_custom_register' ) ) {
 
 			$user_id = wp_insert_user( $user_data );
 
+			// Re-enable WordPress default notifications after user creation
+			remove_filter( 'wp_send_new_user_notification_to_admin', '__return_false', 999 );
+			remove_filter( 'wp_send_new_user_notification_to_user', '__return_false', 999 );
+
 			if ( ! is_wp_error( $user_id ) && apply_filters( 'motors_vl_get_nuxy_mod', false, 'enable_email_confirmation' ) ) {
 
 				$user_data['user_phone'] = $user_phone;
+
+				// Process form editor fields for sign_up form
+				stm_process_form_editor_fields_on_register( $user_id );
 
 				stm_handle_premoderation( $user_id, $user_data );
 
@@ -779,15 +806,16 @@ if ( ! function_exists( 'stm_custom_register' ) ) {
 					update_user_meta( $user_id, 'stm_whatsapp_number', '' );
 				}
 
-				// When using caching plugins user sessions are not working properly
-				// deleting user meta cache should solve this issue
+				// Clear user meta cache for proper session handling
 				wp_cache_delete( $user_id, 'user_meta' );
 
+				// Authenticate user first to establish session
 				wp_set_current_user( $user_id, $user_login );
-
-				wp_set_auth_cookie( $user_id );
-
+				wp_set_auth_cookie( $user_id, true );
 				do_action( 'wp_login', $user_login, new WP_User( $user_id ) );
+
+				// Process form editor fields after authentication
+				stm_process_form_editor_fields_on_register( $user_id );
 
 				if ( $redirect ) {
 					$response['message']      = esc_html__( 'Congratulations! You have been successfully registered. Redirecting to your account profile page.', 'stm_vehicles_listing' );
@@ -849,47 +877,15 @@ if ( ! function_exists( 'stm_custom_register' ) ) {
 
 				}
 
-				// AUTH
+				// Show activation message if required
+				if ( (int) get_option( 'users_can_register' ) ) {
+					$response['message'] = esc_html__( 'Congratulations! You have been successfully registered. Please, activate your account', 'stm_vehicles_listing' );
+				}
+
+				// Trigger registration hooks
 				do_action( 'stm_register_new_user', $user_id );
 				if ( function_exists( 'stm_force_favourites' ) ) {
 					stm_force_favourites( $user_id );
-				}
-
-				if ( (int) get_option( 'users_can_register' ) ) {
-					$response['message'] = esc_html__( 'Congratulations! You have been successfully registered. Please, activate your account', 'stm_vehicles_listing' );
-				} else {
-					wp_set_current_user( $user_id, $user_login );
-
-					wp_set_auth_cookie( $user_id );
-
-					do_action( 'wp_login', $user_login, new WP_User( $user_id ) );
-
-					if ( $redirect ) {
-						$response['message']      = esc_html__( 'Congratulations! You have been successfully registered. Redirecting to your account profile page.', 'stm_vehicles_listing' );
-						$response['redirect_url'] = get_author_posts_url( $user_id );
-					} else {
-						ob_start();
-						stm_add_a_car_user_info( $user_login, $user_name, $user_lastname, $user_id );
-						$restricted   = false;
-						$restrictions = apply_filters(
-							'stm_get_post_limits',
-							array(
-								'premoderation' => true,
-								'posts_allowed' => 0,
-								'posts'         => 0,
-								'images'        => 0,
-								'role'          => 'user',
-							),
-							$user_id
-						);
-
-						if ( $restrictions['posts'] < 1 && apply_filters( 'motors_vl_get_nuxy_mod', false, 'dealer_pay_per_listing' ) ) {
-							$restricted = true;
-						}
-
-						$response['restricted'] = $restricted;
-						$response['user_html']  = ob_get_clean();
-					}
 				}
 
 				do_action(
@@ -1218,10 +1214,14 @@ if ( ! function_exists( 'stm_ajax_add_a_car' ) ) {
 				$car_features[] = esc_attr( $car_feature );
 			}
 		}
+
 		/*Videos*/
 		if ( ! empty( $_POST['stm_video'] ) ) {
 			foreach ( $_POST['stm_video'] as $video ) {
-				$videos[] = esc_url( $video );
+				$video = esc_url( $video );
+				if ( $video && ! in_array( $video, $videos, true ) ) {
+					$videos[] = $video;
+				}
 			}
 		}
 
@@ -1449,6 +1449,8 @@ if ( ! function_exists( 'stm_ajax_add_a_car' ) ) {
 					if ( count( $videos ) > 1 ) {
 						array_shift( $videos );
 						$meta['gallery_videos'] = array_filter( array_unique( $videos ) );
+					} else {
+						$meta['gallery_videos'] = '';
 					}
 				} else {
 					$meta['gallery_video']  = '';
@@ -2742,15 +2744,29 @@ if ( ! function_exists( 'stm_ajax_add_trade_offer' ) ) {
 	function stm_ajax_add_trade_offer() {
 		check_ajax_referer( 'stm_security_nonce', 'security' );
 
-		$response['errors'] = array();
+		$response = array(
+			'errors'   => array(),
+			'status'   => 'danger',
+			'response' => '',
+		);
 
-		if ( ! filter_var( $_POST['name'], FILTER_SANITIZE_STRING ) ) {
+		$form_slug = isset( $_POST['form_slug'] ) ? sanitize_key( wp_unslash( $_POST['form_slug'] ) ) : 'offer_price';
+
+		$name_value = '';
+		if ( isset( $_POST['name'] ) ) {
+			$name_value = sanitize_text_field( wp_unslash( $_POST['name'] ) );
+		} elseif ( isset( $_POST['name_of_user'] ) ) {
+			$name_value = sanitize_text_field( wp_unslash( $_POST['name_of_user'] ) );
+		}
+
+		if ( 'trade_offer' !== $form_slug && '' === $name_value ) {
 			$response['errors']['name'] = true;
 		}
-		if ( ! is_email( $_POST['email'] ) ) {
+		if ( ! is_email( wp_unslash( $_POST['email'] ?? '' ) ) ) {
 			$response['errors']['email'] = true;
 		}
-		if ( ! is_numeric( $_POST['phone'] ) ) {
+		$phone_raw = isset( $_POST['phone'] ) ? wp_unslash( $_POST['phone'] ) : '';
+		if ( ! preg_match( '/^[\d\+\-\.\(\)\s]{7,}$/', $phone_raw ) ) {
 			$response['errors']['phone'] = true;
 		}
 		if ( ! is_numeric( $_POST['trade_price'] ) ) {
@@ -2773,30 +2789,42 @@ if ( ! function_exists( 'stm_ajax_add_trade_offer' ) ) {
 				$response['response'] = esc_html__( 'Your request was sent', 'stm_vehicles_listing' );
 				$response['status']   = 'success';
 
-				// Sending Mail to admin
-
+				// Sending Mail (dynamic with FormsEditor support)
 				$listing_id      = filter_var( $_POST['vehicle_id'], FILTER_SANITIZE_NUMBER_INT );
 				$listing_user_id = get_post_meta( $listing_id, 'stm_car_user', true );
 
 				if ( $listing_id && $listing_user_id ) {
 					$user_data = get_userdata( $listing_user_id );
+					$send_to   = ( $user_data && isset( $user_data->user_email ) ) ? $user_data->user_email : '';
 
-					if ( isset( $user_data->user_email ) && $user_data->user_email ) {
-						$args = array(
+					if ( $send_to ) {
+						$base_tags = array(
 							'listing_id' => $listing_id,
-							'name'       => sanitize_text_field( $_POST['name'] ),
-							'email'      => sanitize_email( $_POST['email'] ),
-							'phone'      => sanitize_text_field( $_POST['phone'] ),
-							'price'      => floatval( filter_var( $_POST['trade_price'], FILTER_SANITIZE_NUMBER_FLOAT ) ),
+							'name'       => $name_value,
+							'email'      => isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '',
+							'phone'      => $phone_raw ? sanitize_text_field( $phone_raw ) : '',
+							'price'      => isset( $_POST['trade_price'] ) ? floatval( filter_var( wp_unslash( $_POST['trade_price'] ), FILTER_SANITIZE_NUMBER_FLOAT ) ) : '',
 							'user_id'    => $listing_user_id,
+							'car'        => get_the_title( $listing_id ),
 						);
+
+						$files        = array();
+						$helper_class = '\MotorsVehiclesListing\Pro\Addons\FormsEditor\Helpers\FormSubmission';
+						if ( class_exists( $helper_class ) ) {
+							$built      = $helper_class::build( $form_slug, $_POST, $_FILES, $base_tags );
+							$smart_tags = $built['smart_tags'];
+							$files      = $built['attachments'];
+						} else {
+							$smart_tags = $base_tags;
+						}
 
 						do_action(
 							'mvl_send_email',
 							array(
 								'config'          => 'trade_offer',
-								'to'              => $user_data->user_email,
-								'smart_tags_args' => $args,
+								'to'              => $send_to,
+								'files'           => $files,
+								'smart_tags_args' => $smart_tags,
 							)
 						);
 					}

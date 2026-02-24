@@ -76,6 +76,7 @@
 		return !hasErrors
 	}
 
+
 	$(document).on('ready', function () {
 		$('.sell-a-car-proceed').on('click', function (e) {
 			e.preventDefault()
@@ -222,5 +223,6 @@
 		$('body').on('click', '.generated .stm-plus', function () {
 			$(this).closest('.stm-pseudo-file-input').remove()
 		})
+
 	})
 })(jQuery)

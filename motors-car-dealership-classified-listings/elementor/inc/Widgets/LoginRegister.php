@@ -38,6 +38,7 @@ class LoginRegister extends WidgetBase {
 		$widget_styles   = parent::get_style_depends();
 		$widget_styles[] = 'uniform';
 		$widget_styles[] = 'uniform-init';
+		$widget_styles[] = 'mvl-forms';
 
 		return $widget_styles;
 	}

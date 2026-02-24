@@ -2,10 +2,15 @@
 	; ('use strict')
 
 	$(document).ready(function () {
+		// Если на странице есть формы FormsEditor, отдаем обработку тест-драйва/трейд-оффера в mvl-forms.js
+		const hasFeForms = $('.mvl-fe-form, .mvl-fe-form-test-drive, .mvl-fe-form-offer-price, .mvl-fe-form-request-car-price').length > 0;
+		if (!hasFeForms) {
 		stm_ajax_add_test_drive()
 		stm_ajax_add_trade_offer()
+		}
 
-		let date_time_picker = $('.stm-date-timepicker')
+		// Initialize datetimepicker for elements outside Forms Editor modals
+		let date_time_picker = $('.stm-date-timepicker').not('.mvl-modal-form .stm-date-timepicker')
 
 		if (typeof $.datetimepicker === 'object' && date_time_picker.length) {
 			date_time_picker.datetimepicker({
@@ -423,15 +428,22 @@
 	function stm_ajax_add_test_drive() {
 		$('#test-drive form').on('submit', function (event) {
 			event.preventDefault()
+
+			var $form = $(this)
+			var formData = new FormData(this)
+
+			formData.append('action', 'stm_ajax_add_test_drive')
+			formData.append('security', stm_add_test_drive_nonce)
+			formData.append('form_slug', 'test_drive')
+
 			$.ajax({
 				url: ajaxurl,
 				type: 'POST',
 				dataType: 'json',
 				context: this,
-				data:
-					$(this).serialize() +
-					'&action=stm_ajax_add_test_drive&security=' +
-					stm_add_test_drive_nonce,
+				data: formData,
+				processData: false,
+				contentType: false,
 				beforeSend: function () {
 					$('.alert-modal').remove()
 					$(this).closest('form').find('input').removeClass('form-error')
@@ -471,15 +483,20 @@
 	function stm_ajax_add_trade_offer() {
 		$('#trade-offer form').on('submit', function (event) {
 			event.preventDefault()
+
+			var formData = new FormData(this)
+			formData.append('action', 'stm_ajax_add_trade_offer')
+			formData.append('security', stm_security_nonce)
+			formData.append('form_slug', 'offer_price')
+
 			$.ajax({
 				url: ajaxurl,
 				type: 'POST',
 				dataType: 'json',
 				context: this,
-				data:
-					$(this).serialize() +
-					'&action=stm_ajax_add_trade_offer&security=' +
-					stm_security_nonce,
+				data: formData,
+				processData: false,
+				contentType: false,
 				beforeSend: function () {
 					$('.alert-modal').remove()
 					$(this).closest('form').find('input').removeClass('form-error')

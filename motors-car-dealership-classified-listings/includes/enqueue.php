@@ -188,6 +188,11 @@ function stm_listings_enqueue_scripts_styles() {
 	wp_register_script( 'motors-datetimepicker', STM_LISTINGS_URL . '/assets/js/motors-datetimepicker.js', array( 'jquery' ), STM_LISTINGS_V, true );
 	wp_register_script( 'mvl-lightgallery-init', STM_LISTINGS_URL . '/assets/js/frontend/lightgallery-init.js', null, STM_LISTINGS_V, true );
 	wp_register_script( 'mvl-swiper-init', STM_LISTINGS_URL . '/assets/js/frontend/swiper-init.js', null, STM_LISTINGS_V, true );
+	//tooltip
+	wp_register_script( 'mvl-tooltip', STM_LISTINGS_URL . '/assets/js/listing-manager/libs/tooltip.js', null, STM_LISTINGS_V, true );
+	wp_enqueue_script( 'mvl-tooltip', STM_LISTINGS_URL . '/assets/js/listing-manager/libs/tooltip.js', null, STM_LISTINGS_V, true );
+	wp_register_style( 'mvl-tooltip', STM_LISTINGS_URL . '/assets/css/mvl-tooltip.css', null, STM_LISTINGS_V );
+	wp_enqueue_style( 'mvl-tooltip', STM_LISTINGS_URL . '/assets/css/mvl-tooltip.css', null, STM_LISTINGS_V );
 
 	wp_enqueue_script(
 		'listings-init',

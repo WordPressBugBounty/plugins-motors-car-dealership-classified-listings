@@ -1,3 +1,11 @@
+<?php
+$form_html = apply_filters( 'mvl_get_form_html', '', 'trade_in' );
+
+// Check if FormsEditor is enabled and form exists
+$is_forms_editor       = apply_filters( 'mvl_is_addon_enabled', false, 'forms_editor' );
+$use_template_directly = $is_forms_editor && ! empty( $form_html );
+?>
+<?php if ( ! $use_template_directly ) : ?>
 <div class="modal" id="trade-in" tabindex="-1" role="dialog" aria-labelledby="myModalLabelTradeIn">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -35,3 +43,43 @@
 
 	})(jQuery);
 </script>
+<?php else : ?>
+	<?php
+	// Load template directly to preserve scripts (reCAPTCHA, etc.)
+	if ( class_exists( '\MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\Config' ) && class_exists( '\MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\FormConfig' ) ) {
+		/** @var \MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\FormConfig|null $form_config */
+		$form_config = \MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\Config::instance_of( 'trade_in' );
+		if ( $form_config ) {
+			$form_data    = $form_config->data();
+			$saved_values = $form_config->get_values();
+			$fields       = $form_data['fields'] ?? array();
+
+			// Extract steps from steps_wizard field
+			$steps = array();
+			foreach ( $fields as $field_id => $field_config ) {
+				if ( isset( $field_config['type'] ) && 'steps_wizard' === $field_config['type'] ) {
+					if ( isset( $saved_values[ $field_id ]['steps'] ) ) {
+						$steps = $saved_values[ $field_id ]['steps'];
+					} elseif ( isset( $field_config['steps'] ) ) {
+						$steps = $field_config['steps'];
+					}
+					break;
+				}
+			}
+
+			$template_data = array(
+				'form_slug'    => 'trade_in',
+				'form_config'  => $form_config,
+				'args'         => array(
+					'is_modal' => true,
+				),
+				'fields'       => $fields,
+				'saved_values' => $saved_values,
+				'steps'        => $steps,
+			);
+
+			do_action( 'stm_listings_load_template', 'addons/forms-editor/page/partials/forms/trade-in', $template_data );
+		}
+	}
+	?>
+<?php endif; ?>

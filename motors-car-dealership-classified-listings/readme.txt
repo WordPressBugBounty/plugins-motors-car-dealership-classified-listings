@@ -5,7 +5,7 @@ Donate link: https://www.paypal.me/stylemix
 Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
 Tested up to: 6.9
-Stable tag: 1.4.103
+Stable tag: 1.4.104
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -182,6 +182,12 @@ Definitely. Motors is translation-ready and works with popular multilingual plug
 You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability](https://patchstack.com/database/vdp/motors-car-dealership-classified-listings). 
 
 == Changelog ==
+
+= 1.4.104
+- **New:** Added Form Builder Addon allowing to fully customize Motors forms with a drag-and-drop editor. Add, remove, and reorder fields, choose from multiple field types, and adjust the form structure. (PRO)
+- **Enhancement:** Added ability to launch Setup Wizard from Tools.
+- **Fix:** Fixed duplicate video in listings created via Add Your Item on frontend.
+- **Fix:** Fixed filter dropdown overlapping slider fields in Search Filter.
 
 = 1.4.103
 - **Fix:** Fixed display of Custom Field child categories with assigned parent categories.

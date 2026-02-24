@@ -9,6 +9,8 @@ $user_fields = apply_filters( 'stm_get_user_custom_fields', $user_id );
 $path        = 'user/private/';
 
 $tpl = apply_filters( 'stm_account_current_page', '' );
+
+
 ?>
 
 <div class="stm-user-private">
@@ -38,7 +40,13 @@ $tpl = apply_filters( 'stm_account_current_page', '' );
 							do_action( 'stm_listings_load_template', $path . $_GET['page'], array( 'user_id' => $user_id ) );
 						}
 					} else {
-						do_action( 'stm_listings_load_template', $path . $tpl, array( 'user_id' => $user_id ) );
+						if ( 'become-dealer' === $tpl && apply_filters( 'mvl_is_addon_enabled', false, 'forms_editor' ) ) {
+							// Load FormsEditor template directly, same as legacy template
+							// Template will get variables from its own scope (Config, etc.)
+							do_action( 'stm_listings_load_template', 'addons/forms-editor/page/partials/forms/become-dealer', array() );
+						} else {
+							do_action( 'stm_listings_load_template', $path . $tpl, array( 'user_id' => $user_id ) );
+						}
 					}
 					?>
 				</div>

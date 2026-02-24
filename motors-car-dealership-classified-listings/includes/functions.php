@@ -910,7 +910,263 @@ function stm_add_dealer_review_metabox() {
 	);
 }
 
+/**
+ * Get test drive fields from Forms Editor
+ *
+ * @param object $form_config Forms Editor form config instance.
+ * @return array Array of fields in metabox format.
+ */
+function stm_get_test_drive_fields_from_forms_editor( $form_config ) {
+	$fields = array();
+
+	if ( ! $form_config ) {
+		return $fields;
+	}
+
+	$form_data    = $form_config->data();
+	$saved_values = $form_config->get_values();
+	$form_fields  = $form_data['fields'] ?? array();
+
+	// Loop through all form fields
+	foreach ( $form_fields as $field_id => $field_config ) {
+		// Look for editable_zone
+		if ( isset( $field_config['type'] ) && 'editable_zone' === $field_config['type'] ) {
+			// Get saved zone fields or default fields
+			$zone_saved_fields   = $saved_values[ $field_id ]['fields'] ?? array();
+			$zone_default_fields = $field_config['fields'] ?? array();
+			$zone_fields         = ! empty( $zone_saved_fields ) ? $zone_saved_fields : $zone_default_fields;
+
+			// Transform each field
+			foreach ( $zone_fields as $zone_field ) {
+				if ( empty( $zone_field['slug'] ) ) {
+					continue;
+				}
+
+				$slug = $zone_field['slug'];
+				$type = $zone_field['type'] ?? 'input';
+
+				// Skip file_upload and custom_html fields - they shouldn't be in metabox
+				if ( in_array( $type, array( 'file_upload', 'custom_html' ), true ) ) {
+					continue;
+				}
+
+				$label = $zone_field['label'] ?? ucfirst( $slug );
+
+				// Map field types
+				$metabox_type = stm_map_forms_editor_type_to_metabox_type( $type );
+
+				$field_data = array(
+					'label' => $label,
+					'type'  => $metabox_type,
+				);
+
+				// Add description if available
+				if ( ! empty( $zone_field['description'] ) ) {
+					$field_data['description'] = $zone_field['description'];
+				}
+
+				// Add placeholder if available (for select/dropdown)
+				if ( ! empty( $zone_field['placeholder'] ) && 'dropdown' === $type ) {
+					$field_data['placeholder'] = $zone_field['placeholder'];
+				}
+
+				// Get field settings
+				$settings = $zone_field['settings'] ?? array();
+
+				// Check if settings are stored directly in zone_field (backward compatibility)
+				if ( empty( $settings ) && is_array( $zone_field ) ) {
+					if ( isset( $zone_field['bind_custom_field'] ) ) {
+						$settings['bind_custom_field'] = $zone_field['bind_custom_field'];
+					}
+					if ( isset( $zone_field['custom_field_source'] ) ) {
+						$settings['custom_field_source'] = $zone_field['custom_field_source'];
+					}
+					if ( isset( $zone_field['custom_source'] ) ) {
+						$settings['custom_source'] = $zone_field['custom_source'];
+					}
+				}
+
+				// Check bind_custom_field
+				$bind_custom_field_raw = $settings['bind_custom_field'] ?? false;
+				$bind_custom_field     = ( true === $bind_custom_field_raw || 'true' === $bind_custom_field_raw || '1' === $bind_custom_field_raw || 1 === $bind_custom_field_raw );
+
+				$custom_field_source = isset( $settings['custom_field_source'] ) ? trim( (string) $settings['custom_field_source'] ) : '';
+				if ( empty( $custom_field_source ) && isset( $settings['custom_source'] ) ) {
+					$custom_field_source = trim( (string) $settings['custom_source'] );
+				}
+
+				// Check if field needs options (dropdown, radio, checkbox)
+				$needs_options = in_array( $type, array( 'dropdown', 'radio', 'checkbox' ), true );
+
+				if ( $needs_options ) {
+					$options = array();
+
+					// If bound to custom field, get options from taxonomy
+					if ( $bind_custom_field && ! empty( $custom_field_source ) && taxonomy_exists( $custom_field_source ) ) {
+						$terms = get_terms(
+							array(
+								'taxonomy'   => $custom_field_source,
+								'hide_empty' => false,
+								'orderby'    => 'name',
+								'order'      => 'ASC',
+							)
+						);
+
+						if ( ! is_wp_error( $terms ) && ! empty( $terms ) && is_array( $terms ) ) {
+							foreach ( $terms as $term ) {
+								if ( is_object( $term ) && isset( $term->name ) && ! empty( $term->name ) ) {
+									$options[ $term->name ] = $term->name;
+								}
+							}
+						}
+					} elseif ( ! empty( $zone_field['options'] ) && is_array( $zone_field['options'] ) ) {
+						$options = $zone_field['options'];
+					}
+
+					// Add options if we have any
+					if ( ! empty( $options ) ) {
+						$field_data['options'] = $options;
+						if ( $bind_custom_field ) {
+							$field_data['bind_custom_field'] = true;
+							$field_data['custom_field_source'] = $custom_field_source;
+						}
+					}
+				}
+
+				// For textarea add rows
+				if ( 'textarea' === $type ) {
+					$field_data['rows'] = isset( $zone_field['rows'] ) ? intval( $zone_field['rows'] ) : 5;
+				}
+
+				$fields[ $slug ] = $field_data;
+			}
+		}
+	}
+
+	return $fields;
+}
+
+/**
+ * Map Forms Editor field type to metabox field type
+ *
+ * @param string $forms_editor_type Forms Editor field type.
+ * @return string Metabox field type.
+ */
+function stm_map_forms_editor_type_to_metabox_type( $forms_editor_type ) {
+	$mapping = array(
+		'input'      => 'text',
+		'email'      => 'text',
+		'phone'      => 'text',
+		'datetime'   => 'text',
+		'date'       => 'text',
+		'time'       => 'text',
+		'dropdown'   => 'select',
+		'textarea'   => 'textarea',
+		'checkbox'   => 'checkbox',
+		'radio'      => 'radio',
+	);
+
+	return isset( $mapping[ $forms_editor_type ] ) ? $mapping[ $forms_editor_type ] : 'text';
+}
+
+/**
+ * Check if option value matches meta value (for select/radio/checkbox)
+ *
+ * @param string|array $meta Meta value to compare.
+ * @param string       $option_key Option key.
+ * @param string       $option_value Option value.
+ * @param bool         $is_bound_to_custom_field Whether field is bound to custom field.
+ * @param bool         $is_array Whether meta is an array (for checkboxes).
+ * @return bool True if matches.
+ */
+function stm_option_matches_meta( $meta, $option_key, $option_value, $is_bound_to_custom_field = false, $is_array = false ) {
+	if ( $is_array ) {
+		if ( ! is_array( $meta ) ) {
+			$meta = is_string( $meta ) && is_serialized( $meta ) ? maybe_unserialize( $meta ) : ( ! empty( $meta ) ? array( $meta ) : array() );
+		}
+		$meta_array = array_filter( array_map( 'trim', array_map( 'strval', $meta ) ) );
+		if ( empty( $meta_array ) ) {
+			return false;
+		}
+		$form_value       = is_numeric( $option_key ) ? $option_value : $option_key;
+		$form_value_str   = trim( (string) $form_value );
+		$option_key_str   = trim( (string) $option_key );
+		$option_value_str = trim( (string) $option_value );
+
+		if ( $is_bound_to_custom_field ) {
+			return in_array( $form_value_str, $meta_array, true ) || in_array( $option_key_str, $meta_array, true ) || in_array( $option_value_str, $meta_array, true );
+		}
+
+		$found = in_array( $form_value_str, $meta_array, true ) || in_array( $option_key_str, $meta_array, true ) || in_array( $option_value_str, $meta_array, true );
+
+		if ( ! $found ) {
+			foreach ( $meta_array as $meta_val ) {
+				$meta_lower = strtolower( trim( (string) $meta_val ) );
+				if ( strtolower( $form_value_str ) === $meta_lower || strtolower( $option_key_str ) === $meta_lower || strtolower( $option_value_str ) === $meta_lower ) {
+					return true;
+				}
+			}
+		}
+		return $found;
+	}
+
+	$meta_str         = trim( (string) $meta );
+	$form_value       = is_numeric( $option_key ) ? $option_value : $option_key;
+	$form_value_str   = trim( (string) $form_value );
+	$option_key_str   = trim( (string) $option_key );
+	$option_value_str = trim( (string) $option_value );
+
+	if ( $is_bound_to_custom_field ) {
+		$matches = ( $meta_str === $form_value_str ) || ( $meta_str === $option_key_str ) || ( $meta_str === $option_value_str );
+	} else {
+		$matches = ( $meta_str === $form_value_str ) || ( $meta_str === $option_key_str ) || ( $meta_str === $option_value_str );
+	}
+
+	if ( ! $matches && ! empty( $meta_str ) ) {
+		$meta_lower = strtolower( $meta_str );
+		$matches    = ( strtolower( $form_value_str ) === $meta_lower || strtolower( $option_key_str ) === $meta_lower || strtolower( $option_value_str ) === $meta_lower );
+	}
+
+	return $matches;
+}
+
 function stm_add_test_drives_metaboxes() {
+	$fields = array();
+
+	// Check if Forms Editor addon is enabled
+	$is_forms_editor_enabled = function_exists( 'mvl_is_addon_enabled' ) && mvl_is_addon_enabled( false, 'forms_editor' );
+
+	if ( $is_forms_editor_enabled && class_exists( '\MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\Config' ) ) {
+		// Get fields from Forms Editor
+		$form_config = \MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\Config::instance_of( 'test_drive' );
+
+		if ( $form_config ) {
+			$fields = stm_get_test_drive_fields_from_forms_editor( $form_config );
+		}
+	}
+
+	// Fallback to default fields if Forms Editor is not enabled or returned no fields
+	if ( empty( $fields ) ) {
+		$fields = array(
+			'name'  => array(
+				'label' => __( 'Name', 'stm_vehicles_listing' ),
+				'type'  => 'text',
+			),
+			'email' => array(
+				'label' => __( 'E-mail', 'stm_vehicles_listing' ),
+				'type'  => 'text',
+			),
+			'phone' => array(
+				'label' => __( 'Phone', 'stm_vehicles_listing' ),
+				'type'  => 'text',
+			),
+			'date'  => array(
+				'label' => __( 'Day', 'stm_vehicles_listing' ),
+				'type'  => 'text',
+			),
+		);
+	}
+
 	add_meta_box(
 		'test_drive_form',
 		__( 'Credentials', 'stm_vehicles_listing' ),
@@ -919,59 +1175,121 @@ function stm_add_test_drives_metaboxes() {
 		'normal',
 		'',
 		array(
-			'fields' => array(
-				'name'  => array(
-					'label' => __( 'Name', 'stm_vehicles_listing' ),
-					'type'  => 'text',
-				),
-				'email' => array(
-					'label' => __( 'E-mail', 'stm_vehicles_listing' ),
-					'type'  => 'text',
-				),
-				'phone' => array(
-					'label' => __( 'Phone', 'stm_vehicles_listing' ),
-					'type'  => 'text',
-				),
-				'date'  => array(
-					'label' => __( 'Day', 'stm_vehicles_listing' ),
-					'type'  => 'text',
-				),
-			),
+			'fields' => $fields,
 		)
 	);
 }
 
 function display_metaboxes( $post, $metabox ) {
+	if ( ! isset( $metabox['args']['fields'] ) || ! is_array( $metabox['args']['fields'] ) ) {
+		return;
+	}
 
 	$fields = $metabox['args']['fields'];
+	if ( empty( $fields ) || ! isset( $post->ID ) ) {
+		return;
+	}
 
-	$html = '<input type="hidden" name="stm_custom_nonce" value="' . wp_create_nonce( basename( __FILE__ ) ) . '" />';//phpcs:ignore
+	$html = '<input type="hidden" name="stm_custom_nonce" value="' . esc_attr( wp_create_nonce( basename( __FILE__ ) ) ) . '" />';//phpcs:ignore
 	$html .= '<table class="form-table stm">';
+
 	foreach ( $fields as $key => $field ) {
-		$meta = get_post_meta( $post->ID, $key, true );
-		if ( 'hidden' !== $field['type'] ) {
-			if ( 'separator' !== $field['type'] ) {
-				$html .= '<tr class="stm_admin_' . $key . '"><th><label for="' . $key . '">' . $field['label'] . '</label></th><td>';
+		if ( ! is_array( $field ) || empty( $field['type'] ) || empty( $field['label'] ) ) {
+			continue;
+		}
+
+		$meta       = get_post_meta( $post->ID, $key, true );
+		$field_type = $field['type'];
+
+		if ( 'hidden' !== $field_type ) {
+			if ( 'separator' !== $field_type ) {
+				$html .= '<tr class="stm_admin_' . esc_attr( $key ) . '"><th><label for="' . esc_attr( $key ) . '">' . esc_html( $field['label'] ) . '</label></th><td>';
 			} else {
-				$html .= '<tr><th><h3>' . $field['label'] . '</h3></th><td>';
+				$html .= '<tr><th><h3>' . esc_html( $field['label'] ) . '</h3></th><td>';
 			}
 		}
-		switch ( $field['type'] ) {
+		switch ( $field_type ) {
 			case 'text':
 				if ( empty( $meta ) && ! empty( $field['default'] ) && 'auto-draft' === $post->post_status ) {
 					$meta = $field['default'];
 				}
-				echo '<input type="text" name="' . esc_attr( $key ) . '" id="' . esc_attr( $key ) . '" value="' . esc_attr( $meta ) . '" />';
+				$html .= '<input type="text" name="' . esc_attr( $key ) . '" id="' . esc_attr( $key ) . '" value="' . esc_attr( $meta ) . '" />';
 				if ( isset( $field['description'] ) ) {
-					$html .= '<p class="textfield-description">' . $field['description'] . '</p>';
+					$html .= '<p class="textfield-description">' . esc_html( $field['description'] ) . '</p>';
 				}
 				break;
 			case 'select':
+				if ( empty( $field['options'] ) || ! is_array( $field['options'] ) ) {
+					break;
+				}
+
 				$html .= '<select name="' . esc_attr( $key ) . '" id="' . esc_attr( $key ) . '">';
+				if ( ! empty( $field['placeholder'] ) ) {
+					$html .= '<option value="">' . esc_html( $field['placeholder'] ) . '</option>';
+				}
+
+				$is_bound = ! empty( $field['bind_custom_field'] );
 				foreach ( $field['options'] as $option_key => $option_value ) {
-					$html .= '<option' . ( $meta === $option_key ? ' selected="selected"' : '' ) . ' value="' . esc_attr( $option_key ) . '">' . esc_html( $option_value ) . '</option>';
+					$is_selected = stm_option_matches_meta( $meta, $option_key, $option_value, $is_bound, false );
+					if ( empty( trim( (string) $meta ) ) && empty( $option_key ) && empty( $field['placeholder'] ) ) {
+						$is_selected = true;
+					}
+					$selected = $is_selected ? ' selected="selected"' : '';
+					$html    .= '<option' . $selected . ' value="' . esc_attr( $option_key ) . '">' . esc_html( $option_value ) . '</option>';
 				}
 				$html .= '</select>';
+				if ( ! empty( $field['description'] ) ) {
+					$html .= '<p class="textfield-description">' . esc_html( $field['description'] ) . '</p>';
+				}
+				break;
+			case 'textarea':
+				if ( empty( $meta ) && ! empty( $field['default'] ) && isset( $post->post_status ) && 'auto-draft' === $post->post_status ) {
+					$meta = $field['default'];
+				}
+				$rows  = isset( $field['rows'] ) ? absint( $field['rows'] ) : 5;
+				$html .= '<textarea name="' . esc_attr( $key ) . '" id="' . esc_attr( $key ) . '" rows="' . esc_attr( $rows ) . '">' . esc_textarea( $meta ) . '</textarea>';
+				if ( ! empty( $field['description'] ) ) {
+					$html .= '<p class="textfield-description">' . esc_html( $field['description'] ) . '</p>';
+				}
+				break;
+			case 'checkbox':
+				$has_options = ! empty( $field['options'] ) && is_array( $field['options'] );
+
+				if ( $has_options ) {
+					$is_bound = ! empty( $field['bind_custom_field'] );
+					foreach ( $field['options'] as $option_key => $option_value ) {
+						$form_value = is_numeric( $option_key ) ? $option_value : $option_key;
+						$is_checked = stm_option_matches_meta( $meta, $option_key, $option_value, $is_bound, true );
+						$checked    = $is_checked ? 'checked="checked"' : '';
+						$option_id  = sanitize_title( $key . '-' . $option_key );
+						$html      .= '<label><input type="checkbox" name="' . esc_attr( $key ) . '[]" id="' . esc_attr( $option_id ) . '" value="' . esc_attr( $form_value ) . '" ' . $checked . ' /> ' . esc_html( $option_value ) . '</label><br />';
+					}
+				} else {
+					// Single checkbox
+					if ( is_string( $meta ) && is_serialized( $meta ) ) {
+						$meta = maybe_unserialize( $meta );
+					}
+					$checked = ( ! empty( $meta ) && ( '1' === $meta || 1 === $meta || true === $meta ) ) ? 'checked="checked"' : '';
+					$html   .= '<input type="checkbox" name="' . esc_attr( $key ) . '" id="' . esc_attr( $key ) . '" value="1" ' . $checked . ' />';
+				}
+
+				if ( ! empty( $field['description'] ) ) {
+					$html .= '<p class="textfield-description">' . esc_html( $field['description'] ) . '</p>';
+				}
+				break;
+			case 'radio':
+				if ( ! empty( $field['options'] ) && is_array( $field['options'] ) ) {
+					$is_bound = ! empty( $field['bind_custom_field'] );
+					foreach ( $field['options'] as $option_key => $option_value ) {
+						$form_value = is_numeric( $option_key ) ? $option_value : $option_key;
+						$is_checked = stm_option_matches_meta( $meta, $option_key, $option_value, $is_bound, false );
+						$checked    = $is_checked ? 'checked="checked"' : '';
+						$html      .= '<label><input type="radio" name="' . esc_attr( $key ) . '" value="' . esc_attr( $form_value ) . '" ' . $checked . ' /> ' . esc_html( $option_value ) . '</label><br />';
+					}
+				}
+				if ( ! empty( $field['description'] ) ) {
+					$html .= '<p class="textfield-description">' . esc_html( $field['description'] ) . '</p>';
+				}
 				break;
 		}
 		$html .= '</td></tr>';
@@ -982,68 +1300,143 @@ function display_metaboxes( $post, $metabox ) {
 }
 
 function stm_save_metaboxes( $post_id ) {
-
-	if ( ! isset( $_POST['stm_custom_nonce'] ) ) {
+	if ( ! isset( $_POST['stm_custom_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['stm_custom_nonce'] ) ), basename( __FILE__ ) ) ) {
 		return $post_id;
 	}
+
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 		return $post_id;
 	}
+
 	if ( ! current_user_can( 'edit_post', $post_id ) ) {
 		return $post_id;
 	}
-	$metaboxes = array(
-		'fields' => array(
-			'name'                => array(
+
+	$post_type = get_post_type( $post_id );
+	if ( ! $post_type ) {
+		return $post_id;
+	}
+
+	// For test_drive_request, try to get fields from Forms Editor
+	$test_drive_fields = array();
+	if ( 'test_drive_request' === $post_type ) {
+		$is_forms_editor_enabled = function_exists( 'mvl_is_addon_enabled' ) && mvl_is_addon_enabled( false, 'forms_editor' );
+
+		if ( $is_forms_editor_enabled && class_exists( '\MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\Config' ) ) {
+			$form_config = \MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\Config::instance_of( 'test_drive' );
+
+			if ( $form_config ) {
+				$test_drive_fields = stm_get_test_drive_fields_from_forms_editor( $form_config );
+			}
+		}
+	}
+
+	// Fallback to default fields if Forms Editor is not enabled or returned no fields
+	if ( empty( $test_drive_fields ) && 'test_drive_request' === $post_type ) {
+		$test_drive_fields = array(
+			'name'  => array(
 				'label' => __( 'Name', 'stm_vehicles_listing' ),
 				'type'  => 'text',
 			),
-			'email'               => array(
+			'email' => array(
 				'label' => __( 'E-mail', 'stm_vehicles_listing' ),
 				'type'  => 'text',
 			),
-			'phone'               => array(
+			'phone' => array(
 				'label' => __( 'Phone', 'stm_vehicles_listing' ),
 				'type'  => 'text',
 			),
-			'date'                => array(
+			'date'  => array(
 				'label' => __( 'Day', 'stm_vehicles_listing' ),
 				'type'  => 'text',
 			),
-			//dealer reviews
-			'stm_review_added_by' => array(
-				'label' => __( 'User added by', 'stm_vehicles_listing' ),
-				'type'  => 'select',
-			),
-			'stm_review_added_on' => array(
-				'label' => __( 'User added on', 'stm_vehicles_listing' ),
-				'type'  => 'select',
-			),
-			'stm_rate_1'          => array(
-				'label' => __( 'Rate 1', 'stm_vehicles_listing' ),
-				'type'  => 'select',
-			),
-			'stm_rate_2'          => array(
-				'label' => __( 'Rate 2', 'stm_vehicles_listing' ),
-				'type'  => 'select',
-			),
-			'stm_rate_3'          => array(
-				'label' => __( 'Rate 3', 'stm_vehicles_listing' ),
-				'type'  => 'select',
-			),
-			'stm_recommended'     => array(
-				'label' => __( 'Recommended', 'stm_vehicles_listing' ),
-				'type'  => 'select',
-			),
+		);
+	}
+
+	$metaboxes = array(
+		'fields' => array_merge(
+			$test_drive_fields,
+			array(
+				//dealer reviews
+				'stm_review_added_by' => array(
+					'label' => __( 'User added by', 'stm_vehicles_listing' ),
+					'type'  => 'select',
+				),
+				'stm_review_added_on' => array(
+					'label' => __( 'User added on', 'stm_vehicles_listing' ),
+					'type'  => 'select',
+				),
+				'stm_rate_1'          => array(
+					'label' => __( 'Rate 1', 'stm_vehicles_listing' ),
+					'type'  => 'select',
+				),
+				'stm_rate_2'          => array(
+					'label' => __( 'Rate 2', 'stm_vehicles_listing' ),
+					'type'  => 'select',
+				),
+				'stm_rate_3'          => array(
+					'label' => __( 'Rate 3', 'stm_vehicles_listing' ),
+					'type'  => 'select',
+				),
+				'stm_recommended'     => array(
+					'label' => __( 'Recommended', 'stm_vehicles_listing' ),
+					'type'  => 'select',
+				),
+			)
 		),
 	);
 
 	foreach ( $metaboxes as $stm_field_key => $fields ) {
+		if ( ! is_array( $fields ) ) {
+			continue;
+		}
 
 		foreach ( $fields as $field => $data ) {
-			$old = get_post_meta( $post_id, $field, true );
+			if ( ! is_array( $data ) || empty( $data['type'] ) ) {
+				continue;
+			}
+
+			$old        = get_post_meta( $post_id, $field, true );
+			$field_type = $data['type'];
+
+			// Handle checkbox - can be single or multiple
+			if ( 'checkbox' === $field_type ) {
+				$has_options = ! empty( $data['options'] ) && is_array( $data['options'] );
+
+				if ( $has_options ) {
+					// Multiple checkboxes - save as array
+					$new = isset( $_POST[ $field ] ) && is_array( $_POST[ $field ] )
+						? array_map( 'sanitize_text_field', wp_unslash( $_POST[ $field ] ) )
+						: array();
+
+					$old_array = is_array( $old ) ? $old : ( ! empty( $old ) ? array( $old ) : array() );
+					sort( $new );
+					sort( $old_array );
+
+					if ( $new !== $old_array ) {
+						if ( ! empty( $new ) ) {
+							update_post_meta( $post_id, $field, $new );
+						} else {
+							delete_post_meta( $post_id, $field, $old );
+						}
+					}
+				} else {
+					// Single checkbox - save as '1' or ''
+					$new = isset( $_POST[ $field ] ) ? '1' : '';
+					if ( $new !== $old ) {
+						if ( '' !== $new ) {
+							update_post_meta( $post_id, $field, $new );
+						} else {
+							delete_post_meta( $post_id, $field, $old );
+						}
+					}
+				}
+				continue;
+			}
+
+			// Handle other field types
 			if ( isset( $_POST[ $field ] ) ) {
-				if ( 'listing_select' === $data['type'] ) {
+				if ( 'listing_select' === $field_type ) {
 					$new_array    = (array) $_POST[ $field ];
 					$new_array    = array_map( 'sanitize_text_field', $new_array );
 					$new_imploded = implode( ',', $new_array );
@@ -1052,8 +1445,17 @@ function stm_save_metaboxes( $post_id ) {
 					} elseif ( '' === $new_imploded && $old ) {
 						delete_post_meta( $post_id, $field, $old );
 					}
+				} elseif ( 'textarea' === $field_type ) {
+					$new = sanitize_textarea_field( wp_unslash( $_POST[ $field ] ) );
+					if ( $new !== $old ) {
+						if ( '' !== $new ) {
+							update_post_meta( $post_id, $field, $new );
+						} else {
+							delete_post_meta( $post_id, $field, $old );
+						}
+					}
 				} else {
-					$new = sanitize_text_field( $_POST[ $field ] );
+					$new = sanitize_text_field( wp_unslash( $_POST[ $field ] ) );
 					if ( $new && $new !== $old ) {
 						update_post_meta( $post_id, $field, $new );
 					} elseif ( '' === $new && $old ) {
@@ -1061,7 +1463,10 @@ function stm_save_metaboxes( $post_id ) {
 					}
 				}
 			} else {
-				delete_post_meta( $post_id, $field, $old );
+				// For checkbox, if not set, delete the meta
+				if ( 'checkbox' !== $field_type ) {
+					delete_post_meta( $post_id, $field, $old );
+				}
 			}
 		}
 

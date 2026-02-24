@@ -1,9 +1,13 @@
 <?php
+use MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\Config;
+use MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\FormConfig;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-$user = apply_filters( 'stm_get_user_custom_fields', '' );
+$user    = apply_filters( 'stm_get_user_custom_fields', '' );
+$user_id = $user['user_id'] ?? get_current_user_id();
 
 $socials = array(
 	'facebook' => $user['socials']['facebook'] ?? '',
@@ -12,7 +16,16 @@ $socials = array(
 	'youtube'  => $user['socials']['youtube'] ?? '',
 );
 
-$user_bio = get_user_meta( $user['user_id'], 'description', true );
+$is_forms_editor = apply_filters( 'mvl_is_addon_enabled', false, 'forms_editor' );
+
+if ( $is_forms_editor ) {
+	$sign_up_form_config  = Config::instance_of( 'sign_up' );
+	$sign_up_form_data    = ( $sign_up_form_config instanceof FormConfig ) ? $sign_up_form_config->data() : array();
+	$sign_up_fields       = $sign_up_form_data['fields'] ?? array();
+	$sign_up_saved_values = ( $sign_up_form_config instanceof FormConfig ) ? $sign_up_form_config->get_values() : array();
+}
+
+$user_bio = get_user_meta( $user_id, 'description', true );
 ?>
 
 <div class="stm-user-private-settings-wrapper">
@@ -71,6 +84,7 @@ $user_bio = get_user_meta( $user['user_id'], 'description', true );
 					<div class="heading-font"><?php esc_html_e( 'Main Information', 'stm_vehicles_listing' ); ?></div>
 				</div>
 				<div class="main-info-settings">
+					<?php if ( ! $is_forms_editor ) : ?>
 					<div class="row">
 						<div class="col-md-6 col-sm-6">
 							<div class="form-group">
@@ -107,6 +121,25 @@ $user_bio = get_user_meta( $user['user_id'], 'description', true );
 							</div>
 						</div>
 					</div>
+					<?php else : ?>
+							<?php if ( $sign_up_form_config instanceof FormConfig ) : ?>
+								<?php foreach ( $sign_up_fields as $field_id => $field_config ) : ?>
+									<?php
+									$sign_up_form_config->render_field(
+										$field_id,
+										$field_config,
+										$sign_up_saved_values,
+										array( 'header', 'button' ),
+										array(
+											'excluded_slugs' => array( 'stm_nickname', 'stm_user_password' ),
+											'user_meta' => true,
+											'user_id'   => $user_id,
+										)
+									);
+									?>
+								<?php endforeach; ?>
+							<?php endif; ?>
+					<?php endif; ?>
 				</div>
 			</div>
 

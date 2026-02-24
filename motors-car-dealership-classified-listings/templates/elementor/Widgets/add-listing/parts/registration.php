@@ -3,6 +3,24 @@ $stm_title_user = apply_filters( 'motors_vl_get_nuxy_mod', '', 'addl_reg_log_tit
 $stm_text_user  = apply_filters( 'motors_vl_get_nuxy_mod', '', 'addl_reg_log_desc' );
 $_link          = apply_filters( 'motors_vl_get_nuxy_mod', '', 'addl_reg_log_link' );
 
+
+$form_html = apply_filters(
+	'mvl_get_form_html',
+	'',
+	'sign_up',
+	array(
+		'is_modal'          => true,
+		'__link_of_terms__' => $__link_of_terms__ ?? '',
+	)
+);
+
+$login_form_class    = '';
+$register_form_class = '';
+
+if ( ! empty( $form_html ) ) {
+	$register_form_class = 'mvl-forms-editor-register-form';
+}
+
 ?>
 <div class="stm-user-registration-unit">
 	<div class="stm_register_title">
@@ -22,7 +40,10 @@ $_link          = apply_filters( 'motors_vl_get_nuxy_mod', '', 'addl_reg_log_lin
 			<div class="stm-text"><?php echo esc_html( $stm_text_user ); ?></div>
 		</div>
 		<div class="stm-login-register-form">
-			<div class="stm-register-form">
+			<div class="stm-register-form <?php echo esc_attr( $register_form_class ); ?>">
+				<?php if ( ! empty( $form_html ) ) : ?>
+					<?php echo wp_kses_post( $form_html ); ?>
+				<?php else : ?>
 				<form id="add-car-register-form" class="add-car-register-form" method="post">
 					<input type="hidden" name="redirect" value="disable">
 					<?php if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'new_user_registration' ) ) : ?>
@@ -153,6 +174,7 @@ $_link          = apply_filters( 'motors_vl_get_nuxy_mod', '', 'addl_reg_log_lin
 					?>
 					<div class="stm-validation-message"></div>
 				</form>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>

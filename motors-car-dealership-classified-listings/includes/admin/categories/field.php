@@ -143,10 +143,32 @@ if ( 2 === $column ) {
 		<?php endif; ?>
 		<div class="stm_custom_fields__radio--wrapper stm_custom_fields__radio-image-grid">
 			<?php
+			$default_options = motors_page_options();
+			$default_choices = isset( $default_options[ $field_key ]['choices'] ) ? $default_options[ $field_key ]['choices'] : array();
+
 			foreach ( $field['choices'] as $choice_value => $choice_args ) :
 				$checked = ( ! empty( $field['value'] ) ) ? checked( $field['value'], $choice_value, false ) : '';
+
+				if ( ! is_array( $choice_args ) ) {
+					$choice_args = array( 'label' => $choice_args );
+				}
+
+				if ( isset( $default_choices[ $choice_value ]['dependency'] ) ) {
+					$choice_args['dependency'] = $default_choices[ $choice_value ]['dependency'];
+				}
+
+				if ( 'numeric_skins' === $field_key && 'skin_2' === $choice_value && empty( $choice_args['dependency'] ) ) {
+					$choice_args['dependency'] = array(
+						'slug'  => 'slider',
+						'value' => 'dropdown',
+						'type'  => 'not_empty',
+					);
+				}
+
+				$dep_attrs   = apply_filters( 'stm_listings_choice_dependency_attributes', '', $choice_args );
+				$dep_classes = isset( $choice_args['pro_field'] ) && $choice_args['pro_field'] ? 'stm-pro-field' : '';
 				?>
-				<div class="stm_custom_fields__radio--inside <?php echo isset( $choice_args['pro_field'] ) && $choice_args['pro_field'] ? 'stm-pro-field' : ''; ?>">
+				<div class="stm_custom_fields__radio--inside <?php echo esc_attr( $dep_classes ); ?>" <?php echo wp_kses_post( $dep_attrs ); ?>>
 				<?php if ( isset( $choice_args['pro_field'] ) && $choice_args['pro_field'] ) : ?>
 					<div class="stm-pro-field-inner">
 						<label for="<?php echo esc_attr( $prefix_id . $field_key . '-' . $choice_value ); ?>">

@@ -1016,7 +1016,6 @@
                     updateNewTermsData($termItem, currentName, imageId, termMeta);
                     updateColor($termItem, termMeta);
                 } else {
-                    // Для существующих терминов помечаем как измененный
                     const originalColor = $termItem.data('original-color') || '';
                     const currentColor = $input.val();
                     

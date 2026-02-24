@@ -35,11 +35,13 @@
     justify-content: space-between;
 }
 
-.classic-filter-row.motors-elementor-widget .filter-sidebar .sidebar-entry-header.icon-right i, .classic-filter-row.motors-elementor-widget .filter-sidebar .sidebar-entry-header.icon-right img {
+.classic-filter-row.motors-elementor-widget .filter-sidebar .sidebar-entry-header.icon-right i,
+.classic-filter-row.motors-elementor-widget .filter-sidebar .sidebar-entry-header.icon-right img {
     margin: unset;
 }
 
-.classic-filter-row.motors-elementor-widget .filter-sidebar .sidebar-entry-header i, .classic-filter-row.motors-elementor-widget .filter-sidebar .sidebar-entry-header img {
+.classic-filter-row.motors-elementor-widget .filter-sidebar .sidebar-entry-header i,
+.classic-filter-row.motors-elementor-widget .filter-sidebar .sidebar-entry-header img {
     margin-right: 21px;
 }
 
@@ -479,7 +481,7 @@ html.mobile-overflow-hidden {
     }
 
     .select2-container {
-        z-index: 1;
+        z-index: 2;
     }
 }
 

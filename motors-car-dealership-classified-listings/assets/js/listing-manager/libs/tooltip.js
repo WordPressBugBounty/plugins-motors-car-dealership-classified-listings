@@ -1,4 +1,5 @@
 jQuery(document).ready(function($) {
+    console.log('tooltip.js loaded');
 
     const tooltip = $('<div class="mvl-tooltip"></div>');
     const tooltipImage = $('<div class="mvl-tooltip-image"></div>');
@@ -12,7 +13,7 @@ jQuery(document).ready(function($) {
     function positionTooltip(element, tooltip) {
         const elementRect = element.getBoundingClientRect();
         const tooltipRect = tooltip.getBoundingClientRect();
-        const position = element.getAttribute('mvl-tooltip-position') || 'top';
+        const position = element.getAttribute('data-mvl-tooltip-position') || element.getAttribute('mvl-tooltip-position') || 'top';
         
         tooltip.setAttribute('data-position', position);
         
@@ -68,13 +69,13 @@ jQuery(document).ready(function($) {
         }, 100);
     }
 
-    $(document).on('mouseenter', '[mvl-tooltip-text]', function() {
-        const text = this.getAttribute('mvl-tooltip-text');
+    $(document).on('mouseenter', '[mvl-tooltip-text], [data-mvl-tooltip-text]', function() {
+        const text = this.getAttribute('data-mvl-tooltip-text') || this.getAttribute('mvl-tooltip-text');
         tooltipImageElement.style.display = 'none';
         showTooltip(this, tooltipElement, text);
     });
 
-    $(document).on('mouseleave', '[mvl-tooltip-text]', function() {
+    $(document).on('mouseleave', '[mvl-tooltip-text], [data-mvl-tooltip-text]', function() {
         hideTooltip(tooltipElement);
     });
 
@@ -90,7 +91,7 @@ jQuery(document).ready(function($) {
 
     $(window).on('scroll resize', function() {
         if (tooltipElement.style.display === 'block') {
-            const activeElement = document.querySelector('[mvl-tooltip-text]:hover');
+            const activeElement = document.querySelector('[mvl-tooltip-text]:hover, [data-mvl-tooltip-text]:hover');
             if (activeElement) {
                 positionTooltip(activeElement, tooltipElement);
             }

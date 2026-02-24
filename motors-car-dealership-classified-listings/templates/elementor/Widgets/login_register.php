@@ -6,6 +6,23 @@
  */
 
 $can_register = apply_filters( 'motors_vl_get_nuxy_mod', false, 'new_user_registration' );
+
+// Check if form editor is enabled for sign_up form
+$has_form_editor = false;
+if ( class_exists( '\MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\Config' ) ) {
+	$form_config           = \MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\Config::instance_of( 'sign_up' );
+	$addons_editor_enabled = apply_filters( 'mvl_is_addon_enabled', false, 'forms_editor' );
+	$has_form_editor       = $addons_editor_enabled && ! empty( $form_config );
+}
+
+$login_form_class    = '';
+$register_form_class = '';
+
+if ( $has_form_editor ) {
+	$login_form_class    = 'mvl-forms-editor-login-form';
+	$register_form_class = 'mvl-forms-editor-register-form';
+}
+
 ?>
 <div class="stm-login-register-form">
 	<?php if ( ! empty( $_GET['user_id'] ) && ! empty( $_GET['hash_check'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
@@ -19,7 +36,7 @@ $can_register = apply_filters( 'motors_vl_get_nuxy_mod', false, 'new_user_regist
 
 			<?php do_action( 'stm_signin_demo_login_tools' ); ?>
 
-			<div class="stm-login-form">
+			<div class="stm-login-form <?php echo esc_attr( $login_form_class ); ?>">
 				<form method="post">
 					<?php do_action( 'stm_before_signin_form' ); ?>
 					<div class="form-group">
@@ -85,7 +102,30 @@ $can_register = apply_filters( 'motors_vl_get_nuxy_mod', false, 'new_user_regist
 		<div class="col-md-8">
 			<?php if ( $can_register ) : ?>
 			<h3><?php esc_html_e( 'Sign Up', 'stm_vehicles_listing' ); ?></h3>
-			<div class="stm-register-form">
+			<div class="stm-register-form <?php echo esc_attr( $register_form_class ); ?>">
+				<?php if ( $has_form_editor ) : ?>
+					<?php
+					// Load form template directly using stm_listings_load_template to preserve scripts
+					$form_config = \MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\Config::instance_of( 'sign_up' );
+					if ( $form_config ) {
+						$form_data    = $form_config->data();
+						$saved_values = $form_config->get_values();
+						$fields       = $form_data['fields'] ?? array();
+
+						$template_data = array(
+							'form_slug'    => $form_config->snake_case_class_name(),
+							'args'         => array(
+								'is_modal'          => true,
+								'__link_of_terms__' => $__link_of_terms__ ?? '',
+							),
+							'fields'       => $fields,
+							'saved_values' => $saved_values,
+						);
+
+						do_action( 'stm_listings_load_template', 'addons/forms-editor/page/partials/forms/sign-up', $template_data );
+					}
+					?>
+				<?php else : ?>
 				<form id="page-register-form" method="post">
 					<?php if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'new_user_registration' ) ) : ?>
 						<input type="hidden" name="stm_custom_register_nonce" value="<?php echo esc_attr( wp_create_nonce( 'stm_custom_register' ) ); ?>">
@@ -244,7 +284,8 @@ $can_register = apply_filters( 'motors_vl_get_nuxy_mod', false, 'new_user_regist
 
 					<?php do_action( 'stm_after_signup_form' ); ?>
 
-				</form>
+					</form>
+				<?php endif; ?>
 			</div>
 			<?php endif; ?>
 		</div>

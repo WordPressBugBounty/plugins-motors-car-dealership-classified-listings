@@ -381,7 +381,7 @@ function motors_page_options() {
 			),
 			'group'       => 'filter',
 		),
-		'dropdown_skins' => array(
+		'dropdown_skins'                        => array(
 			'label'      => esc_html__( 'Select a skin for this field that will be used in the inventory filter.', 'stm_vehicles_listing' ),
 			'type'       => 'radio-image',
 			'dependency' => array(
@@ -402,7 +402,7 @@ function motors_page_options() {
 			),
 			'group'      => 'skins',
 		),
-		'numeric_skins' => array(
+		'numeric_skins'                         => array(
 			'label'      => esc_html__( 'Select a skin for this field that will be used in the inventory filter.', 'stm_vehicles_listing' ),
 			'type'       => 'radio-image',
 			'dependency' => array(
@@ -416,9 +416,14 @@ function motors_page_options() {
 					'url'   => STM_LISTINGS_URL . '/assets/images/pro/custom_field_skins/numeric-1.png',
 				),
 				'skin_2' => array(
-					'label'     => 'Range with Dropdowns',
-					'url'       => STM_LISTINGS_URL . '/assets/images/pro/custom_field_skins/numeric-2.png',
-					'pro_field' => true,
+					'label'      => 'Range with Dropdowns',
+					'url'        => STM_LISTINGS_URL . '/assets/images/pro/custom_field_skins/numeric-2.png',
+					'pro_field'  => true,
+					'dependency' => array(
+						'slug'  => 'slider',
+						'value' => 'dropdown',
+						'type'  => 'not_empty',
+					),
 				),
 				'skin_3' => array(
 					'label'     => 'Range with Inputs',
@@ -604,6 +609,52 @@ function motors_custom_field_show_dependency( $settings ) {
 
 	echo wp_kses_post( apply_filters( 'stm_vl_depends_filter', $attributes ) );
 }
+
+
+function motors_custom_field_choice_dependency( $attributes, $choice_args ) {
+	if ( empty( $choice_args['dependency'] ) ) {
+		return $attributes;
+	}
+
+	$dependency = $choice_args['dependency'];
+	$slugs      = array();
+	$attr_list  = array();
+
+	$is_multiple = ! empty( $dependency[0] ) && is_array( $dependency[0] );
+
+	if ( $is_multiple ) {
+		foreach ( $dependency as $dep_item ) {
+			if ( is_array( $dep_item ) && isset( $dep_item['slug'] ) ) {
+				$slugs[] = $dep_item['slug'];
+				foreach ( $dep_item as $key => $value ) {
+					if ( 'slug' !== $key ) {
+						$attr_list[ $key ] = 'data-' . $key . '="' . esc_attr( $value ) . '"';
+					}
+				}
+			}
+		}
+	} else {
+		foreach ( $dependency as $key => $value ) {
+			if ( 'slug' === $key ) {
+				$slugs[] = $value;
+			} else {
+				$attr_list[ $key ] = 'data-' . $key . '="' . esc_attr( $value ) . '"';
+			}
+		}
+	}
+
+	if ( empty( $slugs ) ) {
+		return $attributes;
+	}
+
+	$attributes  = ' data-choice-depends-on="' . esc_attr( implode( ',', $slugs ) ) . '" ';
+	$attributes .= implode( ' ', $attr_list );
+	$attributes .= ' style="display: none;"';
+
+	return $attributes;
+}
+
+add_filter( 'stm_listings_choice_dependency_attributes', 'motors_custom_field_choice_dependency', 10, 2 );
 
 function stm_vehicles_listing_has_preview( $settings ) {
 	$class = '';

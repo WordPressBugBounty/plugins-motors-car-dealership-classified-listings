@@ -42,7 +42,6 @@ if ( ! empty( $args['custom_img_size'] ) ) {
 					}
 
 					do_action( 'stm_listings_load_template', '/loop/badge' );
-
 					?>
 					<div class="listing-car-item-meta">
 						<?php do_action( 'stm_listings_load_template', 'loop/list/price' ); ?>

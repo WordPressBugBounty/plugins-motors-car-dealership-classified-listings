@@ -940,6 +940,11 @@
                             }
 
                             bypass_select(Form.data.editForm);
+                            
+                            // Reset form state after loading data
+                            $('.stm-admin-button-save', Form.data.editForm).prop('disabled', true);
+                            Form.data.edited = false;
+                            
                             data.methods.open('edit');
                         }
                     }
@@ -1289,17 +1294,60 @@
                 );
             }
 
-            function hideUseless(field, dependent) {
+            function updateChoiceDependencies($form, fieldName) {
+                $('[data-choice-depends-on]').each(function() {
+                    let $dependentItem = $(this);
+                    let dependsOnSlugs = $dependentItem.attr('data-choice-depends-on');
+                    
+                    if (!dependsOnSlugs || !dependsOnSlugs.split(',').map(function(s) { return s.trim(); }).includes(fieldName)) {
+                        return;
+                    }
 
-                let depType = $(field).attr('type'),
-                    depValue = '';
+                    let $fieldToCheck = $('[name="' + fieldName + '"]');
+                    if (!$fieldToCheck.length) {
+                        $dependentItem.hide();
+                        return;
+                    }
+                    
+                    let depValue = '';
+                    let firstField = $fieldToCheck.first();
+                    let depType = firstField.attr('type');
+                    
+                    if ('checkbox' === depType) {
+                        depValue = firstField.prop('checked') ? '1' : '0';
+                    } else if ('radio' === depType) {
+                        $fieldToCheck.each(function() {
+                            if ($(this).is(':checked')) {
+                                depValue = $(this).val();
+                            }
+                        });
+                    } else {
+                        depValue = firstField.val();
+                    }
+                    
+                    let requiredValue = $dependentItem.attr('data-value');
+                    if (requiredValue) {
+                        let values = requiredValue.split(',').map(function(v) { return v.trim(); });
+                        $dependentItem.toggle(values.includes(String(depValue)));
+                    } else {
+                        $dependentItem.toggle(!!depValue);
+                    }
+                });
+            }
+
+            function hideUseless(field, dependent) {
+                let $field = $(field),
+                    depType = $field.attr('type'),
+                    depValue = '',
+                    $formScope = $field.closest(Form.data.el).length ? $field.closest(Form.data.el) : $(Form.data.el);
 
                 if ('checkbox' === depType) {
-                    depValue = $(field).prop('checked');
-                } else if (depType && 'select' === $(field).prop('tagName')) {
-                    depValue = $(field).val();
+                    depValue = $field.prop('checked') ? '1' : '0';
+                } else if (depType && 'SELECT' === $field.prop('tagName')) {
+                    depValue = $field.val();
                 } else if ('radio' === depType) {
-                    $(field).each(
+                    let fieldName = $field.attr('name');
+                    $formScope.find('[name="' + fieldName + '"]').each(
                         function () {
                             if ($(this).is(':checked')) {
                                 depValue = $(this).val();
@@ -1307,31 +1355,38 @@
                         }
                     );
                 } else {
-                    depValue = $(field).val();
+                    depValue = $field.val();
                 }
 
-                if ('SELECT' === $(field).prop('tagName')) {
+                let requiredValue = dependent.attr('data-value');
+                
+                if ('SELECT' === $field.prop('tagName')) {
                     dependent.each(function () {
-                            if ($(this).data('value').split(',').includes(depValue)) {
-                                $(this).show();
+                            let $dep = $(this);
+                            let depValues = $dep.attr('data-value');
+                            if (depValues && depValues.split(',').map(function(v) { return v.trim(); }).includes(String(depValue))) {
+                                $dep.show();
                             } else {
-                                $(this).hide();
+                                $dep.hide();
                             }
                         }
-                    )
-
-                } else if (depValue && 'radio' === depType) {
-                    dependent.each(
-                        function () {
-                            if ($(this).data('slug').split(',').includes(depValue)) {
-                                $(this).show();
-                            } else {
-                                $(this).hide();
-                            }
-                        }
-                    )
+                    );
+                } else if ('radio' === depType && requiredValue) {
+                    let values = requiredValue.split(',').map(function(v) { return v.trim(); });
+                    if (values.includes(String(depValue))) {
+                        dependent.show();
+                    } else {
+                        dependent.hide();
+                    }
                 } else {
-                    if (depValue) {
+                    if (requiredValue) {
+                        let values = requiredValue.split(',').map(function(v) { return v.trim(); });
+                        if (values.includes(String(depValue))) {
+                            dependent.show();
+                        } else {
+                            dependent.hide();
+                        }
+                    } else if (depValue) {
                         dependent.show();
                     } else {
                         dependent.hide();
@@ -1340,37 +1395,37 @@
             }
 
             function watcher() {
-                $('input, select', Form.data.el).on(
-                    'change',
-                    function () {
-                        let $field = $(this),
-                            $field_name = $field.attr('name'),
-                            $field_value = $field.val(),
-                            $form = $field.closest(Form.data.el),
-                            dependencyBlock = ($field_name === 'field_type') ? $('.stm_custom_fields__dependency[data-slug="' + $field_name + '"][data-value="' + $field_value + '"]', $form) : $('.stm_custom_fields__dependency[data-slug="' + $field_name + '"]', $form),
-                            dependencyFields = $(Field.data.el + '[data-slug]', $form);
+                $(Form.data.el).on('change', 'input, select, textarea', function () {
+                    let $field = $(this),
+                        $field_name = $field.attr('name'),
+                        $field_value = $field.val(),
+                        $form = $field.closest(Form.data.el),
+                        $formScope = $form.length ? $form : $(Form.data.el),
+                        dependencyBlock = ($field_name === 'field_type') ? $('.stm_custom_fields__dependency[data-slug="' + $field_name + '"][data-value="' + $field_value + '"]', $formScope) : $('.stm_custom_fields__dependency[data-slug="' + $field_name + '"]', $formScope),
+                        dependencyFields = $(Field.data.el + '[data-slug]', $formScope);
 
-                        if (dependencyBlock.length) {
-                            $('.stm_custom_fields__dependency[data-slug="' + $field_name + '"]', $form).hide();
-                            dependencyBlock.show();
-                        }
+                    // Enable save button when form fields change (only on actual change event)
+                    $('.stm-admin-button-save', $formScope).prop('disabled', false);
+                    Form.data.edited = true;
 
-                        if (dependencyFields.length) {
-                            dependencyFields.each(
-                                function () {
-                                    if ($(this).attr('data-slug').split(',').includes($field_name)) {
-                                        hideUseless($field, $(this));
-                                    }
-                                }
-                            );
-                        }
-
-                        if (!$field.closest(data.notification.el).length) {
-                            $('.stm-admin-button-save', $form).prop('disabled', false);
-                            data.edited = true;
-                        }
+                    if (dependencyBlock.length) {
+                        $('.stm_custom_fields__dependency[data-slug="' + $field_name + '"]', $formScope).hide();
+                        dependencyBlock.show();
                     }
-                );
+
+                    if (dependencyFields.length) {
+                        dependencyFields.each(function () {
+                            let $dependentField = $(this);
+                            let dependentSlugs = $dependentField.attr('data-slug');
+                            if (dependentSlugs && dependentSlugs.split(',').map(function(s) { return s.trim(); }).includes($field_name)) {
+                                hideUseless($field, $dependentField);
+                            }
+                        });
+                    }
+
+                    // Update dependencies for choice items inside radio-image fields
+                    updateChoiceDependencies($formScope, $field_name);
+                });
 
                 $('.stm_vehicles_listing_icons .inner .stm_font_nav a').on(
                     'click',
@@ -1498,6 +1553,40 @@
                 );
             }
 
+            function initChoiceDependencies() {
+                let $form = $(Form.data.el);
+                
+                let dependentFields = [];
+                $('[data-choice-depends-on]').each(function() {
+                    let dependsOnSlugs = $(this).attr('data-choice-depends-on');
+                    if (dependsOnSlugs) {
+                        dependsOnSlugs.split(',').forEach(function(slug) {
+                            slug = slug.trim();
+                            if (dependentFields.indexOf(slug) === -1) {
+                                dependentFields.push(slug);
+                            }
+                        });
+                    }
+                });
+                
+                dependentFields.forEach(function(fieldName) {
+                    updateChoiceDependencies($form, fieldName);
+                });
+                
+                $(Field.data.el + '[data-slug]').each(function() {
+                    let $dependentField = $(this);
+                    let dependentSlugs = $dependentField.attr('data-slug');
+                    if (dependentSlugs) {
+                        dependentSlugs.split(',').forEach(function(slug) {
+                            let $sourceField = $form.find('[name="' + slug.trim() + '"]').first();
+                            if ($sourceField.length) {
+                                hideUseless($sourceField, $dependentField);
+                            }
+                        });
+                    }
+                });
+            }
+
             return {
                 data: data,
                 methods: {
@@ -1508,6 +1597,7 @@
                     save,
                     clear_form_edit,
                     clear_form_add,
+                    initChoiceDependencies,
                 }
             };
         }
@@ -1525,6 +1615,9 @@
         Form.methods.add_field();
         Form.methods.cancel();
         Form.methods.watcher();
+        setTimeout(function() {
+            Form.methods.initChoiceDependencies();
+        }, 100);
         Form.methods.save();
 
         Table.methods.dragging_init();
@@ -1534,3 +1627,4 @@
         Table.methods.search();
     }
 }(jQuery));
+

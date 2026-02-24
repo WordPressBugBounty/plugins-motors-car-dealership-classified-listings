@@ -1,6 +1,26 @@
 <?php
+use MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\Config;
+use MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\FormConfig;
+
 mvl_enqueue_header_scripts_styles( 'motors-datetimepicker' );
+$listing_id    = get_queried_object_id();
+$listing_title = apply_filters( 'stm_generate_title_from_slugs', get_the_title( $listing_id ), $listing_id );
+
+$form_html = apply_filters(
+	'mvl_get_form_html',
+	'',
+	'test_drive',
+	array(
+		'listing_id'    => $listing_id,
+		'listing_title' => $listing_title,
+		'is_modal'      => true,
+	)
+);
+
+$is_forms_editor       = apply_filters( 'mvl_is_addon_enabled', false, 'forms_editor' );
+$use_template_directly = $is_forms_editor && ! empty( $form_html );
 ?>
+<?php if ( ! $use_template_directly ) : ?>
 <div class="modal" id="test-drive" tabindex="-1" role="dialog" aria-labelledby="myModalLabelTestDrive">
 	<form id="request-test-drive-form" action="<?php echo esc_url( home_url( '/' ) ); ?>" method="post">
 		<div class="modal-dialog" role="document">
@@ -64,3 +84,30 @@ mvl_enqueue_header_scripts_styles( 'motors-datetimepicker' );
 		</div>
 	</form>
 </div>
+<?php else : ?>
+	<?php
+	// Load template directly to preserve scripts (reCAPTCHA, etc.)
+	if ( class_exists( '\MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\Config' ) && class_exists( '\MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\FormConfig' ) ) {
+		/** @var \MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\FormConfig|null $form_config */
+		$form_config = \MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\Config::instance_of( 'test_drive' );
+		if ( $form_config ) {
+			$form_data    = $form_config->data();
+			$saved_values = $form_config->get_values();
+			$fields       = $form_data['fields'] ?? array();
+
+			$template_data = array(
+				'form_slug'    => 'test_drive',
+				'args'         => array(
+					'listing_id'    => $listing_id,
+					'listing_title' => $listing_title,
+					'is_modal'      => true,
+				),
+				'fields'       => $fields,
+				'saved_values' => $saved_values,
+			);
+
+			do_action( 'stm_listings_load_template', 'addons/forms-editor/page/partials/forms/test-drive', $template_data );
+		}
+	}
+	?>
+<?php endif; ?>

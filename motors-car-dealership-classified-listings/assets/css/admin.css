@@ -493,6 +493,25 @@ body.toplevel_page_mvl_plugin_settings #feature-request, body[class*=post-type-s
     vertical-align: bottom
 }
 
+.mvl-menu-badge {
+    display: inline-block;
+    margin-left: 4px;
+    padding: 1px 5px;
+    font-size: 10px;
+    line-height: 1.2;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    color: #fff;
+    border-radius: 3px;
+    vertical-align: middle
+}
+
+li#toplevel_page_mvl_plugin_settings .wp-submenu .mvl-menu-badge {
+    font-size: 9px;
+    padding: 3px
+}
+
 .wp-admin #stm-payout_edit .stm-order table thead tr, .wp-admin #stm_order_info .stm-order table thead tr {
     background-color: #385bcd
 }

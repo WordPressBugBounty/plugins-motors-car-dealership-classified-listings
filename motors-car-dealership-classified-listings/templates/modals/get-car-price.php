@@ -1,4 +1,7 @@
 <?php
+use MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\Config;
+use MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\FormConfig;
+
 $recaptcha_enabled    = apply_filters( 'motors_vl_get_nuxy_mod', false, 'enable_recaptcha' );
 $recaptcha_public_key = apply_filters( 'motors_vl_get_nuxy_mod', false, 'recaptcha_public_key' );
 $recaptcha_secret_key = apply_filters( 'motors_vl_get_nuxy_mod', false, 'recaptcha_secret_key' );
@@ -6,63 +9,104 @@ $recaptcha_secret_key = apply_filters( 'motors_vl_get_nuxy_mod', false, 'recaptc
 if ( ! empty( $recaptcha_enabled ) && $recaptcha_enabled && ! empty( $recaptcha_public_key ) && ! empty( $recaptcha_secret_key ) ) {
 	wp_enqueue_script( 'stm_grecaptcha' );
 }
+$form_html = apply_filters(
+	'mvl_get_form_html',
+	'',
+	'request_car_price',
+	array(
+		'listing_id'    => get_the_ID(),
+		'listing_title' => get_the_title( get_the_ID() ),
+		'is_modal'      => true,
+	)
+);
+
+$is_forms_editor       = apply_filters( 'mvl_is_addon_enabled', false, 'forms_editor' );
+$use_template_directly = $is_forms_editor && ! empty( $form_html );
 ?>
-<div class="modal" id="get-car-price" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	<form id="get-car-price-form" action="<?php echo esc_url( home_url( '/' ) ); ?>" method="post">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header modal-header-iconed">
-					<i class="motors-icons-steering_wheel"></i>
-					<i class="modal-close motors-icons-close-times" data-dismiss="modal"></i>
-					<h3 class="modal-title" id="myModalLabel">
-						<?php esc_html_e( 'Request car price', 'stm_vehicles_listing' ); ?>
-					</h3>
-					<div class="test-drive-car-name"><?php echo wp_kses_post( get_the_title( get_the_ID() ) ); ?></div>
-				</div>
-				<div class="modal-body">
-					<div class="row">
-						<div class="col-md-6 col-sm-6">
-							<div class="form-group">
-								<div class="form-modal-label"><?php esc_html_e( 'Name', 'stm_vehicles_listing' ); ?></div>
-								<input name="name" type="text"/>
-							</div>
-						</div>
-						<div class="col-md-6 col-sm-6">
-							<div class="form-group">
-								<div class="form-modal-label"><?php esc_html_e( 'Email', 'stm_vehicles_listing' ); ?></div>
-								<input name="email" type="email"/>
-							</div>
-						</div>
+<?php if ( ! $use_template_directly ) : ?>
+	<div class="modal" id="get-car-price" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<form id="get-car-price-form" action="<?php echo esc_url( home_url( '/' ) ); ?>" method="post">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header modal-header-iconed">
+						<i class="motors-icons-steering_wheel"></i>
+						<i class="modal-close motors-icons-close-times" data-dismiss="modal"></i>
+						<h3 class="modal-title" id="myModalLabel">
+							<?php esc_html_e( 'Request car price', 'stm_vehicles_listing' ); ?>
+						</h3>
+						<div class="test-drive-car-name"><?php echo wp_kses_post( get_the_title( get_the_ID() ) ); ?></div>
 					</div>
-					<div class="row">
-						<div class="col-md-6 col-sm-6">
-							<div class="form-group">
-								<div class="form-modal-label"><?php esc_html_e( 'Phone', 'stm_vehicles_listing' ); ?></div>
-								<input name="phone" type="tel"/>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<div class="form-modal-label"><?php esc_html_e( 'Name', 'stm_vehicles_listing' ); ?></div>
+									<input name="name" type="text"/>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<div class="form-modal-label"><?php esc_html_e( 'Email', 'stm_vehicles_listing' ); ?></div>
+									<input name="email" type="email"/>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="row button-row">
-						<div class="col-md-12 col-sm-12 get-car-price-form-actions">
-							<?php if ( ! empty( $recaptcha_enabled ) && $recaptcha_enabled && ! empty( $recaptcha_public_key ) && ! empty( $recaptcha_secret_key ) ) : ?>
-								<button type="submit" class="stm-request-test-drive g-recaptcha" data-sitekey="<?php echo esc_attr( $recaptcha_public_key ); ?>" data-callback='onSubmitGetCarPrice'><?php esc_html_e( 'Request', 'stm_vehicles_listing' ); ?></button>
-								<script>
-									function onSubmitGetCarPrice(token) {
-										jQuery("form#get-car-price-form").trigger('submit');
-									}
-								</script>
-							<?php else : ?>
-							<button type="submit" class="stm-request-test-drive"><?php esc_html_e( 'Request', 'stm_vehicles_listing' ); ?></button>
-							<?php endif; ?>
-							<div class="stm-ajax-loader" style="margin-top:10px;">
-								<i class="fa fa-spinner"></i>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<div class="form-modal-label"><?php esc_html_e( 'Phone', 'stm_vehicles_listing' ); ?></div>
+									<input name="phone" type="tel"/>
+								</div>
 							</div>
 						</div>
+						<div class="row button-row">
+							<div class="col-md-12 col-sm-12 get-car-price-form-actions">
+								<?php if ( ! empty( $recaptcha_enabled ) && $recaptcha_enabled && ! empty( $recaptcha_public_key ) && ! empty( $recaptcha_secret_key ) ) : ?>
+									<button type="submit" class="stm-request-test-drive g-recaptcha" data-sitekey="<?php echo esc_attr( $recaptcha_public_key ); ?>" data-callback='onSubmitGetCarPrice'><?php esc_html_e( 'Request', 'stm_vehicles_listing' ); ?></button>
+									<script>
+										function onSubmitGetCarPrice(token) {
+											jQuery("form#get-car-price-form").trigger('submit');
+										}
+									</script>
+								<?php else : ?>
+								<button type="submit" class="stm-request-test-drive"><?php esc_html_e( 'Request', 'stm_vehicles_listing' ); ?></button>
+								<?php endif; ?>
+								<div class="stm-ajax-loader" style="margin-top:10px;">
+									<i class="fa fa-spinner"></i>
+								</div>
+							</div>
+						</div>
+						<div class="mg-bt-25px"></div>
+						<input name="vehicle_id" type="hidden" value="<?php echo esc_attr( get_queried_object_id() ); ?>" />
 					</div>
-					<div class="mg-bt-25px"></div>
-					<input name="vehicle_id" type="hidden" value="<?php echo esc_attr( get_queried_object_id() ); ?>" />
 				</div>
 			</div>
-		</div>
-	</form>
-</div>
+		</form>
+	</div>
+<?php else : ?>
+	<?php
+	// Load template directly to preserve scripts (reCAPTCHA, etc.)
+	if ( class_exists( '\MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\Config' ) && class_exists( '\MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\FormConfig' ) ) {
+		/** @var \MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\FormConfig|null $form_config */
+		$form_config = \MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\Config::instance_of( 'request_car_price' );
+		if ( $form_config ) {
+			$form_data    = $form_config->data();
+			$saved_values = $form_config->get_values();
+			$fields       = $form_data['fields'] ?? array();
+
+			$template_data = array(
+				'form_slug'    => 'request_car_price',
+				'args'         => array(
+					'listing_id'    => get_the_ID(),
+					'listing_title' => get_the_title( get_the_ID() ),
+					'is_modal'      => true,
+				),
+				'fields'       => $fields,
+				'saved_values' => $saved_values,
+			);
+
+			do_action( 'stm_listings_load_template', 'addons/forms-editor/page/partials/forms/request-car-price', $template_data );
+		}
+	}
+	?>
+<?php endif; ?>

@@ -13,6 +13,7 @@ class Addons {
 	public const SAVED_SEARCH           = 'saved_search';
 	public const EMAIL_MANAGER          = 'email_manager';
 	public const CAR_INFO_AUTO_COMPLETE = 'car_info_auto_complete';
+	public const FORMS_EDITOR           = 'forms_editor';
 
 	public static function all() : array {
 		return array(
@@ -21,6 +22,7 @@ class Addons {
 			self::SAVED_SEARCH,
 			self::EMAIL_MANAGER,
 			self::CAR_INFO_AUTO_COMPLETE,
+			self::FORMS_EDITOR,
 		);
 	}
 
@@ -33,16 +35,50 @@ class Addons {
 		);
 	}
 
+	public static function get_menu_badge_html( array $addon ) : string {
+		if ( empty( $addon['badge'] ) ) {
+			return '';
+		}
+		$color = isset( $addon['badge_color'] ) ? $addon['badge_color'] : '#dba617';
+		$text_color = isset( $addon['badge_text_color'] ) ? $addon['badge_text_color'] : '#fff';
+		$style = 'background-color:' . esc_attr( $color ) . '; color:' . esc_attr( $text_color );
+
+		return ' <span class="mvl-menu-badge" style="' . $style . '">' . esc_html( $addon['badge'] ) . '</span>';
+	}
+
 	public static function list() : array {
 		return array(
-			self::VIN_DECODER            => array(
-				'name'          => esc_html__( 'VIN Decoder', 'stm_vehicles_listing' ),
-				'url'           => esc_url( STM_LISTINGS_URL . '/assets/addons/img/VinDecoder.png' ),
-				'settings'      => admin_url( 'admin.php?page=vin_decoders_settings' ),
-				'description'   => esc_html__( 'Get a comprehensive overview of a vehicle’s history with important details like make and mileage by VIN number. Connect up to 5 VIN services for comprehensive insights.', 'stm_vehicles_listing' ),
+			self::FORMS_EDITOR           => array(
+				'name'          => esc_html__( 'Form Builder', 'stm_vehicles_listing' ),
+				'url'           => esc_url( STM_LISTINGS_URL . '/assets/addons/img/FormsEditor.png' ),
+				'settings'      => home_url( 'motors/forms-editor/' ),
+				'description'   => esc_html__( 'Lets you fully customize Motors forms with a drag-and-drop editor. Add, remove, and reorder fields, choose from multiple field types, and adjust the form structure to match your business needs.', 'stm_vehicles_listing' ),
+				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=motorswpadmin&utm_campaign=motors-plugin&licenses=1&billing_cycle=annual',
+				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/motors-pro-addons/forms-builder',
+				'img_url'       => 'forms-editor',
+				'toggle'        => true,
+				'badge'         => 'NEW',
+				'badge_color'   => '#ffaa0040',
+				'badge_text_color' => '#ffaa00',
+			),
+			self::EMAIL_MANAGER          => array(
+				'name'          => esc_html__( 'Email Template Manager', 'stm_vehicles_listing' ),
+				'url'           => esc_url( STM_LISTINGS_URL . '/assets/addons/img/EmailManager.png' ),
+				'settings'      => apply_filters( 'mvl_email_manager_url', '' ),
+				'description'   => esc_html__( 'Manage your email templates and send them to your users.', 'stm_vehicles_listing' ),
+				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=motorswpadmin&utm_campaign=motors-plugin&licenses=1&billing_cycle=annual',
+				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/motors-pro-addons/email-manager',
+				'img_url'       => 'email-manager',
+				'toggle'        => true,
+			),
+			self::CAR_INFO_AUTO_COMPLETE => array(
+				'name'          => esc_html__( 'Car Info Autocomplete', 'stm_vehicles_listing' ),
+				'url'           => esc_url( STM_LISTINGS_URL . '/assets/addons/img/CarInfoAutoComplete.png' ),
+				'settings'      => admin_url( 'admin.php?page=car_info_auto_complete_settings' ),
+				'description'   => esc_html__( 'Automatically fill in vehicle details by selecting a make, model, year, or VIN. Speeds up listing creation and ensures accurate data.', 'stm_vehicles_listing' ),
+				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/motors-pro-addons/car-info-autocomplete',
+				'img_url'       => 'car-info-auto-complete',
 				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro',
-				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/motors-pro-addons/vin-decoder',
-				'img_url'       => 'vin-decoder',
 				'toggle'        => true,
 			),
 			self::SAVED_SEARCH           => array(
@@ -65,34 +101,14 @@ class Addons {
 				'img_url'       => 'social-login',
 				'toggle'        => true,
 			),
-			self::CAR_INFO_AUTO_COMPLETE => array(
-				'name'          => esc_html__( 'Car Info Autocomplete', 'stm_vehicles_listing' ),
-				'url'           => esc_url( STM_LISTINGS_URL . '/assets/addons/img/CarInfoAutoComplete.png' ),
-				'settings'      => admin_url( 'admin.php?page=car_info_auto_complete_settings' ),
-				'description'   => esc_html__( 'Automatically fill in vehicle details by selecting a make, model, year, or VIN. Speeds up listing creation and ensures accurate data.', 'stm_vehicles_listing' ),
-				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/motors-pro-addons/car-info-autocomplete',
-				'img_url'       => 'car-info-auto-complete',
+			self::VIN_DECODER            => array(
+				'name'          => esc_html__( 'VIN Decoder', 'stm_vehicles_listing' ),
+				'url'           => esc_url( STM_LISTINGS_URL . '/assets/addons/img/VinDecoder.png' ),
+				'settings'      => admin_url( 'admin.php?page=vin_decoders_settings' ),
+				'description'   => esc_html__( 'Get a comprehensive overview of a vehicle’s history with important details like make and mileage by VIN number. Connect up to 5 VIN services for comprehensive insights.', 'stm_vehicles_listing' ),
 				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro',
-				'toggle'        => true,
-			),
-			self::EMAIL_MANAGER          => array(
-				'name'          => esc_html__( 'Email Template Manager', 'stm_vehicles_listing' ),
-				'url'           => esc_url( STM_LISTINGS_URL . '/assets/addons/img/EmailManager.png' ),
-				'settings'      => apply_filters( 'mvl_email_manager_url', '' ),
-				'description'   => esc_html__( 'Manage your email templates and send them to your users.', 'stm_vehicles_listing' ),
-				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=motorswpadmin&utm_campaign=motors-plugin&licenses=1&billing_cycle=annual',
-				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/motors-pro-addons/email-manager',
-				'img_url'       => 'email-manager',
-				'toggle'        => true,
-			),
-			self::EMAIL_MANAGER          => array(
-				'name'          => esc_html__( 'Email Template Manager', 'stm_vehicles_listing' ),
-				'url'           => esc_url( STM_LISTINGS_URL . '/assets/addons/img/EmailManager.png' ),
-				'settings'      => apply_filters( 'mvl_email_manager_url', '' ),
-				'description'   => esc_html__( 'Manage your email templates and send them to your users.', 'stm_vehicles_listing' ),
-				'pro_url'       => 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=motorswpadmin&utm_campaign=motors-plugin&licenses=1&billing_cycle=annual',
-				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/motors-pro-addons/email-manager',
-				'img_url'       => 'email-manager',
+				'documentation' => 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/motors-pro-addons/vin-decoder',
+				'img_url'       => 'vin-decoder',
 				'toggle'        => true,
 			),
 		);

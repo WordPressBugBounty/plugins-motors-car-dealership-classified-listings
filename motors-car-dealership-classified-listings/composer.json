@@ -12,6 +12,9 @@
 	},
 	"config": {
 		"platform-check": false,
-		"optimize-autoloader": true
+		"optimize-autoloader": true,
+		"allow-plugins": {
+			"php-http/discovery": true
+		}
 	}
 }

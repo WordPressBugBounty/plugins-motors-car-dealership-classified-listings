@@ -266,6 +266,16 @@ class Settings {
 		);
 
 		add_submenu_page(
+			'tools.php',
+			esc_html__( 'Motors Setup Wizard', 'stm_vehicles_listing' ),
+			esc_html__( 'Motors Setup Wizard', 'stm_vehicles_listing' ),
+			'manage_options',
+			'mvl-welcome-setup',
+			'mvl_setup_wizard_sub_menu_admin_page_contents',
+			101
+		);
+
+		add_submenu_page(
 			'mvl_plugin_settings',
 			esc_html__( 'Help Center', 'stm_vehicles_listing' ),
 			'<span style="color: #FC7B40; font-weight: 700;">' . esc_html__( 'Help Center', 'stm_vehicles_listing' ) . '</span>',

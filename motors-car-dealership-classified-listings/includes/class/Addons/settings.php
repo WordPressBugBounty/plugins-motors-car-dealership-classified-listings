@@ -20,10 +20,12 @@ if ( ! defined( 'STM_LISTINGS_PRO_PATH' ) ) {
 					continue;
 				}
 
+				$menu_title = $addon['name'] . Addons::get_menu_badge_html( $addon );
+
 				add_submenu_page(
 					'mvl_plugin_settings',
 					$addon['name'],
-					$addon['name'],
+					$menu_title,
 					'manage_options',
 					$key,
 					function () use ( $key ) {

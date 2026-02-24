@@ -41,6 +41,62 @@ i {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.motors-icons-check-square:before {
+    content: "\ea2d";
+}
+
+.motors-icons-clock-square:before {
+    content: "\ea2e";
+}
+
+.motors-icons-development-03:before {
+    content: "\ea2f";
+}
+
+.motors-icons-dropdown:before {
+    content: "\ea30";
+}
+
+.motors-icons-icon-drag:before {
+    content: "\ea31";
+}
+
+.motors-icons-image:before {
+    content: "\ea32";
+}
+
+.motors-icons-input:before {
+    content: "\ea33";
+}
+
+.motors-icons-mailbox:before {
+    content: "\ea34";
+}
+
+.motors-icons-phone-call:before {
+    content: "\ea35";
+}
+
+.motors-icons-plus:before {
+    content: "\ea36";
+}
+
+.motors-icons-radio:before {
+    content: "\ea37";
+}
+
+.motors-icons-reverse:before {
+    content: "\ea38";
+}
+
+.motors-icons-textarea:before {
+    content: "\ea39";
+}
+
+.motors-icons-upload:before {
+    content: "\ea3a";
+}
+
 .motors-icons-angle-right:before {
     content: "\ea2c";
 }

@@ -12,17 +12,6 @@ add_action( 'admin_enqueue_scripts', 'mvl_setup_wizard_assets_enqueue' );
 function mvl_setup_wizard_sub_menu_admin_page_contents() {
 	require_once MVL_SETUP_WIZARD_TEMPLATES_PATH . 'index.php';
 }
-function mvl_setup_wizard_admin_menu() {
-	add_submenu_page(
-		'null',
-		__( 'Welcome', 'stm_vehicles_listing' ),
-		__( 'Hidden', 'stm_vehicles_listing' ),
-		'manage_options',
-		'mvl-welcome-setup',
-		'mvl_setup_wizard_sub_menu_admin_page_contents'
-	);
-}
-add_action( 'admin_menu', 'mvl_setup_wizard_admin_menu' );
 
 function mvl_plugin_activation() {
 	add_option( 'mvl_plugin_do_activation_redirect', true );
@@ -32,8 +21,12 @@ add_action( 'admin_init', 'mvl_plugin_redirect' );
 function mvl_plugin_redirect() {
 	if ( get_option( 'mvl_plugin_do_activation_redirect', false ) ) {
 		delete_option( 'mvl_plugin_do_activation_redirect' );
-		if ( ! isset( $_GET['activate-multi'] ) && ! defined( 'MOTORS_THEME' ) ) {
-			wp_safe_redirect( 'admin.php?page=mvl-welcome-setup' );
+		if ( ! get_option( 'mvl_has_been_activated', false ) ) {
+			update_option( 'mvl_has_been_activated', true );
+			if ( ! isset( $_GET['activate-multi'] ) && ! defined( 'MOTORS_THEME' ) ) {
+				wp_safe_redirect( 'admin.php?page=mvl-welcome-setup' );
+				exit;
+			}
 		}
 	}
 }

@@ -277,39 +277,50 @@ function is_mvl_addon_enabled( $addon ) {
 add_filter( 'wp_kses_allowed_html', 'mvl_wp_kses_allowed_html' );
 function mvl_wp_kses_allowed_html( $allowed_html ) {
 	$allowed_atts = array(
-		'align'       => array(),
-		'class'       => array(),
-		'type'        => array(),
-		'id'          => array(),
-		'dir'         => array(),
-		'lang'        => array(),
-		'style'       => array(),
-		'xml:lang'    => array(),
-		'src'         => array(),
-		'alt'         => array(),
-		'href'        => array(),
-		'rel'         => array(),
-		'rev'         => array(),
-		'target'      => array(),
-		'novalidate'  => array(),
-		'value'       => array(),
-		'name'        => array(),
-		'tabindex'    => array(),
-		'action'      => array(),
-		'method'      => array(),
-		'for'         => array(),
-		'width'       => array(),
-		'height'      => array(),
-		'data'        => array(),
-		'title'       => array(),
-		'placeholder' => array(),
-		'selected'    => array(),
+		'align'        => array(),
+		'class'        => array(),
+		'type'         => array(),
+		'id'           => array(),
+		'dir'          => array(),
+		'lang'         => array(),
+		'style'        => array(),
+		'xml:lang'     => array(),
+		'src'          => array(),
+		'alt'          => array(),
+		'href'         => array(),
+		'rel'          => array(),
+		'rev'          => array(),
+		'target'       => array(),
+		'novalidate'   => array(),
+		'value'        => array(),
+		'name'         => array(),
+		'tabindex'     => array(),
+		'action'       => array(),
+		'method'       => array(),
+		'for'          => array(),
+		'width'        => array(),
+		'height'       => array(),
+		'data-*'       => true,
+		'title'        => array(),
+		'placeholder'  => array(),
+		'selected'     => array(),
+		'disabled'     => array(),
+		'checked'      => array(),
+		'required'     => array(),
+		'readonly'     => array(),
+		'autocomplete' => array(),
 	);
 
 	$allowed_html['select']             = $allowed_atts;
 	$allowed_html['input']              = $allowed_atts;
 	$allowed_html['option']             = $allowed_atts;
 	$allowed_html['option']['selected'] = array();
+	$allowed_html['form']               = $allowed_atts;
+	$allowed_html['textarea']           = $allowed_atts;
+	$allowed_html['button']             = $allowed_atts;
+	$allowed_html['label']              = $allowed_atts;
+	$allowed_html['div']                = $allowed_atts;
+	$allowed_html['span']               = $allowed_atts;
 
 	$allowed_html['img'] = array(
 		'src'      => true,
@@ -1255,8 +1266,15 @@ if ( ! function_exists( 'stm_get_car_medias' ) ) {
 			$car_video_main = get_post_meta( $post_id, 'gallery_video', true );
 			$car_videos     = get_post_meta( $post_id, 'gallery_videos', true );
 
-			if ( ! empty( $car_video_main ) ) {
-				$car_video[] = $car_video_main;
+			if ( is_string( $car_videos ) && '' !== $car_videos ) {
+				$car_videos = array( $car_videos );
+			} else {
+				$car_videos = is_array( $car_videos ) ? $car_videos : array();
+			}
+			$car_videos = array_values( array_filter( $car_videos ) );
+
+			if ( ! empty( $car_video_main ) && ! in_array( $car_video_main, $car_videos, true ) ) {
+				array_unshift( $car_videos, $car_video_main );
 			}
 
 			if ( ! empty( $car_videos ) ) {
@@ -1267,6 +1285,7 @@ if ( ! function_exists( 'stm_get_car_medias' ) ) {
 				}
 			}
 
+			$car_video                       = array_values( array_unique( $car_video ) );
 			$car_media['car_videos']         = $car_video;
 			$car_media['car_videos_posters'] = $car_videos_posters;
 			$car_media['car_videos_count']   = count( $car_video );

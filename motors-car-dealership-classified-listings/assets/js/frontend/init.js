@@ -48,7 +48,28 @@ function stm_test_drive_car_title(id, title) {
             var formData = new FormData();
 
             /*Add image*/
-            formData.append('stm-avatar', $('input[name="stm-avatar"]')[0].files[0]);
+            var avatarInput = $('input[name="stm-avatar"]')[0];
+            if (avatarInput && avatarInput.files && avatarInput.files[0]) {
+                formData.append('stm-avatar', avatarInput.files[0]);
+            }
+
+            /*Add file upload fields from form editor*/
+            $(this).find('input[type="file"]').each(function() {
+                var $input = $(this);
+                var inputName = $input.attr('name');
+                
+                // Skip avatar field (already handled)
+                if (inputName === 'stm-avatar') {
+                    return;
+                }
+                
+                // Handle multiple files
+                if (this.files && this.files.length > 0) {
+                    for (var i = 0; i < this.files.length; i++) {
+                        formData.append(inputName, this.files[i]);
+                    }
+                }
+            });
 
             /*Add text fields*/
             var formInputs = $(this).serializeArray();
@@ -80,6 +101,17 @@ function stm_test_drive_car_title(id, title) {
             });
         })
     };
+
+    // STMListings.become_dealer_file_input = function () {
+    //     $('body').on('change', 'input[name="stm-avatar"]', function () {
+    //         var length = $(this)[0].files.length;
+    //         if (length == 1) {
+    //             $('.stm-new-file-label').text($(this).val());
+    //         } else {
+    //             $('.stm-new-file-label').text('No File Chosen');
+    //         }
+    //     });
+    // };
 
     STMListings.stm_logout = function () {
         $('body').on('click', '.stm_logout a', function (e) {
@@ -347,7 +379,11 @@ function stm_test_drive_car_title(id, title) {
         }
     }
 
-    STMListings.ajaxGetCarPrice = function () {
+STMListings.ajaxGetCarPrice = function () {
+        // Если FormsEditor вариант присутствует, не вешаем легаси обработчик
+        if ($('.mvl-fe-form-request-car-price').length) {
+            return;
+        }
         $('#get-car-price form').on("submit", function (event) {
             event.preventDefault();
             $.ajax({
@@ -528,6 +564,7 @@ function stm_test_drive_car_title(id, title) {
         STMListings.ajaxGetCarPrice();
         STMListings.on_submit_filter_form();
         STMListings.initTooltips();
+        // STMListings.become_dealer_file_input();
 
         window.stm_favourites = new Favorites();
 
@@ -596,7 +633,7 @@ function stm_test_drive_car_title(id, title) {
 
     jQuery(document).ready(function ($) {
 
-        $('.stm-show-password .far').mousedown(function () {
+        $('.stm-show-password .fas, .stm-show-password .far ').mousedown(function () {
             $(this).closest('.stm-show-password').find('input').attr('type', 'text');
             $(this).addClass('fa-eye');
             $(this).removeClass('fa-eye-slash');
@@ -604,11 +641,13 @@ function stm_test_drive_car_title(id, title) {
 
         $(document).mouseup(function () {
             $('.stm-show-password').find('input').attr('type', 'password');
+            $('.stm-show-password .fas').addClass('fa-eye-slash');
+            $('.stm-show-password .fas').removeClass('fa-eye');
             $('.stm-show-password .far').addClass('fa-eye-slash');
             $('.stm-show-password .far').removeClass('fa-eye');
         });
 
-        $("body").on('touchstart', '.stm-show-password .far', function () {
+        $("body").on('touchstart', '.stm-show-password .fas, .stm-show-password .far', function () {
             $(this).closest('.stm-show-password').find('input').attr('type', 'text');
             $(this).addClass('fa-eye');
             $(this).removeClass('fa-eye-slash');

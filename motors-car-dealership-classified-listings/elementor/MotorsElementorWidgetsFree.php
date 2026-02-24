@@ -119,6 +119,20 @@ class MotorsElementorWidgetsFree {
 	public static function motors_ew_editor_enqueue_scripts() {
 		wp_enqueue_style( 'stm-elementor-icons', STM_LISTINGS_URL . '/assets/elementor/icons/style.css', array(), STM_LISTINGS_V );
 		wp_enqueue_style( 'motors-elementor-editor', STM_LISTINGS_URL . '/assets/elementor/css/editor.css', array(), STM_LISTINGS_V );
+
+		if ( apply_filters( 'mvl_is_addon_enabled', false, 'forms_editor' ) && defined( 'STM_LISTINGS_PRO_URL' ) && defined( 'STM_LISTINGS_PRO_V' ) ) {
+			if ( ! wp_style_is( 'mvl-forms', 'registered' ) ) {
+				$forms_css_path = STM_LISTINGS_PRO_URL . '/addons/FormsEditor/assets/css/mvl-forms.css';
+				wp_register_style(
+					'mvl-forms',
+					$forms_css_path,
+					array(),
+					STM_LISTINGS_PRO_V,
+					'all'
+				);
+			}
+			wp_enqueue_style( 'mvl-forms' );
+		}
 	}
 
 	public static function motors_ew_register_elementor_widget_categories() {

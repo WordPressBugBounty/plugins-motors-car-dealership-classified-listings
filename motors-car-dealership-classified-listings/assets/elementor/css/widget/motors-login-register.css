@@ -12,6 +12,21 @@
     display: flex;
 }
 
+.stm-login-register-form .stm-register-form form input[type=text],
+.stm-login-register-form .stm-register-form form input[type=number],
+.stm-login-register-form .stm-register-form form input[type=tel],
+.stm-login-register-form .stm-register-form form input[type=email],
+.stm-login-register-form .stm-register-form form input[type=search],
+.stm-login-register-form .stm-register-form form input[type=password], .stm-login-register-form .stm-login-form form input[type=text],
+.stm-login-register-form .stm-login-form form input[type=number],
+.stm-login-register-form .stm-login-form form input[type=tel],
+.stm-login-register-form .stm-login-form form input[type=email],
+.stm-login-register-form .stm-login-form form input[type=search],
+.stm-login-register-form .stm-login-form form input[type=password] {
+    width: 100%;
+    line-height: 0;
+}
+
 .stm-login-register-form .stm-login-form .form-checker {
     display: flex;
     flex-direction: row;
