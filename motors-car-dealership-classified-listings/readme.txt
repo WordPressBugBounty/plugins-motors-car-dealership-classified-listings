@@ -5,7 +5,7 @@ Donate link: https://www.paypal.me/stylemix
 Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
 Tested up to: 6.9
-Stable tag: 1.4.104
+Stable tag: 1.4.105
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -182,6 +182,12 @@ Definitely. Motors is translation-ready and works with popular multilingual plug
 You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability](https://patchstack.com/database/vdp/motors-car-dealership-classified-listings). 
 
 == Changelog ==
+
+= 1.4.105
+- **Update:** Motors Skins updated to version 1.1.6.
+- **Fix:** Fixed Car Condition filter not displaying all options when Multiple Filter Select is enabled with Modular Inventory Page skin. (PRO)
+- **Fix:** Fixed Listings per Page working across all skins for Inventory Page. (PRO)
+- **Fix:** Fixed parent–child relationship for checkbox custom field type in Modern and Modular skins Inventory Page. (PRO)
 
 = 1.4.104
 - **New:** Added Form Builder Addon allowing to fully customize Motors forms with a drag-and-drop editor. Add, remove, and reorder fields, choose from multiple field types, and adjust the form structure. (PRO)

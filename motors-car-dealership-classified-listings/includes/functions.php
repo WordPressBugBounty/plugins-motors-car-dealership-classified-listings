@@ -106,7 +106,17 @@ if ( ! function_exists( 'stm_get_listing_seller_note' ) ) {
 	 * @return mixed|string
 	 */
 	function stm_get_listing_seller_note( $listing_id ) {
-		return ( defined( 'WPB_VC_VERSION' ) ) ? get_post_meta( $listing_id, 'listing_seller_note', true ) : wp_kses_post( get_the_content( null, null, $listing_id ) );
+		$note = '';
+
+		if ( defined( 'WPB_VC_VERSION' ) ) {
+			$note = get_post_meta( $listing_id, 'listing_seller_note', true );
+		}
+
+		if ( '' === trim( (string) $note ) ) {
+			$note = get_the_content( null, null, $listing_id );
+		}
+
+		return wp_kses_post( $note );
 	}
 
 	add_filter( 'stm_get_listing_seller_note', 'stm_get_listing_seller_note' );

@@ -86,20 +86,26 @@ if (typeof (STMListings) == 'undefined') {
     };
 
     Filter.prototype.performAjax = function (url) {
-        var custom_img_size = $('#listings-result').data('custom-img-size')
-        var listings_grid_view_skin = $('#listings-result').data('listings-grid-view-skin')
-        var listings_list_view_skin = $('#listings-result').data('listings-list-view-skin')
+        var target = this.getTarget();
+        var custom_img_size = target.data('custom-img-size');
+        var listings_grid_view_skin = target.data('listings-grid-view-skin');
+        var listings_list_view_skin = target.data('listings-list-view-skin');
+        var posts_per_page = target.data('posts-per-page');
+        var data = {
+            ajax_action: this.ajax_action,
+            custom_img_size: custom_img_size,
+            listings_grid_view_skin: listings_grid_view_skin,
+            listings_list_view_skin: listings_list_view_skin,
+        };
+        if (posts_per_page) {
+            data.posts_per_page = posts_per_page;
+        }
         $.ajax({
             url: url,
             dataType: 'json',
             context: this,
             type: 'POST',
-            data: {
-                ajax_action: this.ajax_action,
-                custom_img_size: custom_img_size,
-                listings_grid_view_skin: listings_grid_view_skin,
-                listings_list_view_skin: listings_list_view_skin,
-            },
+            data: data,
             beforeSend: this.ajaxBefore,
             success: this.ajaxSuccess,
             complete: this.ajaxComplete,
@@ -180,6 +186,16 @@ if (typeof (STMListings) == 'undefined') {
                         // When backend doesn't return a slug, reset to enabled.
                         $(this).prop('disabled', false);
                         $(this).data('base-disabled', 0);
+                    }
+                });
+                $('input[name="' + key + '\[\]"], input[name="' + key + '"]', this.form).each(function () {
+                    var slug = $(this).val();
+                    if (options.hasOwnProperty(slug)) {
+                        if (options[slug].disabled) {
+                            $(this).closest('label').addClass('stashed');
+                        } else {
+                            $(this).closest('label').removeClass('stashed');
+                        }
                     }
                 });
             });
@@ -518,6 +534,7 @@ if (typeof (STMListings) == 'undefined') {
                                         let $option = $(data.element);
                                         let count = $option.data('option-count');
                                         let image = $option.data('option-image');
+                                        let isDisabled = $option.attr('data-disabled') === '1' || (count !== undefined && parseInt(count, 10) === 0);
 
                                         let $wrapper = $('<span class="stm-filter-pro-item-content"></span>');
 
@@ -527,16 +544,19 @@ if (typeof (STMListings) == 'undefined') {
 
                                         $wrapper.append($('<span class="select2-option-text">' + data.text + '</span>'));
 
+                                        if (isDisabled && proDropdown) {
+                                            $wrapper.addClass('disabled');
+                                        }
                                         if (count !== undefined) {
-                                            if (count == 0 && proDropdown) {
-                                                $wrapper.addClass('disabled');
-                                            }
                                             $wrapper.append($('<span class="option-count">(' + count + ')</span>'));
                                         }
 
                                         return $wrapper;
                                     },
                                     templateSelection: function (data) {
+                                        if (!data.id && proDropdown) {
+                                            return null;
+                                        }
                                         if (!data.id) {
                                             return data.text;
                                         }
@@ -642,11 +662,13 @@ if (typeof (STMListings) == 'undefined') {
             })
 
             if (stmType == 'select') {
-                $('select[name="' + stmSlug + '[]"]').val(null);
-                $('select[name="' + stmSlug + '[]"]').trigger('change');
-                $('select[name="' + stmSlug + '"]').val('');
-                let $select = $('select[name="' + stmSlug + '"]');
+                let $selectMulti = $('select[name="' + stmSlug + '[]"]');
+                let $select = $selectMulti.length ? $selectMulti : $('select[name="' + stmSlug + '"]');
+                $select.val(null);
                 $select.find('option').prop('disabled', false);
+                $select.find('option[value=""]').prop('selected', false);
+                $select.trigger('change');
+                $('select[name="' + stmSlug + '"]').val('');
 
                 $select.select2('destroy');
                 let dropdownParent = $('body');
@@ -689,6 +711,7 @@ if (typeof (STMListings) == 'undefined') {
                         let $option = $(data.element);
                         let count = $option.data('option-count');
                         let image = $option.data('option-image');
+                        let isDisabled = $option.attr('data-disabled') === '1' || (count !== undefined && parseInt(count, 10) === 0);
 
                         let $wrapper = $('<span class="stm-filter-pro-item-content"></span>');
 
@@ -698,15 +721,18 @@ if (typeof (STMListings) == 'undefined') {
 
                         $wrapper.append($('<span class="select2-option-text">' + data.text + '</span>'));
 
+                        if (isDisabled && proDropdown) {
+                            $wrapper.addClass('disabled');
+                        }
                         if (count !== undefined) {
-                            if (count == 0 && proDropdown) {
-                                $wrapper.addClass('disabled');
-                            }
                             $wrapper.append($('<span class="option-count">(' + count + ')</span>'));
                         }
                         return $wrapper;
                     },
                     templateSelection: function (data) {
+                        if (!data.id && proDropdown) {
+                            return null;
+                        }
                         if (!data.id) {
                             return data.text;
                         }

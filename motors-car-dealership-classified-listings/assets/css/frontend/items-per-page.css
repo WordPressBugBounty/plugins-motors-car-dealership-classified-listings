@@ -24,6 +24,7 @@
     height: 32px;
     vertical-align: top;
     border: 1px solid var(--motors-border-color);
+    border-radius: 4px;
 }
 
 .stm-inventory-items-per-page-wrap .stm_per_page.active {
@@ -61,6 +62,7 @@
     list-style: none;
     height: 32px;
     z-index: 20;
+    cursor: pointer;
 }
 
 .stm-inventory-items-per-page-wrap .stm_per_page ul.activated {
@@ -68,11 +70,13 @@
 }
 
 .stm-inventory-items-per-page-wrap .stm_per_page ul.activated li {
+    display: block;
     opacity: 1;
     visibility: visible;
 }
 
 .stm-inventory-items-per-page-wrap .stm_per_page ul li {
+    display: none;
     width: 100%;
     margin-bottom: 0;
     text-align: right;
@@ -82,18 +86,25 @@
     transition: all 0.3s ease;
 }
 
+.stm-inventory-items-per-page-wrap .stm_per_page ul li.active {
+    display: block;
+}
+
 .stm-inventory-items-per-page-wrap .stm_per_page ul li a {
     padding-right: 0;
     display: block;
     font-size: 13px;
     color: var(--motors-contract-text-color);
-    background: var(--motors-bg-contrast);
+    background: var(--motors-bg-color);
     text-decoration: none !important;
     text-align: center;
+    border: 1px solid var(--motors-border-color);
+    border-top: none;
 }
 
 .stm-inventory-items-per-page-wrap .stm_per_page ul li a:hover {
     background: var(--motors-accent-color);
+    color: var(--motors-contrast-text-color);
 }
 
 .stm-inventory-items-per-page-wrap .stm_per_page ul li.active {
@@ -115,6 +126,26 @@
     text-align: right;
     cursor: default;
     color: var(--motors-contract-text-alpha-color);
+    border: none;
+    pointer-events: none;
+}
+
+.stm-inventory-items-per-page-wrap .stm_per_page.active.drop-up ul {
+    top: auto;
+    bottom: -1px;
+    padding: 0 0 32px 0;
+    z-index: 9999;
+    margin-bottom: 0;
+}
+
+.stm-inventory-items-per-page-wrap .stm_per_page.active.drop-up ul li a {
+    border-top: 1px solid var(--motors-border-color);
+    border-bottom: none;
+}
+
+.stm-inventory-items-per-page-wrap .stm_per_page.active.drop-up ul li.active {
+    top: auto;
+    bottom: 1px;
 }
 
 .stm-inventory-items-per-page-wrap.left-mode {

@@ -2,9 +2,18 @@
 global $wp_query;
 $listing_grid_choices_option = apply_filters( 'motors_vl_get_nuxy_mod', '', 'listing_grid_choices' );
 $listing_grid_choices        = explode( ',', $listing_grid_choices_option );
-$view_type                   = sanitize_file_name( apply_filters( 'stm_listings_input', apply_filters( 'motors_vl_get_nuxy_mod', 'list', 'listing_view_type' ), 'view_type' ) );
-$listing_grid_choice         = ( ! empty( get_post_meta( apply_filters( 'stm_listings_user_defined_filter_page', '' ), ( 'grid' === $view_type ) ? 'ppp_on_grid' : 'ppp_on_list', true ) ) ) ? get_post_meta( apply_filters( 'stm_listings_user_defined_filter_page', '' ), ( 'grid' === $view_type ) ? 'ppp_on_grid' : 'ppp_on_list', true ) : get_option( 'posts_per_page' );
-$horizontal_filter           = apply_filters( 'motors_vl_get_nuxy_mod', false, 'listing_horizontal_filter' );
+$listings_per_page           = isset( $posts_per_page ) ? $posts_per_page : apply_filters( 'motors_vl_get_nuxy_mod', '6', 'listings_per_page' );
+if ( ! in_array( $listings_per_page, $listing_grid_choices, true ) ) {
+	$listing_grid_choices[] = intval( $listings_per_page );
+}
+
+$listing_grid_choices = array_map( 'intval', $listing_grid_choices );
+sort( $listing_grid_choices );
+$listing_grid_choices = array_unique( $listing_grid_choices );
+
+$view_type           = sanitize_file_name( apply_filters( 'stm_listings_input', apply_filters( 'motors_vl_get_nuxy_mod', 'list', 'listing_view_type' ), 'view_type' ) );
+$listing_grid_choice = ( ! empty( get_post_meta( apply_filters( 'stm_listings_user_defined_filter_page', '' ), ( 'grid' === $view_type ) ? 'ppp_on_grid' : 'ppp_on_list', true ) ) ) ? get_post_meta( apply_filters( 'stm_listings_user_defined_filter_page', '' ), ( 'grid' === $view_type ) ? 'ppp_on_grid' : 'ppp_on_list', true ) : get_option( 'posts_per_page' );
+$horizontal_filter   = apply_filters( 'motors_vl_get_nuxy_mod', false, 'listing_horizontal_filter' );
 
 if ( ! empty( $_GET['posts_per_page'] ) ) {//phpcs:ignore
 	$listing_grid_choice = intval( $_GET['posts_per_page'] );//phpcs:ignore
@@ -15,7 +24,6 @@ if ( ! empty( $_GET['posts_per_page'] ) ) {//phpcs:ignore
 if ( ! in_array( $listing_grid_choice, $listing_grid_choices, true ) ) {
 	$listing_grid_choices[] = intval( $listing_grid_choice );
 }
-
 
 $style = ( ! $listing_grid_choices_option ) ? 'display:none;' : '';
 
@@ -55,12 +63,7 @@ if ( ! empty( $listing_grid_choices ) ) : ?>
 
 				<?php endforeach; ?>
 			</ul>
-			<?php if ( ! $horizontal_filter ) : ?>
 		</div>
-	<?php endif; ?>
-		<?php if ( $horizontal_filter ) : ?>
-			<span class="last"><?php esc_html_e( 'items per page', 'stm_vehicles_listing' ); ?></span>
-		<?php endif; ?>
 	</div>
 <?php endif; ?>
 <script>

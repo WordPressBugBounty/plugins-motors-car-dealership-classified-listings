@@ -147,6 +147,7 @@ function stm_get_single_listing_template( $template ) {
 
 function stm_listings_load_results( $source = null, $type = null, $navigation_type = null ) {
 	$GLOBALS['wp_query'] = stm_listings_query( $source );
+
 	stm_listings_load_template(
 		'filter/results',
 		array(

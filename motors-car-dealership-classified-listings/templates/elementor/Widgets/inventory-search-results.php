@@ -4,8 +4,12 @@ $view_type = apply_filters( 'motors_vl_get_nuxy_mod', 'grid', 'listing_view_type
 if ( ! empty( $_GET['view_type'] ) && in_array( $_GET['view_type'], array( 'grid', 'list' ), true ) ) {
 	$view_type = sanitize_text_field( $_GET['view_type'] );
 }
+if ( isset( $_GET['posts_per_page'] ) && ! empty( $_GET['posts_per_page'] ) ) {
+	$ppp = intval( $_GET['posts_per_page'] );
+} else {
+	$ppp = ${'ppp_on_' . $view_type};
+}
 
-$ppp = ${'ppp_on_' . $view_type};
 if ( isset( $grid_thumb_img_size ) && isset( $list_thumb_img_size ) ) {
 	$custom_img_size = ${$view_type . '_thumb_img_size'};
 }
@@ -22,7 +26,7 @@ if ( 'default' === $listings_list_view_skin ) {
 }
 
 ?>
-<div class="motors-elementor-inventory-search-results" id="listings-result" data-listings-grid-view-skin="<?php echo esc_attr( $listings_grid_view_skin ); ?>" data-listings-list-view-skin="<?php echo esc_attr( $listings_list_view_skin ); ?>" data-custom-img-size="<?php echo ! empty( $custom_img_size ) ? esc_attr( $custom_img_size ) : ''; ?>">
+<div class="motors-elementor-inventory-search-results" id="listings-result" data-listings-grid-view-skin="<?php echo esc_attr( $listings_grid_view_skin ); ?>" data-listings-list-view-skin="<?php echo esc_attr( $listings_list_view_skin ); ?>" data-custom-img-size="<?php echo ! empty( $custom_img_size ) ? esc_attr( $custom_img_size ) : ''; ?>" data-posts-per-page="<?php echo esc_attr( $ppp ); ?>">
 	<?php
 	do_action(
 		'stm_listings_load_results',

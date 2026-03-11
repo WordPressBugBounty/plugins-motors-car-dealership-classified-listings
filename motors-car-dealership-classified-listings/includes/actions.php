@@ -29,7 +29,14 @@ function stm_listings_template_actions() {
 				$listings_grid_view_skin = ( ! empty( $_POST['listings_grid_view_skin'] ) ) ? sanitize_text_field( $_POST['listings_grid_view_skin'] ) : 'default';
 				$listings_list_view_skin = ( ! empty( $_POST['listings_list_view_skin'] ) ) ? sanitize_text_field( $_POST['listings_list_view_skin'] ) : 'default';
 				$nav_type                = ( ! empty( $_POST['navigation_type'] ) ) ? sanitize_text_field( $_POST['navigation_type'] ) : null;
-				$source                  = ( ! empty( $_POST['posts_per_page'] ) ) ? array( 'posts_per_page' => sanitize_text_field( $_POST['posts_per_page'] ) ) : null;
+				$source                  = ( ! empty( $_POST['posts_per_page'] ) ) ? array( 'posts_per_page' => absint( $_POST['posts_per_page'] ) ) : array();
+
+				if ( ! isset( $source['posts_per_page'] ) && ! empty( $_GET['posts_per_page'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+					$source['posts_per_page'] = max( 1, absint( $_GET['posts_per_page'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				}
+				if ( ! isset( $source['posts_per_page'] ) ) {
+					$source['posts_per_page'] = intval( apply_filters( 'motors_vl_get_nuxy_mod', '9', 'listings_per_page' ) );
+				}
 
 				if ( ! empty( $_POST['custom_img_size'] ) ) {
 					$source['custom_img_size'] = sanitize_text_field( $_POST['custom_img_size'] );
@@ -45,9 +52,11 @@ function stm_listings_template_actions() {
 				break;
 			case 'listings-result-load':
 				$nav_type = ( ! empty( $_GET['navigation_type'] ) ) ? $_GET['navigation_type'] : null;
-				$source   = ( ! empty( $_GET['posts_per_page'] ) ) ? array( 'posts_per_page' => $_GET['posts_per_page'] ) : null;
+				$source   = ( ! empty( $_GET['posts_per_page'] ) ) ? array( 'posts_per_page' => $_GET['posts_per_page'] ) : array();
 				$source   = ( ! empty( $_GET['offset'] ) ) ? array( 'offset' => ( $_GET['offset'] * $_GET['posts_per_page'] ) ) : $source;
-
+				if ( ! isset( $source['posts_per_page'] ) ) {
+					$source['posts_per_page'] = intval( apply_filters( 'motors_vl_get_nuxy_mod', '9', 'listings_per_page' ) );
+				}
 				stm_listings_items_ajax_results( $source, null, $nav_type );
 				break;
 			case 'listings-sold':

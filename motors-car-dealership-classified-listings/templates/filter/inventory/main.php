@@ -12,6 +12,8 @@ $posts_per_page = ! empty( $listing_grid_choices ) && $listing_grid_choices[0] ?
 
 if ( ! empty( $_GET['posts_per_page'] ) ) {//phpcs:ignore
 	$posts_per_page = intval( $_GET['posts_per_page'] );//phpcs:ignore
+} else {
+	$posts_per_page = apply_filters( 'motors_vl_get_nuxy_mod', '6', 'listings_per_page' );
 }
 
 $sidebar_position = apply_filters( 'motors_vl_get_nuxy_mod', 'left', 'listing_filter_position' );
@@ -43,9 +45,7 @@ $sidebar_position = apply_filters( 'motors_vl_get_nuxy_mod', 'left', 'listing_fi
 					?>
 				</div>
 				<?php
-				if ( ! $horizontal_filter ) {
-					do_action( 'stm_listings_load_template', 'filter/inventory/items-per-page' );
-				}
+				do_action( 'stm_listings_load_template', 'filter/inventory/items-per-page' );
 				?>
 			</div>
 		</div>
