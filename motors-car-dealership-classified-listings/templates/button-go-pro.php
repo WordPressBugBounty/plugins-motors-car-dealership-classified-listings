@@ -188,8 +188,8 @@ function get_freemius_info() {
 }
 
 $freemius_info = get_freemius_info();
-$start_date    = new DateTime( '2025-12-22 00:00:00' );
-$deadline      = new DateTime( '2026-01-08 23:59:00' );
+$start_date    = new DateTime( '2026-03-16 00:00:00' );
+$deadline      = new DateTime( '2026-03-22 23:59:00' );
 $current_time  = time();
 $is_promotion  = $current_time >= $start_date->format('U') && $current_time < $deadline->format('U'); //phpcs:ignore
 $only_annual   = true;
@@ -229,7 +229,7 @@ if ( $is_promotion && ! empty( $freemius_info ) ) {
 					<?php endif; ?>
 				</p>
 				<?php if ( $is_promotion ) : ?>
-					<div class="stm-discount"><a href="<?php echo esc_url( 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wpadmin&utm_medium=push&utm_campaign=motors&utm_content=gopro&utm_term=bfcm2025&plugin_coupon=XMAS2025' ); ?>" target="_blank"></a></div>
+					<div class="stm-discount"><a href="<?php echo esc_url( 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wpadmin&utm_medium=push&utm_campaign=motors&utm_content=gopro&utm_term=springsale2026&plugin_coupon=SPRING26' ); ?>" target="_blank"></a></div>
 				<?php endif; ?>
 			</div>
 			<?php if ( isset( $freemius_info['plan'] ) ) : ?>
@@ -331,7 +331,7 @@ if ( $is_promotion && ! empty( $freemius_info ) ) {
 									$lifetime_url = $base_url . '&utm_medium=' . $utm_medium . '&billing_cycle=lifetime';
 									$coupon       = '';
 									if ( $is_promotion ) {
-										$coupon .= '&plugin_coupon=XMAS2025';
+										$coupon .= '&plugin_coupon=SPRING26';
 									}
 									$annual_url  .= $coupon;
 									?>
