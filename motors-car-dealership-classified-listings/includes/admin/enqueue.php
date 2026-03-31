@@ -60,6 +60,7 @@ if ( ! function_exists( 'stm_admin_google_places_enable_script' ) ) {
 add_action( 'stm_admin_google_places_script', 'stm_admin_google_places_enable_script' );
 
 function stm_listings_admin_enqueue( $hook ) {
+	wp_register_script( 'bootstrap-bundle', STM_LISTINGS_URL . '/assets/js/admin/bootstrap.bundle.min.js', array(), STM_LISTINGS_V, true );
 	wp_enqueue_style( 'wp-color-picker' );
 	wp_enqueue_script( 'wp-color-picker' );
 
@@ -122,8 +123,6 @@ function stm_listings_admin_enqueue( $hook ) {
 		);
 
 		wp_register_style( 'stm_admin_listing_categories', STM_LISTINGS_URL . '/assets/css/admin/categories.css', array(), STM_LISTINGS_V );
-		wp_register_script( 'bootstrap-bundle', STM_LISTINGS_URL . '/assets/js/admin/bootstrap.bundle.min.js', array(), STM_LISTINGS_V, true );
-
 		/* Google places */
 		do_action( 'stm_admin_google_places_script' );
 	}

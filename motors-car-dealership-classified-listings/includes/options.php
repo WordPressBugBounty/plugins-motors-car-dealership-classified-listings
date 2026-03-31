@@ -732,7 +732,7 @@ function stm_vehicles_listing_get_icons_html() {
 }
 
 /*Update option*/
-function stm_vehicle_listings_save_options( $options ) {
+function stm_vehicle_listings_save_options( $options, $post_type = 'listings' ) {
 	$settings = motors_page_options();
 
 	foreach ( $options as $key => $option ) {
@@ -744,7 +744,7 @@ function stm_vehicle_listings_save_options( $options ) {
 	}
 
 	if ( current_user_can( 'administrator' ) || current_user_can( 'editor' ) || current_user_can( 'listing_manager' ) ) {
-		return update_option( 'stm_vehicle_listing_options', $options );
+		return 'listings' === $post_type ? update_option( 'stm_vehicle_listing_options', $options ) : update_option( "stm_{$post_type}_options", $options );
 	}
 
 	return false;
@@ -758,7 +758,7 @@ function stm_listings_save_single_option_row() {
 		'error'   => false,
 		'message' => '',
 	);
-	$options = stm_listings_get_my_options_list();
+	$options = apply_filters( 'stm_listings_get_options_list', stm_listings_get_my_options_list(), $_POST['post_type'] );
 	$slug    = '';
 
 	/* Check slug of setting */
@@ -821,7 +821,7 @@ function stm_listings_save_single_option_row() {
 		$options[ $option_key ]  = $current_option;
 		$current_option['index'] = $option_key;
 
-		stm_vehicle_listings_save_options( $options );
+		stm_vehicle_listings_save_options( $options, $_POST['post_type'] );
 
 		if ( ! empty( $current_option['field_type'] ) ) {
 			$choices = apply_filters(
@@ -870,7 +870,7 @@ function stm_listings_delete_single_option_row() {
 		$slug = sanitize_text_field( $_POST['slug'] );
 	}
 
-	$options        = stm_listings_get_my_options_list();
+	$options        = apply_filters( 'stm_listings_get_options_list', stm_listings_get_my_options_list(), $_POST['post_type'] );
 	$current_option = wp_list_filter( $options, array( 'slug' => $slug ) );
 	$option_key     = array_key_first( $current_option );
 	$current_option = reset( $current_option );
@@ -897,9 +897,9 @@ function stm_listings_delete_single_option_row() {
 				delete_option( 'mvl_location_settings' );
 			}
 
-			if ( stm_vehicle_listings_save_options( $options ) ) {
+			if ( stm_vehicle_listings_save_options( $options, $_POST['post_type'] ) ) {
 
-				$_options = stm_listings_get_my_options_list();
+				$_options = apply_filters( 'stm_listings_get_options_list', stm_listings_get_my_options_list(), $_POST['post_type'] );
 				$rows     = '';
 
 				$data['message'] = esc_html__( 'Updated', 'stm_vehicles_listing' );
@@ -948,7 +948,7 @@ function stm_listings_save_option_order() {
 	check_ajax_referer( 'stm_listings_save_option_order', 'security' );
 
 	if ( isset( $_POST['new_order'] ) && isset( $_POST['prev_order'] ) ) {
-		$options     = stm_listings_get_my_options_list();
+		$options     = 'listings' === $_POST['post_type'] ? stm_listings_get_my_options_list() : get_option( "stm_{$_POST['post_type']}_options", array() );
 		$new_order   = absint( $_POST['new_order'] );
 		$prev_order  = absint( $_POST['prev_order'] );
 		$prev_option = $options[ $prev_order ];
@@ -956,7 +956,7 @@ function stm_listings_save_option_order() {
 		unset( $options[ $prev_order ] );
 		array_splice( $options, $new_order, 0, array( $prev_option ) );
 
-		if ( stm_vehicle_listings_save_options( $options ) ) {
+		if ( stm_vehicle_listings_save_options( $options, $_POST['post_type'] ) ) {
 			wp_send_json(
 				array(
 					'status' => 200,
@@ -988,7 +988,7 @@ function stm_listings_add_new_option() {
 		'page'    => 1,
 	);
 
-	$options = stm_listings_get_my_options_list();
+	$options = apply_filters( 'stm_listings_get_options_list', stm_listings_get_my_options_list(), $_POST['post_type'] );
 
 	/*Get reserved terms*/
 	$reserved_terms = stm_listings_reserved_terms();
@@ -1072,9 +1072,9 @@ function stm_listings_add_new_option() {
 			'link'       => $link,
 		);
 
-		stm_vehicle_listings_save_options( $options );
+		stm_vehicle_listings_save_options( $options, $_POST['post_type'] );
 
-		$options = stm_listings_get_my_options_list();
+		$options = apply_filters( 'stm_listings_get_options_list', stm_listings_get_my_options_list(), $_POST['post_type'] );
 		$rows    = '';
 
 		if ( ! empty( $options ) ) {
@@ -1154,7 +1154,7 @@ function stm_listings_get_option() {
 	);
 
 	$post_data = $_POST;
-	$options   = stm_listings_get_my_options_list();
+	$options   = apply_filters( 'stm_listings_get_options_list', stm_listings_get_my_options_list(), $post_data['post_type'] );
 
 	if ( isset( $post_data['index'] ) && '' !== $post_data['index'] && ! empty( $options[ $post_data['index'] ] ) ) {
 		$data['option']                   = $options[ $post_data['index'] ];
@@ -1182,7 +1182,7 @@ function stm_listings_change_per_page() {
 		'pages'   => 1,
 	);
 	$search        = sanitize_text_field( $_POST['search'] );
-	$options       = stm_categories_search( $search );
+	$options       = stm_categories_search( $search, $_POST['post_type'] );
 	$data['found'] = count( $options );
 	$_per_page     = sanitize_text_field( $_POST['per_page'] );
 	if ( 'all' !== $_per_page ) {
@@ -1208,8 +1208,13 @@ function stm_listings_change_per_page() {
 
 add_action( 'wp_ajax_stm_listings_change_per_page', 'stm_listings_change_per_page' );
 
-function stm_categories_search( $search ) {
-	$options  = stm_listings_get_my_options_list();
+function stm_categories_search( $search, $post_type = 'listings' ) {
+	if ( 'listings' === $post_type ) {
+		$options = stm_listings_get_my_options_list();
+	} else {
+		$options = get_option( "stm_{$post_type}_options", array() );
+	}
+
 	$response = array();
 
 	if ( ! empty( $options ) && ! empty( $search ) ) {
@@ -1239,7 +1244,7 @@ function stm_listings_category_search() {
 	$search    = sanitize_text_field( $_POST['search'] );
 	$_per_page = sanitize_text_field( $_POST['per_page'] );
 	$rows      = '';
-	$found     = stm_categories_search( $search );
+	$found     = stm_categories_search( $search, $_POST['post_type'] );
 
 	if ( ! empty( $found ) ) {
 		$data['found'] = count( $found );
@@ -1282,7 +1287,7 @@ function stm_listings_change_page() {
 	$_per_page = sanitize_text_field( $_POST['per_page'] );
 	$search    = sanitize_text_field( $_POST['search'] );
 	$_page     = ( ! empty( $_POST['page'] ) ) ? sanitize_text_field( $_POST['page'] ) : 1;
-	$found     = stm_categories_search( $search );
+	$found     = stm_categories_search( $search, $_POST['post_type'] );
 	$_list     = array_chunk( $found, $_per_page, true );
 
 	if ( isset( $_list[ $_page - 1 ] ) ) {

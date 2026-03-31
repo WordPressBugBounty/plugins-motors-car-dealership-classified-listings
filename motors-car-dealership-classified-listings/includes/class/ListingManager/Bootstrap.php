@@ -76,7 +76,7 @@ class Bootstrap {
 	}
 
 	protected function enter_title_here( string $title = '' ): string {
-		if ( 'listings' === get_post_type() ) {
+		if ( apply_filters( 'mvl_is_mlt_post_type', false, get_post_type() ) || apply_filters( 'stm_listings_post_type', 'listings' ) === get_post_type() ) {
 			?>
 			<style>
 			.mvl-listing-manager-edit-form-after-title {
@@ -99,7 +99,7 @@ class Bootstrap {
 	}
 
 	protected function admin_bar_menu( \WP_Admin_Bar $wp_admin_bar ): void {
-		if ( is_singular() && 'listings' === get_post_type() ) {
+		if ( is_singular() && ( apply_filters( 'mvl_is_mlt_post_type', false, get_post_type() ) || apply_filters( 'stm_listings_post_type', 'listings' ) === get_post_type() ) ) {
 			$post = get_post();
 			$wp_admin_bar->remove_node( 'edit' );
 			$wp_admin_bar->add_node(
@@ -260,7 +260,7 @@ class Bootstrap {
 		return end( $pages );
 	}
 
-	protected function mvl_listing_manager_get_features_group() {
+	protected function mvl_listing_manager_update_features_group() {
 		$additional_features = get_terms(
 			array(
 				'taxonomy'   => 'stm_additional_features',
@@ -294,7 +294,7 @@ class Bootstrap {
 	protected function mvl_listing_manager_get_group_features( array $features = array() ): array {
 		$features = get_option( 'mvl_listing_details_settings', array() );
 		if ( empty( $features['fs_user_features'] ) ) {
-			$this->mvl_listing_manager_get_features_group();
+			$this->mvl_listing_manager_update_features_group();
 		}
 		return isset( $features['fs_user_features'] ) && is_array( $features['fs_user_features'] ) ? $features['fs_user_features'] : array();
 	}
@@ -330,7 +330,7 @@ class Bootstrap {
 				$is_admin = true;
 			}
 
-			if ( ! $is_admin && is_super_admin( $user->ID ) ) {
+			if ( $is_admin || is_super_admin( $user->ID ) ) {
 				$is_admin = true;
 			}
 		}
@@ -488,7 +488,7 @@ class Bootstrap {
 			$item_id = wp_insert_post(
 				array(
 					'post_title'  => $post_title,
-					'post_type'   => 'listings',
+					'post_type'   => isset( $_POST['post_type'] ) && apply_filters( 'mvl_is_mlt_post_type', false, $_POST['post_type'] ) ? sanitize_text_field( wp_unslash( $_POST['post_type'] ) ) : apply_filters( 'stm_listings_post_type', 'listings' ),
 					'post_status' => $post_status,
 					'post_name'   => $post_name,
 				)
@@ -523,6 +523,7 @@ class Bootstrap {
 			$data                = isset( $_POST[ $id ] ) && is_array( $_POST[ $id ] ) ? $_POST[ $id ] : array();
 			$data['post_id']     = $item_id;
 			$data['post_status'] = $post_status;
+			$data['post_type']   = isset( $_POST['post_type'] ) && apply_filters( 'mvl_is_mlt_post_type', false, $_POST['post_type'] ) ? sanitize_text_field( $_POST['post_type'] ) : apply_filters( 'stm_listings_post_type', 'listings' );
 
 			if ( isset( $_FILES[ $id ] ) ) {
 				require_once ABSPATH . 'wp-admin/includes/image.php';
@@ -538,7 +539,7 @@ class Bootstrap {
 
 		$response['post_status'] = get_post_status( $item_id );
 		$response['preview_url'] = 'publish' === $response['post_status'] ? get_the_permalink( $item_id ) : get_preview_post_link( $item_id );
-		$response['back_link']   = esc_url( admin_url( 'edit.php?post_type=listings' ) );
+		$response['back_link']   = esc_url( admin_url( 'edit.php?post_type=' . get_post_type( $item_id ) ) );
 
 		update_post_meta( $item_id, '_wpb_vc_js_status', 'true' );
 
@@ -661,21 +662,28 @@ class Bootstrap {
 	}
 
 	//Methods of Listing Manager Template Filters
-	protected function mvl_listing_manager_url( $default = '', int $post_id = 0 ): string {
+	protected function mvl_listing_manager_url( $default = '', int $post_id = 0, $post_type = false ): string {
 		if ( $post_id ) {
-			return home_url( $this->endpoint . '?id=' . $post_id );
+			if ( ! $post_type ) {
+				$post_type = get_post_type( $post_id );
+			}
+			return home_url( $this->endpoint . '?id=' . $post_id . '&post_type=' . $post_type );
 		} else {
-			return home_url( $this->endpoint );
+			if ( ! $post_type ) {
+				$post_type = 'listings';
+			}
+			return home_url( $this->endpoint . '?post_type=' . $post_type );
 		}
 	}
 
 	//Methods for WP Hooks for initialization Listing Manager Page
 	protected function post_row_actions( array $actions, \WP_Post $post ): array {
 		if ( ! isset( $_GET['post_status'] ) || 'trash' !== $_GET['post_status'] ) {
-			if ( 'listings' === $post->post_type ) {
+			if ( apply_filters( 'mvl_is_mlt_post_type', false, $post->post_type ) || apply_filters( 'stm_listings_post_type', 'listings' ) === $post->post_type ) {
+
 				$actions = array_merge(
 					array(
-						'edit_from_listing_manager' => '<a href="' . esc_url( $this->mvl_listing_manager_url( '', $post->ID ) ) . '">' . esc_html( $this->admin_buttons['edit_item'] ) . '</a>',
+						'edit_from_listing_manager' => '<a href="' . esc_url( $this->mvl_listing_manager_url( '', $post->ID, $post->post_type ) ) . '">' . esc_html( $this->admin_buttons['edit_item'] ) . '</a>',
 					),
 					$actions
 				);
@@ -685,16 +693,17 @@ class Bootstrap {
 	}
 
 	protected function admin_footer(): void {
+
 		if ( function_exists( 'get_current_screen' ) ) {
 			$screen = get_current_screen();
-			if ( 'listings' === $screen->post_type && in_array( $screen->base, array( 'edit', 'post' ), true ) ) {
+			if ( ( apply_filters( 'mvl_is_mlt_post_type', false, $screen->post_type ) || apply_filters( 'stm_listings_post_type', 'listings' ) === $screen->post_type ) && in_array( $screen->base, array( 'edit', 'post' ), true ) ) {
 				echo '<script>
 				window.addEventListener("load", function() {
 					var addNew = document.querySelector(".page-title-action");
 					if (addNew) {
 						var newBtn = addNew.cloneNode(true);
 						newBtn.textContent = "' . esc_html( $this->admin_buttons['add_item'] ) . '";
-						newBtn.setAttribute("href", "' . esc_url( home_url( $this->endpoint . '/' ) ) . '");
+						newBtn.setAttribute("href", "' . esc_url( apply_filters( 'mvl_listing_manager_url', home_url( $this->endpoint . '/' ), 0, $screen->post_type ) ) . '");
 						addNew.parentNode.insertBefore(newBtn, addNew);
 					}
 				})

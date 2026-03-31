@@ -39,8 +39,8 @@ class Features extends Page {
 	}
 
 	public function get_features_form() {
-		$features        = apply_filters( 'mvl_listing_manager_get_group_features', array() );
 		$listing_id      = apply_filters( 'mvl_listing_manager_item_id', 0 );
+		$features        = apply_filters( 'mvl_listing_manager_get_group_features', array() );
 		$selected_values = get_post_meta( $listing_id, 'additional_features', true );
 		if ( ! is_array( $selected_values ) ) {
 			if ( is_string( $selected_values ) && strlen( $selected_values ) > 0 ) {
@@ -142,6 +142,7 @@ class Features extends Page {
 
 		$features  = apply_filters( 'mvl_listing_manager_get_group_features', array() );
 		$new_order = array();
+		$post_type = isset( $_POST['post_type'] ) && apply_filters( 'mvl_is_mlt_post_type', false, $_POST['post_type'] ) ? $_POST['post_type'] : 'listings';
 
 		foreach ( $_POST['order'] as $item ) {
 			if ( ! isset( $item['slug'] ) || ! isset( $item['order'] ) ) {
@@ -157,16 +158,29 @@ class Features extends Page {
 		}
 
 		ksort( $new_order );
-		$new_order = array_values( $new_order );
+		$new_order        = array_values( $new_order );
+		$elementor_layout = ( apply_filters( 'stm_is_layout', 'listing_five_elementor' ) || apply_filters( 'stm_is_layout', 'listing_one_elementor' ) || apply_filters( 'stm_is_layout', 'listing_two_elementor' ) || apply_filters( 'stm_is_layout', 'listing_three_elementor' ) || apply_filters( 'stm_is_layout', 'listing_four_elementor' ) );
 
-		$settings                     = get_option( 'mvl_listing_details_settings', array() );
-		$settings['fs_user_features'] = $new_order;
+		if ( 'listings' !== $post_type && $elementor_layout ) {
+			$motors_listing_types                                     = get_option( 'stm_motors_listing_types', array() );
+			$motors_listing_types[ $post_type . '_fs_user_features' ] = $new_order;
 
-		if ( update_option( 'mvl_listing_details_settings', $settings ) ) {
-			return array(
-				'success' => true,
-				'message' => __( 'Field order updated successfully.', 'stm_vehicles_listing' ),
-			);
+			if ( update_option( 'stm_motors_listing_types', $motors_listing_types ) ) {
+				return array(
+					'success' => true,
+					'message' => __( 'Field order updated successfully.', 'stm_vehicles_listing' ),
+				);
+			}
+		} else {
+			$settings                     = get_option( 'mvl_listing_details_settings', array() );
+			$settings['fs_user_features'] = $new_order;
+
+			if ( update_option( 'mvl_listing_details_settings', $settings ) ) {
+				return array(
+					'success' => true,
+					'message' => __( 'Field order updated successfully.', 'stm_vehicles_listing' ),
+				);
+			}
 		}
 
 		return array(
@@ -322,9 +336,10 @@ class Features extends Page {
 			);
 		}
 
-		$title           = sanitize_text_field( $_POST['title'] );
-		$selected_values = isset( $_POST['selected_values'] ) ? array_map( 'sanitize_text_field', $_POST['selected_values'] ) : array();
-		$option_id       = isset( $_POST['option_id'] ) ? sanitize_title( $_POST['option_id'] ) : '';
+		$title            = sanitize_text_field( $_POST['title'] );
+		$selected_values  = isset( $_POST['selected_values'] ) ? array_map( 'sanitize_text_field', $_POST['selected_values'] ) : array();
+		$option_id        = isset( $_POST['option_id'] ) ? sanitize_title( $_POST['option_id'] ) : '';
+		$elementor_layout = ( apply_filters( 'stm_is_layout', 'listing_five_elementor' ) || apply_filters( 'stm_is_layout', 'listing_one_elementor' ) || apply_filters( 'stm_is_layout', 'listing_two_elementor' ) || apply_filters( 'stm_is_layout', 'listing_three_elementor' ) || apply_filters( 'stm_is_layout', 'listing_four_elementor' ) );
 
 		if ( empty( $selected_values ) ) {
 			return array(
@@ -333,8 +348,13 @@ class Features extends Page {
 			);
 		}
 
-		$settings = get_option( 'mvl_listing_details_settings', array() );
-		$features = isset( $settings['fs_user_features'] ) ? $settings['fs_user_features'] : array();
+		if ( 'listings' === $_POST['post_type'] || ! $elementor_layout ) {
+			$settings = get_option( 'mvl_listing_details_settings', array() );
+			$features = isset( $settings['fs_user_features'] ) ? $settings['fs_user_features'] : array();
+		} else {
+			$settings = get_option( 'stm_motors_listing_types', array() );
+			$features = isset( $settings[ $_POST['post_type'] . '_fs_user_features' ] ) ? $settings[ $_POST['post_type'] . '_fs_user_features' ] : array();
+		}
 
 		foreach ( $features as $feature ) {
 			if (
@@ -388,9 +408,18 @@ class Features extends Page {
 			$features[] = $new_feature;
 		}
 
-		$settings['fs_user_features'] = $features;
+		if ( 'listings' === $_POST['post_type'] || ! $elementor_layout ) {
+			$settings['fs_user_features'] = $features;
+			update_option( 'mvl_listing_details_settings', $settings );
 
-		if ( update_option( 'mvl_listing_details_settings', $settings ) ) {
+			return array(
+				'success' => true,
+				'message' => __( 'Features saved successfully.', 'stm_vehicles_listing' ),
+			);
+		} else {
+			$settings[ $_POST['post_type'] . '_fs_user_features' ] = $features;
+			update_option( 'stm_motors_listing_types', $settings );
+
 			return array(
 				'success' => true,
 				'message' => __( 'Features saved successfully.', 'stm_vehicles_listing' ),
@@ -411,9 +440,17 @@ class Features extends Page {
 			);
 		}
 
-		$option_id = isset( $_POST['option_id'] ) ? sanitize_title( $_POST['option_id'] ) : '';
-		$settings  = get_option( 'mvl_listing_details_settings', array() );
-		$features  = isset( $settings['fs_user_features'] ) ? $settings['fs_user_features'] : array();
+		$option_id        = isset( $_POST['option_id'] ) ? sanitize_title( $_POST['option_id'] ) : '';
+		$features         = array();
+		$elementor_layout = ( apply_filters( 'stm_is_layout', 'listing_five_elementor' ) || apply_filters( 'stm_is_layout', 'listing_one_elementor' ) || apply_filters( 'stm_is_layout', 'listing_two_elementor' ) || apply_filters( 'stm_is_layout', 'listing_three_elementor' ) || apply_filters( 'stm_is_layout', 'listing_four_elementor' ) );
+
+		if ( 'listings' !== $_POST['post_type'] && $elementor_layout && apply_filters( 'mvl_is_mlt_post_type', false, $_POST['post_type'] ) ) {
+			$settings = get_option( 'stm_motors_listing_types', array() );
+			$features = isset( $settings[ $_POST['post_type'] . '_fs_user_features' ] ) ? $settings[ $_POST['post_type'] . '_fs_user_features' ] : array();
+		} else {
+			$settings = get_option( 'mvl_listing_details_settings', array() );
+			$features = isset( $settings['fs_user_features'] ) ? $settings['fs_user_features'] : array();
+		}
 
 		foreach ( $features as $key => $feature ) {
 			if ( isset( $feature['tab_title_single'] ) ) {
@@ -427,13 +464,24 @@ class Features extends Page {
 			}
 		}
 
-		$settings['fs_user_features'] = array_values( $features );
+		if ( 'listings' !== $_POST['post_type'] && $elementor_layout && apply_filters( 'mvl_is_mlt_post_type', false, $_POST['post_type'] ) ) {
+			$settings[ $_POST['post_type'] . '_fs_user_features' ] = array_values( $features );
 
-		if ( update_option( 'mvl_listing_details_settings', $settings ) ) {
-			return array(
-				'success' => true,
-				'message' => __( 'Feature group deleted successfully.', 'stm_vehicles_listing' ),
-			);
+			if ( update_option( 'stm_motors_listing_types', $settings ) ) {
+				return array(
+					'success' => true,
+					'message' => __( 'Feature group deleted successfully.', 'stm_vehicles_listing' ),
+				);
+			}
+		} else {
+			$settings['fs_user_features'] = array_values( $features );
+
+			if ( update_option( 'mvl_listing_details_settings', $settings ) ) {
+				return array(
+					'success' => true,
+					'message' => __( 'Feature group deleted successfully.', 'stm_vehicles_listing' ),
+				);
+			}
 		}
 
 		return array(
@@ -442,4 +490,3 @@ class Features extends Page {
 		);
 	}
 }
-

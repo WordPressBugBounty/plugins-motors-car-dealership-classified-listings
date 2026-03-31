@@ -154,7 +154,8 @@ if ( ! function_exists( 'stm_listings_attributes' ) ) {
 		}
 
 		$options = ( ! empty( $listing_type ) && 'listings' !== $listing_type ) ? "stm_{$listing_type}_options" : 'stm_vehicle_listing_options';
-		$data    = array_filter( (array) get_option( $options ) );
+
+		$data = array_filter( (array) get_option( $options ) );
 
 		foreach ( $data as $key => $_data ) {
 			$passed = true;
@@ -780,16 +781,18 @@ function stm_listings_init() {
 			'hierarchical'       => false,
 			'capability_type'    => 'listings_post',
 			'capabilities'       => array(
-				'publish_post'        => 'publish_listings_post',
-				'edit_post'           => 'edit_listings_post',
-				'read_post'           => 'read_listings_post',
-				'delete_post'         => 'delete_listings_post',
-				'publish_posts'       => 'publish_listings_posts',
-				'edit_posts'          => 'edit_listings_posts',
-				'delete_posts'        => 'delete_listings_posts',
-				'edit_others_posts'   => 'edit_others_listings_posts',
-				'delete_others_posts' => 'delete_others_listings_posts',
-				'read_private_posts'  => 'read_private_listings_posts',
+				'publish_post'           => 'publish_listings_post',
+				'edit_post'              => 'edit_listings_post',
+				'read_post'              => 'read_listings_post',
+				'delete_post'            => 'delete_listings_post',
+				'publish_posts'          => 'publish_listings_posts',
+				'edit_posts'             => 'edit_listings_posts',
+				'delete_posts'           => 'delete_listings_posts',
+				'edit_others_posts'      => 'edit_others_listings_posts',
+				'delete_others_posts'    => 'delete_others_listings_posts',
+				'read_private_posts'     => 'read_private_listings_posts',
+				'edit_published_posts'   => 'edit_published_listings_posts',
+				'delete_published_posts' => 'delete_published_listings_posts',
 			),
 		)
 	);
@@ -1639,6 +1642,31 @@ if ( ! function_exists( 'stm_listings_multi_type' ) ) {
 	}
 
 	add_filter( 'stm_listings_multi_type', 'stm_listings_multi_type' );
+}
+
+// get multilisting post types (associative array of slug => label pairs) including/excluding default "listings" post type.
+if ( ! function_exists( 'mvl_listings_multi_type_labeled' ) ) {
+
+	function mvl_listings_multi_type_labeled( $include_default = false ) {
+		$post_types = array();
+
+		if ( $include_default ) {
+			$default_slug                = apply_filters( 'stm_listings_post_type', 'listings' );
+			$post_type_options           = get_option( 'stm_post_types_options' );
+			$post_types[ $default_slug ] = ( ! empty( $post_type_options ) && ! empty( $post_type_options[ $default_slug ] ) ) ? $post_type_options[ $default_slug ]['plural_title'] : esc_html__( 'Listings', 'stm_vehicles_listing' );
+		}
+
+		if ( stm_is_multilisting() ) {
+			$types = STMMultiListing::stm_get_listings();
+			if ( ! empty( $types ) ) {
+				foreach ( $types as $listing ) {
+					$post_types[ $listing['slug'] ] = $listing['label'];
+				}
+			}
+		}
+
+		return $post_types;
+	}
 }
 
 if ( ! function_exists( 'stm_distance_measure_unit_value' ) ) {

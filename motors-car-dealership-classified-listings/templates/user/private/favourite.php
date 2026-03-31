@@ -22,7 +22,12 @@ if ( ! empty( $_GET['view'] ) && $_GET['view'] == 'grid' ) { //phpcs:ignore
 			<?php if ( stm_is_multilisting() ) : ?>
 				<div class="multilisting-select">
 					<?php
-					$listings = stm_listings_multi_type_labeled( true );
+					$listings = function_exists( 'mvl_listings_multi_type_labeled' ) ? mvl_listings_multi_type_labeled( true ) : array();
+
+					if ( empty( $listings ) && function_exists( 'stm_listings_multi_type_labeled' ) ) {
+						$listings = stm_listings_multi_type_labeled( true );
+					}
+
 					if ( ! empty( $listings ) ) :
 						?>
 						<div class="select-type select-listing-type" style="margin-right: 15px;">

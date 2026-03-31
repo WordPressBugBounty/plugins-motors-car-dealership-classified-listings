@@ -1,8 +1,19 @@
 <?php
+/**
+ * {link} - ссылка куда вести пользователя Admin -> в Listings, User -> в User Account
+ * {listing name} - название листинга Post Title
+ * {listing id} - ID листинга
+ * {page_id} - ID страницы (ХЗ нужно будет или нет)
+ * {Menu Item Title} - название пункта меню
+ */
 $listing_id                     = apply_filters( 'mvl_listing_manager_item_id', 0 );
 $is_admin                       = apply_filters( 'mvl_listing_manager_is_admin', false );
 $css_files                      = apply_filters( 'mvl_listing_manager_css', array() );
 $js_files                       = apply_filters( 'mvl_listing_manager_js', array() );
+$_post_type                     = isset( $_GET['post_type'] ) ? sanitize_text_field( wp_unslash( $_GET['post_type'] ) ) : 'listings';
+if ( $listing_id ) {
+	$_post_type = get_post_type( $listing_id );
+}
 $ymmt                           = apply_filters( 'motors_vl_get_nuxy_mod', '', 'make_model_auto_complete_enabled' );
 $vin                            = apply_filters( 'motors_vl_get_nuxy_mod', '', 'vin_search_auto_complete_enabled' );
 $car_info_auto_complete_enabled = false;
@@ -26,7 +37,7 @@ if ( $ymmt || $vin ) {
 				<div class="mvl-listing-manager-wrapper">
 					<div class="mvl-listing-manager-sidebar">
 						<div class="mvl-listing-manager-sidebar-header">
-							<a class="mvl-listing-manager-sidebar-back-link" href="<?php echo esc_url( admin_url( 'edit.php?post_type=listings' ) ); ?>">
+						<a class="mvl-listing-manager-sidebar-back-link" href="<?php echo esc_url( admin_url( 'edit.php?post_type=' . esc_attr( $_post_type ) ) ); ?>">
 								<i class="fa-solid fa-arrow-left"></i>
 							</a> 
 							<div class="mvl-listing-manager-sidebar-title">
@@ -128,6 +139,7 @@ if ( $ymmt || $vin ) {
 						<input type="hidden" name="action" value="mvl_listing_manager_save">
 						<input type="hidden" name="nonce" value="<?php echo esc_html( wp_create_nonce( 'mvl_listing_manager' ) ); ?>">
 						<input type="hidden" name="listing_id" value="<?php echo esc_attr( apply_filters( 'mvl_listing_manager_item_id', 0 ) ); ?>">
+						<input type="hidden" name="post_type" value="<?php echo esc_attr( $_post_type ); ?>">
 					</form>
 				</div>
 			</div>
@@ -168,7 +180,7 @@ if ( $ymmt || $vin ) {
 				],
 				post_status: '<?php echo esc_js( $listing_id ? get_post_status( $listing_id ) : '' ); ?>',
 				currency_position: '<?php echo esc_js( apply_filters( 'motors_vl_get_nuxy_mod', 'right', 'price_currency_position' ) ); ?>',
-				url: '<?php echo esc_js( apply_filters( 'mvl_listing_manager_url', '', 0 ) ); ?>'
+				url: '<?php echo esc_js( apply_filters( 'mvl_listing_manager_url', '', 0, $_post_type ) ); ?>'
 			};
 
 			var listingManagerFileMediaArgs = {

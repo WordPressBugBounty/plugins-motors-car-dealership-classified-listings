@@ -1600,6 +1600,11 @@ table > tbody > tr td {
     z-index: 201 !important;
 }
 
+.stm-login-register-form .mvl-form-login-center {
+    display: flex;
+    justify-content: center;
+}
+
 .stm-accordion-single-unit {
     margin-top: 20px;
 }

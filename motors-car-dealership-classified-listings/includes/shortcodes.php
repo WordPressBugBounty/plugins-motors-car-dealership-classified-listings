@@ -1,6 +1,7 @@
 <?php
 /*Inventory*/
 function motors_listing_inventory( $atts ) {
+
 	if ( isset( $atts['__template'] ) ) {
 		unset( $atts['__template'] );
 	}

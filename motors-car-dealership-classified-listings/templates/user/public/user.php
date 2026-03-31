@@ -122,7 +122,12 @@ $query_popular = stm_user_listings_query( $user_id, 'publish', $posts_per_page, 
 							<?php if ( stm_is_multilisting() ) : ?>
 								<div class="multilisting-select">
 									<?php
-									$listings = stm_listings_multi_type_labeled( true );
+									$listings = function_exists( 'mvl_listings_multi_type_labeled' ) ? mvl_listings_multi_type_labeled( true ) : array();
+
+									if ( empty( $listings ) && function_exists( 'stm_listings_multi_type_labeled' ) ) {
+										$listings = stm_listings_multi_type_labeled( true );
+									}
+
 									if ( ! empty( $listings ) ) :
 										?>
 										<div class="select-type select-listing-type" style="margin-right: 15px;">

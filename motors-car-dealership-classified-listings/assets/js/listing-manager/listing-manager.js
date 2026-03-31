@@ -491,8 +491,9 @@ let MVL_Listing_Manager = {
             params.push('page=' + page);
         }
         if (params.length) {
-            url += '?' + params.join('&');
+            url += '&' + params.join('&');
         }
+
         window.history.pushState({}, '', url);
 
         this.initFormChangeTracking();

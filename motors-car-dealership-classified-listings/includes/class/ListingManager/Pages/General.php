@@ -22,7 +22,7 @@ class General extends Page {
 			'ID'           => intval( $data['post_id'] ),
 			'post_title'   => $title ? $title : __( 'Untitled', 'stm_vehicles_listing' ),
 			'post_content' => $this->validate_tiny_mce( $data['description'] ),
-			'post_type'    => 'listings',
+			'post_type'    => isset( $data['post_type'] ) && apply_filters( 'mvl_is_mlt_post_type', false, $data['post_type'] ) ? sanitize_text_field( $data['post_type'] ) : 'listings',
 			'post_status'  => sanitize_text_field( $data['post_status'] ),
 		);
 

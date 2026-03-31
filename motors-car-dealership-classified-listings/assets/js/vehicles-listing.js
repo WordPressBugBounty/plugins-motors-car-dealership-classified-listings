@@ -229,7 +229,7 @@
                             item = item.clone().draggable();
                         }
                         this.innerHTML = '';
-                        item.css({top: 0, left: 0}).appendTo(this);
+                        item.css({ top: 0, left: 0 }).appendTo(this);
                         $(item).closest('.target-unit').find('input').val(ui.draggable[0].dataset.key);
                     },
                     out: function (ev, ui) {
@@ -345,7 +345,7 @@
                                 url: ajaxurl,
                                 type: 'POST',
                                 dataType: 'json',
-                                data: 'per_page=' + per_page + '&search=' + data.searchValue + '&action=' + data.actions.per_page + '&security=' + perPageOptions,
+                                data: 'per_page=' + per_page + '&search=' + data.searchValue + '&action=' + data.actions.per_page + '&security=' + perPageOptions + '&post_type=' + stm_listings_post_type,
                                 context: this,
                                 beforeSend: function () {
                                     $wrapper.addClass('loading');
@@ -413,7 +413,7 @@
                         url: ajaxurl,
                         type: 'POST',
                         dataType: 'json',
-                        data: 'page=' + $page + '&search=' + data.searchValue + '&per_page=' + data.currentPerPage + '&action=' + data.actions.change_page + '&security=' + changePageOptions,
+                        data: 'page=' + $page + '&search=' + data.searchValue + '&per_page=' + data.currentPerPage + '&action=' + data.actions.change_page + '&security=' + changePageOptions + '&post_type=' + stm_listings_post_type,
                         context: this,
                         beforeSend: function () {
                             $wrapper.addClass('loading');
@@ -463,7 +463,7 @@
             function dragging_init() {
                 let $list = $(data.tbody);
 
-                $list.sortable({items: data.tr});
+                $list.sortable({ items: data.tr });
 
                 $list.disableSelection();
 
@@ -479,7 +479,7 @@
                                     url: ajaxurl,
                                     type: 'POST',
                                     dataType: 'json',
-                                    data: 'new_order=' + Number(newOrder) + '&prev_order=' + Number(prevOrder) + '&action=' + data.actions.save_order + '&security=' + saveOpt,
+                                    data: 'new_order=' + Number(newOrder) + '&prev_order=' + Number(prevOrder) + '&action=' + data.actions.save_order + '&security=' + saveOpt + '&post_type=' + stm_listings_post_type,
                                     context: this,
                                     beforeSend: function () {
                                         $wrapper.addClass('loading');
@@ -534,7 +534,7 @@
                                         url: ajaxurl,
                                         type: 'POST',
                                         dataType: 'json',
-                                        data: 'search=' + $input.val() + '&per_page=' + data.currentPerPage + '&action=' + data.actions.search + '&security=' + searchCategory,
+                                        data: 'search=' + $input.val() + '&per_page=' + data.currentPerPage + '&action=' + data.actions.search + '&security=' + searchCategory + '&post_type=' + stm_listings_post_type,
                                         context: this,
                                         beforeSend: function () {
                                             $wrapper.addClass('loading');
@@ -597,7 +597,7 @@
                                     url: ajaxurl,
                                     type: 'POST',
                                     dataType: 'json',
-                                    data: 'slug=' + data.currentSlug + '&page=' + Table.data.page + '&per_page=' + Table.data.currentPerPage + '&action=' + data.actions.delete + '&security=' + deleteSingleOpt,
+                                    data: 'slug=' + data.currentSlug + '&page=' + Table.data.page + '&per_page=' + Table.data.currentPerPage + '&action=' + data.actions.delete + '&security=' + deleteSingleOpt + '&post_type=' + stm_listings_post_type,
                                     context: this,
                                     beforeSend: function () {
                                         $button.addClass('loading');
@@ -741,13 +741,13 @@
                                         let proLink = $('<span class="stm-pro-field-label"><a href="https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wp-admin&utm_medium=push&utm_campaign=motors&utm_content=gopro" target="_blank">pro</a></span>');
                                         li.append($('<span class="option-text">').text(text).add(proLink).add('<i class="stm-admin-icon-check"></i>'));
 
-                                        li.on('click', function(e) {
+                                        li.on('click', function (e) {
                                             e.preventDefault();
                                             e.stopPropagation();
                                             return false;
                                         });
 
-                                        proLink.on('click', function(e) {
+                                        proLink.on('click', function (e) {
                                             e.stopPropagation();
                                         });
                                     } else {
@@ -856,7 +856,7 @@
                         url: ajaxurl,
                         type: 'POST',
                         dataType: 'json',
-                        data: 'index=' + data.currentIndex + '&action=' + data.actions.get + '&security=' + getOpt,
+                        data: 'index=' + data.currentIndex + '&action=' + data.actions.get + '&security=' + getOpt + '&post_type=' + stm_listings_post_type,
                         context: this,
                         beforeSend: function () {
                             Form.methods.clear_form_edit();
@@ -879,7 +879,7 @@
                                     field.val(response.option[field_key]);
                                 } else if ('field_type' === field_key) {
                                     field.val(response.option[field_key]);
-                                    if('location' === response.option[field_key]) {
+                                    if ('location' === response.option[field_key]) {
                                         $('.stm-admin-button__configure').hide();
                                         Form.data.notification.display = false;
                                     }
@@ -1186,7 +1186,7 @@
                                 url: ajaxurl,
                                 type: 'POST',
                                 dataType: 'json',
-                                data: $form.serialize() + '&per_page=' + Table.data.currentPerPage + '&action=' + Field.data.actions.add + '&security=' + addOpt,
+                                data: $form.serialize() + '&per_page=' + Table.data.currentPerPage + '&action=' + Field.data.actions.add + '&security=' + addOpt + '&post_type=' + stm_listings_post_type,
                                 context: this,
                                 beforeSend: function () {
                                     button.addClass('loading');
@@ -1362,22 +1362,26 @@
                 
                 if ('SELECT' === $field.prop('tagName')) {
                     dependent.each(function () {
-                            let $dep = $(this);
-                            let depValues = $dep.attr('data-value');
-                            if (depValues && depValues.split(',').map(function(v) { return v.trim(); }).includes(String(depValue))) {
-                                $dep.show();
-                            } else {
-                                $dep.hide();
-                            }
+                        let $dep = $(this);
+                        let depValues = $dep.attr('data-value');
+                        if (depValues && depValues.split(',').map(function(v) { return v.trim(); }).includes(String(depValue))) {
+                            $dep.show();
+                        } else {
+                            $dep.hide();
                         }
-                    );
-                } else if ('radio' === depType && requiredValue) {
-                    let values = requiredValue.split(',').map(function(v) { return v.trim(); });
-                    if (values.includes(String(depValue))) {
-                        dependent.show();
-                    } else {
-                        dependent.hide();
-                    }
+                    });
+                } else if ('radio' === depType) {
+                    dependent.each(function () {
+                        let $dep = $(this);
+                        let depValues = $dep.attr('data-value');
+
+                        if (depValues) {
+                            let values = depValues.split(',').map(function(v) { return v.trim(); });
+                            $dep.toggle(values.includes(String(depValue)));
+                        } else {
+                            $dep.toggle(!!depValue);
+                        }
+                    });
                 } else {
                     if (requiredValue) {
                         let values = requiredValue.split(',').map(function(v) { return v.trim(); });
@@ -1521,7 +1525,7 @@
                                 url: ajaxurl,
                                 type: 'POST',
                                 dataType: 'json',
-                                data: $form.serialize() + '&action=' + Field.data.actions.save + '&security=' + saveSingleOpt,
+                                data: $form.serialize() + '&action=' + Field.data.actions.save + '&security=' + saveSingleOpt + '&post_type=' + stm_listings_post_type,
                                 context: this,
                                 beforeSend: function () {
                                     $form.addClass('loading');

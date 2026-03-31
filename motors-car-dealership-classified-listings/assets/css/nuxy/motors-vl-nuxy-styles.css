@@ -19,38 +19,53 @@
   font-style: normal;
 }
 
+body div.stm_metaboxes_grid__inner [data-field^=wpcfto_addon_option_][data-field$=_inventory_skin] .wpcfto_data_select label.wpcfto_data_select__label,
+body div.stm_metaboxes_grid__inner [data-field^=wpcfto_addon_option_][data-field$=_grid_card_skin] .wpcfto_data_select label.wpcfto_data_select__label,
 body div.stm_metaboxes_grid__inner .listing_settings_listing-info-card .wpcfto_data_select label.wpcfto_data_select__label {
     width: 33.33%;
 }
 
+body div.stm_metaboxes_grid__inner [data-field^=wpcfto_addon_option_][data-field$=_inventory_skin] .wpcfto_data_select label.wpcfto_data_select__label .wpcfto_data_select__wrapper .wpcfto_data_select__img,
+body div.stm_metaboxes_grid__inner [data-field^=wpcfto_addon_option_][data-field$=_grid_card_skin] .wpcfto_data_select label.wpcfto_data_select__label .wpcfto_data_select__wrapper .wpcfto_data_select__img,
 body div.stm_metaboxes_grid__inner .listing_settings_listing-info-card .wpcfto_data_select label.wpcfto_data_select__label .wpcfto_data_select__wrapper .wpcfto_data_select__img {
     border-radius: 8px;
 }
 
+body div.stm_metaboxes_grid__inner [data-field^=wpcfto_addon_option_][data-field$=_inventory_skin] .wpcfto_data_select label.wpcfto_data_select__label .wpcfto_data_select__wrapper .wpcfto_data_select__img img,
+body div.stm_metaboxes_grid__inner [data-field^=wpcfto_addon_option_][data-field$=_grid_card_skin] .wpcfto_data_select label.wpcfto_data_select__label .wpcfto_data_select__wrapper .wpcfto_data_select__img img,
 body div.stm_metaboxes_grid__inner .listing_settings_listing-info-card .wpcfto_data_select label.wpcfto_data_select__label .wpcfto_data_select__wrapper .wpcfto_data_select__img img {
     width: 100% !important;
     height: 430px !important;
     transform: translateZ(0);
 }
 
-body div.stm_metaboxes_grid__inner .listing_settings_listing-info-card .listing_settings-list_card_skin .wpcfto_data_select {
+body div.stm_metaboxes_grid__inner [data-field^=wpcfto_addon_option][data-field$=_list_card_skin] .wpcfto_data_select,
+body div.stm_metaboxes_grid__inner .listing_settings-list_card_skin .wpcfto_data_select {
     flex-direction: column;
 }
 
-body div.stm_metaboxes_grid__inner .listing_settings_listing-info-card .listing_settings-list_card_skin .wpcfto_data_select label.wpcfto_data_select__label {
+body div.stm_metaboxes_grid__inner [data-field^=wpcfto_addon_option][data-field$=_list_card_skin] .wpcfto_data_select label.wpcfto_data_select__label,
+body div.stm_metaboxes_grid__inner .listing_settings-list_card_skin .wpcfto_data_select label.wpcfto_data_select__label {
     width: 100%;
 }
 
-body div.stm_metaboxes_grid__inner .listing_settings_listing-info-card .listing_settings-list_card_skin .wpcfto_data_select label.wpcfto_data_select__label .wpcfto_data_select__img {
+body div.stm_metaboxes_grid__inner [data-field^=wpcfto_addon_option][data-field$=_list_card_skin] .wpcfto_data_select label.wpcfto_data_select__label .wpcfto_data_select__img,
+body div.stm_metaboxes_grid__inner .listing_settings-list_card_skin .wpcfto_data_select label.wpcfto_data_select__label .wpcfto_data_select__img {
     border-radius: 10px;
 }
 
-body div.stm_metaboxes_grid__inner .listing_settings_listing-info-card .listing_settings-list_card_skin .wpcfto_data_select label.wpcfto_data_select__label .wpcfto_data_select__img img {
+body div.stm_metaboxes_grid__inner [data-field^=wpcfto_addon_option][data-field$=_list_card_skin] .wpcfto_data_select label.wpcfto_data_select__label .wpcfto_data_select__img img,
+body div.stm_metaboxes_grid__inner .listing_settings-list_card_skin .wpcfto_data_select label.wpcfto_data_select__label .wpcfto_data_select__img img {
     width: auto;
+    max-width: 100%;
     height: auto !important;
     transform: translateZ(0);
     -o-object-fit: contain;
     object-fit: contain;
+}
+
+body div.stm_metaboxes_grid__inner [data-field^=wpcfto_addon_option_][data-field$=_inventory_skin] .wpcfto_data_select label.wpcfto_data_select__label .wpcfto_data_select__wrapper .wpcfto_data_select__img img {
+    height: 330px !important;
 }
 
 body div.stm_metaboxes_grid__inner .search_settings-inventory_skin .wpcfto_data_select label.wpcfto_data_select__label {

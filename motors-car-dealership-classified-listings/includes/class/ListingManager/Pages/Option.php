@@ -17,7 +17,7 @@ class Option extends Page {
 		$listing_id = $data['post_id'];
 		$options    = array_column(
 			array_filter(
-				$this->get_listing_options(),
+				$this->get_listing_options( $_POST['post_type'] ),
 				function( $option ) {
 					return isset( $option['slug'] ) && ! empty( $option['slug'] );
 				}
@@ -77,7 +77,7 @@ class Option extends Page {
 	}
 
 	public function get_edit_option_form() {
-		$options     = $this->get_listing_options();
+		$options     = $this->get_listing_options( $_POST['post_type'] );
 		$fields_html = array();
 
 		if ( ! empty( $options ) && is_array( $options ) ) {
@@ -121,7 +121,7 @@ class Option extends Page {
 			);
 		}
 
-		$options   = $this->get_listing_options();
+		$options   = $this->get_listing_options( $_POST['post_type'] );
 		$new_order = array();
 
 		foreach ( $_POST['order'] as $item ) {
@@ -140,7 +140,15 @@ class Option extends Page {
 		ksort( $new_order );
 		$new_order = array_values( $new_order );
 
-		if ( update_option( 'stm_vehicle_listing_options', $new_order ) ) {
+		if ( 'listings' === $_POST['post_type'] ) {
+			$option_name = 'stm_vehicle_listing_options';
+		} else {
+			$option_name = "stm_{$_POST['post_type']}_options";
+		}
+
+		$updated = update_option( $option_name, $new_order );
+
+		if ( $updated ) {
 			return array(
 				'success' => true,
 				'message' => __( 'Field order updated successfully.', 'stm_vehicles_listing' ),
@@ -153,13 +161,13 @@ class Option extends Page {
 		);
 	}
 
-	public function get_listing_options(): array {
-		return get_option( 'stm_vehicle_listing_options', array() );
+	public function get_listing_options( $post_type = 'listings' ): array {
+		return 'listings' === $post_type ? get_option( 'stm_vehicle_listing_options', array() ) : get_option( "stm_{$post_type}_options", array() );
 	}
 
 	public function get_options_form(): array {
 		$listing_id = isset( $_POST['listing_id'] ) ? intval( $_POST['listing_id'] ) : 0;
-		$options    = $this->get_listing_options();
+		$options    = $this->get_listing_options( $_POST['post_type'] );
 
 		if ( empty( $options ) ) {
 			return array(
@@ -308,7 +316,7 @@ class Option extends Page {
 
 	public function get_modal_form(): array {
 		$option_id = isset( $_POST['option_id'] ) ? sanitize_text_field( $_POST['option_id'] ) : '';
-		$options   = $this->get_listing_options();
+		$options   = $this->get_listing_options( $_POST['post_type'] );
 
 		$current_option = null;
 		foreach ( $options as $option ) {
@@ -589,7 +597,7 @@ class Option extends Page {
 			$slug = sanitize_title( urldecode( $data['single_name'] ) );
 		}
 
-		$options   = $this->get_listing_options();
+		$options   = $this->get_listing_options( $_POST['post_type'] );
 		$found     = false;
 		$option_id = isset( $data['option_id'] ) ? sanitize_text_field( $data['option_id'] ) : '';
 
@@ -673,7 +681,13 @@ class Option extends Page {
 			);
 		}
 
-		if ( update_option( 'stm_vehicle_listing_options', $options ) ) {
+		if ( 'listings' === $_POST['post_type'] ) {
+			$option_name = 'stm_vehicle_listing_options';
+		} else {
+			$option_name = "stm_{$_POST['post_type']}_options";
+		}
+
+		if ( update_option( $option_name, $options ) ) {
 			wp_send_json_success(
 				array(
 					'message' => __( 'Option successfully saved', 'stm_vehicles_listing' ),
@@ -694,7 +708,7 @@ class Option extends Page {
 			return;
 		}
 
-		$options = $this->get_listing_options();
+		$options = $this->get_listing_options( $_POST['post_type'] );
 		$found   = false;
 
 		foreach ( $options as $key => $option ) {
@@ -730,7 +744,13 @@ class Option extends Page {
 
 		$options = array_values( $options );
 
-		if ( update_option( 'stm_vehicle_listing_options', $options ) ) {
+		if ( 'listings' === $_POST['post_type'] ) {
+			$option_name = 'stm_vehicle_listing_options';
+		} else {
+			$option_name = "stm_{$_POST['post_type']}_options";
+		}
+
+		if ( update_option( $option_name, $options ) ) {
 			wp_send_json_success(
 				array(
 					'message' => __( 'Option successfully deleted', 'stm_vehicles_listing' ),

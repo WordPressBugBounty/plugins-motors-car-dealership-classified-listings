@@ -1,13 +1,6 @@
 <?php
 	wp_enqueue_script( 'bootstrap-bundle' );
-
-	/*Get all stored options*/
-	$_per_page     = 10;
-	$options       = stm_listings_get_my_options_list();
-	$options_count = count( $options );
-	$_list         = array_chunk( $options, $_per_page, true );
-	$options       = reset( $_list );
-	$list_empty    = empty( $options );
+	wp_enqueue_script( 'stm-listings-js' );
 ?>
 <div class="stm_vehicles_listing_categories stm_custom_fields">
 	<div class="stm_custom_fields__image-preview">
@@ -163,3 +156,6 @@
 		</div>
 	</div>
 </div>
+<script>
+	let stm_listings_post_type = '<?php echo esc_js( isset( $_GET['post_type'] ) ? $_GET['post_type'] : 'listings' ); ?>';
+</script>

@@ -22,14 +22,13 @@ if ( $has_form_editor ) {
 	$login_form_class    = 'mvl-forms-editor-login-form';
 	$register_form_class = 'mvl-forms-editor-register-form';
 }
-
 ?>
 <div class="stm-login-register-form">
 	<?php if ( ! empty( $_GET['user_id'] ) && ! empty( $_GET['hash_check'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
 		<?php do_action( 'stm_listings_load_template', 'user/private/password-recovery' ); ?>
 	<?php endif; ?>
 
-	<div class="row">
+	<div class="row <?php echo esc_attr( ! $can_register ? 'mvl-form-login-center' : '' ); ?>">
 
 		<div class="col-md-4">
 			<h3><?php esc_html_e( 'Sign In', 'stm_vehicles_listing' ); ?></h3>
@@ -99,8 +98,8 @@ if ( $has_form_editor ) {
 			<?php endif; ?>
 		</div>
 
+		<?php if ( $can_register ) : ?>
 		<div class="col-md-8">
-			<?php if ( $can_register ) : ?>
 			<h3><?php esc_html_e( 'Sign Up', 'stm_vehicles_listing' ); ?></h3>
 			<div class="stm-register-form <?php echo esc_attr( $register_form_class ); ?>">
 				<?php if ( $has_form_editor ) : ?>
@@ -287,7 +286,7 @@ if ( $has_form_editor ) {
 					</form>
 				<?php endif; ?>
 			</div>
-			<?php endif; ?>
 		</div>
+		<?php endif; ?>
 	</div>
 </div>

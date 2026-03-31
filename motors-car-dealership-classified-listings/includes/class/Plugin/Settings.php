@@ -415,7 +415,12 @@ class Settings {
 
 	public static function update( $new_settings ) {
 		$settings = get_option( MVL_Const::MVL_PLUGIN_OPT_NAME, array() );
-		update_option( MVL_Const::MVL_PLUGIN_OPT_NAME, wp_parse_args( $new_settings, $settings ) );
+		foreach ( $new_settings as $setting => $value ) {
+			if ( isset( $settings[ $setting ] ) ) {
+				$settings[ $setting ] = $value;
+			}
+		}
+		update_option( MVL_Const::MVL_PLUGIN_OPT_NAME, $settings );
 	}
 
 	public static function update_one( $setting, $value ) {

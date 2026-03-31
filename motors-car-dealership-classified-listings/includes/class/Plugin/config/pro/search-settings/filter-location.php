@@ -11,7 +11,7 @@ add_filter(
 					'desc'            => esc_html__( 'Let users search listings based on their preferred location. It allows potential buyers to narrow down their search to listings in their area, making it quicker for them to find the vehicle nearby.', 'stm_vehicles_listing' ),
 					'second_btn_text' => esc_html__( 'Learn more', 'stm_vehicles_listing' ),
 					'second_btn_link' => esc_url( 'https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing/listing-manager-settings/search-filters#filter-by-location-pro-feature' ),
-					'preview'     => STM_LISTINGS_URL . '/assets/images/previews/filter-by-location-sf.png',
+					'preview'         => STM_LISTINGS_URL . '/assets/images/previews/filter-by-location-sf.png',
 				),
 			);
 		} else {

@@ -519,6 +519,14 @@ function stm_add_listing_theme_menu_item() {
 add_action( 'wpcfto_screen_motors_vehicles_listing_plugin_settings_added', 'stm_add_listing_theme_menu_item', 12, 1 );
 
 function stm_listings_vehicle_listing_settings_page() {
+	/*Get all stored options*/
+	$_per_page     = 10;
+	$options       = stm_listings_get_my_options_list();
+	$options_count = count( $options );
+	$_list         = array_chunk( $options, $_per_page, true );
+	$options       = reset( $_list );
+	$list_empty    = empty( $options );
+
 	require_once STM_LISTINGS_PATH . '/includes/admin/categories/main.php';
 
 	if ( function_exists( 'stm_vehicles_listing_get_icons_html' ) ) {

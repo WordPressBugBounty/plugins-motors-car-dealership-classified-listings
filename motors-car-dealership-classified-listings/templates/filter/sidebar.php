@@ -34,6 +34,7 @@ $show_sold = apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_sold_listings
 			if ( empty( $filter['filters'] ) ) :
 				$post_type_name = esc_html__( 'Listings', 'stm_vehicles_listing' );
 				if ( stm_is_multilisting() ) {
+
 					$ml = new STMMultiListing();
 					if ( ! empty( $ml->stm_get_current_listing() ) ) {
 						$multitype      = $ml->stm_get_current_listing();

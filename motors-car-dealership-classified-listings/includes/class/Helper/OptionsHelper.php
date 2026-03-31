@@ -145,7 +145,7 @@ class OptionsHelper {
 	 * @return false|mixed|void
 	 */
 	public static function get_all_listing_categories() {
-		return get_option( self::LISTING_OPTION_NAME );
+		return apply_filters( 'mvl_get_all_listing_categories', get_option( self::LISTING_OPTION_NAME ) );
 	}
 
 }

@@ -1560,6 +1560,16 @@ add_filter(
 	2
 );
 
+add_action(
+	'stm_listings_filter_after',
+	function() {
+		$post_type = apply_filters( 'stm_listings_post_type', 'listings' );
+		?>
+		<input type="hidden" name="posttype" value="<?php echo esc_attr( $post_type ); ?>">
+		<?php
+	}
+);
+
 if ( ! function_exists( 'mvl_add_car_page_redirect' ) ) {
 	function mvl_add_car_page_redirect() {
 		if ( ! is_user_logged_in() && is_page() ) {

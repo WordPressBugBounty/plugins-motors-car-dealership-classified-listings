@@ -5,12 +5,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $can_register = apply_filters( 'motors_vl_get_nuxy_mod', false, 'new_user_registration' );
 
-// Check if form editor is enabled for sign_up form (same as widget — load template to preserve scripts).
+// Check if form editor is enabled for sign_up form (same as widget - load template to preserve scripts).
 $has_form_editor = false;
 if ( class_exists( '\MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\Config' ) ) {
-	$form_config            = \MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\Config::instance_of( 'sign_up' );
-	$addons_editor_enabled  = apply_filters( 'mvl_is_addon_enabled', false, 'forms_editor' );
-	$has_form_editor        = $addons_editor_enabled && ! empty( $form_config );
+	$form_config           = \MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\Config::instance_of( 'sign_up' );
+	$addons_editor_enabled = apply_filters( 'mvl_is_addon_enabled', false, 'forms_editor' );
+	$has_form_editor       = $addons_editor_enabled && ! empty( $form_config );
 }
 
 $login_form_class    = '';
@@ -24,7 +24,7 @@ if ( $has_form_editor ) {
 ?>
 
 	<div class="stm-login-register-form motors-alignwide">
-		<div class="row">
+		<div class="row <?php echo esc_attr( ! $can_register ? 'mvl-form-login-center' : '' ); ?>">
 			<div class="col-md-4">
 				<h3><?php esc_html_e( 'Sign In', 'stm_vehicles_listing' ); ?></h3>
 				<div class="stm-login-form <?php echo esc_attr( $login_form_class ); ?>">
@@ -59,116 +59,116 @@ if ( $has_form_editor ) {
 					</form>
 				</div>
 			</div>
+			<?php if ( $can_register ) : ?>
 			<div class="col-md-8">
-				<?php if ( $can_register ) : ?>
-					<h3><?php esc_html_e( 'Sign Up', 'stm_vehicles_listing' ); ?></h3>
-					<div class="stm-register-form <?php echo esc_attr( $register_form_class ); ?>">
-						<?php if ( $has_form_editor ) : ?>
-							<?php
-							$form_config = \MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\Config::instance_of( 'sign_up' );
-							if ( $form_config ) {
-								$form_data    = $form_config->data();
-								$saved_values = $form_config->get_values();
-								$fields       = $form_data['fields'] ?? array();
+				<h3><?php esc_html_e( 'Sign Up', 'stm_vehicles_listing' ); ?></h3>
+				<div class="stm-register-form <?php echo esc_attr( $register_form_class ); ?>">
+					<?php if ( $has_form_editor ) : ?>
+						<?php
+						$form_config = \MotorsVehiclesListing\Pro\Addons\FormsEditor\Config\Config::instance_of( 'sign_up' );
+						if ( $form_config ) {
+							$form_data    = $form_config->data();
+							$saved_values = $form_config->get_values();
+							$fields       = $form_data['fields'] ?? array();
 
-								$template_data = array(
-									'form_slug'    => $form_config->snake_case_class_name(),
-									'args'         => array(
-										'is_modal'          => true,
-										'__link_of_terms__' => $__link_of_terms__ ?? '',
-									),
-									'fields'       => $fields,
-									'saved_values' => $saved_values,
-								);
+							$template_data = array(
+								'form_slug'    => $form_config->snake_case_class_name(),
+								'args'         => array(
+									'is_modal'          => true,
+									'__link_of_terms__' => $__link_of_terms__ ?? '',
+								),
+								'fields'       => $fields,
+								'saved_values' => $saved_values,
+							);
 
-								do_action( 'stm_listings_load_template', 'addons/forms-editor/page/partials/forms/sign-up', $template_data );
-							}
-							?>
-						<?php else : ?>
-						<form method="post">
-							<?php if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'new_user_registration' ) ) : ?>
-								<input type="hidden" name="stm_custom_register_nonce" value="<?php echo esc_attr( wp_create_nonce( 'stm_custom_register' ) ); ?>">
-							<?php endif; ?>
-							<div class="row form-group">
-								<div class="col-md-6">
-									<h4><?php esc_html_e( 'First Name', 'stm_vehicles_listing' ); ?></h4>
-									<input class="user_validated_field form-control" type="text" name="stm_user_first_name"
-										placeholder="<?php esc_html_e( 'Enter First name', 'stm_vehicles_listing' ); ?>"/>
-								</div>
-								<div class="col-md-6">
-									<h4><?php esc_html_e( 'Last Name', 'stm_vehicles_listing' ); ?></h4>
-									<input class="user_validated_field form-control" type="text" name="stm_user_last_name"
-										placeholder="<?php esc_html_e( 'Enter Last name', 'stm_vehicles_listing' ); ?>"/>
-								</div>
-							</div>
-
-							<div class="row form-group">
-								<div class="col-md-6">
-									<h4><?php esc_html_e( 'Phone number', 'stm_vehicles_listing' ); ?></h4>
-									<input class="user_validated_field form-control" type="tel" name="stm_user_phone"
-										placeholder="<?php esc_html_e( 'Enter Phone', 'stm_vehicles_listing' ); ?>"/>
-								</div>
-								<div class="col-md-6">
-									<h4><?php esc_html_e( 'Email *', 'stm_vehicles_listing' ); ?></h4>
-									<input class="user_validated_field form-control" type="email" name="stm_user_mail"
-										placeholder="<?php esc_html_e( 'Enter E-mail', 'stm_vehicles_listing' ); ?>"/>
-								</div>
-							</div>
-
-							<div class="row form-group">
-								<div class="col-md-6">
-									<h4><?php esc_html_e( 'Login *', 'stm_vehicles_listing' ); ?></h4>
-									<input class="user_validated_field form-control" type="text" name="stm_nickname"
-										placeholder="<?php esc_html_e( 'Enter Login', 'stm_vehicles_listing' ); ?>"/>
-								</div>
-								<div class="col-md-6">
-									<h4><?php esc_html_e( 'Password *', 'stm_vehicles_listing' ); ?></h4>
-									<div class="stm-show-password">
-										<i class="far fa-eye-slash"></i>
-										<input class="user_validated_field form-control" type="password" name="stm_user_password"
-											placeholder="<?php esc_html_e( 'Enter Password', 'stm_vehicles_listing' ); ?>"/>
-									</div>
-								</div>
-							</div>
-							<?php
-							if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_term_service' ) ) :
-								$link = apply_filters( 'motors_vl_get_nuxy_mod', '', 'terms_service' );
-								?>
-								<div class="form-group form-checker">
-									<label>
-										<input type="checkbox" name="stm_accept_terms"/>
-										<span>
-										<?php esc_html_e( 'I accept the terms of the', 'stm_vehicles_listing' ); ?>
-										<?php if ( ! empty( $link ) ) : ?>
-											<a href="<?php echo esc_url( get_the_permalink( $link ) ); ?>" target="_blank"><?php echo esc_html( get_the_title( $link ) ); ?></a>
-										<?php endif; ?>
-										</span>
-									</label>
-								</div>
-							<?php endif; ?>
-							<?php if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'allow_user_register_as_dealer' ) && apply_filters( 'is_mvl_pro', false ) ) : ?>
-								<div class="stm-register-as-dealer form-group form-checker">
-									<label>
-										<input type="checkbox" name="register_as_dealer" value="1"/>
-										<span><?php esc_html_e( 'Sign Up as a Dealer', 'stm_vehicles_listing' ); ?></span>
-									</label>
-								</div>
-							<?php endif; ?>
-							<div class="form-group form-group-submit clearfix">
-								<input type="submit" class="button" <?php echo ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_term_service' ) ) ? 'disabled=1' : ''; ?> value="<?php esc_html_e( 'Sign up now!', 'stm_vehicles_listing' ); ?>"/>
-								<span class="stm-listing-loader"><i class="fas fa-spinner"></i></span>
-							</div>
-							<?php
-							if ( apply_filters( 'mvl_is_addon_enabled', false, 'social_login' ) ) {
-								echo do_shortcode( '[motors_social_login action="sign-up"]' );
-							}
-							?>
-							<div class="stm-validation-message"></div>
-						</form>
+							do_action( 'stm_listings_load_template', 'addons/forms-editor/page/partials/forms/sign-up', $template_data );
+						}
+						?>
+					<?php else : ?>
+					<form method="post">
+						<?php if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'new_user_registration' ) ) : ?>
+							<input type="hidden" name="stm_custom_register_nonce" value="<?php echo esc_attr( wp_create_nonce( 'stm_custom_register' ) ); ?>">
 						<?php endif; ?>
-					</div>
-				<?php endif; ?>
+						<div class="row form-group">
+							<div class="col-md-6">
+								<h4><?php esc_html_e( 'First Name', 'stm_vehicles_listing' ); ?></h4>
+								<input class="user_validated_field form-control" type="text" name="stm_user_first_name"
+									placeholder="<?php esc_html_e( 'Enter First name', 'stm_vehicles_listing' ); ?>"/>
+							</div>
+							<div class="col-md-6">
+								<h4><?php esc_html_e( 'Last Name', 'stm_vehicles_listing' ); ?></h4>
+								<input class="user_validated_field form-control" type="text" name="stm_user_last_name"
+									placeholder="<?php esc_html_e( 'Enter Last name', 'stm_vehicles_listing' ); ?>"/>
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-6">
+								<h4><?php esc_html_e( 'Phone number', 'stm_vehicles_listing' ); ?></h4>
+								<input class="user_validated_field form-control" type="tel" name="stm_user_phone"
+									placeholder="<?php esc_html_e( 'Enter Phone', 'stm_vehicles_listing' ); ?>"/>
+							</div>
+							<div class="col-md-6">
+								<h4><?php esc_html_e( 'Email *', 'stm_vehicles_listing' ); ?></h4>
+								<input class="user_validated_field form-control" type="email" name="stm_user_mail"
+									placeholder="<?php esc_html_e( 'Enter E-mail', 'stm_vehicles_listing' ); ?>"/>
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-6">
+								<h4><?php esc_html_e( 'Login *', 'stm_vehicles_listing' ); ?></h4>
+								<input class="user_validated_field form-control" type="text" name="stm_nickname"
+									placeholder="<?php esc_html_e( 'Enter Login', 'stm_vehicles_listing' ); ?>"/>
+							</div>
+							<div class="col-md-6">
+								<h4><?php esc_html_e( 'Password *', 'stm_vehicles_listing' ); ?></h4>
+								<div class="stm-show-password">
+									<i class="far fa-eye-slash"></i>
+									<input class="user_validated_field form-control" type="password" name="stm_user_password"
+										placeholder="<?php esc_html_e( 'Enter Password', 'stm_vehicles_listing' ); ?>"/>
+								</div>
+							</div>
+						</div>
+						<?php
+						if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_term_service' ) ) :
+							$link = apply_filters( 'motors_vl_get_nuxy_mod', '', 'terms_service' );
+							?>
+							<div class="form-group form-checker">
+								<label>
+									<input type="checkbox" name="stm_accept_terms"/>
+									<span>
+									<?php esc_html_e( 'I accept the terms of the', 'stm_vehicles_listing' ); ?>
+									<?php if ( ! empty( $link ) ) : ?>
+										<a href="<?php echo esc_url( get_the_permalink( $link ) ); ?>" target="_blank"><?php echo esc_html( get_the_title( $link ) ); ?></a>
+									<?php endif; ?>
+									</span>
+								</label>
+							</div>
+						<?php endif; ?>
+						<?php if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'allow_user_register_as_dealer' ) && apply_filters( 'is_mvl_pro', false ) ) : ?>
+							<div class="stm-register-as-dealer form-group form-checker">
+								<label>
+									<input type="checkbox" name="register_as_dealer" value="1"/>
+									<span><?php esc_html_e( 'Sign Up as a Dealer', 'stm_vehicles_listing' ); ?></span>
+								</label>
+							</div>
+						<?php endif; ?>
+						<div class="form-group form-group-submit clearfix">
+							<input type="submit" class="button" <?php echo ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_term_service' ) ) ? 'disabled=1' : ''; ?> value="<?php esc_html_e( 'Sign up now!', 'stm_vehicles_listing' ); ?>"/>
+							<span class="stm-listing-loader"><i class="fas fa-spinner"></i></span>
+						</div>
+						<?php
+						if ( apply_filters( 'mvl_is_addon_enabled', false, 'social_login' ) ) {
+							echo do_shortcode( '[motors_social_login action="sign-up"]' );
+						}
+						?>
+						<div class="stm-validation-message"></div>
+					</form>
+					<?php endif; ?>
+				</div>
 			</div>
+			<?php endif; ?>
 		</div>
 	</div>
 <?php //phpcs:disable ?>

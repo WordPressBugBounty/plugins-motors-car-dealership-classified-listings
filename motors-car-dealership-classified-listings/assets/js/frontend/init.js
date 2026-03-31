@@ -582,9 +582,9 @@ STMListings.ajaxGetCarPrice = function () {
                 $(this).closest('form').trigger('submit');
             } else {
                 if (this.closest('.stm-select-sorting')) {
-                    $('[data-action="listings-result"][data-trigger="filter"] [name="sort_order"]').val(this.value);
+                    $('form[data-trigger="filter"] [name="sort_order"]').val(this.value);
                     requestAnimationFrame(function () {
-                        $('[data-action="listings-result"][data-trigger="filter"]').trigger('submit');
+                        $('form[data-trigger="filter"]').trigger('submit');
                     });
                 }
             }

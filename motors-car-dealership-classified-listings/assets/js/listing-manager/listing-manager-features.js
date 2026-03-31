@@ -13,6 +13,7 @@
         let originalHtml = $wrapper.html();
         let modalChanged = false;
         let hasFieldChanged = false;
+        let postType = document.querySelector('input[name="post_type"][type="hidden"]').value;
 
         /**
          * Shows loading state for wrapper
@@ -55,7 +56,8 @@
                 action: 'listing_manager_get_form',
                 nonce: nonce_get_form,
                 listing_id: listingId,
-                listing_manager_page_id: 'features'
+                listing_manager_page_id: 'features',
+                post_type: postType
             };
         }
 
@@ -127,7 +129,8 @@
                             nonce: nonce,
                             template: 'term-features',
                             listing_manager_page_id: 'features',
-                            term_name: newValue
+                            term_name: newValue,
+                            post_type: postType
                         },
                         success: function (response) {
                             if (response.success) {
@@ -176,7 +179,7 @@
         function handleCancelClick() {
             showWrapperLoading();
             disableEditButton();
-            
+
             const $items = $wrapper.find('.mvl-listing-manager-field-item');
             const newOrder = [];
             let hasChanges = false;
@@ -210,7 +213,8 @@
                     nonce: nonce,
                     template: 'edit-features',
                     listing_manager_page_id: 'features',
-                    order: newOrder
+                    order: newOrder,
+                    post_type: postType
                 },
                 success: function (response) {
                     if (response.success) {
@@ -235,7 +239,7 @@
         function getFeatures() {
             showWrapperLoading();
             disableEditButton();
-            
+
             const ajaxData = Object.assign({}, getBaseAjaxData(), { template: 'features' });
             $.ajax({
                 url: ajaxurl,
@@ -402,7 +406,8 @@
             const ajaxData = Object.assign({}, getBaseAjaxData(), {
                 template: 'modal',
                 option_id: optionId,
-                form_action: formAction
+                form_action: formAction,
+                post_type: postType
             });
 
             $.ajax({
@@ -641,7 +646,8 @@
                     nonce: nonce,
                     template: 'term-features',
                     listing_manager_page_id: 'features',
-                    term_name: newValue
+                    term_name: newValue,
+                    post_type: postType,
                 },
                 success: function (response) {
                     if (response.data.success) {
@@ -810,7 +816,8 @@
                     listing_manager_page_id: 'features',
                     title: title,
                     selected_values: selectedValues,
-                    option_id: optionId
+                    option_id: optionId,
+                    post_type: postType
                 },
                 success: function (response) {
                     if (response.success && response.data && response.data.success === false) {
@@ -948,7 +955,7 @@
         function deleteFeatureGroup(optionId) {
             showWrapperLoading();
             disableEditButton();
-            
+
             $.ajax({
                 url: ajaxurl,
                 type: 'POST',
@@ -957,7 +964,8 @@
                     nonce: nonce_get_form,
                     template: 'feature-group',
                     listing_manager_page_id: 'features',
-                    option_id: decodeURIComponent(optionId)
+                    option_id: decodeURIComponent(optionId),
+                    post_type: postType
                 },
                 success: function (response) {
                     if (response.success) {
