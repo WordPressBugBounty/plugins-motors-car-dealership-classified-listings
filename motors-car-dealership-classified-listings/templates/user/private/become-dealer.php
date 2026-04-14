@@ -164,7 +164,7 @@ if ( ! is_user_logged_in() ) {
 										'exclude'      => array( $user_id ),
 									);
 									$users_db = get_users( $args );
-									if ( empty( $users_db ) ) {
+									if ( empty( $users_db ) && apply_filters( 'stm_mvl_is_path_within_uploads', false, $user_old_avatar ) ) {
 										unlink( $user_old_avatar );
 									}
 								}

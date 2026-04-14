@@ -414,10 +414,13 @@ function mvl_motors_starter_demo_install() {
 
 // Install and activate child theme
 add_action( 'wp_ajax_mvl_motors_starter_child_theme_install', 'mvl_motors_starter_child_theme_install' );
-add_action( 'wp_ajax_nopriv_mvl_motors_starter_child_theme_install', 'mvl_motors_starter_child_theme_install' );
 
 function mvl_motors_starter_child_theme_install() {
 	check_ajax_referer( 'mvl_motors_starter_wizard_nonce', 'nonce' );
+
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_die( esc_html__( 'You do not have permission to install child themes.', 'motors-starter-theme' ) );
+	}
 
 	$theme_url  = 'https://motors-plugin.stylemixthemes.com/starter-theme-demo/motors-starter-theme-child.zip';
 	$theme_slug = 'motors-starter-theme-child';
@@ -452,6 +455,21 @@ function mvl_motors_starter_child_theme_install() {
 		wp_send_json_error(
 			array(
 				'message' => __( 'Error moving archive to the themes folder.', 'motors-starter-theme' ),
+			)
+		);
+
+		return;
+	}
+
+	require_once ABSPATH . '/wp-admin/includes/file.php';
+
+	global $wp_filesystem;
+
+	if ( empty( $wp_filesystem ) && ! WP_Filesystem() ) {
+		unlink( $zip_path );
+		wp_send_json_error(
+			array(
+				'message' => esc_html__( 'Could not access filesystem.', 'motors-starter-theme' ),
 			)
 		);
 

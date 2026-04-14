@@ -1305,6 +1305,33 @@ if ( ! function_exists( 'motors_vl_dealer_logo_placeholder' ) ) {
 	add_filter( 'motors_vl_dealer_logo_placeholder', 'motors_vl_dealer_logo_placeholder' );
 }
 
+if ( ! function_exists( 'stm_mvl_is_path_within_uploads' ) ) {
+	function stm_mvl_is_path_within_uploads( $path ) {
+		if ( ! is_string( $path ) || '' === trim( $path ) ) {
+			return true;
+		}
+		$path = trim( $path );
+		$dir  = wp_upload_dir();
+		if ( ! empty( $dir['error'] ) ) {
+			return false;
+		}
+		$upload_basedir = $dir['basedir'];
+		$real_upload    = realpath( $upload_basedir );
+		$real_path      = realpath( $path );
+		if ( false === $real_upload || false === $real_path ) {
+			return false;
+		}
+		return 0 === strpos( $real_path . DIRECTORY_SEPARATOR, $real_upload . DIRECTORY_SEPARATOR );
+	}
+}
+
+if ( ! function_exists( 'stm_mvl_filter_path_within_uploads' ) ) {
+	function stm_mvl_filter_path_within_uploads( $default, $path ) {
+		return stm_mvl_is_path_within_uploads( $path );
+	}
+	add_filter( 'stm_mvl_is_path_within_uploads', 'stm_mvl_filter_path_within_uploads', 10, 2 );
+}
+
 if ( ! function_exists( 'stm_account_current_page' ) ) {
 	function stm_account_current_page() {
 		$page = 'inventory';

@@ -118,11 +118,14 @@ if ( ! function_exists( 'stm_show_user_extra_fields' ) ) {
 				<td>
 					<input type="text" name="stm_user_avatar" id="stm_user_avatar"
 							value="<?php echo esc_attr( get_the_author_meta( 'stm_user_avatar', $user->ID ) ); ?>"
-							class="regular-text"/><br/>
-					<input type="text" name="stm_user_avatar_path" id="stm_user_avatar_path"
-							value="<?php echo esc_attr( get_the_author_meta( 'stm_user_avatar_path', $user->ID ) ); ?>"
-							class="regular-text"/><br/>
-					<span class="description"><?php esc_html_e( 'User avatar(stores URL and path to image)', 'stm_vehicles_listing' ); ?></span>
+							class="regular-text"/>
+					<?php if ( current_user_can( 'edit_users' ) ) : ?>
+						<br/>
+						<input type="text" name="stm_user_avatar_path" id="stm_user_avatar_path"
+								value="<?php echo esc_attr( get_the_author_meta( 'stm_user_avatar_path', $user->ID ) ); ?>"
+								class="regular-text"/><br/>
+						<span class="description"><?php esc_html_e( 'User avatar path (filesystem)', 'stm_vehicles_listing' ); ?></span>
+					<?php endif; ?>
 				</td>
 			</tr>
 
@@ -272,11 +275,14 @@ if ( ! function_exists( 'stm_show_user_extra_fields' ) ) {
 				<td>
 					<input type="text" name="stm_dealer_logo" id="stm_dealer_logo"
 							value="<?php echo esc_attr( get_the_author_meta( 'stm_dealer_logo', $user->ID ) ); ?>"
-							class="regular-text"/><br/>
-					<input type="text" name="stm_dealer_logo_path" id="stm_dealer_logo_path"
-							value="<?php echo esc_attr( get_the_author_meta( 'stm_dealer_logo_path', $user->ID ) ); ?>"
-							class="regular-text"/><br/>
-					<span class="description"><?php esc_html_e( 'Dealer logo(stores URL and path to image)', 'stm_vehicles_listing' ); ?></span>
+							class="regular-text"/>
+					<?php if ( current_user_can( 'edit_users' ) ) : ?>
+						<br/>
+						<input type="text" name="stm_dealer_logo_path" id="stm_dealer_logo_path"
+								value="<?php echo esc_attr( get_the_author_meta( 'stm_dealer_logo_path', $user->ID ) ); ?>"
+								class="regular-text"/><br/>
+						<span class="description"><?php esc_html_e( 'Dealer logo path (filesystem)', 'stm_vehicles_listing' ); ?></span>
+					<?php endif; ?>
 				</td>
 			</tr>
 
@@ -286,11 +292,14 @@ if ( ! function_exists( 'stm_show_user_extra_fields' ) ) {
 				<td>
 					<input type="text" name="stm_dealer_image" id="stm_dealer_image"
 							value="<?php echo esc_attr( get_the_author_meta( 'stm_dealer_image', $user->ID ) ); ?>"
-							class="regular-text"/><br/>
-					<input type="text" name="stm_dealer_image_path" id="stm_dealer_image_path"
-							value="<?php echo esc_attr( get_the_author_meta( 'stm_dealer_image_path', $user->ID ) ); ?>"
-							class="regular-text"/><br/>
-					<span class="description"><?php esc_html_e( 'Dealer image(stores URL and path to image)', 'stm_vehicles_listing' ); ?></span>
+							class="regular-text"/>
+					<?php if ( current_user_can( 'edit_users' ) ) : ?>
+						<br/>
+						<input type="text" name="stm_dealer_image_path" id="stm_dealer_image_path"
+								value="<?php echo esc_attr( get_the_author_meta( 'stm_dealer_image_path', $user->ID ) ); ?>"
+								class="regular-text"/><br/>
+						<span class="description"><?php esc_html_e( 'Dealer image path (filesystem)', 'stm_vehicles_listing' ); ?></span>
+					<?php endif; ?>
 				</td>
 			</tr>
 
@@ -389,12 +398,15 @@ if ( ! function_exists( 'stm_save_user_extra_fields' ) ) {
 		$stm_show_email = isset( $_POST['stm_show_email'] ) ? '1' : '';
 		update_user_meta( $user_id, 'stm_show_email', $stm_show_email );
 
-		// Avatar fields
+		// Avatar fields (path must be within WP uploads to prevent arbitrary file deletion).
 		if ( isset( $_POST['stm_user_avatar'] ) ) {
 			update_user_meta( $user_id, 'stm_user_avatar', esc_url_raw( wp_unslash( $_POST['stm_user_avatar'] ) ) );
 		}
 		if ( isset( $_POST['stm_user_avatar_path'] ) ) {
-			update_user_meta( $user_id, 'stm_user_avatar_path', sanitize_text_field( wp_unslash( $_POST['stm_user_avatar_path'] ) ) );
+			$raw_path = sanitize_text_field( wp_unslash( $_POST['stm_user_avatar_path'] ) );
+			if ( apply_filters( 'stm_mvl_is_path_within_uploads', false, $raw_path ) ) {
+				update_user_meta( $user_id, 'stm_user_avatar_path', $raw_path );
+			}
 		}
 
 		// Social media URLs
@@ -430,18 +442,24 @@ if ( ! function_exists( 'stm_save_user_extra_fields' ) ) {
 			update_user_meta( $user_id, 'stm_message_to_user', sanitize_text_field( wp_unslash( $_POST['stm_message_to_user'] ) ) );
 		}
 
-		// Dealer images
+		// Dealer images (paths must be within WP uploads to prevent arbitrary file deletion).
 		if ( isset( $_POST['stm_dealer_logo'] ) ) {
 			update_user_meta( $user_id, 'stm_dealer_logo', esc_url_raw( wp_unslash( $_POST['stm_dealer_logo'] ) ) );
 		}
 		if ( isset( $_POST['stm_dealer_logo_path'] ) ) {
-			update_user_meta( $user_id, 'stm_dealer_logo_path', sanitize_text_field( wp_unslash( $_POST['stm_dealer_logo_path'] ) ) );
+			$raw_path = sanitize_text_field( wp_unslash( $_POST['stm_dealer_logo_path'] ) );
+			if ( apply_filters( 'stm_mvl_is_path_within_uploads', false, $raw_path ) ) {
+				update_user_meta( $user_id, 'stm_dealer_logo_path', $raw_path );
+			}
 		}
 		if ( isset( $_POST['stm_dealer_image'] ) ) {
 			update_user_meta( $user_id, 'stm_dealer_image', esc_url_raw( wp_unslash( $_POST['stm_dealer_image'] ) ) );
 		}
 		if ( isset( $_POST['stm_dealer_image_path'] ) ) {
-			update_user_meta( $user_id, 'stm_dealer_image_path', sanitize_text_field( wp_unslash( $_POST['stm_dealer_image_path'] ) ) );
+			$raw_path = sanitize_text_field( wp_unslash( $_POST['stm_dealer_image_path'] ) );
+			if ( apply_filters( 'stm_mvl_is_path_within_uploads', false, $raw_path ) ) {
+				update_user_meta( $user_id, 'stm_dealer_image_path', $raw_path );
+			}
 		}
 
 		// Location fields
