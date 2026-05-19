@@ -463,7 +463,11 @@ class STM_WP_Import extends STM_WP_Import_Base {
 						 * Changed for Elementor Demo Import. Original code:
 						 * add_post_meta( $post_id, wp_slash( $key ), wp_slash_strings_only( $value ) );
 						 */
-						add_post_meta( $post_id, $key, $value );
+						add_post_meta(
+							$post_id,
+							apply_filters( 'stm_add_post_meta_key', $key ),
+							apply_filters( 'stm_add_post_meta_value', $value )
+						);
 
 						do_action( 'stm_import_post_meta', $post_id, $key, $value );
 
