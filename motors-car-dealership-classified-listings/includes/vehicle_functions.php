@@ -1611,12 +1611,10 @@ if ( ! function_exists( 'stm_ajax_add_a_car_images' ) ) {
 		$user_id         = get_current_user_id();
 		$attachments_ids = ( isset( $_POST['attachments'] ) && ! empty( $attachments_ids ) ) ? array_map( 'sanitize_text_field', array_values( explode( ',', $_POST['attachments'] ) ) ) : array();
 
-		if ( ! empty( $post_id ) ) {
-			if ( ! empty( get_post_meta( $post_id, 'stm_car_user', true ) ) && intval( get_post_meta( $post_id, 'stm_car_user', true ) ) !== intval( $user_id ) ) {
-				/*User tries to add info to another car*/
-				wp_send_json( array( 'message' => esc_html__( 'You are trying to add car to another car user, or your session has expired, please sign in first', 'stm_vehicles_listing' ) ) );
-				exit;
-			}
+		if ( ! empty( $post_id ) && ! stm_current_user_can_manage_listing_media( $post_id ) ) {
+			/*User tries to add info to another car*/
+			wp_send_json( array( 'message' => esc_html__( 'You are trying to add car to another car user, or your session has expired, please sign in first', 'stm_vehicles_listing' ) ) );
+			exit;
 		}
 
 		$error    = true;
@@ -1756,7 +1754,6 @@ if ( ! function_exists( 'stm_ajax_add_a_car_images' ) ) {
 	}
 
 	add_action( 'wp_ajax_stm_ajax_add_a_car_images', 'stm_ajax_add_a_car_images' );
-	add_action( 'wp_ajax_nopriv_stm_ajax_add_a_car_images', 'stm_ajax_add_a_car_images' );
 }
 
 if ( ! function_exists( 'stm_listing_images_cron_event_start' ) ) {
@@ -1807,18 +1804,80 @@ if ( ! function_exists( 'stm_add_a_car_images_schedule' ) ) {
 
 add_action( 'stm_add_a_car_images_schedule', 'stm_add_a_car_images_schedule' );
 
+if ( ! function_exists( 'stm_add_a_car_listing_post_types' ) ) {
+	function stm_add_a_car_listing_post_types() {
+		$post_types = array( apply_filters( 'stm_listings_post_type', 'listings' ) );
+
+		if ( class_exists( 'STMMultiListing' ) ) {
+			$slugs = STMMultiListing::stm_get_listing_type_slugs();
+
+			if ( ! empty( $slugs ) ) {
+				$post_types = array_merge( $post_types, $slugs );
+			}
+		}
+
+		return array_unique( array_filter( $post_types ) );
+	}
+}
+
+if ( ! function_exists( 'stm_current_user_can_manage_listing_media' ) ) {
+	function stm_current_user_can_manage_listing_media( $post_id ) {
+		if ( ! is_user_logged_in() || empty( $post_id ) ) {
+			return false;
+		}
+
+		if ( ! in_array( get_post_type( $post_id ), stm_add_a_car_listing_post_types(), true ) ) {
+			return false;
+		}
+
+		if ( current_user_can( 'edit_post', $post_id ) ) {
+			return true;
+		}
+
+		$listing_user_id = absint( get_post_meta( $post_id, 'stm_car_user', true ) );
+
+		return $listing_user_id && absint( get_current_user_id() ) === $listing_user_id;
+	}
+}
+
+if ( ! function_exists( 'stm_filter_listing_media_attachments' ) ) {
+	function stm_filter_listing_media_attachments( $attachments_ids, $post_id ) {
+		$filtered = array();
+
+		foreach ( $attachments_ids as $position => $attachment_id ) {
+			$attachment_id = absint( $attachment_id );
+
+			if ( ! $attachment_id || 'attachment' !== get_post_type( $attachment_id ) || ! wp_attachment_is_image( $attachment_id ) ) {
+				continue;
+			}
+
+			$attachment_parent = absint( wp_get_post_parent_id( $attachment_id ) );
+
+			if ( absint( $post_id ) !== $attachment_parent && ! current_user_can( 'edit_post', $attachment_id ) ) {
+				continue;
+			}
+
+			$filtered[ sanitize_key( $position ) ] = $attachment_id;
+		}
+
+		return $filtered;
+	}
+}
+
 if ( ! function_exists( 'stm_ajax_add_a_car_media' ) ) {
 	/**
 	 * Car media
 	 */
 	function stm_ajax_add_a_car_media() {
+		check_ajax_referer( 'stm_security_nonce', 'security' );
+
 		if ( apply_filters( 'stm_site_demo_mode', false ) ) {
 			wp_send_json( array( 'message' => esc_html__( 'Site is on demo mode', 'stm_vehicles_listing' ) ) );
 			exit;
 		}
 
-		$redirect_type = ( isset( $_POST['redirect_type'] ) ) ? $_POST['redirect_type'] : '';
-		$post_id       = intval( $_POST['post_id'] );
+		$redirect_type = ( isset( $_POST['redirect_type'] ) ) ? sanitize_key( wp_unslash( $_POST['redirect_type'] ) ) : '';
+		$post_id       = isset( $_POST['post_id'] ) ? absint( wp_unslash( $_POST['post_id'] ) ) : 0;
 		if ( ! $post_id ) {
 			/*No id passed from first ajax Call?*/
 			wp_send_json( array( 'message' => esc_html__( 'Some error occurred, try again later', 'stm_vehicles_listing' ) ) );
@@ -1828,20 +1887,20 @@ if ( ! function_exists( 'stm_ajax_add_a_car_media' ) ) {
 		$user_id  = get_current_user_id();
 		$updating = $post_id && get_post_meta( $post_id, 'is_listing_updating', true );
 
-		if ( ! empty( $post_id ) ) {
-			if ( ! empty( get_post_meta( $post_id, 'stm_car_user', true ) ) && intval( get_post_meta( $post_id, 'stm_car_user', true ) ) !== intval( $user_id ) ) {
-				/*User tries to add info to another car*/
-				wp_send_json( array( 'message' => esc_html__( 'You are trying to add car to another car user, or your session has expired, please sign in first', 'stm_vehicles_listing' ) ) );
-				exit;
-			}
+		if ( ! stm_current_user_can_manage_listing_media( $post_id ) ) {
+			/*User tries to add info to another car*/
+			wp_send_json( array( 'message' => esc_html__( 'You are trying to add car to another car user, or your session has expired, please sign in first', 'stm_vehicles_listing' ) ) );
+			exit;
 		}
 
 		$attachments_ids = array();
 		foreach ( $_POST as $get_media_keys => $get_media_values ) {
 			if ( strpos( $get_media_keys, 'media_position_' ) !== false ) {
-				$attachments_ids[ str_replace( 'media_position_', '', $get_media_keys ) ] = intval( $get_media_values );
+				$attachments_ids[ str_replace( 'media_position_', '', $get_media_keys ) ] = absint( $get_media_values );
 			}
 		}
+
+		$attachments_ids = stm_filter_listing_media_attachments( $attachments_ids, $post_id );
 
 		$response = array(
 			'message' => '',
@@ -1862,7 +1921,7 @@ if ( ! function_exists( 'stm_ajax_add_a_car_media' ) ) {
 		);
 		$_thumbnail_id       = get_post_thumbnail_id( $post_id );
 		if ( $_thumbnail_id ) {
-			$current_attachments = array_unique( (array) array_unshift( $current_attachments, $_thumbnail_id ), SORT_NUMERIC );
+			$current_attachments = array_unique( array_merge( array( $_thumbnail_id ), $current_attachments ), SORT_NUMERIC );
 		}
 
 		if ( ! empty( $current_attachments ) ) {
@@ -2002,7 +2061,6 @@ if ( ! function_exists( 'stm_ajax_add_a_car_media' ) ) {
 	}
 
 	add_action( 'wp_ajax_stm_ajax_add_a_car_media', 'stm_ajax_add_a_car_media' );
-	add_action( 'wp_ajax_nopriv_stm_ajax_add_a_car_media', 'stm_ajax_add_a_car_media' );
 }
 
 if ( ! function_exists( 'stm_media_random_affix' ) ) {

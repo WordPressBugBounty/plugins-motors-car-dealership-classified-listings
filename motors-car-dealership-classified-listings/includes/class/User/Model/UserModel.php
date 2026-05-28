@@ -191,9 +191,13 @@ class UserModel extends CoreModel {
 	}
 
 	public function fields_by_location( $lat, $lng ) {
-		if ( empty( $lat ) ) {
+		if ( false === filter_var( $lat, FILTER_VALIDATE_FLOAT ) || false === filter_var( $lng, FILTER_VALIDATE_FLOAT ) ) {
 			return '';
 		}
+
+		$lat = (float) $lat;
+		$lng = (float) $lng;
+
 		$formula = "6378.137 * ACOS(COS(RADIANS(stm_lat_prefix.meta_value)) 
 			* COS(RADIANS($lat)) 
 			* COS(RADIANS(stm_lng_prefix.meta_value) - RADIANS($lng)) + SIN(RADIANS(stm_lat_prefix.meta_value)) 
@@ -203,7 +207,7 @@ class UserModel extends CoreModel {
 	}
 
 	public function join_by_location( $lat ) {
-		if ( empty( $lat ) ) {
+		if ( false === filter_var( $lat, FILTER_VALIDATE_FLOAT ) ) {
 			return '';
 		}
 		$join  = " JOIN $this->user_meta_table AS stm_lat_prefix ON (u.ID = stm_lat_prefix.user_id AND stm_lat_prefix.meta_key = 'stm_dealer_location_lat')";
@@ -213,15 +217,17 @@ class UserModel extends CoreModel {
 	}
 
 	public function having_by_location( $lat, $radius ) {
-		if ( empty( $lat ) ) {
+		if ( false === filter_var( $lat, FILTER_VALIDATE_FLOAT ) || false === filter_var( $radius, FILTER_VALIDATE_FLOAT ) ) {
 			return '';
 		}
+
+		$radius = (float) $radius;
 
 		return "HAVING distance <= $radius";
 	}
 
 	public function order_by_location( $lat ) {
-		if ( empty( $lat ) ) {
+		if ( false === filter_var( $lat, FILTER_VALIDATE_FLOAT ) ) {
 			return '';
 		}
 

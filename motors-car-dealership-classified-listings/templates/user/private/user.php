@@ -10,6 +10,19 @@ $path        = 'user/private/';
 
 $tpl = apply_filters( 'stm_account_current_page', '' );
 
+$allowed_private_pages = apply_filters(
+	'stm_user_private_allowed_pages',
+	array(
+		'inventory',
+		'favourite',
+		'settings',
+		'become-dealer',
+		'car-edit',
+		'password-recovery',
+	)
+);
+
+$tpl = sanitize_key( $tpl );
 
 ?>
 
@@ -33,18 +46,19 @@ $tpl = apply_filters( 'stm_account_current_page', '' );
 			<div class="col-md-9 col-sm-12">
 				<div class="stm-user-private-main">
 					<?php
-					if ( isset( $_GET['page'] ) ) {
-						if ( apply_filters( 'get_saved_searches_page', sanitize_text_field( $_GET['page'] ) ) === 'saved-searches' ) {
+					if ( isset( $_GET['page'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+						$page = sanitize_key( wp_unslash( $_GET['page'] ) );
+						if ( apply_filters( 'get_saved_searches_page', $page ) === 'saved-searches' ) {
 							do_action( 'load_saved_searches_page' );
-						} else {
-							do_action( 'stm_listings_load_template', $path . $_GET['page'], array( 'user_id' => $user_id ) );
+						} elseif ( in_array( $page, $allowed_private_pages, true ) ) {
+							do_action( 'stm_listings_load_template', $path . $page, array( 'user_id' => $user_id ) );
 						}
 					} else {
 						if ( 'become-dealer' === $tpl && apply_filters( 'mvl_is_addon_enabled', false, 'forms_editor' ) ) {
 							// Load FormsEditor template directly, same as legacy template
 							// Template will get variables from its own scope (Config, etc.)
 							do_action( 'stm_listings_load_template', 'addons/forms-editor/page/partials/forms/become-dealer', array() );
-						} else {
+						} elseif ( in_array( $tpl, $allowed_private_pages, true ) ) {
 							do_action( 'stm_listings_load_template', $path . $tpl, array( 'user_id' => $user_id ) );
 						}
 					}

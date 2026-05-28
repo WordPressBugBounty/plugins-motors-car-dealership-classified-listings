@@ -64,12 +64,12 @@ class UserController extends CoreController {
 				}
 			}
 
-			$lat    = apply_filters( 'stm_listings_input', null, 'stm_lat' );
-			$lng    = apply_filters( 'stm_listings_input', null, 'stm_lng' );
-			$radius = apply_filters( 'motors_vl_get_nuxy_mod', '', 'distance_search' );
-			$radius = ( ! empty( $radius ) ) ? $radius : 5000;
+			$lat    = filter_var( apply_filters( 'stm_listings_input', null, 'stm_lat' ), FILTER_VALIDATE_FLOAT );
+			$lng    = filter_var( apply_filters( 'stm_listings_input', null, 'stm_lng' ), FILTER_VALIDATE_FLOAT );
+			$radius = filter_var( apply_filters( 'motors_vl_get_nuxy_mod', '', 'distance_search' ), FILTER_VALIDATE_FLOAT );
+			$radius = ( false !== $radius && $radius > 0 ) ? $radius : 5000;
 
-			if ( empty( $left_join ) && ! empty( floatval( $lat ) ) && ! empty( floatval( $lng ) ) ) {
+			if ( empty( $left_join ) && false !== $lat && false !== $lng ) {
 				$include_users = $model->get_filtered_users_by_location( $model->fields_by_location( $lat, $lng ), $model->join_by_location( $lat ), $model->having_by_location( $lat, $radius ), $model->order_by_location( $lat ) );
 			} elseif ( ! empty( $left_join ) && ! empty( $where ) ) {
 				$include_users = $model->get_filtered_users( $left_join, $where, $model->fields_by_location( $lat, $lng ), $model->join_by_location( $lat ), $model->having_by_location( $lat, $radius ), $model->order_by_location( $lat ) );

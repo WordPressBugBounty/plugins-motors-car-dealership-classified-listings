@@ -15,6 +15,12 @@ function stm_listings_locate_template( $templates ) {
 	$located = false;
 
 	foreach ( (array) $templates as $template ) {
+		if ( ! stm_listings_is_safe_template_path( $template ) ) {
+			continue;
+		}
+
+		$template = ltrim( str_replace( '\\', '/', $template ), '/' );
+
 		if ( substr( $template, - 4 ) !== '.php' ) {
 			$template .= '.php';
 		}
@@ -26,17 +32,50 @@ function stm_listings_locate_template( $templates ) {
 		}
 
 		if ( ! ( $located ) ) {
-			if ( file_exists( realpath( apply_filters( 'stm_listings_template_file', STM_LISTINGS_PATH, $template ) . '/templates/' . $template ) ) ) {
-				$located = realpath( apply_filters( 'stm_listings_template_file', STM_LISTINGS_PATH, $template ) . '/templates/' . $template );
+			$template_base = realpath( apply_filters( 'stm_listings_template_file', STM_LISTINGS_PATH, $template ) . '/templates' );
+
+			if ( $template_base ) {
+				$template_path = realpath( $template_base . '/' . $template );
+
+				if ( $template_path && 0 === strpos( $template_path, $template_base . DIRECTORY_SEPARATOR ) && file_exists( $template_path ) ) {
+					$located = $template_path;
+				}
 			}
 		}
 
-		if ( file_exists( $located ) ) {
+		if ( $located && file_exists( $located ) ) {
 			break;
 		}
 	}
 
 	return apply_filters( 'stm_listings_locate_template', $located, $templates );
+}
+
+/**
+ * Check that a requested template path cannot escape the listings template scope.
+ *
+ * @param mixed $template Template path.
+ *
+ * @return bool
+ */
+function stm_listings_is_safe_template_path( $template ) {
+	if ( ! is_string( $template ) || '' === $template || str_contains( $template, "\0" ) ) {
+		return false;
+	}
+
+	$template = str_replace( '\\', '/', $template );
+
+	if ( preg_match( '#^[a-z][a-z0-9+.-]*://#i', $template ) || preg_match( '#^[a-z]:/#i', $template ) || 0 === strpos( $template, '//' ) ) {
+		return false;
+	}
+
+	foreach ( explode( '/', trim( $template, '/' ) ) as $path_part ) {
+		if ( '..' === $path_part ) {
+			return false;
+		}
+	}
+
+	return true;
 }
 
 /**
@@ -47,7 +86,11 @@ function stm_listings_locate_template( $templates ) {
  */
 function stm_listings_load_template( $__template, $__vars = array() ) {
 	extract( $__vars );
-	include stm_listings_locate_template( $__template );
+	$__located = stm_listings_locate_template( $__template );
+
+	if ( $__located ) {
+		include $__located;
+	}
 }
 
 add_action( 'stm_listings_load_template', 'stm_listings_load_template', 10, 2 );

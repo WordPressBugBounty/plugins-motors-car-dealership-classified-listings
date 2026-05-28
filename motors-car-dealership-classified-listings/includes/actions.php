@@ -984,25 +984,77 @@ if ( ! function_exists( 'stm_ajax_buy_car_online' ) ) {
 
 		$response = array( 'status' => 'Error' );
 
-		$car_id = intval( filter_var( wp_unslash( $_POST['car_id'] ), FILTER_SANITIZE_NUMBER_INT ) );
-		$price  = floatval( filter_var( wp_unslash( $_POST['price'] ), FILTER_SANITIZE_NUMBER_FLOAT ) );
+		$car_id = isset( $_POST['car_id'] ) ? absint( wp_unslash( $_POST['car_id'] ) ) : 0;
 
-		if ( ! empty( $car_id ) && ! empty( $price ) ) {
+		if ( ! empty( $car_id ) && stm_is_listing_available_for_online_purchase( $car_id ) ) {
+			$price = stm_get_listing_online_purchase_price( $car_id );
 
-			update_post_meta( $car_id, '_price', $price );
-			update_post_meta( $car_id, 'is_sell_online_status', 'in_cart' );
+			if ( $price > 0 ) {
+				update_post_meta( $car_id, '_price', wc_format_decimal( $price ) );
+				update_post_meta( $car_id, 'is_sell_online_status', 'in_cart' );
 
-			$checkout_url = wc_get_checkout_url() . '?add-to-cart=' . $car_id;
+				$checkout_url = add_query_arg( 'add-to-cart', $car_id, wc_get_checkout_url() );
 
-			$response = array(
-				'status'       => 'success',
-				'redirect_url' => $checkout_url,
-			);
+				$response = array(
+					'status'       => 'success',
+					'redirect_url' => $checkout_url,
+				);
 
-			wp_send_json( $response );
+				wp_send_json( $response );
+			}
 		}
 
 		wp_send_json( $response );
+	}
+}
+
+if ( ! function_exists( 'stm_get_online_purchase_listing_post_types' ) ) {
+	function stm_get_online_purchase_listing_post_types() {
+		$post_types = array( apply_filters( 'stm_listings_post_type', 'listings' ) );
+
+		if ( class_exists( 'STMMultiListing' ) ) {
+			$slugs = STMMultiListing::stm_get_listing_type_slugs();
+
+			if ( ! empty( $slugs ) ) {
+				$post_types = array_merge( $post_types, $slugs );
+			}
+		}
+
+		return array_unique( array_filter( $post_types ) );
+	}
+}
+
+if ( ! function_exists( 'stm_is_listing_available_for_online_purchase' ) ) {
+	function stm_is_listing_available_for_online_purchase( $listing_id ) {
+		if ( ! in_array( get_post_type( $listing_id ), stm_get_online_purchase_listing_post_types(), true ) ) {
+			return false;
+		}
+
+		if ( 'publish' !== get_post_status( $listing_id ) ) {
+			return false;
+		}
+
+		if ( empty( get_post_meta( $listing_id, 'car_mark_woo_online', true ) ) ) {
+			return false;
+		}
+
+		if ( ! empty( get_post_meta( $listing_id, 'car_mark_as_sold', true ) ) ) {
+			return false;
+		}
+
+		return true;
+	}
+}
+
+if ( ! function_exists( 'stm_get_listing_online_purchase_price' ) ) {
+	function stm_get_listing_online_purchase_price( $listing_id ) {
+		$price = get_post_meta( $listing_id, 'sale_price', true );
+
+		if ( empty( $price ) ) {
+			$price = get_post_meta( $listing_id, 'price', true );
+		}
+
+		return (float) wc_format_decimal( $price );
 	}
 }
 

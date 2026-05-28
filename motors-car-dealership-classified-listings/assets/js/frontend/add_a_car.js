@@ -277,6 +277,7 @@
                                 }
 
                                 fd.append('action', 'stm_ajax_add_a_car_media');
+                                fd.append('security', stm_security_nonce);
                                 fd.append('post_id', data.post_id);
 
                                 $.ajax({

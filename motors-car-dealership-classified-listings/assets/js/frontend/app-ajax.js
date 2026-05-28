@@ -5,14 +5,13 @@
         var thisBtn = $(this);
 
         var carId = $(this).data('id');
-        var price = $(this).data('price');
 
         $.ajax({
             url: ajaxurl,
             type: "POST",
             dataType: 'json',
             context: this,
-            data: 'car_id=' + carId + '&price=' + price + '&action=stm_ajax_buy_car_online&security=' + stm_security_nonce,
+            data: 'car_id=' + carId + '&action=stm_ajax_buy_car_online&security=' + stm_security_nonce,
             beforeSend: function () {
                 thisBtn.addClass('buy-online-load');
             },

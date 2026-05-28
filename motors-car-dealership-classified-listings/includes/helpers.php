@@ -1337,7 +1337,7 @@ if ( ! function_exists( 'stm_account_current_page' ) ) {
 		$page = 'inventory';
 
 		if ( isset( $_GET['page'] ) ) {
-			$page = sanitize_text_field( $_GET['page'] );
+			$page = sanitize_key( wp_unslash( $_GET['page'] ) );
 		}
 
 		if ( ! empty( $_GET['my_favourites'] ) ) {
