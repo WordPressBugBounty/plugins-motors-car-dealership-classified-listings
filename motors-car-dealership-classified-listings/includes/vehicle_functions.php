@@ -12,19 +12,19 @@ if ( ! function_exists( 'stm_ajaxurl' ) ) {
 		//phpcs:disable
 		?>
 		<script type="text/javascript">
-            var stm_lang_code = '<?php echo esc_html( $my_locale[0] ); ?>';
-			<?php if ( class_exists( 'SitePress' ) ) : ?>
-            stm_lang_code = '<?php echo esc_js( ICL_LANGUAGE_CODE ); ?>';
-			<?php endif; ?>
-			var ajaxurl = '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>';
-            var mvl_current_ajax_url = '<?php echo esc_url( get_the_permalink( get_the_ID() ) ); ?>';
-			var stm_site_blog_id = "<?php echo get_current_blog_id(); ?>";
-			var stm_added_to_compare_text = "<?php esc_html_e( 'Added to compare', 'stm_vehicles_listing' ); ?>";
-			var stm_removed_from_compare_text = "<?php esc_html_e( 'was removed from compare', 'stm_vehicles_listing' ); ?>";
-			var stm_already_added_to_compare_text = "<?php echo esc_js( apply_filters( 'already_added_to_compare', esc_html__( 'You have already added 3 cars', 'stm_vehicles_listing' ) ) ); ?>";
-			var reset_all_txt = "<?php esc_html_e( 'Reset All', 'stm_vehicles_listing' ); ?>";
-            var photo_remaining_singular = '<?php echo esc_html__( 'more photo', 'stm_vehicles_listing' ); ?>';
-            var photo_remaining_plural = '<?php echo esc_html__( 'more photos', 'stm_vehicles_listing' ); ?>';
+					var stm_lang_code = '<?php echo esc_html( $my_locale[0] ); ?>';
+		  <?php if ( class_exists( 'SitePress' ) ) : ?>
+					stm_lang_code = '<?php echo esc_js( ICL_LANGUAGE_CODE ); ?>';
+		  <?php endif; ?>
+					var ajaxurl = '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>';
+					var mvl_current_ajax_url = '<?php echo esc_url( get_the_permalink( get_the_ID() ) ); ?>';
+					var stm_site_blog_id = "<?php echo get_current_blog_id(); ?>";
+					var stm_added_to_compare_text = "<?php esc_html_e( 'Added to compare', 'stm_vehicles_listing' ); ?>";
+					var stm_removed_from_compare_text = "<?php esc_html_e( 'was removed from compare', 'stm_vehicles_listing' ); ?>";
+					var stm_already_added_to_compare_text = "<?php echo esc_js( apply_filters( 'already_added_to_compare', esc_html__( 'You have already added 3 cars', 'stm_vehicles_listing' ) ) ); ?>";
+					var reset_all_txt = "<?php esc_html_e( 'Reset All', 'stm_vehicles_listing' ); ?>";
+					var photo_remaining_singular = '<?php echo esc_html__( 'more photo', 'stm_vehicles_listing' ); ?>';
+					var photo_remaining_plural = '<?php echo esc_html__( 'more photos', 'stm_vehicles_listing' ); ?>';
 		</script>
 		<?php
 		//phpcs:enable
@@ -52,20 +52,20 @@ if ( ! function_exists( 'stm_vehicle_plugin_admin_create_nonce' ) ) {
 
 		?>
 		<script>
-			var fileAutomanagerUpload = '<?php echo esc_js( $file_automanager_upload ); ?>';
-			var amSaveAssociations = '<?php echo esc_js( $am_save_associations ); ?>';
-			var amSaveTemplate = '<?php echo esc_js( $am_save_template ); ?>';
+					var fileAutomanagerUpload = '<?php echo esc_js( $file_automanager_upload ); ?>';
+					var amSaveAssociations = '<?php echo esc_js( $am_save_associations ); ?>';
+					var amSaveTemplate = '<?php echo esc_js( $am_save_template ); ?>';
 
-			var saveSingleOpt = '<?php echo esc_js( $save_single_opt ); ?>';
-			var deleteSingleOpt = '<?php echo esc_js( $delete_single_opt ); ?>';
-			var perPageOptions = '<?php echo esc_js( $per_page_options ); ?>';
-			var changePageOptions = '<?php echo esc_js( $change_page_options ); ?>';
-			var searchCategory = '<?php echo esc_js( $search_category ); ?>';
-			var saveOpt = '<?php echo esc_js( $save_opt ); ?>';
-			var getOpt = '<?php echo esc_js( $get_opt ); ?>';
-			var addOpt = '<?php echo esc_js( $add_opt ); ?>';
-			var disableNotification = '<?php echo esc_js( $disable_notification ); ?>';
-			var listings_add_category_in = '<?php echo esc_js( $listings_add_category_in ); ?>';
+					var saveSingleOpt = '<?php echo esc_js( $save_single_opt ); ?>';
+					var deleteSingleOpt = '<?php echo esc_js( $delete_single_opt ); ?>';
+					var perPageOptions = '<?php echo esc_js( $per_page_options ); ?>';
+					var changePageOptions = '<?php echo esc_js( $change_page_options ); ?>';
+					var searchCategory = '<?php echo esc_js( $search_category ); ?>';
+					var saveOpt = '<?php echo esc_js( $save_opt ); ?>';
+					var getOpt = '<?php echo esc_js( $get_opt ); ?>';
+					var addOpt = '<?php echo esc_js( $add_opt ); ?>';
+					var disableNotification = '<?php echo esc_js( $disable_notification ); ?>';
+					var listings_add_category_in = '<?php echo esc_js( $listings_add_category_in ); ?>';
 		</script>
 		<?php
 
@@ -1660,7 +1660,7 @@ if ( ! function_exists( 'stm_ajax_add_a_car_images' ) ) {
 			$files               = $_FILES['files'];
 			$max_uploads         = intval( $limits['images'] > $limits['chargeable_listing_images'] ? $limits['images'] : $limits['chargeable_listing_images'] );
 			$max_uploads_message = sprintf(
-				/* translators: %d: images limit */
+			/* translators: %d: images limit */
 				esc_html__( 'Sorry, you can upload only %d images per free listing', 'stm_vehicles_listing' ),
 				$max_uploads
 			);
@@ -1669,7 +1669,7 @@ if ( ! function_exists( 'stm_ajax_add_a_car_images' ) ) {
 			if ( 'pay' === $publication_type ) {
 				$max_uploads         = $limits['chargeable_listing_images'];
 				$max_uploads_message = sprintf(
-					/* translators: %d: images limit */
+				/* translators: %d: images limit */
 					esc_html__( 'Sorry, you can upload only %d images per chargeable listing', 'stm_vehicles_listing' ),
 					$max_uploads
 				);
@@ -1842,7 +1842,9 @@ if ( ! function_exists( 'stm_current_user_can_manage_listing_media' ) ) {
 
 if ( ! function_exists( 'stm_filter_listing_media_attachments' ) ) {
 	function stm_filter_listing_media_attachments( $attachments_ids, $post_id ) {
-		$filtered = array();
+		$filtered           = array();
+		$current_user_id    = get_current_user_id();
+		$can_manage_listing = stm_current_user_can_manage_listing_media( $post_id );
 
 		foreach ( $attachments_ids as $position => $attachment_id ) {
 			$attachment_id = absint( $attachment_id );
@@ -1854,7 +1856,11 @@ if ( ! function_exists( 'stm_filter_listing_media_attachments' ) ) {
 			$attachment_parent = absint( wp_get_post_parent_id( $attachment_id ) );
 
 			if ( absint( $post_id ) !== $attachment_parent && ! current_user_can( 'edit_post', $attachment_id ) ) {
-				continue;
+				$attachment_author = absint( get_post_field( 'post_author', $attachment_id ) );
+
+				if ( ! $can_manage_listing || $current_user_id !== $attachment_author ) {
+					continue;
+				}
 			}
 
 			$filtered[ sanitize_key( $position ) ] = $attachment_id;
@@ -1938,9 +1944,17 @@ if ( ! function_exists( 'stm_ajax_add_a_car_media' ) ) {
 			$attachments_ids = array_unique( $attachments_ids );
 			ksort( $attachments_ids );
 
-			$new_attachments = array_diff( $attachments_ids, $current_attachments );
-			foreach ( $new_attachments as $_attachment_id ) {
+			foreach ( $attachments_ids as $_attachment_id ) {
 				delete_post_meta( $_attachment_id, 'stm_attachment_cron_timestamp' );
+
+				if ( absint( wp_get_post_parent_id( $_attachment_id ) ) !== $post_id ) {
+					wp_update_post(
+						array(
+							'ID'          => $_attachment_id,
+							'post_parent' => $post_id,
+						)
+					);
+				}
 			}
 		} else {
 			stm_delete_media( $_thumbnail_id );

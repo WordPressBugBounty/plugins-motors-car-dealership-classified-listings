@@ -5,7 +5,7 @@ Donate link: https://www.paypal.me/stylemix
 Tags: classified ads, listings, classifieds, car dealer, auto listing, vehicle inventory
 Requires at least: 4.6
 Tested up to: 7.0
-Stable tag: 1.4.110
+Stable tag: 1.4.111
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -90,7 +90,7 @@ The Motors plugin also has an **Email Template Manager (Pro)** that lets you ful
 - Test Drive Form
 - Share Listings on Social Networks
 
-#### Motors Premium Features
+#### [Motors Premium Features](https://stylemixthemes.com/car-dealer-plugin/?utm_source=wporg-motors&utm_medium=description)
 1. **Social login** – Users can log in to your site using their Google or Facebook accounts. This allows for quick access without the need to remember a password.
 2. **Saved Searches** – Allow visitors to save their searches and receive email alerts when new listings match their criteria. You can choose how often these alerts are sent and ensure they never miss relevant listings.
 3. **VIN Decoder** – Get essential vehicle information by entering the VIN (Vehicle Identification Number). You can connect up to five VIN services to gather accurate details like make, model, and more, so users quickly understand key aspects of a vehicle they’re interested in.
@@ -182,6 +182,10 @@ Definitely. Motors is translation-ready and works with popular multilingual plug
 You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability](https://patchstack.com/database/vdp/motors-car-dealership-classified-listings). 
 
 == Changelog ==
+
+= 1.4.111
+- **Fix:** Listings were not accessible in the user profile after publishing
+- **Fix:** Listing images were not saving when submitting a listing through the Add Listing page
 
 = 1.4.110
 - **Update:** Compatibility with WordPress 7.0
