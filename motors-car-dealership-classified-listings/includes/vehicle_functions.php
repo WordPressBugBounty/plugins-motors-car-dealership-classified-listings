@@ -1822,11 +1822,14 @@ if ( ! function_exists( 'stm_add_a_car_listing_post_types' ) ) {
 
 if ( ! function_exists( 'stm_current_user_can_manage_listing_media' ) ) {
 	function stm_current_user_can_manage_listing_media( $post_id ) {
+		$post_id = absint( $post_id );
+
 		if ( ! is_user_logged_in() || empty( $post_id ) ) {
 			return false;
 		}
 
-		if ( ! in_array( get_post_type( $post_id ), stm_add_a_car_listing_post_types(), true ) ) {
+		$post = get_post( $post_id );
+		if ( ! $post || ! in_array( $post->post_type, stm_add_a_car_listing_post_types(), true ) ) {
 			return false;
 		}
 
@@ -1835,6 +1838,10 @@ if ( ! function_exists( 'stm_current_user_can_manage_listing_media' ) ) {
 		}
 
 		$listing_user_id = absint( get_post_meta( $post_id, 'stm_car_user', true ) );
+
+		if ( ! $listing_user_id ) {
+			$listing_user_id = absint( $post->post_author );
+		}
 
 		return $listing_user_id && absint( get_current_user_id() ) === $listing_user_id;
 	}
@@ -1887,6 +1894,11 @@ if ( ! function_exists( 'stm_ajax_add_a_car_media' ) ) {
 		if ( ! $post_id ) {
 			/*No id passed from first ajax Call?*/
 			wp_send_json( array( 'message' => esc_html__( 'Some error occurred, try again later', 'stm_vehicles_listing' ) ) );
+			exit;
+		}
+
+		if ( ! in_array( get_post_type( $post_id ), stm_add_a_car_listing_post_types(), true ) ) {
+			wp_send_json( array( 'message' => esc_html__( 'You are not allowed to manage media for this post.', 'stm_vehicles_listing' ) ) );
 			exit;
 		}
 
@@ -2411,8 +2423,11 @@ if ( ! function_exists( 'stm_edit_delete_user_car' ) ) {
 			}
 
 			if ( ( isset( $_GET['stm_unmark_as_sold_car'] ) && wp_verify_nonce( $_GET['_wpnonce'], 'stm_unmark_as_sold_car' ) ) || ( isset( $_GET['stm_mark_as_sold_car'] ) && wp_verify_nonce( $_GET['_wpnonce'], 'stm_mark_as_sold_car' ) ) ) {
-				$post_id = ( isset( $_GET['stm_unmark_as_sold_car'] ) ) ? $_GET['stm_unmark_as_sold_car'] : $_GET['stm_mark_as_sold_car'];
-				if ( in_array( get_post_type( $post_id ), $listings_post_types, true ) ) {
+				$post_id = ( isset( $_GET['stm_unmark_as_sold_car'] ) ) ? intval( $_GET['stm_unmark_as_sold_car'] ) : intval( $_GET['stm_mark_as_sold_car'] );
+				$author  = get_post_meta( $post_id, 'stm_car_user', true );
+				$user    = wp_get_current_user();
+
+				if ( ( current_user_can( 'manage_options' ) || ( ! empty( $author ) && intval( $user->ID ) !== 0 && intval( $author ) === intval( $user->ID ) ) ) && in_array( get_post_type( $post_id ), $listings_post_types, true ) ) {
 					update_post_meta( $post_id, 'car_mark_as_sold', isset( $_GET['stm_mark_as_sold_car'] ) ? 'on' : '' );
 				}
 			}
