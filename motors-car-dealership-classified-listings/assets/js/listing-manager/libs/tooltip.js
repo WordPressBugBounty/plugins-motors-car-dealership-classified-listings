@@ -1,6 +1,4 @@
 jQuery(document).ready(function($) {
-    console.log('tooltip.js loaded');
-
     const tooltip = $('<div class="mvl-tooltip"></div>');
     const tooltipImage = $('<div class="mvl-tooltip-image"></div>');
     $('body').append(tooltip, tooltipImage);
@@ -56,7 +54,23 @@ jQuery(document).ready(function($) {
         clearTimeout(showTimeout);
         
         showTimeout = setTimeout(() => {
-            tooltip.innerHTML = content;
+            tooltip.textContent = content || '';
+            tooltip.style.display = 'block';
+            positionTooltip(element, tooltip);
+        }, 100);
+    }
+
+    function showImageTooltip(element, tooltip, imageUrl) {
+        clearTimeout(hideTimeout);
+        clearTimeout(showTimeout);
+
+        showTimeout = setTimeout(() => {
+            const image = document.createElement('img');
+            image.src = imageUrl || '';
+            image.alt = 'Preview';
+
+            tooltip.textContent = '';
+            tooltip.appendChild(image);
             tooltip.style.display = 'block';
             positionTooltip(element, tooltip);
         }, 100);
@@ -82,7 +96,7 @@ jQuery(document).ready(function($) {
     $(document).on('mouseenter', '[mvl-tooltip-image]', function() {
         const imageUrl = this.getAttribute('mvl-tooltip-image');
         tooltipElement.style.display = 'none';
-        showTooltip(this, tooltipImageElement, `<img src="${imageUrl}" alt="Preview">`);
+        showImageTooltip(this, tooltipImageElement, imageUrl);
     });
 
     $(document).on('mouseleave', '[mvl-tooltip-image]', function() {

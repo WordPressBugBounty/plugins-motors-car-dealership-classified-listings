@@ -274,8 +274,8 @@ function is_mvl_addon_enabled( $addon ) {
 	return defined( 'STM_LISTINGS_PRO_PATH' ) && isset( $enabled_addons[ $addon ] ) && 'on' === $enabled_addons[ $addon ];
 }
 
-add_filter( 'wp_kses_allowed_html', 'mvl_wp_kses_allowed_html' );
-function mvl_wp_kses_allowed_html( $allowed_html ) {
+add_filter( 'wp_kses_allowed_html', 'mvl_wp_kses_allowed_html', 10, 2 );
+function mvl_wp_kses_allowed_html( $allowed_html, $context = '' ) {
 	$allowed_atts = array(
 		'align'        => array(),
 		'class'        => array(),
@@ -300,7 +300,6 @@ function mvl_wp_kses_allowed_html( $allowed_html ) {
 		'for'          => array(),
 		'width'        => array(),
 		'height'       => array(),
-		'data-*'       => true,
 		'title'        => array(),
 		'placeholder'  => array(),
 		'selected'     => array(),
@@ -310,6 +309,8 @@ function mvl_wp_kses_allowed_html( $allowed_html ) {
 		'readonly'     => array(),
 		'autocomplete' => array(),
 	);
+
+	$allowed_atts = array_merge( $allowed_atts, mvl_get_wp_kses_allowed_data_attributes() );
 
 	$allowed_html['select']             = $allowed_atts;
 	$allowed_html['input']              = $allowed_atts;
@@ -336,6 +337,97 @@ function mvl_wp_kses_allowed_html( $allowed_html ) {
 	);
 
 	return $allowed_html;
+}
+
+function mvl_get_wp_kses_allowed_data_attributes() {
+	return array_fill_keys(
+		array(
+			'data-accept',
+			'data-action',
+			'data-affix',
+			'data-allowedtype',
+			'data-bs-offset',
+			'data-bs-placement',
+			'data-bs-target',
+			'data-bs-title',
+			'data-bs-toggle',
+			'data-callback',
+			'data-class',
+			'data-confirmation-accept',
+			'data-confirmation-cancel',
+			'data-confirmation-delete-btn-icon',
+			'data-confirmation-message',
+			'data-confirmation-slug',
+			'data-confirmation-title',
+			'data-container',
+			'data-date',
+			'data-dep',
+			'data-depend-action',
+			'data-depend-values',
+			'data-depended',
+			'data-depends-action',
+			'data-depends-on',
+			'data-deps',
+			'data-dismiss',
+			'data-distance',
+			'data-elementor-widget-class',
+			'data-field-action',
+			'data-field-id',
+			'data-filesize',
+			'data-filesizemb',
+			'data-fileslimit',
+			'data-groupclass',
+			'data-id',
+			'data-iframe',
+			'data-inputname',
+			'data-itemimage',
+			'data-label',
+			'data-limit',
+			'data-listing-id',
+			'data-listing-page-id',
+			'data-load',
+			'data-max-char',
+			'data-media',
+			'data-mileage',
+			'data-modal-action',
+			'data-multiple',
+			'data-name',
+			'data-offset',
+			'data-original-title',
+			'data-page',
+			'data-parent',
+			'data-placement',
+			'data-post-type',
+			'data-posts-per-page',
+			'data-price',
+			'data-profile',
+			'data-sel-type',
+			'data-seller-note-require',
+			'data-sitekey',
+			'data-slug',
+			'data-src',
+			'data-src-img',
+			'data-status',
+			'data-tab',
+			'data-tab-id',
+			'data-target',
+			'data-template',
+			'data-templateclass',
+			'data-title',
+			'data-toggle',
+			'data-translate',
+			'data-trigger',
+			'data-type',
+			'data-url',
+			'data-user',
+			'data-value',
+			'data-video-field',
+			'data-view',
+			'data-widget-id',
+			'data-widget_id',
+		),
+		array()
+	);
 }
 
 function mvl_wp_kses_allowed_html_in_content( $allowed_html ) {
