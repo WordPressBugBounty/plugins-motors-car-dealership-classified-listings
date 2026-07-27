@@ -1096,7 +1096,7 @@ if ( ! function_exists( 'stm_ajax_add_a_car' ) ) {
 			wp_send_json( $response );
 		}
 
-		check_ajax_referer( 'stm_security_nonce', 'security', false );
+		check_ajax_referer( 'stm_security_nonce', 'security' );
 
 		$response     = array();
 		$first_step   = array();
@@ -1135,6 +1135,40 @@ if ( ! function_exists( 'stm_ajax_add_a_car' ) ) {
 			);
 		}
 
+		$btn_type = '';
+		if ( isset( $_POST['btn-type'] ) ) {
+			$btn_type = sanitize_key( wp_unslash( $_POST['btn-type'] ) );
+		}
+
+		$allowed_btn_types = array( 'add', 'pay', 'edit', 'edit-ppl' );
+		if ( ! in_array( $btn_type, $allowed_btn_types, true ) ) {
+			$response['message'] = esc_html__( 'Unknown action', 'stm_vehicles_listing' );
+			wp_send_json( $response );
+		}
+
+		$default_listing_type = sanitize_key( apply_filters( 'stm_listings_post_type', 'listings' ) );
+		$allowed_listing_types = (array) apply_filters( 'stm_listings_multi_type', array( $default_listing_type ) );
+		$allowed_listing_types = array_map( 'sanitize_key', $allowed_listing_types );
+		$allowed_listing_types = array_values( array_unique( array_filter( $allowed_listing_types ) ) );
+
+		if ( ! in_array( $default_listing_type, $allowed_listing_types, true ) ) {
+			$allowed_listing_types[] = $default_listing_type;
+		}
+
+		$listing_post_type = $default_listing_type;
+		if ( ! empty( $_POST['custom_listing_type'] ) ) {
+			$requested_listing_type = sanitize_key( wp_unslash( $_POST['custom_listing_type'] ) );
+
+			if ( in_array( $requested_listing_type, $allowed_listing_types, true ) ) {
+				$listing_post_type = $requested_listing_type;
+			} else {
+				$response['message'] = esc_html__( 'Unknown listing type', 'stm_vehicles_listing' );
+				wp_send_json( $response );
+			}
+		}
+
+		$slug = $listing_post_type;
+
 		$update = false;
 		if ( ! empty( $_POST['stm_current_car_id'] ) ) {
 			$post_id  = intval( $_POST['stm_current_car_id'] );
@@ -1145,6 +1179,16 @@ if ( ! function_exists( 'stm_ajax_add_a_car' ) ) {
 			if ( intval( $car_user ) !== intval( $user['user_id'] ) ) {
 				return false;
 			}
+
+			if ( ! in_array( get_post_type( $post_id ), $allowed_listing_types, true ) ) {
+				$response['message'] = esc_html__( 'Unknown listing type', 'stm_vehicles_listing' );
+				wp_send_json( $response );
+			}
+		}
+
+		if ( in_array( $btn_type, array( 'edit', 'edit-ppl' ), true ) && ! $update ) {
+			$response['message'] = esc_html__( 'Unknown action', 'stm_vehicles_listing' );
+			wp_send_json( $response );
 		}
 
 		/*Get first step*/
@@ -1179,21 +1223,16 @@ if ( ! function_exists( 'stm_ajax_add_a_car' ) ) {
 			);
 		}
 
-		if ( isset( $_POST['btn-type'] ) && 'pay' === $_POST['btn-type'] ) {
+		if ( 'pay' === $btn_type ) {
 			/*Get if Pay Per Listing no available posts*/
 			if ( ( ! apply_filters( 'mvl_is_woocommerce_active', false ) || ! apply_filters( 'is_mvl_pro', false ) ) ) {
 				$response['message'] = esc_html__( 'WooCommerce or Motors Pro is not active', 'stm_vehicles_listing' );
 				$error               = true;
 			}
-		} else {
-			if ( isset( $_POST['btn-type'] ) && 'add' === $_POST['btn-type'] ) {
-				/*Get if no available posts*/
-				if ( $restrictions['posts'] < 1 ) {
-					$response['message'] = esc_html__( 'You do not have available posts', 'stm_vehicles_listing' );
-					$error               = true;
-				}
-			} elseif ( ! isset( $_POST['btn-type'] ) ) {
-				$response['message'] = esc_html__( 'Unknown action', 'stm_vehicles_listing' );
+		} elseif ( 'add' === $btn_type ) {
+			/*Get if no available posts*/
+			if ( $restrictions['posts'] < 1 ) {
+				$response['message'] = esc_html__( 'You do not have available posts', 'stm_vehicles_listing' );
 				$error               = true;
 			}
 		}
@@ -1287,7 +1326,7 @@ if ( ! function_exists( 'stm_ajax_add_a_car' ) ) {
 			$generic_title = sanitize_text_field( $_POST['stm_car_main_title'] );
 		}
 
-		if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'enable_plans' ) && apply_filters( 'stm_is_multiple_plans', false ) && 'pay' !== $_POST['btn-type'] ) {
+		if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'enable_plans' ) && apply_filters( 'stm_is_multiple_plans', false ) && 'pay' !== $btn_type ) {
 			if ( empty( $_POST['selectedPlan'] ) && ! current_user_can( 'manage_options' ) ) {
 				$error               = true;
 				$response['message'] = esc_html__( 'Please select plan', 'stm_vehicles_listing' );
@@ -1308,20 +1347,15 @@ if ( ! function_exists( 'stm_ajax_add_a_car' ) ) {
 				$status = 'publish';
 			}
 
-			if ( isset( $_POST['btn-type'] ) && 'pay' === $_POST['btn-type'] ) {
+			if ( 'pay' === $btn_type ) {
 				$status = 'pending';
 			}
 
 			$post_data = array(
-				'post_type'   => apply_filters( 'stm_listings_post_type', 'listings' ),
+				'post_type'   => $listing_post_type,
 				'post_title'  => '',
 				'post_status' => $status,
 			);
-
-			if ( ! empty( $_POST['custom_listing_type'] ) ) {
-				$post_data['post_type'] = sanitize_text_field( $_POST['custom_listing_type'] );
-				$slug                   = sanitize_text_field( $_POST['custom_listing_type'] );
-			}
 
 			if ( ! $update && apply_filters( 'stm_get_wpb_def_tmpl', false ) ) {
 				$post_data['post_content'] = apply_filters( 'stm_get_wpb_def_tmpl', false );
@@ -1532,13 +1566,13 @@ if ( ! function_exists( 'stm_ajax_add_a_car' ) ) {
 						delete_post_meta( $post_id, $tax );
 					}
 				}
-				update_post_meta( $post_id, 'publication_type', $_POST['btn-type'] );
+				update_post_meta( $post_id, 'publication_type', $btn_type );
 				update_post_meta( $post_id, 'title', 'hide' );
 				update_post_meta( $post_id, 'breadcrumbs', 'show' );
 				update_post_meta( $post_id, 'car_mark_as_sold', '' );
 
 				$response['post_id']       = $post_id;
-				$response['redirect_type'] = sanitize_text_field( $_POST['btn-type'] );
+				$response['redirect_type'] = $btn_type;
 				if ( ( $update ) ) {
 					$response['message'] = esc_html__( 'Listing Updated, uploading photos', 'stm_vehicles_listing' );
 				} else {
@@ -1559,7 +1593,7 @@ if ( ! function_exists( 'stm_ajax_add_a_car' ) ) {
 
 				update_post_meta( $post_id, 'stm_car_user', $user['user_id'] );
 
-				if ( apply_filters( 'stm_is_multiple_plans', false ) && 'pay' !== $_POST['btn-type'] ) {
+				if ( apply_filters( 'stm_is_multiple_plans', false ) && 'pay' !== $btn_type ) {
 					$plan_id = filter_var( $_POST['selectedPlan'], FILTER_SANITIZE_NUMBER_INT );
 
 					if ( $update ) {
