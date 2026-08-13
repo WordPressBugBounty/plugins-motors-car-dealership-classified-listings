@@ -1,6 +1,35 @@
 (function ($) {
+  function isDemoCheckboxChecked($checkbox) {
+    let checked = $checkbox.data('checked');
+
+    if (typeof checked === 'undefined') {
+      checked = $checkbox.attr('data-checked');
+    }
+
+    if (typeof checked === 'undefined') {
+      return true;
+    }
+
+    return checked === true || checked === 'true' || checked === 1 || checked === '1';
+  }
+
+  function setDemoInstallButtonState($button, isInstalling) {
+    let label = $button.data('install-label');
+
+    if (isInstalling) {
+      label = $button.data('installing-label');
+      $button.addClass('disabled');
+      $button.attr('aria-disabled', 'true');
+    } else {
+      $button.removeClass('disabled');
+      $button.removeAttr('aria-disabled');
+    }
+
+    $button.text(label);
+  }
+
   $(document).ready(function () {
-    let isInstalling = true;
+    let isInstalling = false;
 
     $(document).on('click', '.mst-starter-wizard__demo-checkbox label', function (e) {
       if ($(this).closest('.mst-starter-wizard__demo, .mst-starter-wizard__demo-checkbox').hasClass('disable-check')) {
@@ -10,7 +39,7 @@
       e.preventDefault();
 
       const $checkbox = $(this).find('.demo-checkbox');
-      const isChecked = $checkbox.data('checked');
+      const isChecked = isDemoCheckboxChecked($checkbox);
 
       $checkbox.data('checked', !isChecked);
       $checkbox.attr('data-checked', !isChecked);
@@ -24,9 +53,20 @@
     });
 
     $(document).on('click', '.mst-starter-wizard__button-install-demo', function () {
+      if (isInstalling) {
+        return;
+      }
+
       isInstalling = true;
 
-      $(window).on('beforeunload', function () {
+      const $installButton = $(this);
+      const $buttonBox = $installButton.closest('.mst-starter-wizard__button-box');
+
+      $buttonBox.removeClass('hide-install has-demo-error');
+      $buttonBox.attr('aria-busy', 'true');
+      setDemoInstallButtonState($installButton, true);
+
+      $(window).off('beforeunload.mstDemoImport').on('beforeunload.mstDemoImport', function () {
         if (isInstalling) {
           return 'Demo content is still being installed. Are you sure you want to leave?';
         }
@@ -34,32 +74,32 @@
 
       $('.mst-starter-wizard__demo').addClass('disable-check');
       $(document).off('click', '.mst-starter-wizard__demo-checkbox label');
-      $('.mst-starter-wizard__button-box').addClass('mst-starter-wizard__button-box__hide');
+      $buttonBox.addClass('mst-starter-wizard__button-box__hide');
 
       const steps = [
         {
           type: 'demo_taxonomy',
-          checked: $('.mst-starter-wizard__demo[data-demo="demo-taxonomy"] .demo-checkbox').data('checked'),
+          checked: isDemoCheckboxChecked($('.mst-starter-wizard__demo[data-demo="demo-taxonomy"] .demo-checkbox')),
           animationClass: '.mst-starter-wizard__demo[data-demo="demo-taxonomy"]',
         },
         {
           type: 'demo_content',
-          checked: $('.mst-starter-wizard__demo[data-demo="demo-content"] .demo-checkbox').data('checked'),
+          checked: isDemoCheckboxChecked($('.mst-starter-wizard__demo[data-demo="demo-content"] .demo-checkbox')),
           animationClass: '.mst-starter-wizard__demo[data-demo="demo-content"]',
         },
         {
           type: 'theme_settings',
-          checked: $('.mst-starter-wizard__demo[data-demo="theme-settings"] .demo-checkbox').data('checked'),
+          checked: isDemoCheckboxChecked($('.mst-starter-wizard__demo[data-demo="theme-settings"] .demo-checkbox')),
           animationClass: '.mst-starter-wizard__demo[data-demo="theme-settings"]',
         },
         {
           type: 'mst_options',
-          checked: $('.mst-starter-wizard__demo[data-demo="mvl_plugin_settings"] .demo-checkbox').data('checked'),
+          checked: isDemoCheckboxChecked($('.mst-starter-wizard__demo[data-demo="mvl_plugin_settings"] .demo-checkbox')),
           animationClass: '.mst-starter-wizard__demo[data-demo="mvl_plugin_settings"]',
         },
         {
           type: 'generate_pages',
-          checked: $('.mst-starter-wizard__demo[data-demo="generate-pages"] .demo-checkbox').data('checked'),
+          checked: isDemoCheckboxChecked($('.mst-starter-wizard__demo[data-demo="generate-pages"] .demo-checkbox')),
           animationClass: '.mst-starter-wizard__demo[data-demo="generate-pages"]',
         },
       ];
@@ -73,10 +113,15 @@
           if (currentStep >= steps.length) {
             isInstalling = false;
 
-            $('.mst-starter-wizard__button-box').removeClass('mst-starter-wizard__button-box__hide');
+            $(window).off('beforeunload.mstDemoImport');
+            $buttonBox.removeClass('mst-starter-wizard__button-box__hide');
+            $buttonBox.removeAttr('aria-busy');
+            setDemoInstallButtonState($installButton, false);
 
             if (hasError) {
-              $('.mst-starter-wizard__button-box').addClass('has-demo-error');
+              $buttonBox.addClass('has-demo-error');
+            } else {
+              $buttonBox.addClass('hide-install');
             }
 
             return;
@@ -104,7 +149,7 @@
                 $(step.animationClass)
                   .removeClass('mst-starter-wizard__demo-load')
                   .addClass('mst-starter-wizard__demo-loaded')
-              } else if (response.data === false) {
+              } else {
                 $(step.animationClass)
                   .removeClass(
                     'mst-starter-wizard__demo-load mst-starter-wizard__demo-loaded'

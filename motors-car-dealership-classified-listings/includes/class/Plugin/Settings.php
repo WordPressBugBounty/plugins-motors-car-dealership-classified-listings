@@ -52,6 +52,7 @@ class Settings {
 
 	public function mvl_plugin_conf_autoload() {
 		$config_map = array(
+			'business-type',
 			'listing-settings',
 			'listing-settings/general',
 			'listing-settings/currency',

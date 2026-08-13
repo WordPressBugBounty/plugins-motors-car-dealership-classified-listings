@@ -5,6 +5,19 @@
 </div>
 <div class="mst-starter-wizard__wrapper-content">
 	<?php
+	$rental_preview_path    = STM_LISTINGS_PATH . '/includes/starter-theme/dashboard/assets/images/demo-6.png';
+	$rental_preview_version = STM_LISTINGS_V;
+
+	if ( file_exists( $rental_preview_path ) ) {
+		$rental_preview_version = (string) filemtime( $rental_preview_path );
+	}
+
+	$rental_preview_url = add_query_arg(
+		'ver',
+		$rental_preview_version,
+		STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/images/demo-6.png'
+	);
+
 	$templates = array(
 		array(
 			'image'       => STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/images/demo-1.png',
@@ -21,6 +34,16 @@
 			'status'      => 'Pro',
 			'title'       => 'Luxury',
 			'slug'        => 'luxury',
+			'demo_status' => 'available',
+			'builder'     => 'elementor',
+			'old_builder' => 'elementor-builder',
+			'preview'     => 'https://motors-plugin.stylemixthemes.com/',
+		),
+		array(
+			'image'       => $rental_preview_url,
+			'status'      => 'Pro',
+			'title'       => 'Rental',
+			'slug'        => 'rental',
 			'demo_status' => 'available',
 			'builder'     => 'elementor',
 			'old_builder' => 'elementor-builder',
@@ -80,6 +103,11 @@
 			$active_builder = get_option( 'mst-starter-theme-builder' );
 
 			$is_installed = ( $activated_demo === $template['slug'] ) || ( empty( $activated_demo ) && 'Starter' === $template['title'] && $active_builder === $template['old_builder'] );
+			$demo_activated_class = '';
+
+			if ( $is_installed ) {
+				$demo_activated_class = 'demo-activated';
+			}
 			?>
 			<li class="mst-starter-wizard__template-<?php echo esc_attr( $template['builder'] ); ?>">
 				<div class="mst-starter-wizard__template
@@ -99,7 +127,7 @@
 						<?php endif; ?>
 						<?php if ( ( 'Pro' === $template['status'] && apply_filters( 'is_mvl_pro', false ) && 'pending' !== $template['demo_status'] ) || 'Free' === $template['status'] ) : ?>
 							<div class="mst-status-btns-container">
-								<div class="mst-starter-wizard__button mst-starter-wizard__button-continue <?php echo ( $activated_demo ) ? 'demo-activated' : ''; ?>"
+								<div class="mst-starter-wizard__button mst-starter-wizard__button-continue <?php echo esc_attr( $demo_activated_class ); ?>"
 									data-template="<?php echo esc_attr( 'plugins' ); ?>"
 									data-builder="<?php echo esc_attr( $template['builder'] ); ?>"
 									data-demo="<?php echo esc_attr( $template['slug'] ); ?>">

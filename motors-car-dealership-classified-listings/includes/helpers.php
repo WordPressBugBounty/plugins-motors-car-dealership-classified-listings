@@ -1665,7 +1665,13 @@ if ( ! function_exists( 'motors_get_demo_data' ) ) {
 if ( ! function_exists( 'motors_get_demo_file_url' ) ) {
 	function motors_get_demo_file_url( $filename ) {
 		$skin_name = motors_get_skin_name();
-		if ( defined( 'STM_DEV_MODE' ) && STM_DEV_MODE && defined( 'MOTORS_STARTER_THEME_TEMPLATE_URI' ) ) {
+		$use_local_demo = defined( 'STM_DEV_MODE' ) && STM_DEV_MODE && defined( 'MOTORS_STARTER_THEME_TEMPLATE_URI' );
+
+		if ( 'rental' === $skin_name ) {
+			$use_local_demo = false;
+		}
+
+		if ( $use_local_demo ) {
 			$file_url = MOTORS_STARTER_THEME_TEMPLATE_URI . '/includes/demo/' . $skin_name . '/' . $filename;
 		} else {
 			$file_url = 'https://motors-plugin.stylemixthemes.com/starter-theme-demo/' . $skin_name . '/' . $filename;

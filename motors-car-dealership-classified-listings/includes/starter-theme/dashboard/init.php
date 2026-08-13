@@ -25,13 +25,34 @@ function mvl_motors_starter_admin_script_styles() {
 		wp_enqueue_style( 'starter-icons', STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/fonts/ms/style.css', array(), STM_LISTINGS_V );
 	}
 
+	$wizard_style_path    = STM_LISTINGS_PATH . '/includes/starter-theme/dashboard/assets/css/wizard.css';
+	$wizard_style_version = STM_LISTINGS_V;
+
+	if ( file_exists( $wizard_style_path ) ) {
+		$wizard_style_version = (string) filemtime( $wizard_style_path );
+	}
+
 	wp_enqueue_style( 'noto-sans', 'https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap', array(), STM_LISTINGS_V );
-	wp_enqueue_style( 'motors-starter-wizard', STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/css/wizard.css', '', STM_LISTINGS_V );
+	wp_enqueue_style( 'motors-starter-wizard', STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/css/wizard.css', array(), $wizard_style_version );
 	wp_enqueue_script( 'lottie-player', 'https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js', array( 'jquery' ), STM_LISTINGS_V, true );
 	wp_enqueue_script( 'motors-starter-pro', STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/js/pro.js', array( 'jquery' ), STM_LISTINGS_V, true );
 	wp_enqueue_script( 'motors-starter-wizard', STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/js/wizard.js', array( 'jquery' ), STM_LISTINGS_V, true );
-	wp_enqueue_script( 'motors-starter-plugins', STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/js/install-plugins.js', array( 'jquery' ), STM_LISTINGS_V, true );
-	wp_enqueue_script( 'motors-starter-demo-import', STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/js/demo-import.js', array( 'jquery' ), STM_LISTINGS_V, true );
+
+	$plugins_script_path    = STM_LISTINGS_PATH . '/includes/starter-theme/dashboard/assets/js/install-plugins.js';
+	$plugins_script_version = STM_LISTINGS_V;
+	$demo_import_path       = STM_LISTINGS_PATH . '/includes/starter-theme/dashboard/assets/js/demo-import.js';
+	$demo_import_version    = STM_LISTINGS_V;
+
+	if ( file_exists( $plugins_script_path ) ) {
+		$plugins_script_version = (string) filemtime( $plugins_script_path );
+	}
+
+	if ( file_exists( $demo_import_path ) ) {
+		$demo_import_version = (string) filemtime( $demo_import_path );
+	}
+
+	wp_enqueue_script( 'motors-starter-plugins', STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/js/install-plugins.js', array( 'jquery' ), $plugins_script_version, true );
+	wp_enqueue_script( 'motors-starter-demo-import', STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/js/demo-import.js', array( 'jquery' ), $demo_import_version, true );
 	wp_enqueue_script( 'motors-starter-child-theme', STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/js/child-theme.js', array( 'jquery' ), STM_LISTINGS_V, true );
 }
 

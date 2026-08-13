@@ -2,7 +2,7 @@
   $(document).ready(function () {
     let isInstalling = false;
 
-    $(document).on('click', '.mst-starter-wizard__button', function () {
+    $(document).on('click', '.mst-starter-wizard__button-install', function () {
       $('.mst-starter-wizard__button-box').addClass('mst-starter-wizard__button-box__hide');
       const $pluginItems = $('.mst-starter-wizard__plugin');
       let currentIndex = 0;

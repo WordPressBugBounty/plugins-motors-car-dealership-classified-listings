@@ -69,7 +69,9 @@
 			<div class="mst-starter-wizard__button-message">
 				<?php echo esc_html__( 'An unexpected error occurred. Please try again.', 'motors-starter-theme' ); ?>
 			</div>
-			<div class="mst-starter-wizard__button mst-starter-wizard__button-install-demo">
+			<div class="mst-starter-wizard__button mst-starter-wizard__button-install-demo"
+				data-install-label="<?php echo esc_attr__( 'Install', 'motors-starter-theme' ); ?>"
+				data-installing-label="<?php echo esc_attr__( 'Installing demo...', 'motors-starter-theme' ); ?>">
 				<?php echo esc_html__( 'Install', 'motors-starter-theme' ); ?>
 			</div>
 			<div class="mst-starter-wizard__button mst-starter-wizard__button-next"

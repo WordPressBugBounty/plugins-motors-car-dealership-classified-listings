@@ -4,6 +4,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $can_register = apply_filters( 'motors_vl_get_nuxy_mod', false, 'new_user_registration' );
+$is_rental_business_type = (bool) apply_filters( 'mvl_is_rental_business_type', false );
+$allow_dealer_signup     = apply_filters( 'motors_vl_get_nuxy_mod', false, 'allow_user_register_as_dealer' ) && apply_filters( 'is_mvl_pro', false );
+
+if ( $is_rental_business_type ) {
+	$allow_dealer_signup = false;
+}
 
 // Check if form editor is enabled for sign_up form (same as widget - load template to preserve scripts).
 $has_form_editor = false;
@@ -146,7 +152,7 @@ if ( $has_form_editor ) {
 								</label>
 							</div>
 						<?php endif; ?>
-						<?php if ( apply_filters( 'motors_vl_get_nuxy_mod', false, 'allow_user_register_as_dealer' ) && apply_filters( 'is_mvl_pro', false ) ) : ?>
+						<?php if ( $allow_dealer_signup ) : ?>
 							<div class="stm-register-as-dealer form-group form-checker">
 								<label>
 									<input type="checkbox" name="register_as_dealer" value="1"/>

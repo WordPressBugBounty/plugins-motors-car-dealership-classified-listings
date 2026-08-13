@@ -38,6 +38,7 @@ class AddonsPage {
 		$addons           = Addons::list();
 		$pro_features     = ProFeatures::list();
 		$all_features     = array_merge( $addons, $pro_features );
+		$all_features     = $this->filter_rental_features( $all_features );
 		$enabled_addons   = get_option( 'motors_vl_addons', array() );
 		$mvl_addons_nonce = wp_create_nonce( 'mvl_addons_nonce' );
 
@@ -53,5 +54,29 @@ class AddonsPage {
 		);
 
 		stm_listings_load_template( 'addons/main', compact( 'all_features', 'enabled_addons' ) );
+	}
+
+	private function filter_rental_features( array $features ): array {
+		if (
+			! class_exists( '\MotorsVehiclesListing\Pro\BusinessType\Resolver' )
+			|| ! \MotorsVehiclesListing\Pro\BusinessType\Resolver::is_rental()
+		) {
+			return $features;
+		}
+
+		return array_intersect_key(
+			$features,
+			array_flip(
+				array(
+					Addons::EMAIL_MANAGER,
+					Addons::SOCIAL_LOGIN,
+					'inventory_skins',
+					'keyword-search',
+					'filter-by-location',
+					'custom-fields-types',
+					'google-maps',
+				)
+			)
+		);
 	}
 }

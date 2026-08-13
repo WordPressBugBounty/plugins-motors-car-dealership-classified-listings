@@ -2,6 +2,10 @@
 add_filter(
 	'me_search_and_filter_settings_conf',
 	function ( $global_conf ) {
+		if ( apply_filters( 'mvl_is_rental_business_type', false ) ) {
+			return $global_conf;
+		}
+
 		$is_pro = apply_filters( 'is_mvl_pro', false );
 
 		$is_saved_search_enabled = is_mvl_addon_enabled( 'saved_search' );

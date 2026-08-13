@@ -102,6 +102,12 @@ function mvl_motors_starter_template() {
 
 	$allowed_html = wp_kses_allowed_html( 'post' );
 
+	if ( ! isset( $allowed_html['span'] ) || ! is_array( $allowed_html['span'] ) ) {
+		$allowed_html['span'] = array();
+	}
+
+	$allowed_html['span']['data-checked'] = true;
+
 	echo wp_kses( $content, array_merge( $allowed_html, array( 'lottie-player' => array( 'src' => 1, 'background' => 1, 'speed' => 1, 'style' => 1, 'autoplay' => 1 ) ) ) );//phpcs:ignore
 	wp_die();
 }
@@ -260,6 +266,16 @@ function mvl_motors_starter_demo_install() {
 				$wp_import->processed_terms,
 				$wp_import->processed_menu_items,
 			);
+			do_action(
+				'mvl_motors_starter_after_demo_import_stage',
+				$type,
+				$demo,
+				array(
+					'processed_posts'      => $wp_import->processed_posts,
+					'processed_terms'      => $wp_import->processed_terms,
+					'processed_menu_items' => $wp_import->processed_menu_items,
+				)
+			);
 
 			unlink( $temp_file_path );
 
@@ -301,10 +317,22 @@ function mvl_motors_starter_demo_install() {
 
 				$homepage = ! empty( $homepage_query->posts ) ? $homepage_query->posts[0] : null;
 
+				$homepage_id = 0;
+
 				if ( $homepage ) {
 					update_option( 'page_on_front', $homepage->ID );
 					update_option( 'show_on_front', 'page' );
+					$homepage_id = $homepage->ID;
 				}
+
+				do_action(
+					'mvl_motors_starter_after_demo_import_stage',
+					$type,
+					$demo,
+					array(
+						'homepage_id' => $homepage_id,
+					)
+				);
 
 				wp_send_json_success( __( 'Theme settings imported successfully.', 'motors-starter-theme' ) );
 
@@ -348,6 +376,15 @@ function mvl_motors_starter_demo_install() {
 			}
 
 			update_option( '_motors_widgets_default_settings_updated', array() );
+
+			do_action(
+				'mvl_motors_starter_after_demo_import_stage',
+				$type,
+				$demo,
+				array(
+					'settings' => $mst_settings,
+				)
+			);
 
 			wp_send_json_success( __( 'Motors options imported and settings updated successfully.', 'motors-starter-theme' ) );
 
@@ -401,6 +438,16 @@ function mvl_motors_starter_demo_install() {
 			do_action( 'wpcfto_after_settings_saved', $id, $settings );
 
 			do_action( 'mvl_reset_elementor_cache' );
+			do_action(
+				'mvl_motors_starter_after_demo_import_stage',
+				$type,
+				$demo,
+				array(
+					'listing_archive'   => $found_page,
+					'user_add_car_page' => $add_car_page,
+					'compare_page'      => $compare_page,
+				)
+			);
 
 			wp_send_json_success( __( 'Motors Skins Pages imported.', 'motors-starter-theme' ) );
 

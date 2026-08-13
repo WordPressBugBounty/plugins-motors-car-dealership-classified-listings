@@ -82,6 +82,81 @@ function mvl_setup_wizard_install_starter_theme() {
 
 add_action( 'wp_ajax_mvl_setup_wizard_install_starter_theme', 'mvl_setup_wizard_install_starter_theme' );
 
+function mvl_setup_wizard_prepare_dealership_demo() {
+	check_ajax_referer( 'stm_mvl_setup_wizard_nonce', 'security' );
+
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_send_json_error( __( 'You do not have permission to prepare demo content', 'stm_vehicles_listing' ) );
+	}
+
+	if ( function_exists( 'is_mvl_pro' ) && is_mvl_pro() ) {
+		wp_send_json_error( __( 'The Pro setup importer handles this business type.', 'stm_vehicles_listing' ) );
+	}
+
+	$settings = get_option( MVL_Const::MVL_PLUGIN_OPT_NAME, array() );
+
+	if ( ! is_array( $settings ) ) {
+		$settings = array();
+	}
+
+	$settings['motors_business_type'] = 'dealership';
+
+	update_option( MVL_Const::MVL_PLUGIN_OPT_NAME, $settings );
+	update_option( 'motors_vehicles_listing_plugin_settings_updated', true );
+
+	$completed = 0;
+
+	if ( isset( $_POST['completed'] ) ) {
+		$completed = absint( wp_unslash( $_POST['completed'] ) );
+	}
+
+	$post_types = (array) apply_filters( 'stm_get_multilisting_types', array( 'listings' ) );
+	$post_types = array_values( array_filter( array_map( 'sanitize_key', $post_types ) ) );
+
+	if ( empty( $post_types ) ) {
+		$post_types = array( 'listings' );
+	}
+
+	$listing_ids = get_posts(
+		array(
+			'post_type'      => $post_types,
+			'post_status'    => 'any',
+			'posts_per_page' => 1,
+			'fields'         => 'ids',
+			'no_found_rows'  => true,
+		)
+	);
+	$skip_import = ! empty( $listing_ids ) && ! $completed;
+
+	if ( ! $skip_import ) {
+		update_option( MVL_Const::ACTIVE_SKIN_OPT_NAME, 'free' );
+		update_option( 'mvl_motors_starter_demo_name', 'free' );
+		update_option( 'mst-starter-theme-builder', 'elementor' );
+	}
+
+	if ( $completed ) {
+		$wizard_data = get_option( 'mvl_setup_wizard_data', array() );
+
+		if ( ! is_array( $wizard_data ) ) {
+			$wizard_data = array();
+		}
+
+		$wizard_data['use_starter']   = 1;
+		$wizard_data['use_elementor'] = 1;
+		$wizard_data['data_imported'] = 1;
+
+		update_option( 'mvl_setup_wizard_data', $wizard_data );
+	}
+
+	wp_send_json_success(
+		array(
+			'demo'        => 'free',
+			'skip_import' => $skip_import,
+		)
+	);
+}
+add_action( 'wp_ajax_mvl_setup_wizard_prepare_dealership_demo', 'mvl_setup_wizard_prepare_dealership_demo' );
+
 function mvl_ajax_install_starter_theme() {
 	if ( ! current_user_can( 'install_themes' ) ) {
 		wp_send_json_error( __( 'You do not have permission to install themes', 'stm_vehicles_listing' ) );

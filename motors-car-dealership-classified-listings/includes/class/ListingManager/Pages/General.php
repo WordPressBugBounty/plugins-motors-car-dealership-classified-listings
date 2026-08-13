@@ -45,6 +45,10 @@ class General extends Page {
 			),
 		);
 
+		if ( apply_filters( 'mvl_is_rental_business_type', false ) ) {
+			$this->update_numeric_meta( $data, 'stm_car_stock' );
+		}
+
 		foreach ( $valdation_methods as $method => $keys ) {
 			foreach ( $keys as $key ) {
 				$this->$method( $data, $key );

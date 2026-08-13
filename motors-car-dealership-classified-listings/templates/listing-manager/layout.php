@@ -17,6 +17,7 @@ if ( $listing_id ) {
 $ymmt                           = apply_filters( 'motors_vl_get_nuxy_mod', '', 'make_model_auto_complete_enabled' );
 $vin                            = apply_filters( 'motors_vl_get_nuxy_mod', '', 'vin_search_auto_complete_enabled' );
 $car_info_auto_complete_enabled = false;
+$is_rental_business_type        = (bool) apply_filters( 'mvl_is_rental_business_type', false );
 if ( $ymmt || $vin ) {
 	$car_info_auto_complete_enabled = true;
 }
@@ -94,14 +95,16 @@ if ( $ymmt || $vin ) {
 									<a class="mvl-listing-manager-content-header-action-btn mvl-thirdary-btn mvl-plus-icon" href="<?php echo esc_url( apply_filters( 'mvl_listing_manager_url', '' ) ); ?>">
 										<?php esc_html_e( 'Create Another', 'stm_vehicles_listing' ); ?>
 									</a>
-									<a href="<?php echo $listing_id && get_post_status( $listing_id ) === 'publish' ? esc_url( get_the_permalink( $listing_id ) ) : esc_url( get_preview_post_link( $listing_id ) ); ?>" target="_blank" class="mvl-secondary-btn mvl-listing-manager-content-header-action-btn <?php echo ! apply_filters( 'mvl_listing_manager_item_id', false ) || get_post_status( apply_filters( 'mvl_listing_manager_item_id', 0 ) ) === 'trash' ? 'disabled' : ''; ?> mvl-listing-preview-button">
-										<i class="motors-icons-mvl-eye"></i>
-										<?php if ( $listing_id && get_post_status( $listing_id ) === 'publish' ) : ?>
-											<?php esc_html_e( 'View', 'stm_vehicles_listing' ); ?>
-										<?php else : ?>
-											<?php esc_html_e( 'Preview', 'stm_vehicles_listing' ); ?>
-										<?php endif; ?>
-									</a>
+									<?php if ( ! $is_rental_business_type ) : ?>
+										<a href="<?php echo $listing_id && get_post_status( $listing_id ) === 'publish' ? esc_url( get_the_permalink( $listing_id ) ) : esc_url( get_preview_post_link( $listing_id ) ); ?>" target="_blank" class="mvl-secondary-btn mvl-listing-manager-content-header-action-btn <?php echo ! apply_filters( 'mvl_listing_manager_item_id', false ) || get_post_status( apply_filters( 'mvl_listing_manager_item_id', 0 ) ) === 'trash' ? 'disabled' : ''; ?> mvl-listing-preview-button">
+											<i class="motors-icons-mvl-eye"></i>
+											<?php if ( $listing_id && get_post_status( $listing_id ) === 'publish' ) : ?>
+												<?php esc_html_e( 'View', 'stm_vehicles_listing' ); ?>
+											<?php else : ?>
+												<?php esc_html_e( 'Preview', 'stm_vehicles_listing' ); ?>
+											<?php endif; ?>
+										</a>
+									<?php endif; ?>
 									<button type="submit" class="mvl-primary-btn mvl-listing-manager-content-header-action-btn <?php echo $listing_id && get_post_status( $listing_id ) === 'publish' ? 'disabled' : ''; ?>" data-status="publish">
 									<?php if ( $listing_id && get_post_status( $listing_id ) === 'publish' ) : ?>
 										<?php esc_html_e( 'Update', 'stm_vehicles_listing' ); ?>
@@ -180,7 +183,9 @@ if ( $ymmt || $vin ) {
 				],
 				post_status: '<?php echo esc_js( $listing_id ? get_post_status( $listing_id ) : '' ); ?>',
 				currency_position: '<?php echo esc_js( apply_filters( 'motors_vl_get_nuxy_mod', 'right', 'price_currency_position' ) ); ?>',
-				url: '<?php echo esc_js( apply_filters( 'mvl_listing_manager_url', '', 0, $_post_type ) ); ?>'
+				url: '<?php echo esc_js( apply_filters( 'mvl_listing_manager_url', '', 0, $_post_type ) ); ?>',
+				rental_locations_rest_url: '<?php echo esc_js( rest_url( 'mvl-rental/v1/locations' ) ); ?>',
+				rest_nonce: '<?php echo esc_js( wp_create_nonce( 'wp_rest' ) ); ?>'
 			};
 
 			var listingManagerFileMediaArgs = {

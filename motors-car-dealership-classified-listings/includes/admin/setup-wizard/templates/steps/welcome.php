@@ -1,5 +1,6 @@
 <?php
 $settings = apply_filters( 'mvl_setup_wizard_data', array() );
+$start_step = apply_filters( 'mvl_setup_wizard_start_step', 'fields' );
 ?>
 <div class="mvl-welcome-content-body">
 	<div class="welcome-block">
@@ -10,7 +11,7 @@ $settings = apply_filters( 'mvl_setup_wizard_data', array() );
 		<p><?php echo esc_html__( 'This setup wizard helps you quickly configure Motors so you can start creating listings. It’s optional, takes only a few minutes and you can return to it anytime.', 'stm_vehicles_listing' ); ?></p>
 		<div class="welcome-block-actions">
 			<a href="<?php echo esc_url( admin_url( 'admin.php?page=mvl_plugin_settings' ) ); ?>" class="button button-secondary"><?php echo esc_html__( 'Exit setup', 'stm_vehicles_listing' ); ?></a> &nbsp;
-			<a href="<?php echo esc_url( apply_filters( 'mvl_setup_wizard_step_url', 'fields' ) ); ?>" class="button button-primary" id="mvl-next-step-link" data-step="fields"><?php echo esc_html__( 'Start plugin setup', 'stm_vehicles_listing' ); ?></a>
+			<a href="<?php echo esc_url( apply_filters( 'mvl_setup_wizard_step_url', $start_step ) ); ?>" class="button button-primary" id="mvl-next-step-link" data-step="<?php echo esc_attr( $start_step ); ?>"><?php echo esc_html__( 'Start plugin setup', 'stm_vehicles_listing' ); ?></a>
 		</div>
 	</div>
 </div>

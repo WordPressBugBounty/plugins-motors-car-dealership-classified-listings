@@ -1696,4 +1696,4 @@
         $newTermsInput.val(JSON.stringify(filteredTerms));
     }
 
-})(jQuery); 
+})(jQuery);

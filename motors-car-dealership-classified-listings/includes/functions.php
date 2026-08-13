@@ -20,8 +20,27 @@ if ( ! function_exists( 'is_mvl_pro' ) ) {
 			return true;
 		}
 
+		$pro_plugin_file = 'motors-car-dealership-classified-listings-pro/motors-car-dealership-classified-listings-pro.php';
+
+		if ( defined( 'STM_LISTINGS_PRO_FILE' ) ) {
+			$pro_plugin_file = plugin_basename( STM_LISTINGS_PRO_FILE );
+		}
+
 		$active_plugins = get_option( 'active_plugins', array() );
-		return in_array( 'motors-car-dealership-classified-listings-pro/motors-car-dealership-classified-listings-pro.php', $active_plugins, true );
+
+		if ( in_array( $pro_plugin_file, $active_plugins, true ) ) {
+			return true;
+		}
+
+		if ( is_multisite() ) {
+			$network_active_plugins = get_site_option( 'active_sitewide_plugins', array() );
+
+			if ( isset( $network_active_plugins[ $pro_plugin_file ] ) ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	add_filter( 'is_mvl_pro', 'is_mvl_pro' );

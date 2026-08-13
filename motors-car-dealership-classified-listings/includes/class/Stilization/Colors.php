@@ -88,9 +88,13 @@ class Colors {
 	 * Protected methods
 	 */
 	protected function __construct() {
-		$skin_name = motors_get_skin_name();
+		$skin_name = static::normalize_skin_name( motors_get_skin_name() );
 		foreach ( static::DEFAULT[ $skin_name ] as $id => $value ) {
-			$this->colors[ $id ] = Color::load( $id, $skin_name );
+			$color = Color::load( $id, $skin_name );
+
+			if ( $color instanceof Color ) {
+				$this->colors[ $id ] = $color;
+			}
 		}
 	}
 
@@ -100,6 +104,10 @@ class Colors {
 	 * @return string
 	 */
 	protected function get_value( string $id, float $alphachannel ) {
+		if ( ! isset( $this->colors[ $id ] ) || ! $this->colors[ $id ] instanceof Color ) {
+			return static::default_value( $id );
+		}
+
 		return $this->colors[ $id ]->get_value( $alphachannel );
 	}
 
@@ -110,6 +118,10 @@ class Colors {
 		$settings = array();
 
 		foreach ( $this->colors as $color ) {
+			if ( ! $color instanceof Color ) {
+				continue;
+			}
+
 			if ( $color->is_include_in_elementor() ) {
 				$settings[] = $color->get_in_format_of_elementor_settings();
 
@@ -128,6 +140,10 @@ class Colors {
 	protected function get_elementor_global_vars_css() {
 		$css = array();
 		foreach ( $this->colors as $color ) {
+			if ( ! $color instanceof Color ) {
+				continue;
+			}
+
 			if ( $color->is_include_in_elementor() ) {
 				$css[] = $color->get_elementor_css_var_name() . ': var(' . $color->get_plugin_css_var_name() . ');';
 
@@ -181,9 +197,39 @@ class Colors {
 	 * @param string $id
 	 * @return string
 	 */
-	public static function default_value( $id ) {
-		$skin_name = motors_get_skin_name();
-		return static::DEFAULT[ $skin_name ][ $id ];
+	public static function default_value( $id, $skin_name = '' ) {
+		$skin_name = static::normalize_skin_name( $skin_name );
+
+		if ( isset( static::DEFAULT[ $skin_name ][ $id ] ) ) {
+			return static::DEFAULT[ $skin_name ][ $id ];
+		}
+
+		return isset( static::DEFAULT['free'][ $id ] ) ? static::DEFAULT['free'][ $id ] : '#000000';
+	}
+
+	/**
+	 * @param string $skin_name
+	 * @return string
+	 */
+	public static function normalize_skin_name( $skin_name = '' ) {
+		$skin_name = ! empty( $skin_name ) ? $skin_name : motors_get_skin_name();
+
+		if ( isset( static::DEFAULT[ $skin_name ] ) ) {
+			return $skin_name;
+		}
+
+		$skin_aliases = apply_filters(
+			'motors_stilization_skin_aliases',
+			array(
+				'rental' => 'free',
+			)
+		);
+
+		if ( isset( $skin_aliases[ $skin_name ] ) && isset( static::DEFAULT[ $skin_aliases[ $skin_name ] ] ) ) {
+			return $skin_aliases[ $skin_name ];
+		}
+
+		return 'free';
 	}
 
 	/**

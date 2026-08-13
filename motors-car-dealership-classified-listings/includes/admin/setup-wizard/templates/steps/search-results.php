@@ -263,13 +263,14 @@ $plugin_settings = array(
 </div>
 <div class="mvl-welcome-nav-actions">
 	<div>
-		<a href="<?php echo esc_url( apply_filters( 'mvl_setup_wizard_step_url', 'demo-content' ) ); ?>" class="button" id="mvl-prev-step-link" data-step="demo-content">
+		<?php $prev_step_slug = apply_filters( 'mvl_setup_wizard_prev_step', 'demo-content', 'search-results' ); ?>
+		<a href="<?php echo esc_url( apply_filters( 'mvl_setup_wizard_step_url', $prev_step_slug ) ); ?>" class="button" id="mvl-prev-step-link" data-step="<?php echo esc_attr( $prev_step_slug ); ?>">
 			<?php echo esc_html__( 'Back', 'stm_vehicles_listing' ); ?>
 		</a>
 	</div>
 	<div>
 		<?php
-		$next_step_slug = 'profile';
+		$next_step_slug = apply_filters( 'mvl_setup_wizard_next_step', 'profile', 'search-results' );
 		?>
 		<a href="<?php echo esc_url( apply_filters( 'mvl_setup_wizard_step_url', $next_step_slug ) ); ?>" class="button button-primary" id="mvl-next-step-link" data-step="<?php echo esc_attr( $next_step_slug ); ?>">
 			<?php echo esc_html__( 'Next Step', 'stm_vehicles_listing' ); ?>

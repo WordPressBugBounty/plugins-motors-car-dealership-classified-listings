@@ -20,6 +20,12 @@ body.mvl-popup-overlay::after {
     z-index: 999;
 }
 
+i.motors-icons-location-pin.mvl-listing-manager-select2-location-icon {
+    color: #98A0B3;
+    padding-right: 7px;
+    padding-left: 3px;
+}
+
 .screen-reader-text {
     display: none;
 }
@@ -869,6 +875,338 @@ body.mvl-popup-confirmation-opened::before {
     border-bottom: 1px solid #CED4DA;
 }
 
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-field .mvl-listing-manager-field-info {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-field .select2-container {
+    width: 100% !important;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-field .mvl-listing-manager-select2-result-with-icon {
+    align-items: center;
+    display: inline-flex;
+    gap: 8px;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-field .mvl-listing-manager-select2-location-icon {
+    color: #98A0B3;
+    font-family: "motors-icons";
+    font-size: 14px;
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+    padding-right: 7px;
+    padding-left: 3px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-field .mvl-listing-manager-select2-result__text {
+    color: #000;
+    line-height: 1.4;
+    display: inline-block;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-field .select2-selection__rendered {
+    padding-left: 0;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-add-button {
+    align-items: center;
+    background: #2F80ED;
+    border: 1px solid #2F80ED;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 14px;
+    font-weight: 600;
+    gap: 8px;
+    height: 42px;
+    justify-content: center;
+    line-height: 20px;
+    padding: 0 16px;
+    white-space: nowrap;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-add-button:hover, .mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-add-button:focus {
+    background: #246FD1;
+    border-color: #246FD1;
+    color: #fff;
+    outline: none;
+    text-decoration: none;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-add-button i {
+    font-size: 13px;
+    line-height: 1;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal {
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 100000;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal[hidden] {
+    display: none;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__backdrop {
+    background: rgba(15, 23, 42, 0.42);
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__dialog {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.24);
+    display: flex;
+    flex-direction: column;
+    height: min(820px, 100vh - 48px);
+    left: 50%;
+    max-height: calc(100vh - 48px);
+    min-height: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: min(560px, 100vw - 32px);
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__header {
+    align-items: flex-start;
+    border-bottom: 1px solid #E9EEF7;
+    display: flex;
+    flex: 0 0 auto;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 24px 24px 18px;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__header h3 {
+    color: #111827;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 28px;
+    margin: 0;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__header p {
+    color: #6B7280;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 4px 0 0;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__close {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    color: #6B7280;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 26px;
+    height: 32px;
+    justify-content: center;
+    line-height: 1;
+    padding: 0;
+    width: 32px;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__body {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: 16px;
+    max-height: calc(100vh - 220px);
+    min-height: 0;
+    overflow-y: scroll;
+    padding: 20px 24px 24px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__body label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__body span {
+    color: #111827;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__body input,
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__body select {
+    background: #fff;
+    border: 1px solid #D5DEEF;
+    border-radius: 4px;
+    color: #111827;
+    font-size: 14px;
+    height: 42px;
+    line-height: 20px;
+    padding: 0 12px;
+    width: 100%;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__body input:focus,
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__body select:focus {
+    border-color: #2F80ED;
+    box-shadow: 0 0 0 2px rgba(47, 128, 237, 0.12);
+    outline: none;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__row {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__hours {
+    border: 1px solid #E9EEF7;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+    gap: 0;
+    overflow: visible;
+}
+
+@supports (height: 100dvh) {
+    .mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__dialog {
+        height: min(820px, 100dvh - 48px);
+        max-height: calc(100dvh - 48px);
+    }
+
+    .mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__body {
+        max-height: calc(100dvh - 220px);
+    }
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__hours-title {
+    background: #F8FAFC;
+    border-bottom: 1px solid #E9EEF7;
+    color: #111827;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+    padding: 12px 14px;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__hours-row {
+    align-items: center;
+    display: grid;
+    gap: 14px;
+    grid-template-columns: minmax(130px, 1fr) 190px;
+    padding: 10px 14px;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__hours-row + .mvl-listing-manager-rental-location-modal__hours-row {
+    border-top: 1px solid #EEF2F8;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__hours-toggle {
+    align-items: center;
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 9px !important;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__hours-toggle input {
+    height: 16px !important;
+    margin: 0;
+    padding: 0;
+    width: 16px !important;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__hours-toggle span {
+    font-weight: 500;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__hours-time {
+    display: grid;
+    gap: 8px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__hours-time input {
+    height: 36px !important;
+    padding: 0 8px !important;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__hours-time input:disabled {
+    background: #F3F6FB;
+    color: #98A0B3;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__error {
+    background: #FEF2F2;
+    border: 1px solid #FECACA;
+    border-radius: 4px;
+    color: #B91C1C;
+    font-size: 13px;
+    line-height: 18px;
+    padding: 10px 12px;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__footer {
+    align-items: center;
+    border-top: 1px solid #E9EEF7;
+    display: flex;
+    flex: 0 0 auto;
+    gap: 12px;
+    justify-content: flex-end;
+    padding: 16px 24px;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__footer button {
+    min-width: 118px;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-empty {
+    color: #98A0B3;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.45;
+}
+
+@media (max-width: 640px) {
+    .mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-field .mvl-listing-manager-field-info {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-add-button {
+        width: 100%;
+    }
+
+    .mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__row {
+        grid-template-columns: 1fr;
+    }
+
+    .mvl-listing-manager-body .mvl-listing-manager-content-body-page.location .mvl-listing-manager-rental-location-modal__hours-row {
+        align-items: stretch;
+        grid-template-columns: 1fr;
+    }
+}
+
 .mvl-listing-manager-body .mvl-listing-manager-content-body-page.media .mvl-listing-manager-content-body-page-text {
     flex-direction: row;
     flex-wrap: wrap;
@@ -982,6 +1320,282 @@ body.mvl-popup-confirmation-opened::before {
 
 .mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-content-body-page-fields-group.full-width .mvl-listing-manager-field {
     width: 100%;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-field {
+    position: relative;
+    width: 100%;
+    padding: 10px;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-description {
+    margin: 0 0 22px;
+    color: #596579;
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-description a {
+    color: #1280DF;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-description a:hover {
+    text-decoration: none;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-trigger {
+    width: 100%;
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 13px 16px;
+    border: 1px solid #D7DDE5;
+    border-radius: 4px;
+    background: #fff;
+    color: #1D2530;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.2s;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-trigger i {
+    margin-left: auto;
+    color: #8B96A8;
+    font-size: 11px;
+    transition: transform 0.2s;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-badge {
+    width: 43px;
+    height: 43px;
+    border-radius: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 43px;
+    background: #EEF2F6;
+    color: #4C6D9B;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-trigger-text,
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-option-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-trigger-text strong,
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-option-text strong {
+    color: #1D2530;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-trigger-text small,
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-option-text small {
+    color: #768296;
+    font-size: 12px;
+    line-height: 1.35;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-dropdown {
+    display: none;
+    border: 1px solid #D7DDE5;
+    border-top: 0;
+    border-radius: 0 0 4px 4px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-field.is-open .mvl-listing-manager-rental-price-trigger {
+    border-color: #1280DF;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-field.is-open .mvl-listing-manager-rental-price-trigger i {
+    transform: rotate(180deg);
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-field.is-open .mvl-listing-manager-rental-price-dropdown {
+    display: block;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-search {
+    position: relative;
+    padding: 10px 12px;
+    border-bottom: 1px solid #E6EAF0;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-search i {
+    position: absolute;
+    top: 50%;
+    left: 24px;
+    transform: translateY(-50%);
+    color: #A5AEBB;
+    font-size: 14px;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-search input {
+    width: 100%;
+    height: 36px;
+    padding: 0 12px 0 34px;
+    border: 1px solid #DCE2EA;
+    border-radius: 4px;
+    background: #F7F9FB;
+    color: #1D2530;
+    font-size: 14px;
+    outline: none;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-options {
+    max-height: 256px;
+    overflow-y: auto;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-option {
+    width: 100%;
+    min-height: 55px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border: 0;
+    border-bottom: 1px solid #EEF1F5;
+    background: #fff;
+    cursor: pointer;
+    text-align: left;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-option:hover, .mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-option.is-selected {
+    background: #F3F8FD;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-option[hidden] {
+    display: none;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-option > i {
+    display: none;
+    margin-left: 5px;
+    color: #1280DF;
+    font-size: 14px;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-option.is-selected > i {
+    display: inline-block;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-option-rate {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-left: auto;
+    color: #1D2530;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-option-rate strong {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-option-rate small {
+    color: #768296;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-custom {
+    display: none;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    padding: 16px;
+    border: 1px solid #D7DDE5;
+    border-top: 0;
+    border-radius: 0 0 4px 4px;
+    background: #F7F9FB;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-custom.is-open {
+    display: grid;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-custom label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: #596579;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-custom input {
+    width: 100%;
+    height: 46px;
+    padding: 0 12px;
+    border: 1px solid #D7DDE5;
+    border-radius: 4px;
+    background: #fff;
+    color: #1D2530;
+    font-size: 16px;
+    outline: none;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-labels {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 14px;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-labels label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: #596579;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-labels input {
+    width: 100%;
+    height: 46px;
+    padding: 0 12px;
+    border: 1px solid #D7DDE5;
+    border-radius: 4px;
+    background: #fff;
+    color: #1D2530;
+    font-size: 16px;
+    outline: none;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-manage {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 14px 0 0;
+    color: #768296;
+    font-size: 13px;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-manage i {
+    color: #9AA5B5;
+    font-size: 14px;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-manage a {
+    color: #1280DF;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-content-body-page.price .mvl-listing-manager-rental-price-manage a:hover {
+    text-decoration: none;
 }
 
 .mvl-listing-manager-body .mvl-listing-manager-content-body-page.features .mvl-listing-manager-content-body-page-features-wrapper {
@@ -1370,6 +1984,40 @@ body.mvl-popup-confirmation-opened::before {
 .mvl-listing-manager-body .mvl-listing-preview-card-data-value-wrapper {
     display: flex;
     align-items: inherit;
+}
+
+.mvl-listing-manager-body .mvl-listing-preview-card-rental-tariff {
+    padding: 14px 15px;
+    background: #F3F8FD;
+    border: 1px solid #DCEBFA;
+    border-radius: 4px;
+}
+
+.mvl-listing-manager-body .mvl-listing-preview-card-rental-tariff-label {
+    margin-bottom: 6px;
+    color: #5A8CC4;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.mvl-listing-manager-body .mvl-listing-preview-card-rental-tariff-price {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    color: #0F6FC4;
+}
+
+.mvl-listing-manager-body .mvl-listing-preview-card-rental-tariff-price [data-mvl-rental-tariff-value] {
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.mvl-listing-manager-body .mvl-listing-preview-card-rental-tariff-price [data-mvl-rental-tariff-unit] {
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .mvl-listing-manager-body .mvl-listing-preview-card-actions {

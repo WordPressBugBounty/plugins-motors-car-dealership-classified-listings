@@ -49,7 +49,151 @@ add_filter(
 add_filter(
 	'mvl_setup_wizard_steps_data',
 	function( $steps ) {
-		if ( ! defined( 'ELEMENTOR_VERSION' ) ) {
+		if ( function_exists( 'is_mvl_pro' ) && is_mvl_pro() ) {
+			return $steps;
+		}
+
+		return array(
+			'business-type' => array(
+				'title'    => __( 'Business Type', 'stm_vehicles_listing' ),
+				'template' => '',
+			),
+			'fields'         => $steps['fields'],
+			'search-results' => $steps['search-results'],
+			'single-listing' => $steps['single-listing'],
+			'finish'         => $steps['finish'],
+		);
+	},
+	10
+);
+
+add_filter(
+	'mvl_setup_wizard_step_template',
+	function( $template, $step ) {
+		if ( function_exists( 'is_mvl_pro' ) && is_mvl_pro() ) {
+			return $template;
+		}
+
+		if ( 'business-type' === $step ) {
+			return MVL_SETUP_WIZARD_TEMPLATES_PATH . 'steps/business-type.php';
+		}
+
+		return $template;
+	},
+	10,
+	2
+);
+
+add_filter(
+	'mvl_setup_wizard_start_step',
+	function( $step ) {
+		if ( function_exists( 'is_mvl_pro' ) && is_mvl_pro() ) {
+			return $step;
+		}
+
+		return 'business-type';
+	}
+);
+
+add_filter(
+	'mvl_setup_wizard_fields_prev_step',
+	function( $step ) {
+		if ( function_exists( 'is_mvl_pro' ) && is_mvl_pro() ) {
+			return $step;
+		}
+
+		return 'business-type';
+	}
+);
+
+add_filter(
+	'mvl_setup_wizard_next_step',
+	function( $default, $step ) {
+		if ( function_exists( 'is_mvl_pro' ) && is_mvl_pro() ) {
+			return $default;
+		}
+
+		$step_map = array(
+			'business-type' => 'fields',
+			'fields'         => 'search-results',
+			'search-results' => 'single-listing',
+			'single-listing' => 'finish',
+		);
+
+		if ( isset( $step_map[ $step ] ) ) {
+			return $step_map[ $step ];
+		}
+
+		return $default;
+	},
+	10,
+	2
+);
+
+add_filter(
+	'mvl_setup_wizard_prev_step',
+	function( $default, $step ) {
+		if ( function_exists( 'is_mvl_pro' ) && is_mvl_pro() ) {
+			return $default;
+		}
+
+		$step_map = array(
+			'search-results' => 'fields',
+			'single-listing' => 'search-results',
+			'finish'         => 'single-listing',
+		);
+
+		if ( isset( $step_map[ $step ] ) ) {
+			return $step_map[ $step ];
+		}
+
+		return $default;
+	},
+	10,
+	2
+);
+
+add_action(
+	'wp_ajax_mvl_setup_wizard_load_step',
+	function() {
+		if ( function_exists( 'is_mvl_pro' ) && is_mvl_pro() ) {
+			return;
+		}
+
+		if ( ! current_user_can( 'manage_options' ) || empty( $_POST['mvl_setting_motors_business_type'] ) ) {
+			return;
+		}
+
+		if ( false === check_ajax_referer( 'stm_mvl_setup_wizard_nonce', 'security', false ) ) {
+			return;
+		}
+
+		$business_type = sanitize_key( wp_unslash( $_POST['mvl_setting_motors_business_type'] ) );
+
+		if ( 'dealership' !== $business_type ) {
+			$business_type = 'dealership';
+		}
+
+		$options = get_option( \MotorsVehiclesListing\Plugin\MVL_Const::MVL_PLUGIN_OPT_NAME, array() );
+
+		if ( ! is_array( $options ) ) {
+			$options = array();
+		}
+
+		$options['motors_business_type'] = $business_type;
+
+		update_option( \MotorsVehiclesListing\Plugin\MVL_Const::MVL_PLUGIN_OPT_NAME, $options );
+		update_option( 'motors_vehicles_listing_plugin_settings_updated', true );
+	},
+	1
+);
+
+add_filter(
+	'mvl_setup_wizard_steps_data',
+	function( $steps ) {
+		$is_free_dealership_flow = isset( $steps['business-type'] ) && ! ( function_exists( 'is_mvl_pro' ) && is_mvl_pro() );
+
+		if ( isset( $steps['single-listing'] ) && ! defined( 'ELEMENTOR_VERSION' ) && ! $is_free_dealership_flow ) {
 			$steps['single-listing']['disabled'] = true;
 		}
 		return $steps;
@@ -79,7 +223,11 @@ add_action(
 			}
 		}
 
-		include MVL_SETUP_WIZARD_TEMPLATES_PATH . 'steps/' . $step . '.php';
+		$template = apply_filters( 'mvl_setup_wizard_step_template', MVL_SETUP_WIZARD_TEMPLATES_PATH . 'steps/' . $step . '.php', $step, $data );
+
+		if ( file_exists( $template ) ) {
+			include $template;
+		}
 
 	}
 );
@@ -100,6 +248,13 @@ add_filter(
 		}
 
 		$settings = array_merge( $default_fields, $settings );
+		$use_pro  = 0;
+
+		if ( function_exists( 'is_mvl_pro' ) && is_mvl_pro() ) {
+			$use_pro = 1;
+		}
+
+		$settings['use_pro'] = $use_pro;
 
 		return $settings;
 	}

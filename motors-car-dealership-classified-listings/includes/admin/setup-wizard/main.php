@@ -3,8 +3,15 @@
 define( 'MVL_SETUP_WIZARD_TEMPLATES_PATH', STM_LISTINGS_PATH . '/includes/admin/setup-wizard/templates/' );
 
 function mvl_setup_wizard_assets_enqueue() {
+	$script_path    = STM_LISTINGS_PATH . '/includes/admin/setup-wizard/assets/setup-wizard.js';
+	$script_version = STM_LISTINGS_V;
+
+	if ( file_exists( $script_path ) ) {
+		$script_version = (string) filemtime( $script_path );
+	}
+
 	wp_enqueue_style( 'mvl-setup-wizard', STM_LISTINGS_URL . '/includes/admin/setup-wizard/assets/setup-wizard.css', null, 1.0, 'all' );
-	wp_enqueue_script( 'mvl-setup-wizard', STM_LISTINGS_URL . '/includes/admin/setup-wizard/assets/setup-wizard.js', 'jquery', 1.0, true );
+	wp_enqueue_script( 'mvl-setup-wizard', STM_LISTINGS_URL . '/includes/admin/setup-wizard/assets/setup-wizard.js', array( 'jquery' ), $script_version, true );
 	wp_localize_script( 'mvl-setup-wizard', 'security', array( 'ajax_nonce' => wp_create_nonce( 'stm_mvl_setup_wizard_nonce' ) ) );
 }
 add_action( 'admin_enqueue_scripts', 'mvl_setup_wizard_assets_enqueue' );

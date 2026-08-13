@@ -99,12 +99,14 @@ $template_ids       = array(
 	</div>
 	<div class="mvl-welcome-nav-actions">
 		<div>
-			<a href="<?php echo esc_url( apply_filters( 'mvl_setup_wizard_step_url', 'plugins' ) ); ?>" class="button" id="mvl-prev-step-link" data-step="plugins">
+			<?php $prev_step_slug = apply_filters( 'mvl_setup_wizard_prev_step', 'plugins', 'single-listing' ); ?>
+			<a href="<?php echo esc_url( apply_filters( 'mvl_setup_wizard_step_url', $prev_step_slug ) ); ?>" class="button" id="mvl-prev-step-link" data-step="<?php echo esc_attr( $prev_step_slug ); ?>">
 				<?php echo esc_html__( 'Back', 'stm_vehicles_listing' ); ?>
 			</a>
 		</div>
 		<div>
-			<a href="<?php echo esc_url( apply_filters( 'mvl_setup_wizard_step_url', 'demo-content' ) ); ?>" class="button button-primary" id="mvl-next-step-link" data-step="demo-content">
+			<?php $next_step_slug = apply_filters( 'mvl_setup_wizard_next_step', 'demo-content', 'single-listing' ); ?>
+			<a href="<?php echo esc_url( apply_filters( 'mvl_setup_wizard_step_url', $next_step_slug ) ); ?>" class="button button-primary" id="mvl-next-step-link" data-step="<?php echo esc_attr( $next_step_slug ); ?>">
 				<?php echo esc_html__( 'Next Step', 'stm_vehicles_listing' ); ?>
 			</a>
 		</div>

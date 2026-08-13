@@ -20,6 +20,7 @@ $sidebar_position = apply_filters( 'motors_vl_get_nuxy_mod', 'left', 'listing_fi
 
 ?>
 <div class="container">
+	<?php do_action( 'mvl_rental_inventory_search_bar' ); ?>
 	<div class="archive-listing-page">
 		<div class="archive-listing-page_row">
 			<div class="archive-listing-page_side <?php echo $horizontal_filter ? esc_attr( 'horizontal_filter' ) : ''; ?> <?php echo esc_attr( $sidebar_position ); ?>">

@@ -14,6 +14,10 @@ class Price extends Page {
 	}
 
 	public function save( array $data ): array {
+		if ( apply_filters( 'mvl_listing_manager_use_rental_price', false, absint( $data['post_id'] ?? 0 ) ) ) {
+			return $this->save_rental_price( $data );
+		}
+
 		$valdation_methods = array(
 			'update_numeric_meta' => array(
 				'price',
@@ -53,8 +57,36 @@ class Price extends Page {
 		return array();
 	}
 
+	private function save_rental_price( array $data ): array {
+		$post_id   = absint( $data['post_id'] ?? 0 );
+		$price     = isset( $data['price'] ) ? $this->sanitize_rental_amount( $data['price'] ) : '';
+		$pay_later = isset( $data['mvl_rental_pay_later_price'] ) ? $this->sanitize_rental_amount( $data['mvl_rental_pay_later_price'] ) : '';
+
+		update_post_meta( $post_id, 'price', $price );
+		update_post_meta( $post_id, 'stm_genuine_price', $price );
+		update_post_meta( $post_id, 'mvl_rental_deposit', $pay_later );
+		update_post_meta( $post_id, 'mvl_rental_pay_later_price', $pay_later );
+		update_post_meta( $post_id, 'mvl_rental_pay_now_label', isset( $data['mvl_rental_pay_now_label'] ) ? sanitize_text_field( $data['mvl_rental_pay_now_label'] ) : '' );
+		update_post_meta( $post_id, 'mvl_rental_pay_later_label', isset( $data['mvl_rental_pay_later_label'] ) ? sanitize_text_field( $data['mvl_rental_pay_later_label'] ) : '' );
+		$this->update_boolean_meta( $data, 'mvl_rental_pay_later_enabled' );
+		delete_post_meta( $post_id, 'mvl_rental_class_id' );
+		delete_post_meta( $post_id, 'sale_price' );
+
+		return array();
+	}
+
+	private function sanitize_rental_amount( $value ): string {
+		$value = is_string( $value ) ? preg_replace( '/[^0-9.]/', '', $value ) : $value;
+
+		if ( '' === $value || ! is_numeric( $value ) ) {
+			return '';
+		}
+
+		return (string) max( 0, round( (float) $value, 2 ) );
+	}
+
 	public function has_preview(): bool {
-		return true;
+		return ! apply_filters( 'mvl_is_rental_business_type', false );
 	}
 
 	public function get_preview_url(): string {

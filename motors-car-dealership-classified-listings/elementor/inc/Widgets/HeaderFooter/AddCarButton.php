@@ -242,6 +242,10 @@ class AddCarButton extends WidgetBase {
 	}
 
 	protected function render() {
+		if ( ! apply_filters( 'mvl_add_listing_form_enable', true ) ) {
+			return;
+		}
+
 		$settings = $this->get_settings_for_display();
 
 		Helper::stm_ew_load_template( 'elementor/Widgets/header-footer/add-car-button', STM_LISTINGS_PATH, $settings );

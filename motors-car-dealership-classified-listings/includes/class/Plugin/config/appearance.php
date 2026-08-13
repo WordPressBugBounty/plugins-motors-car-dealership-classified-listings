@@ -114,11 +114,8 @@ add_filter(
 				'type'          => 'color',
 				'value'         => Colors::value( 'sold_badge_color' ),
 				'submenu'       => esc_html__( 'Colors', 'stm_vehicles_listing' ),
+				'group'         => 'ended',
 				'default_value' => Colors::default_value( 'sold_badge_color' ),
-			),
-			'endgroup'            => array(
-				'type'  => 'group_end',
-				'group' => 'ended',
 			),
 		);
 

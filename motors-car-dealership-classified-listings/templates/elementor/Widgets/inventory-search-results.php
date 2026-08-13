@@ -26,6 +26,7 @@ if ( 'default' === $listings_list_view_skin ) {
 }
 
 ?>
+<?php do_action( 'mvl_rental_inventory_search_bar' ); ?>
 <div class="motors-elementor-inventory-search-results" id="listings-result" data-listings-grid-view-skin="<?php echo esc_attr( $listings_grid_view_skin ); ?>" data-listings-list-view-skin="<?php echo esc_attr( $listings_list_view_skin ); ?>" data-custom-img-size="<?php echo ! empty( $custom_img_size ) ? esc_attr( $custom_img_size ) : ''; ?>" data-posts-per-page="<?php echo esc_attr( $ppp ); ?>">
 	<?php
 	do_action(

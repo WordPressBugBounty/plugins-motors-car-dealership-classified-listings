@@ -9,6 +9,16 @@
 		<?php
 		$done = true;
 		foreach ( $steps as $slug => $step ) :
+			if ( ! is_array( $step ) ) {
+				$step = array();
+			}
+
+			$step_title = $slug;
+
+			if ( ! empty( $step['title'] ) ) {
+				$step_title = $step['title'];
+			}
+
 			$i++;
 			$item_class = array();
 			if ( $current_step == $slug ) {
@@ -26,7 +36,7 @@
 					<span class="bullet">
 						<span class="number"></span>
 					</span>
-					<span class="stepname"><?php echo esc_html( $step['title'] ); ?></span>
+					<span class="stepname"><?php echo esc_html( $step_title ); ?></span>
 				</a>
 			</li>
 		<?php endforeach; ?>

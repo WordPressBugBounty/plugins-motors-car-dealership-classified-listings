@@ -1,6 +1,22 @@
 <?php
-	wp_enqueue_script( 'bootstrap-bundle' );
-	wp_enqueue_script( 'stm-listings-js' );
+wp_enqueue_script( 'bootstrap-bundle' );
+wp_enqueue_script( 'stm-listings-js' );
+
+if ( ! isset( $options ) || ! is_array( $options ) ) {
+	$options = array();
+}
+
+if ( ! isset( $options_count ) ) {
+	$options_count = count( $options );
+}
+
+if ( ! isset( $_per_page ) ) {
+	$_per_page = 10;
+}
+
+if ( ! isset( $list_empty ) ) {
+	$list_empty = empty( $options );
+}
 ?>
 <div class="stm_vehicles_listing_categories stm_custom_fields">
 	<div class="stm_custom_fields__image-preview">

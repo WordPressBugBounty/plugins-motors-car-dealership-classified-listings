@@ -771,7 +771,9 @@ if ( ! function_exists( 'stm_custom_register' ) ) {
 				'user_email' => $user_mail,
 			);
 
-			if ( ! empty( $_POST['register_as_dealer'] ) && 1 === (int) $_POST['register_as_dealer'] && apply_filters( 'motors_vl_get_nuxy_mod', false, 'allow_user_register_as_dealer' ) ) {
+			$is_rental_business_type = (bool) apply_filters( 'mvl_is_rental_business_type', false );
+
+			if ( ! $is_rental_business_type && ! empty( $_POST['register_as_dealer'] ) && 1 === (int) $_POST['register_as_dealer'] && apply_filters( 'motors_vl_get_nuxy_mod', false, 'allow_user_register_as_dealer' ) ) {
 				$user_data['role'] = 'stm_dealer';
 			}
 

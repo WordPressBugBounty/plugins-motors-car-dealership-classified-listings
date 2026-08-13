@@ -55,6 +55,10 @@ abstract class Page {
 	}
 
 	public function has_preview(): bool {
+		if ( apply_filters( 'mvl_is_rental_business_type', false ) ) {
+			return false;
+		}
+
 		return (bool) $this->preview_url;
 	}
 

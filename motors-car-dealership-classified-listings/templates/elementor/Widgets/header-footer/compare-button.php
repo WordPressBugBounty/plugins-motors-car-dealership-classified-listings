@@ -1,4 +1,8 @@
 <?php
+if ( apply_filters( 'mvl_is_rental_business_type', false ) ) {
+	return;
+}
+
 	$compare_page_link = get_permalink( apply_filters( 'motors_vl_get_nuxy_mod', '', 'compare_page' ) );
 ?>
 <a href="<?php echo esc_url( $compare_page_link ); ?>" class="motors-compare-button">

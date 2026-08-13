@@ -144,14 +144,18 @@ function initMapWithLocation(location) {
     });
 
     geocoder = new google.maps.Geocoder();
+    const input = document.getElementById("stm_car_location");
+    const isHiddenLocationInput = input && input.type === 'hidden';
 
-    map.addListener('mousedown', function (e) {
-        const latlng = { lat: parseFloat(e.latLng.lat()), lng: parseFloat(e.latLng.lng()) };
-        if (!lastLatLng || lastLatLng.lat !== latlng.lat || lastLatLng.lng !== latlng.lng) {
-            lastLatLng = latlng;
-            updateLocation(latlng);
-        }
-    });
+    if (!isHiddenLocationInput) {
+        map.addListener('mousedown', function (e) {
+            const latlng = { lat: parseFloat(e.latLng.lat()), lng: parseFloat(e.latLng.lng()) };
+            if (!lastLatLng || lastLatLng.lat !== latlng.lat || lastLatLng.lng !== latlng.lng) {
+                lastLatLng = latlng;
+                updateLocation(latlng);
+            }
+        });
+    }
 
     marker = new google.maps.Marker({
         position: location,
@@ -162,26 +166,27 @@ function initMapWithLocation(location) {
         }
     });
 
-    const input = document.getElementById("stm_car_location");
-    autocomplete = new google.maps.places.Autocomplete(input);
-    autocomplete.bindTo("bounds", map);
+    if (!isHiddenLocationInput) {
+        autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.bindTo("bounds", map);
 
-    autocomplete.addListener("place_changed", function () {
-        const place = autocomplete.getPlace();
+        autocomplete.addListener("place_changed", function () {
+            const place = autocomplete.getPlace();
 
-        if (!place.geometry) return;
+            if (!place.geometry) return;
 
-        if (place.geometry.viewport) {
-            map.fitBounds(place.geometry.viewport);
-        } else {
-            map.setCenter(place.geometry.location);
-            map.setZoom(14);
-        }
-        marker.setPosition(place.geometry.location);
-        marker.setVisible(true);
+            if (place.geometry.viewport) {
+                map.fitBounds(place.geometry.viewport);
+            } else {
+                map.setCenter(place.geometry.location);
+                map.setZoom(14);
+            }
+            marker.setPosition(place.geometry.location);
+            marker.setVisible(true);
 
-        updateCoordinateFields(place.geometry.location.lat(), place.geometry.location.lng());
-    });
+            updateCoordinateFields(place.geometry.location.lat(), place.geometry.location.lng());
+        });
+    }
 
     input.addEventListener('input', function() {
         clearTimeout(lastTimeout);

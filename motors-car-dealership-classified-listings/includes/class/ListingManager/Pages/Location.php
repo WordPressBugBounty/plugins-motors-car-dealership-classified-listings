@@ -13,7 +13,7 @@ class Location extends Page {
 	}
 
 	public function has_preview(): bool {
-		return true;
+		return ! apply_filters( 'mvl_is_rental_business_type', false );
 	}
 
 	public function get_preview_url(): string {
@@ -22,6 +22,10 @@ class Location extends Page {
 
 	public function save( array $data ): array {
 		$this->update_text_meta( $data, 'stm_car_location' );
+
+		if ( apply_filters( 'mvl_listing_manager_use_rental_locations', false, $data['post_id'] ?? 0 ) ) {
+			$this->update_text_meta( $data, 'mvl_rental_location_id' );
+		}
 
 		if ( isset( $data['stm_lat_car_admin'] ) ) {
 			update_post_meta( $data['post_id'], 'stm_lat_car_admin', sanitize_text_field( $data['stm_lat_car_admin'] ) );

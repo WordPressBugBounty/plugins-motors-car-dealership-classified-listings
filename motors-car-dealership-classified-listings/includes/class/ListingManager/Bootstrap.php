@@ -649,6 +649,13 @@ class Bootstrap {
 			'MotorsVehiclesListing\\ListingManager\\Pages\\OtherDetails',
 		);
 
+		if ( apply_filters( 'mvl_is_rental_business_type', false ) ) {
+			$pages_classnames = array_diff(
+				$pages_classnames,
+				array( 'MotorsVehiclesListing\\ListingManager\\Pages\\OtherDetails' )
+			);
+		}
+
 		if ( empty( $this->pages ) ) {
 			foreach ( $pages_classnames as $page_classname ) {
 				if ( class_exists( $page_classname ) ) {
@@ -663,17 +670,29 @@ class Bootstrap {
 
 	//Methods of Listing Manager Template Filters
 	protected function mvl_listing_manager_url( $default = '', int $post_id = 0, $post_type = false ): string {
-		if ( $post_id ) {
-			if ( ! $post_type ) {
-				$post_type = get_post_type( $post_id );
-			}
-			return home_url( $this->endpoint . '?id=' . $post_id . '&post_type=' . $post_type );
-		} else {
-			if ( ! $post_type ) {
-				$post_type = 'listings';
-			}
-			return home_url( $this->endpoint . '?post_type=' . $post_type );
+		if ( $post_id && ! $post_type ) {
+			$post_type = get_post_type( $post_id );
 		}
+
+		if ( ! $post_type ) {
+			$post_type = 'listings';
+		}
+
+		$query_args = array(
+			'post_type' => $post_type,
+		);
+
+		if ( $post_id ) {
+			$query_args['id'] = $post_id;
+		}
+
+		if ( empty( get_option( 'permalink_structure' ) ) ) {
+			$query_args[ $this->endpoint ] = 1;
+
+			return add_query_arg( $query_args, home_url( '/' ) );
+		}
+
+		return add_query_arg( $query_args, home_url( '/' . trailingslashit( $this->endpoint ) ) );
 	}
 
 	//Methods for WP Hooks for initialization Listing Manager Page
@@ -714,11 +733,19 @@ class Bootstrap {
 	}
 
 	protected function init(): void {
+		$rewrite_rule = '^' . $this->endpoint . '/?$';
+
 		add_rewrite_rule(
-			'^' . $this->endpoint . '/?$',
+			$rewrite_rule,
 			'index.php?' . $this->endpoint . '=1',
 			'top'
 		);
+
+		$stored_rules = get_option( 'rewrite_rules', array() );
+
+		if ( ! is_array( $stored_rules ) || ! isset( $stored_rules[ $rewrite_rule ] ) ) {
+			flush_rewrite_rules( false );
+		}
 	}
 
 	protected function query_vars( array $vars ): array {

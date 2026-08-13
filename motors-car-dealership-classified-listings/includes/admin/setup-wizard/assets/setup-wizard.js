@@ -6,6 +6,183 @@ jQuery(function($){
 
 	/*-------------------------------------------------*/
 
+	$('body').on('click', '.mvl-business-type-option.is-disabled', function(e) {
+		let notice = $('[data-mvl-business-type-pro-notice]');
+
+		e.preventDefault();
+
+		if (notice.length) {
+			notice.addClass('is-visible');
+		}
+
+		return false;
+	});
+
+	let dealershipDemoImportRunning = false;
+
+	function isFreeDealershipBusinessTypeStep() {
+		let businessTypeOptions = $('input[name="motors_business_type"]');
+		let usePro = $('#mvl-setup-wizard-data input[name="use_pro"]');
+
+		if (!businessTypeOptions.length || !usePro.length) {
+			return false;
+		}
+
+		return '0' === usePro.val();
+	}
+
+	function setDealershipDemoStatus(message, isError) {
+		let status = $('[data-mvl-dealership-demo-status]');
+
+		if (!status.length) {
+			return;
+		}
+
+		status.text(message).addClass('is-visible').removeClass('is-error');
+
+		if (isError) {
+			status.addClass('is-error');
+		}
+	}
+
+	function setDealershipDemoLoading(link, isLoading) {
+		if (isLoading) {
+			link.data('default-label', link.text());
+			link.text('Installing Classic demo...').attr('aria-disabled', 'true');
+			$('.mvl-welcome-nav-actions').addClass('processing');
+			return;
+		}
+
+		link.text(link.data('default-label')).removeAttr('aria-disabled');
+		$('.mvl-welcome-nav-actions').removeClass('processing');
+	}
+
+	function getDealershipDemoErrorMessage(response) {
+		if (response && 'string' === typeof response.data && response.data.length) {
+			return response.data;
+		}
+
+		if (response && response.data && 'string' === typeof response.data.message && response.data.message.length) {
+			return response.data.message;
+		}
+
+		if (response && 'string' === typeof response.message && response.message.length) {
+			return response.message;
+		}
+
+		if (response && response.responseJSON) {
+			return getDealershipDemoErrorMessage(response.responseJSON);
+		}
+
+		return 'Classic demo installation failed. Please try again.';
+	}
+
+	function requireSuccessfulDealershipDemoResponse(response) {
+		if (!response || true !== response.success) {
+			throw new Error(getDealershipDemoErrorMessage(response));
+		}
+
+		return response;
+	}
+
+	function requireActiveStarterThemeResponse(response) {
+		requireSuccessfulDealershipDemoResponse(response);
+
+		if (!response.data || true !== response.data.is_installed || true !== response.data.is_active) {
+			throw new Error('Motors Skins could not be installed and activated.');
+		}
+
+		return response;
+	}
+
+	async function runFreeDealershipDemoImport() {
+		let prepareResponse = await ajaxPromise('mvl_setup_wizard_prepare_dealership_demo');
+		requireSuccessfulDealershipDemoResponse(prepareResponse);
+		let skipImport = false;
+
+		if (prepareResponse.data && true === prepareResponse.data.skip_import) {
+			skipImport = true;
+		}
+
+		if (skipImport) {
+			setDealershipDemoStatus('Existing listings found. Only the business type was changed.', false);
+			return;
+		}
+
+		setDealershipDemoStatus('Installing Motors Skins...', false);
+		requireActiveStarterThemeResponse(await ajaxPromise('mvl_setup_wizard_install_starter_theme'));
+
+		setDealershipDemoStatus('Installing required plugins...', false);
+		let requiredPlugins = ['elementor', 'header-footer-elementor', 'contact-form-7'];
+
+		for (let pluginIndex = 0; pluginIndex < requiredPlugins.length; pluginIndex++) {
+			requireSuccessfulDealershipDemoResponse(
+				await ajaxPromise('mvl_setup_wizard_install_plugin', {plugin: requiredPlugins[pluginIndex]})
+			);
+		}
+
+		setDealershipDemoStatus('Importing Classic demo fields...', false);
+		requireSuccessfulDealershipDemoResponse(await ajaxPromise('mvl_setup_wizard_starter_import_fields'));
+
+		setDealershipDemoStatus('Importing Classic demo content...', false);
+		requireSuccessfulDealershipDemoResponse(await ajaxPromise('mvl_setup_wizard_starter_import_content'));
+
+		setDealershipDemoStatus('Applying Classic demo settings...', false);
+		requireSuccessfulDealershipDemoResponse(await ajaxPromise('mvl_setup_wizard_starter_import_settings'));
+
+		requireSuccessfulDealershipDemoResponse(
+			await ajaxPromise('mvl_setup_wizard_prepare_dealership_demo', {completed: 1})
+		);
+
+		$('#mvl-setup-wizard-data input[name="use_starter"]').val('1');
+		$('#mvl-setup-wizard-data input[name="use_elementor"]').val('1');
+		$('#mvl-setup-wizard-data input[name="data_imported"]').val('1');
+
+		setDealershipDemoStatus('Classic demo installed. Opening Custom Fields...', false);
+	}
+
+	$('body').on('click', '#mvl-next-step-link', async function(e) {
+		if (!isFreeDealershipBusinessTypeStep()) {
+			return;
+		}
+
+		e.preventDefault();
+		e.stopImmediatePropagation();
+
+		if (dealershipDemoImportRunning) {
+			return false;
+		}
+
+		let selectedBusinessType = $('input[name="motors_business_type"]:checked').val();
+
+		if ('dealership' !== selectedBusinessType) {
+			setDealershipDemoStatus('Choose Dealership to continue.', true);
+			return false;
+		}
+
+		let link = $(this);
+		let nextStep = link.attr('data-step');
+		let target = link.attr('href');
+		dealershipDemoImportRunning = true;
+		setDealershipDemoLoading(link, true);
+		setDealershipDemoStatus('Preparing Classic demo...', false);
+
+		try {
+			await runFreeDealershipDemoImport();
+			setDealershipDemoLoading(link, false);
+			dealershipDemoImportRunning = false;
+			toStep(nextStep, target);
+		} catch (error) {
+			setDealershipDemoLoading(link, false);
+			dealershipDemoImportRunning = false;
+			setDealershipDemoStatus(getDealershipDemoErrorMessage(error), true);
+		}
+
+		return false;
+	});
+
+	/*-------------------------------------------------*/
+
 	$('body').on('click', '#mvl-starter-install-btn', function(e) {
 		$('.install-progress').removeClass('hidden');
 		$('.mvl-welcome-nav-actions').addClass('processing');

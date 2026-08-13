@@ -2,6 +2,7 @@
 use MotorsVehiclesListing\Stilization\Colors;
 
 $default_featured_badge_color = apply_filters( 'motors_vl_get_nuxy_mod', Colors::value( 'spec_badge_color' ), 'spec_badge_color' );
+$is_rental_business_type = (bool) apply_filters( 'mvl_is_rental_business_type', false );
 
 if ( $listing_manager_page->get_listing_id() ) {
 	$featured_badge_color = get_post_meta( $listing_manager_page->get_listing_id(), 'badge_bg_color', true );
@@ -43,6 +44,25 @@ if ( $listing_manager_page->get_listing_id() ) {
 			)
 		);
 
+		if ( $is_rental_business_type ) {
+			do_action(
+				'stm_listings_load_template',
+				'listing-manager/parts/fields/input',
+				array(
+					'id'          => 'stm_car_stock',
+					'label'       => __( 'Stock quantity', 'stm_vehicles_listing' ),
+					'placeholder' => __( '0', 'stm_vehicles_listing' ),
+					'input_name'  => $listing_manager_page->get_id() . '[stm_car_stock]',
+					'type'        => 'number',
+					'numeric'     => true,
+					'attributes'  => array(
+						'min' => '0',
+					),
+					'value'       => $listing_manager_page->get_listing_id() ? get_post_meta( $listing_manager_page->get_listing_id(), 'stm_car_stock', true ) : '',
+				)
+			);
+		}
+
 		do_action(
 			'stm_listings_load_template',
 			'listing-manager/parts/fields/textarea',
@@ -56,16 +76,18 @@ if ( $listing_manager_page->get_listing_id() ) {
 			)
 		);
 
-		do_action(
-			'stm_listings_load_template',
-			'listing-manager/parts/fields/switch',
-			array(
-				'id'         => 'car_mark_as_sold',
-				'label'      => __( 'Mark as Sold', 'stm_vehicles_listing' ),
-				'input_name' => $listing_manager_page->get_id() . '[car_mark_as_sold]',
-				'value'      => apply_filters( 'mvl_listing_manager_item_is_sold', false ),
-			)
-		);
+		if ( ! $is_rental_business_type ) {
+			do_action(
+				'stm_listings_load_template',
+				'listing-manager/parts/fields/switch',
+				array(
+					'id'         => 'car_mark_as_sold',
+					'label'      => __( 'Mark as Sold', 'stm_vehicles_listing' ),
+					'input_name' => $listing_manager_page->get_id() . '[car_mark_as_sold]',
+					'value'      => apply_filters( 'mvl_listing_manager_item_is_sold', false ),
+				)
+			);
+		}
 
 		do_action(
 			'stm_listings_load_template',

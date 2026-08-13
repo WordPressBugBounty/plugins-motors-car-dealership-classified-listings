@@ -160,13 +160,15 @@ $profile_settings = array(
 			if ( ! defined( 'MOTORS_STARTER_THEME_VERSION' ) && ! defined( 'ELEMENTOR_VERSION' ) ) {
 				$prev_step_slug = 'search-results';
 			}
+			$prev_step_slug = apply_filters( 'mvl_setup_wizard_prev_step', $prev_step_slug, 'profile' );
 			?>
 			<a href="<?php echo esc_url( apply_filters( 'mvl_setup_wizard_step_url', $prev_step_slug ) ); ?>" class="button" id="mvl-prev-step-link" data-step="<?php echo esc_attr( $prev_step_slug ); ?>">
 				<?php echo esc_html__( 'Back', 'stm_vehicles_listing' ); ?>
 			</a>
 		</div>
 		<div>
-			<a href="<?php echo esc_url( apply_filters( 'mvl_setup_wizard_step_url', 'theme' ) ); ?>" class="button button-primary" id="mvl-next-step-link" data-step="theme">
+			<?php $next_step_slug = apply_filters( 'mvl_setup_wizard_next_step', 'theme', 'profile' ); ?>
+			<a href="<?php echo esc_url( apply_filters( 'mvl_setup_wizard_step_url', $next_step_slug ) ); ?>" class="button button-primary" id="mvl-next-step-link" data-step="<?php echo esc_attr( $next_step_slug ); ?>">
 				<?php echo esc_html__( 'Next Step', 'stm_vehicles_listing' ); ?>
 			</a>
 		</div>

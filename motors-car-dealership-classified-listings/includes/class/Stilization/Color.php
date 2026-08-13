@@ -208,7 +208,7 @@ class Color {
 	 */
 	public static function load( $id, $active_skin = 'free' ) {
 		$color_data = Colors::data_for_elementor( $id );
-		$value      = apply_filters( 'motors_vl_get_nuxy_mod', Colors::DEFAULT[ $active_skin ][ $id ], $id );
+		$value      = apply_filters( 'motors_vl_get_nuxy_mod', Colors::default_value( $id, $active_skin ), $id );
 
 		return new static(
 			array(

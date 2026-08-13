@@ -42,6 +42,12 @@
 
 .classic-filter-row.motors-elementor-widget .filter-sidebar .sidebar-entry-header i,
 .classic-filter-row.motors-elementor-widget .filter-sidebar .sidebar-entry-header img {
+    position: static;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    flex: 0 0 auto;
     margin-right: 21px;
 }
 

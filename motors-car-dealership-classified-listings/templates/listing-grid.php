@@ -41,6 +41,20 @@ if ( ! isset( $data['skin'] ) ) {
 	$data['skin'] = apply_filters( 'motors_vl_get_nuxy_mod', 'default', 'grid_card_skin' );
 }
 
+if (
+	class_exists( 'MotorsVehiclesListing\\Pro\\BusinessType\\Resolver' )
+	&& MotorsVehiclesListing\Pro\BusinessType\Resolver::is_rental()
+	&& defined( 'STM_LISTINGS_PRO_PATH' )
+) {
+	$rental_list_card_template = STM_LISTINGS_PRO_PATH . '/templates/rental-form/inventory-list-card.php';
+
+	if ( file_exists( $rental_list_card_template ) ) {
+		$__vars = $data;
+		require $rental_list_card_template;
+		return;
+	}
+}
+
 $data['data_price'] = ! empty( $data['sale_price'] ) ? $data['sale_price'] : ( ! empty( $data['price'] ) ? $data['price'] : 0 );
 
 if ( isset( $custom_img_size ) ) {
@@ -81,6 +95,7 @@ if ( ! in_array( $data['skin'], array( 'default', 'classic' ), true ) && is_mvl_
 		);
 
 		do_action( 'stm_listings_load_template', 'loop/grid/data' );
+		do_action( 'mvl_rental_inventory_card_actions', $data );
 		?>
 	</div>
 	</a>

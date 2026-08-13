@@ -62,6 +62,7 @@ if ( function_exists( 'stm_is_multilisting' ) && stm_is_multilisting() && wp_is_
 }
 
 $inventory_view = apply_filters( 'stm_listings_input', $inventory_view, 'view_type' );
+$is_rental_business_type = (bool) apply_filters( 'mvl_is_rental_business_type', false );
 
 if ( is_mvl_pro() ) {
 	$skin_key = 'listings_' . $inventory_view . '_view_skin';
@@ -82,7 +83,9 @@ if ( have_posts() ) :
 	<div class="stm-isotope-sorting stm-isotope-sorting-<?php echo esc_attr( $inventory_view ); ?> motors-alignwide <?php echo esc_attr( $skin ); ?>">
 
 		<?php
-		do_action( 'stm_listings_load_template', 'filter/featured', $__vars );
+		if ( ! $is_rental_business_type ) {
+			do_action( 'stm_listings_load_template', 'filter/featured', $__vars );
+		}
 		do_action( 'stm_inventory_loop_items_before', $inventory_view );
 
 		while ( have_posts() ) :

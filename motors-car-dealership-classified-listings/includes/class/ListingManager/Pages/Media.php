@@ -22,7 +22,7 @@ class Media extends Page {
 	}
 
 	public function has_preview(): bool {
-		return true;
+		return ! apply_filters( 'mvl_is_rental_business_type', false );
 	}
 
 	public function get_preview_url(): string {

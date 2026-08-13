@@ -1,5 +1,16 @@
 <?php
 $settings = apply_filters( 'mvl_setup_wizard_data', array() );
+
+$is_rental_business_type = (bool) apply_filters( 'mvl_is_rental_business_type', false );
+$wizard_settings         = get_option( 'mvl_setup_wizard_settings_temp', array() );
+
+if ( ! $is_rental_business_type && is_array( $wizard_settings ) && isset( $wizard_settings['motors_business_type'] ) ) {
+	$wizard_business_type = sanitize_key( (string) $wizard_settings['motors_business_type'] );
+
+	if ( 'rental' === $wizard_business_type ) {
+		$is_rental_business_type = true;
+	}
+}
 ?>
 	<div class="mvl-welcome-content-body">
 		<div class="finish-block">
@@ -8,12 +19,16 @@ $settings = apply_filters( 'mvl_setup_wizard_data', array() );
 			</div>
 			<h2><?php echo esc_html__( 'You’re ready to go!', 'stm_vehicles_listing' ); ?></h2>
 			<p><?php echo esc_html__( 'You’ve successfully set up the Motors plugin. Now you can start creating and managing your listings with ease.', 'stm_vehicles_listing' ); ?></p>
-			<div class="finish-block-actions">
-				<a href="<?php echo esc_url( admin_url( 'post-new.php?post_type=listings' ) ); ?>" class="button button-primary"><?php echo esc_html__( 'Add listing', 'stm_vehicles_listing' ); ?></a>
-			</div>
-			<div class="finish-block-actions">
-				<a href="<?php echo esc_url( admin_url( 'admin.php?page=listing_categories' ) ); ?>" class="button button-secondary"><?php echo esc_html__( 'Add Custom Field', 'stm_vehicles_listing' ); ?></a>
-			</div>
+			<?php if ( ! $is_rental_business_type ) : ?>
+				<div class="finish-block-actions">
+					<a href="<?php echo esc_url( admin_url( 'post-new.php?post_type=listings' ) ); ?>" class="button button-primary"><?php echo esc_html__( 'Add listing', 'stm_vehicles_listing' ); ?></a>
+				</div>
+			<?php endif; ?>
+			<?php if ( ! $is_rental_business_type ) : ?>
+				<div class="finish-block-actions">
+					<a href="<?php echo esc_url( admin_url( 'admin.php?page=listing_categories' ) ); ?>" class="button button-secondary"><?php echo esc_html__( 'Add Custom Field', 'stm_vehicles_listing' ); ?></a>
+				</div>
+			<?php endif; ?>
 			<div class="finish-block-actions">
 				<a href="<?php echo esc_url( site_url() ); ?>" class="button button-secondary"><?php echo esc_html__( 'View your website', 'stm_vehicles_listing' ); ?></a>
 				<a href="https://docs.stylemixthemes.com/motors-car-dealer-classifieds-and-listing" class="button button-secondary" target="_blank" rel="nofollow"><?php echo esc_html__( 'Documentation', 'stm_vehicles_listing' ); ?></a>
