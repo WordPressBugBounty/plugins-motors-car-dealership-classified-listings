@@ -2130,6 +2130,115 @@ add_action(
 
 add_filter( 'motors_get_demo_data', 'motors_get_demo_data' );
 
+if ( ! function_exists( 'mvl_is_classified_listing_demo_import' ) ) {
+	function mvl_is_classified_listing_demo_import() {
+		$demo = function_exists( 'motors_get_skin_name' ) ? motors_get_skin_name() : get_option( 'mvl_motors_starter_demo_name', 'free' );
+
+		return 'classified_listing' === $demo;
+	}
+}
+
+if ( ! function_exists( 'mvl_set_classified_listing_default_elementor_skins' ) ) {
+	function mvl_set_classified_listing_default_elementor_skins( $post ) {
+		if ( ! mvl_is_classified_listing_demo_import() || empty( $post['postmeta'] ) || ! is_array( $post['postmeta'] ) ) {
+			return $post;
+		}
+
+		foreach ( $post['postmeta'] as $key => $meta ) {
+			if ( empty( $meta['key'] ) || '_elementor_data' !== $meta['key'] || empty( $meta['value'] ) ) {
+				continue;
+			}
+
+			$value     = maybe_unserialize( $meta['value'] );
+			$is_string = is_string( $value );
+
+			if ( $is_string ) {
+				$value = json_decode( $value, true );
+			}
+
+			if ( ! is_array( $value ) ) {
+				continue;
+			}
+
+			$value = mvl_set_default_skins_to_elementor_data( $value );
+
+			$post['postmeta'][ $key ]['value'] = $is_string ? wp_json_encode( $value ) : $value;
+		}
+
+		return $post;
+	}
+
+	add_filter( 'stm_wp_import_post_data_raw', 'mvl_set_classified_listing_default_elementor_skins', 20 );
+}
+
+if ( ! function_exists( 'mvl_set_classified_listing_default_search_results_skins' ) ) {
+	function mvl_set_classified_listing_default_search_results_skins( $value ) {
+		if ( ! wp_doing_ajax() || ! mvl_is_classified_listing_demo_import() || ! is_array( $value ) ) {
+			return $value;
+		}
+
+		$action = ! empty( $_POST['action'] ) ? sanitize_key( wp_unslash( $_POST['action'] ) ) : '';
+		$type   = ! empty( $_POST['type'] ) ? sanitize_key( wp_unslash( $_POST['type'] ) ) : '';
+
+		if (
+			'mvl_setup_wizard_starter_import_settings' !== $action &&
+			( 'mvl_motors_starter_demo_install' !== $action || 'mst_options' !== $type )
+		) {
+			return $value;
+		}
+
+		$value['grid_card_skin'] = 'default';
+		$value['list_card_skin'] = 'default';
+
+		return $value;
+	}
+
+	add_filter(
+		'pre_update_option_mvl_search_results_settings',
+		'mvl_set_classified_listing_default_search_results_skins'
+	);
+}
+
+if ( ! function_exists( 'mvl_set_default_skins_to_elementor_data' ) ) {
+	function mvl_set_default_skins_to_elementor_data( array $elementor_data ) {
+		$grid_widgets_to_update = array(
+			'motors-listings-grid',
+			'motors-listings-grid-tabs',
+			'motors-listing-tabs',
+			'motors-listings-carousel',
+			'motors-single-listing-search-results',
+		);
+
+		$list_widgets_to_update = array(
+			'motors-listings-list',
+		);
+
+		foreach ( $elementor_data as $key => $element ) {
+			if ( ! is_array( $element ) ) {
+				continue;
+			}
+
+			if ( ! empty( $element['widgetType'] ) && in_array( $element['widgetType'], $grid_widgets_to_update, true ) ) {
+				if ( 'motors-listings-carousel' === $element['widgetType'] ) {
+					$elementor_data[ $key ]['settings']['view_style'] = 'default';
+				} else {
+					$elementor_data[ $key ]['settings']['listings_grid_view_skin'] = 'default';
+				}
+			}
+
+			if ( ! empty( $element['widgetType'] ) && in_array( $element['widgetType'], $list_widgets_to_update, true ) ) {
+				$elementor_data[ $key ]['settings']['listings_list_view_skin'] = 'default';
+			}
+
+			if ( ! empty( $element['elements'] ) && is_array( $element['elements'] ) ) {
+				$elementor_data[ $key ]['elements'] = mvl_set_default_skins_to_elementor_data( $element['elements'] );
+			}
+		}
+
+		return $elementor_data;
+	}
+}
+
 add_filter(
 	'mvl_add_listing_form_enable',
 	function () {

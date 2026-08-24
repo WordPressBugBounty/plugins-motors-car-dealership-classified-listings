@@ -4,10 +4,6 @@
     background-color: var(--motors-bg-color);
 }
 
-.stm-pricing-plan {
-  /** animations **/
-}
-
 .stm-pricing-plan__header {
     padding: 30px 50px 25px;
     position: relative;
@@ -275,6 +271,10 @@
 .stm-pricing-plan__items__item__text {
     flex: 1;
     line-height: 1;
+}
+
+.stm-pricing-plan {
+  /** animations **/
 }
 
 .stm-pricing-plan__separator__bottom_line > div {

@@ -70,10 +70,6 @@
     margin: 0 15px 30px 15px;
 }
 
-.mvl-addons .mvl-addon-banner__text h2 strong {
-    font-weight: 700;
-}
-
 .mvl-addons .mvl-addon-banner__text h2 strong.mvl-addon-banner__text_primary {
     color: #fff;
     font-size: 30px;
@@ -81,6 +77,10 @@
     font-weight: 900;
     text-transform: uppercase;
     font-style: italic;
+}
+
+.mvl-addons .mvl-addon-banner__text h2 strong {
+    font-weight: 700;
 }
 
 .mvl-addons .mvl-addon-banner__text ul {

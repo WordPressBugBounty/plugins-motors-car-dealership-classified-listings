@@ -5,24 +5,11 @@ use MotorsVehiclesListing\Plugin\MVL_Const;
 add_filter(
 	'mvl_motors_starter_theme_plugins',
 	function () {
-		function get_plugin_status( $plugin_slug ) {
-
-			switch ( $plugin_slug ) {
-				case 'motors-car-dealership-classified-listings':
-					$plugin_slug = $plugin_slug . '/stm_vehicles_listing.php';
-					break;
-				case 'contact-form-7':
-					$plugin_slug = $plugin_slug . '/wp-contact-form-7.php';
-					break;
-				default:
-					$plugin_slug = $plugin_slug . '/' . $plugin_slug . '.php';
-					break;
-			}
-
-			$plugin_file = WP_PLUGIN_DIR . '/' . $plugin_slug;
+		$get_plugin_status = function ( $plugin_slug ) {
+			$plugin_file = WP_PLUGIN_DIR . '/' . mvl_motors_starter_get_plugin_file( $plugin_slug );
 
 			if ( file_exists( $plugin_file ) ) {
-				if ( is_plugin_active( $plugin_slug ) ) {
+				if ( is_plugin_active( mvl_motors_starter_get_plugin_file( $plugin_slug ) ) ) {
 					return 'Activated';
 				} else {
 					return 'Installed but not activated';
@@ -30,38 +17,107 @@ add_filter(
 			}
 
 			return 'Not installed';
-		}
+		};
 
 		$plugins = array(
 			array(
 				'image'       => STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/images/motors-logo.png',
 				'title'       => 'Motors – Car Dealer, Classifieds & Listing',
 				'slug'        => 'motors-car-dealership-classified-listings',
-				'description' => get_plugin_status( 'motors-car-dealership-classified-listings' ),
+				'description' => $get_plugin_status( 'motors-car-dealership-classified-listings' ),
 			),
 			array(
 				'image'       => STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/images/elementor.png',
 				'title'       => 'Elementor',
 				'slug'        => 'elementor',
-				'description' => get_plugin_status( 'elementor' ),
+				'description' => $get_plugin_status( 'elementor' ),
 			),
 			array(
 				'image'       => STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/images/elementor-hfe.png',
 				'title'       => 'Elementor Header & Footer Builder',
 				'slug'        => 'header-footer-elementor',
-				'description' => get_plugin_status( 'header-footer-elementor' ),
+				'description' => $get_plugin_status( 'header-footer-elementor' ),
 			),
 			array(
 				'image'       => STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/images/cf7.png',
 				'title'       => 'Contact Form 7',
 				'slug'        => 'contact-form-7',
-				'description' => get_plugin_status( 'contact-form-7' ),
+				'description' => $get_plugin_status( 'contact-form-7' ),
 			),
 		);
+
+		$selected_demo = get_option( 'mvl_motors_starter_demo_name' );
+
+		if ( in_array( $selected_demo, array( 'car_dealership_two' ), true ) ) {
+			$plugins = array_merge(
+				$plugins,
+				array(
+					array(
+						'image'       => 'https://ps.w.org/woocommerce/assets/icon-128x128.png',
+						'title'       => 'WooCommerce',
+						'slug'        => 'woocommerce',
+						'description' => $get_plugin_status( 'woocommerce' ),
+					),
+				)
+			);
+		}
+
+		if ( in_array( $selected_demo, array( 'dealer-one', 'car_dealer_elementor', 'classified_listing' ), true ) ) {
+			$plugins = array_merge(
+				$plugins,
+				array(
+					array(
+						'image'       => 'https://ps.w.org/cost-calculator-builder/assets/icon-128x128.png',
+						'title'       => 'Cost Calculator Builder',
+						'slug'        => 'cost-calculator-builder',
+						'description' => $get_plugin_status( 'cost-calculator-builder' ),
+					),
+					array(
+						'image'       => STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/images/mailchimp.png',
+						'title'       => 'Mailchimp for WordPress',
+						'slug'        => 'mailchimp-for-wp',
+						'description' => $get_plugin_status( 'mailchimp-for-wp' ),
+					),
+					array(
+						'image'       => 'https://ps.w.org/add-to-any/assets/icon-128x128.png',
+						'title'       => 'AddToAny Share Buttons',
+						'slug'        => 'add-to-any',
+						'description' => $get_plugin_status( 'add-to-any' ),
+					),
+					array(
+						'image'       => 'https://ps.w.org/woocommerce/assets/icon-128x128.png',
+						'title'       => 'WooCommerce',
+						'slug'        => 'woocommerce',
+						'description' => $get_plugin_status( 'woocommerce' ),
+					),
+				)
+			);
+		}
 
 		return $plugins;
 	}
 );
+
+function mvl_motors_starter_get_plugin_file( $plugin_slug ) {
+	switch ( $plugin_slug ) {
+		case 'motors-car-dealership-classified-listings':
+			return $plugin_slug . '/stm_vehicles_listing.php';
+		case 'contact-form-7':
+			return $plugin_slug . '/wp-contact-form-7.php';
+		default:
+			return $plugin_slug . '/' . $plugin_slug . '.php';
+	}
+}
+
+function mvl_motors_starter_get_plugin_source( $plugin_slug ) {
+	$premium_plugins = array(
+		'motors-elementor-widgets' => 'downloads://motors/motors-elementor-widgets-1.6.15.zip',
+		'stm-elementor-icons'      => 'downloads://motors/stm-elementor-icons-1.0.0.zip',
+		'stm-megamenu'             => 'downloads://motors/stm-megamenu-2.3.15.zip',
+	);
+
+	return $premium_plugins[ $plugin_slug ] ?? '';
+}
 
 //Loading templates using ajax
 add_action( 'wp_ajax_mvl_motors_starter_demo_options', 'mvl_motors_starter_demo_options' );
@@ -129,19 +185,7 @@ function mvl_motors_starter_plugins_install() {
 		wp_send_json_error( esc_html__( 'No plugin specified for installation.', 'motors-starter-theme' ) );
 	}
 
-	$plugin_file = '';
-
-	switch ( $plugin_slug ) {
-		case 'motors-car-dealership-classified-listings':
-			$plugin_file = $plugin_slug . '/stm_vehicles_listing.php';
-			break;
-		case 'contact-form-7':
-			$plugin_file = $plugin_slug . '/wp-contact-form-7.php';
-			break;
-		default:
-			$plugin_file = $plugin_slug . '/' . $plugin_slug . '.php';
-			break;
-	}
+	$plugin_file = mvl_motors_starter_get_plugin_file( $plugin_slug );
 
 	if ( is_plugin_active( $plugin_file ) ) {
 		wp_send_json_success( esc_html__( 'Plugin is already active.', 'motors-starter-theme' ) );
@@ -165,6 +209,12 @@ function mvl_motors_starter_plugins_install() {
 function mvl_install_plugin( $slug ) {
 	include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
 	include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+
+	$source = mvl_motors_starter_get_plugin_source( $slug );
+	if ( $source ) {
+		$upgrader = new Plugin_Upgrader( new WP_Ajax_Upgrader_Skin() );
+		return $upgrader->install( $source );
+	}
 
 	$api = plugins_api(
 		'plugin_information',
@@ -220,6 +270,13 @@ function mvl_motors_starter_demo_install() {
 			wp_send_json_error( __( 'Failed to import taxonomies.', 'motors-starter-theme' ) );
 			break;
 		case 'demo_content':
+			if ( get_option( 'mvl_motors_starter_demo_content_imported' ) === $demo ) {
+				wp_send_json_success( __( 'Demo content was already imported.', 'motors-starter-theme' ) );
+				break;
+			}
+
+			update_option( 'mvl_motors_starter_demo_import_completed', false );
+
 			$response = apply_filters( 'motors_get_demo_data', 'demo.xml' );
 
 			if ( is_wp_error( $response ) ) {
@@ -256,6 +313,8 @@ function mvl_motors_starter_demo_install() {
 			$wp_import->builder           = $builder;
 			$wp_import->fetch_attachments = true;
 
+			update_option( 'mvl_motors_starter_demo_content_imported', $demo );
+
 			ob_start();
 			$wp_import->import( $temp_file_path );
 			ob_end_clean();
@@ -265,6 +324,17 @@ function mvl_motors_starter_demo_install() {
 				$wp_import->processed_posts,
 				$wp_import->processed_terms,
 				$wp_import->processed_menu_items,
+				$demo
+			);
+			do_action(
+				'mvl_motors_starter_after_demo_import_stage',
+				$type,
+				$demo,
+				array(
+					'processed_posts'      => $wp_import->processed_posts,
+					'processed_terms'      => $wp_import->processed_terms,
+					'processed_menu_items' => $wp_import->processed_menu_items,
+				)
 			);
 			do_action(
 				'mvl_motors_starter_after_demo_import_stage',
@@ -449,6 +519,8 @@ function mvl_motors_starter_demo_install() {
 				)
 			);
 
+			update_option( 'mvl_motors_starter_demo_import_completed', $demo );
+
 			wp_send_json_success( __( 'Motors Skins Pages imported.', 'motors-starter-theme' ) );
 
 			break;
@@ -557,13 +629,23 @@ function mvl_motors_starter_template_reset() {
 		wp_die( esc_html__( 'You do not have permission to export users.', 'motors-starter-theme' ) );
 	}
 
-	// Remove all posts marked with 'mvl_motors_starter_demo' meta
+	// Remove all posts marked as Motors Starter demo content.
 	$all_posts = get_posts(
 		array(
-			'numberposts' => - 1,
-			'post_type'   => 'any',
-			'post_status' => 'any',
-			'meta_key'    => 'mvl_motors_starter_demo',
+			'numberposts'  => - 1,
+			'post_type'    => 'any',
+			'post_status'  => 'any',
+			'meta_query'   => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+				'relation' => 'OR',
+				array(
+					'key'     => 'mvl_motors_starter_demo',
+					'compare' => 'EXISTS',
+				),
+				array(
+					'key'     => 'motors_starter_demo',
+					'compare' => 'EXISTS',
+				),
+			),
 		)
 	);
 
@@ -584,7 +666,7 @@ function mvl_motors_starter_template_reset() {
 		wp_delete_post( $post->ID, true );
 	}
 
-	// Remove all terms marked with 'mvl_motors_starter_demo' meta
+	// Remove all terms marked as Motors Starter demo content.
 	$taxonomies = get_taxonomies( array(), 'objects' );
 	foreach ( $taxonomies as $taxonomy ) {
 		$terms = get_terms(
@@ -595,8 +677,9 @@ function mvl_motors_starter_template_reset() {
 		);
 
 		foreach ( $terms as $term ) {
-			$meta_value = get_term_meta( $term->term_id, 'mvl_motors_starter_demo', true );
-			if ( $meta_value ) {
+			$mvl_meta     = get_term_meta( $term->term_id, 'mvl_motors_starter_demo', true );
+			$starter_meta = get_term_meta( $term->term_id, 'motors_starter_demo', true );
+			if ( $mvl_meta || $starter_meta ) {
 				wp_delete_term( $term->term_id, $taxonomy->name );
 			}
 		}
@@ -607,13 +690,23 @@ function mvl_motors_starter_template_reset() {
 	// Remove all taxonomy_option marked with 'mvl_motors_starter_demo' meta
 	delete_option( 'stm_vehicle_listing_options' );
 
-	// Remove all menu items marked with 'mvl_motors_starter_demo' meta
+	// Remove all menu items marked as Motors Starter demo content.
 	$menu_items = get_posts(
 		array(
-			'numberposts' => - 1,
-			'post_type'   => 'nav_menu_item',
-			'post_status' => 'any',
-			'meta_key'    => 'mvl_motors_starter_demo',
+			'numberposts'  => - 1,
+			'post_type'    => 'nav_menu_item',
+			'post_status'  => 'any',
+			'meta_query'   => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+				'relation' => 'OR',
+				array(
+					'key'     => 'mvl_motors_starter_demo',
+					'compare' => 'EXISTS',
+				),
+				array(
+					'key'     => 'motors_starter_demo',
+					'compare' => 'EXISTS',
+				),
+			),
 		)
 	);
 
@@ -623,6 +716,8 @@ function mvl_motors_starter_template_reset() {
 
 	// Remove options and widgets
 	update_option( 'show_on_front', 'posts' );
+	delete_option( 'mvl_motors_starter_demo_content_imported' );
+	delete_option( 'mvl_motors_starter_demo_import_completed' );
 
 	wp_send_json_success( 'Database was reset successfully!' );
 }

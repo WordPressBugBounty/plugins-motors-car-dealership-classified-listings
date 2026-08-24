@@ -44,7 +44,6 @@
     margin-bottom: 15px;
     padding: 0 8px;
     position: relative;
-  /*UI SLIDER*/
 }
 
 @media (max-width: 921px) {
@@ -97,6 +96,10 @@
 .filter-listing.motors_dynamic_listing_filter .stm-filter-tab-selects .row .stm-select-col .stm-taxonomy-range-unit {
     margin-top: 10px;
     padding: 0 10px;
+}
+
+.filter-listing.motors_dynamic_listing_filter .stm-filter-tab-selects .row .stm-select-col {
+  /*UI SLIDER*/
 }
 
 .filter-listing.motors_dynamic_listing_filter .stm-filter-tab-selects .row .stm-select-col .ui-slider-horizontal {

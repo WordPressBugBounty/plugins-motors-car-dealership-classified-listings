@@ -57,7 +57,8 @@
 
     $(document).on('click', '.mst-starter-wizard__button', function (event) {
       if (!$(this).hasClass('mst-starter-wizard__button-continue') &&
-        !$(this).hasClass('mst-starter-wizard__button-reset')) {
+        !$(this).hasClass('mst-starter-wizard__button-reset') &&
+        !$(this).hasClass('mst-starter-wizard__button-install-demo')) {
         motors_demo_steps($(this), event);
       }
       if ($(this).data('template') === 'finish' ||

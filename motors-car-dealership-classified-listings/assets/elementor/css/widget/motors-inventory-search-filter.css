@@ -153,8 +153,6 @@
 
 .classic-filter-row.motors-elementor-widget .stm-listing-directory-checkboxes .stm-accordion-content-wrapper .stm-checkbox-submit {
     width: 100%;
-    margin-bottom: 10px;
-    margin-top: 10px;
 }
 
 .classic-filter-row.motors-elementor-widget .stm-listing-directory-checkboxes .stm-accordion-content-wrapper .stm-checkbox-submit a {
@@ -165,6 +163,11 @@
     background-color: var(--motors-accent-color);
     color: var(--motors-contrast-text-color);
     transition: all 0.2s ease-in-out;
+}
+
+.classic-filter-row.motors-elementor-widget .stm-listing-directory-checkboxes .stm-accordion-content-wrapper .stm-checkbox-submit {
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .classic-filter-row.motors-elementor-widget .stm-accordion-content .content {
@@ -201,6 +204,14 @@
     outline: none;
 }
 
+.classic-filter-row.motors-elementor-widget input[type=text]::-moz-placeholder {
+    font-family: Montserrat;
+}
+
+.classic-filter-row.motors-elementor-widget input[type=text]::placeholder {
+    font-family: Montserrat;
+}
+
 .classic-filter-row.motors-elementor-widget input[type=text] {
     height: 40px;
     line-height: 40px;
@@ -208,14 +219,6 @@
     border: none;
     background-color: var(--motors-filter-inputs-color);
     color: var(--motors-text-color);
-    font-family: Montserrat;
-}
-
-.classic-filter-row.motors-elementor-widget input[type=text]::-moz-placeholder {
-    font-family: Montserrat;
-}
-
-.classic-filter-row.motors-elementor-widget input[type=text]::placeholder {
     font-family: Montserrat;
 }
 
@@ -236,16 +239,16 @@
     margin-bottom: 16px;
 }
 
-.classic-filter-row.motors-elementor-widget .type-text input[type=search] {
-    box-sizing: border-box;
-}
-
 .classic-filter-row.motors-elementor-widget .type-text input[type=search]::-moz-placeholder {
     font-family: Montserrat;
 }
 
 .classic-filter-row.motors-elementor-widget .type-text input[type=search]::placeholder {
     font-family: Montserrat;
+}
+
+.classic-filter-row.motors-elementor-widget .type-text input[type=search] {
+    box-sizing: border-box;
 }
 
 .classic-filter-row.motors-elementor-widget .type-text input[type=search]:invalid {

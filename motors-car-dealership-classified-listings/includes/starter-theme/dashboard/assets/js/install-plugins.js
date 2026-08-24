@@ -15,7 +15,6 @@
           $('.mst-starter-wizard__button-box').removeClass('mst-starter-wizard__button-box__hide').addClass('hide-install');
           return;
         }
-        console.log(3);
         const $currentPlugin = $pluginItems.eq(currentIndex);
         const pluginSlug = $currentPlugin.data('plugin');
 
@@ -31,10 +30,16 @@
               plugin_slug: pluginSlug,
             },
             success: function (response) {
-              $currentPlugin
-                .removeClass('mst-starter-wizard__plugin-load')
-                .addClass('mst-starter-wizard__plugin-loaded');
-              $currentPlugin.find('.mst-starter-wizard__plugin-info__description').text('Activated');
+              $currentPlugin.removeClass('mst-starter-wizard__plugin-load');
+
+              if (response.success) {
+                $currentPlugin.addClass('mst-starter-wizard__plugin-loaded');
+                $currentPlugin.find('.mst-starter-wizard__plugin-info__description').text('Activated');
+              } else {
+                const message = response.data || 'Installation failed';
+                $currentPlugin.find('.mst-starter-wizard__plugin-info__description').text(message);
+              }
+
               currentIndex++;
               processNextPlugin();
             },

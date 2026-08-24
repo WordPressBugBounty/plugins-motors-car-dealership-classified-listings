@@ -62,12 +62,6 @@ body.toplevel_page_stm-lms-settings .go-to-pro-notice {
 .unlock-wrapper-content .unlock-addons-price {
     display: flex;
     flex-direction: column;
-    color: #001931;
-    font-size: 1.5rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    margin-bottom: 40px;
 }
 
 .unlock-wrapper-content .unlock-addons-price span {
@@ -77,6 +71,15 @@ body.toplevel_page_stm-lms-settings .go-to-pro-notice {
     font-weight: 500;
     line-height: normal;
     opacity: 0.5;
+}
+
+.unlock-wrapper-content .unlock-addons-price {
+    color: #001931;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-bottom: 40px;
 }
 
 @media (max-width: 768px) {
@@ -95,12 +98,15 @@ body.toplevel_page_stm-lms-settings .go-to-pro-notice {
     font-weight: 700;
     line-height: normal;
     text-transform: initial;
-    margin-right: 10px;
 }
 
 .unlock-wrapper-content .unlock-addons-buttons .primary:hover {
     background: #fff;
     color: #227AFF;
+}
+
+.unlock-wrapper-content .unlock-addons-buttons .primary {
+    margin-right: 10px;
 }
 
 .unlock-wrapper-content .unlock-addons-buttons .secondary {

@@ -7,8 +7,10 @@
 			<?php echo esc_html__( 'Import demo content to quickly set up your site. You can customize or delete it anytime.', 'motors-starter-theme' ); ?>
 		</div>
 		<?php
-		$mst_settings = get_option( 'mst_settings' );
-		$builder      = get_option( 'mst-starter-theme-builder' );
+			$mst_settings = get_option( 'mst_settings' );
+			$builder      = get_option( 'mst-starter-theme-builder' );
+			$demo         = get_option( 'mvl_motors_starter_demo_name' );
+			$is_imported  = $demo && get_option( 'mvl_motors_starter_demo_import_completed' ) === $demo;
 
 		$demos = array(
 			array(
@@ -46,11 +48,11 @@
 		?>
 		<ul>
 			<?php foreach ( $demos as $demo ) : ?>
-				<li class="mst-starter-wizard__demo for-<?php echo esc_attr( $demo['for_builder'] ); ?>"
+					<li class="mst-starter-wizard__demo for-<?php echo esc_attr( $demo['for_builder'] ); ?> <?php echo esc_attr( $is_imported ? 'mst-starter-wizard__demo-loaded disable-check' : '' ); ?>"
 					data-demo="<?php echo esc_attr( $demo['slug'] ); ?>">
 					<div class="mst-starter-wizard__demo-checkbox">
 						<label>
-							<span class="demo-checkbox" data-checked="true"><span
+								<span class="demo-checkbox" data-checked="<?php echo esc_attr( $is_imported ? 'false' : 'true' ); ?>"><span
 										class="mst-icon-check"></span></span><?php echo esc_html( $demo['title'] ); ?>
 						</label>
 						<div class="mst-starter-wizard__demo-checkbox-content"><?php echo wp_kses_post( $demo['description'] ); ?></div>
@@ -65,7 +67,7 @@
 				</li>
 			<?php endforeach; ?>
 		</ul>
-		<div class="mst-starter-wizard__button-box">
+			<div class="mst-starter-wizard__button-box <?php echo esc_attr( $is_imported ? 'hide-install' : '' ); ?>">
 			<div class="mst-starter-wizard__button-message">
 				<?php echo esc_html__( 'An unexpected error occurred. Please try again.', 'motors-starter-theme' ); ?>
 			</div>

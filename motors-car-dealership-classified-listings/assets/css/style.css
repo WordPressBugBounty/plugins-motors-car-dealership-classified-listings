@@ -1400,7 +1400,6 @@ table > tbody > tr td {
 .stm-views-metabox__item {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
 }
 
 .stm-views-metabox__item .reset-counter {
@@ -1411,6 +1410,10 @@ table > tbody > tr td {
 .stm-views-metabox__item span {
     font-weight: 700;
     margin-left: 5px;
+}
+
+.stm-views-metabox__item {
+    margin-bottom: 10px;
 }
 
 .mvl-checkbox-metabox {
@@ -1603,6 +1606,10 @@ table > tbody > tr td {
 .stm-login-register-form .mvl-form-login-center {
     display: flex;
     justify-content: center;
+}
+
+.stm-secondary-color {
+    color: var(--motors-accent-color);
 }
 
 .stm-accordion-single-unit {

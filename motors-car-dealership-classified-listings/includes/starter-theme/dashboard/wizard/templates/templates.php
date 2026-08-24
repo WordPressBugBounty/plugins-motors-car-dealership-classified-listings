@@ -5,6 +5,27 @@
 </div>
 <div class="mst-starter-wizard__wrapper-content">
 	<?php
+	$dealer_one_image_path = get_theme_root() . '/motors/assets/admin/images/layouts/car_dealer_elementor.jpg';
+	$dealer_one_image_url  = file_exists( $dealer_one_image_path )
+		? get_theme_root_uri() . '/motors/assets/admin/images/layouts/car_dealer_elementor.jpg'
+		: STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/images/car_dealer_elementor.jpg';
+	$classified_one_image_path = get_theme_root() . '/motors/assets/admin/images/layouts/listing_one_elementor.jpg';
+	$classified_one_image_url  = file_exists( $classified_one_image_path )
+		? get_theme_root_uri() . '/motors/assets/admin/images/layouts/listing_one_elementor.jpg'
+		: STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/images/listing_one_elementor.jpg';
+	$classified_dealership_two_image_path = get_theme_root() . '/motors/assets/admin/images/layouts/car_dealership_two_elementor.jpg';
+	$classified_dealership_two_image_url  = file_exists( $classified_dealership_two_image_path )
+		? get_theme_root_uri() . '/motors/assets/admin/images/layouts/car_dealership_two_elementor.jpg'
+		: STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/images/car_dealer_two.jpg';
+	$classified_listing_two_image_path = get_theme_root() . '/motors/assets/admin/images/layouts/classified_listing_two_elementor.jpg';
+	$classified_listing_two_image_url  = file_exists( $classified_listing_two_image_path )
+		? get_theme_root_uri() . '/motors/assets/admin/images/layouts/classified_listing_two_elementor.jpg'
+		: STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/images/listing_two.jpg';
+	$classified_listing_three_image_path = get_theme_root() . '/motors/assets/admin/images/layouts/classified_listing_three_elementor.jpg';
+	$classified_listing_three_image_url  = file_exists( $classified_listing_three_image_path )
+		? get_theme_root_uri() . '/motors/assets/admin/images/layouts/classified_listing_three_elementor.jpg'
+		: STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/images/listing_three.jpg';
+
 	$rental_preview_path    = STM_LISTINGS_PATH . '/includes/starter-theme/dashboard/assets/images/demo-6.png';
 	$rental_preview_version = STM_LISTINGS_V;
 
@@ -39,6 +60,56 @@
 			'old_builder' => 'elementor-builder',
 			'preview'     => 'https://motors-plugin.stylemixthemes.com/',
 		),
+		array(
+			'image'       => $dealer_one_image_url,
+			'status'      => 'Pro',
+			'title'       => 'Dealer One',
+			'slug'        => 'car_dealer_elementor',
+			'demo_status' => 'available',
+			'builder'     => 'elementor',
+			'old_builder' => 'elementor-builder',
+			'preview'     => 'https://motors.stylemixthemes.com/elementor-dealer-one/',
+		),
+		array(
+			'image'       => $classified_one_image_url,
+			'status'      => 'Pro',
+			'title'       => 'Classified Listing',
+			'slug'        => 'classified_listing',
+			'demo_status' => 'available',
+			'builder'     => 'elementor',
+			'old_builder' => 'elementor-builder',
+			'preview'     => 'https://motors.stylemixthemes.com/elementor-classified-one/',
+		),
+		// array(
+		// 	'image'       => $classified_dealership_two_image_url,
+		// 	'status'      => 'Pro',
+		// 	'title'       => 'Car Dealership two',
+		// 	'slug'        => 'car_dealership_two',
+		// 	'demo_status' => 'available',
+		// 	'builder'     => 'elementor',
+		// 	'old_builder' => 'elementor-builder',
+		// 	'preview'     => 'https://motors.stylemixthemes.com/elementor-classified-one/',
+		// ),
+		// array(
+		// 	'image'       => $classified_listing_two_image_url,
+		// 	'status'      => 'Pro',
+		// 	'title'       => 'Classified Listing two',
+		// 	'slug'        => 'classified_listing_two',
+		// 	'demo_status' => 'available',
+		// 	'builder'     => 'elementor',
+		// 	'old_builder' => 'elementor-builder',
+		// 	'preview'     => 'https://motors.stylemixthemes.com/elementor-classified-two/',
+		// ),
+		// array(
+		// 	'image'       => $classified_listing_three_image_url,
+		// 	'status'      => 'Pro',
+		// 	'title'       => 'Classified Listing three',
+		// 	'slug'        => 'classified_listing_three',
+		// 	'demo_status' => 'available',
+		// 	'builder'     => 'elementor',
+		// 	'old_builder' => 'elementor-builder',
+		// 	'preview'     => 'https://motors.stylemixthemes.com/elementor-classified-three/',
+		// ),
 		array(
 			'image'       => $rental_preview_url,
 			'status'      => 'Pro',

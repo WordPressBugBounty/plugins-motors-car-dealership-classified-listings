@@ -1059,13 +1059,16 @@ ul.list-style-2 li:before {
 
 .stm-slider-filter-type-unit .stm-price-range-unit {
     margin: 15px 0 20px;
-    padding: 0;
 }
 
 @media (max-width: 1023px) {
     .stm-slider-filter-type-unit .stm-price-range-unit {
         margin: 10px 10px 20px 10px;
     }
+}
+
+.stm-slider-filter-type-unit .stm-price-range-unit {
+    padding: 0;
 }
 
 .stm-slider-filter-type-unit .stm-price-range-unit .stm-filter-type-slider {
@@ -2983,6 +2986,10 @@ footer .lOffer-account-dropdown {
     z-index: 99;
 }
 
+.classified_listing-skin {
+    padding-top: 60px;
+}
+
 .listing-list-loop {
     width: 100%;
     padding-bottom: 11px;
@@ -4825,11 +4832,14 @@ body .select2-container--default .select2-search--dropdown .select2-search__fiel
 a.motors-compare-button {
     display: flex;
     align-items: center;
-    color: var(--motors-text-highalpha-color);
 }
 
 a.motors-compare-button:hover {
     color: var(--motors-text-color);
+}
+
+a.motors-compare-button {
+    color: var(--motors-text-highalpha-color);
 }
 
 a.motors-compare-button .compare-icon-wrapper {

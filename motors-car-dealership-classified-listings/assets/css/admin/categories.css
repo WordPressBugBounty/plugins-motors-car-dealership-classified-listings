@@ -1195,21 +1195,30 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 10px 30px rgba(0, 0, 0, 0.1);
     max-height: 176px;
   /* width */
-  /* Track */
-  /* Handle */
-  /* Handle on hover */
 }
 
 .stm_custom_fields__select--list::-webkit-scrollbar {
     width: 10px;
 }
 
+.stm_custom_fields__select--list {
+  /* Track */
+}
+
 .stm_custom_fields__select--list::-webkit-scrollbar-track {
     background: #f1f1f1;
 }
 
+.stm_custom_fields__select--list {
+  /* Handle */
+}
+
 .stm_custom_fields__select--list::-webkit-scrollbar-thumb {
     background: #c7ccd1;
+}
+
+.stm_custom_fields__select--list {
+  /* Handle on hover */
 }
 
 .stm_custom_fields__select--list::-webkit-scrollbar-thumb:hover {

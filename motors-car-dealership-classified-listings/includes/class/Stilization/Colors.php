@@ -7,7 +7,7 @@ namespace MotorsVehiclesListing\Stilization;
  */
 class Colors {
 	public const DEFAULT = array(
-		'free'   => array(
+		'free'                 => array(
 			'accent_color'                => '#1280DF',
 			'bg_color'                    => '#FFFFFF',
 			'bg_shade'                    => '#F0F3F7',
@@ -37,7 +37,7 @@ class Colors {
 			'filter_field_text_color'     => '#010101',
 			'filter_field_link_color'     => '#1280DF',
 		),
-		'luxury' => array(
+		'luxury'               => array(
 			'accent_color'                => '#A08254',
 			'bg_color'                    => '#0C1315',
 			'bg_shade'                    => '#161A1D',
@@ -66,6 +66,36 @@ class Colors {
 			'filter_field_bg_color'       => '#161A1D',
 			'filter_field_text_color'     => '#E9E9E9',
 			'filter_field_link_color'     => '#A08254',
+		),
+		'car_dealer_elementor' => array(
+			'accent_color'                => '#CC6119',
+			'bg_color'                    => '#FFFFFF',
+			'bg_shade'                    => '#EAEDF0',
+			'bg_contrast'                 => '#232628',
+			'text_color'                  => '#232628',
+			'contrast_text_color'         => '#FFFFFF',
+			'filter_inputs_color'         => '#F6F7F9',
+			'spec_badge_color'            => '#FAB637',
+			'sold_badge_color'            => '#FC4E4E',
+			'success_bg_color'            => '#dbf2a2',
+			'success_text_color'          => '#5eac3f',
+			'notice_bg_color'             => '#fbc45d',
+			'notice_text_color'           => '#e4961a',
+			'error_bg_color'              => 'rgba(255,127,127,1)',
+			'error_text_color'            => 'rgba(244,43,43,1)',
+			'card_bg_color'               => '#ffffff',
+			'card_bg_color_hover'         => '#FFFFFF',
+			'card_title_color'            => '#111827',
+			'card_options_color'          => '#4E5562',
+			'card_btn_color'              => '#CC6119',
+			'card_popup_hover_bg_color'   => '#f9f9f9',
+			'filter_bg_color'             => '#ffffff',
+			'filter_border_color'         => '#CAD0D9',
+			'filter_text_color'           => '#232628',
+			'filter_text_color_secondary' => '#232628',
+			'filter_field_bg_color'       => '#ffffff',
+			'filter_field_text_color'     => '#232628',
+			'filter_field_link_color'     => '#CC6119',
 		),
 	);
 

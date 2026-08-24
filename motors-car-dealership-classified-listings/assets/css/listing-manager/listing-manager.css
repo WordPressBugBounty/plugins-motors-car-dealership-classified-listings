@@ -542,6 +542,11 @@ body.mvl-popup-confirmation-opened::before {
     }
 }
 
+.mvl-listing-manager-body .mvl-link-button i {
+    margin-right: 4px;
+    font-size: 14px;
+}
+
 .mvl-listing-manager-body .mvl-link-button {
     font-size: 14px;
     color: #3783E1;
@@ -555,11 +560,6 @@ body.mvl-popup-confirmation-opened::before {
     justify-content: center;
     gap: 4px;
     cursor: pointer;
-}
-
-.mvl-listing-manager-body .mvl-link-button i {
-    margin-right: 4px;
-    font-size: 14px;
 }
 
 @keyframes mvl-spin {
@@ -707,12 +707,12 @@ body.mvl-popup-confirmation-opened::before {
     }
 }
 
-.mvl-listing-manager-body .mvl-lm-search-field-input {
-    height: 40px;
-}
-
 .mvl-listing-manager-body .mvl-lm-search-field-input.mvl-input-field {
     padding-left: 42px;
+}
+
+.mvl-listing-manager-body .mvl-lm-search-field-input {
+    height: 40px;
 }
 
 .mvl-listing-manager-body .mvl-listing-manager-content-body-inner {
@@ -2387,11 +2387,6 @@ body.mvl-popup-confirmation-opened::before {
     color: #000;
 }
 
-.mvl-listing-manager-body .select2-container .select2-dropdown .select2-results__options {
-    scrollbar-width: thin;
-    scrollbar-color: #DFDFDF #fff;
-}
-
 .mvl-listing-manager-body .select2-container .select2-dropdown .select2-results__options::-webkit-scrollbar {
     width: 8px;
     background: #F1F5F9;
@@ -2405,6 +2400,11 @@ body.mvl-popup-confirmation-opened::before {
 
 .mvl-listing-manager-body .select2-container .select2-dropdown .select2-results__options::-webkit-scrollbar-thumb:hover {
     background: #BFC8D9;
+}
+
+.mvl-listing-manager-body .select2-container .select2-dropdown .select2-results__options {
+    scrollbar-width: thin;
+    scrollbar-color: #DFDFDF #fff;
 }
 
 .mvl-listing-manager-body .select2-container .select2-dropdown .select2-results__options .select2-results__option {
@@ -3445,12 +3445,12 @@ body.mvl-popup-confirmation-opened::before {
     gap: 10px;
 }
 
-.mvl-listing-manager-body .mvl-listing-manager-term-item:hover {
-    cursor: pointer;
-}
-
 .mvl-listing-manager-body .mvl-listing-manager-term-item:hover .mvl-listing-manager-term-item-actions {
     display: flex;
+}
+
+.mvl-listing-manager-body .mvl-listing-manager-term-item:hover {
+    cursor: pointer;
 }
 
 .mvl-listing-manager-body .mvl-listing-manager-field-term-item.active {
@@ -3521,6 +3521,10 @@ body.mvl-popup-confirmation-opened::before {
     display: none !important;
 }
 
+.mvl-listing-manager-body .mvl-listing-manager-term-item-image-edit.active {
+    display: flex;
+}
+
 .mvl-listing-manager-body .mvl-listing-manager-term-item-image-edit {
     position: absolute;
     display: none;
@@ -3532,10 +3536,6 @@ body.mvl-popup-confirmation-opened::before {
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.2s ease;
-}
-
-.mvl-listing-manager-body .mvl-listing-manager-term-item-image-edit.active {
-    display: flex;
 }
 
 .mvl-listing-manager-body .mvl-listing-manager-term-item-image-edit:hover {
@@ -3751,8 +3751,6 @@ body.mvl-popup-confirmation-opened::before {
     gap: 20px;
     max-height: 500px;
     overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #DFDFDF #fff;
 }
 
 .mvl-listing-manager-body .mvl-options-settings-tab-content-item::-webkit-scrollbar {
@@ -3768,6 +3766,11 @@ body.mvl-popup-confirmation-opened::before {
 
 .mvl-listing-manager-body .mvl-options-settings-tab-content-item::-webkit-scrollbar-thumb:hover {
     background: #BFC8D9;
+}
+
+.mvl-listing-manager-body .mvl-options-settings-tab-content-item {
+    scrollbar-width: thin;
+    scrollbar-color: #DFDFDF #fff;
 }
 
 .mvl-listing-manager-body .mvl-options-settings-tab-content-item.active {
@@ -3907,8 +3910,6 @@ body.mvl-popup-confirmation-opened::before {
     max-height: 230px;
     width: 100%;
     overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #DFDFDF #fff;
 }
 
 .mvl-listing-manager-body .terms-list::-webkit-scrollbar {
@@ -3926,11 +3927,14 @@ body.mvl-popup-confirmation-opened::before {
     background: #BFC8D9;
 }
 
+.mvl-listing-manager-body .terms-list {
+    scrollbar-width: thin;
+    scrollbar-color: #DFDFDF #fff;
+}
+
 .mvl-listing-manager-body .terms-list-container {
     max-height: 220px;
     overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #DFDFDF #fff;
 }
 
 .mvl-listing-manager-body .terms-list-container::-webkit-scrollbar {
@@ -3946,6 +3950,11 @@ body.mvl-popup-confirmation-opened::before {
 
 .mvl-listing-manager-body .terms-list-container::-webkit-scrollbar-thumb:hover {
     background: #BFC8D9;
+}
+
+.mvl-listing-manager-body .terms-list-container {
+    scrollbar-width: thin;
+    scrollbar-color: #DFDFDF #fff;
 }
 
 .mvl-listing-manager-body .mvl-no-terms-found {

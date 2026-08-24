@@ -26,6 +26,9 @@ body .mst-starter-wizard-inner {
 body .mst-starter-wizard img {
     display: block;
     max-width: 100%;
+}
+
+.mst-starter-templates .mst-starter-wizard__template-image img {
     height: 387px;
     -o-object-fit: cover;
     object-fit: cover;

@@ -423,6 +423,12 @@ function mvl_setup_wizard_starter_import_content() {
 	}
 
 	if ( ! empty( $importer->processed_posts ) ) {
+		do_action(
+			'mvl_motors_starter_after_demo_import',
+			$importer->processed_posts,
+			$importer->processed_terms,
+			$importer->processed_menu_items,
+		);
 		wp_send_json_success();
 	} else {
 		wp_send_json_error();

@@ -6,6 +6,15 @@
 add_filter( 'stm_wp_import_post_meta', 'stm_wp_import_post_meta_filter', 10, 1 );
 
 function stm_wp_import_post_meta_filter( $post_meta ) {
+	$post_meta = array_values(
+		array_filter(
+			$post_meta,
+			function ( $meta ) {
+				return ! in_array( $meta['key'], array( '_elementor_element_cache', '_elementor_css' ), true );
+			}
+		)
+	);
+
 	if ( function_exists('consulting_importer_get_placeholder') && !empty( consulting_importer_get_placeholder() ) ) {
 		foreach ( $post_meta as $meta_index => $meta ) {
 			switch ( $meta['key'] ) {
