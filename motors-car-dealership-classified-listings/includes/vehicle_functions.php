@@ -2059,7 +2059,7 @@ if ( ! function_exists( 'stm_ajax_add_a_car_media' ) ) {
 					'mvl_send_email',
 					array(
 						'config'          => 'listing_waiting',
-						'to	'             => get_userdata( $listing_user_id )->user_email,
+						'to'              => get_userdata( $listing_user_id )->user_email,
 						'smart_tags_args' => array(
 							'user_id'    => $listing_user_id,
 							'listing_id' => $post_id,
@@ -2350,20 +2350,33 @@ if ( ! function_exists( 'stm_get_add_page_url' ) ) {
 	 * @return mixed
 	 */
 	function stm_get_add_page_url( $edit = '', $post_id = '' ) {
-		if ( get_post_type( $post_id ) === apply_filters( 'stm_listings_post_type', 'listings' ) ) {
-			$page_id = apply_filters( 'motors_vl_get_nuxy_mod', 1755, 'user_add_car_page' );
-		} else {
-			// this is a multilisting type
-			if ( stm_is_multilisting() ) {
+		$post_type = get_post_type( $post_id );
+		$page_id   = '';
+
+		// Match add/edit page by the listing CPT, not the filtered default post type.
+		if ( $post_type && function_exists( 'stm_is_multilisting' ) && stm_is_multilisting() && class_exists( 'STMMultiListing' ) ) {
+			if ( method_exists( 'STMMultiListing', 'get_setting' ) ) {
+				$configured_page = STMMultiListing::get_setting( 'add_page', $post_type );
+				if ( ! empty( $configured_page ) ) {
+					$page_id = $configured_page;
+				}
+			}
+
+			if ( empty( $page_id ) ) {
 				$listings = STMMultiListing::stm_get_listings();
 				if ( ! empty( $listings ) ) {
-					foreach ( $listings as $key => $listing ) {
-						if ( isset( $listing['add_page'] ) && get_post_type( $post_id ) === $listing['slug'] ) {
+					foreach ( $listings as $listing ) {
+						if ( ! empty( $listing['slug'] ) && ! empty( $listing['add_page'] ) && $post_type === $listing['slug'] ) {
 							$page_id = $listing['add_page'];
+							break;
 						}
 					}
 				}
 			}
+		}
+
+		if ( empty( $page_id ) ) {
+			$page_id = apply_filters( 'motors_vl_get_nuxy_mod', 1755, 'user_add_car_page' );
 		}
 
 		$page_link = '';
@@ -3162,17 +3175,35 @@ if ( ! function_exists( 'mvl_ajax_dealer_load_listings_by_type' ) ) {
 		check_ajax_referer( 'stm_security_nonce', 'security' );
 		$response       = array();
 		$user_id        = isset( $_POST['user_id'] ) ? intval( filter_var( $_POST['user_id'], FILTER_SANITIZE_NUMBER_INT ) ) : 0;
-		$listing_type   = ( isset( $_POST['listing_type'] ) && ! empty( $_POST['listing_type'] ) ) ? sanitize_text_field( $_POST['listing_type'] ) : 'listings';
+		$listing_type   = ( isset( $_POST['listing_type'] ) && ! empty( $_POST['listing_type'] ) ) ? sanitize_text_field( $_POST['listing_type'] ) : '';
+		if ( 'all' === $listing_type ) {
+			$listing_type = '';
+		}
 		$user_public    = ( isset( $_POST['user_public'] ) && ! empty( $_POST['user_public'] ) ) ? sanitize_text_field( $_POST['user_public'] ) : '';
 		$user_private   = ( isset( $_POST['user_private'] ) && ! empty( $_POST['user_private'] ) ) ? sanitize_text_field( $_POST['user_private'] ) : '';
 		$user_favourite = ( isset( $_POST['user_favourite'] ) && ! empty( $_POST['user_favourite'] ) ) ? sanitize_text_field( $_POST['user_favourite'] ) : '';
 		$popular        = ( isset( $_POST['popular'] ) && ! empty( $_POST['popular'] ) && 'yes' === sanitize_text_field( $_POST['popular'] ) );
 		$favourites     = $user_favourite ? get_the_author_meta( 'stm_user_favourites', $user_id ) : null;
-		$view_type      = ( isset( $_POST['view_type'] ) && ! empty( $_POST['view_type'] ) ) ? sanitize_text_field( $_POST['view_type'] ) : 'grid';
-		$status         = $user_private || $user_favourite ? 'any' : 'publish';
-		$per_page       = intval( filter_var( $_POST['posts_per_page'], FILTER_SANITIZE_NUMBER_INT ) );
-		$get_all        = - 1 === $per_page;
-		$columns        = apply_filters( 'get_stm_column_dealer_load_cars', 3 );
+		$view_type      = ( isset( $_POST['view_type'] ) && ! empty( $_POST['view_type'] ) ) ? sanitize_text_field( $_POST['view_type'] ) : '';
+		if ( $user_private || ! in_array( $view_type, array( 'list', 'grid' ), true ) ) {
+			$view_type = $user_private ? 'list' : 'grid';
+		}
+		$status   = $user_private || $user_favourite ? 'any' : 'publish';
+		$per_page = isset( $_POST['posts_per_page'] ) ? intval( filter_var( wp_unslash( $_POST['posts_per_page'] ), FILTER_SANITIZE_NUMBER_INT ) ) : 0;
+		if ( 0 === $per_page ) {
+			$per_page = (int) apply_filters( 'motors_vl_get_nuxy_mod', get_option( 'posts_per_page', 10 ), 'post_per_page_user_inventory' );
+			if ( $per_page <= 0 ) {
+				$per_page = (int) get_option( 'posts_per_page', 10 );
+			}
+		}
+		$get_all = - 1 === $per_page;
+		$columns = apply_filters( 'get_stm_column_dealer_load_cars', 3 );
+
+		if ( $listing_type ) {
+			$_GET['listing_type'] = $listing_type;
+		} else {
+			unset( $_GET['listing_type'] );
+		}
 
 		$query = ( function_exists( 'stm_user_listings_query' ) ) ? stm_user_listings_query( $user_id, $status, $per_page, $popular, 0, false, $get_all, $listing_type, $favourites ) : null;
 
@@ -3182,12 +3213,17 @@ if ( ! function_exists( 'mvl_ajax_dealer_load_listings_by_type' ) ) {
 			while ( $query->have_posts() ) {
 				$query->the_post();
 				if ( $user_private ) {
-					do_action( 'stm_listings_load_template', 'listing-cars/listing-' . $view_type . '-directory-edit-loop' );
+					echo '<div class="stm_listing_edit_car ' . esc_attr( get_post_status( get_the_ID() ) ) . '">';
+					do_action( 'stm_listings_load_template', 'listing-cars/listing-list-directory-edit-loop' );
+					echo '</div>';
 				} else {
 					do_action( 'stm_listings_load_template', 'listing-' . $view_type, array( 'columns' => $columns ) );
 				}
 			}
 			$html = ob_get_clean();
+			wp_reset_postdata();
+		} elseif ( $user_private ) {
+			$html = '<h4 class="stm-seller-title">' . esc_html__( 'No listings yet', 'stm_vehicles_listing' ) . '</h4>';
 		}
 
 		$response['html']   = $html;

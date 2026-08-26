@@ -23,10 +23,10 @@ if ( $query->have_posts() ) : ?>
 					?>
 					<div class="select-type select-listing-type" style="margin-right: 15px;">
 						<div class="stm-label-type"><?php esc_html_e( 'Listing type', 'stm_vehicles_listing' ); ?></div>
-						<select data-user="<?php echo esc_attr( $user_id ); ?>" data-user-private="1">
-							<option value="all" selected><?php esc_html_e( 'All listing types', 'stm_vehicles_listing' ); ?></option>
+						<select data-user="<?php echo esc_attr( $user_id ); ?>" data-user-private="1" data-posts-per-page="<?php echo esc_attr( $posts_per_page ); ?>">
+							<option value="all" <?php selected( empty( $_GET['listing_type'] ) || 'all' === $_GET['listing_type'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>><?php esc_html_e( 'All listing types', 'stm_vehicles_listing' ); ?></option>
 							<?php foreach ( $listings as $slug => $label ) : ?>
-								<option value="<?php echo esc_attr( $slug ); ?>" <?php echo ( isset( $_GET['listing_type'] ) && $_GET['listing_type'] === $slug ) ? 'selected' : ''; ?>><?php echo esc_html( $label ); ?></option>
+								<option value="<?php echo esc_attr( $slug ); ?>" <?php selected( isset( $_GET['listing_type'] ) && $_GET['listing_type'] === $slug ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>><?php echo esc_html( $label ); ?></option>
 							<?php endforeach; ?>
 						</select>
 					</div>

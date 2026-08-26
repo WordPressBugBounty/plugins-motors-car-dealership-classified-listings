@@ -681,20 +681,53 @@ if ( ! function_exists( 'mvl_get_user_role' ) ) {
 
 add_action( 'pending_to_publish', 'stm_on_publish_pending_post', 10, 1 );
 function stm_on_publish_pending_post( $post ) {
+	if ( empty( $post->ID ) ) {
+		return;
+	}
+
+	if ( function_exists( 'stm_add_a_car_listing_post_types' ) && ! in_array( $post->post_type, stm_add_a_car_listing_post_types(), true ) ) {
+		return;
+	}
+
 	$listing_user_id = get_post_meta( $post->ID, 'stm_car_user', true );
-	$user_data       = get_userdata( $listing_user_id );
+
+	if ( ! $listing_user_id ) {
+		$listing_user_id = $post->post_author;
+	}
+
+	$user_data = get_userdata( $listing_user_id );
+
+	if ( ! $user_data || empty( $user_data->user_email ) ) {
+		return;
+	}
+
+	$smart_tags = array(
+		'listing_id' => $post->ID,
+		'user_id'    => $user_data->ID,
+		'car_title'  => $post->post_title,
+	);
+
 	do_action(
 		'mvl_send_email',
 		array(
 			'config'          => 'listing_approved',
-			'to	'             => $user_data->user_email,
-			'smart_tags_args' => array(
-				'listing_id' => $post->ID,
-				'user_id'    => $user_data->ID,
-
-			),
+			'to'              => $user_data->user_email,
+			'smart_tags_args' => $smart_tags,
 		)
 	);
+
+	$admin_email = get_bloginfo( 'admin_email' );
+
+	if ( $admin_email ) {
+		do_action(
+			'mvl_send_email',
+			array(
+				'config'          => 'user_add_listing',
+				'to'              => $admin_email,
+				'smart_tags_args' => $smart_tags,
+			)
+		);
+	}
 }
 
 if ( ! function_exists( 'stm_ajax_get_car_price' ) ) {
@@ -1373,14 +1406,26 @@ function stm_sort_listings_callback() {
 
 	$page           = isset( $_POST['page'] ) ? intval( $_POST['page'] ) : 1;
 	$posts_per_page = isset( $_POST['posts_per_page'] ) ? intval( $_POST['posts_per_page'] ) : 6;
-	$offset         = $posts_per_page * ( $page - 1 );
-	$status         = 'any';
+	if ( $posts_per_page <= 0 ) {
+		$posts_per_page = (int) get_option( 'posts_per_page', 10 );
+	}
+	$listing_type = isset( $_POST['listing_type'] ) ? sanitize_text_field( wp_unslash( $_POST['listing_type'] ) ) : '';
+	if ( 'all' === $listing_type ) {
+		$listing_type = '';
+	}
+	if ( $listing_type ) {
+		$_GET['listing_type'] = $listing_type;
+	} else {
+		unset( $_GET['listing_type'] );
+	}
+	$offset = $posts_per_page * ( $page - 1 );
+	$status = 'any';
 	if ( 'pending' === $sort_by ) {
 		$status = 'pending';
 	} elseif ( 'draft' === $sort_by ) {
 		$status = 'draft';
 	}
-	$query = stm_user_listings_query( $user_id, $status, $posts_per_page, false, $offset );
+	$query = stm_user_listings_query( $user_id, $status, $posts_per_page, false, $offset, false, false, $listing_type );
 	ob_start();
 	if ( $query->have_posts() ) {
 		while ( $query->have_posts() ) {
@@ -1676,19 +1721,34 @@ function mvl_send_email( $args ) {
 	$config_name = EmailManagerCompatibility::instance()->get_free_config_name( $args['config'] );
 	$smart_tags  = EmailManagerCompatibility::instance()->get_free_smart_tags( $args['smart_tags_args'] );
 
-	if ( isset( $smart_tags['listing_id'] ) ) {
-		$smart_tags['car']           = get_the_title( $smart_tags['listing_id'] );
-		$smart_tags['listing_title'] = $smart_tags['car'];
-		$smart_tags['car_title']     = $smart_tags['car'];
-		$smart_tags['car_id']        = $smart_tags['listing_id'];
-		$smart_tags['revision_link'] = getRevisionLink( $smart_tags['listing_id'] );
-		$smart_tags['listing_url']   = get_the_permalink( $smart_tags['listing_id'] );
+	$listing_id = 0;
 
-		if ( ! isset( $smart_tags['user_id'] ) || ! $smart_tags['user_id'] ) {
-			$smart_tags['user_id'] = get_post_meta( $smart_tags['listing_id'], 'stm_car_user', true );
+	if ( ! empty( $smart_tags['listing_id'] ) ) {
+		$listing_id = $smart_tags['listing_id'];
+	} elseif ( ! empty( $smart_tags['car_id'] ) && is_numeric( $smart_tags['car_id'] ) ) {
+		$listing_id = $smart_tags['car_id'];
+	}
+
+	if ( $listing_id ) {
+		$car_title = ! empty( $smart_tags['car_title'] ) ? $smart_tags['car_title'] : get_the_title( $listing_id );
+
+		if ( '' === $car_title ) {
+			$car_title = get_post_field( 'post_title', $listing_id );
+		}
+
+		$smart_tags['car']           = $car_title;
+		$smart_tags['listing_title'] = $car_title;
+		$smart_tags['car_title']     = $car_title;
+		$smart_tags['car_id']        = $listing_id;
+		$smart_tags['listing_id']    = $listing_id;
+		$smart_tags['revision_link'] = getRevisionLink( $listing_id );
+		$smart_tags['listing_url']   = get_the_permalink( $listing_id );
+
+		if ( empty( $smart_tags['user_id'] ) ) {
+			$smart_tags['user_id'] = get_post_meta( $listing_id, 'stm_car_user', true );
 
 			if ( ! $smart_tags['user_id'] ) {
-				$smart_tags['user_id'] = get_post_field( 'post_author', $smart_tags['listing_id'] );
+				$smart_tags['user_id'] = get_post_field( 'post_author', $listing_id );
 			}
 		}
 	}

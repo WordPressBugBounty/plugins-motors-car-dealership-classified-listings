@@ -40,8 +40,16 @@
 				let userPublic    = $select.data( 'user-public' );
 				let userPrivate   = $select.data( 'user-private' );
 				let userFavourite = $select.data( 'user-favourite' );
-				let postsPerPage  = $select.data( 'posts-per-page' );
-				let offset        = $select.data( 'offset' );
+				let postsPerPage  = parseInt( $select.data( 'posts-per-page' ), 10 );
+				let offset        = parseInt( $select.data( 'offset' ), 10 );
+				if ( ! postsPerPage ) {
+					postsPerPage = parseInt( $( '#sort_by_select' ).data( 'posts-per-page' ), 10 ) || -1;
+				}
+				if ( userPrivate ) {
+					viewType = 'list';
+				} else if ( ! viewType ) {
+					viewType = 'grid';
+				}
 				if ( offset === 0 ) {
 					offset = postsPerPage;
 				}
@@ -70,8 +78,8 @@
 						success: function (data) {
 							$( '.select-listing-type select' ).prop( "disabled", false );
 							if (data) {
-								const $target = userPublic || userPrivate ? $( '.archive-listing-page' ) :
-								userFavourite ? $( '.archive-listing-page .car-listing-row' ) :
+								const $target = userPrivate || userFavourite ? $( '.archive-listing-page .car-listing-row' ) :
+								userPublic ? $( '.archive-listing-page' ) :
 								$( '#' + listingsView ).find( '.car-listing-row' );
 								$target.html( data.html );
 							}
@@ -179,10 +187,11 @@
         window.history.replaceState({}, document.title, newUrl);
     }
 
-	$('#sort_by_select').on('change', function () {
+	$(document).on('change', '#sort_by_select', function () {
 		var sortBy = $(this).val()
 		var user_id = $(this).data('user')
 		var posts_per_page = $(this).data('posts-per-page')
+		var listing_type = $('.select-listing-type select').val() || 'all'
 		var data = {
 			action: 'stm_sort_listings',
 			sort_by: sortBy,
@@ -190,6 +199,7 @@
 			security: stm_security_nonce,
 			page: 1,
 			posts_per_page: posts_per_page,
+			listing_type: listing_type,
 		}
 		$.ajax({
 			url: ajaxurl,
@@ -217,12 +227,14 @@
 		var sortBy = $('#sort_by_select').val()
 		var user_id = $('#sort_by_select').data('user')
 		var posts_per_page = $('#sort_by_select').data('posts-per-page')
+		var listing_type = $('.select-listing-type select').val() || 'all'
 		var data = {
 			action: 'stm_sort_listings',
 			sort_by: sortBy,
 			user_id: user_id,
 			page: page,
 			posts_per_page: posts_per_page,
+			listing_type: listing_type,
 			security: stm_security_nonce,
 		}
 		$.ajax({
