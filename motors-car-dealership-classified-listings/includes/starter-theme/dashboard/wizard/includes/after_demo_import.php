@@ -450,6 +450,12 @@ function mvl_motors_disable_addtoany_page_placement( $processed_posts = array(),
 	update_option( 'addtoany_options', $options );
 }
 
+add_action( 'mvl_motors_starter_after_demo_import', 'mvl_motors_disable_woocommerce_coming_soon', 16, 4 );
+
+function mvl_motors_disable_woocommerce_coming_soon() {
+	update_option( 'woocommerce_coming_soon', 'no' );
+}
+
 /**
  * Set CCB calculator layout by slug (post_name) or title.
  * Matches calculators from demo and sets general.layout = horizontal-layout.
@@ -463,7 +469,7 @@ function mvl_motors_set_ccb_calc_layout_by_slug( $processed_posts = array(), $pr
 		return;
 	}
 
-	if ( in_array( $demo, array( 'classified_listing', 'car_dealer_elementor' ), true ) ) {
+	if ( in_array( $demo, array( 'classified_listing', 'classified_listing_two', 'car_dealer_elementor' ), true ) ) {
 		return;
 	}
 

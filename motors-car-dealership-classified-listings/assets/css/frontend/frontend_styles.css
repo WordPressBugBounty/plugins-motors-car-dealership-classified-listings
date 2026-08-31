@@ -2986,7 +2986,7 @@ footer .lOffer-account-dropdown {
     z-index: 99;
 }
 
-.classified_listing-skin {
+.classified_listing-skin, .classified_listing_two-skin {
     padding-top: 60px;
 }
 

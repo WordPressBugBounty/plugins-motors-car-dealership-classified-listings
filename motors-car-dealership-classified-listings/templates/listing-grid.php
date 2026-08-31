@@ -29,12 +29,17 @@ $data = array(
 		'asSold'           => get_post_meta( get_the_ID(), 'car_mark_as_sold', true ),
 		'sold_badge_color' => apply_filters( 'motors_vl_get_nuxy_mod', '', 'sold_badge_bg_color' ),
 	),
-	'grid_action_buttons'    => isset( $grid_action_buttons ) ? $grid_action_buttons : array(),
-	'grid_action_popup_btns' => isset( $grid_action_popup_btns ) ? $grid_action_popup_btns : array(),
+	/*
+	 * The card skins run array_filter() and foreach() over these, so a non-array here takes the
+	 * whole page down with a fatal. Template overrides feed them from post meta, which yields an
+	 * empty string when the meta was never saved, so check the type rather than just isset().
+	 */
+	'grid_action_buttons'    => isset( $grid_action_buttons ) && is_array( $grid_action_buttons ) ? $grid_action_buttons : array(),
+	'grid_action_popup_btns' => isset( $grid_action_popup_btns ) && is_array( $grid_action_popup_btns ) ? $grid_action_popup_btns : array(),
 	'veiw_details_grid'      => isset( $veiw_details_grid ) ? $veiw_details_grid : array(),
 	'veiw_details_list'      => isset( $veiw_details_list ) ? $veiw_details_list : array(),
-	'listing_options_list'   => isset( $listing_options_list ) ? $listing_options_list : array(),
-	'listing_options_grid'   => isset( $listing_options_grid ) ? $listing_options_grid : array(),
+	'listing_options_list'   => isset( $listing_options_list ) && is_array( $listing_options_list ) ? $listing_options_list : array(),
+	'listing_options_grid'   => isset( $listing_options_grid ) && is_array( $listing_options_grid ) ? $listing_options_grid : array(),
 );
 
 if ( ! isset( $data['skin'] ) ) {
