@@ -62,7 +62,7 @@ add_filter(
 			);
 		}
 
-		if ( in_array( $selected_demo, array( 'dealer-one', 'car_dealer_elementor', 'classified_listing', 'classified_listing_two' ), true ) ) {
+		if ( in_array( $selected_demo, array( 'dealer-one', 'car_dealer_elementor', 'classified_listing', 'classified_listing_two', 'classified_listing_three' ), true ) ) {
 			$plugins = array_merge(
 				$plugins,
 				array(

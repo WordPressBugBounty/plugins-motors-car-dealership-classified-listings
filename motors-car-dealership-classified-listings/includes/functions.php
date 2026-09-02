@@ -2130,17 +2130,35 @@ add_action(
 
 add_filter( 'motors_get_demo_data', 'motors_get_demo_data' );
 
+if ( ! function_exists( 'mvl_get_starter_demo_name' ) ) {
+	function mvl_get_starter_demo_name() {
+		return function_exists( 'motors_get_skin_name' ) ? motors_get_skin_name() : get_option( 'mvl_motors_starter_demo_name', 'free' );
+	}
+}
+
 if ( ! function_exists( 'mvl_is_classified_listing_demo_import' ) ) {
 	function mvl_is_classified_listing_demo_import() {
-		$demo = function_exists( 'motors_get_skin_name' ) ? motors_get_skin_name() : get_option( 'mvl_motors_starter_demo_name', 'free' );
+		return 'classified_listing' === mvl_get_starter_demo_name();
+	}
+}
 
-		return 'classified_listing' === $demo;
+if ( ! function_exists( 'mvl_is_classified_listing_three_demo_import' ) ) {
+	function mvl_is_classified_listing_three_demo_import() {
+		return 'classified_listing_three' === mvl_get_starter_demo_name();
 	}
 }
 
 if ( ! function_exists( 'mvl_set_classified_listing_default_elementor_skins' ) ) {
 	function mvl_set_classified_listing_default_elementor_skins( $post ) {
-		if ( ! mvl_is_classified_listing_demo_import() || empty( $post['postmeta'] ) || ! is_array( $post['postmeta'] ) ) {
+		$scope = '';
+
+		if ( mvl_is_classified_listing_demo_import() ) {
+			$scope = 'all';
+		} elseif ( mvl_is_classified_listing_three_demo_import() ) {
+			$scope = 'list';
+		}
+
+		if ( '' === $scope || empty( $post['postmeta'] ) || ! is_array( $post['postmeta'] ) ) {
 			return $post;
 		}
 
@@ -2160,7 +2178,7 @@ if ( ! function_exists( 'mvl_set_classified_listing_default_elementor_skins' ) )
 				continue;
 			}
 
-			$value = mvl_set_default_skins_to_elementor_data( $value );
+			$value = mvl_set_default_skins_to_elementor_data( $value, $scope );
 
 			$post['postmeta'][ $key ]['value'] = $is_string ? wp_json_encode( $value ) : $value;
 		}
@@ -2200,7 +2218,7 @@ if ( ! function_exists( 'mvl_set_classified_listing_default_search_results_skins
 }
 
 if ( ! function_exists( 'mvl_set_default_skins_to_elementor_data' ) ) {
-	function mvl_set_default_skins_to_elementor_data( array $elementor_data ) {
+	function mvl_set_default_skins_to_elementor_data( array $elementor_data, $scope = 'all' ) {
 		$grid_widgets_to_update = array(
 			'motors-listings-grid',
 			'motors-listings-grid-tabs',
@@ -2212,6 +2230,10 @@ if ( ! function_exists( 'mvl_set_default_skins_to_elementor_data' ) ) {
 		$list_widgets_to_update = array(
 			'motors-listings-list',
 		);
+
+		if ( 'list' === $scope ) {
+			$grid_widgets_to_update = array();
+		}
 
 		foreach ( $elementor_data as $key => $element ) {
 			if ( ! is_array( $element ) ) {
@@ -2231,7 +2253,7 @@ if ( ! function_exists( 'mvl_set_default_skins_to_elementor_data' ) ) {
 			}
 
 			if ( ! empty( $element['elements'] ) && is_array( $element['elements'] ) ) {
-				$elementor_data[ $key ]['elements'] = mvl_set_default_skins_to_elementor_data( $element['elements'] );
+				$elementor_data[ $key ]['elements'] = mvl_set_default_skins_to_elementor_data( $element['elements'], $scope );
 			}
 		}
 
