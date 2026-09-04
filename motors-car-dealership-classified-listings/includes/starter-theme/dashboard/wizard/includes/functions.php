@@ -58,6 +58,18 @@ add_filter(
 						'slug'        => 'woocommerce',
 						'description' => $get_plugin_status( 'woocommerce' ),
 					),
+					array(
+						'image'       => STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/images/cf7.png',
+						'title'       => 'Contact Form 7',
+						'slug'        => 'contact-form-7',
+						'description' => $get_plugin_status( 'contact-form-7' ),
+					),
+					array(
+						'image'       => 'https://ps.w.org/cost-calculator-builder/assets/icon-128x128.png',
+						'title'       => 'Cost Calculator Builder',
+						'slug'        => 'cost-calculator-builder',
+						'description' => $get_plugin_status( 'cost-calculator-builder' ),
+					),
 				)
 			);
 		}
