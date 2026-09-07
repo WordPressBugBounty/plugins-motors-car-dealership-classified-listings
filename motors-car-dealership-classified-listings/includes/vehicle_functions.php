@@ -2188,7 +2188,7 @@ if ( ! function_exists( 'stm_user_listings_query' ) ) {
 	 *
 	 * @return WP_Query
 	 */
-	function stm_user_listings_query( $user_id, $status = 'publish', $per_page = - 1, $popular = false, $offset = 0, $data_desc = false, $get_all = false, $listing_type = '', $posts_in = '' ) {
+	function stm_user_listings_query( $user_id, $status = 'publish', $per_page = - 1, $popular = false, $offset = 0, $data_desc = false, $get_all = false, $listing_type = '', $posts_in = '', $exclude_password_protected = false ) {
 		$pay_per_listing = ( $get_all ) ? array() : array(
 			'key'     => 'pay_per_listing',
 			'compare' => 'NOT EXISTS',
@@ -2239,6 +2239,10 @@ if ( ! function_exists( 'stm_user_listings_query' ) ) {
 					$pay_per_listing,
 				),
 			);
+		}
+
+		if ( $exclude_password_protected ) {
+			$args['has_password'] = false;
 		}
 
 		if ( $popular ) {
@@ -3117,6 +3121,22 @@ add_action(
 	}
 );
 
+if ( ! function_exists( 'mvl_ajax_can_view_private_user_listings' ) ) {
+	function mvl_ajax_can_view_private_user_listings( $user_id ) {
+		if ( ! is_user_logged_in() ) {
+			return false;
+		}
+
+		$current_user_id = get_current_user_id();
+
+		if ( 0 >= $current_user_id || absint( $user_id ) !== $current_user_id ) {
+			return false;
+		}
+
+		return true;
+	}
+}
+
 if ( ! function_exists( 'mvl_ajax_dealer_load_cars' ) ) {
 	function mvl_ajax_dealer_load_cars() {
 		check_ajax_referer( 'stm_security_nonce', 'security' );
@@ -3125,18 +3145,34 @@ if ( ! function_exists( 'mvl_ajax_dealer_load_cars' ) ) {
 		$offset         = isset( $_POST['offset'] ) ? intval( filter_var( $_POST['offset'], FILTER_SANITIZE_NUMBER_INT ) ) : 0;
 		$view_type      = ( isset( $_POST['view_type'] ) && 'list' === $_POST['view_type'] ) ? 'list' : 'grid';
 		$popular        = ( isset( $_POST['popular'] ) && 'yes' === $_POST['popular'] );
-		$user_private   = isset( $_POST['profile_page'] );
+		$private_requested = isset( $_POST['profile_page'] );
+		$user_private   = false;
 		$posts_per_page = apply_filters( 'motors_vl_get_nuxy_mod', 6, 'post_per_page_user_inventory' );
 		$listing_type   = ( isset( $_POST['listing_type'] ) && ! empty( $_POST['listing_type'] ) ) ? $_POST['listing_type'] : '';
 
-		$status             = $user_private ? 'any' : 'publish';
+		if ( $private_requested && mvl_ajax_can_view_private_user_listings( $user_id ) ) {
+			$user_private = true;
+		}
+
+		$status = 'publish';
+
+		if ( $user_private ) {
+			$status                     = 'any';
+			$exclude_password_protected = false;
+		} else {
+			$exclude_password_protected = true;
+		}
+
 		$response['offset'] = $offset;
 		$new_offset         = $posts_per_page + $offset;
+		$query              = null;
 
-		if ( empty( $listing_type ) ) {
-			$query = function_exists( 'stm_user_listings_query' ) ? stm_user_listings_query( $user_id, $status, $posts_per_page, $popular, $offset ) : null;
-		} else {
-			$query = function_exists( 'stm_user_listings_query' ) ? stm_user_listings_query( $user_id, $status, $posts_per_page, $popular, $offset, false, false, $listing_type ) : null;
+		if ( function_exists( 'stm_user_listings_query' ) ) {
+			if ( empty( $listing_type ) ) {
+				$query = stm_user_listings_query( $user_id, $status, $posts_per_page, $popular, $offset, false, false, '', '', $exclude_password_protected );
+			} else {
+				$query = stm_user_listings_query( $user_id, $status, $posts_per_page, $popular, $offset, false, false, $listing_type, '', $exclude_password_protected );
+			}
 		}
 
 		$html    = '';
@@ -3180,11 +3216,13 @@ if ( ! function_exists( 'mvl_ajax_dealer_load_listings_by_type' ) ) {
 			$listing_type = '';
 		}
 		$user_public    = ( isset( $_POST['user_public'] ) && ! empty( $_POST['user_public'] ) ) ? sanitize_text_field( $_POST['user_public'] ) : '';
-		$user_private   = ( isset( $_POST['user_private'] ) && ! empty( $_POST['user_private'] ) ) ? sanitize_text_field( $_POST['user_private'] ) : '';
-		$user_favourite = ( isset( $_POST['user_favourite'] ) && ! empty( $_POST['user_favourite'] ) ) ? sanitize_text_field( $_POST['user_favourite'] ) : '';
+		$private_requested   = ( isset( $_POST['user_private'] ) && ! empty( $_POST['user_private'] ) );
+		$favourite_requested = ( isset( $_POST['user_favourite'] ) && ! empty( $_POST['user_favourite'] ) );
+		$user_private   = false;
+		$user_favourite = false;
 		$popular        = ( isset( $_POST['popular'] ) && ! empty( $_POST['popular'] ) && 'yes' === sanitize_text_field( $_POST['popular'] ) );
 		$favourites     = $user_favourite ? get_the_author_meta( 'stm_user_favourites', $user_id ) : null;
-		$view_type      = ( isset( $_POST['view_type'] ) && ! empty( $_POST['view_type'] ) ) ? sanitize_text_field( $_POST['view_type'] ) : '';
+		$view_type      = ( isset( $_POST['view_type'] ) && ! empty( $_POST['view_type'] ) ) ? sanitize_text_field( $_POST['view_type'] ) : 'grid';
 		if ( $user_private || ! in_array( $view_type, array( 'list', 'grid' ), true ) ) {
 			$view_type = $user_private ? 'list' : 'grid';
 		}
@@ -3205,7 +3243,27 @@ if ( ! function_exists( 'mvl_ajax_dealer_load_listings_by_type' ) ) {
 			unset( $_GET['listing_type'] );
 		}
 
-		$query = ( function_exists( 'stm_user_listings_query' ) ) ? stm_user_listings_query( $user_id, $status, $per_page, $popular, 0, false, $get_all, $listing_type, $favourites ) : null;
+		if ( mvl_ajax_can_view_private_user_listings( $user_id ) ) {
+			$user_private   = $private_requested;
+			$user_favourite = $favourite_requested;
+		}
+
+		if ( $user_private ) {
+			$status                     = 'any';
+			$exclude_password_protected = false;
+		} else {
+			$exclude_password_protected = true;
+		}
+
+		if ( $user_favourite ) {
+			$favourites = get_the_author_meta( 'stm_user_favourites', $user_id );
+		}
+
+		$query = null;
+
+		if ( function_exists( 'stm_user_listings_query' ) ) {
+			$query = stm_user_listings_query( $user_id, $status, $per_page, $popular, 0, false, $get_all, $listing_type, $favourites, $exclude_password_protected );
+		}
 
 		$html = '';
 		if ( ! empty( $query ) && $query->have_posts() ) {
