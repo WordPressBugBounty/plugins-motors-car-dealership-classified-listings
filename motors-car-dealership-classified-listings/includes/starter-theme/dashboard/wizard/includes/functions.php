@@ -48,7 +48,7 @@ add_filter(
 
 		$selected_demo = get_option( 'mvl_motors_starter_demo_name' );
 
-		if ( in_array( $selected_demo, array( 'car_dealership_two' ), true ) ) {
+		if ( in_array( $selected_demo, array( 'car_dealership_two', 'electric_vehicle' ), true ) ) {
 			$plugins = array_merge(
 				$plugins,
 				array(

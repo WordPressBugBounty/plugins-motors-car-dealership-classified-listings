@@ -1612,6 +1612,97 @@ table > tbody > tr td {
     color: var(--motors-accent-color);
 }
 
+.electric_vehicle-skin .elementor-widget-motors-contact-form-seven h2 {
+    font-size: 36px;
+    font-weight: 500 !important;
+    font-style: normal;
+    letter-spacing: 2.16px;
+    line-height: normal;
+    text-align: left;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+    text-transform: uppercase;
+    color: #000000;
+    box-shadow: none;
+}
+
+@media (max-width: 767px) {
+    .electric_vehicle-skin .elementor-widget-motors-contact-form-seven h2 {
+        font-size: 24px;
+    }
+}
+
+@media (min-width: 992px) {
+    .electric_vehicle-skin .elementor-widget-motors-contact-form-seven h2 {
+        color: #ffffff;
+        margin-top: 20px !important;
+        text-align: left;
+    }
+}
+
+.electric_vehicle-skin .elementor-widget-motors-contact-form-seven form label {
+    width: 100%;
+}
+
+@media (min-width: 992px) {
+    .electric_vehicle-skin .elementor-widget-motors-contact-form-seven form > p {
+        margin-bottom: 35px;
+    }
+
+    .electric_vehicle-skin .elementor-widget-motors-contact-form-seven form label {
+        width: 100%;
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .electric_vehicle-skin .elementor-widget-motors-contact-form-seven form label input,
+  .electric_vehicle-skin .elementor-widget-motors-contact-form-seven form label textarea {
+        background-color: transparent !important;
+        border: none !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.5) !important;
+        color: #ffffff;
+        padding: 0;
+        transition: height 0.4s linear;
+        overflow: hidden;
+        resize: none;
+        font-size: 18px;
+        border-radius: 0;
+        height: 10px;
+    }
+
+    .electric_vehicle-skin .elementor-widget-motors-contact-form-seven form label input.wpcf7-not-valid,
+  .electric_vehicle-skin .elementor-widget-motors-contact-form-seven form label textarea.wpcf7-not-valid {
+        border-bottom: 1px solid #ff2325 !important;
+    }
+
+    .electric_vehicle-skin .elementor-widget-motors-contact-form-seven form .wpcf7-submit {
+        box-shadow: none;
+        color: #000000 !important;
+        background-color: #ffffff;
+        border-radius: 50px;
+        display: inline-block;
+        padding: 17px 45px 15px;
+        font-size: 12px;
+        margin-top: 20px;
+    }
+
+    .electric_vehicle-skin .elementor-widget-motors-contact-form-seven form .wpcf7-response-output {
+        position: initial;
+        border: 1px solid #ff2325 !important;
+        color: #ffffff !important;
+        margin-bottom: 0 !important;
+    }
+}
+
+.electric_vehicle-skin .elementor-widget-motors-contact-form-seven .icon-box {
+    padding: 5px 50px;
+}
+
+.electric_vehicle-skin .elementor-widget-motors-contact-form-seven form label input:focus,
+.electric_vehicle-skin .elementor-widget-motors-contact-form-seven form label textarea:focus {
+    height: 47px;
+}
+
 .stm-accordion-single-unit {
     margin-top: 20px;
 }

@@ -26,6 +26,10 @@
 		? get_theme_root_uri() . '/motors/assets/admin/images/layouts/classified_listing_three_elementor.jpg'
 		: STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/images/listing_three.jpg';
 
+	$electric_vehicle_image_path = file_exists( $classified_listing_three_image_path )
+	? get_theme_root_uri() . '/motors/assets/admin/images/layouts/classified_listing_three_elementor.jpg'
+	: STM_LISTINGS_URL . '/includes/starter-theme/dashboard/assets/images/ev_dealer.jpg';
+
 	$rental_preview_path    = STM_LISTINGS_PATH . '/includes/starter-theme/dashboard/assets/images/demo-6.png';
 	$rental_preview_version = STM_LISTINGS_V;
 
@@ -109,6 +113,16 @@
 			'builder'     => 'elementor',
 			'old_builder' => 'elementor-builder',
 			'preview'     => 'https://motors.stylemixthemes.com/elementor-classified-three/',
+		),
+		array(
+			'image'       => $electric_vehicle_image_path,
+			'status'      => 'Pro',
+			'title'       => 'Electric Vehicle',
+			'slug'        => 'electric_vehicle',
+			'demo_status' => 'available',
+			'builder'     => 'elementor',
+			'old_builder' => 'elementor-builder',
+			'preview'     => 'https://motors.stylemixthemes.com/ev-dealership/',
 		),
 		array(
 			'image'       => $rental_preview_url,
