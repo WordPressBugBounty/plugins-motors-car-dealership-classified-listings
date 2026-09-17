@@ -38,6 +38,7 @@ $data = array(
 	'listing_id'             => $listing_id,
 	'skin'                   => $skin,
 	'image_sizes'            => $image_sizes,
+	'custom_img_size'        => isset( $custom_img_size ) ? $custom_img_size : '',
 	'certificates'           => array(
 		'certificate_1' => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_certified_logo_1' ),
 		'certificate_2' => apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_certified_logo_2' ),

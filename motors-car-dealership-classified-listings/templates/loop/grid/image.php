@@ -76,7 +76,16 @@ $car_media           = apply_filters( 'stm_get_car_medias', array(), get_the_id(
 		<!--Badge-->
 		<?php do_action( 'stm_listings_load_template', 'loop/badge' ); ?>
 
-		<?php do_action( 'stm_listings_load_template', 'loop/image-preview', array( 'view_type' => 'grid' ) ); ?>
+		<?php
+		do_action(
+			'stm_listings_load_template',
+			'loop/image-preview',
+			array(
+				'view_type'       => 'grid',
+				'custom_img_size' => isset( $custom_img_size ) ? $custom_img_size : '',
+			)
+		);
+		?>
 
 		<?php
 		$tooltip_position = 'left';

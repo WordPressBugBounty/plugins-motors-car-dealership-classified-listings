@@ -17,6 +17,15 @@
     width: 25%;
 }
 
+.filter-listing.stm_dynamic_listing_filter .tab-content .stm-filter-tab-selects .stm-select-col .stm-select-label-text {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    line-height: 14px;
+    color: var(--motors-contrast-text-color);
+    opacity: 0.5;
+}
+
 .filter-listing.stm_dynamic_listing_filter .tab-content .stm-filter-tab-selects.hide-overflown-controls .stm-select-col.overflown {
     display: none;
 }
@@ -146,6 +155,27 @@
     max-width: 190px;
     width: 100%;
     min-width: initial;
+}
+
+.filter-listing.stm_dynamic_listing_filter .tab-content .stm-filter-tab-selects .stm-search-submit-col {
+    margin-left: auto;
+    margin-right: 8px;
+    max-width: 190px;
+    width: auto;
+    flex: 0 0 auto;
+}
+
+.filter-listing.stm_dynamic_listing_filter .tab-content .stm-filter-tab-selects .stm-search-submit-col .stm-select-label-text {
+    display: flex;
+    gap: 4px;
+    white-space: nowrap;
+}
+
+.filter-listing.stm_dynamic_listing_filter .tab-content .stm-filter-tab-selects .stm-search-submit-col button[type=submit] {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: none;
+    width: 100%;
 }
 
 .filter-listing.stm_dynamic_listing_filter .tab-content .stm-filter-tab-selects button.vmc-btn-submit {

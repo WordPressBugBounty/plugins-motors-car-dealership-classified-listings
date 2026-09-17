@@ -18,10 +18,20 @@ if ( ! empty( $sold ) && 'on' === $sold ) {
 	$classes[] = 'listing_is_active';
 }
 
-$col = ( ! empty( get_post_meta( apply_filters( 'stm_listings_user_defined_filter_page', '' ), 'quant_grid_items', true ) ) ) ? 12 / get_post_meta( apply_filters( 'stm_listings_user_defined_filter_page', '' ), 'quant_grid_items', true ) : 4;
+$col    = 4;
+$col_sm = 6;
 
-if ( ! empty( $columns ) ) {
+if ( ! empty( $per_row ) ) {
+	$per_row = max( 1, intval( $per_row ) );
+	$col     = (int) ( 12 / $per_row );
+	$col_sm  = ( $per_row >= 3 ) ? 4 : 6;
+} elseif ( ! empty( $columns ) ) {
 	$col = $columns;
+} else {
+	$quant_grid_items = get_post_meta( apply_filters( 'stm_listings_user_defined_filter_page', '' ), 'quant_grid_items', true );
+	if ( ! empty( $quant_grid_items ) ) {
+		$col = 12 / $quant_grid_items;
+	}
 }
 
 $listing_id = get_the_ID();
@@ -30,7 +40,7 @@ $post_type  = get_post_type();
 ?>
 
 <div
-	class="col-md-<?php echo esc_attr( $col ); ?> col-sm-6 col-xs-12 col-xxs-12 stm-directory-grid-loop stm-isotope-listing-item all <?php echo esc_attr( implode( ' ', $classes ) ); ?>"
+	class="col-md-<?php echo esc_attr( $col ); ?> col-sm-<?php echo esc_attr( $col_sm ); ?> col-xs-12 col-xxs-12 stm-directory-grid-loop stm-isotope-listing-item all <?php echo esc_attr( implode( ' ', $classes ) ); ?>"
 	data-price="<?php echo esc_attr( $data_price ); ?>"
 	data-date="<?php echo get_the_date( 'Ymdhi' ); ?>"
 	data-listing-id="<?php echo esc_attr( $listing_id ); ?>"

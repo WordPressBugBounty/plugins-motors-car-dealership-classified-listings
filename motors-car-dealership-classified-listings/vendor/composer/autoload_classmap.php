@@ -17,6 +17,7 @@ return array(
     'MotorsElementorWidgetsFree\\Widgets\\HeaderFooter\\CompareButton' => $baseDir . '/elementor/inc/Widgets/HeaderFooter/CompareButton.php',
     'MotorsElementorWidgetsFree\\Widgets\\HeaderFooter\\ProfileButton' => $baseDir . '/elementor/inc/Widgets/HeaderFooter/ProfileButton.php',
     'MotorsElementorWidgetsFree\\Widgets\\ImageCategories' => $baseDir . '/elementor/inc/Widgets/ImageCategories.php',
+    'MotorsElementorWidgetsFree\\Widgets\\InventoryCategoryTabs' => $baseDir . '/elementor/inc/Widgets/InventoryCategoryTabs.php',
     'MotorsElementorWidgetsFree\\Widgets\\InventorySearchFilter' => $baseDir . '/elementor/inc/Widgets/InventorySearchFilter.php',
     'MotorsElementorWidgetsFree\\Widgets\\InventorySearchResults' => $baseDir . '/elementor/inc/Widgets/InventorySearchResults.php',
     'MotorsElementorWidgetsFree\\Widgets\\InventorySortBy' => $baseDir . '/elementor/inc/Widgets/InventorySortBy.php',

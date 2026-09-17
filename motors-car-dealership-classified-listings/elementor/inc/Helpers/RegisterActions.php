@@ -290,6 +290,7 @@ class RegisterActions {
 		$template_args['image_sizes'] = $image_sizes;
 		$template_args['skin']        = $skin;
 		$template_args['per_row']     = $per_row;
+		$template_args['columns']     = (int) ( 12 / max( 1, $per_row ) );
 
 		$listings_query = new WP_Query( $args );
 

@@ -2148,11 +2148,17 @@ if ( ! function_exists( 'mvl_is_classified_listing_three_demo_import' ) ) {
 	}
 }
 
+if ( ! function_exists( 'mvl_is_motorcycles_dealer_demo_import' ) ) {
+	function mvl_is_motorcycles_dealer_demo_import() {
+		return 'motorcycles_dealer' === mvl_get_starter_demo_name();
+	}
+}
+
 if ( ! function_exists( 'mvl_set_classified_listing_default_elementor_skins' ) ) {
 	function mvl_set_classified_listing_default_elementor_skins( $post ) {
 		$scope = '';
 
-		if ( mvl_is_classified_listing_demo_import() ) {
+		if ( mvl_is_classified_listing_demo_import() || mvl_is_motorcycles_dealer_demo_import() ) {
 			$scope = 'all';
 		} elseif ( mvl_is_classified_listing_three_demo_import() ) {
 			$scope = 'list';

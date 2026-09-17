@@ -591,6 +591,8 @@ if (typeof (STMListings) == 'undefined') {
                         $('.mobile-search-filter #show-car-btn-mobile span').text(res.total);
                         $('.filter-listing.motors_dynamic_listing_filter .stm-filter-tab-selects .search-submit span').text(res.total);
                         $('.filter-listing.stm_dynamic_listing_filter .stm-filter-tab-selects .search-submit span').text(res.total);
+                        $('.filter-listing.motors_dynamic_listing_filter .stm-filter-tab-selects .stm-search-count').text(res.total);
+                        $('.filter-listing.stm_dynamic_listing_filter .stm-filter-tab-selects .stm-search-count').text(res.total);
                         $('.stm-inventory-pro-total-found').text(res.total);
 
                         $('.stm-listing-directory-total-matches').show();

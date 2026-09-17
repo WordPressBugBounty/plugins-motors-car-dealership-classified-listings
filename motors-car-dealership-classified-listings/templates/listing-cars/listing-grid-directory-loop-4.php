@@ -34,7 +34,9 @@ if ( ! empty( $args['custom_img_size'] ) ) {
 	$data['custom_img_size'] = $args['custom_img_size'];
 }
 
-$data['class'] = array( 'col-md-3 col-sm-4 col-xs-12 col-xxs-12 stm-directory-grid-loop stm-isotope-listing-item all' );
+$data['per_row'] = ! empty( $per_row ) ? intval( $per_row ) : 4;
+$data['columns'] = ! empty( $columns ) ? $columns : (int) ( 12 / $data['per_row'] );
+$data['class']   = array( 'col-md-3 col-sm-4 col-xs-12 col-xxs-12 stm-directory-grid-loop stm-isotope-listing-item all' );
 
 ?>
 

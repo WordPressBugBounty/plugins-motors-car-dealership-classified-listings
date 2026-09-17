@@ -47,6 +47,7 @@ class ComposerStaticInit5db859e1dab632b715b93d33219eb1cf
         'MotorsElementorWidgetsFree\\Widgets\\HeaderFooter\\CompareButton' => __DIR__ . '/../..' . '/elementor/inc/Widgets/HeaderFooter/CompareButton.php',
         'MotorsElementorWidgetsFree\\Widgets\\HeaderFooter\\ProfileButton' => __DIR__ . '/../..' . '/elementor/inc/Widgets/HeaderFooter/ProfileButton.php',
         'MotorsElementorWidgetsFree\\Widgets\\ImageCategories' => __DIR__ . '/../..' . '/elementor/inc/Widgets/ImageCategories.php',
+        'MotorsElementorWidgetsFree\\Widgets\\InventoryCategoryTabs' => __DIR__ . '/../..' . '/elementor/inc/Widgets/InventoryCategoryTabs.php',
         'MotorsElementorWidgetsFree\\Widgets\\InventorySearchFilter' => __DIR__ . '/../..' . '/elementor/inc/Widgets/InventorySearchFilter.php',
         'MotorsElementorWidgetsFree\\Widgets\\InventorySearchResults' => __DIR__ . '/../..' . '/elementor/inc/Widgets/InventorySearchResults.php',
         'MotorsElementorWidgetsFree\\Widgets\\InventorySortBy' => __DIR__ . '/../..' . '/elementor/inc/Widgets/InventorySortBy.php',

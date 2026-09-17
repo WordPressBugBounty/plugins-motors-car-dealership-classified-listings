@@ -1,16 +1,24 @@
 <?php
-$view_type                 = ( ! empty( $view_type ) ) ? $view_type : apply_filters( 'motors_vl_get_nuxy_mod', 'list', 'listing_view_type' );
-$image_size                = ( ! apply_filters( 'stm_is_motors_theme', false ) ) ? 'medium' : ( ( 'grid' === $view_type ) ? 'stm-img-255' : 'stm-img-280' );
-$thumb_width               = ( 'grid' === $view_type ) ? 255 : 280;
-$grid_col_w                = ( 'grid' === $view_type ) ? '(max-width: 1023px) 33vw, ' : '';
-$placeholder_path          = ( apply_filters( 'stm_is_motors_theme', false ) ) ? get_stylesheet_directory_uri() . '/assets/images/plchldr255.png' : STM_LISTINGS_URL . '/assets/images/plchldr255.png';
+$view_type          = ( ! empty( $view_type ) ) ? $view_type : apply_filters( 'motors_vl_get_nuxy_mod', 'list', 'listing_view_type' );
+$is_motors_theme    = apply_filters( 'stm_is_motors_theme', false );
+$default_image_size = $is_motors_theme
+	? ( ( 'grid' === $view_type ) ? 'stm-img-255' : 'stm-img-280' )
+	: ( ( 'grid' === $view_type ) ? 'medium_large' : 'large' );
+$image_size         = ( ! empty( $custom_img_size ) && ! in_array( $custom_img_size, array( 'thumbnail', 'medium' ), true ) )
+	? $custom_img_size
+	: $default_image_size;
+$thumb_width        = ( 'grid' === $view_type ) ? 255 : 400;
+$grid_col_w         = ( 'grid' === $view_type ) ? '(max-width: 1023px) 33vw, ' : '';
+$placeholder_path   = $is_motors_theme
+	? get_stylesheet_directory_uri() . '/assets/images/plchldr255.png'
+	: STM_LISTINGS_URL . '/assets/images/plchldr255.png';
 $gallery_hover_interaction = apply_filters( 'motors_vl_get_nuxy_mod', false, 'gallery_hover_interaction' );
 $thumbs                    = ( $gallery_hover_interaction ) ? apply_filters( 'stm_get_hoverable_thumbs', array(), get_the_ID(), $image_size ) : array();
 $img_attrs                 = array(
-	'sizes'   => '(max-width: 767px) 100vw, ' . esc_attr( $grid_col_w ) . esc_attr( $thumb_width ) . 'px',
-	'class'   => 'img-responsive',
-	'alt'     => get_the_title(),
-	'loading' => 'lazy',
+	'sizes'    => '(max-width: 767px) 100vw, ' . esc_attr( $grid_col_w ) . esc_attr( $thumb_width ) . 'px',
+	'class'    => 'img-responsive',
+	'alt'      => get_the_title(),
+	'decoding' => 'async',
 );
 ?>
 

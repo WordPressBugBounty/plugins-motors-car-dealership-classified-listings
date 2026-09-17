@@ -1,6 +1,6 @@
 input[type=text].form-control, input[type=email].form-control, input[type=password].form-control, input[type=search].form-control, input[type=tel].form-control, input[type=url].form-control, input[type=number].form-control, textarea.form-control {
     border: 1px solid var(--motors-border-color);
-    padding: 12px;
+    padding: 22px;
     line-height: 1.35em;
     height: auto;
     font-size: 16px;

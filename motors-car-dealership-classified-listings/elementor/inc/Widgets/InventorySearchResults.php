@@ -136,6 +136,7 @@ class InventorySearchResults extends WidgetBase {
 				'label'   => __( 'Image Size', 'stm_vehicles_listing' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'options' => Helper::stm_ew_get_image_sizes( true, true, true ),
+				'default' => 'large',
 			),
 		);
 

@@ -14,6 +14,9 @@
  * @var $__button_icon_html__
  * @var $lst_btn_postfix
  * @var $lst_btn_text
+ * @var $lst_show_btn_label
+ * @var $lst_btn_found_prefix
+ * @var $lst_btn_found_suffix
  * @var $lst_reviews_taxonomies
  * @var $tab_prefix
  * @var $tab_suffix
@@ -59,7 +62,40 @@ $tab_pane_activity_class = 'in active';
 
 $nonce_field = apply_filters( 'stm_listings_filter_nonce', false );
 
-$show_label = ( isset( $lst_show_label ) && 'yes' === $lst_show_label ) ? true : false;
+$show_label           = ( isset( $lst_show_label ) && 'yes' === $lst_show_label );
+$show_btn_label       = ( isset( $lst_show_btn_label ) && 'yes' === $lst_show_btn_label );
+$lst_btn_found_prefix = isset( $lst_btn_found_prefix ) ? $lst_btn_found_prefix : '';
+$lst_btn_found_suffix = isset( $lst_btn_found_suffix ) ? $lst_btn_found_suffix : '';
+$all                  = new WP_Query( $args );
+
+$render_search_button = static function ( $count, $btn_text, $btn_postfix, $btn_icon, $show_btn_label, $found_prefix, $found_suffix ) {
+	$btn_text         = str_replace( '{postfix}', esc_html( $btn_postfix ), $btn_text );
+	$explode_by_count = explode( '{count}', $btn_text );
+	?>
+	<div class="stm-select-col stm-search-submit-col">
+		<?php if ( $show_btn_label ) : ?>
+			<span class="stm-select-label-text">
+				<?php echo esc_html( $found_prefix ); ?>
+				<span class="stm-search-count"><?php echo esc_html( $count ); ?></span>
+				<?php echo esc_html( $found_suffix ); ?>
+			</span>
+		<?php endif; ?>
+		<button type="submit" class="search-submit heading-font">
+			<?php
+			if ( ! empty( $btn_icon ) ) {
+				\Elementor\Icons_Manager::render_icon( $btn_icon );
+			}
+
+			if ( count( $explode_by_count ) > 1 ) {
+				echo esc_html( $explode_by_count[0] ) . '<span>' . esc_html( $count ) . '</span>' . esc_html( $explode_by_count[1] );
+			} else {
+				echo esc_html( $explode_by_count[0] );
+			}
+			?>
+		</button>
+	</div>
+	<?php
+};
 ?>
 <div
 	class="stm_dynamic_listing_filter filter-listing stm-vc-ajax-filter animated fadeIn"
@@ -139,22 +175,17 @@ $show_label = ( isset( $lst_show_label ) && 'yes' === $lst_show_label ) ? true :
 								</span>
 							</div>
 						<?php endif; ?>
-						<button type="submit" class="search-submit heading-font">
-							<?php if ( ! empty( $lst_btn_icon ) ) : ?>
-								<?php \Elementor\Icons_Manager::render_icon( $lst_btn_icon ); ?>
-							<?php endif; ?>
-							<?php
-							$all              = new WP_Query( $args );
-							$lst_btn_text     = str_replace( '{postfix}', esc_html( $lst_btn_postfix ), $lst_btn_text );
-							$explode_by_count = explode( '{count}', $lst_btn_text );
-
-							if ( count( $explode_by_count ) > 1 ) {
-								echo esc_html( $explode_by_count[0] ) . '<span>' . esc_html( $all->found_posts ) . '</span>' . esc_html( $explode_by_count[1] );
-							} else {
-								echo esc_html( $explode_by_count[0] );
-							}
-							?>
-						</button>
+						<?php
+						$render_search_button(
+							$all->found_posts,
+							$lst_btn_text,
+							$lst_btn_postfix,
+							$lst_btn_icon,
+							$show_btn_label,
+							$lst_btn_found_prefix,
+							$lst_btn_found_suffix
+						);
+						?>
 					</div>
 				</form>
 			</div>
@@ -190,21 +221,17 @@ $show_label = ( isset( $lst_show_label ) && 'yes' === $lst_show_label ) ? true :
 									data-name="<?php echo esc_attr( $_tax ); ?>"
 									data-val="<?php echo esc_attr( $_term ); ?>"
 									value="<?php echo esc_attr( $_term ); ?>" class="no-cascading hidden_tax"/>
-							<button type="submit" class="search-submit heading-font">
-								<?php if ( ! empty( $lst_btn_icon ) ) : ?>
-									<?php \Elementor\Icons_Manager::render_icon( $lst_btn_icon ); ?>
-								<?php endif; ?>
-								<?php
-								$lst_btn_text     = str_replace( '{postfix}', esc_html( $lst_btn_postfix ), $lst_btn_text );
-								$explode_by_count = explode( '{count}', $lst_btn_text );
-
-								if ( count( $explode_by_count ) > 1 ) {
-									echo esc_html( $explode_by_count[0] ) . '<span>' . esc_html( $all->found_posts ) . '</span>' . esc_html( $explode_by_count[1] );
-								} else {
-									echo esc_html( $explode_by_count[0] );
-								}
-								?>
-							</button>
+							<?php
+							$render_search_button(
+								$all->found_posts,
+								$lst_btn_text,
+								$lst_btn_postfix,
+								$lst_btn_icon,
+								$show_btn_label,
+								$lst_btn_found_prefix,
+								$lst_btn_found_suffix
+							);
+							?>
 						</div>
 					</form>
 				</div>
@@ -232,29 +259,28 @@ $show_label = ( isset( $lst_show_label ) && 'yes' === $lst_show_label ) ? true :
 							</div>
 						<?php endif; ?>
 						<input type="hidden" name="listing_type" value="with_review" />
-						<button type="submit" class="search-submit heading-font">
-							<i class="fas fa-search"></i>
-							<?php
-								$args = wp_parse_args(
-									array(
-										'post_type'      => stm_review_post_type(),
-										'posts_per_page' => -1,
-										'meta_query'     => array(),
-									),
-									$args
-								);
+						<?php
+						$args = wp_parse_args(
+							array(
+								'post_type'      => stm_review_post_type(),
+								'posts_per_page' => -1,
+								'meta_query'     => array(),
+							),
+							$args
+						);
 
-								$all              = new WP_Query( $args );
-								$lst_btn_text     = str_replace( '{postfix}', esc_html( $lst_btn_postfix ), $lst_btn_text );
-								$explode_by_count = explode( '{count}', $lst_btn_text );
+						$all = new WP_Query( $args );
 
-							if ( count( $explode_by_count ) > 1 ) {
-								echo esc_html( $explode_by_count[0] ) . '<span>' . esc_html( $all->found_posts ) . '</span>' . esc_html( $explode_by_count[1] );
-							} else {
-								echo esc_html( $explode_by_count[0] );
-							}
-							?>
-						</button>
+						$render_search_button(
+							$all->found_posts,
+							$lst_btn_text,
+							$lst_btn_postfix,
+							$lst_btn_icon,
+							$show_btn_label,
+							$lst_btn_found_prefix,
+							$lst_btn_found_suffix
+						);
+						?>
 					</div>
 				</form>
 				<?php

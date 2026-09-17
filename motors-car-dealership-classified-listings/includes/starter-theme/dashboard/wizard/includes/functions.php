@@ -74,6 +74,20 @@ add_filter(
 			);
 		}
 
+		if ( in_array( $selected_demo, array( 'motorcycles' ), true ) ) {
+			$plugins = array_merge(
+				$plugins,
+				array(
+					array(
+						'image'       => 'https://ps.w.org/cost-calculator-builder/assets/icon-128x128.png',
+						'title'       => 'Cost Calculator Builder',
+						'slug'        => 'cost-calculator-builder',
+						'description' => $get_plugin_status( 'cost-calculator-builder' ),
+					),
+				)
+			);
+		}
+
 		if ( in_array( $selected_demo, array( 'dealer-one', 'car_dealer_elementor', 'classified_listing', 'classified_listing_two', 'classified_listing_three' ), true ) ) {
 			$plugins = array_merge(
 				$plugins,

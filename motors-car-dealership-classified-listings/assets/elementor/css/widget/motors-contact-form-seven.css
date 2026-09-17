@@ -1,5 +1,6 @@
 .stm-elementor-contact-form-seven {
     padding-bottom: 20px;
+    color-scheme: light;
 }
 
 .stm-elementor-contact-form-seven .wpcf7-list-item.first.last {
@@ -85,6 +86,46 @@
 .stm-elementor-contact-form-seven form input[type=password] {
     height: 43px;
     line-height: 43px;
+}
+
+.stm-elementor-contact-form-seven form input[type=text],
+.stm-elementor-contact-form-seven form input[type=tel],
+.stm-elementor-contact-form-seven form input[type=email],
+.stm-elementor-contact-form-seven form input[type=search],
+.stm-elementor-contact-form-seven form input[type=password],
+.stm-elementor-contact-form-seven form textarea {
+    background-color: var(--motors-filter-inputs-color) !important;
+    color: #888 !important;
+}
+
+.stm-elementor-contact-form-seven form input[type=text]::-moz-placeholder, .stm-elementor-contact-form-seven form input[type=tel]::-moz-placeholder, .stm-elementor-contact-form-seven form input[type=email]::-moz-placeholder, .stm-elementor-contact-form-seven form input[type=search]::-moz-placeholder, .stm-elementor-contact-form-seven form input[type=password]::-moz-placeholder, .stm-elementor-contact-form-seven form textarea::-moz-placeholder {
+    color: #aaa !important;
+}
+
+.stm-elementor-contact-form-seven form input[type=text]::placeholder,
+.stm-elementor-contact-form-seven form input[type=tel]::placeholder,
+.stm-elementor-contact-form-seven form input[type=email]::placeholder,
+.stm-elementor-contact-form-seven form input[type=search]::placeholder,
+.stm-elementor-contact-form-seven form input[type=password]::placeholder,
+.stm-elementor-contact-form-seven form textarea::placeholder {
+    color: #aaa !important;
+}
+
+.stm-elementor-contact-form-seven form input[type=text]:focus,
+.stm-elementor-contact-form-seven form input[type=tel]:focus,
+.stm-elementor-contact-form-seven form input[type=email]:focus,
+.stm-elementor-contact-form-seven form input[type=search]:focus,
+.stm-elementor-contact-form-seven form input[type=password]:focus,
+.stm-elementor-contact-form-seven form textarea:focus {
+    background-color: #fff;
+    color: #232628;
+}
+
+.stm-elementor-contact-form-seven form input[type=checkbox] {
+    color-scheme: light;
+    accent-color: var(--motors-accent-color);
+    background-color: #fff;
+    border: 1px solid #c5c5c5;
 }
 
 .stm-elementor-contact-form-seven .wpcf7-response-output {

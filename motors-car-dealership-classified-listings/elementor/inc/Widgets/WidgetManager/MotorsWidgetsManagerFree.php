@@ -8,6 +8,7 @@ use MotorsElementorWidgetsFree\Widgets\InventorySearchFilter;
 use MotorsElementorWidgetsFree\Widgets\InventorySortBy;
 use MotorsElementorWidgetsFree\Widgets\InventoryViewType;
 use MotorsElementorWidgetsFree\Widgets\InventorySearchResults;
+use MotorsElementorWidgetsFree\Widgets\InventoryCategoryTabs;
 use MotorsElementorWidgetsFree\Widgets\SingleListing\Title;
 use MotorsElementorWidgetsFree\Widgets\SingleListing\Gallery;
 use MotorsElementorWidgetsFree\Widgets\SingleListing\Features;
@@ -58,6 +59,7 @@ class MotorsWidgetsManagerFree {
 			InventorySortBy::class,
 			InventoryViewType::class,
 			InventorySearchResults::class,
+			InventoryCategoryTabs::class,
 			Title::class,
 			TitleClassified::class,
 			PriceClassified::class,

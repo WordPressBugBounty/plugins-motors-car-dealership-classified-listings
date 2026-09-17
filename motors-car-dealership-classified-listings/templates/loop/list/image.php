@@ -78,7 +78,16 @@ $interactive_hoverable_class = $gallery_hover_interaction ? 'interactive-hoverab
 			<!--Badge-->
 			<?php do_action( 'stm_listings_load_template', 'loop/badge' ); ?>
 
-			<?php do_action( 'stm_listings_load_template', 'loop/image-preview', array( 'view_type' => 'list' ) ); ?>
+			<?php
+			do_action(
+				'stm_listings_load_template',
+				'loop/image-preview',
+				array(
+					'view_type'       => 'list',
+					'custom_img_size' => isset( $custom_img_size ) ? $custom_img_size : '',
+				)
+			);
+			?>
 
 		</div>
 	</a>

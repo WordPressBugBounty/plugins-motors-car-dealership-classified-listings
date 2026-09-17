@@ -384,6 +384,38 @@ class ListingSearchTabs extends WidgetBase {
 		);
 
 		$this->add_control(
+			'lst_show_btn_label',
+			array(
+				'label'       => esc_html__( 'Show Found Label', 'stm_vehicles_listing' ),
+				'description' => esc_html__( 'Shows the listings count above the button, aligned with field labels.', 'stm_vehicles_listing' ),
+				'type'        => \Elementor\Controls_Manager::SWITCHER,
+				'default'     => '',
+			)
+		);
+
+		$this->add_control(
+			'lst_btn_found_prefix',
+			array(
+				'label'     => esc_html__( 'Found prefix', 'stm_vehicles_listing' ),
+				'default'   => esc_html__( 'Found:', 'stm_vehicles_listing' ),
+				'condition' => array(
+					'lst_show_btn_label' => 'yes',
+				),
+			)
+		);
+
+		$this->add_control(
+			'lst_btn_found_suffix',
+			array(
+				'label'     => esc_html__( 'Found suffix', 'stm_vehicles_listing' ),
+				'default'   => esc_html__( 'Vehicles', 'stm_vehicles_listing' ),
+				'condition' => array(
+					'lst_show_btn_label' => 'yes',
+				),
+			)
+		);
+
+		$this->add_control(
 			'lst_btn_icon',
 			array(
 				'label'            => esc_html__( 'Icon', 'stm_vehicles_listing' ),
