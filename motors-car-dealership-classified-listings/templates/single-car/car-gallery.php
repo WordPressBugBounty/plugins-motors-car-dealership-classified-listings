@@ -31,7 +31,7 @@ if ( empty( $badge_text ) ) {
 
 $badge_style = '';
 if ( ! empty( $badge_bg_color ) ) {
-	$badge_style = 'style=background-color:' . $badge_bg_color . ';';
+	$badge_style = 'background-color:' . $badge_bg_color . ';';
 }
 
 $car_media = apply_filters( 'stm_get_car_medias', array(), $listing_id );
@@ -41,10 +41,10 @@ $car_media = apply_filters( 'stm_get_car_medias', array(), $listing_id );
 <div class="stm-car-carousels">
 
 	<?php if ( empty( $as_sold ) && ! empty( $special_car ) && 'on' === $special_car ) : ?>
-		<div class="special-label h5" <?php echo esc_attr( $badge_style ); ?>><?php echo esc_html( $badge_text ); ?></div>
+		<div class="special-label h5" style="<?php echo esc_attr( $badge_style ); ?>"><?php echo esc_html( $badge_text ); ?></div>
 	<?php elseif ( apply_filters( 'stm_sold_status_enabled', true ) && ! empty( $as_sold ) ) : ?>
-		<?php $badge_style = 'style=background-color:' . $sold_badge_color . ';'; ?>
-		<div class="special-label h5" <?php echo esc_attr( $badge_style ); ?>><?php esc_html_e( 'Sold', 'stm_vehicles_listing' ); ?></div>
+		<?php $badge_style = 'background-color:' . $sold_badge_color . ';'; ?>
+		<div class="special-label h5" style="<?php echo esc_attr( $badge_style ); ?>"><?php esc_html_e( 'Sold', 'stm_vehicles_listing' ); ?></div>
 	<?php endif; ?>
 
 	<div class="stm-gallery-actions">

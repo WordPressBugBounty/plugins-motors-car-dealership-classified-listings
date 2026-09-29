@@ -1948,3 +1948,18 @@ add_filter(
 	10,
 	4
 );
+
+if ( ! function_exists( 'mvl_sanitize_css_color' ) ) {
+	/**
+	 * Allow only a plain CSS color value: hex, rgb(a), hsl(a) or a color keyword.
+	 */
+	function mvl_sanitize_css_color( $color ) {
+		$color = trim( (string) $color );
+
+		if ( preg_match( '/^(#[0-9a-f]{3,8}|(rgb|hsl)a?\(\s*[0-9.,%\s\/]+\)|[a-z]{3,20})$/i', $color ) ) {
+			return $color;
+		}
+
+		return '';
+	}
+}

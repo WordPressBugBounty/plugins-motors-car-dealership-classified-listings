@@ -37,6 +37,8 @@ class General extends Page {
 		$valdation_methods = array(
 			'update_text_meta'    => array(
 				'badge_text',
+			),
+			'update_color_meta'   => array(
 				'badge_bg_color',
 			),
 			'update_boolean_meta' => array(

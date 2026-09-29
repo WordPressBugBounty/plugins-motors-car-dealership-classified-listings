@@ -2436,6 +2436,14 @@ if ( ! function_exists( 'stm_edit_delete_user_car' ) ) {
 				 *
 				*/
 
+				$post_id = intval( $_GET['stm_make_featured'] );
+				$author  = get_post_meta( $post_id, 'stm_car_user', true );
+				$user    = wp_get_current_user();
+
+				if ( ! ( current_user_can( 'manage_options' ) || ( ! empty( $author ) && intval( $user->ID ) !== 0 && intval( $author ) === intval( $user->ID ) ) ) || ! in_array( get_post_type( $post_id ), $listings_post_types, true ) ) {
+					return;
+				}
+
 				$featured_payment_enabled = apply_filters( 'motors_vl_get_nuxy_mod', false, 'dealer_payments_for_featured_listing' );
 
 				$featured_listing_price = apply_filters( 'motors_vl_get_nuxy_mod', 0, 'featured_listing_price' );
@@ -2443,7 +2451,7 @@ if ( ! function_exists( 'stm_edit_delete_user_car' ) ) {
 				// multilisting compatibility
 				if ( stm_is_multilisting() ) {
 
-					$post_type = get_post_type( $_GET['stm_make_featured'] );
+					$post_type = get_post_type( $post_id );
 
 					if ( apply_filters( 'stm_listings_post_type', 'listings' ) !== $post_type ) {
 
@@ -2466,10 +2474,10 @@ if ( ! function_exists( 'stm_edit_delete_user_car' ) ) {
 
 				if ( class_exists( 'WooCommerce' ) && $featured_payment_enabled ) {
 
-					update_post_meta( $_GET['stm_make_featured'], '_price', $featured_listing_price );
-					update_post_meta( $_GET['stm_make_featured'], 'car_make_featured_status', 'in_cart' );
+					update_post_meta( $post_id, '_price', $featured_listing_price );
+					update_post_meta( $post_id, 'car_make_featured_status', 'in_cart' );
 
-					$checkout_url = wc_get_checkout_url() . '?add-to-cart=' . $_GET['stm_make_featured'] . '&make_featured=yes';
+					$checkout_url = wc_get_checkout_url() . '?add-to-cart=' . $post_id . '&make_featured=yes';
 					wp_safe_redirect( $checkout_url );
 					die();
 				}

@@ -135,10 +135,10 @@ $isSellOnline = ( $sellOnline ) ? (boolean) ! empty( get_post_meta( $listing_id,
 							echo esc_html( $special_price_label );
 							$mg_bt = '';
 						else :
-							$mg_bt = 'style=margin-top:0';
+							$mg_bt = 'margin-top:0';
 						endif;
 						?>
-						<div class="h4" <?php echo esc_attr( $mg_bt ); ?>><?php echo esc_html( apply_filters( 'stm_filter_price_view', '', $sale_price ) ); ?></div>
+						<div class="h4" style="<?php echo esc_attr( $mg_bt ); ?>"><?php echo esc_html( apply_filters( 'stm_filter_price_view', '', $sale_price ) ); ?></div>
 					</td>
 				</tr>
 			</table>

@@ -20,7 +20,7 @@ if ( ! empty( $attachment_id ) ) {
 	$image   = wp_get_attachment_image_src( $attachment_id, 'stm-img-796-466' );
 
 	if ( $image && ! empty( $image[0] ) ) {
-		$image = 'style=background:url("' . $image[0] . '")';
+		$image = 'background:url("' . esc_url( $image[0] ) . '")';
 	}
 
 	if ( empty( $image ) ) {
@@ -34,7 +34,7 @@ if ( ! $empty_image ) :
 	<div class="stm-placeholder <?php echo esc_attr( $classes ); ?>">
 		<?php if ( ! empty( $image ) ) : ?>
 			<div class="inner">
-				<div class="stm-image-preview" data-media="<?php echo absint( $attachment_id ); ?>" data-id="<?php echo esc_attr( $item_id ); ?>" <?php echo esc_attr( $image ); ?>>
+				<div class="stm-image-preview" data-media="<?php echo absint( $attachment_id ); ?>" data-id="<?php echo esc_attr( $item_id ); ?>" style="<?php echo esc_attr( $image ); ?>">
 					<i class="fas fa-times fa-remove-loaded" data-id="<?php echo esc_attr( $item_id ); ?>" data-media="<?php echo absint( $attachment_id ); ?>"></i>
 				</div>
 			</div>

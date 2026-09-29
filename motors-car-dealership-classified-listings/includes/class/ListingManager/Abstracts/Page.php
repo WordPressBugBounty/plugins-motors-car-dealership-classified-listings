@@ -218,6 +218,14 @@ abstract class Page {
 		}
 	}
 
+	protected function update_color_meta( array $data, string $meta_key ): void {
+		delete_post_meta( $data['post_id'], $meta_key );
+
+		$color = isset( $data[ $meta_key ] ) ? mvl_sanitize_css_color( $data[ $meta_key ] ) : '';
+
+		update_post_meta( $data['post_id'], $meta_key, $color );
+	}
+
 	protected function update_boolean_meta( array $data, string $meta_key ): void {
 		delete_post_meta( $data['post_id'], $meta_key );
 

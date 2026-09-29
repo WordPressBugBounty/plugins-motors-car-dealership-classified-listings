@@ -147,6 +147,10 @@ class ListingMetaboxes {
 			$old = get_post_meta( $post_id, $field, true );
 			$new = isset( $_POST[ $field ] ) ? sanitize_text_field( $_POST[ $field ] ) : '';
 
+			if ( 'badge_bg_color' === $field ) {
+				$new = mvl_sanitize_css_color( $new );
+			}
+
 			if ( $new !== $old ) {
 				if ( ! empty( $new ) ) {
 					update_post_meta( $post_id, $field, $new );
