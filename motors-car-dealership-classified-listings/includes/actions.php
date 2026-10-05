@@ -933,12 +933,31 @@ if ( ! function_exists( 'stm_ajax_get_seller_phone' ) ) {
 	function stm_ajax_get_seller_phone() {
 		check_ajax_referer( 'stm_security_nonce', 'security' );
 
-		$phone_owner_id = isset( $_GET['phone_owner_id'] ) ? intval( $_GET['phone_owner_id'] ) : 0;
-		$phone_number   = get_user_meta( $phone_owner_id, 'stm_phone', true );
+		$listing_id     = isset( $_GET['listing_id'] ) ? absint( $_GET['listing_id'] ) : 0;
+		$phone_owner_id = isset( $_GET['phone_owner_id'] ) ? absint( $_GET['phone_owner_id'] ) : 0;
 
-		if ( isset( $_GET['listing_id'] ) && ! empty( $_GET['listing_id'] ) && 0 !== $_GET['listing_id'] ) {
+		if ( $listing_id ) {
+			// Only reveal the phone of the published listing's actual owner, never an arbitrary user id.
+			$listing       = get_post( $listing_id );
+			$listing_types = apply_filters( 'stm_listings_multi_type', array( 'listings' ) );
 
-			$listing_id = intval( $_GET['listing_id'] );
+			if ( ! $listing || 'publish' !== $listing->post_status || ! in_array( $listing->post_type, $listing_types, true ) ) {
+				wp_send_json_error( null, 403 );
+			}
+
+			$phone_owner_id = absint( get_post_meta( $listing_id, 'stm_car_user', true ) );
+		} elseif ( ! $phone_owner_id || ! apply_filters( 'stm_get_user_role', false, $phone_owner_id ) ) {
+			// Without a listing, only dealers with a public profile expose their phone.
+			wp_send_json_error( null, 403 );
+		}
+
+		if ( ! $phone_owner_id ) {
+			wp_send_json_error( null, 403 );
+		}
+
+		$phone_number = get_user_meta( $phone_owner_id, 'stm_phone', true );
+
+		if ( $listing_id ) {
 
 			$cookies = '';
 

@@ -1197,7 +1197,10 @@ if ( ! function_exists( 'stm_ajax_add_a_car' ) ) {
 		$first_empty = '';
 		if ( ! empty( $_POST['stm_f_s'] ) ) {
 			foreach ( $_POST['stm_f_s'] as $post_key => $post_value ) {
-				$post_value   = sanitize_text_field( urldecode( $post_value ) );
+				// Decode HTML entities before sanitizing so an entity-encoded payload
+				// (e.g. &lt;img src=x onerror=...&gt;) cannot survive as a term name and
+				// later be re-parsed as live markup by the front-end filter widget.
+				$post_value   = sanitize_text_field( wp_specialchars_decode( urldecode( $post_value ), ENT_QUOTES ) );
 				$replaced_key = str_replace( '_pre_', '-', $post_key );
 				if ( ! empty( $post_value ) ) {
 					$first_step[ sanitize_title( $replaced_key ) ] = $post_value;

@@ -308,7 +308,7 @@ function stm_test_drive_car_title(id, title) {
                     if (image) {
                         $wrapper.append($('<img src="' + image + '" class="select2-option-image" />'));
                     }
-                    $wrapper.append($('<span class="select2-option-text">' + data.text + '</span>'));
+                    $wrapper.append($('<span class="select2-option-text"></span>').text(data.text));
 
                     if (count !== undefined) {
                         if (count == 0) {
@@ -334,7 +334,7 @@ function stm_test_drive_car_title(id, title) {
                         $wrapper.append($('<img src="' + image + '" class="select2-option-image" />'));
                     }
 
-                    $wrapper.append($('<span class="select2-option-text">' + data.text + '</span>'));
+                    $wrapper.append($('<span class="select2-option-text"></span>').text(data.text));
                     if (count !== undefined && count != 0) {
                         $wrapper.append($('<span class="option-count">(' + count + ')</span>'));
                     }
