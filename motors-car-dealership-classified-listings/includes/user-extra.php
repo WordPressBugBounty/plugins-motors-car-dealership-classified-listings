@@ -404,7 +404,7 @@ if ( ! function_exists( 'stm_save_user_extra_fields' ) ) {
 		}
 		if ( isset( $_POST['stm_user_avatar_path'] ) ) {
 			$raw_path = sanitize_text_field( wp_unslash( $_POST['stm_user_avatar_path'] ) );
-			if ( apply_filters( 'stm_mvl_is_path_within_uploads', false, $raw_path ) ) {
+			if ( apply_filters( 'stm_mvl_is_path_within_uploads', false, $raw_path ) && stm_mvl_is_allowed_image_file( $raw_path ) ) {
 				update_user_meta( $user_id, 'stm_user_avatar_path', $raw_path );
 			}
 		}
@@ -448,7 +448,7 @@ if ( ! function_exists( 'stm_save_user_extra_fields' ) ) {
 		}
 		if ( isset( $_POST['stm_dealer_logo_path'] ) ) {
 			$raw_path = sanitize_text_field( wp_unslash( $_POST['stm_dealer_logo_path'] ) );
-			if ( apply_filters( 'stm_mvl_is_path_within_uploads', false, $raw_path ) ) {
+			if ( apply_filters( 'stm_mvl_is_path_within_uploads', false, $raw_path ) && stm_mvl_is_allowed_image_file( $raw_path ) ) {
 				update_user_meta( $user_id, 'stm_dealer_logo_path', $raw_path );
 			}
 		}
@@ -457,7 +457,7 @@ if ( ! function_exists( 'stm_save_user_extra_fields' ) ) {
 		}
 		if ( isset( $_POST['stm_dealer_image_path'] ) ) {
 			$raw_path = sanitize_text_field( wp_unslash( $_POST['stm_dealer_image_path'] ) );
-			if ( apply_filters( 'stm_mvl_is_path_within_uploads', false, $raw_path ) ) {
+			if ( apply_filters( 'stm_mvl_is_path_within_uploads', false, $raw_path ) && stm_mvl_is_allowed_image_file( $raw_path ) ) {
 				update_user_meta( $user_id, 'stm_dealer_image_path', $raw_path );
 			}
 		}

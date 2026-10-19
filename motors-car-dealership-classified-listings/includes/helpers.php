@@ -1424,6 +1424,29 @@ if ( ! function_exists( 'stm_mvl_filter_path_within_uploads' ) ) {
 	add_filter( 'stm_mvl_is_path_within_uploads', 'stm_mvl_filter_path_within_uploads', 10, 2 );
 }
 
+if ( ! function_exists( 'stm_mvl_is_allowed_image_file' ) ) {
+	/**
+	 * Whether $path has an allowed image extension.
+	 *
+	 * Used together with stm_mvl_is_path_within_uploads() to gate both the
+	 * avatar/dealer image meta writes and the unlink() of a previous image,
+	 * so a non-image file (e.g. an uploads/.htaccess hardening file) can never
+	 * be stored as an image path nor deleted as a "previous avatar" (CWE-73).
+	 *
+	 * @param string $path Filesystem path or filename.
+	 * @return bool
+	 */
+	function stm_mvl_is_allowed_image_file( $path ) {
+		if ( ! is_string( $path ) || '' === trim( $path ) ) {
+			return false;
+		}
+		$allowed_extensions = array( 'jpg', 'jpeg', 'png', 'gif', 'avif', 'svg' );
+		$file_extension     = strtolower( pathinfo( $path, PATHINFO_EXTENSION ) );
+
+		return in_array( $file_extension, $allowed_extensions, true );
+	}
+}
+
 if ( ! function_exists( 'stm_account_current_page' ) ) {
 	function stm_account_current_page() {
 		$page = 'inventory';
