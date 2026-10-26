@@ -24,16 +24,42 @@ class UserController extends CoreController {
 		 */
 	}
 
+	/**
+	 * Dealer filter terms from the query string: only existing terms of registered taxonomies.
+	 *
+	 * @return \WP_Term[] Terms keyed by taxonomy name.
+	 */
+	private static function get_requested_terms() {
+		$requested_terms = array();
+
+		foreach ( $_GET as $tax => $term ) {// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( ! is_string( $tax ) || ! is_string( $term ) ) {
+				continue;
+			}
+
+			$taxonomy = sanitize_title( wp_unslash( $tax ) );
+
+			if ( '' === $taxonomy || ! taxonomy_exists( $taxonomy ) ) {
+				continue;
+			}
+
+			$term_data = get_term_by( 'slug', sanitize_title( wp_unslash( $term ) ), $taxonomy );
+
+			if ( $term_data instanceof \WP_Term ) {
+				$requested_terms[ $taxonomy ] = $term_data;
+			}
+		}
+
+		return $requested_terms;
+	}
+
 	public static function get_dealers_page_title() {
 		$title = esc_html__( 'Displaying Local Car Dealerships', 'stm_vehicles_listing' );
 
 		if ( ! empty( $_GET ) ) {// phpcs:ignore WordPress.Security.NonceVerification.Missing
 			$terms = '';
-			foreach ( $_GET as $tax => $term ) {// phpcs:ignore WordPress.Security.NonceVerification.Missing
-				if ( term_exists( sanitize_title( $term ), sanitize_title( $tax ) ) ) {
-					$term_data = get_term_by( 'slug', sanitize_title( $term ), sanitize_title( $tax ) );
-					$terms    .= $term_data->name . ' ';
-				}
+			foreach ( self::get_requested_terms() as $term_data ) {
+				$terms .= esc_html( $term_data->name ) . ' ';
 			}
 
 			if ( ! empty( $terms ) ) {
@@ -55,13 +81,15 @@ class UserController extends CoreController {
 		$include_users = array();
 
 		if ( ! empty( $_GET ) ) {// phpcs:ignore WordPress.Security.NonceVerification.Missing
-			foreach ( $_GET as $tax => $term ) {// phpcs:ignore WordPress.Security.NonceVerification.Missing
-				if ( term_exists( sanitize_title( $term ), sanitize_title( $tax ) ) ) {
-					$term_data  = get_term_by( 'slug', sanitize_title( $term ), sanitize_title( $tax ) );
-					$tr         = str_replace( '-', '_', $tax ) . '_tr';
-					$left_join .= $model->left_join( $tr );
-					$where     .= $model->where( $tr, $term_data->term_id );
-				}
+			$requested_terms = self::get_requested_terms();
+			$alias_index     = 0;
+
+			foreach ( $requested_terms as $term_data ) {
+				// The SQL alias never comes from the request.
+				$tr         = 'tax_tr_' . $alias_index;
+				$left_join .= $model->left_join( $tr );
+				$where     .= $model->where( $tr, $term_data->term_taxonomy_id );
+				++$alias_index;
 			}
 
 			$lat    = filter_var( apply_filters( 'stm_listings_input', null, 'stm_lat' ), FILTER_VALIDATE_FLOAT );
@@ -76,7 +104,7 @@ class UserController extends CoreController {
 			}
 
 			$include_users = array_column( $include_users, 'ID' );
-			if ( empty( $include_users ) && ! empty( $term_data ) ) {
+			if ( empty( $include_users ) && ! empty( $requested_terms ) ) {
 				return array(
 					'users' => array(),
 					'total' => 0,

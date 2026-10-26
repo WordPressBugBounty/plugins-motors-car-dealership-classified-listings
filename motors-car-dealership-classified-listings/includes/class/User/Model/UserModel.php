@@ -60,7 +60,7 @@ class UserModel extends CoreModel {
 				ORDER BY users.%5s ASC LIMIT %6d OFFSET %7d
 				";
 
-		$user_in           = ( ! empty( $include_users ) ) ? 'AND users.ID IN (' . implode( ',', $include_users ) . ')' : '';
+		$user_in           = ( ! empty( $include_users ) ) ? 'AND users.ID IN (' . implode( ',', array_map( 'absint', $include_users ) ) . ')' : '';
 		$prepare           = $this->wpdb->prepare( $sql, $this->table, $this->user_meta_table, '%stm_dealer%', $user_in, $sort, $limit, $offset );//phpcs:ignore
 		$result            = $this->wpdb->get_results( $prepare );//phpcs:ignore
 		$this->users_total = $this->wpdb->get_var( 'SELECT FOUND_ROWS()' );
@@ -116,7 +116,7 @@ class UserModel extends CoreModel {
 				LIMIT %3d OFFSET %4d
 				";
 
-		$user_in           = ( ! empty( $include_users ) ) ? ' AND u.ID IN (' . implode( ',', $include_users ) . ') ' : '';
+		$user_in           = ( ! empty( $include_users ) ) ? ' AND u.ID IN (' . implode( ',', array_map( 'absint', $include_users ) ) . ') ' : '';
 		$prepare           = $this->wpdb->prepare( $sql, '%stm_dealer%', $user_in, $limit, $offset );//phpcs:ignore
 		$results           = $this->wpdb->get_results( $prepare );//phpcs:ignore
 		$this->users_total = $this->wpdb->get_var( 'SELECT FOUND_ROWS()' );
@@ -135,7 +135,7 @@ class UserModel extends CoreModel {
 				LIMIT %9d OFFSET %10d
 				";
 
-		$user_in           = ( ! empty( $include_users ) ) ? 'AND users.ID IN (' . implode( ',', $include_users ) . ')' : '';
+		$user_in           = ( ! empty( $include_users ) ) ? 'AND users.ID IN (' . implode( ',', array_map( 'absint', $include_users ) ) . ')' : '';
 		$prepare           = $this->wpdb->prepare( $sql, $sort_type, $sort_type, $this->table, $this->user_meta_table, $this->user_meta_table, '%stm_dealer%', $user_in, $sort_type, $limit, $offset );//phpcs:ignore
 		$results           = $this->wpdb->get_results( $prepare );//phpcs:ignore
 		$this->users_total = $this->wpdb->get_var( 'SELECT FOUND_ROWS()' );
@@ -155,7 +155,7 @@ class UserModel extends CoreModel {
 				ORDER BY total_cars DESC
 				LIMIT %3d OFFSET %4d";
 
-		$user_in           = ( ! empty( $include_users ) ) ? ' WHERE u.ID IN (' . implode( ',', $include_users ) . ')' : '';
+		$user_in           = ( ! empty( $include_users ) ) ? ' WHERE u.ID IN (' . implode( ',', array_map( 'absint', $include_users ) ) . ')' : '';
 		$prepare           = $this->wpdb->prepare( $sql, '%stm_dealer%', $user_in, $limit, $offset );//phpcs:ignore
 		$results           = $this->wpdb->get_results( $prepare );//phpcs:ignore
 		$this->users_total = $this->wpdb->get_var( 'SELECT FOUND_ROWS()' );
@@ -174,7 +174,7 @@ class UserModel extends CoreModel {
 				ORDER BY car_views DESC
 				LIMIT %3d OFFSET %4d";
 
-		$user_in           = ( ! empty( $include_users ) ) ? 'AND u.ID IN (' . implode( ',', $include_users ) . ')' : '';
+		$user_in           = ( ! empty( $include_users ) ) ? 'AND u.ID IN (' . implode( ',', array_map( 'absint', $include_users ) ) . ')' : '';
 		$prepare           = $this->wpdb->prepare( $sql, '%stm_dealer%', $user_in, $limit, $offset );//phpcs:ignore
 		$results           = $this->wpdb->get_results( $prepare );//phpcs:ignore
 		$this->users_total = $this->wpdb->get_var( 'SELECT FOUND_ROWS()' );
@@ -183,11 +183,30 @@ class UserModel extends CoreModel {
 	}
 
 	public function left_join( $key ) {
+		$key = $this->sanitize_alias( $key );
+
+		if ( '' === $key ) {
+			return '';
+		}
+
 		return "LEFT JOIN $this->term_relationships_table AS $key ON (p.ID = $key.object_id)";
 	}
 
 	public function where( $key, $value ) {
-		return " AND $key.term_taxonomy_id = $value ";
+		$key = $this->sanitize_alias( $key );
+
+		if ( '' === $key ) {
+			return '';
+		}
+
+		return " AND $key.term_taxonomy_id = " . absint( $value ) . ' ';
+	}
+
+	/**
+	 * SQL table alias: only lowercase letters, digits and underscores are allowed.
+	 */
+	private function sanitize_alias( $key ) {
+		return is_string( $key ) && preg_match( '/^[a-z0-9_]+$/', $key ) ? $key : '';
 	}
 
 	public function fields_by_location( $lat, $lng ) {
