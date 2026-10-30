@@ -4,7 +4,8 @@
 		<?php
 		$query = apply_filters( 'stm_similar_cars', null );
 
-		if ( $query->have_posts() ) : ?>
+		if ( $query->have_posts() ) :
+			?>
 
 			<div class="stm-similar-cars-units">
 				<?php
@@ -18,8 +19,7 @@
 							</div>
 						<?php endif; ?>
 						<div class="right-unit">
-							<div class="title"><?php echo apply_filters( 'stm_generate_title_from_slugs', get_the_title( get_the_ID() ), get_the_ID() );//phpcs:ignore
-								?></div>
+							<div class="title"><?php echo esc_html( apply_filters( 'stm_generate_title_from_slugs', get_the_title( get_the_ID() ), get_the_ID() ) ); ?></div>
 
 							<?php
 							$user_added_by = get_post_meta( get_the_ID(), 'stm_car_user', true );

@@ -74,7 +74,7 @@ $actions_visibility = ( $show_actions_onhover ) ? ' actions-onhover' : '';
 			</div>
 		<?php endif; ?>
 		<?php if ( 'yes' === $show_compare ) : ?>
-			<div class="stm-gallery-action-unit compare" data-toggle="tooltip" data-placement="bottom" data-id="<?php echo esc_attr( $listing_id ); ?>" data-title="<?php echo wp_kses_post( apply_filters( 'stm_generate_title_from_slugs', get_the_title( $listing_id ), $listing_id ) ); ?>" data-post-type="<?php echo esc_attr( get_post_type( $listing_id ) ); ?>" title="<?php esc_attr_e( 'Add to compare', 'stm_vehicles_listing' ); ?>">
+			<div class="stm-gallery-action-unit compare" data-toggle="tooltip" data-placement="bottom" data-id="<?php echo esc_attr( $listing_id ); ?>" data-title="<?php echo esc_attr( wp_strip_all_tags( apply_filters( 'stm_generate_title_from_slugs', get_the_title( $listing_id ), $listing_id ) ) ); ?>" data-post-type="<?php echo esc_attr( get_post_type( $listing_id ) ); ?>" title="<?php esc_attr_e( 'Add to compare', 'stm_vehicles_listing' ); ?>">
 				<i class="motors-icons-compare-new"></i>
 			</div>
 		<?php endif; ?>

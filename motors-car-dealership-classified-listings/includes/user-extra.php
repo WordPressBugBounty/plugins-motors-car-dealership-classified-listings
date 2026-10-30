@@ -379,6 +379,9 @@ if ( ! function_exists( 'stm_save_user_extra_fields' ) ) {
 			return false;
 		}
 
+		// Security gate: the raw *_path fields are later unlink()ed, so restrict them to admins (CWE-73).
+		$can_write_image_paths = current_user_can( 'edit_users' );
+
 		// Sanitize phone number
 		$phone = '';
 		if ( isset( $_POST['stm_phone'] ) ) {
@@ -402,7 +405,7 @@ if ( ! function_exists( 'stm_save_user_extra_fields' ) ) {
 		if ( isset( $_POST['stm_user_avatar'] ) ) {
 			update_user_meta( $user_id, 'stm_user_avatar', esc_url_raw( wp_unslash( $_POST['stm_user_avatar'] ) ) );
 		}
-		if ( isset( $_POST['stm_user_avatar_path'] ) ) {
+		if ( $can_write_image_paths && isset( $_POST['stm_user_avatar_path'] ) ) {
 			$raw_path = sanitize_text_field( wp_unslash( $_POST['stm_user_avatar_path'] ) );
 			if ( apply_filters( 'stm_mvl_is_path_within_uploads', false, $raw_path ) && stm_mvl_is_allowed_image_file( $raw_path ) ) {
 				update_user_meta( $user_id, 'stm_user_avatar_path', $raw_path );
@@ -446,7 +449,7 @@ if ( ! function_exists( 'stm_save_user_extra_fields' ) ) {
 		if ( isset( $_POST['stm_dealer_logo'] ) ) {
 			update_user_meta( $user_id, 'stm_dealer_logo', esc_url_raw( wp_unslash( $_POST['stm_dealer_logo'] ) ) );
 		}
-		if ( isset( $_POST['stm_dealer_logo_path'] ) ) {
+		if ( $can_write_image_paths && isset( $_POST['stm_dealer_logo_path'] ) ) {
 			$raw_path = sanitize_text_field( wp_unslash( $_POST['stm_dealer_logo_path'] ) );
 			if ( apply_filters( 'stm_mvl_is_path_within_uploads', false, $raw_path ) && stm_mvl_is_allowed_image_file( $raw_path ) ) {
 				update_user_meta( $user_id, 'stm_dealer_logo_path', $raw_path );
@@ -455,7 +458,7 @@ if ( ! function_exists( 'stm_save_user_extra_fields' ) ) {
 		if ( isset( $_POST['stm_dealer_image'] ) ) {
 			update_user_meta( $user_id, 'stm_dealer_image', esc_url_raw( wp_unslash( $_POST['stm_dealer_image'] ) ) );
 		}
-		if ( isset( $_POST['stm_dealer_image_path'] ) ) {
+		if ( $can_write_image_paths && isset( $_POST['stm_dealer_image_path'] ) ) {
 			$raw_path = sanitize_text_field( wp_unslash( $_POST['stm_dealer_image_path'] ) );
 			if ( apply_filters( 'stm_mvl_is_path_within_uploads', false, $raw_path ) && stm_mvl_is_allowed_image_file( $raw_path ) ) {
 				update_user_meta( $user_id, 'stm_dealer_image_path', $raw_path );

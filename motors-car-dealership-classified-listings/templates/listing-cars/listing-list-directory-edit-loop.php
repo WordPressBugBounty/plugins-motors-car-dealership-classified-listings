@@ -111,12 +111,12 @@ do_action(
 
 	<div class="listing_stats_wrap">
 		<div class="stm-phone-reveals" data-type="phone" data-id="<?php echo esc_attr( get_the_ID() ); ?>"
-			data-title="<?php echo wp_kses_post( apply_filters( 'stm_generate_title_from_slugs', get_the_title( get_the_ID() ), get_the_ID(), false ) ); ?>">
+			data-title="<?php echo esc_attr( wp_strip_all_tags( apply_filters( 'stm_generate_title_from_slugs', get_the_title( get_the_ID() ), get_the_ID(), false ) ) ); ?>">
 			<i class="fas fa-phone"></i>
 			<?php echo esc_html( $phone_reveals ); ?>
 		</div>
 		<div class="stm-car-views" data-type="listing" data-id="<?php echo esc_attr( get_the_ID() ); ?>"
-			data-title="<?php echo wp_kses_post( apply_filters( 'stm_generate_title_from_slugs', get_the_title( get_the_ID() ), get_the_ID(), false ) ); ?>">
+			data-title="<?php echo esc_attr( wp_strip_all_tags( apply_filters( 'stm_generate_title_from_slugs', get_the_title( get_the_ID() ), get_the_ID(), false ) ) ); ?>">
 			<i class="fas fa-eye"></i>
 			<?php echo esc_html( $car_views ); ?>
 		</div>
