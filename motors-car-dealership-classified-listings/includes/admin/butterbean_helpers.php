@@ -174,13 +174,81 @@ function stm_listings_get_user_list() {
 	return $users_dropdown;
 }
 
+/**
+ * Check whether a taxonomy belongs to one of the listing post types.
+ *
+ * @since 1.4.130
+ *
+ * @param string $taxonomy Taxonomy name.
+ *
+ * @return bool
+ */
+function mvl_is_listing_taxonomy( $taxonomy ) {
+	$taxonomy_object = get_taxonomy( $taxonomy );
+
+	if ( ! $taxonomy_object ) {
+		return false;
+	}
+
+	$listing_post_types  = (array) apply_filters( 'stm_listings_multi_type', array( 'listings' ) );
+	$is_listing_taxonomy = ! empty( array_intersect( $taxonomy_object->object_type, $listing_post_types ) );
+
+	/**
+	 * Filters whether a taxonomy accepts new terms from the listing metaboxes.
+	 *
+	 * @since 1.4.130
+	 *
+	 * @param bool   $is_listing_taxonomy Whether the taxonomy belongs to a listing post type.
+	 * @param string $taxonomy            Taxonomy name.
+	 */
+	return (bool) apply_filters( 'mvl_is_listing_taxonomy', $is_listing_taxonomy, $taxonomy );
+}
+
+/**
+ * Check whether the current user can add a term to a listing taxonomy.
+ *
+ * @since 1.4.130
+ *
+ * @param string $taxonomy Taxonomy name.
+ *
+ * @return bool
+ */
+function mvl_current_user_can_add_listing_term( $taxonomy ) {
+	if ( ! mvl_is_listing_taxonomy( $taxonomy ) ) {
+		return false;
+	}
+
+	return current_user_can( get_taxonomy( $taxonomy )->cap->edit_terms );
+}
+
+/**
+ * Check that a save request comes from the butterbean metabox of a user who can edit the post.
+ *
+ * @since 1.4.130
+ *
+ * @param int    $post_id      Post ID.
+ * @param string $manager_slug Butterbean manager slug without the "_manager" suffix.
+ *
+ * @return bool
+ */
+function mvl_is_authorized_butterbean_save( $post_id, $manager_slug ) {
+	$nonce_name = "butterbean_{$manager_slug}_manager";
+	$nonce      = isset( $_POST[ $nonce_name ] ) ? sanitize_text_field( wp_unslash( $_POST[ $nonce_name ] ) ) : '';
+
+	return wp_verify_nonce( $nonce, "{$nonce_name}_nonce" ) && current_user_can( 'edit_post', $post_id );
+}
+
 function stm_listings_add_category_in() {
-	check_ajax_referer( 'listings_add_category_in', 'security', false );
+	check_ajax_referer( 'listings_add_category_in', 'security' );
 	$response = array();
 	$category = $term = '';
 
 	if ( ! empty( $_GET['category'] ) ) {
 		$category = sanitize_text_field( $_GET['category'] );
+	}
+
+	if ( ! mvl_current_user_can_add_listing_term( $category ) ) {
+		wp_send_json_error( array( 'message' => esc_html__( 'Access denied.', 'stm_vehicles_listing' ) ), 403 );
 	}
 
 	if ( ! empty( $_GET['term'] ) ) {
@@ -232,11 +300,17 @@ function stm_butterbean_add_new_listings_terms( $post_id ) {
 		$manager_slug = $post_type;
 		$options      = get_option( "stm_{$post_type}_options" );
 	}
+
+	if ( ! is_array( $options ) || ! mvl_is_authorized_butterbean_save( $post_id, $manager_slug ) ) {
+		return;
+	}
+
 	$field_prefix = 'butterbean_' . $manager_slug . '_manager_setting_';
 
 	foreach ( $_POST as $field_key => $field_value ) {
-		if ( str_starts_with( $field_key, $field_prefix ) ) {
-			$field_name = substr( $field_key, strlen( $field_prefix ) );
+		if ( is_string( $field_value ) && str_starts_with( $field_key, $field_prefix ) ) {
+			$field_name  = substr( $field_key, strlen( $field_prefix ) );
+			$field_value = sanitize_text_field( wp_unslash( $field_value ) );
 			foreach ( $options as $option ) {
 				if ( $field_name === $option['slug'] && $option['numeric'] ) {
 					$term_slug = sanitize_title( $field_value );

@@ -731,6 +731,43 @@ function stm_vehicles_listing_get_icons_html() {
 	<?php
 }
 
+/**
+ * Check whether the current user can manage listing custom fields.
+ *
+ * Mirrors the access rules of the "Custom Fields" admin page.
+ *
+ * @since 1.4.130
+ *
+ * @return bool
+ */
+function mvl_current_user_can_manage_listing_fields() {
+	$can_manage = current_user_can( 'manage_options' ) || current_user_can( 'listing_manager' );
+
+	/**
+	 * Filters whether the current user can manage listing custom fields.
+	 *
+	 * @since 1.4.130
+	 *
+	 * @param bool $can_manage Whether the current user can manage listing custom fields.
+	 */
+	return (bool) apply_filters( 'mvl_current_user_can_manage_listing_fields', $can_manage );
+}
+
+/**
+ * Stop the AJAX request when the current user cannot manage listing custom fields.
+ *
+ * @since 1.4.130
+ *
+ * @return void
+ */
+function mvl_verify_listing_fields_ajax_access() {
+	if ( mvl_current_user_can_manage_listing_fields() ) {
+		return;
+	}
+
+	wp_send_json_error( array( 'message' => esc_html__( 'Access denied.', 'stm_vehicles_listing' ) ), 403 );
+}
+
 /*Update option*/
 function stm_vehicle_listings_save_options( $options, $post_type = 'listings' ) {
 	$settings = motors_page_options();
@@ -743,7 +780,7 @@ function stm_vehicle_listings_save_options( $options, $post_type = 'listings' ) 
 		}
 	}
 
-	if ( current_user_can( 'administrator' ) || current_user_can( 'editor' ) || current_user_can( 'listing_manager' ) ) {
+	if ( mvl_current_user_can_manage_listing_fields() ) {
 		return 'listings' === $post_type ? update_option( 'stm_vehicle_listing_options', $options ) : update_option( "stm_{$post_type}_options", $options );
 	}
 
@@ -753,6 +790,7 @@ function stm_vehicle_listings_save_options( $options, $post_type = 'listings' ) 
 /*Ajax saving single option*/
 function stm_listings_save_single_option_row() {
 	check_ajax_referer( 'stm_listings_save_single_option_row', 'security' );
+	mvl_verify_listing_fields_ajax_access();
 
 	$data    = array(
 		'error'   => false,
@@ -853,6 +891,7 @@ add_action( 'wp_ajax_stm_listings_save_single_option_row', 'stm_listings_save_si
 /*Deleting row*/
 function stm_listings_delete_single_option_row() {
 	check_ajax_referer( 'stm_listings_delete_single_option_row', 'security' );
+	mvl_verify_listing_fields_ajax_access();
 
 	$data = array(
 		'error'   => false,
@@ -946,6 +985,7 @@ add_action( 'wp_ajax_stm_listings_delete_single_option_row', 'stm_listings_delet
 /*Save new order*/
 function stm_listings_save_option_order() {
 	check_ajax_referer( 'stm_listings_save_option_order', 'security' );
+	mvl_verify_listing_fields_ajax_access();
 
 	if ( isset( $_POST['new_order'] ) && isset( $_POST['prev_order'] ) ) {
 		$options     = 'listings' === $_POST['post_type'] ? stm_listings_get_my_options_list() : get_option( "stm_{$_POST['post_type']}_options", array() );
@@ -978,6 +1018,7 @@ add_action( 'wp_ajax_stm_listings_save_option_order', 'stm_listings_save_option_
 
 function stm_listings_add_new_option() {
 	check_ajax_referer( 'stm_listings_add_new_option', 'security' );
+	mvl_verify_listing_fields_ajax_access();
 
 	$data = array(
 		'error'   => false,
@@ -1115,6 +1156,10 @@ function stm_listings_add_new_option() {
 add_action( 'wp_ajax_stm_listings_add_new_option', 'stm_listings_add_new_option' );
 
 function mvl_save_location_settings( $option ) {
+	if ( ! mvl_current_user_can_manage_listing_fields() ) {
+		return;
+	}
+
 	if ( 'location' === $option['field_type'] ) {
 		$location_settings                                 = array();
 		$location_settings['enable_distance_search']       = sanitize_text_field( $option['enable_distance_search'] );
@@ -1128,6 +1173,7 @@ function mvl_save_location_settings( $option ) {
 
 function stm_listings_form_edit_disable_notification() {
 	check_ajax_referer( 'stm_listings_form_edit_disable_notification', 'security' );
+	mvl_verify_listing_fields_ajax_access();
 
 	$disable = ( ! empty( $_POST['disable'] ) ) ? sanitize_text_field( $_POST['disable'] ) : '';
 
@@ -1147,6 +1193,7 @@ add_action( 'wp_ajax_stm_listings_form_edit_disable_notification', 'stm_listings
 
 function stm_listings_get_option() {
 	check_ajax_referer( 'stm_listings_get_option', 'security' );
+	mvl_verify_listing_fields_ajax_access();
 
 	$data = array(
 		'error'   => false,
@@ -1174,6 +1221,7 @@ add_action( 'wp_ajax_stm_listings_get_option', 'stm_listings_get_option' );
 
 function stm_listings_change_per_page() {
 	check_ajax_referer( 'stm_listings_change_per_page', 'security' );
+	mvl_verify_listing_fields_ajax_access();
 
 	$data          = array(
 		'error'   => false,
@@ -1234,6 +1282,7 @@ function stm_categories_search( $search, $post_type = 'listings' ) {
 
 function stm_listings_category_search() {
 	check_ajax_referer( 'stm_listings_category_search', 'security' );
+	mvl_verify_listing_fields_ajax_access();
 
 	$data      = array(
 		'error'      => false,
@@ -1278,6 +1327,7 @@ add_action( 'wp_ajax_stm_listings_category_search', 'stm_listings_category_searc
 
 function stm_listings_change_page() {
 	check_ajax_referer( 'stm_listings_change_page', 'security' );
+	mvl_verify_listing_fields_ajax_access();
 
 	$data = array(
 		'error'   => false,

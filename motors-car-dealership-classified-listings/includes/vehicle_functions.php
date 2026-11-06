@@ -34,41 +34,46 @@ if ( ! function_exists( 'stm_ajaxurl' ) ) {
 }
 
 if ( ! function_exists( 'stm_vehicle_plugin_admin_create_nonce' ) ) {
+	/**
+	 * Print admin AJAX nonces only for users allowed to run the matching handlers.
+	 *
+	 * @return void
+	 */
 	function stm_vehicle_plugin_admin_create_nonce() {
-		$file_automanager_upload = wp_create_nonce( 'stm_ajax_file_automanager_upload' );
-		$am_save_associations    = wp_create_nonce( 'stm_ajax_automanager_save_associations' );
-		$am_save_template        = wp_create_nonce( 'stm_ajax_automanager_save_template' );
+		$nonce_actions = array();
 
-		$save_single_opt          = wp_create_nonce( 'stm_listings_save_single_option_row' );
-		$delete_single_opt        = wp_create_nonce( 'stm_listings_delete_single_option_row' );
-		$per_page_options         = wp_create_nonce( 'stm_listings_change_per_page' );
-		$change_page_options      = wp_create_nonce( 'stm_listings_change_page' );
-		$search_category          = wp_create_nonce( 'stm_listings_category_search' );
-		$save_opt                 = wp_create_nonce( 'stm_listings_save_option_order' );
-		$get_opt                  = wp_create_nonce( 'stm_listings_get_option' );
-		$add_opt                  = wp_create_nonce( 'stm_listings_add_new_option' );
-		$disable_notification     = wp_create_nonce( 'stm_listings_form_edit_disable_notification' );
-		$listings_add_category_in = wp_create_nonce( 'listings_add_category_in' );
+		if ( mvl_current_user_can_manage_listing_fields() ) {
+			$nonce_actions = array(
+				'fileAutomanagerUpload' => 'stm_ajax_file_automanager_upload',
+				'amSaveAssociations'    => 'stm_ajax_automanager_save_associations',
+				'amSaveTemplate'        => 'stm_ajax_automanager_save_template',
+				'saveSingleOpt'         => 'stm_listings_save_single_option_row',
+				'deleteSingleOpt'       => 'stm_listings_delete_single_option_row',
+				'perPageOptions'        => 'stm_listings_change_per_page',
+				'changePageOptions'     => 'stm_listings_change_page',
+				'searchCategory'        => 'stm_listings_category_search',
+				'saveOpt'               => 'stm_listings_save_option_order',
+				'getOpt'                => 'stm_listings_get_option',
+				'addOpt'                => 'stm_listings_add_new_option',
+				'disableNotification'   => 'stm_listings_form_edit_disable_notification',
+			);
+		}
+
+		if ( current_user_can( 'manage_categories' ) ) {
+			$nonce_actions['listings_add_category_in'] = 'listings_add_category_in';
+		}
+
+		if ( empty( $nonce_actions ) ) {
+			return;
+		}
 
 		?>
 		<script>
-					var fileAutomanagerUpload = '<?php echo esc_js( $file_automanager_upload ); ?>';
-					var amSaveAssociations = '<?php echo esc_js( $am_save_associations ); ?>';
-					var amSaveTemplate = '<?php echo esc_js( $am_save_template ); ?>';
-
-					var saveSingleOpt = '<?php echo esc_js( $save_single_opt ); ?>';
-					var deleteSingleOpt = '<?php echo esc_js( $delete_single_opt ); ?>';
-					var perPageOptions = '<?php echo esc_js( $per_page_options ); ?>';
-					var changePageOptions = '<?php echo esc_js( $change_page_options ); ?>';
-					var searchCategory = '<?php echo esc_js( $search_category ); ?>';
-					var saveOpt = '<?php echo esc_js( $save_opt ); ?>';
-					var getOpt = '<?php echo esc_js( $get_opt ); ?>';
-					var addOpt = '<?php echo esc_js( $add_opt ); ?>';
-					var disableNotification = '<?php echo esc_js( $disable_notification ); ?>';
-					var listings_add_category_in = '<?php echo esc_js( $listings_add_category_in ); ?>';
+			<?php foreach ( $nonce_actions as $js_variable => $nonce_action ) : ?>
+				var <?php echo esc_js( $js_variable ); ?> = '<?php echo esc_js( wp_create_nonce( $nonce_action ) ); ?>';
+			<?php endforeach; ?>
 		</script>
 		<?php
-
 	}
 
 	add_action( 'admin_head', 'stm_vehicle_plugin_admin_create_nonce' );
