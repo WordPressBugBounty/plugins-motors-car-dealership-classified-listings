@@ -188,8 +188,8 @@ function get_freemius_info() {
 }
 
 $freemius_info = get_freemius_info();
-$start_date    = new DateTime( '2026-10-27 00:00:00' );
-$deadline      = new DateTime( '2026-11-02 23:59:00' );
+$start_date    = new DateTime( '2026-11-17 00:00:00' );
+$deadline      = new DateTime( '2026-12-09 23:59:00' );
 $current_time  = time();
 $is_promotion  = $current_time >= $start_date->format('U') && $current_time < $deadline->format('U'); //phpcs:ignore
 $only_annual   = true;
@@ -229,7 +229,7 @@ if ( $is_promotion && ! empty( $freemius_info ) ) {
 					<?php endif; ?>
 				</p>
 				<?php if ( $is_promotion ) : ?>
-					<div class="stm-discount"><a href="<?php echo esc_url( 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wpadmin&utm_medium=push&utm_campaign=motors&utm_content=gopro&utm_term=summersale2026&plugin_coupon=TREAT26' ); ?>" target="_blank"></a></div>
+					<div class="stm-discount"><a href="<?php echo esc_url( 'https://stylemixthemes.com/car-dealer-plugin/pricing/?utm_source=wpadmin&utm_medium=push&utm_campaign=motors&utm_content=gopro&utm_term=summersale2026&plugin_coupon=BFCM26' ); ?>" target="_blank"></a></div>
 				<?php endif; ?>
 			</div>
 			<?php if ( isset( $freemius_info['plan'] ) ) : ?>
@@ -254,8 +254,8 @@ if ( $is_promotion && ! empty( $freemius_info ) ) {
 								<div class="stm_price">
 									<?php
 									if ( $is_promotion ) :
-										$price_annual   = number_format( $plan->annual_price * 0.70, 2, '.', '' );
-										$price_lifetime = number_format( $plan->lifetime_price * 0.70, 2, '.', '' );
+										$price_annual   = number_format( $plan->annual_price * 0.50, 2, '.', '' );
+										$price_lifetime = number_format( $plan->lifetime_price * 0.50, 2, '.', '' );
 										?>
 										<sup>$</sup>
 										<span class="stm_price__value"
@@ -331,7 +331,7 @@ if ( $is_promotion && ! empty( $freemius_info ) ) {
 									$lifetime_url = $base_url . '&utm_medium=' . $utm_medium . '&billing_cycle=lifetime';
 									$coupon       = '';
 									if ( $is_promotion ) {
-										$coupon .= '&plugin_coupon=TREAT26';
+										$coupon .= '&plugin_coupon=BFCM26';
 									}
 									$annual_url  .= $coupon;
 									?>
